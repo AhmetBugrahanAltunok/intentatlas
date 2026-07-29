@@ -1,0 +1,20 @@
+name: Feature request
+description: Propose an improvement to the intent graph
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: textarea
+    attributes:
+      label: Requirement
+      description: What user problem should be solved?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed relationship or workflow
+      description: Which intent, code, test, evidence, or commit nodes should connect?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Alternatives considered

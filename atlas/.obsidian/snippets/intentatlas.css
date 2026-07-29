@@ -1,0 +1,8 @@
+.workspace-leaf-content[data-type="graph"] .view-content {
+  background: radial-gradient(circle at 50% 40%, #17132c 0%, #090b14 72%);
+}
+.markdown-rendered blockquote {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.08);
+}
+.metadata-container { border-radius: 12px; }

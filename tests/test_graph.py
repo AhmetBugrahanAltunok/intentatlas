@@ -1,0 +1,88 @@
+from __future__ import annotations
+
+import json
+
+import pytest
+
+from intentatlas.graph import AtlasGraph
+from intentatlas.models import Edge, Node
+
+
+def sample_graph() -> AtlasGraph:
+    graph = AtlasGraph()
+    graph.extend(
+        [
+            Node("REQ-1", "requirement", "Understand impact"),
+            Node("ADR-1", "decision", "Use a graph"),
+            Node("file:app.py", "file", "app.py", "app.py"),
+            Node("file:test_app.py", "test", "test_app.py", "test_app.py"),
+        ]
+    )
+    assert graph.add_edge(Edge("REQ-1", "ADR-1", "drives", "wikilink"))
+    assert graph.add_edge(Edge("ADR-1", "file:app.py", "implemented-by", "wikilink"))
+    assert graph.add_edge(Edge("file:test_app.py", "file:app.py", "tests", "python-ast"))
+    return graph
+
+
+def test_graph_deduplicates_edges_and_rejects_invalid_edges() -> None:
+    graph = sample_graph()
+    original = len(graph.edges)
+    assert graph.add_edge(Edge("REQ-1", "ADR-1", "drives", "wikilink"))
+    assert len(graph.edges) == original
+    assert not graph.add_edge(Edge("REQ-1", "missing", "drives"))
+    assert not graph.add_edge(Edge("REQ-1", "REQ-1", "self"))
+
+
+def test_graph_round_trip_and_summary(tmp_path) -> None:
+    graph = sample_graph()
+    path = tmp_path / "graph.json"
+    graph.save(path)
+    restored = AtlasGraph.load(path)
+    assert restored.summary() == {"decision": 1, "file": 1, "requirement": 1, "test": 1}
+    assert restored.edges == graph.edges
+    assert restored.find("app.py").id == "file:app.py"
+    assert restored.orphans() == []
+
+
+def test_find_reports_missing_and_ambiguous_targets() -> None:
+    graph = sample_graph()
+    graph.add_node(Node("file:nested/app.py", "file", "nested/app.py", "nested/app.py"))
+    with pytest.raises(ValueError, match="ambiguous"):
+        graph.find("app")
+    with pytest.raises(ValueError, match="No graph node"):
+        graph.find("nowhere")
+    with pytest.raises(ValueError, match="empty"):
+        graph.find("  ")
+
+
+def test_impact_walks_both_directions_with_depth() -> None:
+    graph = sample_graph()
+    result = graph.impact("file:app.py", depth=2, direction="both")
+    assert [(item.depth, item.node.id, item.direction) for item in result] == [
+        (1, "ADR-1", "upstream"),
+        (1, "file:test_app.py", "upstream"),
+        (2, "REQ-1", "upstream"),
+    ]
+    assert graph.impact("REQ-1", depth=0) == []
+    with pytest.raises(ValueError, match="Unknown direction"):
+        graph.impact("REQ-1", direction="sideways")
+
+
+def test_load_rejects_unknown_schema_and_invalid_edges(tmp_path) -> None:
+    path = tmp_path / "graph.json"
+    path.write_text(json.dumps({"schema_version": 9}), encoding="utf-8")
+    with pytest.raises(ValueError, match="Unsupported"):
+        AtlasGraph.load(path)
+
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "nodes": [{"id": "a", "kind": "file", "label": "a"}],
+                "edges": [{"source": "a", "target": "missing", "relation": "imports"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="Invalid edge"):
+        AtlasGraph.load(path)

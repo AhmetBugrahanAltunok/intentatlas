@@ -1,0 +1,47 @@
+# Architecture
+
+IntentAtlas has three layers with explicit ownership.
+
+```text
+Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
+                         │
+                         ├──query──> impact/status CLI
+                         └──serve──> local web viewer
+```
+
+## 1. Repository adapters
+
+Adapters extract only structural metadata. The Python adapter records files, classes,
+functions, imports, and test relationships. The Git adapter reads commit metadata and
+changed paths with fixed read-only commands. Adapters never execute project code.
+
+## 2. AtlasGraph
+
+`AtlasGraph` is the language-neutral contract. Nodes have a stable ID, kind, label, path,
+and small metadata object. Directed edges have a source, target, relation, and provenance.
+The graph is serialized to `.intentatlas/graph.json`; it is a rebuildable cache, not the
+source of truth.
+
+## 3. Project brain
+
+The `atlas/` folder is an Obsidian vault and the durable human-readable layer.
+
+- Human/agent-owned: Brain, Requirements, Decisions, Evidence, Reviews, Sessions
+- Scanner-owned: Code, Symbols, Tests, Commits
+- Local-only: Private
+
+Generated notes link to one another with standard wikilinks. Human notes can link to any
+generated note and remain untouched by subsequent scans. Graph health flags orphans but
+does not silently invent meaning.
+
+## Trust boundaries
+
+Repository contents, Markdown, and commit subjects are untrusted data. IntentAtlas parses
+them without executing them, redacts common secret forms, skips private and ignored areas,
+and serves the viewer only on loopback. See `SECURITY.md`.
+
+## Inspiration boundary
+
+The graph-first, vault-first, and progressive-disclosure principles are inspired by the
+MIT-licensed `breferrari/obsidian-mind` project. IntentAtlas has an independent Python
+implementation and a different domain: linking software intent to delivery evidence.

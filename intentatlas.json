@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "vault": "atlas",
+  "graph": ".intentatlas/graph.json",
+  "git_history_limit": 25,
+  "exclude": [
+    ".git",
+    ".intentatlas",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".pytest_tmp",
+    ".ruff_cache",
+    ".venv",
+    "atlas",
+    "build",
+    "dist",
+    "node_modules",
+    "var",
+    "vendor"
+  ]
+}

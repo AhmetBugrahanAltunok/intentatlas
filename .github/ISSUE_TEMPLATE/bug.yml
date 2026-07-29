@@ -1,0 +1,25 @@
+name: Bug report
+description: Report reproducible incorrect behavior
+title: "bug: "
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Include the command, expected behavior, and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Minimal reproduction
+      description: Share the smallest safe example; remove secrets and private source.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: IntentAtlas and Python versions
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Operating system and additional context
