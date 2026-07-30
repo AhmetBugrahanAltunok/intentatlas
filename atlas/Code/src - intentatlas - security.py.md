@@ -10,16 +10,17 @@ source_path: "src/intentatlas/security.py"
 
 ## Metadata
 
-- **Language:** `"Python"`
-- **Size Bytes:** `1290`
+- **Language:** <code>"Python"</code>
+- **Size Bytes:** <code>1290</code>
 
 ## Outgoing relationships
 
-- `defines` → [[Symbols/_secret_key - src - intentatlas - security.py|_secret_key]] _(evidence: python-ast)_
-- `defines` → [[Symbols/redact - src - intentatlas - security.py|redact]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_secret_key - src - intentatlas - security.py|_secret_key]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(evidence: python-ast)_
 
 ## Incoming relationships
 
-- `imports` ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_security.py|tests/test_security.py]] _(evidence: filename-convention)_
-- `tests` ← [[Tests/tests - test_security.py|tests/test_security.py]] _(evidence: python-ast)_
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>imports</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: python-ast)_
+- <code>tests</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(evidence: filename-convention)_
+- <code>tests</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(evidence: python-ast)_

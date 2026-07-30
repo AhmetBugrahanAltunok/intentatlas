@@ -5,7 +5,8 @@ type: map
 ---
 # IntentAtlas
 
-> Start with [[Dashboard/IntentAtlas|the living dashboard]] and [[Brain/North Star]].
+> Start with [[Dashboard/IntentAtlas|the living dashboard]], [[Brain/North Star]], and the
+> [[Brain/Product Roadmap|current product roadmap]].
 
 ## Intent chain
 

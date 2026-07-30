@@ -10,9 +10,9 @@ source_path: "src/intentatlas/security.py"
 
 ## Metadata
 
-- **Line:** `15`
-- **Symbol Kind:** `"function"`
+- **Line:** <code>15</code>
+- **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
-- `defines` ← [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(evidence: python-ast)_
+- <code>defines</code> ← [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(evidence: python-ast)_

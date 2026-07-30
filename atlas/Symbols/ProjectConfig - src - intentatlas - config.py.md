@@ -10,9 +10,9 @@ source_path: "src/intentatlas/config.py"
 
 ## Metadata
 
-- **Line:** `12`
-- **Symbol Kind:** `"class"`
+- **Line:** <code>12</code>
+- **Symbol Kind:** <code>"class"</code>
 
 ## Incoming relationships
 
-- `defines` ← [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: python-ast)_
+- <code>defines</code> ← [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: python-ast)_

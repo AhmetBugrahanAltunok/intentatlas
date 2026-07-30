@@ -15,6 +15,7 @@ var/
 
 # IntentAtlas local state and private vault material
 .intentatlas/
+/.obsidian/
 atlas/Private/
 atlas/.obsidian/workspace*.json
 atlas/.obsidian/cache/

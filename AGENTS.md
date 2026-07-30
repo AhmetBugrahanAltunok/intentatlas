@@ -30,3 +30,15 @@
 - Keep generated output deterministic except for explicit generation timestamps.
 - Record architectural changes as ADRs under `atlas/Decisions/`.
 - Keep the CLI usable without network access or an API key.
+
+## Phase completion gates
+
+- Do not mark a delivery phase complete until its requirement acceptance criteria have been
+  checked against the implementation and recorded under `atlas/Evidence/`.
+- At the end of every phase, record a comprehensive change inventory, exact verification
+  commands and results, remaining risks, and the final review decision under `atlas/Reviews/`.
+- Run focused regression tests for each changed behavior, then the complete test, lint, and
+  security suite. Networked audits still require explicit approval.
+- Verify affected CLI and user-interface workflows end to end, not only with unit tests.
+- If a check fails or the implementation diverges from the phase requirement or ADR, keep the
+  phase open and correct the mismatch before starting the next phase.

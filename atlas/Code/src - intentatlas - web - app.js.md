@@ -10,9 +10,9 @@ source_path: "src/intentatlas/web/app.js"
 
 ## Metadata
 
-- **Language:** `"JavaScript"`
-- **Size Bytes:** `13996`
+- **Language:** <code>"JavaScript"</code>
+- **Size Bytes:** <code>14324</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_

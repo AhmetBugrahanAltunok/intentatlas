@@ -5,7 +5,7 @@ from pathlib import Path
 
 from .models import Node
 
-INVALID_FILENAME = re.compile(r'[<>:"/\\|?*\x00-\x1f]+')
+INVALID_FILENAME = re.compile(r'[<>:"/\\|?*\[\]#^\x00-\x1f]+')
 
 
 def note_title(node: Node) -> str:

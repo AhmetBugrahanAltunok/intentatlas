@@ -17,34 +17,35 @@ generated: true
 
 ## Graph summary
 
+- **commit:** 1
 - **config:** 6
-- **decision:** 1
+- **decision:** 2
 - **document:** 10
-- **evidence:** 1
+- **evidence:** 2
 - **file:** 14
-- **memory:** 1
-- **requirement:** 1
-- **review:** 1
+- **memory:** 3
+- **requirement:** 2
+- **review:** 2
 - **session:** 1
-- **symbol:** 108
+- **symbol:** 124
 - **test:** 8
-- **relationships:** 165
+- **relationships:** 241
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 30 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 24 relationships
-- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 18 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 17 relationships
-- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 14 relationships
-- [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] — 11 relationships
-- [[Tests/tests - test_graph.py|tests/test_graph.py]] — 10 relationships
-- [[Tests/tests - test_viewer.py|tests/test_viewer.py]] — 9 relationships
-- [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] — 8 relationships
-- [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] — 8 relationships
-- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 8 relationships
-- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 8 relationships
+- [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 38 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 38 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 25 relationships
+- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 21 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 18 relationships
+- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 15 relationships
+- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 14 relationships
+- [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] — 12 relationships
+- [[Tests/tests - test_graph.py|tests/test_graph.py]] — 12 relationships
+- [[Requirements/REQ-002 - Harden trust boundaries|REQ-002 - Harden trust boundaries]] — 10 relationships
+- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 10 relationships
+- [[Tests/tests - test_viewer.py|tests/test_viewer.py]] — 10 relationships
 
 ## Workflow
 

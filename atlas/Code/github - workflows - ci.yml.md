@@ -10,9 +10,9 @@ source_path: ".github/workflows/ci.yml"
 
 ## Metadata
 
-- **Language:** `"YAML"`
-- **Size Bytes:** `854`
+- **Language:** <code>"YAML"</code>
+- **Size Bytes:** <code>854</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_

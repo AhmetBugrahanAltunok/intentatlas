@@ -10,8 +10,10 @@ reproduction steps, impact, and any suggested mitigation.
 
 - Scans are local and do not upload source code.
 - Generated notes contain relationships and symbol names, not raw source contents.
-- `atlas/Private/` is ignored and never scanned.
+- Excluded directories are pruned before descent; `atlas/Private/` is never enumerated or scanned.
 - Commit subjects are treated as untrusted and redacted before persistence.
+- User note IDs cannot replace scanner-owned graph identities, and generated Markdown escapes
+  untrusted display text.
 - IntentAtlas invokes Git only with fixed, read-only argument lists and never through a shell.
 - The local viewer binds to `127.0.0.1` by default.
 

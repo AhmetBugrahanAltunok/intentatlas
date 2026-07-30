@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="README.tr.md">Türkçe</a> ·
-  <a href="ROADMAP.md">Roadmap</a> ·
+  <a href="atlas/Brain/Product%20Roadmap.md">Product roadmap</a> ·
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
@@ -73,6 +73,10 @@ as a health issue, because project knowledge only becomes useful when it is conn
 
 IntentAtlas is an early working prototype. Python analysis is the first language adapter;
 the graph model is language-neutral and additional adapters are planned.
+
+Ongoing work and completion status are tracked in the
+[Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as
+an explicitly archived snapshot of the original 0.1–0.3 technical plan.
 
 ## Inspiration
 

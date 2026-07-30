@@ -10,9 +10,9 @@ source_path: "src/intentatlas/vault.py"
 
 ## Metadata
 
-- **Line:** `35`
-- **Symbol Kind:** `"class"`
+- **Line:** <code>39</code>
+- **Symbol Kind:** <code>"class"</code>
 
 ## Incoming relationships
 
-- `defines` ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
+- <code>defines</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_

@@ -10,19 +10,20 @@ source_path: "src/intentatlas/viewer.py"
 
 ## Metadata
 
-- **Language:** `"Python"`
-- **Size Bytes:** `2422`
+- **Language:** <code>"Python"</code>
+- **Size Bytes:** <code>2422</code>
 
 ## Outgoing relationships
 
-- `defines` → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(evidence: python-ast)_
-- `defines` → [[Symbols/serve_graph.Handler - src - intentatlas - viewer.py|serve_graph.Handler]] _(evidence: python-ast)_
-- `defines` → [[Symbols/serve_graph.Handler._send - src - intentatlas - viewer.py|serve_graph.Handler._send]] _(evidence: python-ast)_
-- `defines` → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(evidence: python-ast)_
-- `defines` → [[Symbols/serve_graph.Handler.log_message - src - intentatlas - viewer.py|serve_graph.Handler.log_message]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/serve_graph.Handler - src - intentatlas - viewer.py|serve_graph.Handler]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/serve_graph.Handler._send - src - intentatlas - viewer.py|serve_graph.Handler._send]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/serve_graph.Handler.log_message - src - intentatlas - viewer.py|serve_graph.Handler.log_message]] _(evidence: python-ast)_
 
 ## Incoming relationships
 
-- `imports` ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(evidence: filename-convention)_
-- `tests` ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(evidence: python-ast)_
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>imports</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>tests</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(evidence: filename-convention)_
+- <code>tests</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(evidence: python-ast)_

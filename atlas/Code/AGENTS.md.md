@@ -10,9 +10,9 @@ source_path: "AGENTS.md"
 
 ## Metadata
 
-- **Language:** `"Markdown"`
-- **Size Bytes:** `1718`
+- **Language:** <code>"Markdown"</code>
+- **Size Bytes:** <code>2510</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_

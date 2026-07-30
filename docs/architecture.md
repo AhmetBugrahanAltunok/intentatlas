@@ -13,7 +13,9 @@ Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
 
 Adapters extract only structural metadata. The Python adapter records files, classes,
 functions, imports, and test relationships. The Git adapter reads commit metadata and
-changed paths with fixed read-only commands. Adapters never execute project code.
+changed paths with fixed read-only commands. Repository discovery prunes excluded directories
+before descent, does not follow directory links, and excludes the configured vault from the
+repository walk. Adapters never execute project code.
 
 ## 2. AtlasGraph
 
@@ -38,7 +40,7 @@ does not silently invent meaning.
 
 Repository contents, Markdown, and commit subjects are untrusted data. IntentAtlas parses
 them without executing them, redacts common secret forms, skips private and ignored areas,
-and serves the viewer only on loopback. See `SECURITY.md`.
+rejects graph identity collisions, and serves the viewer only on loopback. See `SECURITY.md`.
 
 ## Inspiration boundary
 

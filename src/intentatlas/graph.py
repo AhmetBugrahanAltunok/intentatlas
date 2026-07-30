@@ -29,6 +29,18 @@ class AtlasGraph:
     def add_node(self, node: Node) -> None:
         existing = self.nodes.get(node.id)
         if existing is not None and existing != node:
+            same_identity = (
+                existing.kind == node.kind
+                and existing.label == node.label
+                and existing.path == node.path
+                and existing.metadata.get("owner") == node.metadata.get("owner")
+            )
+            if not same_identity:
+                raise ValueError(
+                    f"Graph node ID collision for {node.id!r}: "
+                    f"{existing.kind} {existing.path or existing.label!r} conflicts with "
+                    f"{node.kind} {node.path or node.label!r}"
+                )
             merged_metadata = {**existing.metadata, **node.metadata}
             node = Node(
                 id=node.id,

@@ -10,41 +10,49 @@ source_path: "src/intentatlas/scanner.py"
 
 ## Metadata
 
-- **Language:** `"Python"`
-- **Size Bytes:** `12877`
+- **Language:** <code>"Python"</code>
+- **Size Bytes:** <code>16632</code>
 
 ## Outgoing relationships
 
-- `defines` → [[Symbols/PendingLink - src - intentatlas - scanner.py|PendingLink]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner - src - intentatlas - scanner.py|RepositoryScanner]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner.__init__ - src - intentatlas - scanner.py|RepositoryScanner.__init__]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._build_module_map - src - intentatlas - scanner.py|RepositoryScanner._build_module_map]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._discover_files - src - intentatlas - scanner.py|RepositoryScanner._discover_files]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._link_test_conventions - src - intentatlas - scanner.py|RepositoryScanner._link_test_conventions]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._resolve_module - src - intentatlas - scanner.py|RepositoryScanner._resolve_module]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._resolve_pending_links - src - intentatlas - scanner.py|RepositoryScanner._resolve_pending_links]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._scan_git_history - src - intentatlas - scanner.py|RepositoryScanner._scan_git_history]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._scan_python_files - src - intentatlas - scanner.py|RepositoryScanner._scan_python_files]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner._scan_user_vault - src - intentatlas - scanner.py|RepositoryScanner._scan_user_vault]] _(evidence: python-ast)_
-- `defines` → [[Symbols/RepositoryScanner.scan - src - intentatlas - scanner.py|RepositoryScanner.scan]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_SymbolVisitor - src - intentatlas - scanner.py|_SymbolVisitor]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_SymbolVisitor.__init__ - src - intentatlas - scanner.py|_SymbolVisitor.__init__]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_SymbolVisitor._visit_symbol - src - intentatlas - scanner.py|_SymbolVisitor._visit_symbol]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_SymbolVisitor.visit_AsyncFunctionDef - src - intentatlas - scanner.py|_SymbolVisitor.visit_AsyncFunctionDef]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_SymbolVisitor.visit_ClassDef - src - intentatlas - scanner.py|_SymbolVisitor.visit_ClassDef]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_SymbolVisitor.visit_FunctionDef - src - intentatlas - scanner.py|_SymbolVisitor.visit_FunctionDef]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_file_kind - src - intentatlas - scanner.py|_file_kind]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_language - src - intentatlas - scanner.py|_language]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_python_imports - src - intentatlas - scanner.py|_python_imports]] _(evidence: python-ast)_
-- `defines` → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/PendingLink - src - intentatlas - scanner.py|PendingLink]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner - src - intentatlas - scanner.py|RepositoryScanner]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner.__init__ - src - intentatlas - scanner.py|RepositoryScanner.__init__]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._build_module_map - src - intentatlas - scanner.py|RepositoryScanner._build_module_map]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._discover_files - src - intentatlas - scanner.py|RepositoryScanner._discover_files]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._is_excluded - src - intentatlas - scanner.py|RepositoryScanner._is_excluded]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._link_test_conventions - src - intentatlas - scanner.py|RepositoryScanner._link_test_conventions]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._resolve_module - src - intentatlas - scanner.py|RepositoryScanner._resolve_module]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._resolve_pending_links - src - intentatlas - scanner.py|RepositoryScanner._resolve_pending_links]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._scan_git_history - src - intentatlas - scanner.py|RepositoryScanner._scan_git_history]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._scan_python_files - src - intentatlas - scanner.py|RepositoryScanner._scan_python_files]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._scan_user_vault - src - intentatlas - scanner.py|RepositoryScanner._scan_user_vault]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._walk_files - src - intentatlas - scanner.py|RepositoryScanner._walk_files]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner.scan - src - intentatlas - scanner.py|RepositoryScanner.scan]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor - src - intentatlas - scanner.py|_SymbolVisitor]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor.__init__ - src - intentatlas - scanner.py|_SymbolVisitor.__init__]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor._visit_symbol - src - intentatlas - scanner.py|_SymbolVisitor._visit_symbol]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor.visit_AsyncFunctionDef - src - intentatlas - scanner.py|_SymbolVisitor.visit_AsyncFunctionDef]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor.visit_ClassDef - src - intentatlas - scanner.py|_SymbolVisitor.visit_ClassDef]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor.visit_FunctionDef - src - intentatlas - scanner.py|_SymbolVisitor.visit_FunctionDef]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_exclude_patterns - src - intentatlas - scanner.py|_exclude_patterns]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_file_kind - src - intentatlas - scanner.py|_file_kind]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_frontmatter_id - src - intentatlas - scanner.py|_frontmatter_id]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_is_directory_link - src - intentatlas - scanner.py|_is_directory_link]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_language - src - intentatlas - scanner.py|_language]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_python_imports - src - intentatlas - scanner.py|_python_imports]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_validate_user_id - src - intentatlas - scanner.py|_validate_user_id]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(evidence: python-ast)_
 
 ## Incoming relationships
 
-- `imports` ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: filename-convention)_
-- `tests` ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: python-ast)_
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>imports</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>references</code> ← [[Decisions/ADR-002 - Pruned trust-boundary traversal|ADR-002 - Pruned trust-boundary traversal]] _(evidence: wikilink)_
+- <code>tests</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: filename-convention)_
+- <code>tests</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: python-ast)_

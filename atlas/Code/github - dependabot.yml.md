@@ -10,9 +10,9 @@ source_path: ".github/dependabot.yml"
 
 ## Metadata
 
-- **Language:** `"YAML"`
-- **Size Bytes:** `193`
+- **Language:** <code>"YAML"</code>
+- **Size Bytes:** <code>193</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_

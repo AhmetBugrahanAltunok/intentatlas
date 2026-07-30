@@ -10,35 +10,36 @@ source_path: "src/intentatlas/graph.py"
 
 ## Metadata
 
-- **Language:** `"Python"`
-- **Size Bytes:** `6929`
+- **Language:** <code>"Python"</code>
+- **Size Bytes:** <code>7498</code>
 
 ## Outgoing relationships
 
-- `defines` → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.__init__ - src - intentatlas - graph.py|AtlasGraph.__init__]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph._ambiguous_message - src - intentatlas - graph.py|AtlasGraph._ambiguous_message]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.add_edge - src - intentatlas - graph.py|AtlasGraph.add_edge]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.add_node - src - intentatlas - graph.py|AtlasGraph.add_node]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.degree - src - intentatlas - graph.py|AtlasGraph.degree]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.edges - src - intentatlas - graph.py|AtlasGraph.edges]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.extend - src - intentatlas - graph.py|AtlasGraph.extend]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.find - src - intentatlas - graph.py|AtlasGraph.find]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.impact - src - intentatlas - graph.py|AtlasGraph.impact]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.load - src - intentatlas - graph.py|AtlasGraph.load]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.orphans - src - intentatlas - graph.py|AtlasGraph.orphans]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.save - src - intentatlas - graph.py|AtlasGraph.save]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.summary - src - intentatlas - graph.py|AtlasGraph.summary]] _(evidence: python-ast)_
-- `defines` → [[Symbols/AtlasGraph.to_dict - src - intentatlas - graph.py|AtlasGraph.to_dict]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.__init__ - src - intentatlas - graph.py|AtlasGraph.__init__]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph._ambiguous_message - src - intentatlas - graph.py|AtlasGraph._ambiguous_message]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.add_edge - src - intentatlas - graph.py|AtlasGraph.add_edge]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.add_node - src - intentatlas - graph.py|AtlasGraph.add_node]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.degree - src - intentatlas - graph.py|AtlasGraph.degree]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.edges - src - intentatlas - graph.py|AtlasGraph.edges]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.extend - src - intentatlas - graph.py|AtlasGraph.extend]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.find - src - intentatlas - graph.py|AtlasGraph.find]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.impact - src - intentatlas - graph.py|AtlasGraph.impact]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.load - src - intentatlas - graph.py|AtlasGraph.load]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.orphans - src - intentatlas - graph.py|AtlasGraph.orphans]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.save - src - intentatlas - graph.py|AtlasGraph.save]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.summary - src - intentatlas - graph.py|AtlasGraph.summary]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.to_dict - src - intentatlas - graph.py|AtlasGraph.to_dict]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
 
 ## Incoming relationships
 
-- `imports` ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(evidence: python-ast)_
-- `imports` ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
-- `imports` ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- `imports` ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
-- `references` ← [[Decisions/ADR-001 - Vault-first intent graph|ADR-001 - Vault-first intent graph]] _(evidence: wikilink)_
-- `tests` ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(evidence: filename-convention)_
-- `tests` ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: python-ast)_
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>imports</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(evidence: python-ast)_
+- <code>imports</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>imports</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
+- <code>imports</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
+- <code>references</code> ← [[Decisions/ADR-001 - Vault-first intent graph|ADR-001 - Vault-first intent graph]] _(evidence: wikilink)_
+- <code>tests</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(evidence: filename-convention)_
+- <code>tests</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(evidence: python-ast)_
+- <code>tests</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: python-ast)_

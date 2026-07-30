@@ -10,9 +10,9 @@ source_path: "src/intentatlas/graph.py"
 
 ## Metadata
 
-- **Line:** `66`
-- **Symbol Kind:** `"function"`
+- **Line:** <code>78</code>
+- **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
-- `defines` ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
+- <code>defines</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_

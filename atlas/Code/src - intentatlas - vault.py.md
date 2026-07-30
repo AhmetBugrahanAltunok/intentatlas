@@ -10,29 +10,32 @@ source_path: "src/intentatlas/vault.py"
 
 ## Metadata
 
-- **Language:** `"Python"`
-- **Size Bytes:** `15813`
+- **Language:** <code>"Python"</code>
+- **Size Bytes:** <code>17714</code>
 
 ## Outgoing relationships
 
-- `defines` → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault.__init__ - src - intentatlas - vault.py|ProjectVault.__init__]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault._note_locations - src - intentatlas - vault.py|ProjectVault._note_locations]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault._purge_generated_notes - src - intentatlas - vault.py|ProjectVault._purge_generated_notes]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault._render_dashboard - src - intentatlas - vault.py|ProjectVault._render_dashboard]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault._render_edges - src - intentatlas - vault.py|ProjectVault._render_edges]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault._render_node - src - intentatlas - vault.py|ProjectVault._render_node]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault._safe_target - src - intentatlas - vault.py|ProjectVault._safe_target]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault._write_if_missing - src - intentatlas - vault.py|ProjectVault._write_if_missing]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault.initialize - src - intentatlas - vault.py|ProjectVault.initialize]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectVault.sync - src - intentatlas - vault.py|ProjectVault.sync]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault.__init__ - src - intentatlas - vault.py|ProjectVault.__init__]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._note_locations - src - intentatlas - vault.py|ProjectVault._note_locations]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._purge_generated_notes - src - intentatlas - vault.py|ProjectVault._purge_generated_notes]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._render_dashboard - src - intentatlas - vault.py|ProjectVault._render_dashboard]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._render_edges - src - intentatlas - vault.py|ProjectVault._render_edges]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._render_node - src - intentatlas - vault.py|ProjectVault._render_node]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._safe_target - src - intentatlas - vault.py|ProjectVault._safe_target]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._write_if_missing - src - intentatlas - vault.py|ProjectVault._write_if_missing]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault.initialize - src - intentatlas - vault.py|ProjectVault.initialize]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault.sync - src - intentatlas - vault.py|ProjectVault.sync]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_markdown_text - src - intentatlas - vault.py|_markdown_text]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_wikilink - src - intentatlas - vault.py|_wikilink]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(evidence: python-ast)_
 
 ## Incoming relationships
 
-- `imports` ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: filename-convention)_
-- `tests` ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: python-ast)_
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>imports</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>tests</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: python-ast)_
+- <code>tests</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: filename-convention)_
+- <code>tests</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: python-ast)_

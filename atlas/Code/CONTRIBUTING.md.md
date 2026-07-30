@@ -10,9 +10,9 @@ source_path: "CONTRIBUTING.md"
 
 ## Metadata
 
-- **Language:** `"Markdown"`
-- **Size Bytes:** `887`
+- **Language:** <code>"Markdown"</code>
+- **Size Bytes:** <code>1158</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_

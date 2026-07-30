@@ -6,7 +6,7 @@
 
 <p align="center"><strong>Yazılım projeleri için yaşayan niyet haritası.</strong></p>
 
-<p align="center"><a href="README.md">English</a> · <a href="ROADMAP.md">Yol haritası</a></p>
+<p align="center"><a href="README.md">English</a> · <a href="atlas/Brain/Product%20Roadmap.md">Ürün yol haritası</a></p>
 
 IntentAtlas bir sistemin neden var olduğunu, onu gerçekleştiren kod ve kanıtlarla bağlar:
 
@@ -18,6 +18,10 @@ Standart kod grafikleri “ne neyi çağırıyor?” sorusuna cevap verir. Inten
 değişikliğin **neden var olduğunu, neyin doğruladığını ve sırada neyi etkileyebileceğini**
 gösterir. Yerel çalışır, API anahtarı istemez ve proje hafızasını Obsidian uyumlu,
 Git ile izlenebilir Markdown dosyalarında tutar.
+
+Güncel fazlar ve tamamlanma durumları
+[Ürün Yol Haritası](atlas/Brain/Product%20Roadmap.md) belgesinde izlenir. Repo kökündeki
+`ROADMAP.md`, ilk 0.1–0.3 teknik planının açıkça arşivlenmiş tarihsel kaydıdır.
 
 ## Hızlı başlangıç
 

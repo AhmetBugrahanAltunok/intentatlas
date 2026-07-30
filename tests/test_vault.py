@@ -57,3 +57,26 @@ def test_sync_removes_only_generated_notes(tmp_path) -> None:
     second = sorted((tmp_path / "atlas" / "Code").glob("*.md"))
     assert manual in second
     assert [path.name for path in first] == [path.name for path in second]
+
+
+def test_vault_escapes_untrusted_markdown_in_generated_notes(tmp_path) -> None:
+    graph = AtlasGraph()
+    graph.add_node(
+        Node(
+            "commit:abc",
+            "commit",
+            "fix ![load](https://example.invalid/x) <img src=x>",
+            metadata={"detail": "</code><script>alert(1)</script>"},
+        )
+    )
+    vault = ProjectVault(tmp_path / "atlas")
+
+    vault.sync(graph)
+
+    generated = next((tmp_path / "atlas" / "Commits").glob("*.md"))
+    content = generated.read_text(encoding="utf-8")
+    assert "<img" not in content
+    assert "<script" not in content
+    assert "![load](" not in content
+    assert "&lt;img src=x&gt;" in content
+    assert "&lt;/code&gt;&lt;script&gt;" in content

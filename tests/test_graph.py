@@ -33,6 +33,32 @@ def test_graph_deduplicates_edges_and_rejects_invalid_edges() -> None:
     assert not graph.add_edge(Edge("REQ-1", "REQ-1", "self"))
 
 
+def test_graph_rejects_identity_collisions_but_merges_same_identity() -> None:
+    graph = AtlasGraph()
+    graph.add_node(Node("file:app.py", "file", "app.py", "app.py", {"owner": "scanner"}))
+    graph.add_node(
+        Node(
+            "file:app.py",
+            "file",
+            "app.py",
+            "app.py",
+            {"owner": "scanner", "language": "Python"},
+        )
+    )
+    assert graph.nodes["file:app.py"].metadata["language"] == "Python"
+
+    with pytest.raises(ValueError, match="Graph node ID collision"):
+        graph.add_node(
+            Node(
+                "file:app.py",
+                "requirement",
+                "Replace the file",
+                "Requirements/Replace.md",
+                {"owner": "user"},
+            )
+        )
+
+
 def test_graph_round_trip_and_summary(tmp_path) -> None:
     graph = sample_graph()
     path = tmp_path / "graph.json"

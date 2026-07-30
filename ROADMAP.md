@@ -1,4 +1,12 @@
-# Roadmap
+# Legacy Technical Roadmap (0.1 Draft)
+
+> **Status: archived planning snapshot.** This file preserves the original version-oriented
+> plan and is not the active delivery roadmap. See the
+> [current Product Roadmap](atlas/Brain/Product%20Roadmap.md) for the phases, status, evidence,
+> and completion gates used for ongoing work.
+
+The checklist below is historical context. Its version headings and checkbox states must not be
+used to decide whether a current product phase is complete.
 
 ## 0.1 — Local intent graph
 

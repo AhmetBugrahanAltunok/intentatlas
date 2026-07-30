@@ -19,6 +19,7 @@ class ProjectConfig:
             ".git",
             ".intentatlas",
             ".mypy_cache",
+            ".obsidian",
             ".pytest_cache",
             ".pytest_tmp",
             ".ruff_cache",
@@ -62,15 +63,17 @@ class ProjectConfig:
         return path
 
     def graph_path(self, root: Path) -> Path:
-        return _inside(root, self.graph)
+        return _inside(root, self.graph, "graph")
 
     def vault_path(self, root: Path) -> Path:
-        return _inside(root, self.vault)
+        return _inside(root, self.vault, "vault")
 
 
-def _inside(root: Path, configured: str) -> Path:
+def _inside(root: Path, configured: str, label: str) -> Path:
     base = root.resolve()
     target = (base / configured).resolve()
-    if target != base and base not in target.parents:
+    if target == base:
+        raise ValueError(f"Configured {label} path must be below the project root: {configured}")
+    if base not in target.parents:
         raise ValueError(f"Configured path escapes project root: {configured}")
     return target

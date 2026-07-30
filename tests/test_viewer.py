@@ -11,7 +11,13 @@ def test_viewer_assets_are_packaged() -> None:
     web = files("intentatlas.web")
     assert "IntentAtlas" in web.joinpath("index.html").read_text(encoding="utf-8")
     assert "--accent" in web.joinpath("styles.css").read_text(encoding="utf-8")
-    assert 'fetch("/graph.json"' in web.joinpath("app.js").read_text(encoding="utf-8")
+    app = web.joinpath("app.js").read_text(encoding="utf-8")
+    assert 'fetch("/graph.json"' in app
+    pointerup = app.split('group.addEventListener("pointerup"', maxsplit=1)[1].split(
+        'group.addEventListener("pointercancel"', maxsplit=1
+    )[0]
+    assert "if (!moved) selectNode(node.id);" in pointerup
+    assert 'group.addEventListener("click", () => { if (!moved) selectNode(node.id); });' in app
 
 
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:

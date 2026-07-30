@@ -13,6 +13,7 @@ def test_config_round_trip_and_bounds(tmp_path) -> None:
     assert path.exists()
     loaded = ProjectConfig.load(tmp_path)
     assert loaded.git_history_limit == 15
+    assert ".obsidian" in loaded.exclude
     assert loaded.vault_path(tmp_path) == (tmp_path / "atlas").resolve()
 
 
@@ -26,3 +27,17 @@ def test_config_rejects_escape_and_unknown_schema(tmp_path) -> None:
     (tmp_path / "intentatlas.json").write_text(json.dumps({"schema_version": 99}), encoding="utf-8")
     with pytest.raises(ValueError, match="Unsupported"):
         ProjectConfig.load(tmp_path)
+
+
+def test_config_rejects_project_root_as_an_output_path(tmp_path) -> None:
+    (tmp_path / "intentatlas.json").write_text(
+        json.dumps({"schema_version": 1, "vault": "."}), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="vault path must be below"):
+        ProjectConfig.load(tmp_path).vault_path(tmp_path)
+
+    (tmp_path / "intentatlas.json").write_text(
+        json.dumps({"schema_version": 1, "graph": "."}), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="graph path must be below"):
+        ProjectConfig.load(tmp_path).graph_path(tmp_path)

@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import ast
+import os
 import re
 from collections import defaultdict
 from collections.abc import Iterable
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from .config import ProjectConfig
 from .git_history import collect_git_history
@@ -49,7 +50,9 @@ USER_VAULT_AREAS = {
     "Sessions": "session",
 }
 WIKILINK = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
-FRONTMATTER_ID = re.compile(r"(?m)^id:\s*[\"']?([^\n\"']+)")
+FRONTMATTER_ID_LINE = re.compile(r"^id:\s*(.+?)\s*$")
+UNSAFE_USER_ID = re.compile(r"[\x00-\x20\x7f\[\]|]")
+RESERVED_USER_ID_PREFIXES = ("commit:", "file:", "symbol:")
 
 
 @dataclass(slots=True)
@@ -77,6 +80,11 @@ class RepositoryScanner:
         self.module_to_node: dict[str, str] = {}
         self.path_to_module: dict[str, str] = {}
         self.pending_links: list[PendingLink] = []
+        self.exclude_patterns = _exclude_patterns(config.exclude)
+        self.vault_parts = tuple(
+            part.casefold()
+            for part in config.vault_path(self.root).relative_to(self.root).parts
+        )
 
     def scan(self) -> AtlasGraph:
         self._discover_files()
@@ -89,13 +97,8 @@ class RepositoryScanner:
         return self.graph
 
     def _discover_files(self) -> None:
-        excluded = {item.casefold() for item in self.config.exclude}
-        for path in sorted(self.root.rglob("*")):
-            if not path.is_file() or path.is_symlink():
-                continue
+        for path in self._walk_files():
             relative_path = path.relative_to(self.root)
-            if any(part.casefold() in excluded for part in relative_path.parts):
-                continue
             if path.suffix.casefold() not in SUPPORTED_SUFFIXES:
                 continue
             relative = relative_path.as_posix()
@@ -119,6 +122,51 @@ class RepositoryScanner:
                     },
                 )
             )
+
+    def _walk_files(self) -> Iterable[Path]:
+        """Yield files without descending into excluded or linked directories."""
+
+        for current, directories, filenames in os.walk(
+            self.root,
+            topdown=True,
+            onerror=lambda _error: None,
+            followlinks=False,
+        ):
+            current_path = Path(current)
+            current_relative = current_path.relative_to(self.root)
+            allowed_directories: list[str] = []
+            for name in sorted(directories, key=str.casefold):
+                relative = current_relative / name
+                if self._is_excluded(relative):
+                    continue
+                candidate = current_path / name
+                if _is_directory_link(candidate):
+                    continue
+                allowed_directories.append(name)
+            directories[:] = allowed_directories
+
+            for name in sorted(filenames, key=str.casefold):
+                relative = current_relative / name
+                if self._is_excluded(relative):
+                    continue
+                candidate = current_path / name
+                try:
+                    if candidate.is_symlink() or not candidate.is_file():
+                        continue
+                except OSError:
+                    continue
+                yield candidate
+
+    def _is_excluded(self, relative: Path) -> bool:
+        parts = tuple(part.casefold() for part in relative.parts)
+        if self.vault_parts and parts[: len(self.vault_parts)] == self.vault_parts:
+            return True
+        for pattern in self.exclude_patterns:
+            if len(pattern) == 1 and pattern[0] in parts:
+                return True
+            if len(pattern) > 1 and parts[: len(pattern)] == pattern:
+                return True
+        return False
 
     def _build_module_map(self) -> None:
         for relative in sorted(self.files):
@@ -223,10 +271,10 @@ class RepositoryScanner:
                 except OSError:
                     continue
                 relative = path.relative_to(vault).as_posix()
-                explicit_id = FRONTMATTER_ID.search(content)
+                explicit_id = _frontmatter_id(content)
                 node_id = (
-                    explicit_id.group(1).strip()
-                    if explicit_id
+                    _validate_user_id(explicit_id, relative)
+                    if explicit_id is not None
                     else f"note:{relative.removesuffix('.md')}"
                 )
                 node = Node(
@@ -367,3 +415,57 @@ def _language(suffix: str) -> str:
         ".yaml": "YAML",
         ".yml": "YAML",
     }.get(suffix, suffix.lstrip(".").upper())
+
+
+def _exclude_patterns(values: Iterable[str]) -> tuple[tuple[str, ...], ...]:
+    patterns: set[tuple[str, ...]] = set()
+    for value in values:
+        normalized = value.strip().replace("\\", "/").strip("/")
+        if not normalized:
+            continue
+        parts = tuple(
+            part.casefold()
+            for part in PurePosixPath(normalized).parts
+            if part not in {"", "."}
+        )
+        if ".." in parts:
+            raise ValueError(f"Exclude path may not contain '..': {value}")
+        if parts:
+            patterns.add(parts)
+    return tuple(sorted(patterns))
+
+
+def _is_directory_link(path: Path) -> bool:
+    try:
+        if path.is_symlink():
+            return True
+        is_junction = getattr(path, "is_junction", None)
+        return bool(is_junction and is_junction())
+    except OSError:
+        return True
+
+
+def _frontmatter_id(content: str) -> str | None:
+    lines = content.lstrip("\ufeff \t\r\n").splitlines()
+    if not lines or lines[0].strip() != "---":
+        return None
+    candidate: str | None = None
+    for line in lines[1:]:
+        if line.strip() == "---":
+            return candidate
+        match = FRONTMATTER_ID_LINE.fullmatch(line.strip())
+        if match is None:
+            continue
+        value = match.group(1).strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+            value = value[1:-1].strip()
+        candidate = value
+    return None
+
+
+def _validate_user_id(value: str, relative: str) -> str:
+    if not value or len(value) > 240 or UNSAFE_USER_ID.search(value):
+        raise ValueError(f"Invalid user note ID in {relative}: {value!r}")
+    if value.casefold().startswith(RESERVED_USER_ID_PREFIXES):
+        raise ValueError(f"Reserved graph node ID in {relative}: {value!r}")
+    return value

@@ -135,18 +135,23 @@ function updatePositions() {
 }
 
 function bindNode(group, node) {
-  let moved = false;
+  let moved = false, dragOrigin = null;
   group.addEventListener("pointerdown", event => {
-    event.stopPropagation(); moved = false; node.fixed = true; group.setPointerCapture(event.pointerId);
+    event.stopPropagation(); moved = false; dragOrigin = { x: event.clientX, y: event.clientY };
+    node.fixed = true; group.setPointerCapture(event.pointerId);
   });
   group.addEventListener("pointermove", event => {
-    if (!group.hasPointerCapture(event.pointerId)) return; moved = true;
+    if (!group.hasPointerCapture(event.pointerId)) return;
+    if (dragOrigin && Math.hypot(event.clientX - dragOrigin.x, event.clientY - dragOrigin.y) >= 4) moved = true;
     const point = graphPoint(event); node.x = point.x; node.y = point.y; node.vx = 0; node.vy = 0; updatePositions();
   });
   group.addEventListener("pointerup", event => {
     if (group.hasPointerCapture(event.pointerId)) group.releasePointerCapture(event.pointerId);
+    if (!moved) selectNode(node.id);
+    dragOrigin = null;
     node.fixed = false; state.alpha = Math.max(state.alpha, .15); tick();
   });
+  group.addEventListener("pointercancel", () => { dragOrigin = null; node.fixed = false; });
   group.addEventListener("click", () => { if (!moved) selectNode(node.id); });
   group.addEventListener("keydown", event => {
     if (event.key === "Enter" || event.key === " ") { event.preventDefault(); selectNode(node.id); }

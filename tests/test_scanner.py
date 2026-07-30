@@ -1,5 +1,11 @@
 from __future__ import annotations
 
+import os
+from pathlib import Path
+
+import pytest
+
+import intentatlas.scanner as scanner_module
 from intentatlas.config import ProjectConfig
 from intentatlas.scanner import scan_repository
 from intentatlas.vault import ProjectVault
@@ -26,6 +32,8 @@ def build_python_project(tmp_path) -> None:
     (tmp_path / "README.md").write_text("# Demo\n", encoding="utf-8")
     (tmp_path / ".venv").mkdir()
     (tmp_path / ".venv" / "ignored.py").write_text("raise Exception\n", encoding="utf-8")
+    (tmp_path / ".obsidian").mkdir()
+    (tmp_path / ".obsidian" / "ignored.md").write_text("# Wrong vault\n", encoding="utf-8")
 
 
 def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
@@ -35,6 +43,7 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
     assert "symbol:src/demo/core.py::Greeter" in graph.nodes
     assert "symbol:src/demo/core.py::Greeter.hello" in graph.nodes
     assert "file:.venv/ignored.py" not in graph.nodes
+    assert "file:.obsidian/ignored.md" not in graph.nodes
 
     relationships = {(edge.source, edge.target, edge.relation) for edge in graph.edges}
     assert (
@@ -49,13 +58,26 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
     ) in relationships
 
 
-def test_scanner_reads_user_vault_links_but_skips_private(tmp_path) -> None:
+def test_scanner_reads_user_vault_links_without_enumerating_private(
+    tmp_path, monkeypatch
+) -> None:
     build_python_project(tmp_path)
     config = ProjectConfig(git_history_limit=0)
     vault = ProjectVault(config.vault_path(tmp_path))
     vault.initialize()
     private = config.vault_path(tmp_path) / "Private" / "secret.md"
     private.write_text("password=hunter2", encoding="utf-8")
+
+    original_scandir = os.scandir
+    private_root = private.parent.resolve()
+
+    def guarded_scandir(path):
+        candidate = Path(path).resolve()
+        if candidate == private_root or private_root in candidate.parents:
+            raise AssertionError("scanner enumerated atlas/Private")
+        return original_scandir(path)
+
+    monkeypatch.setattr(scanner_module.os, "scandir", guarded_scandir)
 
     graph = scan_repository(tmp_path, config)
     assert "REQ-001" in graph.nodes
@@ -65,3 +87,54 @@ def test_scanner_reads_user_vault_links_but_skips_private(tmp_path) -> None:
         edge.source == "REQ-001" and edge.target == "ADR-001" and edge.relation == "references"
         for edge in graph.edges
     )
+
+
+def test_scanner_prunes_configured_nested_excludes_before_descent(tmp_path, monkeypatch) -> None:
+    (tmp_path / "vendor" / "generated").mkdir(parents=True)
+    (tmp_path / "vendor" / "keep.py").write_text("value = 1\n", encoding="utf-8")
+    (tmp_path / "vendor" / "generated" / "secret.py").write_text(
+        "password = 'do-not-read'\n", encoding="utf-8"
+    )
+    blocked = (tmp_path / "vendor" / "generated").resolve()
+    original_scandir = os.scandir
+
+    def guarded_scandir(path):
+        candidate = Path(path).resolve()
+        if candidate == blocked or blocked in candidate.parents:
+            raise AssertionError("scanner descended into configured exclude")
+        return original_scandir(path)
+
+    monkeypatch.setattr(scanner_module.os, "scandir", guarded_scandir)
+    config = ProjectConfig(exclude=["vendor/generated"], git_history_limit=0)
+    graph = scan_repository(tmp_path, config)
+
+    assert "file:vendor/keep.py" in graph.nodes
+    assert "file:vendor/generated/secret.py" not in graph.nodes
+
+
+def test_scanner_rejects_reserved_user_note_ids(tmp_path) -> None:
+    config = ProjectConfig(git_history_limit=0)
+    vault = ProjectVault(config.vault_path(tmp_path))
+    vault.initialize()
+    (config.vault_path(tmp_path) / "Requirements" / "Collision.md").write_text(
+        "---\nid: file:README.md\ntype: requirement\n---\n# Collision\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="Reserved graph node ID"):
+        scan_repository(tmp_path, config)
+
+
+def test_scanner_only_reads_ids_from_frontmatter(tmp_path) -> None:
+    config = ProjectConfig(git_history_limit=0)
+    vault = ProjectVault(config.vault_path(tmp_path))
+    vault.initialize()
+    note = config.vault_path(tmp_path) / "Requirements" / "Body ID.md"
+    note.write_text("# Body ID\n\nid: file:README.md\n", encoding="utf-8")
+    malformed = config.vault_path(tmp_path) / "Requirements" / "Malformed frontmatter.md"
+    malformed.write_text("---\n# Not closed\nid: file:README.md\n", encoding="utf-8")
+
+    graph = scan_repository(tmp_path, config)
+
+    assert "note:Requirements/Body ID" in graph.nodes
+    assert "note:Requirements/Malformed frontmatter" in graph.nodes

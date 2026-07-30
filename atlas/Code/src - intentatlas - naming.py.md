@@ -10,16 +10,17 @@ source_path: "src/intentatlas/naming.py"
 
 ## Metadata
 
-- **Language:** `"Python"`
-- **Size Bytes:** `1050`
+- **Language:** <code>"Python"</code>
+- **Size Bytes:** <code>1056</code>
 
 ## Outgoing relationships
 
-- `defines` → [[Symbols/note_title - src - intentatlas - naming.py|note_title]] _(evidence: python-ast)_
-- `defines` → [[Symbols/safe_filename - src - intentatlas - naming.py|safe_filename]] _(evidence: python-ast)_
-- `imports` → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/note_title - src - intentatlas - naming.py|note_title]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/safe_filename - src - intentatlas - naming.py|safe_filename]] _(evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
 
 ## Incoming relationships
 
-- `imports` ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- `imports` ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>imports</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
+- <code>imports</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_

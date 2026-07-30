@@ -10,9 +10,9 @@ source_path: "src/intentatlas/scanner.py"
 
 ## Metadata
 
-- **Line:** `81`
-- **Symbol Kind:** `"function"`
+- **Line:** <code>89</code>
+- **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
-- `defines` ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
+- <code>defines</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_

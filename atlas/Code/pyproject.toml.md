@@ -10,9 +10,9 @@ source_path: "pyproject.toml"
 
 ## Metadata
 
-- **Language:** `"TOML"`
-- **Size Bytes:** `1769`
+- **Language:** <code>"TOML"</code>
+- **Size Bytes:** <code>1769</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_

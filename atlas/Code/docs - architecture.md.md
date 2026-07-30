@@ -10,9 +10,9 @@ source_path: "docs/architecture.md"
 
 ## Metadata
 
-- **Language:** `"Markdown"`
-- **Size Bytes:** `1914`
+- **Language:** <code>"Markdown"</code>
+- **Size Bytes:** <code>2107</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_

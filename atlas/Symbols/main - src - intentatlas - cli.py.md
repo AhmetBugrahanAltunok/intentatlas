@@ -10,9 +10,9 @@ source_path: "src/intentatlas/cli.py"
 
 ## Metadata
 
-- **Line:** `57`
-- **Symbol Kind:** `"function"`
+- **Line:** <code>57</code>
+- **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
-- `defines` ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>defines</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_

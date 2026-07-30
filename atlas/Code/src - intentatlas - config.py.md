@@ -10,22 +10,23 @@ source_path: "src/intentatlas/config.py"
 
 ## Metadata
 
-- **Language:** `"Python"`
-- **Size Bytes:** `2376`
+- **Language:** <code>"Python"</code>
+- **Size Bytes:** <code>2533</code>
 
 ## Outgoing relationships
 
-- `defines` → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectConfig.graph_path - src - intentatlas - config.py|ProjectConfig.graph_path]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectConfig.load - src - intentatlas - config.py|ProjectConfig.load]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectConfig.save_if_missing - src - intentatlas - config.py|ProjectConfig.save_if_missing]] _(evidence: python-ast)_
-- `defines` → [[Symbols/ProjectConfig.vault_path - src - intentatlas - config.py|ProjectConfig.vault_path]] _(evidence: python-ast)_
-- `defines` → [[Symbols/_inside - src - intentatlas - config.py|_inside]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.graph_path - src - intentatlas - config.py|ProjectConfig.graph_path]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.load - src - intentatlas - config.py|ProjectConfig.load]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.save_if_missing - src - intentatlas - config.py|ProjectConfig.save_if_missing]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.vault_path - src - intentatlas - config.py|ProjectConfig.vault_path]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_inside - src - intentatlas - config.py|_inside]] _(evidence: python-ast)_
 
 ## Incoming relationships
 
-- `imports` ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
-- `imports` ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_config.py|tests/test_config.py]] _(evidence: filename-convention)_
-- `tests` ← [[Tests/tests - test_config.py|tests/test_config.py]] _(evidence: python-ast)_
-- `tests` ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: python-ast)_
+- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>imports</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>imports</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
+- <code>tests</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(evidence: filename-convention)_
+- <code>tests</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(evidence: python-ast)_
+- <code>tests</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: python-ast)_
