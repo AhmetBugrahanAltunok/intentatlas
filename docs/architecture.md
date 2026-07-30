@@ -11,11 +11,16 @@ Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
 
 ## 1. Repository adapters
 
-Adapters extract only structural metadata. The Python adapter records files, classes,
-functions, imports, and test relationships. The Git adapter reads commit metadata and
-changed paths with fixed read-only commands. Repository discovery prunes excluded directories
-before descent, does not follow directory links, and excludes the configured vault from the
-repository walk. Adapters never execute project code.
+Adapters extract only structural metadata. Built-in language adapters receive a read-only file
+and kind mapping, enforce the shared parse-size limit, and return deterministic graph fragments;
+they do not mutate the graph directly. The Python adapter uses the standard-library AST. The
+TypeScript/JavaScript adapter conservatively recognizes explicit declarations and static relative
+module references in `.ts`, `.tsx`, `.js`, and `.jsx` files without requiring Node. Bare package
+imports are not resolved into repository relationships.
+
+The Git adapter reads commit metadata and changed paths with fixed read-only commands. Repository
+discovery prunes excluded directories before descent, does not follow directory links, and
+excludes the configured vault from the repository walk. Adapters never execute project code.
 
 ## 2. AtlasGraph
 

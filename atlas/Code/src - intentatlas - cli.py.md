@@ -32,6 +32,7 @@ source_path: "src/intentatlas/cli.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_

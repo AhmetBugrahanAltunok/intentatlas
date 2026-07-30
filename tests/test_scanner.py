@@ -10,6 +10,8 @@ from intentatlas.config import ProjectConfig
 from intentatlas.scanner import scan_repository
 from intentatlas.vault import ProjectVault
 
+TYPESCRIPT_FIXTURE = Path(__file__).parent / "fixtures" / "typescript_project"
+
 
 def build_python_project(tmp_path) -> None:
     (tmp_path / "src" / "demo").mkdir(parents=True)
@@ -56,6 +58,91 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
         "file:src/demo/core.py",
         "tests",
     ) in relationships
+
+
+def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> None:
+    first = scan_repository(TYPESCRIPT_FIXTURE, ProjectConfig(git_history_limit=0))
+    second = scan_repository(TYPESCRIPT_FIXTURE, ProjectConfig(git_history_limit=0))
+
+    assert first.to_dict()["nodes"] == second.to_dict()["nodes"]
+    assert first.to_dict()["edges"] == second.to_dict()["edges"]
+    for node_id in (
+        "symbol:src/math.ts::Calculator",
+        "symbol:src/math.ts::Numeric",
+        "symbol:src/math.ts::Operation",
+        "symbol:src/math.ts::add",
+        "symbol:src/components/index.ts::Card",
+        "symbol:src/main.ts::boot",
+        "symbol:src/card.tsx::CardView",
+        "symbol:src/view.jsx::View",
+        "symbol:src/comments.ts::VisibleShape",
+        "symbol:src/multiline.ts::createCard",
+        "symbol:src/dynamic.ts::loadMath",
+    ):
+        assert node_id in first.nodes
+    assert "symbol:src/comments.ts::Phantom" not in first.nodes
+    assert "symbol:src/comments.ts::TemplatePhantom" not in first.nodes
+    assert "symbol:src/comments.ts::StringPhantom" not in first.nodes
+    assert first.nodes["file:src/main.test.ts"].kind == "test"
+    assert first.nodes["file:src/main.test.ts"].metadata["language"] == "TypeScript"
+    assert first.nodes["file:src/view.jsx"].metadata["language"] == "JavaScript"
+
+    relationships = {
+        (edge.source, edge.target, edge.relation, edge.evidence) for edge in first.edges
+    }
+    assert (
+        "file:src/main.ts",
+        "file:src/math.ts",
+        "imports",
+        "javascript-structural",
+    ) in relationships
+    assert (
+        "file:src/main.ts",
+        "file:src/components/index.ts",
+        "imports",
+        "javascript-structural",
+    ) in relationships
+    assert (
+        "file:src/legacy.js",
+        "file:src/math.ts",
+        "imports",
+        "javascript-structural",
+    ) in relationships
+    assert (
+        "file:src/multiline.ts",
+        "file:src/components/index.ts",
+        "imports",
+        "javascript-structural",
+    ) in relationships
+    assert (
+        "file:src/main.test.ts",
+        "file:src/main.ts",
+        "tests",
+        "javascript-structural",
+    ) in relationships
+    assert (
+        "file:src/math.test.ts",
+        "file:src/math.ts",
+        "tests",
+        "filename-convention",
+    ) in relationships
+    assert not any(
+        edge.source == "file:src/main.ts" and edge.target == "file:src/react.ts"
+        for edge in first.edges
+    )
+    assert not any(
+        edge.source == "file:src/escape.ts" and edge.target == "file:outside.ts"
+        for edge in first.edges
+    )
+    assert not any(
+        edge.source == "file:src/ambiguous.ts"
+        and edge.target in {"file:src/dual.ts", "file:src/dual.js"}
+        for edge in first.edges
+    )
+    assert not any(
+        edge.source == "file:src/dynamic.ts" and edge.relation in {"imports", "tests"}
+        for edge in first.edges
+    )
 
 
 def test_scanner_reads_user_vault_links_without_enumerating_private(

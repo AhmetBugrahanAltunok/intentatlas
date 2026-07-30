@@ -13,7 +13,37 @@ source_path: "src/intentatlas/web/app.js"
 - **Language:** <code>"JavaScript"</code>
 - **Size Bytes:** <code>14500</code>
 
+## Outgoing relationships
+
+- <code>defines</code> → [[Symbols/applySearch - src - intentatlas - web - app.js|applySearch]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/bindEvents - src - intentatlas - web - app.js|bindEvents]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/bindNode - src - intentatlas - web - app.js|bindNode]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/boot - src - intentatlas - web - app.js|boot]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/clamp - src - intentatlas - web - app.js|clamp]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/closeDetail - src - intentatlas - web - app.js|closeDetail]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/color - src - intentatlas - web - app.js|color]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/degree - src - intentatlas - web - app.js|degree]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/draw - src - intentatlas - web - app.js|draw]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/escapeAttr - src - intentatlas - web - app.js|escapeAttr]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/escapeHTML - src - intentatlas - web - app.js|escapeHTML]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/fitGraph - src - intentatlas - web - app.js|fitGraph]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/focusNode - src - intentatlas - web - app.js|focusNode]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/graphPoint - src - intentatlas - web - app.js|graphPoint]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/radius - src - intentatlas - web - app.js|radius]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/rebuild - src - intentatlas - web - app.js|rebuild]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/renderFilters - src - intentatlas - web - app.js|renderFilters]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/renderStats - src - intentatlas - web - app.js|renderStats]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/seeded - src - intentatlas - web - app.js|seeded]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/selectNode - src - intentatlas - web - app.js|selectNode]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/shortLabel - src - intentatlas - web - app.js|shortLabel]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/stat - src - intentatlas - web - app.js|stat]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/svgElement - src - intentatlas - web - app.js|svgElement]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/tick - src - intentatlas - web - app.js|tick]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/transform - src - intentatlas - web - app.js|transform]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/updatePositions - src - intentatlas - web - app.js|updatePositions]] _(structure; evidence: javascript-structural)_
+
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_

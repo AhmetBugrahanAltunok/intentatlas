@@ -28,13 +28,18 @@ source_path: "src/intentatlas/models.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - adapters - javascript.py|src/intentatlas/adapters/javascript.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_relations.py|tests/test_relations.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: python-ast)_

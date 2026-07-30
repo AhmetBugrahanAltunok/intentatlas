@@ -39,24 +39,45 @@ Status: complete (2026-07-30)
 - Outcome: intent, delivery, implementation, verification, evidence, history, and structure
   relationships have stable forward/inverse semantics across the cache, CLI, vault, and viewer.
 
-## Phase 3 — Evidence and language adapters
+## Phase 3 — Adapter platform and TypeScript/JavaScript
+
+Status: complete (2026-07-31)
+
+- Establish a deterministic, typed language-adapter contract.
+- Move Python structural analysis behind the same contract without regressions.
+- Add TypeScript, JavaScript, TSX, and JSX file, symbol, import, and test relationships.
+- Requirement: [[Requirements/REQ-004 - Trace TypeScript and JavaScript structure]]
+- Decision: [[Decisions/ADR-004 - Built-in language adapter contract]]
+- Delivery issue: [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter]]
+- Strategy: [[Brain/Language Adapter Strategy]]
+- Evidence: [[Evidence/EVD-004 - Phase 3 TypeScript and JavaScript verification]]
+- Review: [[Reviews/Phase 3 TypeScript and JavaScript Review]]
+- Outcome: Python and TypeScript/JavaScript now share one bounded, deterministic adapter contract;
+  TS, TSX, JS, and JSX structure is navigable across the cache, CLI, vault, and viewer.
+
+## Phase 4 — Evidence import and CI graph diff
 
 Status: planned
 
-- Import coverage and test-result evidence.
-- Add TypeScript/JavaScript first, then Go, followed by Rust or Java based on demand.
-- Add optional issue/pull-request inputs.
-- Produce a stable graph diff for CI.
-- Strategy: [[Brain/Language Adapter Strategy]]
+- Import coverage and test-result evidence without executing project code.
+- Produce a stable graph diff format for CI.
 
-## Phase 4 — Product experience and scale
+## Phase 5 — Go and external delivery inputs
+
+Status: planned
+
+- Add Go as the next language adapter.
+- Add optional issue and pull-request inputs through explicit local data sources.
+- Select Rust or Java next according to demand and fixture quality.
+
+## Phase 6 — Product experience and scale
 
 Status: planned
 
 - Improve graph navigation, filtering, relationship paths, and large-graph performance.
 - Add change-risk and evidence-gap explanations.
 
-## Phase 5 — Open-source release readiness
+## Phase 7 — Open-source release readiness
 
 Status: planned
 

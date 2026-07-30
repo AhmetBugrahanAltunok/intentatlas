@@ -13,6 +13,7 @@ This evidence verifies the Phase 2 requirement and decision under the completion
 - references:: [[Decisions/ADR-003 - Typed relation vocabulary]]
 - references:: [[Brain/Phase Completion Protocol]]
 - references:: [[Issues/ISSUE-001 - Implement typed intent chain]]
+- recorded-in:: [[Commit dfc5345 - feat- complete typed intent chain phase]]
 
 ## Change inventory
 
@@ -102,4 +103,5 @@ This evidence verifies the Phase 2 requirement and decision under the completion
   combinations.
 - Coverage and imported test-result evidence remain Phase 3 work.
 - Large-graph filtering, path exploration, and performance work remain Phase 4 scope.
-- This evidence is not linked to a Phase 2 commit until the owner authorizes creating that commit.
+- Phase 2 is recorded in commit `dfc5345` and becomes visible through the generated commit note on
+  the next repository scan.

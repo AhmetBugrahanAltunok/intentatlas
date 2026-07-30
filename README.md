@@ -75,8 +75,10 @@ ordinary wikilinks remain safe generic references.
 
 ## Status
 
-IntentAtlas is an early working prototype. Python analysis is the first language adapter;
-the graph model is language-neutral and additional adapters are planned.
+IntentAtlas is an early working prototype. Python and TypeScript/JavaScript analysis share a
+language-neutral built-in adapter contract. The TypeScript/JavaScript adapter covers `.ts`, `.tsx`,
+`.js`, and `.jsx` files with conservative symbol, local-import, re-export, and test relationships
+without running Node or project code.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

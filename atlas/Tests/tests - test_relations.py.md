@@ -20,3 +20,7 @@ source_path: "tests/test_relations.py"
 - <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(verification; evidence: python-ast)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_

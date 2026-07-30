@@ -11,12 +11,13 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>7256</code>
+- **Size Bytes:** <code>10294</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/build_python_project - tests - test_scanner.py|build_python_project]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_connects_typescript_javascript_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_typescript_javascript_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_only_reads_ids_from_frontmatter - tests - test_scanner.py|test_scanner_only_reads_ids_from_frontmatter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_preserves_explicit_typed_intent_links - tests - test_scanner.py|test_scanner_preserves_explicit_typed_intent_links]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent]] _(structure; evidence: python-ast)_
@@ -32,5 +33,6 @@ source_path: "tests/test_scanner.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

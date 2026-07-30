@@ -49,6 +49,12 @@ gösterecektir.
 Anlamı belirtilmiş bağlantılar `relation:: [[hedef]]` biçimini kullanır. Normal wikilinkler
 güvenli ve genel `references` ilişkileri olarak çalışmaya devam eder.
 
+## Durum
+
+Python ile TypeScript/JavaScript analizi aynı dil-bağımsız adaptör sözleşmesini kullanır. `.ts`,
+`.tsx`, `.js` ve `.jsx` dosyalarında adlandırılmış semboller, yerel import/re-export bağlantıları
+ve test ilişkileri; Node veya proje kodu çalıştırılmadan, yerel ve tutucu biçimde çıkarılır.
+
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden
 esinlenmiştir. IntentAtlas buna kod, test, Git ve teslimat niyeti katmanını ekler.

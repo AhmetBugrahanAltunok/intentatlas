@@ -22,6 +22,7 @@ source_path: "src/intentatlas/relations.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_

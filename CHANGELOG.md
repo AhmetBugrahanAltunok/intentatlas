@@ -14,6 +14,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 - Phase-based delivery protocol with evidence and review completion gates.
 - Phase 2 typed relation catalog, inverse relationship labels, issue notes, and explicit
   `relation:: [[target]]` Markdown links.
+- A deterministic built-in language-adapter contract and conservative TypeScript/JavaScript,
+  TSX, and JSX symbol, local-import, re-export, and test analysis.
 
 ### Changed
 
@@ -25,6 +27,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   evidence recorded in the Obsidian vault.
 - Graph caches use schema 2 while retaining read compatibility with schema 1, and impact output
   explains relation direction, category, and provenance.
+- Python structural analysis now runs behind the same graph-fragment adapter contract used by
+  TypeScript and JavaScript without changing its graph semantics.
 
 ### Fixed
 
