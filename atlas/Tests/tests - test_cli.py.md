@@ -11,16 +11,16 @@ source_path: "tests/test_cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1267</code>
+- **Size Bytes:** <code>1354</code>
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/test_cli_init_scan_status_and_impact - tests - test_cli.py|test_cli_init_scan_status_and_impact]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_cli_reports_invalid_requests - tests - test_cli.py|test_cli_reports_invalid_requests]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cli_init_scan_status_and_impact - tests - test_cli.py|test_cli_init_scan_status_and_impact]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cli_reports_invalid_requests - tests - test_cli.py|test_cli_reports_invalid_requests]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>references</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(evidence: wikilink)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

@@ -10,9 +10,9 @@ source_path: "tests/test_graph.py"
 
 ## Metadata
 
-- **Line:** <code>27</code>
+- **Line:** <code>28</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
-- <code>defines</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(evidence: python-ast)_
+- <code>defined-in</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(structure; evidence: python-ast)_

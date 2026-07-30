@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from .relations import relation_type
+
 
 @dataclass(frozen=True, slots=True)
 class Node:
@@ -45,22 +47,39 @@ class Edge:
     relation: str
     evidence: str = "scanner"
 
+    @property
+    def category(self) -> str:
+        return relation_type(self.relation).category
+
+    @property
+    def inverse(self) -> str:
+        return relation_type(self.relation).inverse
+
     def to_dict(self) -> dict[str, str]:
         return {
             "source": self.source,
             "target": self.target,
             "relation": self.relation,
+            "category": self.category,
+            "inverse": self.inverse,
             "evidence": self.evidence,
         }
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> Edge:
-        return cls(
+        edge = cls(
             source=str(value["source"]),
             target=str(value["target"]),
             relation=str(value["relation"]),
             evidence=str(value.get("evidence", "scanner")),
         )
+        for field_name, expected in (("category", edge.category), ("inverse", edge.inverse)):
+            declared = value.get(field_name)
+            if declared is not None and str(declared) != expected:
+                raise ValueError(
+                    f"Invalid {field_name} for relation {edge.relation!r}: {declared!r}"
+                )
+        return edge
 
 
 @dataclass(frozen=True, slots=True)

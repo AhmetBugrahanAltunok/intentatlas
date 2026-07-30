@@ -138,3 +138,40 @@ def test_scanner_only_reads_ids_from_frontmatter(tmp_path) -> None:
 
     assert "note:Requirements/Body ID" in graph.nodes
     assert "note:Requirements/Malformed frontmatter" in graph.nodes
+
+
+def test_scanner_preserves_explicit_typed_intent_links(tmp_path) -> None:
+    build_python_project(tmp_path)
+    config = ProjectConfig(git_history_limit=0)
+    vault = ProjectVault(config.vault_path(tmp_path))
+    vault.initialize()
+    (vault.root / "Requirements" / "REQ-Typed.md").write_text(
+        "---\nid: REQ-TYPED\ntype: requirement\n---\n"
+        "# Typed requirement\n\n- drives:: [[Decisions/ADR-Typed]]\n"
+        "- unknown:: [[Evidence/EVD-Typed]]\n",
+        encoding="utf-8",
+    )
+    (vault.root / "Decisions" / "ADR-Typed.md").write_text(
+        "---\nid: ADR-TYPED\ntype: decision\n---\n"
+        "# Typed decision\n\n- tracked-by:: [[Issues/ISSUE-Typed]]\n",
+        encoding="utf-8",
+    )
+    (vault.root / "Issues" / "ISSUE-Typed.md").write_text(
+        "---\nid: ISSUE-TYPED\ntype: issue\n---\n"
+        "# Typed issue\n\n- implemented-by:: [[src - demo - core.py]]\n",
+        encoding="utf-8",
+    )
+    (vault.root / "Evidence" / "EVD-Typed.md").write_text(
+        "---\nid: EVD-TYPED\ntype: evidence\n---\n"
+        "# Typed evidence\n\n- proves:: [[Requirements/REQ-Typed]]\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, config)
+    assert graph.nodes["ISSUE-TYPED"].kind == "issue"
+    relationships = {(edge.source, edge.target, edge.relation) for edge in graph.edges}
+    assert ("REQ-TYPED", "ADR-TYPED", "drives") in relationships
+    assert ("ADR-TYPED", "ISSUE-TYPED", "tracked-by") in relationships
+    assert ("ISSUE-TYPED", "file:src/demo/core.py", "implemented-by") in relationships
+    assert ("EVD-TYPED", "REQ-TYPED", "proves") in relationships
+    assert ("REQ-TYPED", "EVD-TYPED", "references") in relationships

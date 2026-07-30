@@ -15,4 +15,4 @@ source_path: "src/intentatlas/naming.py"
 
 ## Incoming relationships
 
-- <code>defines</code> ← [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(evidence: python-ast)_
+- <code>defined-in</code> ← [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(structure; evidence: python-ast)_

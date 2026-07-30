@@ -15,11 +15,11 @@ source_path: "tests/test_security.py"
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/test_redact_nested_values_and_common_token_shapes - tests - test_security.py|test_redact_nested_values_and_common_token_shapes]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_redact_nested_values_and_common_token_shapes - tests - test_security.py|test_redact_nested_values_and_common_token_shapes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_

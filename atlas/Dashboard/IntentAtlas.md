@@ -17,35 +17,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 1
+- **commit:** 2
 - **config:** 6
-- **decision:** 2
+- **decision:** 3
 - **document:** 10
-- **evidence:** 2
-- **file:** 14
-- **memory:** 3
-- **requirement:** 2
-- **review:** 2
+- **evidence:** 3
+- **file:** 15
+- **issue:** 1
+- **memory:** 4
+- **requirement:** 3
+- **review:** 3
 - **session:** 1
-- **symbol:** 124
-- **test:** 8
-- **relationships:** 241
+- **symbol:** 135
+- **test:** 9
+- **relationships:** 304
 - **orphaned durable notes:** 0
 
 ## Most connected
 
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 42 relationships
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 38 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 38 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 25 relationships
-- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 21 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 28 relationships
+- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 22 relationships
+- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 20 relationships
+- [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] — 19 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 18 relationships
-- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 15 relationships
-- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 14 relationships
-- [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] — 12 relationships
-- [[Tests/tests - test_graph.py|tests/test_graph.py]] — 12 relationships
-- [[Requirements/REQ-002 - Harden trust boundaries|REQ-002 - Harden trust boundaries]] — 10 relationships
-- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 10 relationships
-- [[Tests/tests - test_viewer.py|tests/test_viewer.py]] — 10 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 17 relationships
+- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 16 relationships
+- [[Tests/tests - test_graph.py|tests/test_graph.py]] — 15 relationships
+- [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] — 13 relationships
+- [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] — 11 relationships
 
 ## Workflow
 

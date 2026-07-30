@@ -15,4 +15,4 @@ source_path: "src/intentatlas/security.py"
 
 ## Incoming relationships
 
-- <code>defines</code> ← [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(evidence: python-ast)_
+- <code>defined-in</code> ← [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(structure; evidence: python-ast)_

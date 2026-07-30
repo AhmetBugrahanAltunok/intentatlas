@@ -41,9 +41,13 @@ gösterecektir.
 
 - Klasörler amaca göre, bağlantılar anlama göre düzenlenir.
 - İnsan/ajan notları ile tarayıcının ürettiği kod notlarının sahipliği ayrıdır.
+- `Issues/` dahil kalıcı niyet notları kullanıcıya aittir ve taramalarda korunur.
 - `Private/` Git’e girmez ve IntentAtlas tarafından okunmaz.
 - Kalıcı ama bağlantısız notlar sağlık sorunu olarak raporlanır.
 - Obsidian zorunlu değildir; aynı grafik yerel web görünümünde açılabilir.
+
+Anlamı belirtilmiş bağlantılar `relation:: [[hedef]]` biçimini kullanır. Normal wikilinkler
+güvenli ve genel `references` ilişkileri olarak çalışmaya devam eder.
 
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden

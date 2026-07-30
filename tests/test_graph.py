@@ -6,6 +6,7 @@ import pytest
 
 from intentatlas.graph import AtlasGraph
 from intentatlas.models import Edge, Node
+from intentatlas.relations import relation_catalog
 
 
 def sample_graph() -> AtlasGraph:
@@ -68,6 +69,12 @@ def test_graph_round_trip_and_summary(tmp_path) -> None:
     assert restored.edges == graph.edges
     assert restored.find("app.py").id == "file:app.py"
     assert restored.orphans() == []
+    payload = graph.to_dict()
+    assert payload["schema_version"] == 2
+    assert payload["relation_schema_version"] == 1
+    drives = next(edge for edge in payload["edges"] if edge["relation"] == "drives")
+    assert drives["category"] == "intent"
+    assert drives["inverse"] == "driven-by"
 
 
 def test_find_reports_missing_and_ambiguous_targets() -> None:
@@ -111,4 +118,53 @@ def test_load_rejects_unknown_schema_and_invalid_edges(tmp_path) -> None:
         encoding="utf-8",
     )
     with pytest.raises(ValueError, match="Invalid edge"):
+        AtlasGraph.load(path)
+
+
+def test_load_migrates_schema_one_and_rejects_invalid_typed_relations(tmp_path) -> None:
+    path = tmp_path / "graph.json"
+    legacy = {
+        "schema_version": 1,
+        "nodes": [
+            {"id": "REQ-1", "kind": "requirement", "label": "Requirement"},
+            {"id": "ADR-1", "kind": "decision", "label": "Decision"},
+        ],
+        "edges": [
+            {
+                "source": "REQ-1",
+                "target": "ADR-1",
+                "relation": "drives",
+                "evidence": "wikilink",
+            }
+        ],
+    }
+    path.write_text(json.dumps(legacy), encoding="utf-8")
+    migrated = AtlasGraph.load(path)
+    assert migrated.edges[0].category == "intent"
+    assert migrated.to_dict()["schema_version"] == 2
+
+    graph = AtlasGraph()
+    graph.extend(
+        [Node("REQ-1", "requirement", "Requirement"), Node("ADR-1", "decision", "Decision")]
+    )
+    with pytest.raises(ValueError, match="Unknown graph relation"):
+        graph.add_edge(Edge("REQ-1", "ADR-1", "invented"))
+    with pytest.raises(ValueError, match="Unknown graph relation"):
+        graph.add_edge(Edge("missing", "also-missing", "invented"))
+
+    invalid_v2 = {
+        **legacy,
+        "schema_version": 2,
+        "relation_schema_version": 1,
+        "relation_types": relation_catalog(),
+        "edges": [{**legacy["edges"][0], "inverse": "wrong"}],
+    }
+    path.write_text(json.dumps(invalid_v2), encoding="utf-8")
+    with pytest.raises(ValueError, match="Invalid inverse"):
+        AtlasGraph.load(path)
+
+    invalid_v2["edges"] = legacy["edges"]
+    invalid_v2["relation_types"] = []
+    path.write_text(json.dumps(invalid_v2), encoding="utf-8")
+    with pytest.raises(ValueError, match="Invalid relation catalog"):
         AtlasGraph.load(path)

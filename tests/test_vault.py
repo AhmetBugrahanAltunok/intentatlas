@@ -44,6 +44,10 @@ def test_vault_initializes_obsidian_and_preserves_user_owned_notes(tmp_path) -> 
     assert GENERATED_MARKER in content
     assert "[[Requirements/Keep context|Keep context]]" in content
     assert "[[Symbols/main - src - app.py|main]]" in content
+    assert "<code>implements</code>" in content
+    assert "implementation; evidence: wikilink" in content
+    assert (tmp_path / "atlas" / "Issues").is_dir()
+    assert (tmp_path / "atlas" / "Templates" / "Issue.md").exists()
 
 
 def test_sync_removes_only_generated_notes(tmp_path) -> None:

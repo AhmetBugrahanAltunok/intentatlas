@@ -13,6 +13,7 @@ from .git_history import collect_git_history
 from .graph import AtlasGraph
 from .models import Edge, Node
 from .naming import note_title, safe_filename
+from .relations import USER_RELATIONS
 
 SUPPORTED_SUFFIXES = {
     ".c",
@@ -45,11 +46,13 @@ USER_VAULT_AREAS = {
     "Brain": "memory",
     "Requirements": "requirement",
     "Decisions": "decision",
+    "Issues": "issue",
     "Evidence": "evidence",
     "Reviews": "review",
     "Sessions": "session",
 }
 WIKILINK = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
+TYPED_RELATION_PREFIX = re.compile(r"\s*(?:[-*+]\s+)?([a-z][a-z0-9-]*)::\s*")
 FRONTMATTER_ID_LINE = re.compile(r"^id:\s*(.+?)\s*$")
 UNSAFE_USER_ID = re.compile(r"[\x00-\x20\x7f\[\]|]")
 RESERVED_USER_ID_PREFIXES = ("commit:", "file:", "symbol:")
@@ -59,6 +62,7 @@ RESERVED_USER_ID_PREFIXES = ("commit:", "file:", "symbol:")
 class PendingLink:
     source: str
     target: str
+    relation: str
     evidence: str
 
 
@@ -285,8 +289,10 @@ class RepositoryScanner:
                     metadata={"owner": "user", "area": area},
                 )
                 self.graph.add_node(node)
-                for target in WIKILINK.findall(content):
-                    self.pending_links.append(PendingLink(node_id, target.strip(), "wikilink"))
+                for target, relation in _wikilinks(content):
+                    self.pending_links.append(
+                        PendingLink(node_id, target, relation, "wikilink")
+                    )
 
     def _resolve_pending_links(self) -> None:
         aliases: dict[str, set[str]] = defaultdict(set)
@@ -312,7 +318,12 @@ class RepositoryScanner:
             matches = aliases.get(pending.target.casefold(), set())
             if len(matches) == 1:
                 self.graph.add_edge(
-                    Edge(pending.source, next(iter(matches)), "references", pending.evidence)
+                    Edge(
+                        pending.source,
+                        next(iter(matches)),
+                        pending.relation,
+                        pending.evidence,
+                    )
                 )
 
 
@@ -443,6 +454,19 @@ def _is_directory_link(path: Path) -> bool:
         return bool(is_junction and is_junction())
     except OSError:
         return True
+
+
+def _wikilinks(content: str) -> Iterable[tuple[str, str]]:
+    """Yield links with an allowlisted typed relation when explicitly annotated."""
+
+    for match in WIKILINK.finditer(content):
+        line_start = content.rfind("\n", 0, match.start()) + 1
+        prefix = content[line_start : match.start()]
+        typed = TYPED_RELATION_PREFIX.fullmatch(prefix)
+        relation = (
+            typed.group(1) if typed and typed.group(1) in USER_RELATIONS else "references"
+        )
+        yield match.group(1).strip(), relation
 
 
 def _frontmatter_id(content: str) -> str | None:

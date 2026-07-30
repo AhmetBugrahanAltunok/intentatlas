@@ -15,12 +15,12 @@ source_path: "src/intentatlas/security.py"
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/_secret_key - src - intentatlas - security.py|_secret_key]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_secret_key - src - intentatlas - security.py|_secret_key]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>imports</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: python-ast)_
-- <code>tests</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(evidence: filename-convention)_
-- <code>tests</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(evidence: python-ast)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(verification; evidence: python-ast)_

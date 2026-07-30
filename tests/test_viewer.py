@@ -18,6 +18,8 @@ def test_viewer_assets_are_packaged() -> None:
     )[0]
     assert "if (!moved) selectNode(node.id);" in pointerup
     assert 'group.addEventListener("click", () => { if (!moved) selectNode(node.id); });' in app
+    assert "edge.inverse || edge.relation" in app
+    assert 'issue: "#f97316"' in app
 
 
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:

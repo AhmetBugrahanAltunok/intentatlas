@@ -10,9 +10,9 @@ source_path: "tests/test_vault.py"
 
 ## Metadata
 
-- **Line:** <code>62</code>
+- **Line:** <code>66</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
-- <code>defines</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: python-ast)_
+- <code>defined-in</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(structure; evidence: python-ast)_

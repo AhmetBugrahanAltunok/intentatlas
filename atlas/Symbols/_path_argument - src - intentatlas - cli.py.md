@@ -15,4 +15,4 @@ source_path: "src/intentatlas/cli.py"
 
 ## Incoming relationships
 
-- <code>defines</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
+- <code>defined-in</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

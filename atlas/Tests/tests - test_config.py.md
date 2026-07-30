@@ -15,12 +15,13 @@ source_path: "tests/test_config.py"
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/test_config_rejects_escape_and_unknown_schema - tests - test_config.py|test_config_rejects_escape_and_unknown_schema]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_config_rejects_project_root_as_an_output_path - tests - test_config.py|test_config_rejects_project_root_as_an_output_path]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_config_round_trip_and_bounds - tests - test_config.py|test_config_round_trip_and_bounds]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_config_rejects_escape_and_unknown_schema - tests - test_config.py|test_config_rejects_escape_and_unknown_schema]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_config_rejects_project_root_as_an_output_path - tests - test_config.py|test_config_rejects_project_root_as_an_output_path]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_config_round_trip_and_bounds - tests - test_config.py|test_config_round_trip_and_bounds]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_

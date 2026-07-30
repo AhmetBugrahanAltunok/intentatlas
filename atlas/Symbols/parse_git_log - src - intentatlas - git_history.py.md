@@ -15,4 +15,4 @@ source_path: "src/intentatlas/git_history.py"
 
 ## Incoming relationships
 
-- <code>defines</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: python-ast)_
+- <code>defined-in</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_

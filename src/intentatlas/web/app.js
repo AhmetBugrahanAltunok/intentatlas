@@ -1,12 +1,12 @@
 "use strict";
 
 const colors = {
-  requirement: "#fb7185", decision: "#f59e0b", evidence: "#c084fc",
+  requirement: "#fb7185", decision: "#f59e0b", issue: "#f97316", evidence: "#c084fc",
   review: "#e879f9", memory: "#a78bfa", session: "#818cf8",
   file: "#22d3ee", config: "#38bdf8", document: "#60a5fa",
   symbol: "#8b5cf6", test: "#34d399", commit: "#94a3b8"
 };
-const kindOrder = ["requirement", "decision", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "commit"];
+const kindOrder = ["requirement", "decision", "issue", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "commit"];
 const state = { data: null, enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
 const svg = document.querySelector("#graph");
 const viewport = document.querySelector("#viewport");
@@ -208,7 +208,9 @@ function selectNode(id) {
   document.querySelector("#detail-links").innerHTML = connected.length ? connected.map(edge => {
     const outgoing = edge.source === id, otherId = outgoing ? edge.target : edge.source;
     const other = state.data.nodes.find(item => item.id === otherId);
-    return `<button class="relationship" data-node="${escapeAttr(otherId)}"><b>${outgoing ? "→" : "←"} ${escapeHTML(edge.relation)}</b> ${escapeHTML(other?.label || otherId)}<small>${escapeHTML(edge.evidence)}</small></button>`;
+    const relation = outgoing ? edge.relation : (edge.inverse || edge.relation);
+    const detail = [edge.category, edge.evidence].filter(Boolean).join(" · ");
+    return `<button class="relationship" data-node="${escapeAttr(otherId)}"><b>${outgoing ? "→" : "←"} ${escapeHTML(relation)}</b> ${escapeHTML(other?.label || otherId)}<small>${escapeHTML(detail)}</small></button>`;
   }).join("") : "<p class='hint'>No relationships yet.</p>";
   for (const button of document.querySelectorAll(".relationship")) button.addEventListener("click", () => focusNode(button.dataset.node));
   document.querySelector("#detail").classList.add("open");

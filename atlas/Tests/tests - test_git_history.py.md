@@ -15,11 +15,11 @@ source_path: "tests/test_git_history.py"
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/test_parse_git_log_collects_paths_and_redacts_subjects - tests - test_git_history.py|test_parse_git_log_collects_paths_and_redacts_subjects]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_parse_git_log_ignores_malformed_blocks - tests - test_git_history.py|test_parse_git_log_ignores_malformed_blocks]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_parse_git_log_collects_paths_and_redacts_subjects - tests - test_git_history.py|test_parse_git_log_collects_paths_and_redacts_subjects]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_parse_git_log_ignores_malformed_blocks - tests - test_git_history.py|test_parse_git_log_ignores_malformed_blocks]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_

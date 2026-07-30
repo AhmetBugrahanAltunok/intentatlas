@@ -15,18 +15,19 @@ source_path: "src/intentatlas/config.py"
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/ProjectConfig.graph_path - src - intentatlas - config.py|ProjectConfig.graph_path]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/ProjectConfig.load - src - intentatlas - config.py|ProjectConfig.load]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/ProjectConfig.save_if_missing - src - intentatlas - config.py|ProjectConfig.save_if_missing]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/ProjectConfig.vault_path - src - intentatlas - config.py|ProjectConfig.vault_path]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_inside - src - intentatlas - config.py|_inside]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.graph_path - src - intentatlas - config.py|ProjectConfig.graph_path]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.load - src - intentatlas - config.py|ProjectConfig.load]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.save_if_missing - src - intentatlas - config.py|ProjectConfig.save_if_missing]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectConfig.vault_path - src - intentatlas - config.py|ProjectConfig.vault_path]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_inside - src - intentatlas - config.py|_inside]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>imports</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(evidence: python-ast)_
-- <code>imports</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- <code>tests</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(evidence: filename-convention)_
-- <code>tests</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(evidence: python-ast)_
-- <code>tests</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(evidence: python-ast)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: python-ast)_

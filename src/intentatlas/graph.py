@@ -8,12 +8,14 @@ from pathlib import Path
 from typing import Any
 
 from .models import Edge, ImpactRecord, Node
+from .relations import RELATION_SCHEMA_VERSION, relation_catalog, relation_type
 
 
 class AtlasGraph:
     """Language-neutral, deterministic graph of project intent and implementation."""
 
-    schema_version = 1
+    schema_version = 2
+    supported_schema_versions = {1, schema_version}
 
     def __init__(self) -> None:
         self.nodes: dict[str, Node] = {}
@@ -54,6 +56,7 @@ class AtlasGraph:
     def add_edge(self, edge: Edge) -> bool:
         if edge.source == edge.target:
             return False
+        relation_type(edge.relation)
         if edge.source not in self.nodes or edge.target not in self.nodes:
             return False
         key = (edge.source, edge.target, edge.relation, edge.evidence)
@@ -164,8 +167,10 @@ class AtlasGraph:
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": self.schema_version,
+            "relation_schema_version": RELATION_SCHEMA_VERSION,
             "generated_at": datetime.now(UTC).isoformat(),
             "summary": self.summary(),
+            "relation_types": relation_catalog(),
             "nodes": [self.nodes[node_id].to_dict() for node_id in sorted(self.nodes)],
             "edges": [edge.to_dict() for edge in self.edges],
         }
@@ -184,8 +189,21 @@ class AtlasGraph:
             value = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             raise ValueError(f"Cannot read graph at {path}: {exc}") from exc
-        if value.get("schema_version") != cls.schema_version:
-            raise ValueError(f"Unsupported graph schema: {value.get('schema_version')}")
+        schema_version = value.get("schema_version")
+        if schema_version not in cls.supported_schema_versions:
+            raise ValueError(f"Unsupported graph schema: {schema_version}")
+        if (
+            schema_version == cls.schema_version
+            and value.get("relation_schema_version") != RELATION_SCHEMA_VERSION
+        ):
+            raise ValueError(
+                f"Unsupported relation schema: {value.get('relation_schema_version')}"
+            )
+        if (
+            schema_version == cls.schema_version
+            and value.get("relation_types") != relation_catalog()
+        ):
+            raise ValueError("Invalid relation catalog")
         graph = cls()
         for item in value.get("nodes", []):
             graph.add_node(Node.from_dict(item))

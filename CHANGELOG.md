@@ -12,6 +12,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 - Obsidian-compatible project brain and generated graph notes.
 - Local interactive viewer, impact tracing, and health status commands.
 - Phase-based delivery protocol with evidence and review completion gates.
+- Phase 2 typed relation catalog, inverse relationship labels, issue notes, and explicit
+  `relation:: [[target]]` Markdown links.
 
 ### Changed
 
@@ -21,6 +23,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   roadmap remains available as an explicitly archived historical snapshot.
 - Phase 1 now has complete local, browser, dependency-audit, and packaged-wheel acceptance
   evidence recorded in the Obsidian vault.
+- Graph caches use schema 2 while retaining read compatibility with schema 1, and impact output
+  explains relation direction, category, and provenance.
 
 ### Fixed
 

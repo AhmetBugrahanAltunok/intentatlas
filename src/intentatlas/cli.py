@@ -133,9 +133,12 @@ def _impact(root: Path, target: str, depth: int, direction: str) -> int:
         return 0
     for record in records:
         marker = "->" if record.direction == "downstream" else "<-"
+        relation = (
+            record.edge.relation if record.direction == "downstream" else record.edge.inverse
+        )
         print(
-            f"{'  ' * record.depth}{marker} [{record.edge.relation}] "
-            f"{record.node.label} ({record.node.kind})"
+            f"{'  ' * record.depth}{marker} [{relation} · {record.edge.category}] "
+            f"{record.node.label} ({record.node.kind}) via {record.edge.evidence}"
         )
     return 0
 

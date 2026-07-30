@@ -15,4 +15,4 @@ source_path: "tests/test_config.py"
 
 ## Incoming relationships
 
-- <code>defines</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(evidence: python-ast)_
+- <code>defined-in</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(structure; evidence: python-ast)_

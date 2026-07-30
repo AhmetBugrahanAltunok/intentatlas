@@ -27,18 +27,27 @@ Status: complete (2026-07-30)
 
 ## Phase 2 — Typed intent chain
 
-Status: planned
+Status: complete (2026-07-30)
 
 - Express Requirement → Decision → Issue → Code → Test → Evidence → Commit with typed relations.
 - Add schema evolution and clearer impact explanations.
+- Requirement: [[Requirements/REQ-003 - Trace a typed intent chain]]
+- Decision: [[Decisions/ADR-003 - Typed relation vocabulary]]
+- Delivery issue: [[Issues/ISSUE-001 - Implement typed intent chain]]
+- Evidence: [[Evidence/EVD-003 - Phase 2 typed chain verification]]
+- Review: [[Reviews/Phase 2 Typed Intent Chain Review]]
+- Outcome: intent, delivery, implementation, verification, evidence, history, and structure
+  relationships have stable forward/inverse semantics across the cache, CLI, vault, and viewer.
 
 ## Phase 3 — Evidence and language adapters
 
 Status: planned
 
 - Import coverage and test-result evidence.
-- Add TypeScript/JavaScript analysis and optional issue/pull-request inputs.
+- Add TypeScript/JavaScript first, then Go, followed by Rust or Java based on demand.
+- Add optional issue/pull-request inputs.
 - Produce a stable graph diff for CI.
+- Strategy: [[Brain/Language Adapter Strategy]]
 
 ## Phase 4 — Product experience and scale
 

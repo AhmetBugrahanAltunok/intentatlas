@@ -15,14 +15,14 @@ source_path: "src/intentatlas/git_history.py"
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/CommitRecord - src - intentatlas - git_history.py|CommitRecord]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/collect_git_history - src - intentatlas - git_history.py|collect_git_history]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(evidence: python-ast)_
-- <code>imports</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/CommitRecord - src - intentatlas - git_history.py|CommitRecord]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/collect_git_history - src - intentatlas - git_history.py|collect_git_history]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>imports</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- <code>tests</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(evidence: filename-convention)_
-- <code>tests</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(evidence: python-ast)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: python-ast)_

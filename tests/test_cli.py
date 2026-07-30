@@ -20,6 +20,8 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
     assert "Scanned" in output
     assert "relationships" in output
     assert "app.py" in output
+    assert "tested-by · verification" in output
+    assert "via python-ast" in output
 
 
 def test_cli_reports_invalid_requests(tmp_path, capsys) -> None:

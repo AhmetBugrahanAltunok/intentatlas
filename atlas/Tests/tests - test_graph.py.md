@@ -11,22 +11,25 @@ source_path: "tests/test_graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3932</code>
+- **Size Bytes:** <code>6055</code>
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/sample_graph - tests - test_graph.py|sample_graph]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_find_reports_missing_and_ambiguous_targets - tests - test_graph.py|test_find_reports_missing_and_ambiguous_targets]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_graph_deduplicates_edges_and_rejects_invalid_edges - tests - test_graph.py|test_graph_deduplicates_edges_and_rejects_invalid_edges]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_graph_rejects_identity_collisions_but_merges_same_identity - tests - test_graph.py|test_graph_rejects_identity_collisions_but_merges_same_identity]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_graph_round_trip_and_summary - tests - test_graph.py|test_graph_round_trip_and_summary]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_impact_walks_both_directions_with_depth - tests - test_graph.py|test_impact_walks_both_directions_with_depth]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_load_rejects_unknown_schema_and_invalid_edges - tests - test_graph.py|test_load_rejects_unknown_schema_and_invalid_edges]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/sample_graph - tests - test_graph.py|sample_graph]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_find_reports_missing_and_ambiguous_targets - tests - test_graph.py|test_find_reports_missing_and_ambiguous_targets]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_graph_deduplicates_edges_and_rejects_invalid_edges - tests - test_graph.py|test_graph_deduplicates_edges_and_rejects_invalid_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_graph_rejects_identity_collisions_but_merges_same_identity - tests - test_graph.py|test_graph_rejects_identity_collisions_but_merges_same_identity]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_graph_round_trip_and_summary - tests - test_graph.py|test_graph_round_trip_and_summary]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_impact_walks_both_directions_with_depth - tests - test_graph.py|test_impact_walks_both_directions_with_depth]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_load_migrates_schema_one_and_rejects_invalid_typed_relations - tests - test_graph.py|test_load_migrates_schema_one_and_rejects_invalid_typed_relations]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_load_rejects_unknown_schema_and_invalid_edges - tests - test_graph.py|test_load_rejects_unknown_schema_and_invalid_edges]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>references</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(evidence: wikilink)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

@@ -11,25 +11,30 @@ source_path: "src/intentatlas/models.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1820</code>
+- **Size Bytes:** <code>2497</code>
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/Edge.from_dict - src - intentatlas - models.py|Edge.from_dict]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/Edge.to_dict - src - intentatlas - models.py|Edge.to_dict]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/ImpactRecord - src - intentatlas - models.py|ImpactRecord]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/Node.from_dict - src - intentatlas - models.py|Node.from_dict]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/Node.to_dict - src - intentatlas - models.py|Node.to_dict]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Edge.category - src - intentatlas - models.py|Edge.category]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Edge.from_dict - src - intentatlas - models.py|Edge.from_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Edge.inverse - src - intentatlas - models.py|Edge.inverse]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Edge.to_dict - src - intentatlas - models.py|Edge.to_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ImpactRecord - src - intentatlas - models.py|ImpactRecord]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Node.from_dict - src - intentatlas - models.py|Node.from_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/Node.to_dict - src - intentatlas - models.py|Node.to_dict]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>imports</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(evidence: python-ast)_
-- <code>imports</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
-- <code>imports</code> ← [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(evidence: python-ast)_
-- <code>imports</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- <code>imports</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
-- <code>tests</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(evidence: python-ast)_
-- <code>tests</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(evidence: python-ast)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_relations.py|tests/test_relations.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: python-ast)_

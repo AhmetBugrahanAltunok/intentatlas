@@ -11,20 +11,21 @@ source_path: "tests/test_vault.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3144</code>
+- **Size Bytes:** <code>3371</code>
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/graph_fixture - tests - test_vault.py|graph_fixture]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_sync_removes_only_generated_notes - tests - test_vault.py|test_sync_removes_only_generated_notes]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_vault_escapes_untrusted_markdown_in_generated_notes - tests - test_vault.py|test_vault_escapes_untrusted_markdown_in_generated_notes]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_vault_initializes_obsidian_and_preserves_user_owned_notes - tests - test_vault.py|test_vault_initializes_obsidian_and_preserves_user_owned_notes]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/graph_fixture - tests - test_vault.py|graph_fixture]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_sync_removes_only_generated_notes - tests - test_vault.py|test_sync_removes_only_generated_notes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_vault_escapes_untrusted_markdown_in_generated_notes - tests - test_vault.py|test_vault_escapes_untrusted_markdown_in_generated_notes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_vault_initializes_obsidian_and_preserves_user_owned_notes - tests - test_vault.py|test_vault_initializes_obsidian_and_preserves_user_owned_notes]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>references</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(evidence: wikilink)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

@@ -11,20 +11,21 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1774</code>
+- **Size Bytes:** <code>1861</code>
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/test_serve_graph_rejects_missing_graph - tests - test_viewer.py|test_serve_graph_rejects_missing_graph]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.__init__ - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.__init__]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.serve_forever - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.serve_forever]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.server_close - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.server_close]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_rejects_missing_graph - tests - test_viewer.py|test_serve_graph_rejects_missing_graph]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.__init__ - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.serve_forever - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.serve_forever]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.server_close - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.server_close]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_

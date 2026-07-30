@@ -11,28 +11,28 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5780</code>
+- **Size Bytes:** <code>5946</code>
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/_impact - src - intentatlas - cli.py|_impact]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_init - src - intentatlas - cli.py|_init]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_open - src - intentatlas - cli.py|_open]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_path_argument - src - intentatlas - cli.py|_path_argument]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_scan - src - intentatlas - cli.py|_scan]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_status - src - intentatlas - cli.py|_status]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(evidence: python-ast)_
-- <code>imports</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(evidence: python-ast)_
-- <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: python-ast)_
-- <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(evidence: python-ast)_
-- <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
-- <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_impact - src - intentatlas - cli.py|_impact]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_init - src - intentatlas - cli.py|_init]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_open - src - intentatlas - cli.py|_open]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_path_argument - src - intentatlas - cli.py|_path_argument]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_scan - src - intentatlas - cli.py|_scan]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_status - src - intentatlas - cli.py|_status]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>imports</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(evidence: python-ast)_
-- <code>tests</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(evidence: filename-convention)_
-- <code>tests</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(evidence: python-ast)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: python-ast)_

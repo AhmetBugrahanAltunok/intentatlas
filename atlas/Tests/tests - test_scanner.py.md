@@ -11,24 +11,26 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5561</code>
+- **Size Bytes:** <code>7256</code>
 
 ## Outgoing relationships
 
-- <code>defines</code> → [[Symbols/build_python_project - tests - test_scanner.py|build_python_project]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_only_reads_ids_from_frontmatter - tests - test_scanner.py|test_scanner_only_reads_ids_from_frontmatter]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir]] _(evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(evidence: python-ast)_
+- <code>defines</code> → [[Symbols/build_python_project - tests - test_scanner.py|build_python_project]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_only_reads_ids_from_frontmatter - tests - test_scanner.py|test_scanner_only_reads_ids_from_frontmatter]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_preserves_explicit_typed_intent_links - tests - test_scanner.py|test_scanner_preserves_explicit_typed_intent_links]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
-- <code>changes</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(evidence: git-log)_
-- <code>references</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(evidence: wikilink)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
