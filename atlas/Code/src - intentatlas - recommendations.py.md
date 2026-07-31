@@ -45,6 +45,7 @@ source_path: "src/intentatlas/recommendations.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: filename-convention)_

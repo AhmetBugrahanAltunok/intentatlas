@@ -42,6 +42,10 @@ reproduction steps, impact, and any suggested mitigation.
 - Test recommendations are pure queries over the already validated graph. They execute no test or
   project command, use fixed confidence rules, bound artifacts/candidates/reasons/observations and
   output size, and label every result advisory. Imported JUnit aggregates never raise confidence.
+- Generated-vault synchronization never purges desired output before replacement. Changed notes
+  use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
+  failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during
+  cleanup, and temporary files are removed on success or failure.
 - The local viewer binds to `127.0.0.1` by default.
 
 Security reports are acknowledged in release notes unless the reporter requests anonymity.

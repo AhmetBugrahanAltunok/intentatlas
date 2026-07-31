@@ -11,21 +11,25 @@ source_path: "src/intentatlas/vault.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>18333</code>
+- **Size Bytes:** <code>20930</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault.__init__ - src - intentatlas - vault.py|ProjectVault.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._note_locations - src - intentatlas - vault.py|ProjectVault._note_locations]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/ProjectVault._purge_generated_notes - src - intentatlas - vault.py|ProjectVault._purge_generated_notes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._prune_stale_generated_notes - src - intentatlas - vault.py|ProjectVault._prune_stale_generated_notes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._render_dashboard - src - intentatlas - vault.py|ProjectVault._render_dashboard]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._render_edges - src - intentatlas - vault.py|ProjectVault._render_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._render_node - src - intentatlas - vault.py|ProjectVault._render_node]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._replace_generated_note - src - intentatlas - vault.py|ProjectVault._replace_generated_note]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._retry_file_operation - src - intentatlas - vault.py|ProjectVault._retry_file_operation]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._safe_target - src - intentatlas - vault.py|ProjectVault._safe_target]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault._sync_generated_notes - src - intentatlas - vault.py|ProjectVault._sync_generated_notes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._write_if_missing - src - intentatlas - vault.py|ProjectVault._write_if_missing]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault.initialize - src - intentatlas - vault.py|ProjectVault.initialize]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault.sync - src - intentatlas - vault.py|ProjectVault.sync]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_is_transient_file_error - src - intentatlas - vault.py|_is_transient_file_error]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_markdown_text - src - intentatlas - vault.py|_markdown_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_wikilink - src - intentatlas - vault.py|_wikilink]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
@@ -40,6 +44,7 @@ source_path: "src/intentatlas/vault.py"
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-008 - Implement resilient generated vault synchronization|ISSUE-008 - Implement resilient generated vault synchronization]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(verification; evidence: python-ast)_

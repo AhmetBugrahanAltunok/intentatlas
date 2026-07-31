@@ -57,6 +57,11 @@ tavsiyedir; listede olmayan bir test, davranışın etkilenmediğini kanıtlamaz
 - Kalıcı ama bağlantısız notlar sağlık sorunu olarak raporlanır.
 - Obsidian zorunlu değildir; aynı grafik yerel web görünümünde açılabilir.
 
+Üretilmiş notların senkronizasyonu, dosyalara dokunmadan önce hedef görünümün tamamını hazırlar.
+Bayt düzeyinde aynı notları yeniden yazmaz; değişen notları geçici dosya kilitleri için sınırlı
+tekrarlarla atomik olarak değiştirir ve eski notları ancak bütün hedef notlar yerindeyken siler.
+Kalıcı hata bu nedenle önceki üretilmiş görünümü baştan silmeden açıkça raporlanır.
+
 Anlamı belirtilmiş bağlantılar `relation:: [[hedef]]` biçimini kullanır. Normal wikilinkler
 güvenli ve genel `references` ilişkileri olarak çalışmaya devam eder.
 

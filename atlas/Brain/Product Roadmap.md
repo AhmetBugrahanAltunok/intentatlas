@@ -130,7 +130,23 @@ Status: complete (2026-08-01)
 - Outcome: commits, files, and symbols now produce bounded, deterministic test candidates with
   inspectable confidence, evidence, and paths while explicitly preserving uncertainty.
 
-## Phase 6B2 — Product experience and scale
+## Phase 6B2A — Resilient generated vault synchronization
+
+Status: complete (2026-08-01)
+
+- Preserve the last complete generated vault when a transient or persistent file lock interrupts
+  synchronization.
+- Avoid rewriting byte-identical generated notes and remove stale notes only after desired output
+  is safely in place.
+- Requirement: [[Requirements/REQ-010 - Preserve generated vault integrity during synchronization]]
+- Decision: [[Decisions/ADR-010 - Failure-preserving atomic vault synchronization]]
+- Delivery issue: [[Issues/ISSUE-008 - Implement resilient generated vault synchronization]]
+- Evidence: [[Evidence/EVD-010 - Phase 6B2A vault synchronization verification]]
+- Review: [[Reviews/Phase 6B2A Vault Synchronization Review]]
+- Outcome: generated notes now refresh through failure-preserving atomic replacement; unchanged
+  scans avoid rewrites and a locked file cannot trigger a destructive purge.
+
+## Phase 6B2B — Measured recommendation quality and scale
 
 Status: planned
 

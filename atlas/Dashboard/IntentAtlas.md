@@ -17,36 +17,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 8
+- **commit:** 9
 - **config:** 6
-- **decision:** 9
+- **decision:** 10
 - **document:** 11
-- **evidence:** 9
+- **evidence:** 10
 - **file:** 24
-- **issue:** 7
+- **issue:** 8
 - **memory:** 4
-- **requirement:** 9
-- **review:** 9
+- **requirement:** 10
+- **review:** 10
 - **session:** 1
-- **symbol:** 337
+- **symbol:** 368
 - **test:** 45
-- **relationships:** 951
+- **relationships:** 1039
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 53 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 59 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 51 relationships
 - [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 48 relationships
 - [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 46 relationships
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 45 relationships
 - [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] — 44 relationships
+- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 40 relationships
+- [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] — 37 relationships
 - [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] — 35 relationships
 - [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] — 34 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 33 relationships
 - [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 33 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 32 relationships
-- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 31 relationships
 
 ## Workflow
 

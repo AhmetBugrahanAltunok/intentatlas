@@ -47,3 +47,6 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 ### Fixed
 
 - Restored reliable pointer, click, and keyboard activation for graph nodes in the local viewer.
+- Generated-vault refreshes now preserve existing output during render or replacement failures,
+  retry transient file locks, atomically replace changed notes, skip byte-identical writes, clean
+  temporary files, and postpone stale-note deletion until every desired note is present.

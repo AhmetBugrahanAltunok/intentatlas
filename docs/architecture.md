@@ -80,6 +80,13 @@ Generated notes link to one another with standard wikilinks. Human notes can lin
 generated note and remain untouched by subsequent scans. Graph health flags orphans but
 does not silently invent meaning.
 
+Vault synchronization is failure-preserving. It renders the complete desired generated set in
+memory, skips byte-identical targets, writes each changed note to a dot-prefixed sibling temporary file,
+and atomically replaces the target with bounded retries for recognized sharing or permission
+locks. Only after all desired replacements succeed are marked stale notes pruned. A persistent
+replacement failure leaves the previous target and all not-yet-updated targets present and skips
+stale cleanup. This is per-file atomic replacement, not a cross-file transaction.
+
 Human notes may preserve link meaning with `relation:: [[target]]`. Only the documented relation
 vocabulary is accepted as typed input; unknown labels fall back to generic references.
 

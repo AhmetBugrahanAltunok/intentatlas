@@ -17,3 +17,4 @@ source_path: "src/intentatlas/cli.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-diff-hunk)_

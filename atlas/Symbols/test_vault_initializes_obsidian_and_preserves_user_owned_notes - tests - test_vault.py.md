@@ -10,11 +10,10 @@ source_path: "tests/test_vault.py"
 
 ## Metadata
 
-- **End Line:** <code>50</code>
-- **Line:** <code>28</code>
+- **End Line:** <code>56</code>
+- **Line:** <code>34</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-diff-hunk)_

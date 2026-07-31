@@ -41,7 +41,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/Edge.from_dict - src - intentatlas - models.py|Edge.from_dict]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/Edge.inverse - src - intentatlas - models.py|Edge.inverse]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/Edge.to_dict - src - intentatlas - models.py|Edge.to_dict]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_vault_initializes_obsidian_and_preserves_user_owned_notes - tests - test_vault.py|test_vault_initializes_obsidian_and_preserves_user_owned_notes]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

@@ -30,4 +30,5 @@ source_path: "tests/test_recommendations.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
