@@ -10,6 +10,7 @@ from types import MappingProxyType
 
 from .adapters import BUILTIN_ADAPTERS, AdapterContext
 from .config import ProjectConfig
+from .evidence import import_evidence
 from .git_history import collect_git_history
 from .graph import AtlasGraph
 from .models import Edge, Node
@@ -92,6 +93,7 @@ class RepositoryScanner:
     def scan(self) -> AtlasGraph:
         self._discover_files()
         self._scan_language_adapters()
+        self._scan_evidence_reports()
         self._scan_git_history()
         self._scan_user_vault()
         self._resolve_pending_links()
@@ -216,6 +218,26 @@ class RepositoryScanner:
                 target = f"file:{relative}"
                 if target in self.graph.nodes:
                     self.graph.add_edge(Edge(node_id, target, "changes", "git-log"))
+
+    def _scan_evidence_reports(self) -> None:
+        kinds = {
+            relative: self.graph.nodes[f"file:{relative}"].kind for relative in self.files
+        }
+        fragment = import_evidence(
+            self.root,
+            files=dict(self.files),
+            kinds=kinds,
+            vault=self.config.vault_path(self.root),
+            coverage_reports=self.config.coverage_reports,
+            test_reports=self.config.test_reports,
+        )
+        for node in fragment.nodes:
+            self.graph.add_node(node)
+        for edge in fragment.edges:
+            if not self.graph.add_edge(edge):
+                raise ValueError(
+                    f"Evidence importer emitted invalid edge: {edge.source} -> {edge.target}"
+                )
 
     def _scan_user_vault(self) -> None:
         vault = self.config.vault_path(self.root)

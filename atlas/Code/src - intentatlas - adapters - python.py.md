@@ -32,5 +32,6 @@ source_path: "src/intentatlas/adapters/python.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_

@@ -23,3 +23,7 @@ source_path: "tests/test_adapters.py"
 - <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: python-ast)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

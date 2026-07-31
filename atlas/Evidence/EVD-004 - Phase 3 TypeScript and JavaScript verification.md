@@ -14,6 +14,7 @@ issue, and completion protocol.
 - references:: [[Decisions/ADR-004 - Built-in language adapter contract]]
 - references:: [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter]]
 - references:: [[Brain/Phase Completion Protocol]]
+- recorded-in:: [[Commit cabeadd - feat- add TypeScript and JavaScript adapters]]
 
 ## Change inventory
 
@@ -101,5 +102,4 @@ issue, and completion protocol.
 - Public real-world fixtures and cross-platform end-to-end coverage remain later release-readiness
   work.
 - Coverage/test-result evidence import and stable CI graph diff are Phase 4 scope.
-- The Phase 3 commit link will be added after the phase is recorded in Git and becomes visible on
-  the next repository scan.
+- Phase 3 is recorded in commit `cabeadd` and is visible through the generated commit note.

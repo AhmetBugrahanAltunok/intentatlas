@@ -20,6 +20,13 @@ reproduction steps, impact, and any suggested mitigation.
   limit, persist structural metadata only, and never invoke language runtimes or project code.
 - TypeScript/JavaScript resolution accepts only static relative module references; bare dependency
   names, dynamic imports, and paths escaping the scanned repository are not followed.
+- Coverage and test reports are opt-in, project-local XML inputs. Import rejects symbolic links,
+  paths outside the project or inside `atlas/Private/`, DTD/entity declarations, oversized files,
+  excessive records, malformed XML, and ambiguous file mappings.
+- Imported verification evidence stores aggregate counts and durations only; raw failure output,
+  test output, source content, secrets, and absolute report paths are not persisted.
+- Graph diff inputs and outputs remain below the project root, cannot use `atlas/Private/`, and may
+  not overwrite either input graph.
 - IntentAtlas invokes Git only with fixed, read-only argument lists and never through a shell.
 - The local viewer binds to `127.0.0.1` by default.
 

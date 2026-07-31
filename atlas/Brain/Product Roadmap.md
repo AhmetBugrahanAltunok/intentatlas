@@ -57,10 +57,17 @@ Status: complete (2026-07-31)
 
 ## Phase 4 — Evidence import and CI graph diff
 
-Status: planned
+Status: complete (2026-07-31)
 
 - Import coverage and test-result evidence without executing project code.
 - Produce a stable graph diff format for CI.
+- Requirement: [[Requirements/REQ-005 - Import verification evidence and compare graph changes]]
+- Decision: [[Decisions/ADR-005 - Bounded evidence imports and canonical graph diff]]
+- Delivery issue: [[Issues/ISSUE-003 - Implement evidence imports and graph diff]]
+- Evidence: [[Evidence/EVD-005 - Phase 4 evidence import and graph diff verification]]
+- Review: [[Reviews/Phase 4 Evidence Import and Graph Diff Review]]
+- Outcome: existing Cobertura and JUnit reports become bounded per-file evidence, while CI can
+  consume a deterministic, timestamp-free graph diff without IntentAtlas running project code.
 
 ## Phase 5 — Go and external delivery inputs
 

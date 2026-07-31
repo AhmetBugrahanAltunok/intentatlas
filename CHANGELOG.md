@@ -16,6 +16,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   `relation:: [[target]]` Markdown links.
 - A deterministic built-in language-adapter contract and conservative TypeScript/JavaScript,
   TSX, and JSX symbol, local-import, re-export, and test analysis.
+- Bounded, offline Cobertura coverage and JUnit test-result evidence imports.
+- A versioned, timestamp-free graph diff command with deterministic JSON and optional CI checks.
 
 ### Changed
 

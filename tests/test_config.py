@@ -8,11 +8,17 @@ from intentatlas.config import ProjectConfig
 
 
 def test_config_round_trip_and_bounds(tmp_path) -> None:
-    config = ProjectConfig(git_history_limit=15)
+    config = ProjectConfig(
+        git_history_limit=15,
+        coverage_reports=["reports/coverage.xml"],
+        test_reports=["reports/junit.xml"],
+    )
     path = config.save_if_missing(tmp_path)
     assert path.exists()
     loaded = ProjectConfig.load(tmp_path)
     assert loaded.git_history_limit == 15
+    assert loaded.coverage_reports == ["reports/coverage.xml"]
+    assert loaded.test_reports == ["reports/junit.xml"]
     assert ".obsidian" in loaded.exclude
     assert loaded.vault_path(tmp_path) == (tmp_path / "atlas").resolve()
 
@@ -41,3 +47,23 @@ def test_config_rejects_project_root_as_an_output_path(tmp_path) -> None:
     )
     with pytest.raises(ValueError, match="graph path must be below"):
         ProjectConfig.load(tmp_path).graph_path(tmp_path)
+
+
+def test_config_rejects_invalid_report_source_lists(tmp_path) -> None:
+    (tmp_path / "intentatlas.json").write_text(
+        json.dumps({"coverage_reports": "coverage.xml"}), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="must be a list"):
+        ProjectConfig.load(tmp_path)
+
+    (tmp_path / "intentatlas.json").write_text(
+        json.dumps({"test_reports": [""]}), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="empty path"):
+        ProjectConfig.load(tmp_path)
+
+    (tmp_path / "intentatlas.json").write_text(
+        json.dumps({"test_reports": [{"path": "junit.xml"}]}), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="path strings"):
+        ProjectConfig.load(tmp_path)

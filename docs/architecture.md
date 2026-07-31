@@ -6,6 +6,7 @@ IntentAtlas has three layers with explicit ownership.
 Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
                          │
                          ├──query──> impact/status CLI
+                         ├──compare──> deterministic CI graph diff
                          └──serve──> local web viewer
 ```
 
@@ -22,6 +23,10 @@ The Git adapter reads commit metadata and changed paths with fixed read-only com
 discovery prunes excluded directories before descent, does not follow directory links, and
 excludes the configured vault from the repository walk. Adapters never execute project code.
 
+Configured evidence adapters read only explicit project-local reports. The Cobertura and JUnit
+importers reject DTD/entity declarations, enforce byte and record limits, map report paths only to
+one discovered file, and aggregate coverage or result counts without retaining raw failure output.
+
 ## 2. AtlasGraph
 
 `AtlasGraph` is the language-neutral contract. Nodes have a stable ID, kind, label, path,
@@ -32,12 +37,16 @@ embedded catalog, edge categories, and inverse labels match the runtime registry
 The graph is serialized to `.intentatlas/graph.json`; it is a rebuildable cache, not the
 source of truth.
 
+Graph comparison is a pure operation over two validated caches. Diff schema 1 excludes generation
+timestamps and sorts added, removed, and changed nodes plus added and removed edges. The same two
+graphs therefore produce byte-for-byte identical JSON suitable for CI artifacts or `--check` gates.
+
 ## 3. Project brain
 
 The `atlas/` folder is an Obsidian vault and the durable human-readable layer.
 
 - Human/agent-owned: Brain, Requirements, Decisions, Issues, Evidence, Reviews, Sessions
-- Scanner-owned: Code, Symbols, Tests, Commits
+- Scanner-owned: Code, Symbols, Tests (including imported aggregates), Commits
 - Local-only: Private
 
 Generated notes link to one another with standard wikilinks. Human notes can link to any

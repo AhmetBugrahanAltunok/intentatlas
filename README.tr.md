@@ -55,6 +55,11 @@ Python ile TypeScript/JavaScript analizi aynı dil-bağımsız adaptör sözleş
 `.tsx`, `.js` ve `.jsx` dosyalarında adlandırılmış semboller, yerel import/re-export bağlantıları
 ve test ilişkileri; Node veya proje kodu çalıştırılmadan, yerel ve tutucu biçimde çıkarılır.
 
+İsteğe bağlı Cobertura coverage ve JUnit test raporları `intentatlas.json` içindeki proje-göreli
+`coverage_reports` ve `test_reports` listeleriyle içe aktarılabilir. IntentAtlas testleri çalıştırmaz;
+yalnızca dosya başına sınırlı özetleri grafiğe ekler. `intentatlas diff` komutu da mevcut grafiği bir
+temel grafikle karşılaştırarak CI için deterministik ve zaman damgasız JSON üretir.
+
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden
 esinlenmiştir. IntentAtlas buna kod, test, Git ve teslimat niyeti katmanını ekler.

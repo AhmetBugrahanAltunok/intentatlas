@@ -29,6 +29,8 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 - Generate a linked Obsidian vault with purpose-based folders and wikilinks.
 - Explore the same graph in a local, dependency-free web viewer.
 - Trace upstream and downstream impact from the command line.
+- Import existing Cobertura coverage and JUnit test evidence without running project code.
+- Produce a deterministic, versioned graph diff for CI.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
 ## Quick start
@@ -54,7 +56,26 @@ intentatlas init [PATH]                  Create the project brain and local conf
 intentatlas scan [PATH]                  Rebuild the graph and generated vault notes
 intentatlas status [PATH]                Show graph and orphan-note health
 intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships
+intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
 intentatlas open [PATH]                  Launch the local interactive graph
+```
+
+Verification reports are opt-in. Add project-relative paths to `intentatlas.json`, generate the
+reports with your existing CI tools, and run `intentatlas scan`:
+
+```json
+{
+  "coverage_reports": ["coverage.xml"],
+  "test_reports": ["junit.xml"]
+}
+```
+
+IntentAtlas reads these XML files offline and stores only bounded per-file aggregates. It does not
+run a test command, retain failure output, or persist absolute source paths. To compare the current
+cache with a saved baseline:
+
+```text
+intentatlas diff .intentatlas/baseline.json --output .intentatlas/diff.json --check
 ```
 
 ## The project brain
@@ -79,6 +100,10 @@ IntentAtlas is an early working prototype. Python and TypeScript/JavaScript anal
 language-neutral built-in adapter contract. The TypeScript/JavaScript adapter covers `.ts`, `.tsx`,
 `.js`, and `.jsx` files with conservative symbol, local-import, re-export, and test relationships
 without running Node or project code.
+
+Configured Cobertura and JUnit reports now create generated coverage and test-result evidence in
+the graph. Graph diff schema 1 provides stable node and relationship changes for CI without a
+generation timestamp.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

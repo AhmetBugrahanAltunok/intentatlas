@@ -18,3 +18,7 @@ source_path: "tests/fixtures/typescript_project/src/math.test.ts"
 - <code>defines</code> → [[Symbols/verifiesAdd - tests - fixtures - typescript_project - src - math.test.ts|verifiesAdd]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(verification; evidence: javascript-structural)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

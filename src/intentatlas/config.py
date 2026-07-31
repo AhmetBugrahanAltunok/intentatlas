@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 CONFIG_NAME = "intentatlas.json"
+MAX_REPORT_SOURCES = 32
 
 
 @dataclass(slots=True)
@@ -14,6 +15,8 @@ class ProjectConfig:
     vault: str = "atlas"
     graph: str = ".intentatlas/graph.json"
     git_history_limit: int = 25
+    coverage_reports: list[str] = field(default_factory=list)
+    test_reports: list[str] = field(default_factory=list)
     exclude: list[str] = field(
         default_factory=lambda: [
             ".git",
@@ -49,6 +52,8 @@ class ProjectConfig:
             vault=str(raw.get("vault", "atlas")),
             graph=str(raw.get("graph", ".intentatlas/graph.json")),
             git_history_limit=max(0, min(int(raw.get("git_history_limit", 25)), 250)),
+            coverage_reports=_report_sources(raw, "coverage_reports"),
+            test_reports=_report_sources(raw, "test_reports"),
             exclude=[str(item) for item in raw.get("exclude", cls().exclude)],
         )
 
@@ -77,3 +82,17 @@ def _inside(root: Path, configured: str, label: str) -> Path:
     if base not in target.parents:
         raise ValueError(f"Configured path escapes project root: {configured}")
     return target
+
+
+def _report_sources(raw: dict[str, Any], key: str) -> list[str]:
+    value = raw.get(key, [])
+    if not isinstance(value, list):
+        raise ValueError(f"Configured {key} must be a list")
+    if len(value) > MAX_REPORT_SOURCES:
+        raise ValueError(f"Configured {key} exceeds the {MAX_REPORT_SOURCES}-report limit")
+    if any(not isinstance(item, str) for item in value):
+        raise ValueError(f"Configured {key} must contain only path strings")
+    sources = [item.strip() for item in value]
+    if any(not source for source in sources):
+        raise ValueError(f"Configured {key} contains an empty path")
+    return list(dict.fromkeys(sources))

@@ -11,12 +11,14 @@ source_path: "tests/test_cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1354</code>
+- **Size Bytes:** <code>3384</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_cli_init_scan_status_and_impact - tests - test_cli.py|test_cli_init_scan_status_and_impact]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cli_rejects_unsafe_graph_diff_paths - tests - test_cli.py|test_cli_rejects_unsafe_graph_diff_paths]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_reports_invalid_requests - tests - test_cli.py|test_cli_reports_invalid_requests]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cli_writes_deterministic_graph_diff_and_supports_ci_check - tests - test_cli.py|test_cli_writes_deterministic_graph_diff_and_supports_ci_check]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
 

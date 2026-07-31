@@ -16,3 +16,7 @@ source_path: "tests/fixtures/typescript_project/src/dynamic.ts"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/loadMath - tests - fixtures - typescript_project - src - dynamic.ts|loadMath]] _(structure; evidence: javascript-structural)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

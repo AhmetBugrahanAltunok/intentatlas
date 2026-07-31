@@ -10,7 +10,7 @@ source_path: "tests/test_cli.py"
 
 ## Metadata
 
-- **Line:** <code>6</code>
+- **Line:** <code>9</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

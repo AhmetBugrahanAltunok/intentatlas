@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "vault": "atlas",
+  "graph": ".intentatlas/graph.json",
+  "git_history_limit": 0,
+  "coverage_reports": [
+    "reports/cobertura-fixture.xml"
+  ],
+  "test_reports": [
+    "reports/junit.xml"
+  ]
+}

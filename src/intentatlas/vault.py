@@ -16,8 +16,10 @@ MARKDOWN_CONTROL = re.compile(r"([\\`*_{}\[\]()!])")
 USER_KINDS = {"memory", "requirement", "decision", "issue", "evidence", "review", "session"}
 GENERATED_AREAS = {
     "commit": "Commits",
+    "coverage": "Tests",
     "symbol": "Symbols",
     "test": "Tests",
+    "test-result": "Tests",
 }
 ALL_AREAS = (
     "Brain",

@@ -17,36 +17,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 3
+- **commit:** 4
 - **config:** 6
-- **decision:** 4
+- **decision:** 5
 - **document:** 10
-- **evidence:** 4
-- **file:** 19
-- **issue:** 2
+- **evidence:** 5
+- **file:** 21
+- **issue:** 3
 - **memory:** 4
-- **requirement:** 4
-- **review:** 4
+- **requirement:** 5
+- **review:** 5
 - **session:** 1
-- **symbol:** 204
-- **test:** 28
-- **relationships:** 438
+- **symbol:** 239
+- **test:** 32
+- **relationships:** 542
 - **orphaned durable notes:** 0
 
 ## Most connected
 
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 39 relationships
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 38 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 35 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 29 relationships
+- [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] — 31 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 31 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 29 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 29 relationships
-- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 25 relationships
-- [[Brain/Product Roadmap|Product Roadmap]] — 23 relationships
-- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 23 relationships
+- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 28 relationships
+- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 24 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 23 relationships
 - [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] — 20 relationships
 - [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] — 19 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 19 relationships
-- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 18 relationships
-- [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] — 16 relationships
+- [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] — 19 relationships
 
 ## Workflow
 

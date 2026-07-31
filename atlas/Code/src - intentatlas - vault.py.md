@@ -11,7 +11,7 @@ source_path: "src/intentatlas/vault.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>18195</code>
+- **Size Bytes:** <code>18248</code>
 
 ## Outgoing relationships
 
@@ -38,6 +38,7 @@ source_path: "src/intentatlas/vault.py"
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: python-ast)_

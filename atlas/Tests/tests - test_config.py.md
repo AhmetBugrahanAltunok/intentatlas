@@ -11,11 +11,12 @@ source_path: "tests/test_config.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1588</code>
+- **Size Bytes:** <code>2555</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_config_rejects_escape_and_unknown_schema - tests - test_config.py|test_config_rejects_escape_and_unknown_schema]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_config_rejects_invalid_report_source_lists - tests - test_config.py|test_config_rejects_invalid_report_source_lists]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_config_rejects_project_root_as_an_output_path - tests - test_config.py|test_config_rejects_project_root_as_an_output_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_config_round_trip_and_bounds - tests - test_config.py|test_config_round_trip_and_bounds]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: filename-convention)_

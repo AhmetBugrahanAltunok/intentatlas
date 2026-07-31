@@ -8,6 +8,7 @@ from pathlib import Path
 from . import __version__
 from .config import ProjectConfig
 from .graph import AtlasGraph
+from .graph_diff import graph_diff, render_graph_diff
 from .scanner import USER_VAULT_AREAS, scan_repository
 from .vault import ProjectVault
 from .viewer import serve_graph
@@ -40,6 +41,16 @@ def build_parser() -> argparse.ArgumentParser:
         default="both",
     )
 
+    diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
+    diff_parser.add_argument("base", help="Baseline graph path below the project root")
+    _path_argument(diff_parser)
+    diff_parser.add_argument("--output", help="Write deterministic JSON below the project root")
+    diff_parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Return exit status 1 when graph changes exist",
+    )
+
     open_parser = commands.add_parser("open", help="Launch the local interactive graph")
     _path_argument(open_parser)
     open_parser.add_argument("--host", default="127.0.0.1")
@@ -66,6 +77,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _status(root)
         if args.command == "impact":
             return _impact(root, args.target, args.depth, args.direction)
+        if args.command == "diff":
+            return _diff(root, args.base, args.output, args.check)
         if args.command == "open":
             return _open(root, args.host, args.port, not args.no_browser)
     except (OSError, ValueError) as exc:
@@ -154,3 +167,46 @@ def _open(root: Path, host: str, port: int, open_browser: bool) -> int:
         _scan(root)
     serve_graph(graph_path, host=host, port=port, open_browser=open_browser)
     return 0
+
+
+def _diff(root: Path, base: str, output: str | None, check: bool) -> int:
+    config = ProjectConfig.load(root)
+    current_path = config.graph_path(root)
+    base_path = _project_path(root, config, base, "baseline graph", must_exist=True)
+    current = AtlasGraph.load(current_path)
+    baseline = AtlasGraph.load(base_path)
+    value = graph_diff(baseline, current)
+    rendered = render_graph_diff(value)
+    if output is None:
+        print(rendered, end="")
+    else:
+        output_path = _project_path(root, config, output, "graph diff output", must_exist=False)
+        if output_path in {base_path, current_path}:
+            raise ValueError("Graph diff output may not overwrite an input graph")
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(rendered, encoding="utf-8", newline="\n")
+        print(f"Graph diff: {output_path.relative_to(root)}")
+    return 1 if check and value["has_changes"] else 0
+
+
+def _project_path(
+    root: Path,
+    config: ProjectConfig,
+    configured: str,
+    label: str,
+    *,
+    must_exist: bool,
+) -> Path:
+    candidate = Path(configured)
+    unresolved = candidate if candidate.is_absolute() else root / candidate
+    if unresolved.is_symlink():
+        raise ValueError(f"Configured {label} may not be a symbolic link: {configured}")
+    target = unresolved.resolve()
+    if target == root or root not in target.parents:
+        raise ValueError(f"Configured {label} must be below the project root: {configured}")
+    private = (config.vault_path(root) / "Private").resolve()
+    if target == private or private in target.parents:
+        raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
+    if must_exist and not target.is_file():
+        raise ValueError(f"Configured {label} does not exist: {configured}")
+    return target
