@@ -10,9 +10,11 @@ source_path: "tests/test_evidence.py"
 
 ## Metadata
 
-- **Line:** <code>117</code>
+- **End Line:** <code>122</code>
+- **Line:** <code>109</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-diff-hunk)_

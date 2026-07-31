@@ -32,6 +32,9 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 - Import existing Cobertura coverage and JUnit test evidence without running project code.
 - Produce a deterministic, versioned graph diff for CI.
 - Import bounded issue and pull-request metadata from explicit local JSON snapshots.
+- Link recent commits to exact modified Python symbols when zero-context diff hunks intersect
+  validated AST source spans and the worktree file matches that commit's blob, while retaining
+  file-level history as a safe fallback.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
 ## Quick start
@@ -113,6 +116,11 @@ generation timestamp.
 
 Explicit local delivery snapshots connect requirements and decisions to issues, pull requests,
 changed files, and known commits without credentials or provider API access.
+
+Recent Git history also records direct `modifies` relationships for Python classes, functions,
+and methods when changed new-side lines intersect their AST spans and the current file still
+matches the analyzed commit blob. File-level `changes` links stay available for stale files,
+deletions, module-level edits, unsupported span adapters, and uncertain cases.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

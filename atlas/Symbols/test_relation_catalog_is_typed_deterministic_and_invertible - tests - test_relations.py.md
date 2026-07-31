@@ -10,6 +10,7 @@ source_path: "tests/test_relations.py"
 
 ## Metadata
 
+- **End Line:** <code>16</code>
 - **Line:** <code>9</code>
 - **Symbol Kind:** <code>"function"</code>
 

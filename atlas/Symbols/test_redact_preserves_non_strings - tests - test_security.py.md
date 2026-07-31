@@ -10,9 +10,11 @@ source_path: "tests/test_security.py"
 
 ## Metadata
 
+- **End Line:** <code>17</code>
 - **Line:** <code>15</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-diff-hunk)_

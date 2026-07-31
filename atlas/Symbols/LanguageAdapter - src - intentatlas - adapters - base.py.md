@@ -10,6 +10,7 @@ source_path: "src/intentatlas/adapters/base.py"
 
 ## Metadata
 
+- **End Line:** <code>45</code>
 - **Line:** <code>39</code>
 - **Symbol Kind:** <code>"class"</code>
 

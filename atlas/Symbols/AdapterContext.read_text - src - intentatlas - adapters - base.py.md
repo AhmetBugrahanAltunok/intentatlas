@@ -10,9 +10,11 @@ source_path: "src/intentatlas/adapters/base.py"
 
 ## Metadata
 
+- **End Line:** <code>28</code>
 - **Line:** <code>19</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-diff-hunk)_

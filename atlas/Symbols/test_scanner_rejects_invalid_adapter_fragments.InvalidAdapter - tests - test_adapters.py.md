@@ -10,6 +10,7 @@ source_path: "tests/test_adapters.py"
 
 ## Metadata
 
+- **End Line:** <code>49</code>
 - **Line:** <code>42</code>
 - **Symbol Kind:** <code>"class"</code>
 

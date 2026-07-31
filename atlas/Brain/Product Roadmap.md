@@ -99,12 +99,29 @@ Status: complete (2026-07-31)
 - Outcome: explicit local snapshots connect intent, issues, pull requests, files, and known commits
   through a bounded offline delivery graph.
 
-## Phase 6 — Product experience and scale
+## Phase 6A — Symbol-level change impact foundation
+
+Status: complete (2026-07-31)
+
+- Map bounded Git diff hunks to exact symbols when the current language adapter exposes a
+  trustworthy source span.
+- Preserve file-level change relationships as a conservative fallback instead of guessing.
+- Requirement: [[Requirements/REQ-008 - Trace symbol-level commit impact]]
+- Decision: [[Decisions/ADR-008 - Conservative diff-to-symbol projection]]
+- Delivery issue: [[Issues/ISSUE-006 - Implement symbol-level commit impact]]
+- Evidence: [[Evidence/EVD-008 - Phase 6A symbol impact verification]]
+- Review: [[Reviews/Phase 6A Symbol Impact Review]]
+- Outcome: recent commits retain complete file history and gain direct `modifies` evidence for
+  the most-specific changed Python symbols when bounded new-side hunks intersect validated AST
+  spans; uncertain cases remain safely at file level.
+
+## Phase 6B — Product experience and scale
 
 Status: planned
 
-- Improve graph navigation, filtering, relationship paths, and large-graph performance.
-- Add change-risk and evidence-gap explanations.
+- Use verified symbol-change evidence to improve graph navigation and impact explanations.
+- Add confidence-aware test recommendations, filtering, relationship paths, and large-graph
+  performance without treating inferred impact as fact.
 
 ## Phase 7 — Open-source release readiness
 

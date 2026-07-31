@@ -10,9 +10,11 @@ source_path: "tests/test_graph_diff.py"
 
 ## Metadata
 
+- **End Line:** <code>42</code>
 - **Line:** <code>8</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-diff-hunk)_

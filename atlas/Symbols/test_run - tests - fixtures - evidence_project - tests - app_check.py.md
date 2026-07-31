@@ -10,9 +10,11 @@ source_path: "tests/fixtures/evidence_project/tests/app_check.py"
 
 ## Metadata
 
+- **End Line:** <code>5</code>
 - **Line:** <code>4</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - fixtures - evidence_project - tests - app_check.py|tests/fixtures/evidence_project/tests/app_check.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-diff-hunk)_

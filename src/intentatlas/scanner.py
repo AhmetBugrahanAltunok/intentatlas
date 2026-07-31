@@ -12,7 +12,7 @@ from .adapters import BUILTIN_ADAPTERS, AdapterContext
 from .config import ProjectConfig
 from .delivery import import_delivery
 from .evidence import import_evidence
-from .git_history import collect_git_history
+from .git_history import DiffHunk, collect_git_history
 from .graph import AtlasGraph
 from .models import Edge, Node
 from .naming import note_title, safe_filename
@@ -203,7 +203,12 @@ class RepositoryScanner:
                     )
 
     def _scan_git_history(self) -> None:
-        for commit in collect_git_history(self.root, self.config.git_history_limit):
+        symbols_by_path = _symbols_by_path(self.graph.nodes.values())
+        for commit in collect_git_history(
+            self.root,
+            self.config.git_history_limit,
+            symbol_paths=symbols_by_path,
+        ):
             node_id = f"commit:{commit.sha}"
             self.graph.add_node(
                 Node(
@@ -221,6 +226,8 @@ class RepositoryScanner:
                 target = f"file:{relative}"
                 if target in self.graph.nodes:
                     self.graph.add_edge(Edge(node_id, target, "changes", "git-log"))
+            for symbol_id in _modified_symbols(commit.hunks, symbols_by_path):
+                self.graph.add_edge(Edge(node_id, symbol_id, "modifies", "git-diff-hunk"))
 
     def _scan_evidence_reports(self) -> None:
         kinds = {
@@ -439,3 +446,63 @@ def _validate_user_id(value: str, relative: str) -> str:
     if value.casefold().startswith(RESERVED_USER_ID_PREFIXES):
         raise ValueError(f"Reserved graph node ID in {relative}: {value!r}")
     return value
+
+
+def _symbols_by_path(nodes: Iterable[Node]) -> dict[str, tuple[Node, ...]]:
+    grouped: dict[str, list[Node]] = defaultdict(list)
+    for node in nodes:
+        if node.kind != "symbol" or node.path is None:
+            continue
+        start = node.metadata.get("line")
+        end = node.metadata.get("end_line")
+        if (
+            not isinstance(start, int)
+            or isinstance(start, bool)
+            or not isinstance(end, int)
+            or isinstance(end, bool)
+            or start < 1
+            or end < start
+        ):
+            continue
+        grouped[node.path].append(node)
+    return {
+        path: tuple(
+            sorted(
+                values,
+                key=lambda item: (
+                    int(item.metadata["line"]),
+                    int(item.metadata["end_line"]),
+                    item.id,
+                ),
+            )
+        )
+        for path, values in grouped.items()
+    }
+
+
+def _modified_symbols(
+    hunks: tuple[DiffHunk, ...], symbols_by_path: dict[str, tuple[Node, ...]]
+) -> tuple[str, ...]:
+    modified: set[str] = set()
+    for hunk in hunks:
+        hunk_end = hunk.start + hunk.count - 1
+        candidates = [
+            node
+            for node in symbols_by_path.get(hunk.path, ())
+            if int(node.metadata["line"]) <= hunk_end
+            and int(node.metadata["end_line"]) >= hunk.start
+        ]
+        for candidate in candidates:
+            start = int(candidate.metadata["line"])
+            end = int(candidate.metadata["end_line"])
+            contains_more_specific = any(
+                other.id != candidate.id
+                and start <= int(other.metadata["line"])
+                and end >= int(other.metadata["end_line"])
+                and (start, end)
+                != (int(other.metadata["line"]), int(other.metadata["end_line"]))
+                for other in candidates
+            )
+            if not contains_more_specific:
+                modified.add(candidate.id)
+    return tuple(sorted(modified))

@@ -10,7 +10,8 @@ source_path: "src/intentatlas/relations.py"
 
 ## Metadata
 
-- **Line:** <code>7</code>
+- **End Line:** <code>16</code>
+- **Line:** <code>6</code>
 - **Symbol Kind:** <code>"class"</code>
 
 ## Incoming relationships

@@ -10,7 +10,8 @@ source_path: "src/intentatlas/graph.py"
 
 ## Metadata
 
-- **Line:** <code>25</code>
+- **End Line:** <code>29</code>
+- **Line:** <code>24</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

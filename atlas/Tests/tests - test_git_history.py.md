@@ -11,10 +11,14 @@ source_path: "tests/test_git_history.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>673</code>
+- **Size Bytes:** <code>2497</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans - tests - test_git_history.py|test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans.matches - tests - test_git_history.py|test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans.matches]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_parse_git_diffs_collects_only_safe_current_side_ranges - tests - test_git_history.py|test_parse_git_diffs_collects_only_safe_current_side_ranges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_parse_git_diffs_rejects_malformed_paths_and_excessive_output - tests - test_git_history.py|test_parse_git_diffs_rejects_malformed_paths_and_excessive_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_log_collects_paths_and_redacts_subjects - tests - test_git_history.py|test_parse_git_log_collects_paths_and_redacts_subjects]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_log_ignores_malformed_blocks - tests - test_git_history.py|test_parse_git_log_ignores_malformed_blocks]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(verification; evidence: filename-convention)_
@@ -23,3 +27,4 @@ source_path: "tests/test_git_history.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_

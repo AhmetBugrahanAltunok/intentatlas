@@ -10,6 +10,7 @@ source_path: "src/intentatlas/viewer.py"
 
 ## Metadata
 
+- **End Line:** <code>70</code>
 - **Line:** <code>17</code>
 - **Symbol Kind:** <code>"function"</code>
 

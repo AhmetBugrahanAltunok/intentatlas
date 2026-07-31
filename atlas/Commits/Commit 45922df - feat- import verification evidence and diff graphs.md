@@ -32,6 +32,39 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_config.py|tests/test_config.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(history; evidence: git-log)_
+- <code>modifies</code> → [[Symbols/_diff - src - intentatlas - cli.py|_diff]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_project_path - src - intentatlas - cli.py|_project_path]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/EvidenceFragment - src - intentatlas - evidence.py|EvidenceFragment]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_check_record_limit - src - intentatlas - evidence.py|_check_record_limit]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_coverage_fragment - src - intentatlas - evidence.py|_coverage_fragment]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_duration - src - intentatlas - evidence.py|_duration]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_file_aliases - src - intentatlas - evidence.py|_file_aliases]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_local_name - src - intentatlas - evidence.py|_local_name]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_nonnegative_int - src - intentatlas - evidence.py|_nonnegative_int]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_read_xml - src - intentatlas - evidence.py|_read_xml]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_report_path - src - intentatlas - evidence.py|_report_path]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_resolve_file - src - intentatlas - evidence.py|_resolve_file]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_test_fragment - src - intentatlas - evidence.py|_test_fragment]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_test_status - src - intentatlas - evidence.py|_test_status]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_test_target - src - intentatlas - evidence.py|_test_target]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/import_evidence - src - intentatlas - evidence.py|import_evidence]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_edge_key - src - intentatlas - graph_diff.py|_edge_key]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/graph_diff - src - intentatlas - graph_diff.py|graph_diff]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/render_graph_diff - src - intentatlas - graph_diff.py|render_graph_diff]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/run - tests - fixtures - evidence_project - src - app.py|run]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_run - tests - fixtures - evidence_project - tests - app_check.py|test_run]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_cli_rejects_unsafe_graph_diff_paths - tests - test_cli.py|test_cli_rejects_unsafe_graph_diff_paths]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_cli_writes_deterministic_graph_diff_and_supports_ci_check - tests - test_cli.py|test_cli_writes_deterministic_graph_diff_and_supports_ci_check]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/_evidence_project - tests - test_evidence.py|_evidence_project]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_imports_bounded_coverage_and_test_evidence_deterministically - tests - test_evidence.py|test_imports_bounded_coverage_and_test_evidence_deterministically]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_rejects_entity_malformed_oversized_and_excessive_reports - tests - test_evidence.py|test_rejects_entity_malformed_oversized_and_excessive_reports]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_rejects_report_content_with_the_wrong_format - tests - test_evidence.py|test_rejects_report_content_with_the_wrong_format]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_rejects_symbolic_link_report_before_reading.guarded_is_symlink - tests - test_evidence.py|test_rejects_symbolic_link_report_before_reading.guarded_is_symlink]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_rejects_unsafe_or_missing_report_paths - tests - test_evidence.py|test_rejects_unsafe_or_missing_report_paths]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_graph_diff_is_complete_versioned_and_deterministic - tests - test_graph_diff.py|test_graph_diff_is_complete_versioned_and_deterministic]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_graph_diff_reports_identical_graphs_without_changes - tests - test_graph_diff.py|test_graph_diff_reports_identical_graphs_without_changes]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

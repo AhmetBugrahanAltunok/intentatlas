@@ -10,6 +10,7 @@ source_path: "src/intentatlas/adapters/javascript.py"
 
 ## Metadata
 
+- **End Line:** <code>91</code>
 - **Line:** <code>45</code>
 - **Symbol Kind:** <code>"class"</code>
 

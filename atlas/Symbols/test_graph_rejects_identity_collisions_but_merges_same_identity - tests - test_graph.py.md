@@ -10,6 +10,7 @@ source_path: "tests/test_graph.py"
 
 ## Metadata
 
+- **End Line:** <code>60</code>
 - **Line:** <code>37</code>
 - **Symbol Kind:** <code>"function"</code>
 

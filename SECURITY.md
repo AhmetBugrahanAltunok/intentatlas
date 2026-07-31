@@ -33,6 +33,12 @@ reproduction steps, impact, and any suggested mitigation.
   duplicate-key, field, type, identifier, and URL validation. They retain no body, comment, author,
   credential, query string, fragment, or raw provider payload.
 - IntentAtlas invokes Git only with fixed, read-only argument lists and never through a shell.
+  Symbol-impact parsing is limited to a bounded recent commit window, zero-context patches, a
+  fixed byte/hunk budget, validated commit identifiers, and safe current-side project paths;
+  raw blobs are read with `git cat-file` and must match the bounded worktree file after line-ending
+  normalization. Blob checks are limited to scanned paths with trusted spans and at most 1,000
+  commit/path pairs; excluded paths are never opened. Stale, malformed, or excessive patch data
+  produces no symbol claims.
 - The local viewer binds to `127.0.0.1` by default.
 
 Security reports are acknowledged in release notes unless the reporter requests anonymity.

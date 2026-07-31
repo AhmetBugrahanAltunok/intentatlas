@@ -10,9 +10,11 @@ source_path: "src/intentatlas/graph.py"
 
 ## Metadata
 
+- **End Line:** <code>176</code>
 - **Line:** <code>167</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-diff-hunk)_

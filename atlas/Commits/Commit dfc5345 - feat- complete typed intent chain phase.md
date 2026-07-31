@@ -33,6 +33,15 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_vault.py|tests/test_vault.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
+- <code>modifies</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/AtlasGraph.add_edge - src - intentatlas - graph.py|AtlasGraph.add_edge]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/AtlasGraph.load - src - intentatlas - graph.py|AtlasGraph.load]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/AtlasGraph.to_dict - src - intentatlas - graph.py|AtlasGraph.to_dict]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/Edge.category - src - intentatlas - models.py|Edge.category]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/Edge.from_dict - src - intentatlas - models.py|Edge.from_dict]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/Edge.inverse - src - intentatlas - models.py|Edge.inverse]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/Edge.to_dict - src - intentatlas - models.py|Edge.to_dict]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_vault_initializes_obsidian_and_preserves_user_owned_notes - tests - test_vault.py|test_vault_initializes_obsidian_and_preserves_user_owned_notes]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

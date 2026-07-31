@@ -11,18 +11,26 @@ source_path: "src/intentatlas/git_history.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2362</code>
+- **Size Bytes:** <code>8475</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/CommitRecord - src - intentatlas - git_history.py|CommitRecord]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_aligned_git_diffs - src - intentatlas - git_history.py|_aligned_git_diffs]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_collect_git_diffs - src - intentatlas - git_history.py|_collect_git_diffs]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_matches_commit_blob - src - intentatlas - git_history.py|_matches_commit_blob]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_normalized_lines - src - intentatlas - git_history.py|_normalized_lines]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_patch_path - src - intentatlas - git_history.py|_patch_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/collect_git_history - src - intentatlas - git_history.py|collect_git_history]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/parse_git_diffs - src - intentatlas - git_history.py|parse_git_diffs]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: python-ast)_

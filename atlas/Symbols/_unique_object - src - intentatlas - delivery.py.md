@@ -10,9 +10,11 @@ source_path: "src/intentatlas/delivery.py"
 
 ## Metadata
 
+- **End Line:** <code>241</code>
 - **Line:** <code>235</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-diff-hunk)_

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -45,6 +47,13 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
     assert "file:src/demo/core.py" in graph.nodes
     assert "symbol:src/demo/core.py::Greeter" in graph.nodes
     assert "symbol:src/demo/core.py::Greeter.hello" in graph.nodes
+    assert graph.nodes["symbol:src/demo/core.py::Greeter"].metadata["end_line"] == 3
+    assert graph.nodes["symbol:src/demo/core.py::Greeter.hello"].metadata == {
+        "symbol_kind": "function",
+        "line": 2,
+        "end_line": 3,
+        "owner": "scanner",
+    }
     assert "file:.venv/ignored.py" not in graph.nodes
     assert "file:.obsidian/ignored.md" not in graph.nodes
 
@@ -211,6 +220,131 @@ def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
         edge.source == "file:internal/math/comments.go"
         and edge.target == "file:submodule/worker/worker.go"
         for edge in first.edges
+    )
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
+    def git(*arguments: str) -> str:
+        result = subprocess.run(
+            ["git", *arguments],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        return result.stdout.strip()
+
+    (tmp_path / "src").mkdir()
+    auth = tmp_path / "src" / "auth.py"
+    javascript = tmp_path / "src" / "app.js"
+    auth.write_text(
+        "class Auth:\n"
+        "    def requirement_nine(self):\n"
+        "        return 'old'\n\n"
+        "    def requirement_eighteen(self):\n"
+        "        return 'stable'\n",
+        encoding="utf-8",
+    )
+    javascript.write_text("export function run() { return 1; }\n", encoding="utf-8")
+    git("init", "-q")
+    git("config", "user.name", "IntentAtlas Test")
+    git("config", "user.email", "intentatlas-test@example.invalid")
+    git("add", "src/auth.py", "src/app.js")
+    git("commit", "-q", "-m", "initial")
+
+    auth.write_text(
+        "class Auth:\n"
+        "    def requirement_nine(self):\n"
+        "        return 'new'\n\n"
+        "    def requirement_eighteen(self):\n"
+        "        return 'stable'\n",
+        encoding="utf-8",
+    )
+    git("add", "src/auth.py")
+    git("commit", "-q", "-m", "change one Python symbol")
+    python_commit = git("rev-parse", "HEAD")
+
+    javascript.write_text("export function run() { return 2; }\n", encoding="utf-8")
+    git("add", "src/app.js")
+    git("commit", "-q", "-m", "change JavaScript without spans")
+    javascript_commit = git("rev-parse", "HEAD")
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=3))
+    relationships = {
+        (edge.source, edge.target, edge.relation, edge.evidence) for edge in graph.edges
+    }
+
+    assert (
+        f"commit:{python_commit}",
+        "symbol:src/auth.py::Auth.requirement_nine",
+        "modifies",
+        "git-diff-hunk",
+    ) in relationships
+    assert not any(
+        source == f"commit:{python_commit}"
+        and target
+        in {
+            "symbol:src/auth.py::Auth",
+            "symbol:src/auth.py::Auth.requirement_eighteen",
+        }
+        and relation == "modifies"
+        for source, target, relation, _evidence in relationships
+    )
+    assert (
+        f"commit:{python_commit}",
+        "file:src/auth.py",
+        "changes",
+        "git-log",
+    ) in relationships
+    assert (
+        f"commit:{javascript_commit}",
+        "file:src/app.js",
+        "changes",
+        "git-log",
+    ) in relationships
+    assert not any(
+        source == f"commit:{javascript_commit}" and relation == "modifies"
+        for source, _target, relation, _evidence in relationships
+    )
+
+    auth.write_text(
+        "class Auth:\n"
+        "    def requirement_nine(self):\n"
+        "        return 'new'\n\n"
+        "    def requirement_eighteen(self):\n"
+        "        return 'changed later'\n",
+        encoding="utf-8",
+    )
+    git("add", "src/auth.py")
+    git("commit", "-q", "-m", "change the sibling later")
+    later_commit = git("rev-parse", "HEAD")
+
+    later_graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=4))
+    later_relationships = {
+        (edge.source, edge.target, edge.relation, edge.evidence)
+        for edge in later_graph.edges
+    }
+    assert not any(
+        source == f"commit:{python_commit}" and relation == "modifies"
+        for source, _target, relation, _evidence in later_relationships
+    )
+    assert (
+        f"commit:{later_commit}",
+        "symbol:src/auth.py::Auth.requirement_eighteen",
+        "modifies",
+        "git-diff-hunk",
+    ) in later_relationships
+    assert not any(
+        source == f"commit:{later_commit}"
+        and target
+        in {
+            "symbol:src/auth.py::Auth",
+            "symbol:src/auth.py::Auth.requirement_nine",
+        }
+        and relation == "modifies"
+        for source, target, relation, _evidence in later_relationships
     )
 
 

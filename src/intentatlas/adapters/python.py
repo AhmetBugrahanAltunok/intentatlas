@@ -69,13 +69,21 @@ class _SymbolVisitor(ast.NodeVisitor):
     def _visit_symbol(self, node: ast.ClassDef | ast.FunctionDef | ast.AsyncFunctionDef) -> None:
         qualname = ".".join([*self.stack, node.name])
         kind = "class" if isinstance(node, ast.ClassDef) else "function"
+        decorator_lines = [decorator.lineno for decorator in node.decorator_list]
+        start_line = min([node.lineno, *decorator_lines])
+        end_line = node.end_lineno if node.end_lineno is not None else node.lineno
         self.nodes.append(
             Node(
                 id=f"symbol:{self.relative}::{qualname}",
                 kind="symbol",
                 label=qualname,
                 path=self.relative,
-                metadata={"symbol_kind": kind, "line": node.lineno, "owner": "scanner"},
+                metadata={
+                    "symbol_kind": kind,
+                    "line": start_line,
+                    "end_line": end_line,
+                    "owner": "scanner",
+                },
             )
         )
         self.stack.append(node.name)

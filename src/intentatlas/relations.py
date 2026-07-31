@@ -38,6 +38,12 @@ _RELATION_TYPES = (
         "An intent or delivery item is implemented by code.",
     ),
     RelationType("imports", "imported-by", "structure", "A file imports another file."),
+    RelationType(
+        "modifies",
+        "modified-by",
+        "history",
+        "A commit directly modifies a symbol through validated diff evidence.",
+    ),
     RelationType("proves", "proven-by", "evidence", "Evidence proves a linked claim."),
     RelationType("recorded-in", "records", "history", "Evidence is recorded in a commit."),
     RelationType("references", "referenced-by", "reference", "A note references another node."),
@@ -49,7 +55,7 @@ RELATION_TYPES = {relation.name: relation for relation in _RELATION_TYPES}
 USER_RELATIONS = frozenset(
     {"drives", "implemented-by", "proves", "recorded-in", "references", "tracked-by"}
 )
-RELATION_SCHEMA_VERSION = 2
+RELATION_SCHEMA_VERSION = 3
 
 
 def relation_type(name: str) -> RelationType:

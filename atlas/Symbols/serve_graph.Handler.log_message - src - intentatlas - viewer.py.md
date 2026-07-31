@@ -10,9 +10,11 @@ source_path: "src/intentatlas/viewer.py"
 
 ## Metadata
 
+- **End Line:** <code>56</code>
 - **Line:** <code>55</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-diff-hunk)_

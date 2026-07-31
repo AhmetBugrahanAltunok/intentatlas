@@ -11,7 +11,7 @@ source_path: "src/intentatlas/scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>15010</code>
+- **Size Bytes:** <code>17364</code>
 
 ## Outgoing relationships
 
@@ -33,6 +33,8 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/_frontmatter_id - src - intentatlas - scanner.py|_frontmatter_id]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_is_directory_link - src - intentatlas - scanner.py|_is_directory_link]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_language - src - intentatlas - scanner.py|_language]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_modified_symbols - src - intentatlas - scanner.py|_modified_symbols]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_symbols_by_path - src - intentatlas - scanner.py|_symbols_by_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_validate_user_id - src - intentatlas - scanner.py|_validate_user_id]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_wikilinks - src - intentatlas - scanner.py|_wikilinks]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(structure; evidence: python-ast)_
@@ -48,6 +50,7 @@ source_path: "src/intentatlas/scanner.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
@@ -57,6 +60,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>referenced-by</code> ← [[Decisions/ADR-002 - Pruned trust-boundary traversal|ADR-002 - Pruned trust-boundary traversal]] _(reference; evidence: wikilink)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_

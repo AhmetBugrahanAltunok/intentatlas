@@ -10,6 +10,7 @@ source_path: "tests/test_delivery.py"
 
 ## Metadata
 
+- **End Line:** <code>194</code>
 - **Line:** <code>180</code>
 - **Symbol Kind:** <code>"function"</code>
 

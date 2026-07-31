@@ -11,6 +11,7 @@ def test_relation_catalog_is_typed_deterministic_and_invertible() -> None:
     assert [item["name"] for item in catalog] == sorted(item["name"] for item in catalog)
     assert relation_type("drives").inverse == "driven-by"
     assert relation_type("tests").category == "verification"
+    assert relation_type("modifies").inverse == "modified-by"
     assert "drives" in USER_RELATIONS
     assert "imports" not in USER_RELATIONS
 

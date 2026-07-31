@@ -71,7 +71,7 @@ def test_graph_round_trip_and_summary(tmp_path) -> None:
     assert restored.orphans() == []
     payload = graph.to_dict()
     assert payload["schema_version"] == 2
-    assert payload["relation_schema_version"] == 2
+    assert payload["relation_schema_version"] == 3
     drives = next(edge for edge in payload["edges"] if edge["relation"] == "drives")
     assert drives["category"] == "intent"
     assert drives["inverse"] == "driven-by"
@@ -155,7 +155,7 @@ def test_load_migrates_schema_one_and_rejects_invalid_typed_relations(tmp_path) 
     invalid_v2 = {
         **legacy,
         "schema_version": 2,
-        "relation_schema_version": 2,
+        "relation_schema_version": 3,
         "relation_types": relation_catalog(),
         "edges": [{**legacy["edges"][0], "inverse": "wrong"}],
     }

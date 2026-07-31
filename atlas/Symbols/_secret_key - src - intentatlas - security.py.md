@@ -10,9 +10,11 @@ source_path: "src/intentatlas/security.py"
 
 ## Metadata
 
+- **End Line:** <code>42</code>
 - **Line:** <code>37</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-diff-hunk)_

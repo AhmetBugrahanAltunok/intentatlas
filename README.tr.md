@@ -67,6 +67,12 @@ Issue ve pull request bağlamı da isteğe bağlı yerel JSON snapshot dosyalar�
 commitlerle bağlar. Gövdeler, yorumlar ve ham API yanıtları saklanmaz; ayrıntılar
 [yerel teslimat şemasında](docs/delivery-schema.md) açıklanır.
 
+Yakın Git geçmişinde değişen yeni taraf satırları, doğrulanmış AST aralıklarıyla kesiştiğinde ve
+güncel dosya incelenen commit blobuyla eşleştiğinde Python sınıf, fonksiyon ve metot sembollerine
+doğrudan `modifies` ilişkisi eklenir. Eski dosya sürümü, silme, modül-seviyesi değişiklik, span
+desteği olmayan adaptör veya belirsizlik durumunda mevcut dosya-seviyesi `changes` ilişkisi güvenli
+yedek olarak korunur.
+
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden
 esinlenmiştir. IntentAtlas buna kod, test, Git ve teslimat niyeti katmanını ekler.

@@ -10,6 +10,7 @@ source_path: "tests/test_config.py"
 
 ## Metadata
 
+- **End Line:** <code>37</code>
 - **Line:** <code>28</code>
 - **Symbol Kind:** <code>"function"</code>
 

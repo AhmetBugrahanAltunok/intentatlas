@@ -10,7 +10,8 @@ source_path: "src/intentatlas/git_history.py"
 
 ## Metadata
 
-- **Line:** <code>12</code>
+- **End Line:** <code>38</code>
+- **Line:** <code>31</code>
 - **Symbol Kind:** <code>"class"</code>
 
 ## Incoming relationships

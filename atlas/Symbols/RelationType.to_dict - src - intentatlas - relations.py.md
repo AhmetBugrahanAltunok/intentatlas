@@ -10,6 +10,7 @@ source_path: "src/intentatlas/relations.py"
 
 ## Metadata
 
+- **End Line:** <code>16</code>
 - **Line:** <code>15</code>
 - **Symbol Kind:** <code>"function"</code>
 

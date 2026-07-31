@@ -10,6 +10,7 @@ source_path: "src/intentatlas/naming.py"
 
 ## Metadata
 
+- **End Line:** <code>31</code>
 - **Line:** <code>27</code>
 - **Symbol Kind:** <code>"function"</code>
 

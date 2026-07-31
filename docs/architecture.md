@@ -25,9 +25,16 @@ resolution boundaries, including nested modules. A local package import projects
 non-test Go files; external and unresolved imports are omitted rather than guessed. Import-like
 text inside comments or literals is never treated as a relationship.
 
-The Git adapter reads commit metadata and changed paths with fixed read-only commands. Repository
-discovery prunes excluded directories before descent, does not follow directory links, and
-excludes the configured vault from the repository walk. Adapters never execute project code.
+The Git adapter reads commit metadata, changed paths, and a bounded recent window of zero-context
+diff hunks with fixed read-only commands. Changed new-side lines project to the most-specific
+Python symbol only when the current file matches that commit's bounded raw Git blob after
+line-ending normalization and validated AST source spans intersect. Blob checks include only
+scanned paths with trusted spans, never excluded paths, and stop safely above 1,000 commit/path
+candidates. File-level history remains the fallback for stale historical files, deletions, module
+edits, adapters without spans, malformed
+patches, and excessive output. Repository discovery prunes excluded directories before descent,
+does not follow directory links, and excludes the configured vault from the repository walk.
+Adapters never execute project code.
 
 Configured evidence adapters read only explicit project-local reports. The Cobertura and JUnit
 importers reject DTD/entity declarations, enforce byte and record limits, map report paths only to
@@ -45,7 +52,8 @@ and small metadata object. Directed edges have a source, target, typed relation,
 category, and provenance. The graph schema is versioned; schema 2 loads schema-1 caches and
 rebuilds them with the current relation catalog. Schema-2 caches are accepted only when their
 embedded catalog, edge categories, and inverse labels match the runtime registry.
-The graph is serialized to `.intentatlas/graph.json`; it is a rebuildable cache, not the
+Relation schema 3 adds invertible `modifies`/`modified-by` semantics for direct symbol-change
+evidence. The graph is serialized to `.intentatlas/graph.json`; it is a rebuildable cache, not the
 source of truth.
 
 Graph comparison is a pure operation over two validated caches. Diff schema 1 excludes generation

@@ -11,7 +11,7 @@ source_path: "tests/test_relations.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1042</code>
+- **Size Bytes:** <code>1104</code>
 
 ## Outgoing relationships
 

@@ -22,6 +22,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   types, functions, methods, module-local imports, and tests.
 - Bounded vendor-neutral local issue and pull-request snapshots with typed intent, delivery, file,
   and known-commit relationships.
+- Conservative symbol-level Git impact for recent Python changes using bounded zero-context hunks,
+  commit-blob alignment, validated AST spans, and typed `modifies`/`modified-by` relationships.
 
 ### Changed
 
@@ -37,6 +39,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   TypeScript and JavaScript without changing its graph semantics.
 - Relation schema 2 adds `addressed-by`/`addresses` delivery semantics and broadens `changes` to
   version-control delivery records; existing graph caches require a new scan.
+- Relation schema 3 adds direct `modifies`/`modified-by` history semantics while preserving
+  commit-to-file `changes` as the conservative fallback.
 
 ### Fixed
 

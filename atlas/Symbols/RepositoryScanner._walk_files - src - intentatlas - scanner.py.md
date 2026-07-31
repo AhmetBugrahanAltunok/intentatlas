@@ -10,6 +10,7 @@ source_path: "src/intentatlas/scanner.py"
 
 ## Metadata
 
+- **End Line:** <code>164</code>
 - **Line:** <code>132</code>
 - **Symbol Kind:** <code>"function"</code>
 

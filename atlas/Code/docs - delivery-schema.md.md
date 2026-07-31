@@ -13,6 +13,6 @@ source_path: "docs/delivery-schema.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1263</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
