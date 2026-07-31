@@ -10,6 +10,7 @@ from types import MappingProxyType
 
 from .adapters import BUILTIN_ADAPTERS, AdapterContext
 from .config import ProjectConfig
+from .delivery import import_delivery
 from .evidence import import_evidence
 from .git_history import collect_git_history
 from .graph import AtlasGraph
@@ -97,6 +98,7 @@ class RepositoryScanner:
         self._scan_evidence_reports()
         self._scan_git_history()
         self._scan_user_vault()
+        self._scan_delivery_reports()
         self._resolve_pending_links()
         return self.graph
 
@@ -274,6 +276,22 @@ class RepositoryScanner:
                     self.pending_links.append(
                         PendingLink(node_id, target, relation, "wikilink")
                     )
+
+    def _scan_delivery_reports(self) -> None:
+        fragment = import_delivery(
+            self.root,
+            files=dict(self.files),
+            graph_nodes=dict(self.graph.nodes),
+            vault=self.config.vault_path(self.root),
+            reports=self.config.delivery_reports,
+        )
+        for node in fragment.nodes:
+            self.graph.add_node(node)
+        for edge in fragment.edges:
+            if not self.graph.add_edge(edge):
+                raise ValueError(
+                    f"Delivery importer emitted invalid edge: {edge.source} -> {edge.target}"
+                )
 
     def _resolve_pending_links(self) -> None:
         aliases: dict[str, set[str]] = defaultdict(set)

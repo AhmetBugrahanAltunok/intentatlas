@@ -12,6 +12,7 @@ def test_config_round_trip_and_bounds(tmp_path) -> None:
         git_history_limit=15,
         coverage_reports=["reports/coverage.xml"],
         test_reports=["reports/junit.xml"],
+        delivery_reports=["reports/delivery.json"],
     )
     path = config.save_if_missing(tmp_path)
     assert path.exists()
@@ -19,6 +20,7 @@ def test_config_round_trip_and_bounds(tmp_path) -> None:
     assert loaded.git_history_limit == 15
     assert loaded.coverage_reports == ["reports/coverage.xml"]
     assert loaded.test_reports == ["reports/junit.xml"]
+    assert loaded.delivery_reports == ["reports/delivery.json"]
     assert ".obsidian" in loaded.exclude
     assert loaded.vault_path(tmp_path) == (tmp_path / "atlas").resolve()
 
@@ -66,4 +68,10 @@ def test_config_rejects_invalid_report_source_lists(tmp_path) -> None:
         json.dumps({"test_reports": [{"path": "junit.xml"}]}), encoding="utf-8"
     )
     with pytest.raises(ValueError, match="path strings"):
+        ProjectConfig.load(tmp_path)
+
+    (tmp_path / "intentatlas.json").write_text(
+        json.dumps({"delivery_reports": "delivery.json"}), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="must be a list"):
         ProjectConfig.load(tmp_path)

@@ -20,6 +20,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 - A versioned, timestamp-free graph diff command with deterministic JSON and optional CI checks.
 - A conservative, dependency-free Go adapter for `.go` files, `go.mod` module boundaries, named
   types, functions, methods, module-local imports, and tests.
+- Bounded vendor-neutral local issue and pull-request snapshots with typed intent, delivery, file,
+  and known-commit relationships.
 
 ### Changed
 
@@ -33,6 +35,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   explains relation direction, category, and provenance.
 - Python structural analysis now runs behind the same graph-fragment adapter contract used by
   TypeScript and JavaScript without changing its graph semantics.
+- Relation schema 2 adds `addressed-by`/`addresses` delivery semantics and broadens `changes` to
+  version-control delivery records; existing graph caches require a new scan.
 
 ### Fixed
 

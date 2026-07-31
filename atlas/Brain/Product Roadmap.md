@@ -85,12 +85,19 @@ Status: complete (2026-07-31)
 
 ## Phase 5B — External delivery inputs
 
-Status: planned
+Status: complete (2026-07-31)
 
-- Add optional issue and pull-request inputs through explicit local data sources.
+- Add optional issue and pull-request inputs through explicit local JSON snapshots.
+- Requirement: [[Requirements/REQ-007 - Import local delivery context]]
+- Decision: [[Decisions/ADR-007 - Explicit local delivery snapshots]]
+- Delivery issue: [[Issues/ISSUE-005 - Implement local delivery imports]]
+- Evidence: [[Evidence/EVD-007 - Phase 5B local delivery verification]]
+- Review: [[Reviews/Phase 5B Local Delivery Review]]
 - Preserve offline operation and require explicit configuration for every external data source.
 - Select Rust or Java next according to demand and fixture quality after delivery inputs are
   bounded and verified.
+- Outcome: explicit local snapshots connect intent, issues, pull requests, files, and known commits
+  through a bounded offline delivery graph.
 
 ## Phase 6 — Product experience and scale
 

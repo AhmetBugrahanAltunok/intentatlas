@@ -5,9 +5,10 @@ const colors = {
   review: "#e879f9", memory: "#a78bfa", session: "#818cf8",
   file: "#22d3ee", config: "#38bdf8", document: "#60a5fa",
   symbol: "#8b5cf6", test: "#34d399", coverage: "#2dd4bf",
-  "test-result": "#10b981", commit: "#94a3b8"
+  "test-result": "#10b981", "delivery-issue": "#fb923c",
+  "pull-request": "#facc15", commit: "#94a3b8"
 };
-const kindOrder = ["requirement", "decision", "issue", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "coverage", "test-result", "commit"];
+const kindOrder = ["requirement", "decision", "issue", "delivery-issue", "pull-request", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "coverage", "test-result", "commit"];
 const state = { data: null, enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
 const svg = document.querySelector("#graph");
 const viewport = document.querySelector("#viewport");

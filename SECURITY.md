@@ -29,6 +29,9 @@ reproduction steps, impact, and any suggested mitigation.
   test output, source content, secrets, and absolute report paths are not persisted.
 - Graph diff inputs and outputs remain below the project root, cannot use `atlas/Private/`, and may
   not overwrite either input graph.
+- Delivery imports are opt-in local JSON files with path, symlink, byte, record, link, schema,
+  duplicate-key, field, type, identifier, and URL validation. They retain no body, comment, author,
+  credential, query string, fragment, or raw provider payload.
 - IntentAtlas invokes Git only with fixed, read-only argument lists and never through a shell.
 - The local viewer binds to `127.0.0.1` by default.
 

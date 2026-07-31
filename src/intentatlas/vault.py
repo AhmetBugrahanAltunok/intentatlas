@@ -17,6 +17,8 @@ USER_KINDS = {"memory", "requirement", "decision", "issue", "evidence", "review"
 GENERATED_AREAS = {
     "commit": "Commits",
     "coverage": "Tests",
+    "delivery-issue": "Commits/Issues",
+    "pull-request": "Commits/Pull Requests",
     "symbol": "Symbols",
     "test": "Tests",
     "test-result": "Tests",

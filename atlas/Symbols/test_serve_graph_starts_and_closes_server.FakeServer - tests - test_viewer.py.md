@@ -10,7 +10,7 @@ source_path: "tests/test_viewer.py"
 
 ## Metadata
 
-- **Line:** <code>34</code>
+- **Line:** <code>36</code>
 - **Symbol Kind:** <code>"class"</code>
 
 ## Incoming relationships

@@ -17,7 +17,18 @@ class RelationType:
 
 
 _RELATION_TYPES = (
-    RelationType("changes", "changed-by", "history", "A commit changes an artifact."),
+    RelationType(
+        "addressed-by",
+        "addresses",
+        "delivery",
+        "An issue is addressed by a pull request.",
+    ),
+    RelationType(
+        "changes",
+        "changed-by",
+        "history",
+        "A version-control delivery record changes an artifact.",
+    ),
     RelationType("defines", "defined-in", "structure", "A file defines a symbol."),
     RelationType("drives", "driven-by", "intent", "A requirement drives a decision."),
     RelationType(
@@ -38,7 +49,7 @@ RELATION_TYPES = {relation.name: relation for relation in _RELATION_TYPES}
 USER_RELATIONS = frozenset(
     {"drives", "implemented-by", "proves", "recorded-in", "references", "tracked-by"}
 )
-RELATION_SCHEMA_VERSION = 1
+RELATION_SCHEMA_VERSION = 2
 
 
 def relation_type(name: str) -> RelationType:

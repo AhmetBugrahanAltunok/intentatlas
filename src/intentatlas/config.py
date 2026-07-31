@@ -17,6 +17,7 @@ class ProjectConfig:
     git_history_limit: int = 25
     coverage_reports: list[str] = field(default_factory=list)
     test_reports: list[str] = field(default_factory=list)
+    delivery_reports: list[str] = field(default_factory=list)
     exclude: list[str] = field(
         default_factory=lambda: [
             ".git",
@@ -54,6 +55,7 @@ class ProjectConfig:
             git_history_limit=max(0, min(int(raw.get("git_history_limit", 25)), 250)),
             coverage_reports=_report_sources(raw, "coverage_reports"),
             test_reports=_report_sources(raw, "test_reports"),
+            delivery_reports=_report_sources(raw, "delivery_reports"),
             exclude=[str(item) for item in raw.get("exclude", cls().exclude)],
         )
 

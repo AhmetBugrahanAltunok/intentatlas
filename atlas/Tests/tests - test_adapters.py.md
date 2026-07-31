@@ -27,4 +27,5 @@ source_path: "tests/test_adapters.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

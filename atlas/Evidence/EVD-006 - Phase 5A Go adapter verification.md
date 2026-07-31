@@ -14,6 +14,7 @@ issue, and completion protocol.
 - references:: [[Decisions/ADR-006 - Conservative Go module projection]]
 - references:: [[Issues/ISSUE-004 - Implement Go language adapter]]
 - references:: [[Brain/Phase Completion Protocol]]
+- recorded-in:: [[Commit 88fb6ce - feat- add deterministic Go structure tracing]]
 
 ## Change inventory
 
@@ -119,5 +120,3 @@ issue, and completion protocol.
 - Go workspace files, `replace` semantics, vendoring semantics, and dependency graph resolution are
   outside this phase; only discovered `go.mod` module declarations define local boundaries.
 - External issue and pull-request inputs remain deliberately deferred to Phase 5B.
-- The Phase 5A commit link will be added after the phase is recorded in Git and becomes visible on
-  the next repository scan.

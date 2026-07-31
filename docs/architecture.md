@@ -33,6 +33,11 @@ Configured evidence adapters read only explicit project-local reports. The Cober
 importers reject DTD/entity declarations, enforce byte and record limits, map report paths only to
 one discovered file, and aggregate coverage or result counts without retaining raw failure output.
 
+The delivery adapter reads only explicit project-local schema-1 JSON snapshots after path, byte,
+record, link, field, type, duplicate-key, and URL validation. It creates bounded delivery-issue and
+pull-request nodes, then links only exact local intent IDs, issue IDs, file paths, and commit SHAs.
+Raw provider payloads, bodies, comments, authors, credentials, and unknown fields are rejected.
+
 ## 2. AtlasGraph
 
 `AtlasGraph` is the language-neutral contract. Nodes have a stable ID, kind, label, path,

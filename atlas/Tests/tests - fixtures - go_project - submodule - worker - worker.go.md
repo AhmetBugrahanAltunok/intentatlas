@@ -16,3 +16,7 @@ source_path: "tests/fixtures/go_project/submodule/worker/worker.go"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/Run - tests - fixtures - go_project - submodule - worker - worker.go|Run]] _(structure; evidence: go-structural)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_

@@ -20,6 +20,8 @@ def test_viewer_assets_are_packaged() -> None:
     assert 'group.addEventListener("click", () => { if (!moved) selectNode(node.id); });' in app
     assert "edge.inverse || edge.relation" in app
     assert 'issue: "#f97316"' in app
+    assert '"delivery-issue": "#fb923c"' in app
+    assert '"pull-request": "#facc15"' in app
 
 
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:

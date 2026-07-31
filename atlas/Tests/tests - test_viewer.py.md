@@ -11,7 +11,7 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1861</code>
+- **Size Bytes:** <code>1955</code>
 
 ## Outgoing relationships
 

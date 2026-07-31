@@ -11,7 +11,7 @@ source_path: "tests/test_config.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2555</code>
+- **Size Bytes:** <code>2899</code>
 
 ## Outgoing relationships
 

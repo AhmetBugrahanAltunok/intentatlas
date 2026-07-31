@@ -22,6 +22,7 @@ source_path: "src/intentatlas/adapters/__init__.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_

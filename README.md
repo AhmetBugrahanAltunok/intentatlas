@@ -31,6 +31,7 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 - Trace upstream and downstream impact from the command line.
 - Import existing Cobertura coverage and JUnit test evidence without running project code.
 - Produce a deterministic, versioned graph diff for CI.
+- Import bounded issue and pull-request metadata from explicit local JSON snapshots.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
 ## Quick start
@@ -78,6 +79,10 @@ cache with a saved baseline:
 intentatlas diff .intentatlas/baseline.json --output .intentatlas/diff.json --check
 ```
 
+Delivery context is also opt-in and offline. Configure
+`"delivery_reports": ["reports/delivery.json"]` and scan again. IntentAtlas retains only bounded
+metadata and exact local links; see [the delivery schema](docs/delivery-schema.md).
+
 ## The project brain
 
 The `atlas/` vault deliberately separates ownership:
@@ -105,6 +110,9 @@ module-local package imports, and tests. Neither adapter runs a language runtime
 Configured Cobertura and JUnit reports now create generated coverage and test-result evidence in
 the graph. Graph diff schema 1 provides stable node and relationship changes for CI without a
 generation timestamp.
+
+Explicit local delivery snapshots connect requirements and decisions to issues, pull requests,
+changed files, and known commits without credentials or provider API access.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

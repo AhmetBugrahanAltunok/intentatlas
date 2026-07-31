@@ -13,6 +13,6 @@ source_path: "tests/fixtures/go_project/submodule/go.mod"
 - **Language:** <code>"Go Modules"</code>
 - **Size Bytes:** <code>47</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_

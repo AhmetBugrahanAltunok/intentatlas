@@ -11,7 +11,7 @@ source_path: "src/intentatlas/config.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3472</code>
+- **Size Bytes:** <code>3605</code>
 
 ## Outgoing relationships
 
@@ -29,10 +29,12 @@ source_path: "src/intentatlas/config.py"
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: python-ast)_

@@ -62,6 +62,11 @@ Hiçbir adaptör dil çalışma zamanını veya proje kodunu çalıştırmaz.
 yalnızca dosya başına sınırlı özetleri grafiğe ekler. `intentatlas diff` komutu da mevcut grafiği bir
 temel grafikle karşılaştırarak CI için deterministik ve zaman damgasız JSON üretir.
 
+Issue ve pull request bağlamı da isteğe bağlı yerel JSON snapshot dosyalarından içe aktarılabilir.
+`delivery_reports` kaynakları gereksinim ve kararları issue, pull request, değişen dosya ve bilinen
+commitlerle bağlar. Gövdeler, yorumlar ve ham API yanıtları saklanmaz; ayrıntılar
+[yerel teslimat şemasında](docs/delivery-schema.md) açıklanır.
+
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden
 esinlenmiştir. IntentAtlas buna kod, test, Git ve teslimat niyeti katmanını ekler.

@@ -36,6 +36,7 @@ source_path: "src/intentatlas/models.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - javascript.py|src/intentatlas/adapters/javascript.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
@@ -43,6 +44,7 @@ source_path: "src/intentatlas/models.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_relations.py|tests/test_relations.py]] _(verification; evidence: python-ast)_

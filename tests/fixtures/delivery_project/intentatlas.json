@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "git_history_limit": 0,
+  "delivery_reports": ["reports/delivery.json"]
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "source": "github-export",
+  "repository": "acme/demo",
+  "issues": [
+    {
+      "id": 12,
+      "title": "Trace delivery context",
+      "state": "open",
+      "url": "https://example.invalid/acme/demo/issues/12",
+      "labels": ["enhancement", "intent"],
+      "intent_ids": ["REQ-DELIVERY", "MISSING"]
+    }
+  ],
+  "pull_requests": [
+    {
+      "id": "45",
+      "title": "Connect issue and implementation",
+      "state": "merged",
+      "url": "https://example.invalid/acme/demo/pull/45",
+      "draft": false,
+      "issue_ids": ["12", "missing"],
+      "changed_files": ["src/app.py", "../outside.py", "missing.py"],
+      "commit_shas": ["0000000000000000000000000000000000000000"]
+    }
+  ]
+}
