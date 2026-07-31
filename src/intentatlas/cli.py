@@ -9,6 +9,7 @@ from . import __version__
 from .config import ProjectConfig
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
+from .recommendations import recommend_tests, render_recommendations
 from .scanner import USER_VAULT_AREAS, scan_repository
 from .vault import ProjectVault
 from .viewer import serve_graph
@@ -39,6 +40,25 @@ def build_parser() -> argparse.ArgumentParser:
         "--direction",
         choices=("both", "upstream", "downstream"),
         default="both",
+    )
+
+    recommend_parser = commands.add_parser(
+        "recommend-tests",
+        help="Rank tests for a commit, file, or symbol with explainable confidence",
+    )
+    recommend_parser.add_argument("target", help="Commit, file, or symbol target")
+    _path_argument(recommend_parser)
+    recommend_parser.add_argument(
+        "--minimum-confidence",
+        choices=("low", "medium", "high"),
+        default="medium",
+    )
+    recommend_parser.add_argument("--limit", type=int, default=20)
+    recommend_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
     )
 
     diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
@@ -77,6 +97,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _status(root)
         if args.command == "impact":
             return _impact(root, args.target, args.depth, args.direction)
+        if args.command == "recommend-tests":
+            return _recommend_tests(
+                root,
+                args.target,
+                args.minimum_confidence,
+                args.limit,
+                args.output_format,
+            )
         if args.command == "diff":
             return _diff(root, args.base, args.output, args.check)
         if args.command == "open":
@@ -153,6 +181,26 @@ def _impact(root: Path, target: str, depth: int, direction: str) -> int:
             f"{'  ' * record.depth}{marker} [{relation} · {record.edge.category}] "
             f"{record.node.label} ({record.node.kind}) via {record.edge.evidence}"
         )
+    return 0
+
+
+def _recommend_tests(
+    root: Path,
+    target: str,
+    minimum_confidence: str,
+    limit: int,
+    output_format: str,
+) -> int:
+    config = ProjectConfig.load(root)
+    graph = AtlasGraph.load(config.graph_path(root))
+    origin = graph.find(target)
+    result = recommend_tests(
+        graph,
+        origin.id,
+        minimum_confidence=minimum_confidence,
+        limit=limit,
+    )
+    print(render_recommendations(result, output_format), end="")
     return 0
 
 

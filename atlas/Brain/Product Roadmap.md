@@ -115,13 +115,29 @@ Status: complete (2026-07-31)
   the most-specific changed Python symbols when bounded new-side hunks intersect validated AST
   spans; uncertain cases remain safely at file level.
 
-## Phase 6B — Product experience and scale
+## Phase 6B1 — Explainable test recommendations
+
+Status: complete (2026-08-01)
+
+- Rank direct test candidates from verified symbol and file-change evidence.
+- Expose fixed confidence levels, evidence paths, filtering, and deterministic text/JSON output
+  without treating inferred test necessity as fact.
+- Requirement: [[Requirements/REQ-009 - Recommend tests with explainable confidence]]
+- Decision: [[Decisions/ADR-009 - Evidence-ranked test recommendations]]
+- Delivery issue: [[Issues/ISSUE-007 - Implement explainable test recommendations]]
+- Evidence: [[Evidence/EVD-009 - Phase 6B1 test recommendation verification]]
+- Review: [[Reviews/Phase 6B1 Test Recommendation Review]]
+- Outcome: commits, files, and symbols now produce bounded, deterministic test candidates with
+  inspectable confidence, evidence, and paths while explicitly preserving uncertainty.
+
+## Phase 6B2 — Product experience and scale
 
 Status: planned
 
-- Use verified symbol-change evidence to improve graph navigation and impact explanations.
-- Add confidence-aware test recommendations, filtering, relationship paths, and large-graph
-  performance without treating inferred impact as fact.
+- Measure recommendation precision and recall on labeled real repositories before adding wider
+  dependency propagation.
+- Add indexed graph traversal, large-repository benchmarks, richer viewer paths, and generated
+  output policies that reduce Git noise.
 
 ## Phase 7 — Open-source release readiness
 

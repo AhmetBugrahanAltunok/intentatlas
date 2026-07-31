@@ -17,36 +17,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 7
+- **commit:** 8
 - **config:** 6
-- **decision:** 8
+- **decision:** 9
 - **document:** 11
-- **evidence:** 8
-- **file:** 23
-- **issue:** 6
+- **evidence:** 9
+- **file:** 24
+- **issue:** 7
 - **memory:** 4
-- **requirement:** 8
-- **review:** 8
+- **requirement:** 9
+- **review:** 9
 - **session:** 1
-- **symbol:** 305
-- **test:** 44
-- **relationships:** 857
+- **symbol:** 337
+- **test:** 45
+- **relationships:** 951
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 52 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 50 relationships
-- [[Brain/Product Roadmap|Product Roadmap]] — 47 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 53 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 51 relationships
+- [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 48 relationships
 - [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 46 relationships
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 45 relationships
 - [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] — 44 relationships
 - [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] — 35 relationships
+- [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] — 34 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 33 relationships
+- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 33 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 32 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 31 relationships
-- [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] — 31 relationships
-- [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] — 29 relationships
-- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 28 relationships
+- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 31 relationships
 
 ## Workflow
 

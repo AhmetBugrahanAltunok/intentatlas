@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>8422</code>
+- **Size Bytes:** <code>9860</code>
 
 ## Outgoing relationships
 
@@ -21,6 +21,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>defines</code> → [[Symbols/_open - src - intentatlas - cli.py|_open]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_path_argument - src - intentatlas - cli.py|_path_argument]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_project_path - src - intentatlas - cli.py|_project_path]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_recommend_tests - src - intentatlas - cli.py|_recommend_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_scan - src - intentatlas - cli.py|_scan]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_status - src - intentatlas - cli.py|_status]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(structure; evidence: python-ast)_
@@ -29,6 +30,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
@@ -39,6 +41,8 @@ source_path: "src/intentatlas/cli.py"
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_

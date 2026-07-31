@@ -5,7 +5,7 @@ IntentAtlas has three layers with explicit ownership.
 ```text
 Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
                          │
-                         ├──query──> impact/status CLI
+                         ├──query──> impact/status/test recommendation CLI
                          ├──compare──> deterministic CI graph diff
                          └──serve──> local web viewer
 ```
@@ -31,8 +31,8 @@ Python symbol only when the current file matches that commit's bounded raw Git b
 line-ending normalization and validated AST source spans intersect. Blob checks include only
 scanned paths with trusted spans, never excluded paths, and stop safely above 1,000 commit/path
 candidates. File-level history remains the fallback for stale historical files, deletions, module
-edits, adapters without spans, malformed
-patches, and excessive output. Repository discovery prunes excluded directories before descent,
+edits, adapters without spans, malformed patches, and excessive output. Repository discovery
+prunes excluded directories before descent,
 does not follow directory links, and excludes the configured vault from the repository walk.
 Adapters never execute project code.
 
@@ -59,6 +59,14 @@ source of truth.
 Graph comparison is a pure operation over two validated caches. Diff schema 1 excludes generation
 timestamps and sorts added, removed, and changed nodes plus added and removed edges. The same two
 graphs therefore produce byte-for-byte identical JSON suitable for CI artifacts or `--check` gates.
+
+Test recommendation is also a pure graph query. Recommendation schema 1 accepts commit, file,
+symbol, or test targets and ranks only direct `changes`, `modifies`, `defines`, and `tests`
+evidence. Fixed scores distinguish exact-symbol structural links, file fallback, filename
+conventions, and directly changed tests. The default medium threshold hides weak filename-only
+file matches. JUnit aggregates remain unscored observations because freshness is unknown.
+Artifact signals, candidate tests, reasons, observations, and returned results have explicit
+bounds. No test is executed, and missing output is never treated as proof of no impact.
 
 ## 3. Project brain
 

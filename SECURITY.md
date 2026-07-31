@@ -39,6 +39,9 @@ reproduction steps, impact, and any suggested mitigation.
   normalization. Blob checks are limited to scanned paths with trusted spans and at most 1,000
   commit/path pairs; excluded paths are never opened. Stale, malformed, or excessive patch data
   produces no symbol claims.
+- Test recommendations are pure queries over the already validated graph. They execute no test or
+  project command, use fixed confidence rules, bound artifacts/candidates/reasons/observations and
+  output size, and label every result advisory. Imported JUnit aggregates never raise confidence.
 - The local viewer binds to `127.0.0.1` by default.
 
 Security reports are acknowledged in release notes unless the reporter requests anonymity.

@@ -42,10 +42,12 @@ source_path: "src/intentatlas/graph.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>referenced-by</code> ← [[Decisions/ADR-001 - Vault-first intent graph|ADR-001 - Vault-first intent graph]] _(reference; evidence: wikilink)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: python-ast)_

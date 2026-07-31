@@ -35,6 +35,8 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 - Link recent commits to exact modified Python symbols when zero-context diff hunks intersect
   validated AST source spans and the worktree file matches that commit's blob, while retaining
   file-level history as a safe fallback.
+- Rank test files for a commit, file, or symbol with fixed confidence levels, complete evidence
+  paths, and deterministic text or JSON output.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
 ## Quick start
@@ -60,6 +62,7 @@ intentatlas init [PATH]                  Create the project brain and local conf
 intentatlas scan [PATH]                  Rebuild the graph and generated vault notes
 intentatlas status [PATH]                Show graph and orphan-note health
 intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships
+intentatlas recommend-tests TARGET       Rank advisory test candidates with explanations
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
 intentatlas open [PATH]                  Launch the local interactive graph
 ```
@@ -81,6 +84,18 @@ cache with a saved baseline:
 ```text
 intentatlas diff .intentatlas/baseline.json --output .intentatlas/diff.json --check
 ```
+
+To rank test files for a commit, file, or symbol without running them:
+
+```text
+intentatlas recommend-tests commit:FULL_SHA --minimum-confidence medium
+intentatlas recommend-tests src/auth.py --minimum-confidence low --format json
+```
+
+Scores are fixed, inspectable structural signals. Exact symbol changes plus static test links rank
+above file-level or filename-convention evidence. Results are advisory: omitted tests and absent
+recommendations never prove that behavior is unaffected. Imported JUnit summaries are displayed
+only as observations because their freshness is unknown.
 
 Delivery context is also opt-in and offline. Configure
 `"delivery_reports": ["reports/delivery.json"]` and scan again. IntentAtlas retains only bounded
@@ -121,6 +136,10 @@ Recent Git history also records direct `modifies` relationships for Python class
 and methods when changed new-side lines intersect their AST spans and the current file still
 matches the analyzed commit blob. File-level `changes` links stay available for stale files,
 deletions, module-level edits, unsupported span adapters, and uncertain cases.
+
+`recommend-tests` consumes those validated graph relationships and ranks direct test-file
+candidates as high, medium, or low confidence. The first version deliberately excludes transitive
+dependency guesses and defaults to medium confidence to reduce false positives.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

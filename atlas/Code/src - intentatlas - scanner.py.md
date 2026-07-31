@@ -54,6 +54,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_

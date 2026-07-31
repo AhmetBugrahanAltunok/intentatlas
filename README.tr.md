@@ -37,6 +37,17 @@ Ardından `atlas/` klasörünü Obsidian’da vault olarak açın. Graph View; g
 kararları, kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak
 gösterecektir.
 
+Bir commit, dosya veya sembol için test dosyalarını çalıştırmadan sıralamak için:
+
+```text
+intentatlas recommend-tests commit:TAM_SHA --minimum-confidence medium
+intentatlas recommend-tests src/auth.py --minimum-confidence low --format json
+```
+
+Puanlar sabit ve incelenebilir yapısal kanıtlara dayanır. Kesin sembol değişikliği ile statik test
+bağlantısı, yalnız dosya veya adlandırma kuralı kanıtından daha yüksek sıralanır. Sonuçlar
+tavsiyedir; listede olmayan bir test, davranışın etkilenmediğini kanıtlamaz.
+
 ## Temel yaklaşım
 
 - Klasörler amaca göre, bağlantılar anlama göre düzenlenir.
@@ -72,6 +83,10 @@ güncel dosya incelenen commit blobuyla eşleştiğinde Python sınıf, fonksiyo
 doğrudan `modifies` ilişkisi eklenir. Eski dosya sürümü, silme, modül-seviyesi değişiklik, span
 desteği olmayan adaptör veya belirsizlik durumunda mevcut dosya-seviyesi `changes` ilişkisi güvenli
 yedek olarak korunur.
+
+`recommend-tests`, doğrulanmış grafik ilişkilerinden doğrudan test dosyalarını `high`, `medium`
+veya `low` güvenle sıralar ve her sonucun neden yolunu gösterir. İlk sürüm yanlış pozitifleri
+azaltmak için geçişli bağımlılık tahminleri yapmaz ve varsayılan olarak `medium` eşiğini kullanır.
 
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden

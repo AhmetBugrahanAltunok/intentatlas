@@ -17,3 +17,4 @@ source_path: "src/intentatlas/scanner.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-diff-hunk)_

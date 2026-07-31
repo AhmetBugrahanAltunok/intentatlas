@@ -10,11 +10,10 @@ source_path: "src/intentatlas/cli.py"
 
 ## Metadata
 
-- **End Line:** <code>189</code>
-- **Line:** <code>172</code>
+- **End Line:** <code>237</code>
+- **Line:** <code>220</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-diff-hunk)_
