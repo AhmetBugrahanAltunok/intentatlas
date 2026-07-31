@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "name": "IntentAtlas original cross-project scenarios",
+  "projects": [
+    {
+      "id": "go-package",
+      "name": "Go package-level test relationships",
+      "graph": "benchmarks/corpus/go-package.graph.json",
+      "labels": "benchmarks/corpus/go-package.labels.json"
+    },
+    {
+      "id": "python-auth",
+      "name": "Python symbol-level authentication change",
+      "graph": "benchmarks/corpus/python-auth.graph.json",
+      "labels": "benchmarks/corpus/python-auth.labels.json"
+    },
+    {
+      "id": "typescript-checkout",
+      "name": "TypeScript file-level checkout change",
+      "graph": "benchmarks/corpus/typescript-checkout.graph.json",
+      "labels": "benchmarks/corpus/typescript-checkout.labels.json"
+    }
+  ]
+}

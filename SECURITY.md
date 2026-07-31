@@ -46,6 +46,10 @@ reproduction steps, impact, and any suggested mitigation.
   It rejects symbolic links, unsafe paths, duplicate or unknown fields, malformed types, stale
   graph identities, and excessive bytes/cases/tests. It reuses the bounded recommendation query,
   executes no project code or tests, makes no network request, and emits timestamp-free summaries.
+- Corpus manifests and every referenced graph or label remain project-local and outside
+  `atlas/Private/`; direct symbolic links, unsafe paths, duplicate identities, malformed schemas,
+  and excessive manifest/project/case/graph sizes are rejected. Corpus evaluation executes no
+  repository code and makes no network request. One invalid project fails the complete corpus.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "name": "Python authentication review",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "python-login-validation",
+      "target": "commit:python-auth",
+      "expected_tests": [
+        "python/tests/test_auth_unit.py",
+        "python/tests/test_changed_auth.py"
+      ]
+    }
+  ]
+}

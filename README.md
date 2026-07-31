@@ -39,6 +39,7 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
   paths, and deterministic text or JSON output.
 - Measure recommendations against exhaustive, human-reviewed local labels with deterministic
   per-case and micro-aggregate precision and recall.
+- Compare low, medium, and high confidence across a bounded corpus of labeled local graphs.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
 ## Quick start
@@ -66,6 +67,7 @@ intentatlas status [PATH]                Show graph and orphan-note health
 intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships
 intentatlas recommend-tests TARGET       Rank advisory test candidates with explanations
 intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
+intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
 intentatlas open [PATH]                  Launch the local interactive graph
 ```
@@ -110,6 +112,18 @@ intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 Evaluation reports TP, FP, FN, precision, and recall without running tests or changing ranking
 scores. The bundled two-case baseline is a regression aid, not evidence of accuracy on other
 repositories. See [the evaluation schema and metric contract](docs/recommendation-evaluation.md).
+
+To compare all confidence thresholds across the original Python, TypeScript, and Go graph
+scenarios:
+
+```text
+intentatlas evaluate-corpus benchmarks/recommendation-corpus.json
+intentatlas evaluate-corpus benchmarks/recommendation-corpus.json --format json
+```
+
+Corpus output contains compact per-project and micro totals. These small original fixtures verify
+aggregation and confidence behavior; they are not copied repositories or real-world accuracy
+evidence. See [the corpus schema](docs/recommendation-corpus.md).
 
 Delivery context is also opt-in and offline. Configure
 `"delivery_reports": ["reports/delivery.json"]` and scan again. IntentAtlas retains only bounded
@@ -163,6 +177,10 @@ dependency guesses and defaults to medium confidence to reduce false positives.
 `evaluate-recommendations` reuses that production query unchanged and compares it with strict,
 closed-world local labels. Its timestamp-free schema-1 output makes threshold tradeoffs and
 ranking regressions visible while keeping undefined metrics explicit.
+
+`evaluate-corpus` applies the same query to multiple saved graphs and reports low, medium, and high
+confidence side by side. It fails the complete corpus when any graph or label is invalid, so stale
+or malformed projects cannot silently improve aggregate metrics.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

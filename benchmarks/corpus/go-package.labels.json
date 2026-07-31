@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "Go package review",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "go-addition-change",
+      "target": "commit:go-package",
+      "expected_tests": ["go/math/add_test.go"]
+    }
+  ]
+}

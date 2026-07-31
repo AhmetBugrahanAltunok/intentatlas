@@ -10,11 +10,10 @@ source_path: "tests/test_graph.py"
 
 ## Metadata
 
-- **End Line:** <code>170</code>
-- **Line:** <code>124</code>
+- **End Line:** <code>192</code>
+- **Line:** <code>146</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-diff-hunk)_

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    {"id": "commit:typescript-checkout", "kind": "commit", "label": "Change checkout totals"},
+    {"id": "file:web/checkout.ts", "kind": "file", "label": "web/checkout.ts", "path": "web/checkout.ts"},
+    {"id": "file:web/checkout.test.ts", "kind": "test", "label": "web/checkout.test.ts", "path": "web/checkout.test.ts"},
+    {"id": "file:web/order.test.ts", "kind": "test", "label": "web/order.test.ts", "path": "web/order.test.ts"}
+  ],
+  "edges": [
+    {"source": "commit:typescript-checkout", "target": "file:web/checkout.ts", "relation": "changes", "evidence": "reviewed-history"},
+    {"source": "file:web/checkout.test.ts", "target": "file:web/checkout.ts", "relation": "tests", "evidence": "typescript-static"},
+    {"source": "file:web/order.test.ts", "target": "file:web/checkout.ts", "relation": "tests", "evidence": "filename-convention"}
+  ]
+}

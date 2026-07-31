@@ -11,11 +11,12 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11545</code>
+- **Size Bytes:** <code>13890</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_diff - src - intentatlas - cli.py|_diff]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_evaluate_corpus - src - intentatlas - cli.py|_evaluate_corpus]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_recommendations - src - intentatlas - cli.py|_evaluate_recommendations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_impact - src - intentatlas - cli.py|_impact]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_init - src - intentatlas - cli.py|_init]] _(structure; evidence: python-ast)_
@@ -29,6 +30,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>defines</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
@@ -41,13 +43,16 @@ source_path: "src/intentatlas/cli.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit d9cd557 - feat- measure test recommendation quality|feat: measure test recommendation quality]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-009 - Implement labeled recommendation evaluation|ISSUE-009 - Implement labeled recommendation evaluation]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-010 - Implement cross-project recommendation benchmarks|ISSUE-010 - Implement cross-project recommendation benchmarks]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_

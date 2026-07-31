@@ -186,11 +186,16 @@ class AtlasGraph:
     @classmethod
     def load(cls, path: Path) -> AtlasGraph:
         try:
-            value = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as exc:
+            value = json.loads(
+                path.read_text(encoding="utf-8"),
+                object_pairs_hook=_unique_object,
+            )
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
             raise ValueError(f"Cannot read graph at {path}: {exc}") from exc
+        if not isinstance(value, dict):
+            raise ValueError(f"Invalid graph document at {path}: expected a JSON object")
         schema_version = value.get("schema_version")
-        if schema_version not in cls.supported_schema_versions:
+        if type(schema_version) is not int or schema_version not in cls.supported_schema_versions:
             raise ValueError(f"Unsupported graph schema: {schema_version}")
         if (
             schema_version == cls.schema_version
@@ -204,11 +209,35 @@ class AtlasGraph:
             and value.get("relation_types") != relation_catalog()
         ):
             raise ValueError("Invalid relation catalog")
+        nodes = value.get("nodes", [])
+        edges = value.get("edges", [])
+        if not isinstance(nodes, list) or not isinstance(edges, list):
+            raise ValueError(f"Invalid graph document at {path}: nodes and edges must be lists")
         graph = cls()
-        for item in value.get("nodes", []):
-            graph.add_node(Node.from_dict(item))
-        for item in value.get("edges", []):
-            edge = Edge.from_dict(item)
+        for index, item in enumerate(nodes):
+            if not isinstance(item, dict):
+                raise ValueError(f"Invalid graph node at index {index}")
+            try:
+                node = Node.from_dict(item)
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError(f"Invalid graph node at index {index}: {exc}") from exc
+            graph.add_node(node)
+        for index, item in enumerate(edges):
+            if not isinstance(item, dict):
+                raise ValueError(f"Invalid graph edge at index {index}")
+            try:
+                edge = Edge.from_dict(item)
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError(f"Invalid graph edge at index {index}: {exc}") from exc
             if not graph.add_edge(edge):
                 raise ValueError(f"Invalid edge in graph: {edge.source} -> {edge.target}")
         return graph
+
+
+def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    value: dict[str, Any] = {}
+    for key, item in pairs:
+        if key in value:
+            raise ValueError(f"Duplicate JSON key: {key}")
+        value[key] = item
+    return value

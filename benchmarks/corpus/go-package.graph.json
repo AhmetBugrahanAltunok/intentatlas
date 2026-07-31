@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    {"id": "commit:go-package", "kind": "commit", "label": "Change package addition"},
+    {"id": "file:go/math/add.go", "kind": "file", "label": "go/math/add.go", "path": "go/math/add.go"},
+    {"id": "file:go/math/add_test.go", "kind": "test", "label": "go/math/add_test.go", "path": "go/math/add_test.go"},
+    {"id": "file:go/math/integration_test.go", "kind": "test", "label": "go/math/integration_test.go", "path": "go/math/integration_test.go"}
+  ],
+  "edges": [
+    {"source": "commit:go-package", "target": "file:go/math/add.go", "relation": "changes", "evidence": "reviewed-history"},
+    {"source": "commit:go-package", "target": "file:go/math/add_test.go", "relation": "changes", "evidence": "reviewed-history"},
+    {"source": "file:go/math/add_test.go", "target": "file:go/math/add.go", "relation": "tests", "evidence": "go-package"},
+    {"source": "file:go/math/integration_test.go", "target": "file:go/math/add.go", "relation": "tests", "evidence": "go-package"}
+  ]
+}

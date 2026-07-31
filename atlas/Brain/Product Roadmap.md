@@ -161,14 +161,28 @@ Status: complete (2026-08-01)
   deterministic TP, FP, FN, precision, and recall; the first reviewed baseline exposes the real
   precision/recall tradeoff without claiming general accuracy.
 
-## Phase 6B2B2 — Recommendation scale and richer paths
+## Phase 6B2B2A — Cross-project recommendation benchmarks
+
+Status: complete (2026-08-01)
+
+- Compare low, medium, and high confidence across a bounded local corpus without changing scores.
+- Add original, independently labeled Python, TypeScript, and Go graph scenarios as deterministic
+  regression fixtures, not as real-world accuracy evidence.
+- Requirement: [[Requirements/REQ-012 - Compare recommendation quality across projects]]
+- Decision: [[Decisions/ADR-012 - Aggregate independent closed-world benchmarks]]
+- Delivery issue: [[Issues/ISSUE-010 - Implement cross-project recommendation benchmarks]]
+- Evidence: [[Evidence/EVD-012 - Phase 6B2B2A cross-project benchmark verification]]
+- Review: [[Reviews/Phase 6B2B2A Cross-Project Benchmark Review]]
+- Outcome: a strict local corpus now compares low, medium, and high thresholds across original
+  Python, TypeScript, and Go graph scenarios while keeping real-world validity explicitly open.
+
+## Phase 6B2B2B — Recommendation scale and richer paths
 
 Status: planned
 
-- Add more independently reviewed repositories and compare confidence thresholds before changing
-  the ranking policy.
-- Add indexed graph traversal, large-repository benchmarks, richer viewer paths, and generated
-  output policies that further reduce Git noise.
+- Add public real-world benchmark repositories after license and network review.
+- Add indexed graph traversal, large-repository performance gates, richer viewer paths, and
+  generated output policies that further reduce Git noise.
 
 ## Phase 7 — Open-source release readiness
 

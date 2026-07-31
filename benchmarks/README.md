@@ -27,3 +27,7 @@ intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 ```
 
 See `docs/recommendation-evaluation.md` for the label schema and metric contract.
+
+For cross-project threshold comparison, `recommendation-corpus.json` references the original
+Python, TypeScript, and Go graph scenarios under `corpus/`. See
+`docs/recommendation-corpus.md` for the manifest contract.

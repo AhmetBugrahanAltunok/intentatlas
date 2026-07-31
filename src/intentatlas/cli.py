@@ -7,6 +7,14 @@ from pathlib import Path
 
 from . import __version__
 from .config import ProjectConfig
+from .corpus import (
+    MAX_CORPUS_GRAPH_BYTES_TOTAL,
+    CorpusProject,
+    evaluate_corpus,
+    load_corpus_manifest,
+    render_corpus,
+    validate_corpus_graph_size,
+)
 from .evaluation import evaluate_recommendations, load_evaluation_labels, render_evaluation
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
@@ -84,6 +92,23 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
     )
 
+    corpus_parser = commands.add_parser(
+        "evaluate-corpus",
+        help="Compare recommendation confidence across labeled local graphs",
+    )
+    corpus_parser.add_argument(
+        "corpus",
+        help="Corpus manifest JSON path below the project root",
+    )
+    _path_argument(corpus_parser)
+    corpus_parser.add_argument("--limit", type=int, default=20)
+    corpus_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
+    )
+
     diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
     diff_parser.add_argument("base", help="Baseline graph path below the project root")
     _path_argument(diff_parser)
@@ -133,6 +158,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                 root,
                 args.labels,
                 args.minimum_confidence,
+                args.limit,
+                args.output_format,
+            )
+        if args.command == "evaluate-corpus":
+            return _evaluate_corpus(
+                root,
+                args.corpus,
                 args.limit,
                 args.output_format,
             )
@@ -259,6 +291,57 @@ def _evaluate_recommendations(
         limit=limit,
     )
     print(render_evaluation(result, output_format), end="")
+    return 0
+
+
+def _evaluate_corpus(
+    root: Path,
+    corpus: str,
+    limit: int,
+    output_format: str,
+) -> int:
+    config = ProjectConfig.load(root)
+    corpus_path = _project_path(
+        root,
+        config,
+        corpus,
+        "corpus manifest",
+        must_exist=True,
+    )
+    manifest = load_corpus_manifest(corpus_path)
+    projects: list[CorpusProject] = []
+    graph_bytes = 0
+    for entry in manifest.projects:
+        graph_path = _project_path(
+            root,
+            config,
+            entry.graph,
+            f"corpus graph for {entry.id}",
+            must_exist=True,
+        )
+        labels_path = _project_path(
+            root,
+            config,
+            entry.labels,
+            f"corpus labels for {entry.id}",
+            must_exist=True,
+        )
+        graph_bytes += validate_corpus_graph_size(graph_path)
+        if graph_bytes > MAX_CORPUS_GRAPH_BYTES_TOTAL:
+            raise ValueError(
+                "Corpus graphs exceed the "
+                f"{MAX_CORPUS_GRAPH_BYTES_TOTAL}-byte aggregate limit"
+            )
+        projects.append(
+            CorpusProject(
+                entry.id,
+                entry.name,
+                AtlasGraph.load(graph_path),
+                load_evaluation_labels(labels_path),
+            )
+        )
+    result = evaluate_corpus(manifest.name, tuple(projects), limit=limit)
+    print(render_corpus(result, output_format), end="")
     return 0
 
 

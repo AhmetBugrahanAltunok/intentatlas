@@ -11,7 +11,7 @@ source_path: "tests/test_graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6055</code>
+- **Size Bytes:** <code>6991</code>
 
 ## Outgoing relationships
 
@@ -22,6 +22,7 @@ source_path: "tests/test_graph.py"
 - <code>defines</code> → [[Symbols/test_graph_round_trip_and_summary - tests - test_graph.py|test_graph_round_trip_and_summary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_impact_walks_both_directions_with_depth - tests - test_graph.py|test_impact_walks_both_directions_with_depth]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_migrates_schema_one_and_rejects_invalid_typed_relations - tests - test_graph.py|test_load_migrates_schema_one_and_rejects_invalid_typed_relations]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_load_rejects_malformed_graph_documents - tests - test_graph.py|test_load_rejects_malformed_graph_documents]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_rejects_unknown_schema_and_invalid_edges - tests - test_graph.py|test_load_rejects_unknown_schema_and_invalid_edges]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: python-ast)_

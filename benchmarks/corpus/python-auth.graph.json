@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    {"id": "commit:python-auth", "kind": "commit", "label": "Change login validation"},
+    {"id": "file:python/auth.py", "kind": "file", "label": "python/auth.py", "path": "python/auth.py"},
+    {"id": "symbol:python/auth.py::login", "kind": "symbol", "label": "login", "path": "python/auth.py"},
+    {"id": "file:python/tests/test_auth_helpers.py", "kind": "test", "label": "python/tests/test_auth_helpers.py", "path": "python/tests/test_auth_helpers.py"},
+    {"id": "file:python/tests/test_auth_unit.py", "kind": "test", "label": "python/tests/test_auth_unit.py", "path": "python/tests/test_auth_unit.py"},
+    {"id": "file:python/tests/test_changed_auth.py", "kind": "test", "label": "python/tests/test_changed_auth.py", "path": "python/tests/test_changed_auth.py"}
+  ],
+  "edges": [
+    {"source": "commit:python-auth", "target": "symbol:python/auth.py::login", "relation": "modifies", "evidence": "reviewed-diff-hunk"},
+    {"source": "commit:python-auth", "target": "file:python/auth.py", "relation": "changes", "evidence": "reviewed-history"},
+    {"source": "commit:python-auth", "target": "file:python/tests/test_changed_auth.py", "relation": "changes", "evidence": "reviewed-history"},
+    {"source": "file:python/auth.py", "target": "symbol:python/auth.py::login", "relation": "defines", "evidence": "python-ast"},
+    {"source": "file:python/tests/test_auth_helpers.py", "target": "file:python/auth.py", "relation": "tests", "evidence": "python-ast"},
+    {"source": "file:python/tests/test_auth_unit.py", "target": "file:python/auth.py", "relation": "tests", "evidence": "python-ast"}
+  ]
+}

@@ -60,6 +60,17 @@ recall üretir. Birlikte gelen iki vakalık temel ölçüm yalnızca regresyon y
 repolardaki doğruluğu kanıtlamaz. Şema ve metrik sözleşmesi
 [değerlendirme belgesinde](docs/recommendation-evaluation.md) açıklanır.
 
+Özgün Python, TypeScript ve Go grafik senaryolarında bütün güven eşiklerini karşılaştırmak için:
+
+```text
+intentatlas evaluate-corpus benchmarks/recommendation-corpus.json
+intentatlas evaluate-corpus benchmarks/recommendation-corpus.json --format json
+```
+
+Corpus çıktısı proje başına ve mikro toplamları birlikte gösterir. Bu küçük özgün fixture’lar
+agregasyon ile güven davranışını doğrular; kopyalanmış repo veya gerçek dünya doğruluk kanıtı
+değildir. Ayrıntılar [corpus şemasında](docs/recommendation-corpus.md) bulunur.
+
 ## Temel yaklaşım
 
 - Klasörler amaca göre, bağlantılar anlama göre düzenlenir.
@@ -108,6 +119,10 @@ azaltmak için geçişli bağımlılık tahminleri yapmaz ve varsayılan olarak 
 `evaluate-recommendations`, aynı üretim sorgusunu değiştirmeden katı ve kapalı-dünya yerel
 etiketleriyle karşılaştırır. Zaman damgasız şema-1 çıktısı eşik farklarını ve regresyonları görünür
 kılar; tanımsız metrikleri açıkça `null`/`n/a` olarak korur.
+
+`evaluate-corpus`, aynı sorguyu birden fazla kayıtlı grafiğe uygular ve `low`, `medium`, `high`
+eşiklerini yan yana raporlar. Herhangi bir grafik veya etiket geçersizse corpus’un tamamı açıkça
+başarısız olur; eski veya bozuk bir proje toplam metriği sessizce iyileştiremez.
 
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden

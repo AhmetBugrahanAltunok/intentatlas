@@ -121,6 +121,28 @@ def test_load_rejects_unknown_schema_and_invalid_edges(tmp_path) -> None:
         AtlasGraph.load(path)
 
 
+@pytest.mark.parametrize(
+    ("document", "message"),
+    [
+        ([], "expected a JSON object"),
+        ({"schema_version": True}, "Unsupported graph schema"),
+        ({"schema_version": 1, "nodes": {}, "edges": []}, "must be lists"),
+        ({"schema_version": 1, "nodes": ["bad"], "edges": []}, "node at index 0"),
+        ({"schema_version": 1, "nodes": [{}], "edges": []}, "node at index 0"),
+        ({"schema_version": 1, "nodes": [], "edges": ["bad"]}, "edge at index 0"),
+    ],
+)
+def test_load_rejects_malformed_graph_documents(tmp_path, document, message) -> None:
+    path = tmp_path / "graph.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(ValueError, match=message):
+        AtlasGraph.load(path)
+
+    path.write_text('{"schema_version":1,"schema_version":1}', encoding="utf-8")
+    with pytest.raises(ValueError, match="Duplicate JSON key"):
+        AtlasGraph.load(path)
+
+
 def test_load_migrates_schema_one_and_rejects_invalid_typed_relations(tmp_path) -> None:
     path = tmp_path / "graph.json"
     legacy = {

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "TypeScript checkout review",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "typescript-checkout-total",
+      "target": "commit:typescript-checkout",
+      "expected_tests": ["web/checkout.test.ts"]
+    }
+  ]
+}

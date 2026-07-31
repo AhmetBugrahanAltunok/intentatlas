@@ -7,6 +7,7 @@ Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
                          │
                          ├──query──> impact/status/test recommendation CLI
                          ├──evaluate──> labeled precision/recall report
+                         ├──aggregate──> cross-project threshold corpus
                          ├──compare──> deterministic CI graph diff
                          └──serve──> local web viewer
 ```
@@ -76,6 +77,13 @@ same bounded recommendation query at a selected threshold and limit, and calcula
 micro-aggregate TP, FP, FN, precision, and recall. It does not infer ground truth from history,
 silently skip stale labels, tune scores, execute tests, or add timestamps to output. Undefined
 metrics remain explicit, and every report warns that its cases do not establish general accuracy.
+
+Corpus evaluation composes multiple saved graphs and their closed-world labels without merging
+graph identities. A strict manifest resolves every input below the invoking project root, then the
+same evaluator runs at low, medium, and high confidence with one shared result limit. Per-project
+counts remain separate; corpus totals are micro aggregates from summed TP, FP, and FN. Output
+contains aggregates rather than every ranked case, keeping the schema bounded while individual
+evaluation remains available for diagnosis. One invalid graph or label aborts the corpus.
 
 ## 3. Project brain
 

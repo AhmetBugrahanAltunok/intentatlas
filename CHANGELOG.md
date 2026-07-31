@@ -28,6 +28,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   bounded text/JSON output, filtering, deduplication, and unscored JUnit observations.
 - Strict, offline recommendation evaluation against exhaustive reviewed labels, with deterministic
   per-case and micro-aggregate TP, FP, FN, precision, and recall plus a self-hosted baseline.
+- Bounded cross-project corpus evaluation with low/medium/high threshold comparison and original
+  Python, TypeScript, and Go graph regression scenarios.
 
 ### Changed
 
@@ -39,6 +41,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   evidence recorded in the Obsidian vault.
 - Graph caches use schema 2 while retaining read compatibility with schema 1, and impact output
   explains relation direction, category, and provenance.
+- Graph loading now rejects duplicate JSON keys, non-object roots, malformed node/edge collections,
+  and invalid record shapes with explicit validation errors.
 - Python structural analysis now runs behind the same graph-fragment adapter contract used by
   TypeScript and JavaScript without changing its graph semantics.
 - Relation schema 2 adds `addressed-by`/`addresses` delivery semantics and broadens `changes` to
