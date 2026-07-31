@@ -50,6 +50,9 @@ reproduction steps, impact, and any suggested mitigation.
   `atlas/Private/`; direct symbolic links, unsafe paths, duplicate identities, malformed schemas,
   and excessive manifest/project/case/graph sizes are rejected. Corpus evaluation executes no
   repository code and makes no network request. One invalid project fails the complete corpus.
+- The query-scale benchmark creates only bounded synthetic in-memory nodes and edges. Boolean,
+  negative, and excessive edge or iteration counts are rejected; it reads no repository files,
+  executes no project code, persists no benchmark graph, and makes no network request.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during

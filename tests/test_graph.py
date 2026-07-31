@@ -34,6 +34,33 @@ def test_graph_deduplicates_edges_and_rejects_invalid_edges() -> None:
     assert not graph.add_edge(Edge("REQ-1", "REQ-1", "self"))
 
 
+def test_graph_index_is_deterministic_reused_and_invalidated() -> None:
+    graph = sample_graph()
+    index = graph.index
+
+    assert index.edge_count == 3
+    assert [edge.target for edge in index.outgoing("REQ-1")] == ["ADR-1"]
+    assert [edge.source for edge in index.incoming("file:app.py")] == [
+        "ADR-1",
+        "file:test_app.py",
+    ]
+    assert index.incoming("file:app.py", "tests") == (
+        Edge("file:test_app.py", "file:app.py", "tests", "python-ast"),
+    )
+    assert index.outgoing("missing") == ()
+    assert graph.index is index
+
+    assert graph.add_edge(Edge("REQ-1", "ADR-1", "drives", "wikilink"))
+    assert graph.index is index
+
+    graph.add_node(Node("file:other.py", "file", "other.py", "other.py"))
+    assert graph.add_edge(Edge("file:other.py", "file:app.py", "imports"))
+    rebuilt = graph.index
+    assert rebuilt is not index
+    assert rebuilt.edge_count == 4
+    assert graph.index is rebuilt
+
+
 def test_graph_rejects_identity_collisions_but_merges_same_identity() -> None:
     graph = AtlasGraph()
     graph.add_node(Node("file:app.py", "file", "app.py", "app.py", {"owner": "scanner"}))

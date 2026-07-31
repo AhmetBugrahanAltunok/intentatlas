@@ -2,13 +2,63 @@ from __future__ import annotations
 
 import json
 from collections import Counter, deque
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from types import MappingProxyType
+from typing import Any, TypeVar
 
 from .models import Edge, ImpactRecord, Node
 from .relations import RELATION_SCHEMA_VERSION, relation_catalog, relation_type
+
+_BucketKey = TypeVar("_BucketKey")
+
+
+@dataclass(frozen=True, slots=True)
+class GraphIndex:
+    """Deterministic immutable views over graph edge adjacency."""
+
+    edge_count: int
+    _outgoing_by_node: Mapping[str, tuple[Edge, ...]]
+    _incoming_by_node: Mapping[str, tuple[Edge, ...]]
+    _outgoing_by_relation: Mapping[tuple[str, str], tuple[Edge, ...]]
+    _incoming_by_relation: Mapping[tuple[str, str], tuple[Edge, ...]]
+
+    @classmethod
+    def build(cls, edges: Iterable[Edge]) -> GraphIndex:
+        ordered = tuple(
+            sorted(
+                edges,
+                key=lambda edge: (edge.source, edge.target, edge.relation, edge.evidence),
+            )
+        )
+        outgoing_by_node: dict[str, list[Edge]] = {}
+        incoming_by_node: dict[str, list[Edge]] = {}
+        outgoing_by_relation: dict[tuple[str, str], list[Edge]] = {}
+        incoming_by_relation: dict[tuple[str, str], list[Edge]] = {}
+        for edge in ordered:
+            outgoing_by_node.setdefault(edge.source, []).append(edge)
+            incoming_by_node.setdefault(edge.target, []).append(edge)
+            outgoing_by_relation.setdefault((edge.source, edge.relation), []).append(edge)
+            incoming_by_relation.setdefault((edge.target, edge.relation), []).append(edge)
+        return cls(
+            edge_count=len(ordered),
+            _outgoing_by_node=_freeze_buckets(outgoing_by_node),
+            _incoming_by_node=_freeze_buckets(incoming_by_node),
+            _outgoing_by_relation=_freeze_buckets(outgoing_by_relation),
+            _incoming_by_relation=_freeze_buckets(incoming_by_relation),
+        )
+
+    def outgoing(self, node_id: str, relation: str | None = None) -> tuple[Edge, ...]:
+        if relation is None:
+            return self._outgoing_by_node.get(node_id, ())
+        return self._outgoing_by_relation.get((node_id, relation), ())
+
+    def incoming(self, node_id: str, relation: str | None = None) -> tuple[Edge, ...]:
+        if relation is None:
+            return self._incoming_by_node.get(node_id, ())
+        return self._incoming_by_relation.get((node_id, relation), ())
 
 
 class AtlasGraph:
@@ -20,6 +70,7 @@ class AtlasGraph:
     def __init__(self) -> None:
         self.nodes: dict[str, Node] = {}
         self._edges: dict[tuple[str, str, str, str], Edge] = {}
+        self._index: GraphIndex | None = None
 
     @property
     def edges(self) -> list[Edge]:
@@ -27,6 +78,12 @@ class AtlasGraph:
             self._edges.values(),
             key=lambda edge: (edge.source, edge.target, edge.relation, edge.evidence),
         )
+
+    @property
+    def index(self) -> GraphIndex:
+        if self._index is None:
+            self._index = GraphIndex.build(self._edges.values())
+        return self._index
 
     def add_node(self, node: Node) -> None:
         existing = self.nodes.get(node.id)
@@ -60,7 +117,10 @@ class AtlasGraph:
         if edge.source not in self.nodes or edge.target not in self.nodes:
             return False
         key = (edge.source, edge.target, edge.relation, edge.evidence)
+        is_new = key not in self._edges
         self._edges[key] = edge
+        if is_new:
+            self._index = None
         return True
 
     def extend(self, nodes: Iterable[Node], edges: Iterable[Edge] = ()) -> None:
@@ -70,9 +130,8 @@ class AtlasGraph:
             self.add_edge(edge)
 
     def degree(self, node_id: str) -> int:
-        return sum(
-            edge.source == node_id or edge.target == node_id for edge in self._edges.values()
-        )
+        index = self.index
+        return len(index.outgoing(node_id)) + len(index.incoming(node_id))
 
     def summary(self) -> dict[str, int]:
         counts = Counter(node.kind for node in self.nodes.values())
@@ -136,7 +195,7 @@ class AtlasGraph:
         results: list[ImpactRecord] = []
         visited = {node_id}
         queue: deque[tuple[str, int]] = deque([(node_id, 0)])
-        edges = self.edges
+        index = self.index
 
         while queue:
             current, current_depth = queue.popleft()
@@ -145,11 +204,11 @@ class AtlasGraph:
             candidates: list[tuple[str, Edge, str]] = []
             if direction in {"both", "downstream"}:
                 candidates.extend(
-                    (edge.target, edge, "downstream") for edge in edges if edge.source == current
+                    (edge.target, edge, "downstream") for edge in index.outgoing(current)
                 )
             if direction in {"both", "upstream"}:
                 candidates.extend(
-                    (edge.source, edge, "upstream") for edge in edges if edge.target == current
+                    (edge.source, edge, "upstream") for edge in index.incoming(current)
                 )
             for neighbor_id, edge, edge_direction in sorted(
                 candidates, key=lambda value: (value[0], value[1].relation, value[2])
@@ -241,3 +300,9 @@ def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
             raise ValueError(f"Duplicate JSON key: {key}")
         value[key] = item
     return value
+
+
+def _freeze_buckets(
+    values: dict[_BucketKey, list[Edge]],
+) -> Mapping[_BucketKey, tuple[Edge, ...]]:
+    return MappingProxyType({key: tuple(edges) for key, edges in values.items()})

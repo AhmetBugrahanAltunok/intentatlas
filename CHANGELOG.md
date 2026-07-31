@@ -30,6 +30,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   per-case and micro-aggregate TP, FP, FN, precision, and recall plus a self-hosted baseline.
 - Bounded cross-project corpus evaluation with low/medium/high threshold comparison and original
   Python, TypeScript, and Go graph regression scenarios.
+- A lazy deterministic graph adjacency index shared by impact, orphan-health, and test
+  recommendation queries, plus a bounded offline synthetic scale benchmark command.
 
 ### Changed
 
@@ -43,6 +45,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   explains relation direction, category, and provenance.
 - Graph loading now rejects duplicate JSON keys, non-object roots, malformed node/edge collections,
   and invalid record shapes with explicit validation errors.
+- Repeated impact and recommendation lookups now traverse indexed local edge buckets instead of
+  rescanning every unrelated graph relationship.
 - Python structural analysis now runs behind the same graph-fragment adapter contract used by
   TypeScript and JavaScript without changing its graph semantics.
 - Relation schema 2 adds `addressed-by`/`addresses` delivery semantics and broadens `changes` to

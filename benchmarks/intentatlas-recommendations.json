@@ -18,8 +18,10 @@
       "target": "commit:6758ec08e89f3b493829d42f3e2055a7bde97291",
       "expected_tests": [
         "tests/test_cli.py",
+        "tests/test_corpus.py",
         "tests/test_evaluation.py",
-        "tests/test_recommendations.py"
+        "tests/test_recommendations.py",
+        "tests/test_scale.py"
       ]
     }
   ]

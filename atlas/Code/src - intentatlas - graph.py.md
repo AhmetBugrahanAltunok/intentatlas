@@ -11,7 +11,7 @@ source_path: "src/intentatlas/graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9687</code>
+- **Size Bytes:** <code>12355</code>
 
 ## Outgoing relationships
 
@@ -25,11 +25,17 @@ source_path: "src/intentatlas/graph.py"
 - <code>defines</code> → [[Symbols/AtlasGraph.extend - src - intentatlas - graph.py|AtlasGraph.extend]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/AtlasGraph.find - src - intentatlas - graph.py|AtlasGraph.find]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/AtlasGraph.impact - src - intentatlas - graph.py|AtlasGraph.impact]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/AtlasGraph.index - src - intentatlas - graph.py|AtlasGraph.index]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/AtlasGraph.load - src - intentatlas - graph.py|AtlasGraph.load]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/AtlasGraph.orphans - src - intentatlas - graph.py|AtlasGraph.orphans]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/AtlasGraph.save - src - intentatlas - graph.py|AtlasGraph.save]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/AtlasGraph.summary - src - intentatlas - graph.py|AtlasGraph.summary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/AtlasGraph.to_dict - src - intentatlas - graph.py|AtlasGraph.to_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/GraphIndex - src - intentatlas - graph.py|GraphIndex]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/GraphIndex.build - src - intentatlas - graph.py|GraphIndex.build]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/GraphIndex.incoming - src - intentatlas - graph.py|GraphIndex.incoming]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/GraphIndex.outgoing - src - intentatlas - graph.py|GraphIndex.outgoing]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_freeze_buckets - src - intentatlas - graph.py|_freeze_buckets]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_unique_object - src - intentatlas - graph.py|_unique_object]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
@@ -39,13 +45,16 @@ source_path: "src/intentatlas/graph.py"
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>referenced-by</code> ← [[Decisions/ADR-001 - Vault-first intent graph|ADR-001 - Vault-first intent graph]] _(reference; evidence: wikilink)_

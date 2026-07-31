@@ -71,6 +71,17 @@ Corpus çıktısı proje başına ve mikro toplamları birlikte gösterir. Bu k�
 agregasyon ile güven davranışını doğrular; kopyalanmış repo veya gerçek dünya doğruluk kanıtı
 değildir. Ayrıntılar [corpus şemasında](docs/recommendation-corpus.md) bulunur.
 
+Bir projeyi okumadan veya çalıştırmadan çevrimdışı ölçek kontrolü yapmak için:
+
+```text
+intentatlas benchmark-scale
+intentatlas benchmark-scale --unrelated-edges 50000 --iterations 500 --format json
+```
+
+Benchmark kararlı grafik/sonuç/iş sayılarını ve ortama bağlı süreleri raporlar. Taşınabilir gecikme
+garantisi değil, regresyon ve tanılama aracıdır. Ayrıntılar
+[ölçek benchmark sözleşmesinde](docs/query-scale-benchmark.md) bulunur.
+
 ## Temel yaklaşım
 
 - Klasörler amaca göre, bağlantılar anlama göre düzenlenir.
@@ -123,6 +134,10 @@ kılar; tanımsız metrikleri açıkça `null`/`n/a` olarak korur.
 `evaluate-corpus`, aynı sorguyu birden fazla kayıtlı grafiğe uygular ve `low`, `medium`, `high`
 eşiklerini yan yana raporlar. Herhangi bir grafik veya etiket geçersizse corpus’un tamamı açıkça
 başarısız olur; eski veya bozuk bir proje toplam metriği sessizce iyileştiremez.
+
+Etki ve test önerisi sorguları aynı tembel ve deterministik adjacency indeksini kullanır. Tekrarlı
+yerel sorgular yalnız eşleşen giriş/çıkış bucket’larını inceler; yeni kenar eklenirse bellek içi
+indeks geçersizleştirilip güvenle yeniden kurulur.
 
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden

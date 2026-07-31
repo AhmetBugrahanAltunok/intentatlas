@@ -4,7 +4,7 @@ import json
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from .graph import AtlasGraph
+from .graph import AtlasGraph, GraphIndex
 from .models import Edge, Node
 
 RECOMMENDATION_SCHEMA_VERSION = 1
@@ -144,9 +144,9 @@ def recommend_tests(
             f"received {target.kind}"
         )
 
-    edges = graph.edges
+    index = graph.index
     reasons_by_test: dict[str, list[RecommendationReason]] = {}
-    signals = _artifact_signals(graph, target, edges)
+    signals = _artifact_signals(graph, target, index)
     if len(signals) > MAX_ARTIFACT_SIGNALS:
         raise ValueError(
             f"Recommendation target exceeds the {MAX_ARTIFACT_SIGNALS}-artifact signal limit"
@@ -165,7 +165,7 @@ def recommend_tests(
                 ),
             )
             continue
-        for edge in _preferred_test_edges(edges, signal.file.id):
+        for edge in _preferred_test_edges(index, signal.file.id):
             test = graph.nodes.get(edge.source)
             if test is None or test.kind != "test":
                 continue
@@ -213,7 +213,7 @@ def recommend_tests(
         raise ValueError(
             f"Recommendation query exceeds the {MAX_CANDIDATE_TESTS}-test candidate limit"
         )
-    recommendations = _recommendations(graph, reasons_by_test, edges)
+    recommendations = _recommendations(graph, reasons_by_test, index)
     candidate_count = len(recommendations)
     minimum_rank = CONFIDENCE_RANK[minimum_confidence]
     filtered = tuple(
@@ -268,18 +268,16 @@ def render_recommendations(result: RecommendationResult, output_format: str = "t
 
 
 def _artifact_signals(
-    graph: AtlasGraph, target: Node, edges: list[Edge]
+    graph: AtlasGraph, target: Node, index: GraphIndex
 ) -> tuple[_ArtifactSignal, ...]:
     signals: list[_ArtifactSignal] = []
     if target.kind == "commit":
-        for edge in edges:
-            if edge.source != target.id:
-                continue
+        for edge in index.outgoing(target.id):
             changed = graph.nodes.get(edge.target)
             if changed is None:
                 continue
             if edge.relation == "modifies" and changed.kind == "symbol":
-                symbol_file = _symbol_file(graph, changed, edges)
+                symbol_file = _symbol_file(graph, changed, index)
                 if symbol_file is not None:
                     file, defines_evidence = symbol_file
                     signals.append(
@@ -303,7 +301,7 @@ def _artifact_signals(
                     )
                 )
     elif target.kind == "symbol":
-        symbol_file = _symbol_file(graph, target, edges)
+        symbol_file = _symbol_file(graph, target, index)
         if symbol_file is not None:
             file, evidence = symbol_file
             signals.append(
@@ -353,11 +351,9 @@ def _artifact_signals(
     )
 
 
-def _preferred_test_edges(edges: list[Edge], target_id: str) -> tuple[Edge, ...]:
+def _preferred_test_edges(index: GraphIndex, target_id: str) -> tuple[Edge, ...]:
     selected: dict[str, Edge] = {}
-    for edge in edges:
-        if edge.relation != "tests" or edge.target != target_id:
-            continue
+    for edge in index.incoming(target_id, "tests"):
         current = selected.get(edge.source)
         candidate_rank = (edge.evidence != "filename-convention", edge.evidence)
         current_rank = (
@@ -371,7 +367,7 @@ def _preferred_test_edges(edges: list[Edge], target_id: str) -> tuple[Edge, ...]
 
 
 def _symbol_file(
-    graph: AtlasGraph, symbol: Node, edges: list[Edge]
+    graph: AtlasGraph, symbol: Node, index: GraphIndex
 ) -> tuple[Node, str] | None:
     if symbol.path is None:
         return None
@@ -381,10 +377,8 @@ def _symbol_file(
     evidence = sorted(
         {
             edge.evidence
-            for edge in edges
+            for edge in index.incoming(symbol.id, "defines")
             if edge.source == file.id
-            and edge.target == symbol.id
-            and edge.relation == "defines"
         }
     )
     return file, evidence[0] if evidence else "graph-symbol-path"
@@ -403,7 +397,7 @@ def _add_reason(
 def _recommendations(
     graph: AtlasGraph,
     reasons_by_test: dict[str, list[RecommendationReason]],
-    edges: list[Edge],
+    index: GraphIndex,
 ) -> tuple[TestRecommendation, ...]:
     values: list[TestRecommendation] = []
     for test_id in sorted(reasons_by_test):
@@ -424,7 +418,7 @@ def _recommendations(
         )
         reasons = all_reasons[:MAX_REASONS_PER_TEST]
         score = max(reason.score for reason in all_reasons)
-        all_observations = _test_observations(graph, test_id, edges)
+        all_observations = _test_observations(graph, test_id, index)
         observations = all_observations[:MAX_OBSERVATIONS_PER_TEST]
         values.append(
             TestRecommendation(
@@ -443,12 +437,10 @@ def _recommendations(
 
 
 def _test_observations(
-    graph: AtlasGraph, test_id: str, edges: list[Edge]
+    graph: AtlasGraph, test_id: str, index: GraphIndex
 ) -> tuple[TestObservation, ...]:
     observations: list[TestObservation] = []
-    for edge in edges:
-        if edge.target != test_id or edge.relation != "proves":
-            continue
+    for edge in index.incoming(test_id, "proves"):
         node = graph.nodes.get(edge.source)
         if node is None or node.kind != "test-result":
             continue

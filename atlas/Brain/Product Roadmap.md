@@ -176,13 +176,29 @@ Status: complete (2026-08-01)
 - Outcome: a strict local corpus now compares low, medium, and high thresholds across original
   Python, TypeScript, and Go graph scenarios while keeping real-world validity explicitly open.
 
-## Phase 6B2B2B — Recommendation scale and richer paths
+## Phase 6B2B2B1 — Indexed graph queries and scale gate
+
+Status: complete (2026-08-01)
+
+- Replace repeated whole-edge scans in impact and recommendation queries with one shared lazy
+  adjacency index while preserving exact deterministic results.
+- Add a bounded synthetic large-graph benchmark for cold index construction and repeated warm
+  queries.
+- Requirement: [[Requirements/REQ-013 - Keep graph queries responsive at scale]]
+- Decision: [[Decisions/ADR-013 - Lazy deterministic adjacency index]]
+- Delivery issue: [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark]]
+- Evidence: [[Evidence/EVD-013 - Phase 6B2B2B1 indexed query verification]]
+- Review: [[Reviews/Phase 6B2B2B1 Indexed Query Review]]
+- Outcome: impact and test-recommendation traversal now reuse one deterministic adjacency index;
+  a bounded offline benchmark verifies stable results and local-bucket work as unrelated edges grow.
+
+## Phase 6B2B2B2 — Real-world validation and richer product paths
 
 Status: planned
 
 - Add public real-world benchmark repositories after license and network review.
-- Add indexed graph traversal, large-repository performance gates, richer viewer paths, and
-  generated output policies that further reduce Git noise.
+- Add richer viewer evidence paths, end-user demos, and generated output policies that further
+  reduce Git noise.
 
 ## Phase 7 — Open-source release readiness
 

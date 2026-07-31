@@ -13,6 +13,6 @@ source_path: "benchmarks/corpus/README.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1217</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_

@@ -13,6 +13,6 @@ source_path: "docs/recommendation-corpus.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>2574</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_

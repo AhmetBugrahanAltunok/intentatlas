@@ -11,13 +11,14 @@ source_path: "tests/test_graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6991</code>
+- **Size Bytes:** <code>7937</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/sample_graph - tests - test_graph.py|sample_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_find_reports_missing_and_ambiguous_targets - tests - test_graph.py|test_find_reports_missing_and_ambiguous_targets]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_deduplicates_edges_and_rejects_invalid_edges - tests - test_graph.py|test_graph_deduplicates_edges_and_rejects_invalid_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_graph_index_is_deterministic_reused_and_invalidated - tests - test_graph.py|test_graph_index_is_deterministic_reused_and_invalidated]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_rejects_identity_collisions_but_merges_same_identity - tests - test_graph.py|test_graph_rejects_identity_collisions_but_merges_same_identity]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_round_trip_and_summary - tests - test_graph.py|test_graph_round_trip_and_summary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_impact_walks_both_directions_with_depth - tests - test_graph.py|test_impact_walks_both_directions_with_depth]] _(structure; evidence: python-ast)_
@@ -36,4 +37,5 @@ source_path: "tests/test_graph.py"
 - <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

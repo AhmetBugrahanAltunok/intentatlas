@@ -58,6 +58,13 @@ Relation schema 3 adds invertible `modifies`/`modified-by` semantics for direct 
 evidence. The graph is serialized to `.intentatlas/graph.json`; it is a rebuildable cache, not the
 source of truth.
 
+`GraphIndex` is a lazy in-memory view over canonical edges. It stores immutable incoming and
+outgoing tuples by node and by exact `(node, relation)` key. Degree, orphan health, breadth-first
+impact, and recommendation evidence discovery reuse the same index. A newly accepted edge
+invalidates the cached view; the next read rebuilds it in O(E). Local traversal then scales with
+the matching adjacency bucket rather than unrelated graph edges. The index is rebuildable and is
+not serialized into the graph cache.
+
 Graph comparison is a pure operation over two validated caches. Diff schema 1 excludes generation
 timestamps and sorts added, removed, and changed nodes plus added and removed edges. The same two
 graphs therefore produce byte-for-byte identical JSON suitable for CI artifacts or `--check` gates.
@@ -84,6 +91,11 @@ same evaluator runs at low, medium, and high confidence with one shared result l
 counts remain separate; corpus totals are micro aggregates from summed TP, FP, and FN. Output
 contains aggregates rather than every ranked case, keeping the schema bounded while individual
 evaluation remains available for diagnosis. One invalid graph or label aborts the corpus.
+
+The synthetic scale benchmark constructs a relevant commit/file/test chain and bounded unrelated
+edges entirely in memory. It reports graph and result counts, a full-scan reference work estimate,
+indexed bucket work, and cold/warm timings. Timings are diagnostic and environment-specific; the
+stable correctness contract is the graph shape, result identities, and bounded local work.
 
 ## 3. Project brain
 

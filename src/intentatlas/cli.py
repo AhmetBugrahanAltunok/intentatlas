@@ -19,6 +19,7 @@ from .evaluation import evaluate_recommendations, load_evaluation_labels, render
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
 from .recommendations import recommend_tests, render_recommendations
+from .scale import render_scale_benchmark, run_scale_benchmark
 from .scanner import USER_VAULT_AREAS, scan_repository
 from .vault import ProjectVault
 from .viewer import serve_graph
@@ -109,6 +110,19 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
     )
 
+    scale_parser = commands.add_parser(
+        "benchmark-scale",
+        help="Measure indexed queries on a bounded synthetic graph",
+    )
+    scale_parser.add_argument("--unrelated-edges", type=int, default=25_000)
+    scale_parser.add_argument("--iterations", type=int, default=200)
+    scale_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
+    )
+
     diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
     diff_parser.add_argument("base", help="Baseline graph path below the project root")
     _path_argument(diff_parser)
@@ -136,7 +150,7 @@ def _path_argument(parser: argparse.ArgumentParser) -> None:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        root = Path(args.path).resolve()
+        root = Path(getattr(args, "path", ".")).resolve()
         if args.command == "init":
             return _init(root)
         if args.command == "scan":
@@ -168,6 +182,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.limit,
                 args.output_format,
             )
+        if args.command == "benchmark-scale":
+            result = run_scale_benchmark(
+                unrelated_edges=args.unrelated_edges,
+                iterations=args.iterations,
+            )
+            print(render_scale_benchmark(result, args.output_format), end="")
+            return 0
         if args.command == "diff":
             return _diff(root, args.base, args.output, args.check)
         if args.command == "open":
