@@ -6,7 +6,13 @@ from types import MappingProxyType
 import pytest
 
 import intentatlas.scanner as scanner_module
-from intentatlas.adapters import AdapterContext, GraphFragment, JavaScriptAdapter, PythonAdapter
+from intentatlas.adapters import (
+    AdapterContext,
+    GoAdapter,
+    GraphFragment,
+    JavaScriptAdapter,
+    PythonAdapter,
+)
 from intentatlas.config import ProjectConfig
 from intentatlas.models import Edge
 from intentatlas.scanner import scan_repository
@@ -27,6 +33,7 @@ def test_adapter_contract_is_offline_bounded_and_immutable(tmp_path: Path) -> No
     assert GraphFragment().nodes == ()
     assert PythonAdapter().suffixes == frozenset({".py"})
     assert JavaScriptAdapter().suffixes == frozenset({".js", ".jsx", ".ts", ".tsx"})
+    assert GoAdapter().suffixes == frozenset({".go"})
 
 
 def test_scanner_rejects_invalid_adapter_fragments(tmp_path: Path, monkeypatch) -> None:
@@ -44,3 +51,36 @@ def test_scanner_rejects_invalid_adapter_fragments(tmp_path: Path, monkeypatch) 
     monkeypatch.setattr(scanner_module, "BUILTIN_ADAPTERS", (InvalidAdapter(),))
     with pytest.raises(ValueError, match="emitted invalid edge"):
         scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+
+def test_go_adapter_skips_oversized_files_and_unclosed_import_blocks(tmp_path: Path) -> None:
+    module = tmp_path / "go.mod"
+    module.write_text("module example.com/fixture\n", encoding="utf-8")
+    target = tmp_path / "internal" / "value.go"
+    target.parent.mkdir()
+    target.write_text("package internal\n\nfunc Value() int { return 1 }\n", encoding="utf-8")
+    broken = tmp_path / "broken.go"
+    broken.write_text(
+        'package fixture\n\nimport (\n\t"example.com/fixture/internal"\n',
+        encoding="utf-8",
+    )
+    oversized = tmp_path / "large.go"
+    oversized.write_text("package fixture\n" + "x" * 100, encoding="utf-8")
+    files = MappingProxyType(
+        {
+            "broken.go": broken,
+            "go.mod": module,
+            "internal/value.go": target,
+            "large.go": oversized,
+        }
+    )
+    kinds = MappingProxyType(
+        {relative: "config" if relative == "go.mod" else "file" for relative in files}
+    )
+    context = AdapterContext(files=files, kinds=kinds, max_parse_bytes=64)
+
+    fragment = GoAdapter().scan(context)
+
+    assert "symbol:internal/value.go::Value" in {node.id for node in fragment.nodes}
+    assert not any(node.path == "large.go" for node in fragment.nodes)
+    assert not any(edge.source == "file:broken.go" for edge in fragment.edges)

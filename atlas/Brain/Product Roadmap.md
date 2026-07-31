@@ -69,13 +69,28 @@ Status: complete (2026-07-31)
 - Outcome: existing Cobertura and JUnit reports become bounded per-file evidence, while CI can
   consume a deterministic, timestamp-free graph diff without IntentAtlas running project code.
 
-## Phase 5 — Go and external delivery inputs
+## Phase 5A — Go language adapter
+
+Status: complete (2026-07-31)
+
+- Add deterministic Go file, symbol, module-local import, and test relationships.
+- Requirement: [[Requirements/REQ-006 - Trace Go structure]]
+- Decision: [[Decisions/ADR-006 - Conservative Go module projection]]
+- Delivery issue: [[Issues/ISSUE-004 - Implement Go language adapter]]
+- Strategy: [[Brain/Language Adapter Strategy]]
+- Evidence: [[Evidence/EVD-006 - Phase 5A Go adapter verification]]
+- Review: [[Reviews/Phase 5A Go Adapter Review]]
+- Outcome: Go files, `go.mod` module boundaries, named types, functions, methods, local package
+  imports, and tests are navigable through the same offline deterministic graph contract.
+
+## Phase 5B — External delivery inputs
 
 Status: planned
 
-- Add Go as the next language adapter.
 - Add optional issue and pull-request inputs through explicit local data sources.
-- Select Rust or Java next according to demand and fixture quality.
+- Preserve offline operation and require explicit configuration for every external data source.
+- Select Rust or Java next according to demand and fixture quality after delivery inputs are
+  bounded and verified.
 
 ## Phase 6 — Product experience and scale
 

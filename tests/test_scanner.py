@@ -11,6 +11,7 @@ from intentatlas.scanner import scan_repository
 from intentatlas.vault import ProjectVault
 
 TYPESCRIPT_FIXTURE = Path(__file__).parent / "fixtures" / "typescript_project"
+GO_FIXTURE = Path(__file__).parent / "fixtures" / "go_project"
 
 
 def build_python_project(tmp_path) -> None:
@@ -141,6 +142,74 @@ def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> N
     )
     assert not any(
         edge.source == "file:src/dynamic.ts" and edge.relation in {"imports", "tests"}
+        for edge in first.edges
+    )
+
+
+def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
+    first = scan_repository(GO_FIXTURE, ProjectConfig(git_history_limit=0))
+    second = scan_repository(GO_FIXTURE, ProjectConfig(git_history_limit=0))
+
+    assert first.to_dict()["nodes"] == second.to_dict()["nodes"]
+    assert first.to_dict()["edges"] == second.to_dict()["edges"]
+    for node_id in (
+        "symbol:internal/math/add.go::Calculator",
+        "symbol:internal/math/add.go::Calculator.Sum",
+        "symbol:internal/math/add.go::Number",
+        "symbol:internal/math/add.go::Operation",
+        "symbol:internal/math/add.go::Add",
+        "symbol:cmd/app/main.go::main",
+        "symbol:internal/math/add_test.go::TestAdd",
+    ):
+        assert node_id in first.nodes
+    assert "symbol:internal/math/comments.go::Phantom" not in first.nodes
+    assert "symbol:internal/math/comments.go::RawPhantom" not in first.nodes
+    assert first.nodes["file:go.mod"].kind == "config"
+    assert first.nodes["file:go.mod"].metadata["language"] == "Go Modules"
+    assert first.nodes["file:internal/math/add_test.go"].kind == "test"
+    assert first.nodes["file:internal/math/add.go"].metadata["language"] == "Go"
+
+    relationships = {
+        (edge.source, edge.target, edge.relation, edge.evidence) for edge in first.edges
+    }
+    assert (
+        "file:cmd/app/main.go",
+        "file:internal/math/add.go",
+        "imports",
+        "go-structural",
+    ) in relationships
+    assert (
+        "file:cmd/app/main.go",
+        "file:internal/math/comments.go",
+        "imports",
+        "go-structural",
+    ) in relationships
+    assert (
+        "file:internal/math/integration_test.go",
+        "file:internal/math/add.go",
+        "tests",
+        "go-structural",
+    ) in relationships
+    assert (
+        "file:internal/math/add_test.go",
+        "file:internal/math/add.go",
+        "tests",
+        "filename-convention",
+    ) in relationships
+    assert not any(
+        edge.source == "file:cmd/app/external_fixture.go"
+        and edge.target == "file:third_party/external.go"
+        for edge in first.edges
+    )
+    assert (
+        "file:cmd/app/main.go",
+        "file:submodule/worker/worker.go",
+        "imports",
+        "go-structural",
+    ) in relationships
+    assert not any(
+        edge.source == "file:internal/math/comments.go"
+        and edge.target == "file:submodule/worker/worker.go"
         for edge in first.edges
     )
 

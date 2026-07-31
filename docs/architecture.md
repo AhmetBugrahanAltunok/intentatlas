@@ -19,6 +19,12 @@ TypeScript/JavaScript adapter conservatively recognizes explicit declarations an
 module references in `.ts`, `.tsx`, `.js`, and `.jsx` files without requiring Node. Bare package
 imports are not resolved into repository relationships.
 
+The Go adapter uses a small structural lexer to recognize named types, functions, methods, and
+import declarations without requiring the Go toolchain. `go.mod` module declarations define local
+resolution boundaries, including nested modules. A local package import projects to its discovered
+non-test Go files; external and unresolved imports are omitted rather than guessed. Import-like
+text inside comments or literals is never treated as a relationship.
+
 The Git adapter reads commit metadata and changed paths with fixed read-only commands. Repository
 discovery prunes excluded directories before descent, does not follow directory links, and
 excludes the configured vault from the repository walk. Adapters never execute project code.

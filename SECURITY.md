@@ -20,6 +20,8 @@ reproduction steps, impact, and any suggested mitigation.
   limit, persist structural metadata only, and never invoke language runtimes or project code.
 - TypeScript/JavaScript resolution accepts only static relative module references; bare dependency
   names, dynamic imports, and paths escaping the scanned repository are not followed.
+- Go resolution accepts only imports matching a discovered local `go.mod` module path, prefers the
+  longest nested-module match, and does not invoke the Go toolchain or resolve external modules.
 - Coverage and test reports are opt-in, project-local XML inputs. Import rejects symbolic links,
   paths outside the project or inside `atlas/Private/`, DTD/entity declarations, oversized files,
   excessive records, malformed XML, and ambiguous file mappings.

@@ -29,6 +29,7 @@ SUPPORTED_SUFFIXES = {
     ".js",
     ".jsx",
     ".md",
+    ".mod",
     ".php",
     ".py",
     ".rb",
@@ -41,7 +42,7 @@ SUPPORTED_SUFFIXES = {
     ".yaml",
     ".yml",
 }
-CONFIG_SUFFIXES = {".toml", ".yaml", ".yml"}
+CONFIG_SUFFIXES = {".mod", ".toml", ".yaml", ".yml"}
 DOCUMENT_SUFFIXES = {".md", ".rst"}
 MAX_PARSE_BYTES = 1_000_000
 USER_VAULT_AREAS = {
@@ -340,6 +341,7 @@ def _language(suffix: str) -> str:
         ".js": "JavaScript",
         ".jsx": "JavaScript",
         ".md": "Markdown",
+        ".mod": "Go Modules",
         ".php": "PHP",
         ".py": "Python",
         ".rb": "Ruby",

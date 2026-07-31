@@ -21,3 +21,7 @@ source_path: "tests/test_graph_diff.py"
 - <code>tests</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_

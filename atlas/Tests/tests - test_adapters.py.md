@@ -11,11 +11,12 @@ source_path: "tests/test_adapters.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1928</code>
+- **Size Bytes:** <code>3339</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_adapter_contract_is_offline_bounded_and_immutable - tests - test_adapters.py|test_adapter_contract_is_offline_bounded_and_immutable]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_go_adapter_skips_oversized_files_and_unclosed_import_blocks - tests - test_adapters.py|test_go_adapter_skips_oversized_files_and_unclosed_import_blocks]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan]] _(structure; evidence: python-ast)_

@@ -24,7 +24,7 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 
 ## What works today
 
-- Scan Python repositories into a deterministic relationship graph.
+- Scan Python, TypeScript/JavaScript, and Go repositories into a deterministic relationship graph.
 - Connect files, symbols, imports, tests, Markdown documents, and Git commits.
 - Generate a linked Obsidian vault with purpose-based folders and wikilinks.
 - Explore the same graph in a local, dependency-free web viewer.
@@ -96,10 +96,11 @@ ordinary wikilinks remain safe generic references.
 
 ## Status
 
-IntentAtlas is an early working prototype. Python and TypeScript/JavaScript analysis share a
+IntentAtlas is an early working prototype. Python, TypeScript/JavaScript, and Go analysis share a
 language-neutral built-in adapter contract. The TypeScript/JavaScript adapter covers `.ts`, `.tsx`,
-`.js`, and `.jsx` files with conservative symbol, local-import, re-export, and test relationships
-without running Node or project code.
+`.js`, and `.jsx` files with conservative symbol, local-import, re-export, and test relationships.
+The Go adapter covers `.go` files, `go.mod` module boundaries, named types, functions, methods,
+module-local package imports, and tests. Neither adapter runs a language runtime or project code.
 
 Configured Cobertura and JUnit reports now create generated coverage and test-result evidence in
 the graph. Graph diff schema 1 provides stable node and relationship changes for CI without a

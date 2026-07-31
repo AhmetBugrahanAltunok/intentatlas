@@ -14,7 +14,8 @@ stable before more parsers are added.
 1. Phase 2 establishes typed relations and schema migration.
 2. Phase 3 establishes the adapter contract and adds TypeScript/JavaScript as the first new
    adapter family.
-3. Go follows as a compact, strongly structured validation of the adapter boundary.
+3. Go follows as a compact, strongly structured validation of the adapter boundary (Phase 5A,
+   complete 2026-07-31).
 4. Rust or Java follows according to user demand, fixture quality, and maintenance cost.
 
 ## Selection gates

@@ -18,6 +18,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   TSX, and JSX symbol, local-import, re-export, and test analysis.
 - Bounded, offline Cobertura coverage and JUnit test-result evidence imports.
 - A versioned, timestamp-free graph diff command with deterministic JSON and optional CI checks.
+- A conservative, dependency-free Go adapter for `.go` files, `go.mod` module boundaries, named
+  types, functions, methods, module-local imports, and tests.
 
 ### Changed
 

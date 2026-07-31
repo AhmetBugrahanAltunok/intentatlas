@@ -14,6 +14,7 @@ issue, and completion protocol.
 - references:: [[Decisions/ADR-005 - Bounded evidence imports and canonical graph diff]]
 - references:: [[Issues/ISSUE-003 - Implement evidence imports and graph diff]]
 - references:: [[Brain/Phase Completion Protocol]]
+- recorded-in:: [[Commit 45922df - feat- import verification evidence and diff graphs]]
 
 ## Change inventory
 
@@ -111,5 +112,3 @@ issue, and completion protocol.
   or threshold policy; CI remains responsible for generating and enforcing those reports.
 - Large graph diffs include full changed node/edge objects and may need a streaming or summary-only
   mode at higher scale.
-- The Phase 4 commit link will be added after the phase is recorded in Git and becomes visible on
-  the next repository scan.

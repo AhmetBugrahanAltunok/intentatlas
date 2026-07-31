@@ -10,7 +10,7 @@ source_path: "tests/test_adapters.py"
 
 ## Metadata
 
-- **Line:** <code>39</code>
+- **Line:** <code>46</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

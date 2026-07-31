@@ -27,3 +27,7 @@ source_path: "tests/test_evidence.py"
 - <code>tests</code> → [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: python-ast)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_

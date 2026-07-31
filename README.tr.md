@@ -51,9 +51,11 @@ güvenli ve genel `references` ilişkileri olarak çalışmaya devam eder.
 
 ## Durum
 
-Python ile TypeScript/JavaScript analizi aynı dil-bağımsız adaptör sözleşmesini kullanır. `.ts`,
+Python, TypeScript/JavaScript ve Go analizi aynı dil-bağımsız adaptör sözleşmesini kullanır. `.ts`,
 `.tsx`, `.js` ve `.jsx` dosyalarında adlandırılmış semboller, yerel import/re-export bağlantıları
-ve test ilişkileri; Node veya proje kodu çalıştırılmadan, yerel ve tutucu biçimde çıkarılır.
+ve test ilişkileri çıkarılır. Go adaptörü `.go` dosyalarını, `go.mod` modül sınırlarını,
+adlandırılmış türleri, fonksiyonları, metotları, modül-içi paket importlarını ve testleri kapsar.
+Hiçbir adaptör dil çalışma zamanını veya proje kodunu çalıştırmaz.
 
 İsteğe bağlı Cobertura coverage ve JUnit test raporları `intentatlas.json` içindeki proje-göreli
 `coverage_reports` ve `test_reports` listeleriyle içe aktarılabilir. IntentAtlas testleri çalıştırmaz;
