@@ -11,13 +11,14 @@ source_path: "README.tr.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>5423</code>
+- **Size Bytes:** <code>6389</code>
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 658cbad - fix- preserve generated vault during sync failures|fix: preserve generated vault during sync failures]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_

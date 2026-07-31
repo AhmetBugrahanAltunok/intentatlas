@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "name": "IntentAtlas reviewed baseline",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "phase-6a-symbol-impact",
+      "target": "commit:8c229ae8f55f7d5589b3cf71befee5340be631a4",
+      "expected_tests": [
+        "tests/test_git_history.py",
+        "tests/test_graph.py",
+        "tests/test_relations.py",
+        "tests/test_scanner.py"
+      ]
+    },
+    {
+      "id": "phase-6b1-recommendations",
+      "target": "commit:6758ec08e89f3b493829d42f3e2055a7bde97291",
+      "expected_tests": [
+        "tests/test_cli.py",
+        "tests/test_evaluation.py",
+        "tests/test_recommendations.py"
+      ]
+    }
+  ]
+}

@@ -37,6 +37,7 @@ source_path: "src/intentatlas/config.py"
 - <code>tested-by</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: python-ast)_

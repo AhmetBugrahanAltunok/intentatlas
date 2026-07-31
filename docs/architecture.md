@@ -6,6 +6,7 @@ IntentAtlas has three layers with explicit ownership.
 Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
                          │
                          ├──query──> impact/status/test recommendation CLI
+                         ├──evaluate──> labeled precision/recall report
                          ├──compare──> deterministic CI graph diff
                          └──serve──> local web viewer
 ```
@@ -67,6 +68,14 @@ conventions, and directly changed tests. The default medium threshold hides weak
 file matches. JUnit aggregates remain unscored observations because freshness is unknown.
 Artifact signals, candidate tests, reasons, observations, and returned results have explicit
 bounds. No test is executed, and missing output is never treated as proof of no impact.
+
+Recommendation evaluation is a second pure layer around the unchanged production query. Schema-1
+label files declare a closed-world `complete-test-set` policy, exact graph target IDs, and complete
+project-relative expected test paths. The evaluator resolves every identity strictly, runs the
+same bounded recommendation query at a selected threshold and limit, and calculates per-case and
+micro-aggregate TP, FP, FN, precision, and recall. It does not infer ground truth from history,
+silently skip stale labels, tune scores, execute tests, or add timestamps to output. Undefined
+metrics remain explicit, and every report warns that its cases do not establish general accuracy.
 
 ## 3. Project brain
 

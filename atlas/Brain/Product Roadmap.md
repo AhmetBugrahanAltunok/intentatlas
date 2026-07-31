@@ -146,14 +146,29 @@ Status: complete (2026-08-01)
 - Outcome: generated notes now refresh through failure-preserving atomic replacement; unchanged
   scans avoid rewrites and a locked file cannot trigger a destructive purge.
 
-## Phase 6B2B — Measured recommendation quality and scale
+## Phase 6B2B1 — Labeled recommendation evaluation
+
+Status: complete (2026-08-01)
+
+- Add a deterministic offline evaluator for exhaustive human-labeled test sets.
+- Record an honest self-hosted IntentAtlas baseline before widening dependency propagation.
+- Requirement: [[Requirements/REQ-011 - Measure test recommendation quality]]
+- Decision: [[Decisions/ADR-011 - Closed-world recommendation evaluation]]
+- Delivery issue: [[Issues/ISSUE-009 - Implement labeled recommendation evaluation]]
+- Evidence: [[Evidence/EVD-011 - Phase 6B2B1 recommendation evaluation verification]]
+- Review: [[Reviews/Phase 6B2B1 Recommendation Evaluation Review]]
+- Outcome: strict local labels now measure the unchanged production recommendation query with
+  deterministic TP, FP, FN, precision, and recall; the first reviewed baseline exposes the real
+  precision/recall tradeoff without claiming general accuracy.
+
+## Phase 6B2B2 — Recommendation scale and richer paths
 
 Status: planned
 
-- Measure recommendation precision and recall on labeled real repositories before adding wider
-  dependency propagation.
+- Add more independently reviewed repositories and compare confidence thresholds before changing
+  the ranking policy.
 - Add indexed graph traversal, large-repository benchmarks, richer viewer paths, and generated
-  output policies that reduce Git noise.
+  output policies that further reduce Git noise.
 
 ## Phase 7 — Open-source release readiness
 

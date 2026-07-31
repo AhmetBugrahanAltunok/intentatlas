@@ -22,9 +22,6 @@ generated: true
 - <code>changes</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_recommend_tests - src - intentatlas - cli.py|_recommend_tests]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/RecommendationPath.__post_init__ - src - intentatlas - recommendations.py|RecommendationPath.__post_init__]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/RecommendationPath.render - src - intentatlas - recommendations.py|RecommendationPath.render]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/RecommendationPath.to_dict - src - intentatlas - recommendations.py|RecommendationPath.to_dict]] _(history; evidence: git-diff-hunk)_

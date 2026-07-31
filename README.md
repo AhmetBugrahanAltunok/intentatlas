@@ -37,6 +37,8 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
   file-level history as a safe fallback.
 - Rank test files for a commit, file, or symbol with fixed confidence levels, complete evidence
   paths, and deterministic text or JSON output.
+- Measure recommendations against exhaustive, human-reviewed local labels with deterministic
+  per-case and micro-aggregate precision and recall.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
 ## Quick start
@@ -63,6 +65,7 @@ intentatlas scan [PATH]                  Rebuild the graph and generated vault n
 intentatlas status [PATH]                Show graph and orphan-note health
 intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships
 intentatlas recommend-tests TARGET       Rank advisory test candidates with explanations
+intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
 intentatlas open [PATH]                  Launch the local interactive graph
 ```
@@ -96,6 +99,17 @@ Scores are fixed, inspectable structural signals. Exact symbol changes plus stat
 above file-level or filename-convention evidence. Results are advisory: omitted tests and absent
 recommendations never prove that behavior is unaffected. Imported JUnit summaries are displayed
 only as observations because their freshness is unknown.
+
+To measure recommendation quality against an explicitly exhaustive reviewed label set:
+
+```text
+intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
+intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json --minimum-confidence high --format json
+```
+
+Evaluation reports TP, FP, FN, precision, and recall without running tests or changing ranking
+scores. The bundled two-case baseline is a regression aid, not evidence of accuracy on other
+repositories. See [the evaluation schema and metric contract](docs/recommendation-evaluation.md).
 
 Delivery context is also opt-in and offline. Configure
 `"delivery_reports": ["reports/delivery.json"]` and scan again. IntentAtlas retains only bounded
@@ -145,6 +159,10 @@ deletions, module-level edits, unsupported span adapters, and uncertain cases.
 `recommend-tests` consumes those validated graph relationships and ranks direct test-file
 candidates as high, medium, or low confidence. The first version deliberately excludes transitive
 dependency guesses and defaults to medium confidence to reduce false positives.
+
+`evaluate-recommendations` reuses that production query unchanged and compares it with strict,
+closed-world local labels. Its timestamp-free schema-1 output makes threshold tradeoffs and
+ranking regressions visible while keeping undefined metrics explicit.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

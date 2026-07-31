@@ -54,6 +54,7 @@ source_path: "tests/test_vault.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 658cbad - fix- preserve generated vault during sync failures|fix: preserve generated vault during sync failures]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-008 - Implement resilient generated vault synchronization|ISSUE-008 - Implement resilient generated vault synchronization]] _(implementation; evidence: wikilink)_

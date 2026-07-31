@@ -26,6 +26,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   commit-blob alignment, validated AST spans, and typed `modifies`/`modified-by` relationships.
 - Deterministic advisory test-file recommendations with fixed confidence scores, evidence paths,
   bounded text/JSON output, filtering, deduplication, and unscored JUnit observations.
+- Strict, offline recommendation evaluation against exhaustive reviewed labels, with deterministic
+  per-case and micro-aggregate TP, FP, FN, precision, and recall plus a self-hosted baseline.
 
 ### Changed
 

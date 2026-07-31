@@ -46,6 +46,7 @@ source_path: "src/intentatlas/models.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_

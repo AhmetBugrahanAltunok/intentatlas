@@ -48,6 +48,18 @@ Puanlar sabit ve incelenebilir yapısal kanıtlara dayanır. Kesin sembol deği�
 bağlantısı, yalnız dosya veya adlandırma kuralı kanıtından daha yüksek sıralanır. Sonuçlar
 tavsiyedir; listede olmayan bir test, davranışın etkilenmediğini kanıtlamaz.
 
+Öneri kalitesini eksiksiz olduğu açıkça belirtilen, insan incelemeli yerel etiketlerle ölçmek için:
+
+```text
+intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
+intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json --minimum-confidence high --format json
+```
+
+Değerlendirme testleri çalıştırmadan ve sıralama puanlarını değiştirmeden TP, FP, FN, precision ve
+recall üretir. Birlikte gelen iki vakalık temel ölçüm yalnızca regresyon yardımcısıdır; başka
+repolardaki doğruluğu kanıtlamaz. Şema ve metrik sözleşmesi
+[değerlendirme belgesinde](docs/recommendation-evaluation.md) açıklanır.
+
 ## Temel yaklaşım
 
 - Klasörler amaca göre, bağlantılar anlama göre düzenlenir.
@@ -92,6 +104,10 @@ yedek olarak korunur.
 `recommend-tests`, doğrulanmış grafik ilişkilerinden doğrudan test dosyalarını `high`, `medium`
 veya `low` güvenle sıralar ve her sonucun neden yolunu gösterir. İlk sürüm yanlış pozitifleri
 azaltmak için geçişli bağımlılık tahminleri yapmaz ve varsayılan olarak `medium` eşiğini kullanır.
+
+`evaluate-recommendations`, aynı üretim sorgusunu değiştirmeden katı ve kapalı-dünya yerel
+etiketleriyle karşılaştırır. Zaman damgasız şema-1 çıktısı eşik farklarını ve regresyonları görünür
+kılar; tanımsız metrikleri açıkça `null`/`n/a` olarak korur.
 
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden

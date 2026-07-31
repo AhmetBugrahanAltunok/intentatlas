@@ -42,6 +42,10 @@ reproduction steps, impact, and any suggested mitigation.
 - Test recommendations are pure queries over the already validated graph. They execute no test or
   project command, use fixed confidence rules, bound artifacts/candidates/reasons/observations and
   output size, and label every result advisory. Imported JUnit aggregates never raise confidence.
+- Recommendation evaluation accepts only explicit project-local JSON outside `atlas/Private/`.
+  It rejects symbolic links, unsafe paths, duplicate or unknown fields, malformed types, stale
+  graph identities, and excessive bytes/cases/tests. It reuses the bounded recommendation query,
+  executes no project code or tests, makes no network request, and emits timestamp-free summaries.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during

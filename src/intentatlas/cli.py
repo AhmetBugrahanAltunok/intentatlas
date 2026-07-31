@@ -7,6 +7,7 @@ from pathlib import Path
 
 from . import __version__
 from .config import ProjectConfig
+from .evaluation import evaluate_recommendations, load_evaluation_labels, render_evaluation
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
 from .recommendations import recommend_tests, render_recommendations
@@ -61,6 +62,28 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
     )
 
+    evaluate_parser = commands.add_parser(
+        "evaluate-recommendations",
+        help="Compare test recommendations with an exhaustive local label set",
+    )
+    evaluate_parser.add_argument(
+        "labels",
+        help="Evaluation label JSON path below the project root",
+    )
+    _path_argument(evaluate_parser)
+    evaluate_parser.add_argument(
+        "--minimum-confidence",
+        choices=("low", "medium", "high"),
+        default="medium",
+    )
+    evaluate_parser.add_argument("--limit", type=int, default=20)
+    evaluate_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
+    )
+
     diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
     diff_parser.add_argument("base", help="Baseline graph path below the project root")
     _path_argument(diff_parser)
@@ -101,6 +124,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _recommend_tests(
                 root,
                 args.target,
+                args.minimum_confidence,
+                args.limit,
+                args.output_format,
+            )
+        if args.command == "evaluate-recommendations":
+            return _evaluate_recommendations(
+                root,
+                args.labels,
                 args.minimum_confidence,
                 args.limit,
                 args.output_format,
@@ -201,6 +232,33 @@ def _recommend_tests(
         limit=limit,
     )
     print(render_recommendations(result, output_format), end="")
+    return 0
+
+
+def _evaluate_recommendations(
+    root: Path,
+    labels: str,
+    minimum_confidence: str,
+    limit: int,
+    output_format: str,
+) -> int:
+    config = ProjectConfig.load(root)
+    graph = AtlasGraph.load(config.graph_path(root))
+    labels_path = _project_path(
+        root,
+        config,
+        labels,
+        "evaluation labels",
+        must_exist=True,
+    )
+    parsed = load_evaluation_labels(labels_path)
+    result = evaluate_recommendations(
+        graph,
+        parsed,
+        minimum_confidence=minimum_confidence,
+        limit=limit,
+    )
+    print(render_evaluation(result, output_format), end="")
     return 0
 
 
