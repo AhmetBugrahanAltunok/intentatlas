@@ -1,7 +1,7 @@
 ---
 id: REQ-025
 type: requirement
-status: active
+status: accepted
 phase: 10D
 ---
 # Harden verification and release provenance

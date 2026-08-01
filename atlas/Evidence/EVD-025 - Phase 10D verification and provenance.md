@@ -1,7 +1,7 @@
 ---
 id: EVD-025
 type: evidence
-status: partial
+status: verified
 phase: 10D
 ---
 # EVD-025 — Phase 10D verification and provenance
@@ -13,7 +13,7 @@ phase: 10D
 - Delivery issue: [[Issues/ISSUE-023 - Implement verification and provenance hardening]]
 - Review: [[Reviews/Phase 10D Verification and Release Provenance Review]]
 
-## Interim change inventory
+## Change inventory
 
 - Added 32 fixed-seed generated-graph round trips, 32 deterministic graph-document mutations, 32
   generated untrusted-JSON trees, and a hostile JSON corpus. Accepted mutations must retain graph
@@ -35,7 +35,7 @@ phase: 10D
 - Updated release, contribution, architecture, security, changelog, and English/Turkish product
   documentation. Default CI remains verification-only.
 
-## Interim verification
+## Verification
 
 - `.venv\Scripts\python.exe -m pytest tests/test_action.py tests/test_property_fuzz.py
   tests/test_browser_e2e.py tests/test_release.py -q` — 111 passed.
@@ -70,21 +70,39 @@ phase: 10D
 - Official Git references resolved the pinned checkout `v4.2.2` to `11bd719...`, setup-python
   `v5.6.0` to `a26af69...`, and the PyPI trusted-publishing `release/v1` branch to immutable
   `dc37677...` on 2026-08-01. The local policy accepted every external reference.
-- A no-change closure scan kept generated-note bytes and nanosecond modification times stable at
-  SHA-256 `16e9cff43c3e044e62ed247599e83edef344e6663e09f5f932146ba22f1fbde6`;
-  the explicit user-owned Brain/Requirement/Decision/Issue/Evidence/Review/Session areas were
-  byte-stable across the same scan. `atlas/Private/` was not enumerated or read.
+- Final post-CI vault materialization produced 1,076 nodes, 2,444 relationships, 941 generated
+  notes, `3 reused, 0 rebuilt`, and zero durable orphans. A subsequent no-change scan kept
+  generated-note bytes, lengths, and modification times stable at SHA-256
+  `f28acff89fce76184d892038eaaec2a2052ee8ed438c41499c3c4b1eb25e2c29`; the explicit user-owned
+  Brain/Requirement/Decision/Issue/Evidence/Review/Session snapshot remained byte-and-mtime stable
+  across the same scan. `atlas/Private/` was not enumerated or read.
+- The separately approved network audit, `.venv\Scripts\python.exe -m pip_audit`, reported no
+  known vulnerabilities. The unpublished local `intentatlas` distribution was the only skipped
+  item because it is not available from PyPI; the hosted security job independently passed its
+  Bandit and dependency-audit steps.
+- Implementation and local-evidence commits through `583bf932f0a975c30afc311e903c3d86e47388ec`
+  were pushed to `origin/main`. GitHub Actions run
+  [30714014834](https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30714014834)
+  completed successfully on 2026-08-01. All 13 jobs passed: Python 3.11/3.12/3.13 tests, the six
+  Windows/Linux/macOS installed-wheel E2E combinations, reproducible package/provenance, real
+  browser E2E, static typing, and security.
 
-## Open gates
+## Remaining operational limits
 
-- Pinned Action revisions require remote CI execution before they can close the hosted gate.
 - The trusted-publishing workflow requires the repository owner to configure protected `pypi`
   reviewers and matching package-index trust before first use. No workflow dispatch or package
   publication has occurred or is authorized by this evidence.
-- Final deterministic vault, remote CI, dependency-audit, and Review closure remain pending.
+- Property and mutation tests explore deterministic bounded samples; they do not prove the absence
+  of every parser or graph defect.
+- Passing dependency audits only cover vulnerabilities known to the audit database at execution
+  time and must be repeated for future releases.
 
-## Interim decision
+## Acceptance decision
 
-Phase 10D remains active. Local property/fuzz, browser, typing, policy, package, installed-wheel,
-and committed-source provenance behavior passes, but the remote CI, dependency-audit, and final
-Review gates prevent completion.
+All REQ-025 acceptance criteria pass. Phase 10D is verified. Publication remains a separately
+authorized release operation and was not performed.
+
+## Links
+
+- proves:: [[Requirements/REQ-025 - Harden verification and release provenance]]
+- reviewed-by:: [[Reviews/Phase 10D Verification and Release Provenance Review]]

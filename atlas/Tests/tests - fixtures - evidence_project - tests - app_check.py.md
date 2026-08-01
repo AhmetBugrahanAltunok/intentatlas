@@ -16,7 +16,3 @@ source_path: "tests/fixtures/evidence_project/tests/app_check.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_run - tests - fixtures - evidence_project - tests - app_check.py|test_run]] _(structure; evidence: python-ast)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_

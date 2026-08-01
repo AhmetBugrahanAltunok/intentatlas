@@ -1,7 +1,7 @@
 ---
 id: ISSUE-023
 type: issue
-status: in-progress
+status: closed
 phase: 10D
 ---
 # Implement verification and provenance hardening
@@ -14,4 +14,5 @@ the exact workflow and artifacts receive separate explicit approval.
 
 - implements:: [[Requirements/REQ-025 - Harden verification and release provenance]]
 - decided-by:: [[Decisions/ADR-025 - Layer offline verification before trusted publishing]]
-- planned-evidence:: [[Evidence/EVD-025 - Phase 10D verification and provenance]]
+- verified-by:: [[Evidence/EVD-025 - Phase 10D verification and provenance]]
+- reviewed-by:: [[Reviews/Phase 10D Verification and Release Provenance Review]]

@@ -17,4 +17,3 @@ source_path: "tests/fixtures/evidence_project/src/app.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - fixtures - evidence_project - src - app.py|tests/fixtures/evidence_project/src/app.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-diff-hunk)_

@@ -334,7 +334,7 @@ Status: complete (2026-08-01)
 
 ## Phase 10 — Scale and open evidence ecosystem
 
-Status: active (Phases 10A–10C complete; Phase 10D active)
+Status: complete (2026-08-01; Phases 10A–10D complete)
 
 - Add incremental scanning and atomic derived indexes without weakening Markdown portability.
 - Import open evidence formats such as SCIP, SARIF, and per-test execution maps.
@@ -361,8 +361,8 @@ Status: complete (2026-08-01)
   changed language inputs, reject unsafe or corrupt derived state, and atomically preserve the last
   complete graph/cache artifact without storing source content.
 
-Phase 10A established the incremental foundation. The sections below record completed Phase 10B
-and 10C delivery; Phase 10D provenance, property/fuzz, browser, and release hardening is active.
+Phase 10A established the incremental foundation. The sections below record completed Phase 10B,
+10C, and 10D delivery.
 
 ### Phase 10B — Open evidence imports
 
@@ -405,7 +405,7 @@ Status: complete (2026-08-01)
 
 ### Phase 10D — Verification and release provenance
 
-Status: active (2026-08-01)
+Status: complete (2026-08-01)
 
 - Add deterministic property and mutation-fuzz coverage at untrusted graph and JSON boundaries.
 - Exercise the packaged large-graph viewer through a real Chrome-family browser.
@@ -416,8 +416,12 @@ Status: active (2026-08-01)
 - Decision: [[Decisions/ADR-025 - Layer offline verification before trusted publishing]]
 - Delivery issue: [[Issues/ISSUE-023 - Implement verification and provenance hardening]]
 - Kickoff: [[Sessions/2026-08-01 - Phase 10D kickoff]]
-- Planned evidence: [[Evidence/EVD-025 - Phase 10D verification and provenance]]
-- Planned review: [[Reviews/Phase 10D Verification and Release Provenance Review]]
+- Evidence: [[Evidence/EVD-025 - Phase 10D verification and provenance]]
+- Review: [[Reviews/Phase 10D Verification and Release Provenance Review]]
+- Outcome: deterministic hostile-input tests, a real browser large-graph check, maintained-source
+  typing, immutable CI dependencies, and source-bound repeatable artifact provenance now protect
+  the verification boundary. All local gates, the network dependency audit, and 13 remote CI jobs
+  passed; publishing remains manual, protected, and unexecuted.
 
 ## Completion rule
 

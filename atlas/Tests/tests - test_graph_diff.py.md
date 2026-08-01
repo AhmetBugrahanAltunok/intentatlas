@@ -23,7 +23,3 @@ source_path: "tests/test_graph_diff.py"
 - <code>tests</code> → [[Symbols/render_graph_diff - src - intentatlas - graph_diff.py|render_graph_diff]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
