@@ -18,6 +18,8 @@ source_path: "tests/fixtures/typescript_project/src/main.ts"
 - <code>defines</code> → [[Symbols/boot - tests - fixtures - typescript_project - src - main.ts|boot]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - components - index.ts|tests/fixtures/typescript_project/src/components/index.ts]] _(verification; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(verification; evidence: javascript-structural)_
+- <code>tests</code> → [[Symbols/Calculator - tests - fixtures - typescript_project - src - math.ts|Calculator]] _(verification; evidence: javascript-symbol-reference)_
+- <code>tests</code> → [[Symbols/add - tests - fixtures - typescript_project - src - math.ts|add]] _(verification; evidence: javascript-symbol-reference)_
 
 ## Incoming relationships
 

@@ -28,4 +28,3 @@ source_path: "src/intentatlas/viewer.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(verification; evidence: python-ast)_

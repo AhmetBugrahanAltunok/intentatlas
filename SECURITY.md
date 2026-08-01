@@ -19,7 +19,10 @@ reproduction steps, impact, and any suggested mitigation.
 - Built-in language adapters receive a read-only discovered-file view, enforce the local parse-size
   limit, persist structural metadata only, and never invoke language runtimes or project code.
 - TypeScript/JavaScript resolution accepts only static relative module references; bare dependency
-  names, dynamic imports, and paths escaping the scanned repository are not followed.
+  names, dynamic imports, and paths escaping the scanned repository are not followed. Exact-symbol
+  evidence is limited to unambiguous discovered named or default declarations.
+- Python exact-symbol references follow at most eight local package re-export hops, reject cycles,
+  and never import or execute a module.
 - Go resolution accepts only imports matching a discovered local `go.mod` module path, prefers the
   longest nested-module match, and does not invoke the Go toolchain or resolve external modules.
   Same-directory test links require a compatible package plus an exported identifier uniquely
@@ -46,7 +49,9 @@ reproduction steps, impact, and any suggested mitigation.
   produces no symbol claims.
 - Test recommendations are pure queries over the already validated graph. They execute no test or
   project command, use fixed confidence rules, bound artifacts/candidates/reasons/observations and
-  output size, and label every result advisory. Imported JUnit aggregates never raise confidence.
+  output size, and label every result advisory. Exact-symbol dependency propagation is limited to
+  one production hop and 1,000 direct dependents; recent co-change evidence uses at most five
+  latest-date commits. Imported JUnit aggregates never raise confidence.
 - Recommendation evaluation accepts only explicit project-local JSON outside `atlas/Private/`.
   It rejects symbolic links, unsafe paths, duplicate or unknown fields, malformed types, stale
   graph identities, and excessive bytes/cases/tests. It reuses the bounded recommendation query,

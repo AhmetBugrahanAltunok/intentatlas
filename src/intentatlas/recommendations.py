@@ -13,6 +13,8 @@ MAX_ARTIFACT_SIGNALS = 1_000
 MAX_CANDIDATE_TESTS = 10_000
 MAX_REASONS_PER_TEST = 25
 MAX_OBSERVATIONS_PER_TEST = 25
+MAX_RECENT_COCHANGE_COMMITS = 5
+MAX_DIRECT_SYMBOL_DEPENDENTS = 1_000
 CONFIDENCE_RANK = {"low": 0, "medium": 1, "high": 2}
 ADVISORY = (
     "Recommendations are advisory structural evidence, not proof that a test is required or "
@@ -124,6 +126,12 @@ class _ArtifactSignal:
     evidence: tuple[str, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class _PreferredTestEdge:
+    edge: Edge
+    matched_symbol_id: str | None = None
+
+
 def recommend_tests(
     graph: AtlasGraph,
     target_id: str,
@@ -165,7 +173,8 @@ def recommend_tests(
                 ),
             )
             continue
-        for edge in _preferred_test_edges(index, signal.file.id):
+        for match in _preferred_test_edges(graph, index, signal.file.id, signal.symbol):
+            edge = match.edge
             test = graph.nodes.get(edge.source)
             if test is None or test.kind != "test":
                 continue
@@ -173,17 +182,27 @@ def recommend_tests(
             if signal.symbol is not None:
                 score = 70 if convention else 80
                 signal_name = "symbol-filename-test" if convention else "symbol-structural-test"
-                summary = (
-                    "The filename convention associates this test with the file containing an "
-                    "exactly modified symbol."
-                    if convention
-                    else "The test structurally targets the file containing an exactly modified "
-                    "symbol."
-                )
-                path = RecommendationPath(
-                    (*signal.path.nodes, test.id),
-                    (*signal.path.relations, "tested-by"),
-                )
+                if match.matched_symbol_id is not None:
+                    owner_match = match.matched_symbol_id != signal.symbol.id
+                    summary = (
+                        "The test references the owning symbol of an exactly modified nested "
+                        "symbol."
+                        if owner_match
+                        else "The test directly references an exactly modified symbol."
+                    )
+                    path = _symbol_test_path(signal, match.matched_symbol_id, test.id)
+                else:
+                    summary = (
+                        "The filename convention associates this test with the file containing an "
+                        "exactly modified symbol."
+                        if convention
+                        else "The test structurally targets the file containing an exactly "
+                        "modified symbol."
+                    )
+                    path = RecommendationPath(
+                        (*signal.path.nodes, test.id),
+                        (*signal.path.relations, "tested-by"),
+                    )
             else:
                 score = 45 if convention else 65
                 signal_name = "file-filename-test" if convention else "file-structural-test"
@@ -205,9 +224,25 @@ def recommend_tests(
                     score=score,
                     summary=summary,
                     path=path,
-                    evidence=_unique_values((*signal.evidence, edge.evidence)),
+                    evidence=_unique_values(
+                        (
+                            *signal.evidence,
+                            edge.evidence,
+                            *(
+                                ("owner-name-convention",)
+                                if match.matched_symbol_id is not None
+                                and match.matched_symbol_id != signal.symbol.id
+                                else ()
+                            ),
+                        )
+                    ),
                 ),
             )
+        if signal.symbol is not None:
+            _add_direct_dependent_reasons(graph, signal, index, reasons_by_test)
+
+    if target.kind in {"file", "symbol"}:
+        _add_recent_cochange_reasons(graph, target, index, reasons_by_test)
 
     if len(reasons_by_test) > MAX_CANDIDATE_TESTS:
         raise ValueError(
@@ -312,6 +347,19 @@ def _artifact_signals(
                     (evidence,),
                 )
             )
+    elif target.kind == "file":
+        scoped = _latest_file_symbol_signals(graph, target, index)
+        if scoped:
+            signals.extend(scoped)
+        else:
+            signals.append(
+                _ArtifactSignal(
+                    target,
+                    None,
+                    RecommendationPath((target.id,), ()),
+                    ("selected-target",),
+                )
+            )
     else:
         signals.append(
             _ArtifactSignal(
@@ -351,9 +399,32 @@ def _artifact_signals(
     )
 
 
-def _preferred_test_edges(index: GraphIndex, target_id: str) -> tuple[Edge, ...]:
+def _preferred_test_edges(
+    graph: AtlasGraph,
+    index: GraphIndex,
+    target_id: str,
+    symbol: Node | None,
+) -> tuple[_PreferredTestEdge, ...]:
+    if symbol is not None:
+        for symbol_id in _symbol_and_owner_ids(symbol):
+            symbol_edges = _select_test_edges(index.incoming(symbol_id, "tests"))
+            if symbol_edges:
+                if symbol_id != symbol.id:
+                    focused = _owner_named_tests(graph, symbol_id, symbol_edges)
+                    if focused:
+                        symbol_edges = focused
+                return tuple(
+                    _PreferredTestEdge(edge, symbol_id) for edge in symbol_edges
+                )
+    return tuple(
+        _PreferredTestEdge(edge)
+        for edge in _select_test_edges(index.incoming(target_id, "tests"))
+    )
+
+
+def _select_test_edges(edges: tuple[Edge, ...]) -> tuple[Edge, ...]:
     selected: dict[str, Edge] = {}
-    for edge in index.incoming(target_id, "tests"):
+    for edge in edges:
         current = selected.get(edge.source)
         candidate_rank = (edge.evidence != "filename-convention", edge.evidence)
         current_rank = (
@@ -364,6 +435,210 @@ def _preferred_test_edges(index: GraphIndex, target_id: str) -> tuple[Edge, ...]
         if current_rank is None or candidate_rank > current_rank:
             selected[edge.source] = edge
     return tuple(selected[test_id] for test_id in sorted(selected))
+
+
+def _owner_named_tests(
+    graph: AtlasGraph,
+    symbol_id: str,
+    edges: tuple[Edge, ...],
+) -> tuple[Edge, ...]:
+    owner_name = symbol_id.rsplit("::", 1)[-1].rsplit(".", 1)[-1].casefold()
+    selected: list[Edge] = []
+    for edge in edges:
+        test = graph.nodes.get(edge.source)
+        if test is None or test.path is None:
+            continue
+        stem = test.path.rsplit("/", 1)[-1].rsplit(".", 1)[0].casefold()
+        candidate = stem.removeprefix("test_").removesuffix("_test")
+        if candidate == owner_name:
+            selected.append(edge)
+    return tuple(selected)
+
+
+def _symbol_and_owner_ids(symbol: Node) -> tuple[str, ...]:
+    prefix, separator, qualname = symbol.id.partition("::")
+    if not separator:
+        return (symbol.id,)
+    parts = qualname.split(".")
+    return tuple(f"{prefix}::{'.'.join(parts[:index])}" for index in range(len(parts), 0, -1))
+
+
+def _symbol_test_path(
+    signal: _ArtifactSignal,
+    matched_symbol_id: str,
+    test_id: str,
+) -> RecommendationPath:
+    nodes = list(signal.path.nodes)
+    relations = list(signal.path.relations)
+    if nodes and nodes[-1] == signal.file.id and len(nodes) > 1:
+        nodes.pop()
+        relations.pop()
+    if nodes[-1] != matched_symbol_id:
+        nodes.append(matched_symbol_id)
+        relations.append("owned-by")
+    nodes.append(test_id)
+    relations.append("tested-by")
+    return RecommendationPath(tuple(nodes), tuple(relations))
+
+
+def _add_direct_dependent_reasons(
+    graph: AtlasGraph,
+    signal: _ArtifactSignal,
+    index: GraphIndex,
+    reasons_by_test: dict[str, list[RecommendationReason]],
+) -> None:
+    if signal.symbol is None:
+        return
+    dependency_edges = index.incoming(signal.symbol.id, "imports")
+    if len(dependency_edges) > MAX_DIRECT_SYMBOL_DEPENDENTS:
+        raise ValueError(
+            "Recommendation symbol exceeds the "
+            f"{MAX_DIRECT_SYMBOL_DEPENDENTS}-direct-dependent limit"
+        )
+    for dependency_edge in dependency_edges:
+        dependent = graph.nodes.get(dependency_edge.source)
+        if dependent is None or dependent.kind != "file":
+            continue
+        for match in _preferred_test_edges(graph, index, dependent.id, None):
+            test = graph.nodes.get(match.edge.source)
+            if test is None or test.kind != "test":
+                continue
+            nodes = list(signal.path.nodes)
+            relations = list(signal.path.relations)
+            if nodes and nodes[-1] == signal.file.id and len(nodes) > 1:
+                nodes.pop()
+                relations.pop()
+            _add_reason(
+                reasons_by_test,
+                test.id,
+                RecommendationReason(
+                    signal="direct-symbol-dependent-test",
+                    score=65,
+                    summary=(
+                        "The test directly targets a file that imports the exact changed symbol."
+                    ),
+                    path=RecommendationPath(
+                        (*nodes, dependent.id, test.id),
+                        (*relations, "imported-by", "tested-by"),
+                    ),
+                    evidence=_unique_values(
+                        (*signal.evidence, dependency_edge.evidence, match.edge.evidence)
+                    ),
+                ),
+            )
+
+
+def _latest_file_symbol_signals(
+    graph: AtlasGraph,
+    file: Node,
+    index: GraphIndex,
+) -> tuple[_ArtifactSignal, ...]:
+    signals: list[_ArtifactSignal] = []
+    for commit, change_evidence in _latest_file_commits(graph, file.id, index):
+        for edge in index.outgoing(commit.id, "modifies"):
+            symbol = graph.nodes.get(edge.target)
+            if symbol is None or symbol.kind != "symbol" or symbol.path != file.path:
+                continue
+            symbol_file = _symbol_file(graph, symbol, index)
+            if symbol_file is None:
+                continue
+            _defined_file, defines_evidence = symbol_file
+            signals.append(
+                _ArtifactSignal(
+                    file,
+                    symbol,
+                    RecommendationPath(
+                        (file.id, commit.id, symbol.id, file.id),
+                        ("changed-in", "modifies", "defined-in"),
+                    ),
+                    (
+                        "selected-target",
+                        change_evidence,
+                        edge.evidence,
+                        defines_evidence,
+                    ),
+                )
+            )
+    return tuple(
+        value
+        for _key, value in sorted(
+            {
+                (item.symbol.id if item.symbol else "", item.path.nodes): item
+                for item in signals
+            }.items()
+        )
+    )
+
+
+def _latest_file_commits(
+    graph: AtlasGraph,
+    file_id: str,
+    index: GraphIndex,
+) -> tuple[tuple[Node, str], ...]:
+    commits: list[tuple[Node, str]] = []
+    for edge in index.incoming(file_id, "changes"):
+        commit = graph.nodes.get(edge.source)
+        if (
+            commit is not None
+            and commit.kind == "commit"
+            and str(commit.metadata.get("date", ""))
+        ):
+            commits.append((commit, edge.evidence))
+    if not commits:
+        return ()
+    latest_date = max(str(commit.metadata.get("date", "")) for commit, _evidence in commits)
+    latest = [
+        value for value in commits if str(value[0].metadata.get("date", "")) == latest_date
+    ]
+    return tuple(sorted(latest, key=lambda value: value[0].id)[:MAX_RECENT_COCHANGE_COMMITS])
+
+
+def _add_recent_cochange_reasons(
+    graph: AtlasGraph,
+    target: Node,
+    index: GraphIndex,
+    reasons_by_test: dict[str, list[RecommendationReason]],
+) -> None:
+    if target.kind == "symbol":
+        symbol_file = _symbol_file(graph, target, index)
+        if symbol_file is None:
+            return
+        file, defines_evidence = symbol_file
+        prefix_nodes = (target.id, file.id)
+        prefix_relations = ("defined-in",)
+        prefix_evidence = (defines_evidence,)
+        score = 70
+    else:
+        file = target
+        prefix_nodes = (target.id,)
+        prefix_relations = ()
+        prefix_evidence = ("selected-target",)
+        score = 65
+
+    for commit, change_evidence in _latest_file_commits(graph, file.id, index):
+        for edge in index.outgoing(commit.id, "changes"):
+            test = graph.nodes.get(edge.target)
+            if test is None or test.kind != "test":
+                continue
+            _add_reason(
+                reasons_by_test,
+                test.id,
+                RecommendationReason(
+                    signal="recent-cochange-test",
+                    score=score,
+                    summary=(
+                        "The test changed together with this artifact in its most recent "
+                        "analyzed change."
+                    ),
+                    path=RecommendationPath(
+                        (*prefix_nodes, commit.id, test.id),
+                        (*prefix_relations, "changed-in", "changes"),
+                    ),
+                    evidence=_unique_values(
+                        (*prefix_evidence, change_evidence, edge.evidence)
+                    ),
+                ),
+            )
 
 
 def _symbol_file(

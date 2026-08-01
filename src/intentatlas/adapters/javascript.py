@@ -40,6 +40,12 @@ _REQUIRE = re.compile(
     r"(?m)^[ \t]*(?:(?:const|let|var)\b[^;\n]*?=[ \t]*)?require\([ \t]*"
     r"['\"]([^'\"]+)['\"][ \t]*\)"
 )
+_IMPORT_BINDINGS = re.compile(
+    r"(?s)^\s*import\s+(?:type\s+)?(.+?)\s+from\s*['\"]([^'\"]+)['\"]"
+)
+_DEFAULT_EXPORT_DECLARATION = re.compile(
+    rf"(?m)^\s*export\s+default\s+(?:async\s+)?(?:class|function\*?)\s+({_IDENTIFIER})"
+)
 
 
 class JavaScriptAdapter:
@@ -50,6 +56,9 @@ class JavaScriptAdapter:
         aliases = _module_aliases(context.files)
         nodes: list[Node] = []
         edges: list[Edge] = []
+        structural_sources: dict[str, str] = {}
+        symbols_by_file: dict[str, dict[str, str]] = {}
+        default_symbols: dict[str, str] = {}
 
         for relative in sorted(context.files):
             if PurePosixPath(relative).suffix.casefold() not in self.suffixes:
@@ -58,21 +67,48 @@ class JavaScriptAdapter:
             if source is None:
                 continue
             structural = _mask_comments_and_templates(source)
+            structural_sources[relative] = structural
             symbol_source = _mask_quoted_strings(structural)
             file_node = f"file:{relative}"
 
             file_symbols = _symbols(relative, symbol_source)
             nodes.extend(file_symbols)
+            symbols_by_file[file_node] = {node.label: node.id for node in file_symbols}
+            default_name = _default_export_name(symbol_source)
+            if default_name is not None and default_name in symbols_by_file[file_node]:
+                default_symbols[file_node] = symbols_by_file[file_node][default_name]
             edges.extend(
                 Edge(file_node, node.id, "defines", "javascript-structural")
                 for node in file_symbols
             )
 
+        for relative in sorted(structural_sources):
+            structural = structural_sources[relative]
+            file_node = f"file:{relative}"
             relation = "tests" if context.kinds[relative] == "test" else "imports"
             for specifier in _module_specifiers(structural):
                 target = _resolve_local_module(relative, specifier, aliases)
                 if target is not None and target != file_node:
                     edges.append(Edge(file_node, target, relation, "javascript-structural"))
+            for specifier, imported_names in _javascript_imports(structural):
+                target = _resolve_local_module(relative, specifier, aliases)
+                if target is None or target == file_node:
+                    continue
+                for imported_name in imported_names:
+                    symbol_target = (
+                        default_symbols.get(target)
+                        if imported_name == "default"
+                        else symbols_by_file.get(target, {}).get(imported_name)
+                    )
+                    if symbol_target is not None:
+                        edges.append(
+                            Edge(
+                                file_node,
+                                symbol_target,
+                                relation,
+                                "javascript-symbol-reference",
+                            )
+                        )
 
         edges.extend(_filename_test_edges(context, aliases))
         return GraphFragment(
@@ -116,6 +152,38 @@ def _symbols(relative: str, source: str) -> list[Node]:
 
 def _line_number(source: str, offset: int) -> int:
     return source.count("\n", 0, offset) + 1
+
+
+def _default_export_name(source: str) -> str | None:
+    match = _DEFAULT_EXPORT_DECLARATION.search(source)
+    return match.group(1) if match is not None else None
+
+
+def _javascript_imports(source: str) -> list[tuple[str, tuple[str, ...]]]:
+    statements = _module_statements(source)
+    statements.extend(line for line in source.splitlines() if line.lstrip().startswith("import "))
+    values: set[tuple[str, tuple[str, ...]]] = set()
+    for statement in statements:
+        flattened = " ".join(statement.splitlines())
+        match = _IMPORT_BINDINGS.match(flattened)
+        if match is None:
+            continue
+        clause, specifier = match.groups()
+        if not specifier.startswith("."):
+            continue
+        imported: set[str] = set()
+        leading = clause.split(",", 1)[0].strip()
+        if leading and not leading.startswith(("{", "*")):
+            imported.add("default")
+        named_match = re.search(r"\{(.*?)\}", clause)
+        if named_match is not None:
+            for item in named_match.group(1).split(","):
+                name = item.strip().removeprefix("type ").split()[0] if item.strip() else ""
+                if re.fullmatch(_IDENTIFIER, name):
+                    imported.add(name)
+        if imported:
+            values.add((specifier, tuple(sorted(imported))))
+    return sorted(values)
 
 
 def _module_specifiers(source: str) -> list[str]:

@@ -18,7 +18,7 @@ source_path: "tests/test_security.py"
 - <code>defines</code> → [[Symbols/test_redact_nested_values_and_common_token_shapes - tests - test_security.py|test_redact_nested_values_and_common_token_shapes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

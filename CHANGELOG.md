@@ -39,6 +39,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   projects, and an ephemeral-only generated-output policy.
 - Conservative Go same-package test links based on referenced exported declarations uniquely owned
   by one production file, with filename convention retained as weak fallback evidence.
+- Bounded Python re-export and JavaScript/TypeScript static-import symbol evidence, one-hop exact
+  symbol-dependent test discovery, and recent co-change test evidence with inspectable paths.
 
 ### Changed
 
@@ -58,6 +60,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   built-in demo use.
 - Python structural analysis now runs behind the same graph-fragment adapter contract used by
   TypeScript and JavaScript without changing its graph semantics.
+- Python tests with an exact local symbol reference no longer inherit a broader test-to-file edge
+  for that resolved module; nested changes prefer a matching owner-named test when available.
 - Root-level JavaScript files named `test.js` or `tests.js` are now recognized as tests.
 - Go tests importing a local package now link only through uniquely owned referenced exports
   instead of every file in that package; non-test imports remain package-level.

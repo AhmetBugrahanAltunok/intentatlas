@@ -39,6 +39,10 @@ source_path: "src/intentatlas/corpus.py"
 - <code>imports</code> → [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/EvaluationLabels - src - intentatlas - evaluation.py|EvaluationLabels]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/EvaluationTotals - src - intentatlas - evaluation.py|EvaluationTotals]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/evaluate_recommendations - src - intentatlas - evaluation.py|evaluate_recommendations]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -48,4 +52,3 @@ source_path: "src/intentatlas/corpus.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: python-ast)_

@@ -17,3 +17,4 @@ source_path: "src/intentatlas/evaluation.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-symbol-reference)_

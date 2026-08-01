@@ -22,9 +22,3 @@ generated: true
 - <code>changes</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/recommendation_graph - tests - test_recommendations.py|recommendation_graph]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_recommendation_json_and_cli_are_deterministic - tests - test_recommendations.py|test_recommendation_json_and_cli_are_deterministic]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_recommendations_bound_input_and_explanation_output - tests - test_recommendations.py|test_recommendations_bound_input_and_explanation_output]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_recommendations_rank_deduplicate_filter_and_explain - tests - test_recommendations.py|test_recommendations_rank_deduplicate_filter_and_explain]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_recommendations_reject_unsupported_targets_and_bounds - tests - test_recommendations.py|test_recommendations_reject_unsupported_targets_and_bounds]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_recommendations_support_low_limit_file_symbol_and_no_results - tests - test_recommendations.py|test_recommendations_support_low_limit_file_symbol_and_no_results]] _(history; evidence: git-diff-hunk)_

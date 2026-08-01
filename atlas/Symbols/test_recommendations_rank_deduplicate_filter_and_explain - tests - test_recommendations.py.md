@@ -17,4 +17,3 @@ source_path: "tests/test_recommendations.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-diff-hunk)_

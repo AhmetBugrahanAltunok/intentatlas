@@ -164,6 +164,158 @@ def test_recommendations_support_low_limit_file_symbol_and_no_results() -> None:
     assert "Lower-confidence candidates available: 1" in rendered
 
 
+def test_recommendations_focus_nested_symbols_and_latest_file_change() -> None:
+    graph = AtlasGraph()
+    graph.extend(
+        [
+            Node(
+                "commit:latest",
+                "commit",
+                "latest",
+                metadata={"date": "2026-01-02", "owner": "scanner"},
+            ),
+            Node("file:src/core.py", "file", "src/core.py", path="src/core.py"),
+            Node(
+                "symbol:src/core.py::Context",
+                "symbol",
+                "Context",
+                path="src/core.py",
+            ),
+            Node(
+                "symbol:src/core.py::Context.close",
+                "symbol",
+                "Context.close",
+                path="src/core.py",
+            ),
+            Node(
+                "file:tests/test_context.py",
+                "test",
+                "tests/test_context.py",
+                path="tests/test_context.py",
+            ),
+            Node(
+                "file:tests/test_other.py",
+                "test",
+                "tests/test_other.py",
+                path="tests/test_other.py",
+            ),
+        ],
+        [
+            Edge("commit:latest", "file:src/core.py", "changes", "git-log"),
+            Edge(
+                "commit:latest",
+                "symbol:src/core.py::Context.close",
+                "modifies",
+                "git-diff-hunk",
+            ),
+            Edge(
+                "file:src/core.py",
+                "symbol:src/core.py::Context",
+                "defines",
+                "python-ast",
+            ),
+            Edge(
+                "file:src/core.py",
+                "symbol:src/core.py::Context.close",
+                "defines",
+                "python-ast",
+            ),
+            Edge(
+                "file:tests/test_context.py",
+                "symbol:src/core.py::Context",
+                "tests",
+                "python-symbol-reference",
+            ),
+            Edge(
+                "file:tests/test_other.py",
+                "symbol:src/core.py::Context",
+                "tests",
+                "python-symbol-reference",
+            ),
+        ],
+    )
+
+    result = recommend_tests(graph, "file:src/core.py")
+
+    assert [item.test.id for item in result.recommendations] == [
+        "file:tests/test_context.py"
+    ]
+    reason = result.recommendations[0].reasons[0]
+    assert reason.signal == "symbol-structural-test"
+    assert "owned-by" in reason.path.relations
+    assert "owner-name-convention" in reason.evidence
+
+
+def test_recommendations_use_exact_direct_dependents_and_recent_cochange(monkeypatch) -> None:
+    graph = AtlasGraph()
+    graph.extend(
+        [
+            Node(
+                "commit:latest",
+                "commit",
+                "latest",
+                metadata={"date": "2026-01-02", "owner": "scanner"},
+            ),
+            Node("file:src/helper.js", "file", "src/helper.js", path="src/helper.js"),
+            Node("file:src/core.js", "file", "src/core.js", path="src/core.js"),
+            Node(
+                "symbol:src/helper.js::normalize",
+                "symbol",
+                "normalize",
+                path="src/helper.js",
+            ),
+            Node(
+                "file:tests/core.test.js",
+                "test",
+                "tests/core.test.js",
+                path="tests/core.test.js",
+            ),
+            Node(
+                "file:tests/integration.test.js",
+                "test",
+                "tests/integration.test.js",
+                path="tests/integration.test.js",
+            ),
+        ],
+        [
+            Edge("commit:latest", "file:src/helper.js", "changes", "git-log"),
+            Edge("commit:latest", "file:tests/integration.test.js", "changes", "git-log"),
+            Edge(
+                "file:src/helper.js",
+                "symbol:src/helper.js::normalize",
+                "defines",
+                "javascript-structural",
+            ),
+            Edge(
+                "file:src/core.js",
+                "symbol:src/helper.js::normalize",
+                "imports",
+                "javascript-symbol-reference",
+            ),
+            Edge(
+                "file:tests/core.test.js",
+                "file:src/core.js",
+                "tests",
+                "javascript-structural",
+            ),
+        ],
+    )
+
+    result = recommend_tests(graph, "symbol:src/helper.js::normalize")
+
+    assert [(item.test.id, item.score) for item in result.recommendations] == [
+        ("file:tests/integration.test.js", 70),
+        ("file:tests/core.test.js", 65),
+    ]
+    dependent = result.recommendations[1].reasons[0]
+    assert dependent.signal == "direct-symbol-dependent-test"
+    assert dependent.path.relations[-2:] == ("imported-by", "tested-by")
+
+    monkeypatch.setattr(recommendations_module, "MAX_DIRECT_SYMBOL_DEPENDENTS", 0)
+    with pytest.raises(ValueError, match="0-direct-dependent limit"):
+        recommend_tests(graph, "symbol:src/helper.js::normalize")
+
+
 def test_recommendations_reject_unsupported_targets_and_bounds() -> None:
     graph = recommendation_graph()
     with pytest.raises(ValueError, match="support commit, file, symbol, or test"):

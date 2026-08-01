@@ -19,10 +19,12 @@ source_path: "tests/test_demo.py"
 - <code>defines</code> → [[Symbols/test_demo_graph_is_deterministic_and_covers_intent_to_proof - tests - test_demo.py|test_demo_graph_is_deterministic_and_covers_intent_to_proof]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it.fake_serve - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it.fake_serve]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/build_demo_graph - src - intentatlas - demo.py|build_demo_graph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

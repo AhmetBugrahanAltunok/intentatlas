@@ -20,6 +20,10 @@ source_path: "src/intentatlas/demo.py"
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -27,4 +31,3 @@ source_path: "src/intentatlas/demo.py"
 - <code>implements</code> ← [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths|ISSUE-012 - Implement guided demo and viewer evidence paths]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(verification; evidence: python-ast)_

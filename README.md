@@ -213,9 +213,14 @@ and methods when changed new-side lines intersect their AST spans and the curren
 matches the analyzed commit blob. File-level `changes` links stay available for stale files,
 deletions, module-level edits, unsupported span adapters, and uncertain cases.
 
-`recommend-tests` consumes those validated graph relationships and ranks direct test-file
-candidates as high, medium, or low confidence. The first version deliberately excludes transitive
-dependency guesses and defaults to medium confidence to reduce false positives.
+`recommend-tests` consumes those validated graph relationships and ranks test-file candidates as
+high, medium, or low confidence. Python tests can target exact imported symbols through bounded
+package re-exports; nested changes can use a focused owning-symbol test when its test name agrees.
+JavaScript/TypeScript records exact named and default static imports, and follows at most one exact
+symbol-dependent source file to a directly linked test. For a selected file or symbol, tests from
+the artifact's most recent analyzed co-change provide separate medium-confidence evidence. The
+query never performs unrestricted transitive traversal and defaults to medium confidence to reduce
+false positives.
 
 `evaluate-recommendations` reuses that production query unchanged and compares it with strict,
 closed-world local labels. Its timestamp-free schema-1 output makes threshold tradeoffs and

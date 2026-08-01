@@ -22,13 +22,19 @@ source_path: "tests/test_adapters.py"
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/GoAdapter - src - intentatlas - adapters - go.py|GoAdapter]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/JavaScriptAdapter - src - intentatlas - adapters - javascript.py|JavaScriptAdapter]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit db64192 - feat- improve Go test evidence|feat: improve Go test evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_

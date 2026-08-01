@@ -17,36 +17,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 16
+- **commit:** 17
 - **config:** 6
-- **decision:** 17
+- **decision:** 18
 - **document:** 18
-- **evidence:** 17
+- **evidence:** 18
 - **file:** 29
-- **issue:** 15
+- **issue:** 16
 - **memory:** 4
-- **requirement:** 17
-- **review:** 17
+- **requirement:** 18
+- **review:** 18
 - **session:** 1
-- **symbol:** 499
+- **symbol:** 519
 - **test:** 50
-- **relationships:** 1512
+- **relationships:** 1688
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 101 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 54 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 53 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 49 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 107 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 69 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 61 relationships
+- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 50 relationships
 - [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 48 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 48 relationships
 - [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] — 46 relationships
 - [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 45 relationships
-- [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] — 44 relationships
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 42 relationships
-- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 41 relationships
+- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 42 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 40 relationships
-- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 39 relationships
+- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 35 relationships
 
 ## Workflow
 

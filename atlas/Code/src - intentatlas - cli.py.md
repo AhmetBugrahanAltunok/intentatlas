@@ -44,6 +44,29 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/CorpusProject - src - intentatlas - corpus.py|CorpusProject]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/evaluate_corpus - src - intentatlas - corpus.py|evaluate_corpus]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/load_corpus_manifest - src - intentatlas - corpus.py|load_corpus_manifest]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_corpus - src - intentatlas - corpus.py|render_corpus]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/validate_corpus_graph_size - src - intentatlas - corpus.py|validate_corpus_graph_size]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/evaluate_recommendations - src - intentatlas - evaluation.py|evaluate_recommendations]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/load_evaluation_labels - src - intentatlas - evaluation.py|load_evaluation_labels]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_evaluation - src - intentatlas - evaluation.py|render_evaluation]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/graph_diff - src - intentatlas - graph_diff.py|graph_diff]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_graph_diff - src - intentatlas - graph_diff.py|render_graph_diff]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_real_world - src - intentatlas - real_world.py|render_real_world]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_recommendations - src - intentatlas - recommendations.py|render_recommendations]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_scale_benchmark - src - intentatlas - scale.py|render_scale_benchmark]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/run_scale_benchmark - src - intentatlas - scale.py|run_scale_benchmark]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -64,10 +87,3 @@ source_path: "src/intentatlas/cli.py"
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_real_world.py|tests/test_real_world.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_scale.py|tests/test_scale.py]] _(verification; evidence: python-ast)_

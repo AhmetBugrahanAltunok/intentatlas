@@ -47,16 +47,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/AdapterContext.read_text - src - intentatlas - adapters - base.py|AdapterContext.read_text]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/LanguageAdapter.scan - src - intentatlas - adapters - base.py|LanguageAdapter.scan]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/JavaScriptAdapter.scan - src - intentatlas - adapters - javascript.py|JavaScriptAdapter.scan]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - javascript.py|_filename_test_edges]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_line_number - src - intentatlas - adapters - javascript.py|_line_number]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_mask_comments_and_templates - src - intentatlas - adapters - javascript.py|_mask_comments_and_templates]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_mask_quoted_strings - src - intentatlas - adapters - javascript.py|_mask_quoted_strings]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_module_aliases - src - intentatlas - adapters - javascript.py|_module_aliases]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_module_specifiers - src - intentatlas - adapters - javascript.py|_module_specifiers]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_module_statements - src - intentatlas - adapters - javascript.py|_module_statements]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_resolve_local_module - src - intentatlas - adapters - javascript.py|_resolve_local_module]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_symbols - src - intentatlas - adapters - javascript.py|_symbols]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

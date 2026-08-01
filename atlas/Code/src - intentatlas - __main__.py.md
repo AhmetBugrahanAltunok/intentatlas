@@ -16,6 +16,7 @@ source_path: "src/intentatlas/__main__.py"
 ## Outgoing relationships
 
 - <code>imports</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -19,6 +19,12 @@ source_path: "src/intentatlas/adapters/__init__.py"
 - <code>imports</code> → [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - javascript.py|src/intentatlas/adapters/javascript.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/LanguageAdapter - src - intentatlas - adapters - base.py|LanguageAdapter]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/GoAdapter - src - intentatlas - adapters - go.py|GoAdapter]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/JavaScriptAdapter - src - intentatlas - adapters - javascript.py|JavaScriptAdapter]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -17,3 +17,5 @@ source_path: "src/intentatlas/naming.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-symbol-reference)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-symbol-reference)_

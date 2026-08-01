@@ -25,6 +25,7 @@ source_path: "src/intentatlas/models.py"
 - <code>defines</code> → [[Symbols/Node.from_dict - src - intentatlas - models.py|Node.from_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/Node.to_dict - src - intentatlas - models.py|Node.to_dict]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/relation_type - src - intentatlas - relations.py|relation_type]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -46,11 +47,3 @@ source_path: "src/intentatlas/models.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_relations.py|tests/test_relations.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: python-ast)_

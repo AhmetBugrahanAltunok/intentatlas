@@ -18,10 +18,16 @@ first-party demo graph ────────────> local web viewer
 
 Adapters extract only structural metadata. Built-in language adapters receive a read-only file
 and kind mapping, enforce the shared parse-size limit, and return deterministic graph fragments;
-they do not mutate the graph directly. The Python adapter uses the standard-library AST. The
-TypeScript/JavaScript adapter conservatively recognizes explicit declarations and static relative
-module references in `.ts`, `.tsx`, `.js`, and `.jsx` files without requiring Node. Bare package
-imports are not resolved into repository relationships.
+they do not mutate the graph directly. The Python adapter uses the standard-library AST. It maps
+explicit `from` imports and qualified module attributes to exact local top-level symbols, following
+at most eight deterministic package re-export hops and rejecting cycles. A test with exact symbol
+evidence does not also inherit the broader file edge for that resolved module.
+
+The TypeScript/JavaScript adapter conservatively recognizes explicit declarations and static
+relative module references in `.ts`, `.tsx`, `.js`, and `.jsx` files without requiring Node. Named
+and default static imports additionally link to a discovered exact symbol when the target export is
+unambiguous. Bare package imports, dynamic imports, and unresolved export expressions are not
+resolved into exact repository relationships.
 
 The Go adapter uses a small structural lexer to recognize named types, functions, methods, and
 import declarations without requiring the Go toolchain. `go.mod` module declarations define local
@@ -94,12 +100,20 @@ timestamps and sorts added, removed, and changed nodes plus added and removed ed
 graphs therefore produce byte-for-byte identical JSON suitable for CI artifacts or `--check` gates.
 
 Test recommendation is also a pure graph query. Recommendation schema 1 accepts commit, file,
-symbol, or test targets and ranks only direct `changes`, `modifies`, `defines`, and `tests`
-evidence. Fixed scores distinguish exact-symbol structural links, file fallback, filename
-conventions, and directly changed tests. The default medium threshold hides weak filename-only
-file matches. JUnit aggregates remain unscored observations because freshness is unknown.
-Artifact signals, candidate tests, reasons, observations, and returned results have explicit
-bounds. No test is executed, and missing output is never treated as proof of no impact.
+symbol, or test targets. Fixed scores distinguish exactly changed tests, exact-symbol structural
+links, recent co-change, one-hop exact-symbol dependents, file fallback, and filename convention.
+Nested symbols can fall back to a referenced owning symbol; when an owner-named test exists, that
+focused match replaces unrelated users of the same large class. A selected file uses exact symbols
+from its most recent dated analyzed change when available. A selected file or symbol can also use
+tests changed in that same most recent change as explicit historical evidence.
+
+Dependency propagation is deliberately narrow: only production files that directly import the
+exact target symbol are inspected, and only tests directly linked to that dependent file qualify.
+There is no unrestricted file-level transitive or barrel traversal. Recent co-change commits are
+limited to five latest-date records, exact-symbol dependents to 1,000, and the existing artifact,
+candidate, reason, observation, and result bounds still apply. The default medium threshold hides
+weak filename-only file matches. JUnit aggregates remain unscored observations because freshness
+is unknown. No test is executed, and missing output is never treated as proof of no impact.
 
 Recommendation evaluation is a second pure layer around the unchanged production query. Schema-1
 label files declare a closed-world `complete-test-set` policy, exact graph target IDs, and complete

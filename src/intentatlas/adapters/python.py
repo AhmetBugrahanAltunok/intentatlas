@@ -17,6 +17,7 @@ class PythonAdapter:
         module_to_node, path_to_module = _build_module_maps(context.files)
         nodes: list[Node] = []
         edges: list[Edge] = []
+        trees: dict[str, ast.AST] = {}
 
         for relative in sorted(context.files):
             if Path(relative).suffix.casefold() not in self.suffixes:
@@ -28,6 +29,7 @@ class PythonAdapter:
                 tree = ast.parse(source, filename=relative)
             except (SyntaxError, ValueError):
                 continue
+            trees[relative] = tree
 
             file_node = f"file:{relative}"
             visitor = _SymbolVisitor(relative)
@@ -37,10 +39,32 @@ class PythonAdapter:
                 Edge(file_node, node.id, "defines", "python-ast") for node in visitor.nodes
             )
 
+        symbol_resolver = _PythonSymbolResolver(
+            trees,
+            nodes,
+            module_to_node,
+            path_to_module,
+        )
+        for relative in sorted(trees):
+            tree = trees[relative]
+            file_node = f"file:{relative}"
             relation = "tests" if context.kinds[relative] == "test" else "imports"
+            symbol_targets = symbol_resolver.references(relative, tree)
+            precise_files: set[str] = set()
+            for symbol_target in sorted(symbol_targets):
+                edges.append(
+                    Edge(file_node, symbol_target, relation, "python-symbol-reference")
+                )
+                symbol_path = symbol_target.removeprefix("symbol:").split("::", 1)[0]
+                precise_files.add(f"file:{symbol_path}")
+
             for imported_module in sorted(_python_imports(tree, relative, path_to_module)):
                 target = _resolve_module(imported_module, module_to_node)
-                if target is not None and target != file_node:
+                if (
+                    target is not None
+                    and target != file_node
+                    and not (relation == "tests" and target in precise_files)
+                ):
                     edges.append(Edge(file_node, target, relation, "python-ast"))
 
         edges.extend(_filename_test_edges(context))
@@ -152,6 +176,126 @@ def _python_imports(tree: ast.AST, relative: str, path_to_module: dict[str, str]
             for alias in node.names:
                 if alias.name != "*":
                     yield ".".join(part for part in (base, alias.name) if part)
+
+
+class _PythonSymbolResolver:
+    def __init__(
+        self,
+        trees: dict[str, ast.AST],
+        nodes: Iterable[Node],
+        module_to_node: dict[str, str],
+        path_to_module: dict[str, str],
+    ) -> None:
+        self.path_to_module = path_to_module
+        self.direct: dict[tuple[str, str], str] = {}
+        self.reexports: dict[tuple[str, str], tuple[str, str]] = {}
+        for node in nodes:
+            if node.path is None or "." in node.label:
+                continue
+            module = path_to_module.get(node.path)
+            if module:
+                self.direct[(module, node.label)] = node.id
+        for relative, tree in trees.items():
+            module = path_to_module.get(relative)
+            if not module:
+                continue
+            for statement in getattr(tree, "body", ()):
+                if not isinstance(statement, ast.ImportFrom):
+                    continue
+                base = _python_import_base(statement, relative, path_to_module)
+                if not base:
+                    continue
+                for alias in statement.names:
+                    if alias.name == "*":
+                        continue
+                    exported_name = alias.asname or alias.name
+                    self.reexports[(module, exported_name)] = (base, alias.name)
+
+    def resolve(self, module: str, name: str) -> str | None:
+        current = (module, name)
+        seen: set[tuple[str, str]] = set()
+        for _depth in range(8):
+            if current in seen:
+                return None
+            seen.add(current)
+            direct = self.direct.get(current)
+            if direct is not None:
+                return direct
+            forwarded = self.reexports.get(current)
+            if forwarded is None:
+                return None
+            current = forwarded
+        return None
+
+    def references(self, relative: str, tree: ast.AST) -> set[str]:
+        references: set[str] = set()
+        module_bindings: dict[str, tuple[str, tuple[str, ...]]] = {}
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom):
+                base = _python_import_base(node, relative, self.path_to_module)
+                if not base:
+                    continue
+                for alias in node.names:
+                    if alias.name == "*":
+                        continue
+                    target = self.resolve(base, alias.name)
+                    if target is not None:
+                        references.add(target)
+            elif isinstance(node, ast.Import):
+                for alias in node.names:
+                    parts = tuple(alias.name.split("."))
+                    local_name = alias.asname or parts[0]
+                    remaining = () if alias.asname else parts[1:]
+                    module_bindings[local_name] = (alias.name, remaining)
+
+        for node in ast.walk(tree):
+            chain = _python_attribute_chain(node)
+            if chain is None:
+                continue
+            root, attributes = chain
+            binding = module_bindings.get(root)
+            if binding is None:
+                continue
+            module, module_suffix = binding
+            if attributes[: len(module_suffix)] != module_suffix:
+                continue
+            symbol_parts = attributes[len(module_suffix) :]
+            if not symbol_parts:
+                continue
+            target = self.resolve(module, symbol_parts[0])
+            if target is not None:
+                references.add(target)
+        return references
+
+
+def _python_import_base(
+    node: ast.ImportFrom,
+    relative: str,
+    path_to_module: dict[str, str],
+) -> str:
+    current = path_to_module.get(relative, "")
+    is_package = Path(relative).name == "__init__.py"
+    package = current.split(".") if is_package else current.split(".")[:-1]
+    if node.level:
+        remove = max(0, node.level - 1)
+        package = package[: len(package) - remove] if remove else package
+    else:
+        package = []
+    module_parts = node.module.split(".") if node.module else []
+    return ".".join([*package, *module_parts])
+
+
+def _python_attribute_chain(node: ast.AST) -> tuple[str, tuple[str, ...]] | None:
+    if not isinstance(node, ast.Attribute):
+        return None
+    attributes: list[str] = []
+    current: ast.AST = node
+    while isinstance(current, ast.Attribute):
+        attributes.append(current.attr)
+        current = current.value
+    if not isinstance(current, ast.Name):
+        return None
+    return current.id, tuple(reversed(attributes))
 
 
 def _filename_test_edges(context: AdapterContext) -> Iterable[Edge]:

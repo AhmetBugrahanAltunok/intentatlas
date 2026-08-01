@@ -20,7 +20,7 @@ source_path: "tests/test_cli.py"
 - <code>defines</code> → [[Symbols/test_cli_reports_invalid_requests - tests - test_cli.py|test_cli_reports_invalid_requests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_writes_deterministic_graph_diff_and_supports_ci_check - tests - test_cli.py|test_cli_writes_deterministic_graph_diff_and_supports_ci_check]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

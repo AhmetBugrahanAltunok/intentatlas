@@ -132,6 +132,18 @@ def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> N
         "javascript-structural",
     ) in relationships
     assert (
+        "file:src/main.test.ts",
+        "symbol:src/main.ts::boot",
+        "tests",
+        "javascript-symbol-reference",
+    ) in relationships
+    assert (
+        "file:src/main.ts",
+        "symbol:src/math.ts::add",
+        "imports",
+        "javascript-symbol-reference",
+    ) in relationships
+    assert (
         "file:src/math.test.ts",
         "file:src/math.ts",
         "tests",
@@ -154,6 +166,35 @@ def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> N
         edge.source == "file:src/dynamic.ts" and edge.relation in {"imports", "tests"}
         for edge in first.edges
     )
+
+
+def test_scanner_resolves_python_reexports_to_exact_symbols(tmp_path) -> None:
+    (tmp_path / "src" / "sample").mkdir(parents=True)
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "src" / "sample" / "__init__.py").write_text(
+        "from .core import Context as Context\n", encoding="utf-8"
+    )
+    (tmp_path / "src" / "sample" / "core.py").write_text(
+        "class Context:\n    def close(self):\n        return None\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "tests" / "test_context.py").write_text(
+        "import sample\nfrom sample import Context\n\ndef test_context():\n"
+        "    assert sample.Context is Context\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+    relationships = {
+        (edge.source, edge.target, edge.relation, edge.evidence) for edge in graph.edges
+    }
+
+    assert (
+        "file:tests/test_context.py",
+        "symbol:src/sample/core.py::Context",
+        "tests",
+        "python-symbol-reference",
+    ) in relationships
 
 
 def test_scanner_recognizes_root_test_javascript_file(tmp_path) -> None:

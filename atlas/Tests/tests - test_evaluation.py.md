@@ -23,12 +23,17 @@ source_path: "tests/test_evaluation.py"
 - <code>defines</code> → [[Symbols/test_label_parser_rejects_invalid_documents - tests - test_evaluation.py|test_label_parser_rejects_invalid_documents]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_evaluate_and_render_deterministically - tests - test_evaluation.py|test_load_evaluate_and_render_deterministically]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/write_labels - tests - test_evaluation.py|write_labels]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/EvaluationCase - src - intentatlas - evaluation.py|EvaluationCase]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/EvaluationLabels - src - intentatlas - evaluation.py|EvaluationLabels]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/evaluate_recommendations - src - intentatlas - evaluation.py|evaluate_recommendations]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/load_evaluation_labels - src - intentatlas - evaluation.py|load_evaluation_labels]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_evaluation - src - intentatlas - evaluation.py|render_evaluation]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -26,6 +26,7 @@ source_path: "src/intentatlas/git_history.py"
 - <code>defines</code> → [[Symbols/parse_git_diffs - src - intentatlas - git_history.py|parse_git_diffs]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -34,4 +35,3 @@ source_path: "src/intentatlas/git_history.py"
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: python-ast)_

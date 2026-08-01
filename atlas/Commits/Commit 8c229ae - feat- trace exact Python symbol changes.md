@@ -27,7 +27,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_graph.py|tests/test_graph.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_relations.py|tests/test_relations.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_SymbolVisitor._visit_symbol - src - intentatlas - adapters - python.py|_SymbolVisitor._visit_symbol]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/CommitRecord - src - intentatlas - git_history.py|CommitRecord]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_aligned_git_diffs - src - intentatlas - git_history.py|_aligned_git_diffs]] _(history; evidence: git-diff-hunk)_

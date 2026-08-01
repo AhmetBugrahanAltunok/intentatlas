@@ -16,3 +16,4 @@ source_path: "tests/fixtures/typescript_project/src/components/index.ts"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - fixtures - typescript_project - src - components - index.ts|tests/fixtures/typescript_project/src/components/index.ts]] _(structure; evidence: javascript-structural)_
+- <code>tested-by</code> ← [[Tests/tests - fixtures - typescript_project - src - multiline.ts|tests/fixtures/typescript_project/src/multiline.ts]] _(verification; evidence: javascript-symbol-reference)_

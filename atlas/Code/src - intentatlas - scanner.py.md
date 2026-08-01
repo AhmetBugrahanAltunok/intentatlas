@@ -47,6 +47,17 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/import_delivery - src - intentatlas - delivery.py|import_delivery]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/import_evidence - src - intentatlas - evidence.py|import_evidence]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/collect_git_history - src - intentatlas - git_history.py|collect_git_history]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/note_title - src - intentatlas - naming.py|note_title]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/safe_filename - src - intentatlas - naming.py|safe_filename]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -67,8 +78,4 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-ast)_
 - <code>referenced-by</code> ← [[Decisions/ADR-002 - Pruned trust-boundary traversal|ADR-002 - Pruned trust-boundary traversal]] _(reference; evidence: wikilink)_
-- <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: python-ast)_

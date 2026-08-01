@@ -17,3 +17,4 @@ source_path: "src/intentatlas/graph.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-symbol-reference)_

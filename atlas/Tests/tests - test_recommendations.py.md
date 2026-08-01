@@ -11,24 +11,29 @@ source_path: "tests/test_recommendations.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9224</code>
+- **Size Bytes:** <code>14246</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/recommendation_graph - tests - test_recommendations.py|recommendation_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_recommendation_json_and_cli_are_deterministic - tests - test_recommendations.py|test_recommendation_json_and_cli_are_deterministic]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_recommendations_bound_input_and_explanation_output - tests - test_recommendations.py|test_recommendations_bound_input_and_explanation_output]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_recommendations_focus_nested_symbols_and_latest_file_change - tests - test_recommendations.py|test_recommendations_focus_nested_symbols_and_latest_file_change]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_recommendations_rank_deduplicate_filter_and_explain - tests - test_recommendations.py|test_recommendations_rank_deduplicate_filter_and_explain]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_recommendations_reject_unsupported_targets_and_bounds - tests - test_recommendations.py|test_recommendations_reject_unsupported_targets_and_bounds]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_recommendations_support_low_limit_file_symbol_and_no_results - tests - test_recommendations.py|test_recommendations_support_low_limit_file_symbol_and_no_results]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_recommendations_use_exact_direct_dependents_and_recent_cochange - tests - test_recommendations.py|test_recommendations_use_exact_direct_dependents_and_recent_cochange]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_recommendations - src - intentatlas - recommendations.py|render_recommendations]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_

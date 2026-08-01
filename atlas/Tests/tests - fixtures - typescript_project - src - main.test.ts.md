@@ -18,6 +18,7 @@ source_path: "tests/fixtures/typescript_project/src/main.test.ts"
 - <code>defines</code> → [[Symbols/verifiesBoot - tests - fixtures - typescript_project - src - main.test.ts|verifiesBoot]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - main.ts|tests/fixtures/typescript_project/src/main.ts]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - main.ts|tests/fixtures/typescript_project/src/main.ts]] _(verification; evidence: javascript-structural)_
+- <code>tests</code> → [[Symbols/boot - tests - fixtures - typescript_project - src - main.ts|boot]] _(verification; evidence: javascript-symbol-reference)_
 
 ## Incoming relationships
 

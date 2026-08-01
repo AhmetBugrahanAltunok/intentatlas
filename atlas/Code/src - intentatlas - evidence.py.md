@@ -30,6 +30,8 @@ source_path: "src/intentatlas/evidence.py"
 - <code>defines</code> → [[Symbols/_test_target - src - intentatlas - evidence.py|_test_target]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/import_evidence - src - intentatlas - evidence.py|import_evidence]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

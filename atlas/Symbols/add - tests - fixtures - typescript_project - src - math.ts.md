@@ -16,3 +16,5 @@ source_path: "tests/fixtures/typescript_project/src/math.ts"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(structure; evidence: javascript-structural)_
+- <code>tested-by</code> ← [[Tests/tests - fixtures - typescript_project - src - main.ts|tests/fixtures/typescript_project/src/main.ts]] _(verification; evidence: javascript-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - fixtures - typescript_project - src - math.test.ts|tests/fixtures/typescript_project/src/math.test.ts]] _(verification; evidence: javascript-symbol-reference)_

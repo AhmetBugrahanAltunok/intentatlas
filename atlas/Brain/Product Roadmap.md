@@ -256,7 +256,23 @@ Status: complete (2026-08-01)
   and indirect-dependency behavior. Qualified Go import evidence removes 18 observed false
   positives; medium precision is 85.71% and recall 78.26%, with remaining gaps explicit.
 
-## Phase 7C — Open-source release readiness
+## Phase 7C — Bounded symbol-aware dependency evidence
+
+Status: complete (2026-08-01)
+
+- Replace broad Python test-to-file evidence with exact imported-symbol evidence when resolvable.
+- Recover indirect JavaScript tests only through one exact-symbol dependent hop or explicit recent
+  co-change evidence; do not enable unrestricted barrel traversal.
+- Requirement: [[Requirements/REQ-018 - Refine tests with bounded symbol-aware evidence]]
+- Decision: [[Decisions/ADR-018 - Bound dependency propagation with exact symbols and co-change]]
+- Delivery issue: [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence]]
+- Evidence: [[Evidence/EVD-018 - Phase 7C symbol-aware dependency verification]]
+- Review: [[Reviews/Phase 7C Symbol-Aware Dependency Review]]
+- Outcome: exact Python/JavaScript symbol evidence, one-hop exact dependencies, and bounded recent
+  co-change remove the observed Click and Axios gaps without unrestricted transitive traversal;
+  the pinned 18-case medium result is TP 23, FP 0, FN 0 within its explicit sample boundary.
+
+## Phase 7D — Open-source release readiness
 
 Status: planned
 

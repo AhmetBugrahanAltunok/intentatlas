@@ -18,9 +18,10 @@ source_path: "tests/test_scale.py"
 - <code>defines</code> → [[Symbols/test_scale_benchmark_cli_and_format_errors - tests - test_scale.py|test_scale_benchmark_cli_and_format_errors]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scale_benchmark_has_stable_counts_and_local_lookup_work - tests - test_scale.py|test_scale_benchmark_has_stable_counts_and_local_lookup_work]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scale_benchmark_rejects_invalid_bounds - tests - test_scale.py|test_scale_benchmark_rejects_invalid_bounds]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_scale_benchmark - src - intentatlas - scale.py|render_scale_benchmark]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/run_scale_benchmark - src - intentatlas - scale.py|run_scale_benchmark]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

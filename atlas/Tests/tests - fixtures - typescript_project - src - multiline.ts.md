@@ -17,6 +17,7 @@ source_path: "tests/fixtures/typescript_project/src/multiline.ts"
 
 - <code>defines</code> → [[Symbols/createCard - tests - fixtures - typescript_project - src - multiline.ts|createCard]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - components - index.ts|tests/fixtures/typescript_project/src/components/index.ts]] _(verification; evidence: javascript-structural)_
+- <code>tests</code> → [[Symbols/Card - tests - fixtures - typescript_project - src - components - index.ts|Card]] _(verification; evidence: javascript-symbol-reference)_
 
 ## Incoming relationships
 

@@ -11,12 +11,16 @@ source_path: "src/intentatlas/adapters/python.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6512</code>
+- **Size Bytes:** <code>12024</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/PythonAdapter.scan - src - intentatlas - adapters - python.py|PythonAdapter.scan]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_PythonSymbolResolver - src - intentatlas - adapters - python.py|_PythonSymbolResolver]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_PythonSymbolResolver.__init__ - src - intentatlas - adapters - python.py|_PythonSymbolResolver.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_PythonSymbolResolver.references - src - intentatlas - adapters - python.py|_PythonSymbolResolver.references]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_PythonSymbolResolver.resolve - src - intentatlas - adapters - python.py|_PythonSymbolResolver.resolve]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor - src - intentatlas - adapters - python.py|_SymbolVisitor]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor.__init__ - src - intentatlas - adapters - python.py|_SymbolVisitor.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor._visit_symbol - src - intentatlas - adapters - python.py|_SymbolVisitor._visit_symbol]] _(structure; evidence: python-ast)_
@@ -25,10 +29,16 @@ source_path: "src/intentatlas/adapters/python.py"
 - <code>defines</code> → [[Symbols/_SymbolVisitor.visit_FunctionDef - src - intentatlas - adapters - python.py|_SymbolVisitor.visit_FunctionDef]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_build_module_maps - src - intentatlas - adapters - python.py|_build_module_maps]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - python.py|_filename_test_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_python_attribute_chain - src - intentatlas - adapters - python.py|_python_attribute_chain]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_python_import_base - src - intentatlas - adapters - python.py|_python_import_base]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_python_imports - src - intentatlas - adapters - python.py|_python_imports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_module - src - intentatlas - adapters - python.py|_resolve_module]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -36,4 +46,5 @@ source_path: "src/intentatlas/adapters/python.py"
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/recommendations.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>17239</code>
+- **Size Bytes:** <code>27215</code>
 
 ## Outgoing relationships
 
@@ -28,20 +28,33 @@ source_path: "src/intentatlas/recommendations.py"
 - <code>defines</code> → [[Symbols/TestRecommendation - src - intentatlas - recommendations.py|TestRecommendation]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/TestRecommendation.to_dict - src - intentatlas - recommendations.py|TestRecommendation.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_ArtifactSignal - src - intentatlas - recommendations.py|_ArtifactSignal]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_PreferredTestEdge - src - intentatlas - recommendations.py|_PreferredTestEdge]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_add_direct_dependent_reasons - src - intentatlas - recommendations.py|_add_direct_dependent_reasons]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_add_reason - src - intentatlas - recommendations.py|_add_reason]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_add_recent_cochange_reasons - src - intentatlas - recommendations.py|_add_recent_cochange_reasons]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_artifact_signals - src - intentatlas - recommendations.py|_artifact_signals]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_confidence - src - intentatlas - recommendations.py|_confidence]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_latest_file_commits - src - intentatlas - recommendations.py|_latest_file_commits]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_latest_file_symbol_signals - src - intentatlas - recommendations.py|_latest_file_symbol_signals]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_owner_named_tests - src - intentatlas - recommendations.py|_owner_named_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_preferred_test_edges - src - intentatlas - recommendations.py|_preferred_test_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_recommendations - src - intentatlas - recommendations.py|_recommendations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_safe_duration - src - intentatlas - recommendations.py|_safe_duration]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_safe_nonnegative_int - src - intentatlas - recommendations.py|_safe_nonnegative_int]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_select_test_edges - src - intentatlas - recommendations.py|_select_test_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_symbol_and_owner_ids - src - intentatlas - recommendations.py|_symbol_and_owner_ids]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_symbol_file - src - intentatlas - recommendations.py|_symbol_file]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_symbol_test_path - src - intentatlas - recommendations.py|_symbol_test_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_test_observations - src - intentatlas - recommendations.py|_test_observations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_unique_values - src - intentatlas - recommendations.py|_unique_values]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_recommendations - src - intentatlas - recommendations.py|render_recommendations]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/GraphIndex - src - intentatlas - graph.py|GraphIndex]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -49,11 +62,9 @@ source_path: "src/intentatlas/recommendations.py"
 - <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: python-ast)_

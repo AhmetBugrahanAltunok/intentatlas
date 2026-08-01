@@ -46,10 +46,11 @@ source_path: "tests/test_vault.py"
 - <code>defines</code> → [[Symbols/test_temporary_file_is_cleaned_when_writing_it_fails.FailingTemporaryFile.write - tests - test_vault.py|test_temporary_file_is_cleaned_when_writing_it_fails.FailingTemporaryFile.write]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_vault_escapes_untrusted_markdown_in_generated_notes - tests - test_vault.py|test_vault_escapes_untrusted_markdown_in_generated_notes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_vault_initializes_obsidian_and_preserves_user_owned_notes - tests - test_vault.py|test_vault_initializes_obsidian_and_preserves_user_owned_notes]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

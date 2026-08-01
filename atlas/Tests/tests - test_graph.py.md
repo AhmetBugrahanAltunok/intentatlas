@@ -26,9 +26,10 @@ source_path: "tests/test_graph.py"
 - <code>defines</code> → [[Symbols/test_load_rejects_malformed_graph_documents - tests - test_graph.py|test_load_rejects_malformed_graph_documents]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_rejects_unknown_schema_and_invalid_edges - tests - test_graph.py|test_load_rejects_unknown_schema_and_invalid_edges]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/relation_catalog - src - intentatlas - relations.py|relation_catalog]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

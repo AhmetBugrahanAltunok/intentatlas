@@ -153,9 +153,14 @@ doğrudan `modifies` ilişkisi eklenir. Eski dosya sürümü, silme, modül-sevi
 desteği olmayan adaptör veya belirsizlik durumunda mevcut dosya-seviyesi `changes` ilişkisi güvenli
 yedek olarak korunur.
 
-`recommend-tests`, doğrulanmış grafik ilişkilerinden doğrudan test dosyalarını `high`, `medium`
-veya `low` güvenle sıralar ve her sonucun neden yolunu gösterir. İlk sürüm yanlış pozitifleri
-azaltmak için geçişli bağımlılık tahminleri yapmaz ve varsayılan olarak `medium` eşiğini kullanır.
+`recommend-tests`, doğrulanmış grafik ilişkilerinden test dosyalarını `high`, `medium` veya `low`
+güvenle sıralar ve her sonucun neden yolunu gösterir. Python testleri, sınırlı paket yeniden
+dışa-aktarımları üzerinden tam içe aktarılan sembole bağlanabilir; iç içe bir değişiklikte test adı
+uyuşuyorsa sahibi olan sembolün odaklı testi kullanılabilir. JavaScript/TypeScript için adlandırılmış
+ve varsayılan statik içe aktarımlar kaydedilir; yalnızca tam sembolü içe aktaran tek bir bağımlı
+kaynaktan doğrudan bağlı teste gidilir. Seçilen dosya veya sembolün en son incelenen eş-değişimindeki
+testler ayrı bir orta-güven kanıtıdır. Sorgu sınırsız geçişli dolaşım yapmaz ve yanlış pozitifleri
+azaltmak için varsayılan olarak `medium` eşiğini kullanır.
 
 `evaluate-recommendations`, aynı üretim sorgusunu değiştirmeden katı ve kapalı-dünya yerel
 etiketleriyle karşılaştırır. Zaman damgasız şema-1 çıktısı eşik farklarını ve regresyonları görünür

@@ -11,13 +11,15 @@ source_path: "src/intentatlas/adapters/javascript.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11342</code>
+- **Size Bytes:** <code>14517</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/JavaScriptAdapter - src - intentatlas - adapters - javascript.py|JavaScriptAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/JavaScriptAdapter.scan - src - intentatlas - adapters - javascript.py|JavaScriptAdapter.scan]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_default_export_name - src - intentatlas - adapters - javascript.py|_default_export_name]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - javascript.py|_filename_test_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_javascript_imports - src - intentatlas - adapters - javascript.py|_javascript_imports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_line_number - src - intentatlas - adapters - javascript.py|_line_number]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_mask_comments_and_templates - src - intentatlas - adapters - javascript.py|_mask_comments_and_templates]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_mask_quoted_strings - src - intentatlas - adapters - javascript.py|_mask_quoted_strings]] _(structure; evidence: python-ast)_
@@ -28,9 +30,14 @@ source_path: "src/intentatlas/adapters/javascript.py"
 - <code>defines</code> → [[Symbols/_symbols - src - intentatlas - adapters - javascript.py|_symbols]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_

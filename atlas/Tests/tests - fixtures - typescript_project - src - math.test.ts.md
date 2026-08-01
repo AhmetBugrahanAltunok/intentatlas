@@ -18,6 +18,7 @@ source_path: "tests/fixtures/typescript_project/src/math.test.ts"
 - <code>defines</code> → [[Symbols/verifiesAdd - tests - fixtures - typescript_project - src - math.test.ts|verifiesAdd]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(verification; evidence: javascript-structural)_
+- <code>tests</code> → [[Symbols/add - tests - fixtures - typescript_project - src - math.ts|add]] _(verification; evidence: javascript-symbol-reference)_
 
 ## Incoming relationships
 

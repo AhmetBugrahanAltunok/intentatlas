@@ -11,7 +11,7 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>18662</code>
+- **Size Bytes:** <code>20025</code>
 
 ## Outgoing relationships
 
@@ -29,11 +29,12 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_recognizes_root_test_javascript_file - tests - test_scanner.py|test_scanner_recognizes_root_test_javascript_file]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(verification; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_resolves_python_reexports_to_exact_symbols - tests - test_scanner.py|test_scanner_resolves_python_reexports_to_exact_symbols]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -41,6 +42,7 @@ source_path: "tests/test_scanner.py"
 - <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit db64192 - feat- improve Go test evidence|feat: improve Go test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
@@ -49,4 +51,5 @@ source_path: "tests/test_scanner.py"
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-015 - Expand and refine real-world validation|ISSUE-015 - Expand and refine real-world validation]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

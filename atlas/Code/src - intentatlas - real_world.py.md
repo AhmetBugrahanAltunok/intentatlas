@@ -37,6 +37,13 @@ source_path: "src/intentatlas/real_world.py"
 - <code>imports</code> → [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/CorpusEvaluationResult - src - intentatlas - corpus.py|CorpusEvaluationResult]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/CorpusProject - src - intentatlas - corpus.py|CorpusProject]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/evaluate_corpus - src - intentatlas - corpus.py|evaluate_corpus]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_corpus - src - intentatlas - corpus.py|render_corpus]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/load_evaluation_labels - src - intentatlas - evaluation.py|load_evaluation_labels]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -44,4 +51,3 @@ source_path: "src/intentatlas/real_world.py"
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_real_world.py|tests/test_real_world.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_real_world.py|tests/test_real_world.py]] _(verification; evidence: python-ast)_

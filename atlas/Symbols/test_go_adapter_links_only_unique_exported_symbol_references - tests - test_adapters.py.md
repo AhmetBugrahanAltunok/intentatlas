@@ -17,3 +17,4 @@ source_path: "tests/test_adapters.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-diff-hunk)_

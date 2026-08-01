@@ -22,7 +22,10 @@ source_path: "tests/test_git_history.py"
 - <code>defines</code> → [[Symbols/test_parse_git_log_collects_paths_and_redacts_subjects - tests - test_git_history.py|test_parse_git_log_collects_paths_and_redacts_subjects]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_log_ignores_malformed_blocks - tests - test_git_history.py|test_parse_git_log_ignores_malformed_blocks]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/_aligned_git_diffs - src - intentatlas - git_history.py|_aligned_git_diffs]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/parse_git_diffs - src - intentatlas - git_history.py|parse_git_diffs]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -18,6 +18,7 @@ source_path: "src/intentatlas/naming.py"
 - <code>defines</code> → [[Symbols/note_title - src - intentatlas - naming.py|note_title]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/safe_filename - src - intentatlas - naming.py|safe_filename]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
