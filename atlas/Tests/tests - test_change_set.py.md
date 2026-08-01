@@ -28,5 +28,6 @@ source_path: "tests/test_change_set.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_

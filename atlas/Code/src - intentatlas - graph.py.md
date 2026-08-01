@@ -50,6 +50,7 @@ source_path: "src/intentatlas/graph.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_

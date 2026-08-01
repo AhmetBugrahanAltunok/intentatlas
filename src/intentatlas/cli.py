@@ -33,8 +33,10 @@ from .real_world import (
     render_real_world,
 )
 from .recommendations import recommend_tests, render_recommendations
+from .review import build_review_report, render_review
 from .scale import render_scale_benchmark, run_scale_benchmark
 from .scanner import USER_VAULT_AREAS, scan_repository
+from .test_outcomes import load_test_outcomes
 from .vault import ProjectVault
 from .viewer import serve_graph
 
@@ -128,6 +130,37 @@ def build_parser() -> argparse.ArgumentParser:
         help="Open the report in the local interactive viewer",
     )
     _viewer_arguments(changes_parser)
+
+    review_parser = commands.add_parser(
+        "review",
+        help="Review a revision range in non-blocking CI shadow mode",
+    )
+    _path_argument(review_parser)
+    review_parser.add_argument("--base", required=True, help="Base revision")
+    review_parser.add_argument("--head", required=True, help="Head revision")
+    review_parser.add_argument(
+        "--minimum-confidence",
+        choices=("low", "medium", "high"),
+        default="medium",
+    )
+    review_parser.add_argument("--limit", type=int, default=20)
+    review_parser.add_argument(
+        "--test-outcomes",
+        help="Commit-keyed test outcome JSON below the project root",
+    )
+    review_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("markdown", "json", "sarif"),
+        default="markdown",
+    )
+    review_parser.add_argument(
+        "--open",
+        dest="open_report",
+        action="store_true",
+        help="Open the review with its fresh graph in the local viewer",
+    )
+    _viewer_arguments(review_parser)
 
     evaluate_parser = commands.add_parser(
         "evaluate-recommendations",
@@ -270,6 +303,20 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.minimum_confidence,
                 args.limit,
                 args.output_format,
+                args.host,
+                args.port,
+                not args.no_browser,
+            )
+        if args.command == "review":
+            return _review(
+                root,
+                args.base,
+                args.head,
+                args.minimum_confidence,
+                args.limit,
+                args.output_format,
+                args.test_outcomes,
+                args.open_report,
                 args.host,
                 args.port,
                 not args.no_browser,
@@ -493,6 +540,72 @@ def _changes(
         print(render_change_analysis(analyzed, output_format), end="")
     else:
         print(render_change_set(result, output_format), end="")
+    return 0
+
+
+def _review(
+    root: Path,
+    base: str,
+    head: str,
+    minimum_confidence: str,
+    limit: int,
+    output_format: str,
+    test_outcomes_path: str | None,
+    open_report: bool,
+    host: str,
+    port: int,
+    open_browser: bool,
+) -> int:
+    config = ProjectConfig.load(root)
+    private_path = (config.vault_path(root) / "Private").relative_to(root).as_posix()
+    change_set = collect_change_set(
+        root,
+        scope="range",
+        base=base,
+        head=head,
+        excluded_paths=(private_path,),
+    )
+    test_outcomes = None
+    if test_outcomes_path is not None:
+        outcome_path = _project_path(
+            root,
+            config,
+            test_outcomes_path,
+            "test outcomes",
+            must_exist=True,
+        )
+        test_outcomes = load_test_outcomes(outcome_path)
+    if open_report:
+        graph, change_report = collect_change_report_context(
+            root,
+            change_set,
+            config,
+            minimum_confidence=minimum_confidence,
+            limit=limit,
+        )
+        review = build_review_report(change_report, test_outcomes)
+        graph_document = (
+            json.dumps(graph.to_dict(), ensure_ascii=False, sort_keys=True) + "\n"
+        ).encode("utf-8")
+        review_document = render_review(review, "json").encode("utf-8")
+        serve_graph(
+            None,
+            host=host,
+            port=port,
+            open_browser=open_browser,
+            graph_document=graph_document,
+            review_document=review_document,
+        )
+    else:
+        change_report = collect_change_report(
+            root,
+            change_set,
+            config,
+            minimum_confidence=minimum_confidence,
+            limit=limit,
+        )
+        review = build_review_report(change_report, test_outcomes)
+        print(render_review(review, output_format), end="")
     return 0
 
 

@@ -8,6 +8,14 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Added
 
+- A deterministic `review --base --head` shadow-mode command that renders the existing bounded
+  change analysis as Markdown, JSON, or path-safe SARIF 2.1.0 without publishing or blocking CI.
+- An opt-in, credential-free composite Action that writes the shadow review only to the runner's
+  temporary directory and leaves upload, publication, and policy to the calling workflow.
+- Strict commit-keyed test outcome sidecars with explicit aligned/stale freshness and observational
+  selected-versus-executed path comparison, without inferring accuracy from stale or unkeyed data.
+- A change-centric `review --open` viewer backed by the exact in-memory graph and report, including
+  revision scope, strategy, outcome freshness, and selected-versus-executed evidence.
 - Deterministic ChangeSet schema 1 and a `changes` command for bounded commit, revision-range,
   staged, and worktree metadata without retaining raw diffs or untracked contents.
 - Optional Change Analysis schema 1 with explicit `analyzed`/`fallback`/`unknown` state,

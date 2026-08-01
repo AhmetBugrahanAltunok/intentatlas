@@ -53,6 +53,27 @@ tarama, test önerisi ve yerel görüntüleyici akışı ise en eski ve en yeni 
 sürümlerinde Linux, Windows ve macOS üzerinde CI tarafından doğrulanır. Yerel, tekrarlanabilir
 paket kontrolleri için [sürüm sürecine](RELEASING.md) bakın.
 
+Pull request veya CI denemelerinde aynı değişiklik analizi salt-okunur gölge modunda çalıştırılabilir:
+
+```text
+intentatlas review --base origin/main --head HEAD
+intentatlas review --base origin/main --head HEAD --format json
+intentatlas review --base origin/main --head HEAD --format sarif
+intentatlas review --base origin/main --head HEAD --test-outcomes .intentatlas/test-outcomes.json
+intentatlas review --base origin/main --head HEAD --open
+```
+
+Komut aynı revision-aralığı ChangeSet ve Change Report verisini kullanır. Geçerli bulgular süreci
+başarısız yapmaz; pull request yayımlamaz veya değiştirmez, sağlayıcı kimlik bilgisi ve ağ erişimi
+istemez. SARIF yalnız güvenli proje-göreli konumları ve hunk satır aralıklarını taşır; kaynak
+parçası veya mutlak yol içermez. Sınırlar [CI gölge inceleme belgesinde](docs/ci-shadow-review.md)
+açıklanır.
+
+İsteğe bağlı outcome JSON’u tam commit kimliğiyle eşleşirse seçilen ve gerçekten çalıştırılan test
+yolları gözlemsel olarak karşılaştırılır. Commit farklıysa veri `stale` kalır ve karşılaştırma
+üretilmez; bu kümeler doğruluk, zorunluluk veya yeterlilik iddiası değildir.
+`--open`, komutun kullandığı aynı bellek içi grafik ve review raporunu yerel arayüzde açar.
+
 Aynı deterministik ChangeSet şeması commit, revision aralığı, index veya mevcut çalışma ağacını
 kapsar:
 

@@ -38,4 +38,5 @@ source_path: "src/intentatlas/models.py"
 - <code>tested-by</code> ← [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_relations.py|tests/test_relations.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_review.py|tests/test_review.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: python-symbol-reference)_

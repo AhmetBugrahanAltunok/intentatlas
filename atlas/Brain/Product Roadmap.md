@@ -316,12 +316,21 @@ Status: complete (2026-08-01)
 
 ## Phase 9 — Pull-request and CI evidence loop
 
-Status: proposed
+Status: complete (2026-08-01)
 
 - Add a deterministic revision-range review command with Markdown, JSON, and SARIF output.
 - Publish nothing by default; begin with a read-only, shadow-mode CI integration.
 - Import actual test results with commit identity and freshness, then surface change-centric views.
+- Requirement: [[Requirements/REQ-021 - Review revision ranges in CI shadow mode]]
+- Decision: [[Decisions/ADR-021 - Compose review formats over trustworthy change reports]]
+- Delivery issue: [[Issues/ISSUE-019 - Implement CI shadow review loop]]
+- Kickoff: [[Sessions/2026-08-01 - Phase 9 kickoff]]
+- Evidence: [[Evidence/EVD-021 - Phase 9 CI shadow review verification]]
+- Review: [[Reviews/Phase 9 CI Shadow Review Review]]
 - Strategy: [[Brain/Phase 8-10 Strategy]]
+- Outcome: deterministic revision reviews now flow through Markdown, JSON, SARIF, a credential-free
+  opt-in Action, commit-keyed outcome freshness, and the same local in-memory viewer. Findings stay
+  non-blocking and incomplete or stale evidence retains abstention/full-suite safeguards.
 
 ## Phase 10 — Scale and open evidence ecosystem
 

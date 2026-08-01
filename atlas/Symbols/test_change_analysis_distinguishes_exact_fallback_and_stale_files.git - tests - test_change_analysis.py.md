@@ -17,3 +17,4 @@ source_path: "tests/test_change_analysis.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_change_analysis.py|tests/test_change_analysis.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-diff-hunk)_

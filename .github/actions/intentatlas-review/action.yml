@@ -1,0 +1,36 @@
+name: IntentAtlas shadow review
+description: Produce a non-blocking local revision-range review without provider credentials
+
+inputs:
+  base:
+    description: Base Git revision
+    required: true
+  head:
+    description: Head Git revision
+    required: true
+  format:
+    description: Report format (markdown, json, or sarif)
+    required: false
+    default: sarif
+  test_outcomes:
+    description: Optional commit-keyed test outcome JSON path below the project root
+    required: false
+    default: ""
+
+outputs:
+  report:
+    description: Absolute path to the temporary local report
+    value: ${{ steps.review.outputs.report }}
+
+runs:
+  using: composite
+  steps:
+    - id: review
+      name: Produce shadow review
+      shell: bash
+      env:
+        INPUT_BASE: ${{ inputs.base }}
+        INPUT_HEAD: ${{ inputs.head }}
+        INPUT_FORMAT: ${{ inputs.format }}
+        INPUT_TEST_OUTCOMES: ${{ inputs.test_outcomes }}
+      run: bash "${GITHUB_ACTION_PATH}/run.sh"

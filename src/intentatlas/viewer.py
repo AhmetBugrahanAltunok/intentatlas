@@ -31,6 +31,7 @@ def serve_graph(
     open_browser: bool = True,
     graph_document: bytes | None = None,
     change_report_document: bytes | None = None,
+    review_document: bytes | None = None,
 ) -> None:
     if host not in {"127.0.0.1", "localhost", "::1"}:
         raise ValueError("The viewer may only bind to a loopback address")
@@ -51,6 +52,9 @@ def serve_graph(
                 return
             if route == "/change-report.json" and change_report_document is not None:
                 self._send(change_report_document, "application/json; charset=utf-8")
+                return
+            if route == "/review.json" and review_document is not None:
+                self._send(review_document, "application/json; charset=utf-8")
                 return
             asset = CONTENT_TYPES.get(route)
             if asset is None:

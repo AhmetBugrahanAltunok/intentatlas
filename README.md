@@ -93,6 +93,7 @@ intentatlas status [PATH]                Show graph and orphan-note health
 intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships
 intentatlas recommend-tests TARGET       Rank advisory test candidates with explanations
 intentatlas changes --commit REV         Inspect bounded revision-scoped change metadata
+intentatlas review --base REV --head REV Review a range in non-blocking CI shadow mode
 intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
 intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
 intentatlas evaluate-real-world MANIFEST CHECKOUTS  Validate pinned public checkouts offline
@@ -131,6 +132,24 @@ from ranked claims and requires the full suite. The report is advisory and does 
 unlisted requirements or tests are unaffected.
 Add `--open` to inspect that same in-memory report in the loopback viewer without persisting a
 second graph or report artifact.
+
+For pull-request or CI experimentation, `review` composes the same range ChangeSet and Change
+Report into deterministic Markdown, JSON, or bounded SARIF 2.1.0:
+
+```text
+intentatlas review --base origin/main --head HEAD
+intentatlas review --base origin/main --head HEAD --format json
+intentatlas review --base origin/main --head HEAD --format sarif
+intentatlas review --base origin/main --head HEAD --test-outcomes .intentatlas/test-outcomes.json
+intentatlas review --base origin/main --head HEAD --open
+```
+
+This first integration is deliberately shadow-only: valid findings return success, do not publish
+or modify a pull request, and require no provider credential or network request. SARIF contains
+safe project-relative locations and hunk regions but no source snippets or absolute paths. See
+[CI shadow review](docs/ci-shadow-review.md) for the output and trust boundary.
+The local `--open` view serves the exact in-memory graph and review used by the command. The
+[review pilots](docs/review-pilots.md) record aligned, stale, and fallback regression boundaries.
 
 Verification reports are opt-in. Add project-relative paths to `intentatlas.json`, generate the
 reports with your existing CI tools, and run `intentatlas scan`:

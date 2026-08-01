@@ -45,6 +45,7 @@ source_path: "tests/test_scanner.py"
 - <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit db64192 - feat- improve Go test evidence|feat: improve Go test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_

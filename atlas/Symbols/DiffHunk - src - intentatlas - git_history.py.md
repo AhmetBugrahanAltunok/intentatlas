@@ -22,3 +22,4 @@ source_path: "src/intentatlas/git_history.py"
 - <code>modified-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-diff-hunk)_
 - <code>tested-by</code> ← [[Tests/tests - test_change_report.py|tests/test_change_report.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_review.py|tests/test_review.py]] _(verification; evidence: python-symbol-reference)_

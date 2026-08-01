@@ -11,7 +11,7 @@ source_path: "tests/test_cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5324</code>
+- **Size Bytes:** <code>10503</code>
 
 ## Outgoing relationships
 
@@ -19,6 +19,8 @@ source_path: "tests/test_cli.py"
 - <code>defines</code> → [[Symbols/test_cli_rejects_unsafe_graph_diff_paths - tests - test_cli.py|test_cli_rejects_unsafe_graph_diff_paths]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_renders_worktree_change_set_as_deterministic_json - tests - test_cli.py|test_cli_renders_worktree_change_set_as_deterministic_json]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_reports_invalid_requests - tests - test_cli.py|test_cli_reports_invalid_requests]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cli_reviews_revision_range_in_non_blocking_shadow_mode - tests - test_cli.py|test_cli_reviews_revision_range_in_non_blocking_shadow_mode]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cli_reviews_revision_range_in_non_blocking_shadow_mode.fake_serve - tests - test_cli.py|test_cli_reviews_revision_range_in_non_blocking_shadow_mode.fake_serve]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_writes_deterministic_graph_diff_and_supports_ci_check - tests - test_cli.py|test_cli_writes_deterministic_graph_diff_and_supports_ci_check]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
@@ -26,8 +28,10 @@ source_path: "tests/test_cli.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_

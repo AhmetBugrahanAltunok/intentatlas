@@ -10,8 +10,8 @@ source_path: "src/intentatlas/cli.py"
 
 ## Metadata
 
-- **End Line:** <code>317</code>
-- **Line:** <code>239</code>
+- **End Line:** <code>364</code>
+- **Line:** <code>272</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
@@ -24,4 +24,5 @@ source_path: "src/intentatlas/cli.py"
 - <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_real_world.py|tests/test_real_world.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_review_pilots.py|tests/test_review_pilots.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_scale.py|tests/test_scale.py]] _(verification; evidence: python-symbol-reference)_

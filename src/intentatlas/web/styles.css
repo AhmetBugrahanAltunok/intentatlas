@@ -152,12 +152,17 @@ main { height: calc(100% - 72px); display: grid; grid-template-columns: 236px 1f
 .report-datum { padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); }
 .report-datum:first-child { grid-column: 1 / -1; }
 .report-datum span { display: block; color: #737892; font-size: 9px; text-transform: uppercase; letter-spacing: .1em; }
-.report-datum strong { display: block; margin-top: 4px; color: #d8fff8; font-size: 11px; text-transform: capitalize; }
+.report-datum strong { display: block; margin-top: 4px; color: #d8fff8; font-size: 11px; }
 .report-items { display: grid; gap: 7px; }
 .report-item { width: 100%; text-align: left; border: 1px solid rgba(45,212,191,.15); border-radius: 10px; background: rgba(45,212,191,.035); padding: 9px 10px; color: #c8cad9; cursor: pointer; }
 .report-item:hover { border-color: rgba(45,212,191,.5); }
 .report-item strong { display: block; color: #d8fff8; font-size: 11px; overflow-wrap: anywhere; }
-.report-item small { display: block; color: #7f91a1; margin-top: 4px; text-transform: capitalize; }
+.report-item small { display: block; color: #7f91a1; margin-top: 4px; }
+.report-observation { cursor: default; }
+.outcome-comparison { display: grid; gap: 7px; margin-top: 10px; }
+.outcome-paths { padding: 9px 10px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.02); }
+.outcome-paths strong { display: block; color: #d8fff8; font-size: 10px; }
+.outcome-paths span { display: block; margin-top: 4px; color: #7f91a1; font-size: 10px; overflow-wrap: anywhere; }
 
 @media (max-width: 780px) {
   .topbar { grid-template-columns: 1fr auto; gap: 10px; height: 116px; padding: 12px 14px; }

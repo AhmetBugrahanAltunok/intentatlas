@@ -14,6 +14,7 @@ def test_viewer_assets_are_packaged() -> None:
     assert "--accent" in web.joinpath("styles.css").read_text(encoding="utf-8")
     app = web.joinpath("app.js").read_text(encoding="utf-8")
     assert 'fetch("/graph.json"' in app
+    assert 'fetch("/review.json"' in app
     assert 'fetch("/change-report.json"' in app
     assert "renderChangeReport" in app
     pointerup = app.split('group.addEventListener("pointerup"', maxsplit=1)[1].split(
@@ -35,6 +36,8 @@ def test_viewer_assets_are_packaged() -> None:
     assert 'id="detail-paths"' in index
     assert 'id="report-toggle"' in index
     assert 'id="change-report"' in index
+    assert 'id="report-outcomes"' in index
+    assert 'id="report-title"' in index
 
 
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:

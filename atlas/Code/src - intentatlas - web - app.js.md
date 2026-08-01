@@ -11,7 +11,7 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>19937</code>
+- **Size Bytes:** <code>22308</code>
 
 ## Outgoing relationships
 
@@ -36,17 +36,20 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/focusNode - src - intentatlas - web - app.js|focusNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/graphPoint - src - intentatlas - web - app.js|graphPoint]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/openChangeReport - src - intentatlas - web - app.js|openChangeReport]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/outcomePaths - src - intentatlas - web - app.js|outcomePaths]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/radius - src - intentatlas - web - app.js|radius]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/rebuild - src - intentatlas - web - app.js|rebuild]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderChangeReport - src - intentatlas - web - app.js|renderChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderEvidencePaths - src - intentatlas - web - app.js|renderEvidencePaths]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderFilters - src - intentatlas - web - app.js|renderFilters]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/renderOutcomeEvidence - src - intentatlas - web - app.js|renderOutcomeEvidence]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderReportItems - src - intentatlas - web - app.js|renderReportItems]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderStats - src - intentatlas - web - app.js|renderStats]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/reportDatum - src - intentatlas - web - app.js|reportDatum]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/seeded - src - intentatlas - web - app.js|seeded]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/selectNode - src - intentatlas - web - app.js|selectNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortLabel - src - intentatlas - web - app.js|shortLabel]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/shortRevision - src - intentatlas - web - app.js|shortRevision]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/stat - src - intentatlas - web - app.js|stat]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/svgElement - src - intentatlas - web - app.js|svgElement]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/tick - src - intentatlas - web - app.js|tick]] _(structure; evidence: javascript-structural)_
@@ -59,6 +62,7 @@ source_path: "src/intentatlas/web/app.js"
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_

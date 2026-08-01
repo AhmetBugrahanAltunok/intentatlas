@@ -11,18 +11,21 @@ source_path: "tests/test_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5935</code>
+- **Size Bytes:** <code>10245</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_cli - tests - test_e2e.py|_cli]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_http_get - tests - test_e2e.py|_http_get]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_installed_cli_scan_recommend_and_viewer_workflow - tests - test_e2e.py|test_installed_cli_scan_recommend_and_viewer_workflow]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_installed_revision_review_viewer_serves_commit_keyed_outcomes - tests - test_e2e.py|test_installed_revision_review_viewer_serves_commit_keyed_outcomes]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 5a0dba8 - test- synchronize viewer readiness|test: synchronize viewer readiness]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 74df114 - fix- bypass proxies in loopback e2e|fix: bypass proxies in loopback e2e]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_

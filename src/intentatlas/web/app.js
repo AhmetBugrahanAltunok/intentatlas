@@ -11,7 +11,7 @@ const colors = {
 const kindOrder = ["requirement", "decision", "issue", "delivery-issue", "pull-request", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "coverage", "test-result", "commit"];
 const proofKinds = new Set(["test", "evidence", "coverage", "test-result", "commit", "pull-request"]);
 const pathLimits = { depth: 6, visited: 800, results: 6 };
-const state = { data: null, report: null, nodeById: new Map(), pathAdjacency: new Map(), enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
+const state = { data: null, report: null, review: null, nodeById: new Map(), pathAdjacency: new Map(), enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
 const svg = document.querySelector("#graph");
 const viewport = document.querySelector("#viewport");
 const edgeLayer = document.querySelector("#edges");
@@ -25,13 +25,17 @@ boot().catch(error => {
 });
 
 async function boot() {
-  const [response, reportResponse] = await Promise.all([
+  const [response, reviewResponse, reportResponse] = await Promise.all([
     fetch("/graph.json", { cache: "no-store" }),
+    fetch("/review.json", { cache: "no-store" }),
     fetch("/change-report.json", { cache: "no-store" })
   ]);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   state.data = await response.json();
-  if (reportResponse.ok) state.report = await reportResponse.json();
+  if (reviewResponse.ok) {
+    state.review = await reviewResponse.json();
+    state.report = state.review.change_report;
+  } else if (reportResponse.ok) state.report = await reportResponse.json();
   state.nodeById = new Map(state.data.nodes.map(node => [node.id, node]));
   state.pathAdjacency = buildPathAdjacency();
   for (const node of state.data.nodes) state.enabled.add(node.kind);
@@ -41,12 +45,23 @@ async function boot() {
 function renderChangeReport() {
   if (!state.report) return;
   const report = state.report;
-  document.querySelector("#report-toggle").hidden = false;
-  document.querySelector("#report-summary").innerHTML = [
+  const toggle = document.querySelector("#report-toggle");
+  toggle.hidden = false;
+  if (state.review) {
+    toggle.textContent = "Revision review";
+    document.querySelector("#report-title").textContent = "Revision review";
+  }
+  const summary = [
     reportDatum("strategy", report.test_strategy.replaceAll("-", " ")),
     reportDatum("analysis", report.analysis_state),
     reportDatum("coverage", report.analysis_coverage_complete ? "complete" : "fallback required")
-  ].join("");
+  ];
+  if (state.review) {
+    summary.push(reportDatum("mode", state.review.mode));
+    summary.push(reportDatum("base", shortRevision(state.review.base_revision)));
+    summary.push(reportDatum("head", shortRevision(state.review.head_revision)));
+  }
+  document.querySelector("#report-summary").innerHTML = summary.join("");
   renderReportItems("#report-requirements", report.requirements, item => ({
     id: item.requirement.id,
     label: item.requirement.label,
@@ -59,7 +74,40 @@ function renderChangeReport() {
     score: item.score,
     confidence: item.confidence
   }));
+  renderOutcomeEvidence();
 }
+
+function renderOutcomeEvidence() {
+  const section = document.querySelector("#report-outcomes");
+  const comparison = state.review && state.review.test_outcomes;
+  if (!comparison) return;
+  section.hidden = false;
+  document.querySelector("#report-outcome-summary").innerHTML = [
+    reportDatum("freshness", comparison.freshness),
+    reportDatum("commit", shortRevision(comparison.outcome_commit)),
+    reportDatum("executed", comparison.test_count)
+  ].join("");
+  document.querySelector("#report-outcome-tests").innerHTML = comparison.tests.length
+    ? comparison.tests.map(item => `<div class="report-item report-observation"><strong>${escapeHTML(item.path)}</strong><small>${escapeHTML(item.status)}${item.duration_ms === undefined ? "" : ` · ${item.duration_ms} ms`}</small></div>`).join("")
+    : "<p class='hint'>No test path was recorded for this execution.</p>";
+  const evidence = document.querySelector("#report-outcome-comparison");
+  if (comparison.freshness !== "aligned") {
+    evidence.innerHTML = "<p class='path-note'>Comparison withheld because the outcome commit is stale.</p>";
+    return;
+  }
+  evidence.innerHTML = [
+    outcomePaths("Selected and executed", comparison.predicted_and_executed),
+    outcomePaths("Selected, not executed", comparison.predicted_not_executed),
+    outcomePaths("Executed, not selected", comparison.executed_not_predicted)
+  ].join("");
+}
+
+function outcomePaths(label, paths) {
+  const value = paths.length ? paths.join(", ") : "none";
+  return `<div class="outcome-paths"><strong>${escapeHTML(label)}</strong><span>${escapeHTML(value)}</span></div>`;
+}
+
+function shortRevision(value) { return String(value || "").slice(0, 12); }
 
 function reportDatum(label, value) {
   return `<div class="report-datum"><span>${escapeHTML(label)}</span><strong>${escapeHTML(String(value))}</strong></div>`;

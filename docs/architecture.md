@@ -130,11 +130,32 @@ still requires the full suite. `unknown` analysis abstains completely; `fallback
 targeted-plus-full-suite or full-suite-fallback. The report is deterministic, advisory, and never
 claims behavioral completeness.
 
+Review Report schema 1 is a presentation envelope over an explicit range Change Report, not a
+second inference engine. It preserves the resolved base/head identities, analysis state,
+confidence, evidence, and test strategy while adding a fixed `shadow` mode contract. Markdown and
+JSON are deterministic renderings of that envelope. SARIF 2.1.0 maps fallback or unknown analysis,
+possible requirement impact, and full-suite policy to separate fixed rules. Results are sorted and
+bounded, locations accept only encoded project-relative paths and current-side hunk regions, and no
+source snippet or absolute path is emitted. A valid review always returns success in shadow mode;
+provider APIs, credentials, comments, uploads, and blocking policy remain outside this layer.
+
+Optional Test Outcome schema 1 is a separate strict JSON input, never inferred from unkeyed JUnit
+or file timestamps. It binds a complete executed-path set to one full commit ID and stores only
+canonical project-relative paths, fixed statuses, and bounded optional durations. A review compares
+selected and executed paths only when that commit exactly equals the resolved head; stale input is
+reported but all comparison sets are empty. The resulting sets describe one run and are not labeled
+as false positives, false negatives, necessity, sufficiency, or behavioral proof.
+
 `changes --report --open` serves the exact fresh in-memory graph used for analysis together with
 the report; it does not fall back to a potentially stale graph cache or persist an extra report.
 The loopback viewer fetches the optional report endpoint, renders strategy/coverage plus ranked
 requirements and tests, and focuses the corresponding graph node when a report item is selected.
 The normal viewer receives a 404 for that optional endpoint and continues with graph-only mode.
+
+`review --open` uses the same serving boundary with a separate optional `/review.json` endpoint.
+The client prefers that envelope when present, unwraps its nested Change Report for existing ranked
+items, and adds revision scope plus commit-keyed outcome freshness and observational comparison.
+No second scan, cache fallback, provider request, or persisted review artifact is introduced.
 
 Test recommendation is also a pure graph query. Recommendation schema 1 accepts commit, file,
 symbol, or test targets. Fixed scores distinguish exactly changed tests, exact-symbol structural
