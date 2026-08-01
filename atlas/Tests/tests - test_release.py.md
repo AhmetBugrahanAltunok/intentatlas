@@ -11,16 +11,22 @@ source_path: "tests/test_release.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3834</code>
+- **Size Bytes:** <code>7508</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_digest - tests - test_release.py|_digest]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_write_sdist - tests - test_release.py|_write_sdist]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_write_wheel - tests - test_release.py|_write_wheel]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_approved_release_hashes_must_match_both_verified_artifacts - tests - test_release.py|test_approved_release_hashes_must_match_both_verified_artifacts]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_release_provenance_is_deterministic_and_bound_to_verified_bytes - tests - test_release.py|test_release_provenance_is_deterministic_and_bound_to_verified_bytes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_release_provenance_rejects_ambiguous_source_inputs - tests - test_release.py|test_release_provenance_rejects_ambiguous_source_inputs]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_release_verifier_accepts_repeated_project_archives - tests - test_release.py|test_release_verifier_accepts_repeated_project_archives]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_release_verifier_rejects_non_reproducible_wheel - tests - test_release.py|test_release_verifier_rejects_non_reproducible_wheel]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/release_provenance - tools - verify_release.py|release_provenance]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/verify_approved_hashes - tools - verify_release.py|verify_approved_hashes]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/verify_release - tools - verify_release.py|verify_release]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/write_release_provenance - tools - verify_release.py|write_release_provenance]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

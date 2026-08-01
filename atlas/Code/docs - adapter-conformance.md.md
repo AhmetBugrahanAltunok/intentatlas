@@ -13,6 +13,6 @@ source_path: "docs/adapter-conformance.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>3245</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_

@@ -10,11 +10,10 @@ source_path: "tools/verify_release.py"
 
 ## Metadata
 
-- **End Line:** <code>66</code>
-- **Line:** <code>62</code>
+- **End Line:** <code>73</code>
+- **Line:** <code>69</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/tools - verify_release.py|tools/verify_release.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-diff-hunk)_

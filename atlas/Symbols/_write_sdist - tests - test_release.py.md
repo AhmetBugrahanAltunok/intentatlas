@@ -10,11 +10,10 @@ source_path: "tests/test_release.py"
 
 ## Metadata
 
-- **End Line:** <code>78</code>
-- **Line:** <code>57</code>
+- **End Line:** <code>84</code>
+- **Line:** <code>63</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_release.py|tests/test_release.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-diff-hunk)_

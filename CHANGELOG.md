@@ -8,6 +8,15 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Added
 
+- Fixed-seed property and mutation-fuzz coverage for generated graphs and untrusted JSON, plus a
+  real Chrome-family browser E2E gate for the bounded 320-node viewer scenario.
+- Deterministic release provenance records bound to exact source revision, build epoch, artifact
+  names, sizes, SHA-256 digests, and completed archive verification checks.
+- Maintained-source static typing and a repository policy that requires immutable full-SHA
+  references for every external GitHub Action.
+- A separately dispatched, fixed-environment trusted-publishing workflow that requires an exact
+  source revision, build epoch, approved artifact hashes, confirmation phrase, and short-lived
+  identity before it can publish the same bytes it verifies.
 - Executable language-adapter conformance contract version 1, shared by fresh and cached fragments,
   with deterministic fixture checks and fail-closed structural validation before graph merge.
 - Deterministic bounded viewer overview and two-hop focus windows with global search, indexed graph

@@ -5,6 +5,8 @@ import base64
 import csv
 import hashlib
 import io
+import json
+import re
 import tarfile
 from dataclasses import dataclass
 from email.parser import BytesParser
@@ -12,6 +14,8 @@ from pathlib import Path, PurePosixPath
 from zipfile import ZipFile
 
 EXPECTED_NAME = "intentatlas"
+PROVENANCE_SCHEMA_VERSION = 1
+FULL_GIT_SHA = re.compile(r"[0-9a-f]{40}")
 REQUIRED_PACKAGE_FILES = {
     "intentatlas/__init__.py",
     "intentatlas/__main__.py",
@@ -31,10 +35,13 @@ FORBIDDEN_SDIST_ROOTS = {
 
 @dataclass(frozen=True)
 class ReleaseVerification:
+    version: str
     wheel: str
     wheel_sha256: str
+    wheel_size: int
     sdist: str
     sdist_sha256: str
+    sdist_size: int
     wheel_files: int
     sdist_files: int
 
@@ -186,13 +193,110 @@ def verify_release(first: Path, second: Path, project_root: Path) -> ReleaseVeri
     version, wheel_files = _validate_wheel(first_wheel, project_root)
     sdist_files = _validate_sdist(first_sdist, version)
     return ReleaseVerification(
+        version=version,
         wheel=first_wheel.name,
         wheel_sha256=first_wheel_hash,
+        wheel_size=first_wheel.stat().st_size,
         sdist=first_sdist.name,
         sdist_sha256=first_sdist_hash,
+        sdist_size=first_sdist.stat().st_size,
         wheel_files=wheel_files,
         sdist_files=sdist_files,
     )
+
+
+def release_provenance(
+    result: ReleaseVerification,
+    *,
+    source_revision: str,
+    source_date_epoch: int,
+) -> dict[str, object]:
+    if FULL_GIT_SHA.fullmatch(source_revision) is None:
+        raise ValueError("Release provenance requires a lowercase 40-character Git revision")
+    if (
+        isinstance(source_date_epoch, bool)
+        or not isinstance(source_date_epoch, int)
+        or source_date_epoch < 0
+    ):
+        raise ValueError("Release provenance requires a non-negative SOURCE_DATE_EPOCH")
+    artifacts = [
+        {
+            "name": result.wheel,
+            "type": "wheel",
+            "size": result.wheel_size,
+            "sha256": result.wheel_sha256,
+        },
+        {
+            "name": result.sdist,
+            "type": "sdist",
+            "size": result.sdist_size,
+            "sha256": result.sdist_sha256,
+        },
+    ]
+    artifacts.sort(key=lambda item: str(item["name"]))
+    return {
+        "schema_version": PROVENANCE_SCHEMA_VERSION,
+        "format": "intentatlas-release-provenance",
+        "project": EXPECTED_NAME,
+        "version": result.version,
+        "source": {
+            "revision": source_revision,
+            "source_date_epoch": source_date_epoch,
+        },
+        "artifacts": artifacts,
+        "verification": {
+            "repeated_builds_byte_identical": True,
+            "checks": [
+                "archive-member-safety",
+                "artifact-sha256",
+                "bundled-web-assets",
+                "console-entry-point",
+                "mit-license-bytes",
+                "package-boundaries",
+                "python-metadata",
+                "wheel-record",
+            ],
+            "wheel_files": result.wheel_files,
+            "sdist_files": result.sdist_files,
+        },
+    }
+
+
+def write_release_provenance(
+    path: Path,
+    result: ReleaseVerification,
+    *,
+    source_revision: str,
+    source_date_epoch: int,
+) -> None:
+    document = release_provenance(
+        result,
+        source_revision=source_revision,
+        source_date_epoch=source_date_epoch,
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(document, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
+def verify_approved_hashes(
+    result: ReleaseVerification,
+    *,
+    expected_wheel_sha256: str,
+    expected_sdist_sha256: str,
+) -> None:
+    for label, value in (
+        ("wheel", expected_wheel_sha256),
+        ("source distribution", expected_sdist_sha256),
+    ):
+        if re.fullmatch(r"[0-9a-f]{64}", value) is None:
+            raise ValueError(f"Approved {label} SHA-256 must be 64 lowercase hex characters")
+    if result.wheel_sha256 != expected_wheel_sha256:
+        raise ValueError("Verified wheel does not match the approved SHA-256")
+    if result.sdist_sha256 != expected_sdist_sha256:
+        raise ValueError("Verified source distribution does not match the approved SHA-256")
 
 
 def main() -> int:
@@ -202,14 +306,41 @@ def main() -> int:
     parser.add_argument("first", type=Path, help="First build output directory")
     parser.add_argument("second", type=Path, help="Second build output directory")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
+    parser.add_argument("--write-provenance", type=Path)
+    parser.add_argument("--source-revision")
+    parser.add_argument("--source-date-epoch", type=int)
+    parser.add_argument("--expected-wheel-sha256")
+    parser.add_argument("--expected-sdist-sha256")
     args = parser.parse_args()
     try:
         result = verify_release(args.first, args.second, args.project_root.resolve())
+        expected_hashes = (args.expected_wheel_sha256, args.expected_sdist_sha256)
+        if any(value is not None for value in expected_hashes):
+            if any(value is None for value in expected_hashes):
+                raise ValueError("Both approved artifact SHA-256 values are required")
+            verify_approved_hashes(
+                result,
+                expected_wheel_sha256=args.expected_wheel_sha256,
+                expected_sdist_sha256=args.expected_sdist_sha256,
+            )
+        if args.write_provenance is not None:
+            if args.source_revision is None or args.source_date_epoch is None:
+                raise ValueError(
+                    "Writing provenance requires --source-revision and --source-date-epoch"
+                )
+            write_release_provenance(
+                args.write_provenance,
+                result,
+                source_revision=args.source_revision,
+                source_date_epoch=args.source_date_epoch,
+            )
     except (OSError, ValueError, tarfile.TarError) as exc:
         parser.exit(1, f"release verification failed: {exc}\n")
     print(f"Verified reproducible wheel: {result.wheel} sha256={result.wheel_sha256}")
     print(f"Verified reproducible sdist: {result.sdist} sha256={result.sdist_sha256}")
     print(f"Validated archive files: wheel={result.wheel_files}, sdist={result.sdist_files}")
+    if args.write_provenance is not None:
+        print(f"Wrote deterministic release provenance: {args.write_provenance}")
     return 0
 
 

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/recommendations.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>29834</code>
+- **Size Bytes:** <code>30005</code>
 
 ## Outgoing relationships
 

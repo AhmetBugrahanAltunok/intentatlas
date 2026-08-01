@@ -11,7 +11,7 @@ source_path: "RELEASING.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>2392</code>
+- **Size Bytes:** <code>3802</code>
 
 ## Incoming relationships
 

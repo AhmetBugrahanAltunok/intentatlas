@@ -44,6 +44,10 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
   checkouts without bundling or executing third-party code.
 - Verify the installed wheel workflow on Windows, macOS, and Linux CI, and reject release
   candidates whose repeated wheel or source builds differ byte-for-byte.
+- Pressure graph and untrusted JSON boundaries with replayable fixed-seed property/mutation tests,
+  and render the bounded large-graph window through a real Chrome-family browser in CI.
+- Produce deterministic release provenance that binds verified artifact hashes to an exact Git
+  revision and fixed build epoch; package publication remains separately approved.
 - Link Go tests to uniquely owned exported declarations they actually reference, while keeping
   ambiguous and filename-only matches conservative.
 - Follow one exact Go symbol-caller hop when a directly tested wrapper calls the changed symbol.
@@ -86,7 +90,8 @@ On macOS or Linux, replace `.\.venv\Scripts\intentatlas.exe` with
 
 Python 3.11, 3.12, and 3.13 are supported. The complete suite runs on Linux, while an installed
 wheel smoke test covers the CLI, scan, recommendation, and loopback viewer workflow on Linux,
-Windows, and macOS for the oldest and newest supported Python versions. See
+Windows, and macOS for the oldest and newest supported Python versions. CI also runs maintained
+source typing, immutable Action-reference policy, and real-browser rendering gates. See
 [the release process](RELEASING.md) for the local reproducibility and artifact checks.
 
 ## Core commands

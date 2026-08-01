@@ -10,11 +10,10 @@ source_path: "tests/test_action.py"
 
 ## Metadata
 
-- **End Line:** <code>45</code>
-- **Line:** <code>13</code>
+- **End Line:** <code>48</code>
+- **Line:** <code>16</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_action.py|tests/test_action.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-diff-hunk)_

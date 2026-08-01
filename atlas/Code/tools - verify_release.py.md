@@ -11,7 +11,7 @@ source_path: "tools/verify_release.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9081</code>
+- **Size Bytes:** <code>13728</code>
 
 ## Outgoing relationships
 
@@ -23,7 +23,10 @@ source_path: "tools/verify_release.py"
 - <code>defines</code> → [[Symbols/_validate_sdist - tools - verify_release.py|_validate_sdist]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_validate_wheel - tools - verify_release.py|_validate_wheel]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/main - tools - verify_release.py|main]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/release_provenance - tools - verify_release.py|release_provenance]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/verify_approved_hashes - tools - verify_release.py|verify_approved_hashes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/verify_release - tools - verify_release.py|verify_release]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/write_release_provenance - tools - verify_release.py|write_release_provenance]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 

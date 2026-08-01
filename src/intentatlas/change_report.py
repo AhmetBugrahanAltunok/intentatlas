@@ -234,13 +234,16 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
             f"{len(report.requirements)} shown / {report.requirement_candidate_count} candidates"
         ),
     ]
-    for item in report.requirements:
+    for requirement_item in report.requirements:
         lines.append(
-            f"- {item.requirement.id}: {item.score}/100 ({item.confidence})"
+            f"- {requirement_item.requirement.id}: {requirement_item.score}/100 "
+            f"({requirement_item.confidence})"
         )
     lines.append(f"Recommended tests: {len(report.tests)}")
-    for item in report.tests:
-        lines.append(f"- {item.test.id}: {item.score}/100 ({item.confidence})")
+    for test_item in report.tests:
+        lines.append(
+            f"- {test_item.test.id}: {test_item.score}/100 ({test_item.confidence})"
+        )
     lines.append(f"Advisory: {_ADVISORY}")
     return "\n".join(lines) + "\n"
 
@@ -260,7 +263,9 @@ def _requirement_impacts(
     for artifact_id in artifact_ids:
         artifact = graph.nodes[artifact_id]
         initially_degraded = artifact.kind == "file"
-        seeds = [(artifact_id, (artifact_id,), (), initially_degraded, ())]
+        seeds: list[
+            tuple[str, tuple[str, ...], tuple[str, ...], bool, tuple[str, ...]]
+        ] = [(artifact_id, (artifact_id,), (), initially_degraded, ())]
         if artifact.kind == "file":
             seeds.extend(
                 (edge.target, (edge.target,), (), True, (edge.evidence,))

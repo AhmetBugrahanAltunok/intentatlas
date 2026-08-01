@@ -436,14 +436,14 @@ def _collect_import_declaration(
                 index += 1
                 continue
             if kind == "identifier" or (kind == "punctuation" and value == "."):
-                alias = value
+                grouped_alias = value
                 index += 1
                 if index >= len(tokens) or tokens[index][0] != "string":
                     return index
                 import_path = tokens[index][1]
                 if not _valid_import_path(import_path):
                     return index
-                candidates.add((alias, import_path))
+                candidates.add((grouped_alias, import_path))
                 index += 1
                 continue
             return index

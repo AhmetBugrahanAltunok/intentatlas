@@ -137,28 +137,33 @@ def _markdown(report: ReviewReport) -> str:
         "",
     ]
     if change.requirements:
-        for item in change.requirements:
-            path = " → ".join(_markdown_text(node_id) for node_id in item.path.nodes)
+        for requirement_item in change.requirements:
+            path = " → ".join(
+                _markdown_text(node_id) for node_id in requirement_item.path.nodes
+            )
             lines.extend(
                 [
-                    f"- **{_markdown_text(item.requirement.label)}** "
-                    f"(`{_markdown_text(item.requirement.id)}`) — "
-                    f"{_markdown_text(item.confidence)}, {item.score}/100",
+                    f"- **{_markdown_text(requirement_item.requirement.label)}** "
+                    f"(`{_markdown_text(requirement_item.requirement.id)}`) — "
+                    f"{_markdown_text(requirement_item.confidence)}, "
+                    f"{requirement_item.score}/100",
                     f"  - Path: {path}",
-                    f"  - Evidence: {_markdown_text(', '.join(item.evidence) or 'none')}",
+                    "  - Evidence: "
+                    + _markdown_text(", ".join(requirement_item.evidence) or "none"),
                 ]
             )
     else:
         lines.append("- No requirement candidate meets the selected confidence threshold.")
     lines.extend(["", "## Candidate tests", ""])
     if change.tests:
-        for item in change.tests:
-            label = item.test.path or item.test.label
+        for test_item in change.tests:
+            label = test_item.test.path or test_item.test.label
             lines.extend(
                 [
                     f"- **{_markdown_text(label)}** — "
-                    f"{_markdown_text(item.confidence)}, {item.score}/100",
-                    f"  - Evidence: {_markdown_text(', '.join(item.evidence) or 'none')}",
+                    f"{_markdown_text(test_item.confidence)}, {test_item.score}/100",
+                    "  - Evidence: "
+                    + _markdown_text(", ".join(test_item.evidence) or "none"),
                 ]
             )
     else:
@@ -203,12 +208,12 @@ def _markdown(report: ReviewReport) -> str:
     lines.extend(["", "## Analysis gaps", ""])
     gaps = tuple(item for item in change.analysis.files if item.state != "analyzed")
     if gaps:
-        for item in gaps:
+        for gap in gaps:
             lines.append(
-                f"- `{_markdown_text(item.path)}` — {_markdown_text(item.state)}, "
-                f"freshness {_markdown_text(item.freshness)}, confidence "
-                f"{_markdown_text(item.confidence)}; "
-                f"{_markdown_text(', '.join(item.evidence))}"
+                f"- `{_markdown_text(gap.path)}` — {_markdown_text(gap.state)}, "
+                f"freshness {_markdown_text(gap.freshness)}, confidence "
+                f"{_markdown_text(gap.confidence)}; "
+                f"{_markdown_text(', '.join(gap.evidence))}"
             )
     else:
         lines.append("- No structural analysis gap was reported for this range.")
@@ -219,47 +224,49 @@ def _sarif(report: ReviewReport) -> dict[str, Any]:
     change = report.change_report
     change_files = {item.path: item for item in change.analysis.change_set.files}
     results: list[dict[str, Any]] = []
-    for item in change.analysis.files:
-        if item.state == "analyzed":
+    for analysis_item in change.analysis.files:
+        if analysis_item.state == "analyzed":
             continue
-        rule_id = "IA100" if item.state == "unknown" else "IA101"
+        rule_id = "IA100" if analysis_item.state == "unknown" else "IA101"
         result: dict[str, Any] = {
             "ruleId": rule_id,
-            "level": "warning" if item.state == "unknown" else "note",
+            "level": "warning" if analysis_item.state == "unknown" else "note",
             "message": {
                 "text": (
-                    f"Analysis is {item.state} for {item.path} "
-                    f"({item.freshness}; {item.confidence} confidence)."
+                    f"Analysis is {analysis_item.state} for {analysis_item.path} "
+                    f"({analysis_item.freshness}; {analysis_item.confidence} confidence)."
                 )
             },
             "properties": {
-                "state": item.state,
-                "freshness": item.freshness,
-                "confidence": item.confidence,
-                "evidence": list(item.evidence),
+                "state": analysis_item.state,
+                "freshness": analysis_item.freshness,
+                "confidence": analysis_item.confidence,
+                "evidence": list(analysis_item.evidence),
             },
         }
-        location = _location(item.path, change_files.get(item.path))
+        location = _location(analysis_item.path, change_files.get(analysis_item.path))
         if location is not None:
             result["locations"] = [location]
         results.append(result)
-    for item in change.requirements:
+    for requirement_item in change.requirements:
         results.append(
             {
                 "ruleId": "IA200",
                 "level": "note",
                 "message": {
                     "text": (
-                        f"Possible requirement impact: {item.requirement.label} "
-                        f"[{item.requirement.id}] ({item.confidence}; {item.score}/100)."
+                        "Possible requirement impact: "
+                        f"{requirement_item.requirement.label} "
+                        f"[{requirement_item.requirement.id}] "
+                        f"({requirement_item.confidence}; {requirement_item.score}/100)."
                     )
                 },
                 "properties": {
-                    "requirement_id": item.requirement.id,
-                    "confidence": item.confidence,
-                    "score": item.score,
-                    "path": item.path.to_dict(),
-                    "evidence": list(item.evidence),
+                    "requirement_id": requirement_item.requirement.id,
+                    "confidence": requirement_item.confidence,
+                    "score": requirement_item.score,
+                    "path": requirement_item.path.to_dict(),
+                    "evidence": list(requirement_item.evidence),
                 },
             }
         )
@@ -283,12 +290,12 @@ def _sarif(report: ReviewReport) -> dict[str, Any]:
     used_rules = {str(result["ruleId"]) for result in results}
     candidate_tests = [
         {
-            "id": item.test.id,
-            "path": item.test.path,
-            "score": item.score,
-            "confidence": item.confidence,
+            "id": test_item.test.id,
+            "path": test_item.test.path,
+            "score": test_item.score,
+            "confidence": test_item.confidence,
         }
-        for item in change.tests
+        for test_item in change.tests
     ]
     run_properties: dict[str, Any] = {
         "schema_version": REVIEW_SCHEMA_VERSION,

@@ -258,6 +258,18 @@ entry point, web assets, and MIT license bytes, and rejects project-only vault, 
 workflow, and local configuration data from the source archive. Publication remains a separate,
 explicitly approved external action.
 
+Release hardening adds three independent gates around that verifier. Fixed-seed generated graphs
+and hostile JSON mutations must either preserve graph invariants or fail with a bounded validation
+error. A Chrome-family headless browser must execute the packaged viewer and render the expected
+240-node large-graph window. Maintained Python source is checked statically, while a repository
+policy test rejects every external Action reference that is not a full immutable commit SHA.
+
+After repeated archive verification, the verifier can write canonical provenance JSON containing
+the exact source revision, fixed build epoch, artifact names, sizes, SHA-256 digests, and completed
+checks. This record is deterministic descriptive evidence, not a signature. Default CI remains
+verification-only; trusted publishing is a separate protected manual boundary over explicitly
+approved source and artifact identities.
+
 The loopback viewer uses a narrow `ThreadingHTTPServer` subclass that binds through `TCPServer`
 and records the validated numeric server address directly. It avoids the standard HTTP server's
 reverse DNS lookup, which is unnecessary for local serving and can delay startup on constrained

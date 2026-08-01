@@ -13,6 +13,6 @@ source_path: "AGENTS.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>2523</code>
 
-## Incoming relationships
+## Graph health
 
-- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
+- Orphaned generated node

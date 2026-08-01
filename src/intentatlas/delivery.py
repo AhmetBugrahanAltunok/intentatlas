@@ -111,8 +111,8 @@ def _delivery_fragment(
             )
         )
         for intent_id in intent_ids:
-            target = graph_nodes.get(intent_id)
-            if target is not None and target.kind in {"requirement", "decision"}:
+            intent_target = graph_nodes.get(intent_id)
+            if intent_target is not None and intent_target.kind in {"requirement", "decision"}:
                 edges.append(Edge(intent_id, node_id, "tracked-by", "delivery-json"))
                 link_count += 1
         if link_count > MAX_LINKS:
@@ -171,9 +171,9 @@ def _delivery_fragment(
                 edges.append(Edge(issue_node, node_id, "addressed-by", "delivery-json"))
                 link_count += 1
         for changed_file in changed_files:
-            target = _resolve_file(changed_file, aliases)
-            if target is not None:
-                edges.append(Edge(node_id, f"file:{target}", "changes", "delivery-json"))
+            file_target = _resolve_file(changed_file, aliases)
+            if file_target is not None:
+                edges.append(Edge(node_id, f"file:{file_target}", "changes", "delivery-json"))
                 link_count += 1
         for sha in commit_shas:
             commit_id = f"commit:{sha}"

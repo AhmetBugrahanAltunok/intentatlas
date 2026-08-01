@@ -57,7 +57,10 @@ gösterecektir.
 Python 3.11, 3.12 ve 3.13 desteklenir. Tam test paketi Linux üzerinde; kurulmuş wheel ile CLI,
 tarama, test önerisi ve yerel görüntüleyici akışı ise en eski ve en yeni desteklenen Python
 sürümlerinde Linux, Windows ve macOS üzerinde CI tarafından doğrulanır. Yerel, tekrarlanabilir
-paket kontrolleri için [sürüm sürecine](RELEASING.md) bakın.
+paket kontrollerine ek olarak sabit tohumlu property/mutasyon testleri, gerçek Chrome tabanlı
+görüntüleme, statik tip ve değişmez Action referansı kapıları uygulanır. Doğrulanan paket
+hash'lerini kesin Git revision ve sabit derleme zamanına bağlayan deterministik provenance kaydı
+üretilir; yayınlama ayrı onay gerektirir. Ayrıntılar için [sürüm sürecine](RELEASING.md) bakın.
 
 Pull request veya CI denemelerinde aynı değişiklik analizi salt-okunur gölge modunda çalıştırılabilir:
 

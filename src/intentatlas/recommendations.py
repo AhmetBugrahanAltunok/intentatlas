@@ -240,7 +240,8 @@ def recommend_tests(
                             ),
                             *(
                                 ("owner-name-convention",)
-                                if match.matched_symbol_id is not None
+                                if signal.symbol is not None
+                                and match.matched_symbol_id is not None
                                 and match.matched_symbol_id != signal.symbol.id
                                 else ()
                             ),
@@ -659,6 +660,9 @@ def _add_recent_cochange_reasons(
     index: GraphIndex,
     reasons_by_test: dict[str, list[RecommendationReason]],
 ) -> None:
+    prefix_nodes: tuple[str, ...]
+    prefix_relations: tuple[str, ...]
+    prefix_evidence: tuple[str, ...]
     if target.kind == "symbol":
         symbol_file = _symbol_file(graph, target, index)
         if symbol_file is None:

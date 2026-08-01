@@ -4,6 +4,7 @@ import re
 from collections.abc import Set as AbstractSet
 from dataclasses import dataclass
 from types import MappingProxyType
+from typing import TypeGuard
 
 from ..models import Edge, Node
 from .base import AdapterContext, GraphFragment, LanguageAdapter
@@ -138,7 +139,7 @@ def assert_adapter_conforms(
     )
 
 
-def _valid_suffixes(value: object) -> bool:
+def _valid_suffixes(value: object) -> TypeGuard[frozenset[str]]:
     return (
         isinstance(value, frozenset)
         and bool(value)

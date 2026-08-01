@@ -9,9 +9,11 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 .\.venv\Scripts\python.exe -m pytest
 .\.venv\Scripts\python.exe -m ruff check .
+.\.venv\Scripts\python.exe -m pip install -e ".[typing]"
+.\.venv\Scripts\python.exe -m mypy
 ```
 
-Release-affecting changes must also pass `tests/test_e2e.py`, build twice under a fixed
+Release-affecting changes must also pass the installed CLI and real-browser E2E tests, build twice under a fixed
 `SOURCE_DATE_EPOCH`, and pass `tools/verify_release.py` as described in
 [`RELEASING.md`](RELEASING.md).
 

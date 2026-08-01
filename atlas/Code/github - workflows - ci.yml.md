@@ -11,7 +11,7 @@ source_path: ".github/workflows/ci.yml"
 ## Metadata
 
 - **Language:** <code>"YAML"</code>
-- **Size Bytes:** <code>2228</code>
+- **Size Bytes:** <code>3754</code>
 
 ## Incoming relationships
 

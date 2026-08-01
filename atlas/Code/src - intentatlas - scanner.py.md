@@ -11,7 +11,7 @@ source_path: "src/intentatlas/scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>21686</code>
+- **Size Bytes:** <code>21908</code>
 
 ## Outgoing relationships
 
@@ -32,6 +32,8 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/RepositoryScanner.scan - src - intentatlas - scanner.py|RepositoryScanner.scan]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner.scan_incremental - src - intentatlas - scanner.py|RepositoryScanner.scan_incremental]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ScanStatistics - src - intentatlas - scanner.py|ScanStatistics]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_HashWriter - src - intentatlas - scanner.py|_HashWriter]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_HashWriter.update - src - intentatlas - scanner.py|_HashWriter.update]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_adapter_fingerprint - src - intentatlas - scanner.py|_adapter_fingerprint]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_exclude_patterns - src - intentatlas - scanner.py|_exclude_patterns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_file_kind - src - intentatlas - scanner.py|_file_kind]] _(structure; evidence: python-ast)_
@@ -56,6 +58,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/LanguageAdapter - src - intentatlas - adapters - base.py|LanguageAdapter]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/validate_adapter_definition - src - intentatlas - adapters - conformance.py|validate_adapter_definition]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/validate_adapter_fragment - src - intentatlas - adapters - conformance.py|validate_adapter_fragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
@@ -80,8 +83,8 @@ source_path: "src/intentatlas/scanner.py"
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_

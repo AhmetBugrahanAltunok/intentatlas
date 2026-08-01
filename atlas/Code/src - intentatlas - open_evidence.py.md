@@ -11,7 +11,7 @@ source_path: "src/intentatlas/open_evidence.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>16703</code>
+- **Size Bytes:** <code>16739</code>
 
 ## Outgoing relationships
 

@@ -11,11 +11,13 @@ source_path: "tests/test_action.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1544</code>
+- **Size Bytes:** <code>3545</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/test_external_actions_are_pinned_to_immutable_full_commit_shas - tests - test_action.py|test_external_actions_are_pinned_to_immutable_full_commit_shas]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_shadow_review_action_is_opt_in_local_and_credential_free - tests - test_action.py|test_shadow_review_action_is_opt_in_local_and_credential_free]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_trusted_publish_workflow_is_manual_protected_and_hash_bound - tests - test_action.py|test_trusted_publish_workflow_is_manual_protected_and_hash_bound]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 

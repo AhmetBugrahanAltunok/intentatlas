@@ -11,7 +11,7 @@ source_path: "src/intentatlas/delivery.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12429</code>
+- **Size Bytes:** <code>12465</code>
 
 ## Outgoing relationships
 

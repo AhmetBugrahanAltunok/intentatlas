@@ -10,8 +10,8 @@ source_path: "src/intentatlas/adapters/conformance.py"
 
 ## Metadata
 
-- **End Line:** <code>234</code>
-- **Line:** <code>233</code>
+- **End Line:** <code>235</code>
+- **Line:** <code>234</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

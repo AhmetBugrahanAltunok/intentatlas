@@ -10,6 +10,7 @@ import tempfile
 import time
 from collections import defaultdict
 from collections.abc import Callable
+from functools import partial
 from pathlib import Path
 from typing import TypeVar
 
@@ -139,7 +140,8 @@ class ProjectVault:
             ) as stream:
                 temporary = Path(stream.name)
                 stream.write(content)
-            self._retry_file_operation(lambda: os.replace(temporary, target))
+            written = temporary
+            self._retry_file_operation(lambda: os.replace(written, target))
         finally:
             if temporary is not None and temporary.exists():
                 self._retry_file_operation(
@@ -153,14 +155,14 @@ class ProjectVault:
                 if path in desired or path.is_symlink():
                     continue
                 prefix = self._retry_file_operation(
-                    lambda path=path: path.read_text(encoding="utf-8", errors="replace"),
+                    partial(path.read_text, encoding="utf-8", errors="replace"),
                     missing_ok=True,
                 )
                 if prefix is None:
                     continue
                 if GENERATED_MARKER in prefix[:512]:
                     self._retry_file_operation(
-                        lambda path=path: path.unlink(), missing_ok=True
+                        partial(path.unlink), missing_ok=True
                     )
 
     def _retry_file_operation(
@@ -177,6 +179,7 @@ class ProjectVault:
                 if delay is None or not _is_transient_file_error(exc):
                     raise
                 time.sleep(delay)
+        raise AssertionError("file retry schedule must not be empty")
 
     def _note_locations(self, graph: AtlasGraph) -> dict[str, Path]:
         locations: dict[str, Path] = {}

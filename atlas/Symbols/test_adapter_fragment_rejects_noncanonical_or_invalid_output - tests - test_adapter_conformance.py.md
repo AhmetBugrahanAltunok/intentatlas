@@ -17,3 +17,4 @@ source_path: "tests/test_adapter_conformance.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_adapter_conformance.py|tests/test_adapter_conformance.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-diff-hunk)_

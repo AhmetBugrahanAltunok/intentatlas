@@ -10,8 +10,8 @@ source_path: "src/intentatlas/vault.py"
 
 ## Metadata
 
-- **End Line:** <code>276</code>
-- **Line:** <code>251</code>
+- **End Line:** <code>279</code>
+- **Line:** <code>254</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

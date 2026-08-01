@@ -11,7 +11,7 @@ source_path: "src/intentatlas/change_report.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>15205</code>
+- **Size Bytes:** <code>15408</code>
 
 ## Outgoing relationships
 

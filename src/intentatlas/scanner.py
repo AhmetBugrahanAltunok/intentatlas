@@ -8,10 +8,12 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from types import MappingProxyType
+from typing import Protocol
 
 from .adapters import (
     BUILTIN_ADAPTERS,
     AdapterContext,
+    LanguageAdapter,
     validate_adapter_definition,
     validate_adapter_fragment,
 )
@@ -75,6 +77,10 @@ class PendingLink:
     target: str
     relation: str
     evidence: str
+
+
+class _HashWriter(Protocol):
+    def update(self, value: bytes, /) -> None: ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -243,12 +249,13 @@ class RepositoryScanner:
                     fingerprint,
                     frozenset(self.graph.nodes),
                 )
-                fragment = cached.fragment
-                if fragment is None:
+                cached_fragment = cached.fragment
+                if cached_fragment is None:
                     fragment = adapter.scan(context)
                     self.rebuilt_adapters.append(adapter.name)
                     cache_miss = True
                 else:
+                    fragment = cached_fragment
                     self.reused_adapters.append(adapter.name)
 
                 if _adapter_fingerprint(adapter, context) != fingerprint:
@@ -413,7 +420,7 @@ class RepositoryScanner:
                 )
 
 
-def _adapter_fingerprint(adapter, context: AdapterContext) -> str:
+def _adapter_fingerprint(adapter: LanguageAdapter, context: AdapterContext) -> str:
     digest = hashlib.sha256()
     _hash_part(digest, b"intentatlas-adapter-fragment-v1")
     _hash_part(digest, adapter.name.encode("utf-8"))
@@ -439,7 +446,7 @@ def _adapter_fingerprint(adapter, context: AdapterContext) -> str:
     return digest.hexdigest()
 
 
-def _hash_part(digest, value: bytes) -> None:
+def _hash_part(digest: _HashWriter, value: bytes) -> None:
     digest.update(len(value).to_bytes(8, "big"))
     digest.update(value)
 

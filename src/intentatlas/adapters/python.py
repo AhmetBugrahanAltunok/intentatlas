@@ -31,14 +31,14 @@ class PythonAdapter:
             if source is None:
                 continue
             try:
-                tree = ast.parse(source, filename=relative)
+                parsed_tree = ast.parse(source, filename=relative)
             except (SyntaxError, ValueError):
                 continue
-            trees[relative] = tree
+            trees[relative] = parsed_tree
 
             file_node = f"file:{relative}"
             visitor = _SymbolVisitor(relative)
-            visitor.visit(tree)
+            visitor.visit(parsed_tree)
             nodes.extend(visitor.nodes)
             edges.extend(
                 Edge(file_node, node.id, "defines", "python-ast") for node in visitor.nodes

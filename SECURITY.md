@@ -77,7 +77,16 @@ reproduction steps, impact, and any suggested mitigation.
   and source archives. It validates wheel paths, CRCs, `RECORD` hashes and sizes, metadata, console
   entry point, bundled web assets, and repository-matching MIT license bytes. Source archives reject
   unsafe members, links, unexpected roots, and project-only vault, benchmark, workflow, and local
-  configuration data. The release workflow verifies artifacts but never publishes them.
+  configuration data. Fixed-seed property/mutation tests exercise untrusted graph and JSON
+  boundaries, a real Chrome-family browser verifies bounded rendered state, and static typing is a
+  maintained-source CI gate. External Actions are policy-checked for immutable full-SHA references.
+  The verifier can emit deterministic provenance binding artifact names, sizes, and SHA-256 values
+  to an exact source revision and build epoch; this record is descriptive evidence, not a signature.
+  Default CI verifies artifacts but never publishes them. A separate manually dispatched workflow
+  requires a fixed `pypi` environment, an explicit confirmation phrase, exact source/epoch/hashes,
+  immutable Actions, and short-lived trusted-publishing identity; it publishes only the same
+  `release-a` bytes that pass repeated-build and approved-hash verification. Repository environment
+  protection and package-index trust configuration remain external owner responsibilities.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during

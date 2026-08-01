@@ -5,13 +5,19 @@ import csv
 import gzip
 import hashlib
 import io
+import json
 import tarfile
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
 import pytest
 
-from tools.verify_release import verify_release
+from tools.verify_release import (
+    release_provenance,
+    verify_approved_hashes,
+    verify_release,
+    write_release_provenance,
+)
 
 
 def _digest(value: bytes) -> str:
@@ -91,6 +97,8 @@ def test_release_verifier_accepts_repeated_project_archives(tmp_path) -> None:
     result = verify_release(first, second, project_root)
 
     assert result.wheel == first_wheel.name
+    assert result.version == "0.1.0"
+    assert result.wheel_size == first_wheel.stat().st_size
     assert result.wheel_files == 11
     assert result.sdist_files == 7
 
@@ -107,3 +115,108 @@ def test_release_verifier_rejects_non_reproducible_wheel(tmp_path) -> None:
 
     with pytest.raises(ValueError, match="not byte-identical"):
         verify_release(first, second, project_root)
+
+
+def test_release_provenance_is_deterministic_and_bound_to_verified_bytes(tmp_path) -> None:
+    project_root = Path(__file__).parents[1]
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    license_bytes = (project_root / "LICENSE").read_bytes()
+    wheel = _write_wheel(first, license_bytes)
+    _write_wheel(second, license_bytes)
+    sdist = _write_sdist(first)
+    _write_sdist(second)
+    result = verify_release(first, second, project_root)
+    revision = "a" * 40
+
+    first_record = tmp_path / "provenance-a.json"
+    second_record = tmp_path / "provenance-b.json"
+    write_release_provenance(
+        first_record,
+        result,
+        source_revision=revision,
+        source_date_epoch=1_704_067_200,
+    )
+    write_release_provenance(
+        second_record,
+        result,
+        source_revision=revision,
+        source_date_epoch=1_704_067_200,
+    )
+
+    assert first_record.read_bytes() == second_record.read_bytes()
+    document = json.loads(first_record.read_text(encoding="utf-8"))
+    assert document["source"] == {
+        "revision": revision,
+        "source_date_epoch": 1_704_067_200,
+    }
+    assert document["artifacts"] == [
+        {
+            "name": wheel.name,
+            "sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
+            "size": wheel.stat().st_size,
+            "type": "wheel",
+        },
+        {
+            "name": sdist.name,
+            "sha256": hashlib.sha256(sdist.read_bytes()).hexdigest(),
+            "size": sdist.stat().st_size,
+            "type": "sdist",
+        },
+    ]
+
+
+@pytest.mark.parametrize(
+    ("revision", "epoch", "message"),
+    [
+        ("main", 0, "40-character"),
+        ("A" * 40, 0, "40-character"),
+        ("a" * 40, -1, "non-negative"),
+        ("a" * 40, True, "non-negative"),
+    ],
+)
+def test_release_provenance_rejects_ambiguous_source_inputs(
+    tmp_path, revision, epoch, message
+) -> None:
+    project_root = Path(__file__).parents[1]
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    license_bytes = (project_root / "LICENSE").read_bytes()
+    _write_wheel(first, license_bytes)
+    _write_wheel(second, license_bytes)
+    _write_sdist(first)
+    _write_sdist(second)
+    result = verify_release(first, second, project_root)
+
+    with pytest.raises(ValueError, match=message):
+        release_provenance(result, source_revision=revision, source_date_epoch=epoch)
+
+
+def test_approved_release_hashes_must_match_both_verified_artifacts(tmp_path) -> None:
+    project_root = Path(__file__).parents[1]
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    license_bytes = (project_root / "LICENSE").read_bytes()
+    _write_wheel(first, license_bytes)
+    _write_wheel(second, license_bytes)
+    _write_sdist(first)
+    _write_sdist(second)
+    result = verify_release(first, second, project_root)
+
+    verify_approved_hashes(
+        result,
+        expected_wheel_sha256=result.wheel_sha256,
+        expected_sdist_sha256=result.sdist_sha256,
+    )
+    with pytest.raises(ValueError, match="wheel does not match"):
+        verify_approved_hashes(
+            result,
+            expected_wheel_sha256="0" * 64,
+            expected_sdist_sha256=result.sdist_sha256,
+        )
+    with pytest.raises(ValueError, match="64 lowercase"):
+        verify_approved_hashes(
+            result,
+            expected_wheel_sha256=result.wheel_sha256.upper(),
+            expected_sdist_sha256=result.sdist_sha256,
+        )

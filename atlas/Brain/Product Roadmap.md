@@ -334,7 +334,7 @@ Status: complete (2026-08-01)
 
 ## Phase 10 — Scale and open evidence ecosystem
 
-Status: active (Phases 10A–10C complete; Phase 10D planned)
+Status: active (Phases 10A–10C complete; Phase 10D active)
 
 - Add incremental scanning and atomic derived indexes without weakening Markdown portability.
 - Import open evidence formats such as SCIP, SARIF, and per-test execution maps.
@@ -362,7 +362,7 @@ Status: complete (2026-08-01)
   complete graph/cache artifact without storing source content.
 
 Phase 10A established the incremental foundation. The sections below record completed Phase 10B
-and 10C delivery; Phase 10D provenance, property/fuzz, browser, and release hardening remains.
+and 10C delivery; Phase 10D provenance, property/fuzz, browser, and release hardening is active.
 
 ### Phase 10B — Open evidence imports
 
@@ -402,6 +402,21 @@ Status: complete (2026-08-01)
 - Outcome: built-in adapters now pass one executable fresh/cache conformance boundary, while the
   local viewer navigates complete large graphs through indexed deterministic 240-node/900-edge
   overview and focus windows with explicit omission and global hidden-node access.
+
+### Phase 10D — Verification and release provenance
+
+Status: active (2026-08-01)
+
+- Add deterministic property and mutation-fuzz coverage at untrusted graph and JSON boundaries.
+- Exercise the packaged large-graph viewer through a real Chrome-family browser.
+- Enforce maintained-source static typing and immutable full-SHA Action references.
+- Bind repeated verified artifacts to exact source and build inputs with canonical provenance.
+- Keep trusted publishing manual, protected, and outside this phase unless separately approved.
+- Requirement: [[Requirements/REQ-025 - Harden verification and release provenance]]
+- Decision: [[Decisions/ADR-025 - Layer offline verification before trusted publishing]]
+- Delivery issue: [[Issues/ISSUE-023 - Implement verification and provenance hardening]]
+- Kickoff: [[Sessions/2026-08-01 - Phase 10D kickoff]]
+- Planned evidence: [[Evidence/EVD-025 - Phase 10D verification and provenance]]
 
 ## Completion rule
 

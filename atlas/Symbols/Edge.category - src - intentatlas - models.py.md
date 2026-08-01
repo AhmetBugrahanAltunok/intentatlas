@@ -17,4 +17,3 @@ source_path: "src/intentatlas/models.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-diff-hunk)_

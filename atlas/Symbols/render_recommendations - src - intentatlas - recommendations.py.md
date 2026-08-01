@@ -10,8 +10,8 @@ source_path: "src/intentatlas/recommendations.py"
 
 ## Metadata
 
-- **End Line:** <code>312</code>
-- **Line:** <code>272</code>
+- **End Line:** <code>313</code>
+- **Line:** <code>273</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

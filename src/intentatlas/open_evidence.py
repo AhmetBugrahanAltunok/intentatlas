@@ -256,7 +256,7 @@ def execution_map_fragment(
             raise ValueError(f"Test execution map contains invalid or excessive files: {report}")
         records += len(file_values)
         _check_records(records, report)
-        observed: list[str] = []
+        observed_files: list[str] = []
         seen_files: set[str] = set()
         for value in file_values:
             source_value = _bounded_string(value, "execution source path", report)
@@ -266,8 +266,8 @@ def execution_map_fragment(
                     f"Test execution map contains an unresolved or duplicate source: {report}"
                 )
             seen_files.add(source)
-            observed.append(source)
-        observed_tuple = tuple(sorted(observed))
+            observed_files.append(source)
+        observed_tuple = tuple(sorted(observed_files))
         mapped.append((test, observed_tuple))
         mapped_paths.update((test, *observed_tuple))
 
@@ -286,7 +286,7 @@ def execution_map_fragment(
 
     nodes: list[Node] = []
     edges: list[Edge] = []
-    for test, observed in mapped:
+    for test, observed_paths in mapped:
         node_id = f"test-execution:{report}:{test}"
         nodes.append(
             Node(
@@ -299,7 +299,7 @@ def execution_map_fragment(
                     "commit": commit,
                     "freshness": freshness,
                     "completeness": "complete-observed-set",
-                    "observed_files": len(observed),
+                    "observed_files": len(observed_paths),
                     "owner": "scanner",
                 },
             )
@@ -308,7 +308,7 @@ def execution_map_fragment(
         if freshness == "aligned":
             edges.extend(
                 Edge(f"file:{test}", f"file:{source}", "tests", "test-execution-map")
-                for source in observed
+                for source in observed_paths
             )
     return nodes, edges
 
