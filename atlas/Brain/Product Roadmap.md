@@ -192,13 +192,29 @@ Status: complete (2026-08-01)
 - Outcome: impact and test-recommendation traversal now reuse one deterministic adjacency index;
   a bounded offline benchmark verifies stable results and local-bucket work as unrelated edges grow.
 
-## Phase 6B2B2B2 — Real-world validation and richer product paths
+## Phase 6B2B2B2A — Guided local showcase and evidence paths
+
+Status: complete (2026-08-01)
+
+- Ship an original, packaged intent-to-proof demo that opens without scanning or network access.
+- Show bounded, deterministic evidence paths for the selected viewer node.
+- Requirement: [[Requirements/REQ-014 - Explain the product through a guided local demo]]
+- Decision: [[Decisions/ADR-014 - Packaged first-party demo and bounded evidence paths]]
+- Delivery issue: [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths]]
+- Evidence: [[Evidence/EVD-014 - Phase 6B2B2B2A guided demo verification]]
+- Review: [[Reviews/Phase 6B2B2B2A Guided Demo Review]]
+- Outcome: a fresh installation can open an original intent-to-proof showcase with one command,
+  and every selected node exposes bounded structural paths to relevant proof-oriented records.
+
+## Phase 6B2B2B2B — License-reviewed real-world validation
 
 Status: planned
 
-- Add public real-world benchmark repositories after license and network review.
-- Add richer viewer evidence paths, end-user demos, and generated output policies that further
-  reduce Git noise.
+- Add public real-world benchmark repositories only after explicit network approval and license
+  review.
+- Add independently reviewed labels and scanner-to-recommendation measurements without copying
+  third-party history, branding, or source into the product.
+- Define generated-output policies that further reduce Git noise.
 
 ## Phase 7 — Open-source release readiness
 

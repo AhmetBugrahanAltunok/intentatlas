@@ -10,6 +10,7 @@ Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
                          ├──aggregate──> cross-project threshold corpus
                          ├──compare──> deterministic CI graph diff
                          └──serve──> local web viewer
+first-party demo graph ────────────> local web viewer
 ```
 
 ## 1. Repository adapters
@@ -64,6 +65,15 @@ impact, and recommendation evidence discovery reuse the same index. A newly acce
 invalidates the cached view; the next read rebuilds it in O(E). Local traversal then scales with
 the matching adjacency bucket rather than unrelated graph edges. The index is rebuildable and is
 not serialized into the graph cache.
+
+The `demo` command builds a compact first-party graph through the same `AtlasGraph`, relation
+catalog, serializer, and viewer used by scanned projects. It writes the graph only to an
+automatically cleaned temporary directory and never scans the current working directory. The
+viewer builds one reusable adjacency view after loading the graph, then derives evidence paths
+locally with deterministic breadth-first traversal in both edge directions, limited to depth 6,
+800 visited nodes, and 6 proof-oriented results. Path labels use
+the stored forward or inverse relation; they are structural explanations, not proof of causality
+or completeness.
 
 Graph comparison is a pure operation over two validated caches. Diff schema 1 excludes generation
 timestamps and sorts added, removed, and changed nodes plus added and removed edges. The same two

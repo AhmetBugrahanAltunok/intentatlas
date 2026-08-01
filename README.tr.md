@@ -25,6 +25,14 @@ Güncel fazlar ve tamamlanma durumları
 
 ## Hızlı başlangıç
 
+Kurulumdan hemen sonra eksiksiz niyet-kanıt zincirini deneyin:
+
+```powershell
+intentatlas demo
+```
+
+Yerleşik örnek özgün, çevrimdışı ve geçicidir; geçerli klasörü taramaz. Kendi deponuz için:
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
@@ -81,6 +89,12 @@ intentatlas benchmark-scale --unrelated-edges 50000 --iterations 500 --format js
 Benchmark kararlı grafik/sonuç/iş sayılarını ve ortama bağlı süreleri raporlar. Taşınabilir gecikme
 garantisi değil, regresyon ve tanılama aracıdır. Ayrıntılar
 [ölçek benchmark sözleşmesinde](docs/query-scale-benchmark.md) bulunur.
+
+Yerel görüntüleyici, seçilen düğümden testlere, kanıtlara, coverage sonuçlarına, test sonuçlarına,
+commit'lere ve pull request'lere giden sınırlı en kısa yapısal yolları da gösterir. Bu yollar grafik
+bağlantısını açıklar; nedensellik, eksiksizlik, güncellik veya test zorunluluğu iddia etmez.
+`intentatlas demo`, aynı üretim görüntüleyicisini dokuz düğümlü özgün bir örnek üzerinde açar ve
+görüntüleyici kapandığında geçici grafiği temizler.
 
 ## Temel yaklaşım
 

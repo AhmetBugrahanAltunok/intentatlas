@@ -15,6 +15,7 @@ from .corpus import (
     render_corpus,
     validate_corpus_graph_size,
 )
+from .demo import serve_demo
 from .evaluation import evaluate_recommendations, load_evaluation_labels, render_evaluation
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
@@ -123,6 +124,12 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
     )
 
+    demo_parser = commands.add_parser(
+        "demo",
+        help="Launch the built-in intent-to-proof showcase",
+    )
+    _viewer_arguments(demo_parser)
+
     diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
     diff_parser.add_argument("base", help="Baseline graph path below the project root")
     _path_argument(diff_parser)
@@ -135,9 +142,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     open_parser = commands.add_parser("open", help="Launch the local interactive graph")
     _path_argument(open_parser)
-    open_parser.add_argument("--host", default="127.0.0.1")
-    open_parser.add_argument("--port", type=int, default=4317)
-    open_parser.add_argument("--no-browser", action="store_true")
+    _viewer_arguments(open_parser)
     return parser
 
 
@@ -145,6 +150,12 @@ def _path_argument(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "path", nargs="?", default=".", help="Project root (default: current directory)"
     )
+
+
+def _viewer_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=4317)
+    parser.add_argument("--no-browser", action="store_true")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -188,6 +199,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 iterations=args.iterations,
             )
             print(render_scale_benchmark(result, args.output_format), end="")
+            return 0
+        if args.command == "demo":
+            serve_demo(host=args.host, port=args.port, open_browser=not args.no_browser)
             return 0
         if args.command == "diff":
             return _diff(root, args.base, args.output, args.check)
@@ -367,10 +381,6 @@ def _evaluate_corpus(
 
 
 def _open(root: Path, host: str, port: int, open_browser: bool) -> int:
-    if host not in {"127.0.0.1", "localhost", "::1"}:
-        raise ValueError("The prototype viewer may only bind to a loopback address")
-    if port < 0 or port > 65535:
-        raise ValueError("Port must be between 0 and 65535")
     config = ProjectConfig.load(root)
     graph_path = config.graph_path(root)
     if not graph_path.exists():

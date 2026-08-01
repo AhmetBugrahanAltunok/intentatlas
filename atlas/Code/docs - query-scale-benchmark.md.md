@@ -13,6 +13,6 @@ source_path: "docs/query-scale-benchmark.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1674</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_

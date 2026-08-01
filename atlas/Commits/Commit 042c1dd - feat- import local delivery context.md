@@ -59,4 +59,3 @@ generated: true
 - <code>modifies</code> → [[Symbols/test_rejects_invalid_delivery_schema - tests - test_delivery.py|test_rejects_invalid_delivery_schema]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_rejects_symbolic_link_delivery_report_before_reading.guarded_is_symlink - tests - test_delivery.py|test_rejects_symbolic_link_delivery_report_before_reading.guarded_is_symlink]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_rejects_unsafe_or_missing_delivery_paths - tests - test_delivery.py|test_rejects_unsafe_or_missing_delivery_paths]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(history; evidence: git-diff-hunk)_

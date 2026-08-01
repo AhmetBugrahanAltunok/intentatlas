@@ -54,8 +54,5 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
 - <code>modifies</code> → [[Symbols/_secret_key - src - intentatlas - security.py|_secret_key]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph.Handler._send - src - intentatlas - viewer.py|serve_graph.Handler._send]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph.Handler.log_message - src - intentatlas - viewer.py|serve_graph.Handler.log_message]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_redact_nested_values_and_common_token_shapes - tests - test_security.py|test_redact_nested_values_and_common_token_shapes]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(history; evidence: git-diff-hunk)_

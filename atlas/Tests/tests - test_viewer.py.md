@@ -11,11 +11,12 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1955</code>
+- **Size Bytes:** <code>2954</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_serve_graph_rejects_missing_graph - tests - test_viewer.py|test_serve_graph_rejects_missing_graph]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_rejects_non_loopback_and_invalid_ports - tests - test_viewer.py|test_serve_graph_rejects_non_loopback_and_invalid_ports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.__init__ - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.__init__]] _(structure; evidence: python-ast)_

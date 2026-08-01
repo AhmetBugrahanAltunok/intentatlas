@@ -46,6 +46,15 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 
 ## Quick start
 
+Try the complete intent-to-proof story immediately after installation:
+
+```powershell
+intentatlas demo
+```
+
+The built-in showcase is original, offline, and temporary. It does not scan the current directory.
+See the [guided demo](docs/guided-demo.md). For your own repository:
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
@@ -71,6 +80,7 @@ intentatlas recommend-tests TARGET       Rank advisory test candidates with expl
 intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
 intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
 intentatlas benchmark-scale              Measure indexed queries on a synthetic large graph
+intentatlas demo                         Open the built-in intent-to-proof showcase
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
 intentatlas open [PATH]                  Launch the local interactive graph
 ```
@@ -199,6 +209,12 @@ or malformed projects cannot silently improve aggregate metrics.
 Impact and recommendation queries share a lazy deterministic adjacency index. Repeated local
 lookups inspect only matching incoming or outgoing buckets; adding an edge invalidates and safely
 rebuilds the in-memory index.
+
+The local viewer also derives a bounded set of shortest structural paths from the selected node to
+tests, evidence, coverage, test results, commits, and pull requests. These paths make the
+intent-to-proof story easier to follow; they explain graph connectivity and do not claim causality,
+completeness, freshness, or test necessity. `intentatlas demo` opens the same production viewer on
+a packaged nine-node first-party example and removes its temporary graph when the viewer stops.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

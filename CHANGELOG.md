@@ -32,6 +32,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   Python, TypeScript, and Go graph regression scenarios.
 - A lazy deterministic graph adjacency index shared by impact, orphan-health, and test
   recommendation queries, plus a bounded offline synthetic scale benchmark command.
+- A one-command original local showcase and bounded viewer evidence paths that connect selected
+  intent, implementation, delivery, test, evidence, and history nodes.
 
 ### Changed
 
@@ -47,6 +49,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   and invalid record shapes with explicit validation errors.
 - Repeated impact and recommendation lookups now traverse indexed local edge buckets instead of
   rescanning every unrelated graph relationship.
+- Viewer loopback validation now applies inside the serving boundary, including direct library and
+  built-in demo use.
 - Python structural analysis now runs behind the same graph-fragment adapter contract used by
   TypeScript and JavaScript without changing its graph semantics.
 - Relation schema 2 adds `addressed-by`/`addresses` delivery semantics and broadens `changes` to

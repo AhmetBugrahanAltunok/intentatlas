@@ -9,7 +9,9 @@ const colors = {
   "pull-request": "#facc15", commit: "#94a3b8"
 };
 const kindOrder = ["requirement", "decision", "issue", "delivery-issue", "pull-request", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "coverage", "test-result", "commit"];
-const state = { data: null, enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
+const proofKinds = new Set(["test", "evidence", "coverage", "test-result", "commit", "pull-request"]);
+const pathLimits = { depth: 6, visited: 800, results: 6 };
+const state = { data: null, nodeById: new Map(), pathAdjacency: new Map(), enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
 const svg = document.querySelector("#graph");
 const viewport = document.querySelector("#viewport");
 const edgeLayer = document.querySelector("#edges");
@@ -26,6 +28,8 @@ async function boot() {
   const response = await fetch("/graph.json", { cache: "no-store" });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   state.data = await response.json();
+  state.nodeById = new Map(state.data.nodes.map(node => [node.id, node]));
+  state.pathAdjacency = buildPathAdjacency();
   for (const node of state.data.nodes) state.enabled.add(node.kind);
   renderStats(); renderFilters(); rebuild(); bindEvents(); fitGraph();
 }
@@ -206,6 +210,7 @@ function selectNode(id) {
   document.querySelector("#detail-id").textContent = node.id;
   const metadata = { ...(node.path ? { path: node.path } : {}), ...node.metadata };
   document.querySelector("#detail-meta").innerHTML = Object.entries(metadata).map(([key, value]) => `<div class="meta-row"><span>${escapeHTML(key.replaceAll("_", " "))}</span><span>${escapeHTML(typeof value === "object" ? JSON.stringify(value) : String(value))}</span></div>`).join("");
+  renderEvidencePaths(node);
   const connected = state.data.edges.filter(edge => edge.source === id || edge.target === id);
   document.querySelector("#detail-links").innerHTML = connected.length ? connected.map(edge => {
     const outgoing = edge.source === id, otherId = outgoing ? edge.target : edge.source;
@@ -214,8 +219,68 @@ function selectNode(id) {
     const detail = [edge.category, edge.evidence].filter(Boolean).join(" · ");
     return `<button class="relationship" data-node="${escapeAttr(otherId)}"><b>${outgoing ? "→" : "←"} ${escapeHTML(relation)}</b> ${escapeHTML(other?.label || otherId)}<small>${escapeHTML(detail)}</small></button>`;
   }).join("") : "<p class='hint'>No relationships yet.</p>";
-  for (const button of document.querySelectorAll(".relationship")) button.addEventListener("click", () => focusNode(button.dataset.node));
+  for (const button of document.querySelectorAll(".relationship")) bindFocusButton(button);
   document.querySelector("#detail").classList.add("open");
+}
+
+function renderEvidencePaths(node) {
+  const container = document.querySelector("#detail-paths");
+  const paths = findEvidencePaths(node.id);
+  container.innerHTML = paths.length ? paths.map((path, index) => {
+    const destination = path.destination;
+    const hops = path.hops.map(hop => `${hop.direction} ${hop.relation} ${hop.label}`).join(" · ");
+    return `<button class="evidence-path" data-path="${index}" data-node="${escapeAttr(destination.id)}"><strong>${escapeHTML(destination.kind)} · ${escapeHTML(destination.label)}</strong><small>${escapeHTML(hops)}</small></button>`;
+  }).join("") : "<p class='hint'>No bounded evidence path found.</p>";
+  for (const button of container.querySelectorAll(".evidence-path")) bindFocusButton(button);
+}
+
+function bindFocusButton(button) {
+  const activate = () => focusNode(button.dataset.node);
+  button.addEventListener("click", activate);
+  button.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") { event.preventDefault(); activate(); }
+  });
+}
+
+function findEvidencePaths(startId) {
+  const nodes = state.nodeById;
+  const adjacency = state.pathAdjacency;
+  const visited = new Set([startId]);
+  const queue = [{ id: startId, hops: [] }];
+  const results = [];
+  while (queue.length && visited.size <= pathLimits.visited && results.length < pathLimits.results) {
+    const current = queue.shift();
+    if (current.hops.length >= pathLimits.depth) continue;
+    for (const hop of adjacency.get(current.id) || []) {
+      if (visited.has(hop.id) || visited.size >= pathLimits.visited) continue;
+      visited.add(hop.id);
+      const hops = [...current.hops, hop];
+      const destination = nodes.get(hop.id);
+      if (proofKinds.has(destination.kind)) results.push({ destination, hops });
+      if (results.length >= pathLimits.results) break;
+      queue.push({ id: hop.id, hops });
+    }
+  }
+  return results;
+}
+
+function buildPathAdjacency() {
+  const nodes = state.nodeById;
+  const adjacency = new Map();
+  const add = (source, hop) => {
+    if (!adjacency.has(source)) adjacency.set(source, []);
+    adjacency.get(source).push(hop);
+  };
+  for (const edge of state.data.edges) {
+    const target = nodes.get(edge.target), source = nodes.get(edge.source);
+    if (!target || !source) continue;
+    add(edge.source, { id: edge.target, label: target.label, relation: edge.relation, direction: "→" });
+    add(edge.target, { id: edge.source, label: source.label, relation: edge.inverse || edge.relation, direction: "←" });
+  }
+  for (const hops of adjacency.values()) {
+    hops.sort((a, b) => a.id.localeCompare(b.id) || a.relation.localeCompare(b.relation) || a.direction.localeCompare(b.direction));
+  }
+  return adjacency;
 }
 
 function focusNode(id) {

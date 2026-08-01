@@ -22,11 +22,30 @@ def test_viewer_assets_are_packaged() -> None:
     assert 'issue: "#f97316"' in app
     assert '"delivery-issue": "#fb923c"' in app
     assert '"pull-request": "#facc15"' in app
+    assert "findEvidencePaths(node.id)" in app
+    assert 'const pathLimits = { depth: 6, visited: 800, results: 6 };' in app
+    assert "edge.inverse || edge.relation" in app
+    assert "No bounded evidence path found." in app
+    assert "function bindFocusButton(button)" in app
+    assert "state.pathAdjacency = buildPathAdjacency();" in app
+    index = web.joinpath("index.html").read_text(encoding="utf-8")
+    assert 'id="detail-paths"' in index
 
 
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:
     with pytest.raises(ValueError, match="Graph not found"):
         viewer.serve_graph(tmp_path / "missing.json", open_browser=False)
+
+
+def test_serve_graph_rejects_non_loopback_and_invalid_ports(tmp_path) -> None:
+    graph = tmp_path / "graph.json"
+    graph.write_text("{}", encoding="utf-8")
+    with pytest.raises(ValueError, match="loopback"):
+        viewer.serve_graph(graph, host="0.0.0.0", open_browser=False)
+    with pytest.raises(ValueError, match="between 0 and 65535"):
+        viewer.serve_graph(graph, port=65536, open_browser=False)
+    with pytest.raises(ValueError, match="between 0 and 65535"):
+        viewer.serve_graph(graph, port=True, open_browser=False)
 
 
 def test_serve_graph_starts_and_closes_server(tmp_path, monkeypatch, capsys) -> None:

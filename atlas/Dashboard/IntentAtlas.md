@@ -17,36 +17,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 12
+- **commit:** 13
 - **config:** 6
-- **decision:** 13
-- **document:** 16
-- **evidence:** 13
-- **file:** 27
-- **issue:** 11
+- **decision:** 14
+- **document:** 17
+- **evidence:** 14
+- **file:** 28
+- **issue:** 12
 - **memory:** 4
-- **requirement:** 13
-- **review:** 13
+- **requirement:** 14
+- **review:** 14
 - **session:** 1
-- **symbol:** 443
-- **test:** 48
-- **relationships:** 1279
+- **symbol:** 457
+- **test:** 49
+- **relationships:** 1356
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 77 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 83 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 51 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 49 relationships
 - [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 48 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 47 relationships
-- [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 46 relationships
-- [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 45 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 46 relationships
+- [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 45 relationships
 - [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] — 44 relationships
+- [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 42 relationships
 - [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] — 41 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 41 relationships
 - [[Tests/tests - test_vault.py|tests/test_vault.py]] — 41 relationships
-- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 36 relationships
-- [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] — 35 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 39 relationships
+- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 38 relationships
 
 ## Workflow
 

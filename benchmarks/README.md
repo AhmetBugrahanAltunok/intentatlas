@@ -11,8 +11,8 @@ medium-confidence recommendations (`test_adapters.py`, `test_delivery.py`, and
 behavior, so the reviewed label treats them as false positives.
 
 The Phase 6B1 case covers the recommendation engine, its CLI integration, and the evaluation,
-corpus, and scale tests that exercise the same production query. All five are relevant in the
-current test suite.
+corpus, guided-demo, and scale tests that exercise the same production query. All six are relevant
+in the current test suite.
 
 These labels were established by reviewing the changes and behavioral tests. The two cases are
 useful as a reproducible regression baseline and threshold comparison, but they are too small and

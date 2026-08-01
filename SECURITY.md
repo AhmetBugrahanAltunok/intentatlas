@@ -53,10 +53,15 @@ reproduction steps, impact, and any suggested mitigation.
 - The query-scale benchmark creates only bounded synthetic in-memory nodes and edges. Boolean,
   negative, and excessive edge or iteration counts are rejected; it reads no repository files,
   executes no project code, persists no benchmark graph, and makes no network request.
+- The built-in demo graph is original static product data built with the production graph model.
+  It does not scan the current directory, execute project code, or access the network; its graph
+  exists only in an automatically cleaned temporary directory. Viewer evidence-path traversal is
+  limited to depth 6, 800 visited nodes, and 6 results, and all graph labels remain escaped.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during
   cleanup, and temporary files are removed on success or failure.
-- The local viewer binds to `127.0.0.1` by default.
+- The local viewer validates loopback-only binding for both project and demo entry points and uses
+  `127.0.0.1` by default.
 
 Security reports are acknowledged in release notes unless the reporter requests anonymity.

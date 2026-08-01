@@ -21,6 +21,10 @@ def serve_graph(
     port: int = 4317,
     open_browser: bool = True,
 ) -> None:
+    if host not in {"127.0.0.1", "localhost", "::1"}:
+        raise ValueError("The viewer may only bind to a loopback address")
+    if isinstance(port, bool) or not isinstance(port, int) or port < 0 or port > 65535:
+        raise ValueError("Port must be between 0 and 65535")
     if not graph_path.is_file():
         raise ValueError(f"Graph not found: {graph_path}. Run `intentatlas scan` first.")
 
