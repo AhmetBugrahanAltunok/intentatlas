@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "name": "axios/axios c3f553c complete test set",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "xhr-status-zero-navigation-cancel",
+      "target": "commit:c3f553c740ebf3dff5e22dae24e9caaafafddd2d",
+      "expected_tests": [
+        "tests/browser/requests.browser.test.js",
+        "tests/unit/adapters/xhr.test.js",
+        "tests/unit/core/buildFullPath.test.js"
+      ]
+    },
+    {
+      "id": "axios-xhr-source-file",
+      "target": "file:lib/adapters/xhr.js",
+      "expected_tests": [
+        "tests/browser/requests.browser.test.js",
+        "tests/unit/adapters/xhr.test.js"
+      ]
+    },
+    {
+      "id": "axios-normalize-url-symbol",
+      "target": "symbol:lib/helpers/normalizeURLForProtocolCheck.js::normalizeURLForProtocolCheck",
+      "expected_tests": [
+        "tests/browser/requests.browser.test.js",
+        "tests/unit/adapters/xhr.test.js",
+        "tests/unit/core/buildFullPath.test.js"
+      ]
+    }
+  ]
+}

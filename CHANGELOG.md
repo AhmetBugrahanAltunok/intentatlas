@@ -35,8 +35,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 - A one-command original local showcase and bounded viewer evidence paths that connect selected
   intent, implementation, delivery, test, evidence, and history nodes.
 - Offline real-world recommendation evaluation for clean, pinned, license-reviewed public
-  checkouts, with strict provenance validation, nine reviewed Python/JavaScript/Go cases, and an
-  ephemeral-only generated-output policy.
+  checkouts, with strict provenance validation, 18 reviewed cases across six Python/JavaScript/Go
+  projects, and an ephemeral-only generated-output policy.
 - Conservative Go same-package test links based on referenced exported declarations uniquely owned
   by one production file, with filename convention retained as weak fallback evidence.
 
@@ -59,6 +59,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 - Python structural analysis now runs behind the same graph-fragment adapter contract used by
   TypeScript and JavaScript without changing its graph semantics.
 - Root-level JavaScript files named `test.js` or `tests.js` are now recognized as tests.
+- Go tests importing a local package now link only through uniquely owned referenced exports
+  instead of every file in that package; non-test imports remain package-level.
 - Relation schema 2 adds `addressed-by`/`addresses` delivery semantics and broadens `changes` to
   version-control delivery records; existing graph caches require a new scan.
 - Relation schema 3 adds direct `modifies`/`modified-by` history semantics while preserving

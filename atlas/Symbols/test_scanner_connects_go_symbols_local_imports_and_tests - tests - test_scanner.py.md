@@ -10,7 +10,7 @@ source_path: "tests/test_scanner.py"
 
 ## Metadata
 
-- **End Line:** <code>260</code>
+- **End Line:** <code>265</code>
 - **Line:** <code>181</code>
 - **Symbol Kind:** <code>"function"</code>
 

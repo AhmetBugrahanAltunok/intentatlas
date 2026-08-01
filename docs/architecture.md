@@ -36,6 +36,12 @@ declaration names across files, unexported names, comments, literals, missing pa
 oversized files create no such edge. Filename convention remains separate weak evidence; lexical
 reference is advisory structural evidence rather than call-resolution or execution proof.
 
+Tests that import another local Go package are narrower still: named and default imports link only
+qualified `package.Symbol` references, while dot imports use unique exported identifiers. Blank
+imports and unresolved or ambiguous packages create no direct test edge. Non-test source imports
+retain conservative package-level dependencies because they describe implementation structure,
+not a test recommendation claim.
+
 The Git adapter reads commit metadata, changed paths, and a bounded recent window of zero-context
 diff hunks with fixed read-only commands. Changed new-side lines project to the most-specific
 Python symbol only when the current file matches that commit's bounded raw Git blob after

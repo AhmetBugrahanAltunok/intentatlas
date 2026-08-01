@@ -4,6 +4,45 @@
   "generated_output_policy": "ephemeral-only",
   "projects": [
     {
+      "id": "axios",
+      "name": "axios/axios navigation-canceled XHR change",
+      "language": "JavaScript",
+      "repository": "https://github.com/axios/axios",
+      "commit": "c3f553c740ebf3dff5e22dae24e9caaafafddd2d",
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "e8b48767d34116869c34cf31af9e77a37fdd6225f55a27166019dcf9bf439465"
+      },
+      "labels": "benchmarks/real-world/axios.labels.json"
+    },
+    {
+      "id": "click",
+      "name": "pallets/click context exit-stack change",
+      "language": "Python",
+      "repository": "https://github.com/pallets/click",
+      "commit": "555fa9bb37770a6845a98be60b0c84876775552e",
+      "license": {
+        "spdx": "BSD-3-Clause",
+        "path": "LICENSE.txt",
+        "sha256": "757302fe7c41e7026fa46d3315ea8604ed5295fc95c2256d9b38adac43f6fbe5"
+      },
+      "labels": "benchmarks/real-world/click.labels.json"
+    },
+    {
+      "id": "cobra",
+      "name": "spf13/cobra Fish completion quoting change",
+      "language": "Go",
+      "repository": "https://github.com/spf13/cobra",
+      "commit": "61968e893eee2f27696c2fbc8e34fa5c4afaf7c4",
+      "license": {
+        "spdx": "Apache-2.0",
+        "path": "LICENSE.txt",
+        "sha256": "d7a18303ada5be476e66d11ed8c87149664c9fd15f5e7397829f059820d565e6"
+      },
+      "labels": "benchmarks/real-world/cobra.labels.json"
+    },
+    {
       "id": "match",
       "name": "tidwall/match case-insensitive matching change",
       "language": "Go",

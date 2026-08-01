@@ -143,7 +143,7 @@ Corpus output contains compact per-project and micro totals. These small origina
 aggregation and confidence behavior; they are not copied repositories or real-world accuracy
 evidence. See [the corpus schema](docs/recommendation-corpus.md).
 
-For a reproducible real-world check, acquire the three approved public repositories only after
+For a reproducible real-world check, acquire the six approved public repositories only after
 network approval, pin them to the manifest commits, then run:
 
 ```text
@@ -237,7 +237,7 @@ a packaged nine-node first-party example and removes its temporary graph when th
 
 The real-world evaluator adds a provenance gate around the same scanner and corpus evaluator. A
 strict manifest binds each local checkout to an exact GitHub origin, commit, SPDX identifier,
-license-file hash, and reviewed labels. The included nine cases across Python, JavaScript, and Go
+license-file hash, and reviewed labels. The included 18 cases across Python, JavaScript, and Go
 are useful validation evidence for those pinned changes only; they are not a general accuracy
 claim.
 

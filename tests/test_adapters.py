@@ -88,6 +88,7 @@ def test_go_adapter_skips_oversized_files_and_unclosed_import_blocks(tmp_path: P
 
 def test_go_adapter_links_only_unique_exported_symbol_references(tmp_path: Path) -> None:
     sources = {
+        "go.mod": "module example.com/fixture\n",
         "alpha.go": (
             "package sample\n\n"
             "func Alpha() int { return 1 }\n"
@@ -106,14 +107,40 @@ def test_go_adapter_links_only_unique_exported_symbol_references(tmp_path: Path)
             "package sample_test\n\n"
             "func TestAmbiguous() { _ = Shared; _ = \"Alpha\" }\n"
         ),
+        "internal/value.go": (
+            "package internal\n\n"
+            "func Value() int { return 4 }\n"
+        ),
+        "default_alias_test.go": (
+            "package sample_test\n\n"
+            'import "example.com/fixture/internal"\n\n'
+            "func TestDefaultAlias() { _ = internal.Value() }\n"
+        ),
+        "dot_import_test.go": (
+            "package sample_test\n\n"
+            'import . "example.com/fixture/internal"\n\n'
+            "func TestDotImport() { _ = Value() }\n"
+        ),
+        "blank_import_test.go": (
+            "package sample_test\n\n"
+            'import _ "example.com/fixture/internal"\n\n'
+            "func TestBlankImport() {}\n"
+        ),
     }
     files = {}
     kinds = {}
     for relative, source in sources.items():
         path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(source, encoding="utf-8")
         files[relative] = path
-        kinds[relative] = "test" if relative.endswith("_test.go") else "file"
+        kinds[relative] = (
+            "config"
+            if relative == "go.mod"
+            else "test"
+            if relative.endswith("_test.go")
+            else "file"
+        )
     context = AdapterContext(
         files=MappingProxyType(files),
         kinds=MappingProxyType(kinds),
@@ -128,5 +155,8 @@ def test_go_adapter_links_only_unique_exported_symbol_references(tmp_path: Path)
     }
 
     assert ("file:focused_test.go", "file:alpha.go") in symbol_edges
+    assert ("file:default_alias_test.go", "file:internal/value.go") in symbol_edges
+    assert ("file:dot_import_test.go", "file:internal/value.go") in symbol_edges
     assert not any(source == "file:ambiguous_test.go" for source, _target in symbol_edges)
+    assert not any(source == "file:blank_import_test.go" for source, _target in symbol_edges)
     assert ("file:focused_test.go", "file:beta.go") not in symbol_edges

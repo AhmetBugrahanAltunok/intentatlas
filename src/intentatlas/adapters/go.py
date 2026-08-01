@@ -41,6 +41,13 @@ class GoAdapter:
         package_test_identifiers: list[
             tuple[str, str, str, frozenset[str]]
         ] = []
+        package_test_imports: list[
+            tuple[
+                str,
+                tuple[tuple[str, str], ...],
+                tuple[tuple[str | None, str], ...],
+            ]
+        ] = []
 
         for relative in sorted(context.files):
             if PurePosixPath(relative).suffix.casefold() not in self.suffixes:
@@ -48,6 +55,8 @@ class GoAdapter:
             source = context.read_text(relative)
             if source is None:
                 continue
+            tokens = _go_tokens(source)
+            import_bindings = _import_bindings(tokens)
             symbol_source = _mask_comments_and_literals(source, keep_strings=False)
             file_node = f"file:{relative}"
 
@@ -64,9 +73,7 @@ class GoAdapter:
                 directory = "" if directory == "." else directory
                 if context.kinds[relative] == "test":
                     identifiers = frozenset(
-                        value
-                        for kind, value in _go_tokens(source)
-                        if kind == "identifier"
+                        value for kind, value in tokens if kind == "identifier"
                     )
                     package_test_identifiers.append(
                         (relative, directory, package, identifiers)
@@ -78,20 +85,30 @@ class GoAdapter:
                         if reference[:1].isupper():
                             declarations[reference].add(file_node)
 
-            relation = "tests" if context.kinds[relative] == "test" else "imports"
-            for import_path in _import_paths(source):
+            if context.kinds[relative] == "test":
+                package_test_imports.append((relative, tokens, import_bindings))
+                continue
+            for _alias, import_path in import_bindings:
                 for target in _resolve_local_import(
                     import_path,
                     modules=modules,
                     package_files=package_files,
                 ):
                     if target != file_node:
-                        edges.append(Edge(file_node, target, relation, "go-structural"))
+                        edges.append(Edge(file_node, target, "imports", "go-structural"))
 
         edges.extend(
             _package_symbol_test_edges(
                 package_declarations,
                 package_test_identifiers,
+            )
+        )
+        edges.extend(
+            _imported_package_test_edges(
+                modules=modules,
+                package_files=package_files,
+                declarations=package_declarations,
+                tests=package_test_imports,
             )
         )
         edges.extend(_filename_test_edges(context))
@@ -179,6 +196,70 @@ def _package_symbol_test_edges(
     return edges
 
 
+def _imported_package_test_edges(
+    *,
+    modules: Iterable[tuple[str, str]],
+    package_files: Mapping[str, tuple[str, ...]],
+    declarations: Mapping[tuple[str, str], Mapping[str, set[str]]],
+    tests: Iterable[
+        tuple[
+            str,
+            tuple[tuple[str, str], ...],
+            tuple[tuple[str | None, str], ...],
+        ]
+    ],
+) -> list[Edge]:
+    edges: list[Edge] = []
+    package_keys_by_directory: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    for package_key in declarations:
+        package_keys_by_directory[package_key[0]].append(package_key)
+    for relative, tokens, bindings in sorted(tests):
+        targets: set[str] = set()
+        for alias, import_path in bindings:
+            package_targets = _resolve_local_import(
+                import_path,
+                modules=modules,
+                package_files=package_files,
+            )
+            if not package_targets or alias == "_":
+                continue
+            target_path = PurePosixPath(package_targets[0].removeprefix("file:"))
+            directory = target_path.parent.as_posix()
+            directory = "" if directory == "." else directory
+            package_keys = sorted(package_keys_by_directory[directory])
+            if len(package_keys) != 1:
+                continue
+            package_key = package_keys[0]
+            package_alias = package_key[1] if alias is None else alias
+            references = (
+                {value for kind, value in tokens if kind == "identifier"}
+                if package_alias == "."
+                else _qualified_identifiers(tokens, package_alias)
+            )
+            targets.update(
+                next(iter(source_files))
+                for reference, source_files in declarations[package_key].items()
+                if reference in references and len(source_files) == 1
+            )
+        edges.extend(
+            Edge(f"file:{relative}", target, "tests", "go-symbol-reference")
+            for target in sorted(targets)
+        )
+    return edges
+
+
+def _qualified_identifiers(
+    tokens: tuple[tuple[str, str], ...], alias: str
+) -> set[str]:
+    return {
+        tokens[index + 2][1]
+        for index in range(len(tokens) - 2)
+        if tokens[index] == ("identifier", alias)
+        and tokens[index + 1] == ("punctuation", ".")
+        and tokens[index + 2][0] == "identifier"
+    }
+
+
 def _module_roots(context: AdapterContext) -> tuple[tuple[str, str], ...]:
     modules: list[tuple[str, str]] = []
     for relative in sorted(context.files):
@@ -211,8 +292,13 @@ def _package_files(context: AdapterContext) -> Mapping[str, tuple[str, ...]]:
 
 
 def _import_paths(source: str) -> tuple[str, ...]:
-    tokens = _go_tokens(source)
-    imports: set[str] = set()
+    return tuple(sorted({path for _alias, path in _import_bindings(_go_tokens(source))}))
+
+
+def _import_bindings(
+    tokens: tuple[tuple[str, str], ...],
+) -> tuple[tuple[str | None, str], ...]:
+    imports: set[tuple[str | None, str]] = set()
     brace_depth = 0
     index = 0
     while index < len(tokens):
@@ -224,19 +310,19 @@ def _import_paths(source: str) -> tuple[str, ...]:
         elif kind == "identifier" and value == "import" and brace_depth == 0:
             index = _collect_import_declaration(tokens, index + 1, imports)
         index += 1
-    return tuple(sorted(imports))
+    return tuple(sorted(imports, key=lambda item: (item[1], item[0] or "")))
 
 
 def _collect_import_declaration(
     tokens: tuple[tuple[str, str], ...],
     index: int,
-    imports: set[str],
+    imports: set[tuple[str | None, str]],
 ) -> int:
     if index >= len(tokens):
         return index
     if tokens[index] == ("punctuation", "("):
         index += 1
-        candidates: set[str] = set()
+        candidates: set[tuple[str | None, str]] = set()
         while index < len(tokens):
             kind, value = tokens[index]
             if (kind, value) == ("punctuation", ")"):
@@ -248,29 +334,32 @@ def _collect_import_declaration(
             if kind == "string":
                 if not _valid_import_path(value):
                     return index
-                candidates.add(value)
+                candidates.add((None, value))
                 index += 1
                 continue
             if kind == "identifier" or (kind == "punctuation" and value == "."):
+                alias = value
                 index += 1
                 if index >= len(tokens) or tokens[index][0] != "string":
                     return index
                 import_path = tokens[index][1]
                 if not _valid_import_path(import_path):
                     return index
-                candidates.add(import_path)
+                candidates.add((alias, import_path))
                 index += 1
                 continue
             return index
         return index
 
+    alias: str | None = None
     kind, value = tokens[index]
     if kind == "identifier" or (kind == "punctuation" and value == "."):
+        alias = value
         index += 1
     if index < len(tokens):
         kind, value = tokens[index]
         if kind == "string" and _valid_import_path(value):
-            imports.add(value)
+            imports.add((alias, value))
     return index
 
 

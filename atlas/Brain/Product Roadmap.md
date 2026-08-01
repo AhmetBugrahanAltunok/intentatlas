@@ -242,11 +242,19 @@ Status: complete (2026-08-01)
 
 ## Phase 7B — Broader open-source validation
 
-Status: planned
+Status: complete (2026-08-01)
 
 - Expand public benchmarks to larger and more diverse projects with multiple relevant tests,
-  source-only commits, indirect dependencies, monorepo layouts, and explicit negative cases.
+  source-only commits, indirect dependencies, nested test layouts, and explicit negative cases.
 - Preserve license, provenance, offline evaluation, and independently reviewed label boundaries.
+- Requirement: [[Requirements/REQ-017 - Validate recommendations on broader project structures]]
+- Decision: [[Decisions/ADR-017 - Use broader benchmarks to drive conservative refinements]]
+- Delivery issue: [[Issues/ISSUE-015 - Expand and refine real-world validation]]
+- Evidence: [[Evidence/EVD-017 - Phase 7B broader validation verification]]
+- Review: [[Reviews/Phase 7B Broader Validation Review]]
+- Outcome: six pinned projects and 18 reviewed cases expose source-only, multiple-test, package,
+  and indirect-dependency behavior. Qualified Go import evidence removes 18 observed false
+  positives; medium precision is 85.71% and recall 78.26%, with remaining gaps explicit.
 
 ## Phase 7C — Open-source release readiness
 

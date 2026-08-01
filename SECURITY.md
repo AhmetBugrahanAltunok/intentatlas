@@ -24,7 +24,9 @@ reproduction steps, impact, and any suggested mitigation.
   longest nested-module match, and does not invoke the Go toolchain or resolve external modules.
   Same-directory test links require a compatible package plus an exported identifier uniquely
   owned by one production file; ambiguous names, unexported declarations, comments, and literals
-  do not create symbol-reference evidence.
+  do not create symbol-reference evidence. Tests importing another local Go package require a
+  qualified unique exported symbol (or a unique exported identifier for dot imports); blank and
+  ambiguous imports create no direct test relationship.
 - Coverage and test reports are opt-in, project-local XML inputs. Import rejects symbolic links,
   paths outside the project or inside `atlas/Private/`, DTD/entity declarations, oversized files,
   excessive records, malformed XML, and ambiguous file mappings.

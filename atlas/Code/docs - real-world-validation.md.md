@@ -11,7 +11,7 @@ source_path: "docs/real-world-validation.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>3932</code>
+- **Size Bytes:** <code>4961</code>
 
 ## Incoming relationships
 

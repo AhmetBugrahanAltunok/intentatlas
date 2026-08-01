@@ -220,8 +220,13 @@ def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
         "file:internal/math/integration_test.go",
         "file:internal/math/add.go",
         "tests",
-        "go-structural",
+        "go-symbol-reference",
     ) in relationships
+    assert not any(
+        edge.source == "file:internal/math/integration_test.go"
+        and edge.target == "file:internal/math/comments.go"
+        for edge in first.edges
+    )
     assert (
         "file:internal/math/add_test.go",
         "file:internal/math/add.go",

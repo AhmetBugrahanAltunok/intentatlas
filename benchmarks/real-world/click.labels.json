@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "pallets/click 555fa9b complete test set",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "context-exit-exception-forwarding",
+      "target": "commit:555fa9bb37770a6845a98be60b0c84876775552e",
+      "expected_tests": [
+        "tests/test_context.py"
+      ]
+    },
+    {
+      "id": "click-context-source-file",
+      "target": "file:src/click/core.py",
+      "expected_tests": [
+        "tests/test_context.py"
+      ]
+    },
+    {
+      "id": "click-context-close-symbol",
+      "target": "symbol:src/click/core.py::Context._close_with_exception_info",
+      "expected_tests": [
+        "tests/test_context.py"
+      ]
+    }
+  ]
+}

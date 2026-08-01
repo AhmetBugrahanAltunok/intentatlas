@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "spf13/cobra 61968e8 complete test set",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "fish-completion-argument-quoting",
+      "target": "commit:61968e893eee2f27696c2fbc8e34fa5c4afaf7c4",
+      "expected_tests": [
+        "fish_completions_test.go"
+      ]
+    },
+    {
+      "id": "cobra-fish-source-file",
+      "target": "file:fish_completions.go",
+      "expected_tests": [
+        "fish_completions_test.go"
+      ]
+    },
+    {
+      "id": "cobra-fish-generator-symbol",
+      "target": "symbol:fish_completions.go::genFishComp",
+      "expected_tests": [
+        "fish_completions_test.go"
+      ]
+    }
+  ]
+}
