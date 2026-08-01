@@ -8,6 +8,10 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Added
 
+- Content-addressed per-adapter scan fragments that reuse unchanged Python, JavaScript/TypeScript,
+  and Go analysis while retaining a cache-independent full-scan reference and visible CLI metrics.
+- Strict bounded adapter-cache validation and atomic graph/cache replacement that preserves the
+  last complete artifact on write failure and never stores raw source content.
 - A deterministic `review --base --head` shadow-mode command that renders the existing bounded
   change analysis as Markdown, JSON, or path-safe SARIF 2.1.0 without publishing or blocking CI.
 - An opt-in, credential-free composite Action that writes the shadow review only to the runner's

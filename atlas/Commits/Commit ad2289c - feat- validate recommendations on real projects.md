@@ -41,7 +41,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/render_real_world - src - intentatlas - real_world.py|render_real_world]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_file_kind - src - intentatlas - scanner.py|_file_kind]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_git - tests - test_real_world.py|_git]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/build_real_world_fixture - tests - test_real_world.py|build_real_world_fixture]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_real_world_cli_runs_offline_fixture - tests - test_real_world.py|test_real_world_cli_runs_offline_fixture]] _(history; evidence: git-diff-hunk)_

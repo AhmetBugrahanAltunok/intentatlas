@@ -13,6 +13,6 @@ source_path: "docs/review-pilots.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1162</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_

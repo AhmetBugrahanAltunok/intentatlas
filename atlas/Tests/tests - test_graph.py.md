@@ -11,12 +11,14 @@ source_path: "tests/test_graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>8307</code>
+- **Size Bytes:** <code>9020</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/sample_graph - tests - test_graph.py|sample_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_find_reports_missing_and_ambiguous_targets - tests - test_graph.py|test_find_reports_missing_and_ambiguous_targets]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_graph_atomic_save_preserves_previous_artifact_on_replace_failure - tests - test_graph.py|test_graph_atomic_save_preserves_previous_artifact_on_replace_failure]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_graph_atomic_save_preserves_previous_artifact_on_replace_failure.fail_replace - tests - test_graph.py|test_graph_atomic_save_preserves_previous_artifact_on_replace_failure.fail_replace]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_deduplicates_edges_and_rejects_invalid_edges - tests - test_graph.py|test_graph_deduplicates_edges_and_rejects_invalid_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_index_is_deterministic_reused_and_invalidated - tests - test_graph.py|test_graph_index_is_deterministic_reused_and_invalidated]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_rejects_identity_collisions_but_merges_same_identity - tests - test_graph.py|test_graph_rejects_identity_collisions_but_merges_same_identity]] _(structure; evidence: python-ast)_
@@ -26,6 +28,7 @@ source_path: "tests/test_graph.py"
 - <code>defines</code> → [[Symbols/test_load_rejects_malformed_graph_documents - tests - test_graph.py|test_load_rejects_malformed_graph_documents]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_rejects_unknown_schema_and_invalid_edges - tests - test_graph.py|test_load_rejects_unknown_schema_and_invalid_edges]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Code/src - intentatlas - storage.py|src/intentatlas/storage.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
@@ -42,3 +45,4 @@ source_path: "tests/test_graph.py"
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(reference; evidence: wikilink)_

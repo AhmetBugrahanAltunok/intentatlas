@@ -29,6 +29,8 @@ _PACKAGE_DECLARATION = re.compile(rf"(?m)^[ \t]*package[ \t]+({_IDENTIFIER})")
 class GoAdapter:
     name = "go"
     suffixes = frozenset({".go"})
+    cache_input_suffixes = frozenset({".go", ".mod"})
+    cache_version = 1
 
     def scan(self, context: AdapterContext) -> GraphFragment:
         modules = _module_roots(context)

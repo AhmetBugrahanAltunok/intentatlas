@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/base.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1200</code>
+- **Size Bytes:** <code>1264</code>
 
 ## Outgoing relationships
 

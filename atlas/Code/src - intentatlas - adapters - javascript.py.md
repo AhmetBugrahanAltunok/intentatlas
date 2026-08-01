@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/javascript.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>14517</code>
+- **Size Bytes:** <code>14575</code>
 
 ## Outgoing relationships
 

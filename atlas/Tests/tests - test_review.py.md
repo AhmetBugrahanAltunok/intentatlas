@@ -35,3 +35,7 @@ source_path: "tests/test_review.py"
 - <code>tests</code> → [[Symbols/render_review - src - intentatlas - review.py|render_review]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/TestOutcome - src - intentatlas - test_outcomes.py|TestOutcome]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/TestOutcomeSet - src - intentatlas - test_outcomes.py|TestOutcomeSet]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_

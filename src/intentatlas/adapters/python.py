@@ -12,6 +12,8 @@ from .base import AdapterContext, GraphFragment
 class PythonAdapter:
     name = "python"
     suffixes = frozenset({".py"})
+    cache_input_suffixes = suffixes
+    cache_version = 1
 
     def scan(self, context: AdapterContext) -> GraphFragment:
         module_to_node, path_to_module = _build_module_maps(context.files)

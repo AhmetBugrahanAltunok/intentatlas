@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/go.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>23722</code>
+- **Size Bytes:** <code>23798</code>
 
 ## Outgoing relationships
 

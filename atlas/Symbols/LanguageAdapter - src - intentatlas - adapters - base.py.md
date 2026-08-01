@@ -10,7 +10,7 @@ source_path: "src/intentatlas/adapters/base.py"
 
 ## Metadata
 
-- **End Line:** <code>45</code>
+- **End Line:** <code>47</code>
 - **Line:** <code>39</code>
 - **Symbol Kind:** <code>"class"</code>
 
@@ -18,3 +18,4 @@ source_path: "src/intentatlas/adapters/base.py"
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-symbol-reference)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-symbol-reference)_

@@ -11,16 +11,18 @@ source_path: "src/intentatlas/scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>17401</code>
+- **Size Bytes:** <code>21171</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/IncrementalScanResult - src - intentatlas - scanner.py|IncrementalScanResult]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/PendingLink - src - intentatlas - scanner.py|PendingLink]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner - src - intentatlas - scanner.py|RepositoryScanner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner.__init__ - src - intentatlas - scanner.py|RepositoryScanner.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._discover_files - src - intentatlas - scanner.py|RepositoryScanner._discover_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._is_excluded - src - intentatlas - scanner.py|RepositoryScanner._is_excluded]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._resolve_pending_links - src - intentatlas - scanner.py|RepositoryScanner._resolve_pending_links]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._scan - src - intentatlas - scanner.py|RepositoryScanner._scan]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._scan_delivery_reports - src - intentatlas - scanner.py|RepositoryScanner._scan_delivery_reports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._scan_evidence_reports - src - intentatlas - scanner.py|RepositoryScanner._scan_evidence_reports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._scan_git_history - src - intentatlas - scanner.py|RepositoryScanner._scan_git_history]] _(structure; evidence: python-ast)_
@@ -28,9 +30,13 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/RepositoryScanner._scan_user_vault - src - intentatlas - scanner.py|RepositoryScanner._scan_user_vault]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._walk_files - src - intentatlas - scanner.py|RepositoryScanner._walk_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner.scan - src - intentatlas - scanner.py|RepositoryScanner.scan]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner.scan_incremental - src - intentatlas - scanner.py|RepositoryScanner.scan_incremental]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ScanStatistics - src - intentatlas - scanner.py|ScanStatistics]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_adapter_fingerprint - src - intentatlas - scanner.py|_adapter_fingerprint]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_exclude_patterns - src - intentatlas - scanner.py|_exclude_patterns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_file_kind - src - intentatlas - scanner.py|_file_kind]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_frontmatter_id - src - intentatlas - scanner.py|_frontmatter_id]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_hash_part - src - intentatlas - scanner.py|_hash_part]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_is_directory_link - src - intentatlas - scanner.py|_is_directory_link]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_language - src - intentatlas - scanner.py|_language]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_modified_symbols - src - intentatlas - scanner.py|_modified_symbols]] _(structure; evidence: python-ast)_
@@ -38,6 +44,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/_validate_user_id - src - intentatlas - scanner.py|_validate_user_id]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_wikilinks - src - intentatlas - scanner.py|_wikilinks]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(structure; evidence: python-ast)_
@@ -47,6 +54,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/import_delivery - src - intentatlas - delivery.py|import_delivery]] _(structure; evidence: python-symbol-reference)_
@@ -58,6 +66,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/note_title - src - intentatlas - naming.py|note_title]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/safe_filename - src - intentatlas - naming.py|safe_filename]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/AdapterFragmentCache - src - intentatlas - scan_cache.py|AdapterFragmentCache]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -75,6 +84,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

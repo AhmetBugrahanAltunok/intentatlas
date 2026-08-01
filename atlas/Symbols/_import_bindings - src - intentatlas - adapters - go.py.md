@@ -10,8 +10,8 @@ source_path: "src/intentatlas/adapters/go.py"
 
 ## Metadata
 
-- **End Line:** <code>419</code>
-- **Line:** <code>404</code>
+- **End Line:** <code>421</code>
+- **Line:** <code>406</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

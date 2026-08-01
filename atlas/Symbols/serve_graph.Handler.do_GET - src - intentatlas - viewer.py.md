@@ -17,3 +17,4 @@ source_path: "src/intentatlas/viewer.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-diff-hunk)_

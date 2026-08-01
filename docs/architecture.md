@@ -23,6 +23,21 @@ explicit `from` imports and qualified module attributes to exact local top-level
 at most eight deterministic package re-export hops and rejecting cycles. A test with exact symbol
 evidence does not also inherit the broader file edge for that resolved module.
 
+The CLI may reuse a complete adapter fragment through a disposable content-addressed cache. The
+fingerprint covers adapter identity and cache version, the parse limit, and every declared input's
+project-relative path, derived kind, and bytes. Python declares `.py`; JavaScript/TypeScript declares
+`.js`, `.jsx`, `.ts`, and `.tsx`; Go declares both `.go` and `.mod` because module boundaries affect
+resolution. Reuse is whole-adapter rather than per-file so cross-file semantics cannot be assembled
+from incompatible partial states. Inputs are fingerprinted again after analysis and a concurrent
+change aborts before graph publication.
+
+Cache documents are bounded strict JSON below `.intentatlas/adapter-cache/`. They accept only the
+symbol metadata, relation types, and evidence labels emitted by the matching built-in adapter and
+contain no source excerpts. Missing, stale, malformed, linked, oversized, or incompatible entries
+are cache misses. The public `scan_repository` path remains a cache-independent equivalence
+reference. The graph and cache use same-directory temporary files plus atomic replacement, keeping
+the previous complete artifact if replacement fails. See [incremental scanning](incremental-scanning.md).
+
 The TypeScript/JavaScript adapter conservatively recognizes explicit declarations and static
 relative module references in `.ts`, `.tsx`, `.js`, and `.jsx` files without requiring Node. Named
 and default static imports additionally link to a discovered exact symbol when the target export is

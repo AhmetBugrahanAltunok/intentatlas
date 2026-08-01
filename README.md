@@ -73,6 +73,11 @@ python -m venv .venv
 `init` creates generic guidance and empty intent folders; it never seeds IntentAtlas's own
 requirements, decisions, evidence, reviews, or dated sessions into the target repository.
 
+Repeated CLI scans reuse a bounded content-addressed fragment for each unchanged built-in language
+adapter. The command reports reused and rebuilt adapter counts. This cache contains graph metadata,
+not source text, and is always safe to remove; a malformed or stale entry is rebuilt. Graph and
+cache files are replaced atomically. See [incremental scanning](docs/incremental-scanning.md).
+
 Then open the `atlas/` directory as an Obsidian vault. The standard Graph View will
 show requirements, decisions, code, tests, evidence, and commits as color-coded nodes.
 

@@ -35,7 +35,7 @@ from .real_world import (
 from .recommendations import recommend_tests, render_recommendations
 from .review import build_review_report, render_review
 from .scale import render_scale_benchmark, run_scale_benchmark
-from .scanner import USER_VAULT_AREAS, scan_repository
+from .scanner import USER_VAULT_AREAS, scan_repository_incremental
 from .test_outcomes import load_test_outcomes
 from .vault import ProjectVault
 from .viewer import serve_graph
@@ -384,14 +384,25 @@ def _scan(root: Path) -> int:
     config.save_if_missing(root)
     vault = ProjectVault(config.vault_path(root))
     vault.initialize()
-    graph = scan_repository(root, config)
+    scan_result = scan_repository_incremental(root, config)
+    graph = scan_result.graph
     graph_path = config.graph_path(root)
     graph.save(graph_path)
-    result = vault.sync(graph)
+    sync_result = vault.sync(graph)
     print(f"Scanned {root.name}: {len(graph.nodes)} nodes, {len(graph.edges)} relationships")
+    print(
+        "Adapter cache: "
+        f"{len(scan_result.statistics.reused_adapters)} reused, "
+        f"{len(scan_result.statistics.rebuilt_adapters)} rebuilt"
+    )
+    if scan_result.statistics.skipped_cache_writes:
+        print(
+            "Adapter cache writes skipped: "
+            + ", ".join(scan_result.statistics.skipped_cache_writes)
+        )
     print(f"Graph: {graph_path.relative_to(root)}")
     print(f"Obsidian vault: {config.vault_path(root).relative_to(root)}")
-    print(f"Generated notes: {result['generated_notes']}")
+    print(f"Generated notes: {sync_result['generated_notes']}")
     return 0
 
 

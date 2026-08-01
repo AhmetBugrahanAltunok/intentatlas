@@ -334,13 +334,35 @@ Status: complete (2026-08-01)
 
 ## Phase 10 — Scale and open evidence ecosystem
 
-Status: proposed
+Status: active (Phase 10A started 2026-08-01)
 
 - Add incremental scanning and atomic derived indexes without weakening Markdown portability.
 - Import open evidence formats such as SCIP, SARIF, and per-test execution maps.
 - Define an adapter conformance contract and make the viewer responsive on large repositories.
 - Harden release provenance, fuzz/property coverage, browser E2E, and pinned CI dependencies.
 - Strategy: [[Brain/Phase 8-10 Strategy]]
+
+### Phase 10A — Content-addressed scan foundation
+
+Status: complete (2026-08-01)
+
+- Reuse bounded adapter fragments only when their complete declared input set has the same content
+  fingerprint and cache contract version.
+- Rebuild safely when state is missing, stale, malformed, oversized, or changes during scanning.
+- Replace graph and derived cache files atomically without storing source contents or weakening the
+  portable Markdown vault.
+- Requirement: [[Requirements/REQ-022 - Reuse trustworthy scan work safely]]
+- Decision: [[Decisions/ADR-022 - Cache adapter fragments by declared input fingerprint]]
+- Delivery issue: [[Issues/ISSUE-020 - Implement content-addressed scan foundation]]
+- Kickoff: [[Sessions/2026-08-01 - Phase 10A kickoff]]
+- Evidence: [[Evidence/EVD-022 - Phase 10A content-addressed scan verification]]
+- Review: [[Reviews/Phase 10A Content-Addressed Scan Review]]
+- Outcome: repeated CLI scans reuse exact per-adapter structural fragments, selectively rebuild
+  changed language inputs, reject unsafe or corrupt derived state, and atomically preserve the last
+  complete graph/cache artifact without storing source content.
+
+Planned later slices remain Phase 10B open evidence imports, Phase 10C adapter conformance and
+large-graph viewer work, and Phase 10D provenance, property/fuzz, browser, and release hardening.
 
 ## Completion rule
 

@@ -4,6 +4,7 @@ import json
 
 import pytest
 
+import intentatlas.storage as storage_module
 from intentatlas.graph import AtlasGraph
 from intentatlas.models import Edge, Node
 from intentatlas.relations import relation_catalog
@@ -102,6 +103,26 @@ def test_graph_round_trip_and_summary(tmp_path) -> None:
     drives = next(edge for edge in payload["edges"] if edge["relation"] == "drives")
     assert drives["category"] == "intent"
     assert drives["inverse"] == "driven-by"
+
+
+def test_graph_atomic_save_preserves_previous_artifact_on_replace_failure(
+    tmp_path, monkeypatch
+) -> None:
+    path = tmp_path / "graph.json"
+    graph = sample_graph()
+    graph.save(path)
+    previous = path.read_bytes()
+    graph.add_node(Node("file:new.py", "file", "new.py", "new.py"))
+
+    def fail_replace(_source, _target) -> None:
+        raise OSError("simulated replacement failure")
+
+    monkeypatch.setattr(storage_module.os, "replace", fail_replace)
+    with pytest.raises(OSError, match="simulated replacement failure"):
+        graph.save(path)
+
+    assert path.read_bytes() == previous
+    assert list(tmp_path.glob(".graph.json.*.tmp")) == []
 
 
 def test_find_reports_missing_and_ambiguous_targets() -> None:

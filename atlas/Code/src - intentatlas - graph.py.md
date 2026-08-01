@@ -11,7 +11,7 @@ source_path: "src/intentatlas/graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>13612</code>
+- **Size Bytes:** <code>13560</code>
 
 ## Outgoing relationships
 
@@ -40,11 +40,13 @@ source_path: "src/intentatlas/graph.py"
 - <code>defines</code> → [[Symbols/_validate_legacy_relation_catalog - src - intentatlas - graph.py|_validate_legacy_relation_catalog]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - storage.py|src/intentatlas/storage.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ImpactRecord - src - intentatlas - models.py|ImpactRecord]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/relation_catalog - src - intentatlas - relations.py|relation_catalog]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/relation_type - src - intentatlas - relations.py|relation_type]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/atomic_write_text - src - intentatlas - storage.py|atomic_write_text]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -56,6 +58,7 @@ source_path: "src/intentatlas/graph.py"
 - <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_

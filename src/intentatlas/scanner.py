@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import os
 import re
 from collections import defaultdict
@@ -17,6 +18,7 @@ from .graph import AtlasGraph
 from .models import Edge, Node
 from .naming import note_title, safe_filename
 from .relations import USER_RELATIONS
+from .scan_cache import AdapterFragmentCache
 
 SUPPORTED_SUFFIXES = {
     ".c",
@@ -70,6 +72,19 @@ class PendingLink:
     evidence: str
 
 
+@dataclass(frozen=True, slots=True)
+class ScanStatistics:
+    reused_adapters: tuple[str, ...] = ()
+    rebuilt_adapters: tuple[str, ...] = ()
+    skipped_cache_writes: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True, slots=True)
+class IncrementalScanResult:
+    graph: AtlasGraph
+    statistics: ScanStatistics
+
+
 def scan_repository(root: Path, config: ProjectConfig | None = None) -> AtlasGraph:
     root = root.resolve()
     if not root.is_dir():
@@ -79,6 +94,17 @@ def scan_repository(root: Path, config: ProjectConfig | None = None) -> AtlasGra
     return scanner.scan()
 
 
+def scan_repository_incremental(
+    root: Path, config: ProjectConfig | None = None
+) -> IncrementalScanResult:
+    root = root.resolve()
+    if not root.is_dir():
+        raise ValueError(f"Project path is not a directory: {root}")
+    config = config or ProjectConfig.load(root)
+    scanner = RepositoryScanner(root, config)
+    return scanner.scan_incremental()
+
+
 class RepositoryScanner:
     def __init__(self, root: Path, config: ProjectConfig):
         self.root = root.resolve()
@@ -86,6 +112,9 @@ class RepositoryScanner:
         self.graph = AtlasGraph()
         self.files: dict[str, Path] = {}
         self.pending_links: list[PendingLink] = []
+        self.reused_adapters: list[str] = []
+        self.rebuilt_adapters: list[str] = []
+        self.skipped_cache_writes: list[str] = []
         self.exclude_patterns = _exclude_patterns(config.exclude)
         self.vault_parts = tuple(
             part.casefold()
@@ -93,8 +122,22 @@ class RepositoryScanner:
         )
 
     def scan(self) -> AtlasGraph:
+        return self._scan(cache=None)
+
+    def scan_incremental(self) -> IncrementalScanResult:
+        graph = self._scan(cache=AdapterFragmentCache(self.root))
+        return IncrementalScanResult(
+            graph=graph,
+            statistics=ScanStatistics(
+                reused_adapters=tuple(self.reused_adapters),
+                rebuilt_adapters=tuple(self.rebuilt_adapters),
+                skipped_cache_writes=tuple(self.skipped_cache_writes),
+            ),
+        )
+
+    def _scan(self, cache: AdapterFragmentCache | None) -> AtlasGraph:
         self._discover_files()
-        self._scan_language_adapters()
+        self._scan_language_adapters(cache)
         self._scan_evidence_reports()
         self._scan_git_history()
         self._scan_user_vault()
@@ -174,7 +217,7 @@ class RepositoryScanner:
                 return True
         return False
 
-    def _scan_language_adapters(self) -> None:
+    def _scan_language_adapters(self, cache: AdapterFragmentCache | None) -> None:
         kinds = {
             relative: self.graph.nodes[f"file:{relative}"].kind for relative in self.files
         }
@@ -184,7 +227,32 @@ class RepositoryScanner:
             max_parse_bytes=MAX_PARSE_BYTES,
         )
         for adapter in sorted(BUILTIN_ADAPTERS, key=lambda item: item.name):
-            fragment = adapter.scan(context)
+            if cache is None:
+                fragment = adapter.scan(context)
+            else:
+                fingerprint = _adapter_fingerprint(adapter, context)
+                cached = cache.load(
+                    adapter,
+                    fingerprint,
+                    frozenset(self.graph.nodes),
+                )
+                fragment = cached.fragment
+                if fragment is None:
+                    fragment = adapter.scan(context)
+                    self.rebuilt_adapters.append(adapter.name)
+                else:
+                    self.reused_adapters.append(adapter.name)
+
+                if _adapter_fingerprint(adapter, context) != fingerprint:
+                    raise ValueError(
+                        f"{adapter.name} inputs changed during scan; retry with a stable worktree"
+                    )
+                if cached.fragment is None and not cache.store(
+                    adapter,
+                    fingerprint,
+                    fragment,
+                ):
+                    self.skipped_cache_writes.append(adapter.name)
             for node in sorted(fragment.nodes, key=lambda item: item.id):
                 self.graph.add_node(node)
             for edge in sorted(
@@ -201,7 +269,6 @@ class RepositoryScanner:
                         f"Adapter {adapter.name!r} emitted invalid edge: "
                         f"{edge.source} -> {edge.target}"
                     )
-
     def _scan_git_history(self) -> None:
         symbols_by_path = _symbols_by_path(self.graph.nodes.values())
         for commit in collect_git_history(
@@ -331,6 +398,37 @@ class RepositoryScanner:
                         pending.evidence,
                     )
                 )
+
+
+def _adapter_fingerprint(adapter, context: AdapterContext) -> str:
+    digest = hashlib.sha256()
+    _hash_part(digest, b"intentatlas-adapter-fragment-v1")
+    _hash_part(digest, adapter.name.encode("utf-8"))
+    _hash_part(digest, str(adapter.cache_version).encode("ascii"))
+    _hash_part(digest, str(context.max_parse_bytes).encode("ascii"))
+    for relative in sorted(context.files):
+        suffix = PurePosixPath(relative).suffix.casefold()
+        if suffix not in adapter.cache_input_suffixes:
+            continue
+        _hash_part(digest, relative.encode("utf-8"))
+        _hash_part(digest, context.kinds[relative].encode("utf-8"))
+        path = context.files[relative]
+        try:
+            size = path.stat().st_size
+            if size > context.max_parse_bytes:
+                _hash_part(digest, f"oversized:{size}".encode("ascii"))
+                continue
+            with path.open("rb") as stream:
+                while chunk := stream.read(1024 * 1024):
+                    _hash_part(digest, chunk)
+        except OSError:
+            _hash_part(digest, b"unreadable")
+    return digest.hexdigest()
+
+
+def _hash_part(digest, value: bytes) -> None:
+    digest.update(len(value).to_bytes(8, "big"))
+    digest.update(value)
 
 
 def _file_kind(path: Path) -> str:

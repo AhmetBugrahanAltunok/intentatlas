@@ -10,8 +10,8 @@ source_path: "tests/test_graph.py"
 
 ## Metadata
 
-- **End Line:** <code>148</code>
-- **Line:** <code>131</code>
+- **End Line:** <code>169</code>
+- **Line:** <code>152</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

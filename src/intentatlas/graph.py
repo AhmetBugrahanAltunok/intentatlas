@@ -11,6 +11,7 @@ from typing import Any, TypeVar
 
 from .models import Edge, ImpactRecord, Node
 from .relations import RELATION_SCHEMA_VERSION, relation_catalog, relation_type
+from .storage import atomic_write_text
 
 _BucketKey = TypeVar("_BucketKey")
 
@@ -235,11 +236,9 @@ class AtlasGraph:
         }
 
     def save(self, path: Path) -> None:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
+        atomic_write_text(
+            path,
             json.dumps(self.to_dict(), indent=2, ensure_ascii=False) + "\n",
-            encoding="utf-8",
-            newline="\n",
         )
 
     @classmethod

@@ -51,6 +51,8 @@ _DEFAULT_EXPORT_DECLARATION = re.compile(
 class JavaScriptAdapter:
     name = "javascript-typescript"
     suffixes = JAVASCRIPT_SUFFIXES
+    cache_input_suffixes = suffixes
+    cache_version = 1
 
     def scan(self, context: AdapterContext) -> GraphFragment:
         aliases = _module_aliases(context.files)

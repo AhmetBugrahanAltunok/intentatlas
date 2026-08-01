@@ -44,6 +44,12 @@ python -m venv .venv
 `init`, genel yönlendirme ile boş niyet klasörleri oluşturur; IntentAtlas'ın kendi gereksinim,
 karar, kanıt, inceleme veya tarihli oturumlarını hedef depoya örnek veri olarak eklemez.
 
+Tekrarlanan CLI taramaları, değişmeyen her yerleşik dil adaptörü için sınırlı ve içerik-karmalı bir
+parçayı yeniden kullanır. Komut, yeniden kullanılan ve yeniden üretilen adaptör sayılarını gösterir.
+Bu cache kaynak metni değil yalnızca grafik metadata'sını taşır ve güvenle silinebilir; bozuk veya
+eski kayıt yeniden üretilir. Grafik ve cache dosyaları atomik olarak değiştirilir. Ayrıntılar için
+[artımlı tarama belgesine](docs/incremental-scanning.md) bakın.
+
 Ardından `atlas/` klasörünü Obsidian’da vault olarak açın. Graph View; gereksinimleri,
 kararları, kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak
 gösterecektir.

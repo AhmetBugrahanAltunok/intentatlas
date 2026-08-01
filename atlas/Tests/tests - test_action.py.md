@@ -16,3 +16,7 @@ source_path: "tests/test_action.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_shadow_review_action_is_opt_in_local_and_credential_free - tests - test_action.py|test_shadow_review_action_is_opt_in_local_and_credential_free]] _(structure; evidence: python-ast)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_

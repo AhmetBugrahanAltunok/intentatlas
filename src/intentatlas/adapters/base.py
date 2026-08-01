@@ -41,5 +41,7 @@ class LanguageAdapter(Protocol):
 
     name: str
     suffixes: frozenset[str]
+    cache_input_suffixes: frozenset[str]
+    cache_version: int
 
     def scan(self, context: AdapterContext) -> GraphFragment: ...

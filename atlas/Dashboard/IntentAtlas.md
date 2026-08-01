@@ -11,36 +11,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 24
+- **commit:** 25
 - **config:** 7
-- **decision:** 21
-- **document:** 21
-- **evidence:** 21
-- **file:** 34
-- **issue:** 19
+- **decision:** 22
+- **document:** 22
+- **evidence:** 22
+- **file:** 36
+- **issue:** 20
 - **memory:** 5
-- **requirement:** 21
-- **review:** 21
-- **session:** 3
-- **symbol:** 671
-- **test:** 60
-- **relationships:** 2155
+- **requirement:** 22
+- **review:** 22
+- **session:** 4
+- **symbol:** 703
+- **test:** 61
+- **relationships:** 2282
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 129 relationships
-- [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 109 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 88 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 63 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 137 relationships
+- [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 95 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 90 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 73 relationships
+- [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] — 62 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 55 relationships
 - [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 54 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 52 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 49 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 50 relationships
 - [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 46 relationships
 - [[Tests/tests - test_vault.py|tests/test_vault.py]] — 46 relationships
 - [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 45 relationships
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 42 relationships
-- [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] — 42 relationships
 
 ## Workflow
 

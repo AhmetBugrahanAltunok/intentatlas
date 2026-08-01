@@ -24,10 +24,14 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
     assert main(["impact", "app.py", str(tmp_path), "--depth", "1"]) == 0
     output = capsys.readouterr().out
     assert "Scanned" in output
+    assert "Adapter cache: 0 reused, 3 rebuilt" in output
     assert "relationships" in output
     assert "app.py" in output
     assert "tested-by · verification" in output
     assert "via python-ast" in output
+
+    assert main(["scan", str(tmp_path)]) == 0
+    assert "Adapter cache: 3 reused, 0 rebuilt" in capsys.readouterr().out
 
 
 def test_cli_reports_invalid_requests(tmp_path, capsys) -> None:

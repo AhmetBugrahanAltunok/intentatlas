@@ -44,9 +44,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - fixtures - typescript_project - src - view.jsx|tests/fixtures/typescript_project/src/view.jsx]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/AdapterContext.read_text - src - intentatlas - adapters - base.py|AdapterContext.read_text]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/LanguageAdapter.scan - src - intentatlas - adapters - base.py|LanguageAdapter.scan]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 
