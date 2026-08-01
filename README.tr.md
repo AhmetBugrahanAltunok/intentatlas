@@ -45,6 +45,11 @@ Ardından `atlas/` klasörünü Obsidian’da vault olarak açın. Graph View; g
 kararları, kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak
 gösterecektir.
 
+Python 3.11, 3.12 ve 3.13 desteklenir. Tam test paketi Linux üzerinde; kurulmuş wheel ile CLI,
+tarama, test önerisi ve yerel görüntüleyici akışı ise en eski ve en yeni desteklenen Python
+sürümlerinde Linux, Windows ve macOS üzerinde CI tarafından doğrulanır. Yerel, tekrarlanabilir
+paket kontrolleri için [sürüm sürecine](RELEASING.md) bakın.
+
 Bir commit, dosya veya sembol için test dosyalarını çalıştırmadan sıralamak için:
 
 ```text

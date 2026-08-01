@@ -11,8 +11,9 @@ source_path: "pyproject.toml"
 ## Metadata
 
 - **Language:** <code>"TOML"</code>
-- **Size Bytes:** <code>1769</code>
+- **Size Bytes:** <code>2086</code>
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_

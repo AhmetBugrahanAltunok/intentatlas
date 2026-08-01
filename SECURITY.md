@@ -73,6 +73,11 @@ reproduction steps, impact, and any suggested mitigation.
   It does not scan the current directory, execute project code, or access the network; its graph
   exists only in an automatically cleaned temporary directory. Viewer evidence-path traversal is
   limited to depth 6, 800 visited nodes, and 6 results, and all graph labels remain escaped.
+- Release verification builds under a fixed timestamp and requires byte-identical repeated wheel
+  and source archives. It validates wheel paths, CRCs, `RECORD` hashes and sizes, metadata, console
+  entry point, bundled web assets, and repository-matching MIT license bytes. Source archives reject
+  unsafe members, links, unexpected roots, and project-only vault, benchmark, workflow, and local
+  configuration data. The release workflow verifies artifacts but never publishes them.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during

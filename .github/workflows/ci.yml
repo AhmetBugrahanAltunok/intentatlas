@@ -23,6 +23,44 @@ jobs:
       - run: python -m ruff check .
       - run: python -m pytest --cov=intentatlas --cov-report=term-missing --cov-fail-under=80
 
+  cross-platform-e2e:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - run: python -m pip wheel . --no-deps --wheel-dir dist
+      - name: Install the built wheel
+        run: >-
+          python -c "import glob, subprocess, sys; wheels = glob.glob('dist/*.whl');
+          assert len(wheels) == 1; subprocess.check_call([sys.executable, '-m', 'pip',
+          'install', '--force-reinstall', '--no-deps', wheels[0]])"
+      - run: intentatlas --version
+      - run: python -m pytest tests/test_e2e.py -q
+
+  reproducible-package:
+    runs-on: ubuntu-latest
+    env:
+      SOURCE_DATE_EPOCH: "1704067200"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install -e ".[release]"
+      - run: python -m build --sdist --wheel --outdir var/release-a
+      - run: python -m build --sdist --wheel --outdir var/release-b
+      - run: python tools/verify_release.py var/release-a var/release-b
+
   security:
     runs-on: ubuntu-latest
     steps:

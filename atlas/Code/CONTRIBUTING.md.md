@@ -11,7 +11,7 @@ source_path: "CONTRIBUTING.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>1158</code>
+- **Size Bytes:** <code>1351</code>
 
 ## Incoming relationships
 

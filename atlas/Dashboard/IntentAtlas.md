@@ -17,28 +17,28 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 17
+- **commit:** 18
 - **config:** 6
-- **decision:** 18
-- **document:** 18
-- **evidence:** 18
-- **file:** 29
-- **issue:** 16
+- **decision:** 19
+- **document:** 19
+- **evidence:** 19
+- **file:** 30
+- **issue:** 17
 - **memory:** 4
-- **requirement:** 18
-- **review:** 18
+- **requirement:** 19
+- **review:** 19
 - **session:** 1
-- **symbol:** 519
-- **test:** 50
-- **relationships:** 1688
+- **symbol:** 536
+- **test:** 52
+- **relationships:** 1765
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 107 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 113 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 69 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 61 relationships
-- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 50 relationships
+- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 51 relationships
 - [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 48 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 48 relationships
 - [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] — 46 relationships
@@ -46,7 +46,7 @@ generated: true
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 42 relationships
 - [[Tests/tests - test_vault.py|tests/test_vault.py]] — 42 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 40 relationships
-- [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] — 35 relationships
+- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 36 relationships
 
 ## Workflow
 

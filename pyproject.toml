@@ -35,6 +35,9 @@ security = [
   "bandit>=1.8,<2",
   "pip-audit>=2.7,<3",
 ]
+release = [
+  "build>=1.2,<2",
+]
 
 [project.scripts]
 intentatlas = "intentatlas.cli:main"
@@ -45,6 +48,23 @@ Issues = "https://github.com/AhmetBugrahanAltunok/IntentAtlas/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/intentatlas"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/tools/verify_release.py",
+  "/docs",
+  "/CHANGELOG.md",
+  "/CODE_OF_CONDUCT.md",
+  "/CONTRIBUTING.md",
+  "/LICENSE",
+  "/README.md",
+  "/README.tr.md",
+  "/RELEASING.md",
+  "/SECURITY.md",
+  "/pyproject.toml",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

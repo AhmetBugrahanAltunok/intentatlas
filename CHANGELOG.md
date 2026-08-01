@@ -41,6 +41,10 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   by one production file, with filename convention retained as weak fallback evidence.
 - Bounded Python re-export and JavaScript/TypeScript static-import symbol evidence, one-hop exact
   symbol-dependent test discovery, and recent co-change test evidence with inspectable paths.
+- Installed-wheel end-to-end coverage for initialization, scan, status, impact, test
+  recommendation, and loopback viewer retrieval across the supported operating-system matrix.
+- A local release verifier for repeated-build reproducibility, wheel integrity and metadata,
+  bundled assets, license bytes, source-archive boundaries, and a documented release procedure.
 
 ### Changed
 
@@ -69,6 +73,9 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   version-control delivery records; existing graph caches require a new scan.
 - Relation schema 3 adds direct `modifies`/`modified-by` history semantics while preserving
   commit-to-file `changes` as the conservative fallback.
+- Source distributions now contain reviewable source, tests, documentation, release tooling, and
+  required project metadata without bundling the Obsidian vault, benchmarks, workflows, or local
+  IntentAtlas configuration.
 
 ### Fixed
 

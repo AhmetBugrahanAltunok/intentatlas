@@ -143,6 +143,15 @@ edges entirely in memory. It reports graph and result counts, a full-scan refere
 indexed bucket work, and cold/warm timings. Timings are diagnostic and environment-specific; the
 stable correctness contract is the graph shape, result identities, and bounded local work.
 
+Release verification is outside the runtime package and executes no repository project code. A
+cross-platform subprocess test exercises the installed console module from initialization through
+scan, impact, recommendation, and loopback HTTP retrieval. The release builder creates a wheel and
+source distribution twice under one fixed `SOURCE_DATE_EPOCH`; the verifier requires matching
+artifact names and SHA-256 hashes, checks every wheel `RECORD` entry, validates package metadata,
+entry point, web assets, and MIT license bytes, and rejects project-only vault, benchmark,
+workflow, and local configuration data from the source archive. Publication remains a separate,
+explicitly approved external action.
+
 ## 3. Project brain
 
 The `atlas/` folder is an Obsidian vault and the durable human-readable layer.

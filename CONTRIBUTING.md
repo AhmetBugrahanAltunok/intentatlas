@@ -11,6 +11,10 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m ruff check .
 ```
 
+Release-affecting changes must also pass `tests/test_e2e.py`, build twice under a fixed
+`SOURCE_DATE_EPOCH`, and pass `tools/verify_release.py` as described in
+[`RELEASING.md`](RELEASING.md).
+
 ## Before opening a pull request
 
 1. Open an issue for large changes so the intent is clear before implementation.

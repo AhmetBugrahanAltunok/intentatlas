@@ -274,10 +274,24 @@ Status: complete (2026-08-01)
 
 ## Phase 7D — Open-source release readiness
 
-Status: planned
+Status: in progress
 
-- Add cross-platform end-to-end tests.
-- Verify packaging, release documentation, attribution, and reproducible release checks.
+- [x] Add an installed-wheel end-to-end test for init, scan, status, impact, recommendation, and
+  loopback viewer retrieval.
+- [x] Add Linux, Windows, and macOS CI coverage on the oldest and newest supported Python versions.
+- [x] Build wheel and source artifacts twice under a fixed timestamp and verify byte identity,
+  integrity, metadata, bundled assets, license bytes, and source-archive boundaries.
+- [x] Document the release process and keep publishing as a separate approval-gated action.
+- [x] Pass the complete local quality, security, package, CLI/UI, determinism, attribution, and
+  Obsidian closure gates.
+- [ ] Pass the new cross-platform and reproducible-package jobs in remote CI before closing the
+  phase.
+
+- Requirement: [[Requirements/REQ-019 - Ship verifiable cross-platform releases]]
+- Decision: [[Decisions/ADR-019 - Separate reproducible verification from publication]]
+- Delivery issue: [[Issues/ISSUE-017 - Implement open-source release gates]]
+- Planned evidence: [[Evidence/EVD-019 - Phase 7D release readiness verification]]
+- Planned review: [[Reviews/Phase 7D Open-Source Release Readiness Review]]
 
 ## Completion rule
 
