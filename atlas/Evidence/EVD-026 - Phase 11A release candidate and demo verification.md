@@ -52,6 +52,13 @@ phase: 11A
 - A new environment installed that exact wheel with `--no-deps`, reported
   `IntentAtlas 0.3.0rc1`, and rendered both text and valid JSON reports without using the source
   tree.
+- Clean implementation commit `1c640192410c35b7287b2aaddeae6b8cdadcc75d` was rebuilt twice under
+  its own commit epoch `1785613103`. Exact source-bound provenance and approved-hash matching
+  passed: wheel SHA-256 `44a8f7ec7a9c880fecdf605c9ba6ffde4c6a48986c8a99636281a6485dae496a`
+  at 124,511 bytes and sdist SHA-256
+  `c8aaa0ac3486fbab41921e2bc97bf763680a00e212d9a1c86712d0e841fad758` at 192,167 bytes, with 45
+  wheel and 136 source files. A new environment installed the exact committed wheel, reported the
+  candidate version, and parsed its JSON demo report successfully.
 - Final local vault materialization produced 1,096 nodes, 2,422 relationships, 954 generated notes,
   `3 reused, 0 rebuilt`, and zero durable orphans. A subsequent no-change scan kept generated
   bytes, lengths, and mtimes stable at SHA-256
@@ -60,8 +67,6 @@ phase: 11A
 
 ## Open gates
 
-- Build and verify deterministic provenance from the clean implementation commit rather than the
-  working tree.
 - Re-run the complete local gates after final Evidence/Review materialization.
 - Network dependency audit, push, remote CI, final Review, and acceptance remain pending and need
   separate authorization where required.
