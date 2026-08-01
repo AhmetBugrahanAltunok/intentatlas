@@ -10,11 +10,10 @@ source_path: "tests/test_scanner.py"
 
 ## Metadata
 
-- **End Line:** <code>237</code>
-- **Line:** <code>228</code>
+- **End Line:** <code>259</code>
+- **Line:** <code>250</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-diff-hunk)_

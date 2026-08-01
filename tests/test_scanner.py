@@ -155,6 +155,28 @@ def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> N
     )
 
 
+def test_scanner_recognizes_root_test_javascript_file(tmp_path) -> None:
+    (tmp_path / "index.js").write_text(
+        "export default function value() { return 1; }\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "test.js").write_text(
+        "import value from './index.js';\nvalue();\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    assert graph.nodes["file:test.js"].kind == "test"
+    assert any(
+        edge.source == "file:test.js"
+        and edge.target == "file:index.js"
+        and edge.relation == "tests"
+        and edge.evidence == "javascript-structural"
+        for edge in graph.edges
+    )
+
+
 def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
     first = scan_repository(GO_FIXTURE, ProjectConfig(git_history_limit=0))
     second = scan_repository(GO_FIXTURE, ProjectConfig(git_history_limit=0))

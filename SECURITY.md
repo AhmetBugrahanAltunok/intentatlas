@@ -50,6 +50,12 @@ reproduction steps, impact, and any suggested mitigation.
   `atlas/Private/`; direct symbolic links, unsafe paths, duplicate identities, malformed schemas,
   and excessive manifest/project/case/graph sizes are rejected. Corpus evaluation executes no
   repository code and makes no network request. One invalid project fails the complete corpus.
+- Real-world manifests accept only bounded canonical GitHub URLs, full commit IDs, safe relative
+  license and label paths, SPDX identifiers, and SHA-256 license digests. Evaluation is offline and
+  requires an exact origin, exact HEAD, clean checkout, matching license bytes, and a pinned-commit
+  label case. It ignores checkout-owned configuration, scans with fixed exclusions, executes no
+  project code or tests, and persists no third-party graph or metadata. Acquisition remains a
+  separate action requiring explicit network approval.
 - The query-scale benchmark creates only bounded synthetic in-memory nodes and edges. Boolean,
   negative, and excessive edge or iteration counts are rejected; it reads no repository files,
   executes no project code, persists no benchmark graph, and makes no network request.

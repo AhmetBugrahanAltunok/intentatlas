@@ -40,6 +40,8 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 - Measure recommendations against exhaustive, human-reviewed local labels with deterministic
   per-case and micro-aggregate precision and recall.
 - Compare low, medium, and high confidence across a bounded corpus of labeled local graphs.
+- Re-run the unchanged recommendation query against clean, pinned, license-reviewed public
+  checkouts without bundling or executing third-party code.
 - Reuse a lazy deterministic adjacency index for impact and recommendation queries, with a bounded
   synthetic scale benchmark for contributors.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
@@ -79,6 +81,7 @@ intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationshi
 intentatlas recommend-tests TARGET       Rank advisory test candidates with explanations
 intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
 intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
+intentatlas evaluate-real-world MANIFEST CHECKOUTS  Validate pinned public checkouts offline
 intentatlas benchmark-scale              Measure indexed queries on a synthetic large graph
 intentatlas demo                         Open the built-in intent-to-proof showcase
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
@@ -137,6 +140,18 @@ intentatlas evaluate-corpus benchmarks/recommendation-corpus.json --format json
 Corpus output contains compact per-project and micro totals. These small original fixtures verify
 aggregation and confidence behavior; they are not copied repositories or real-world accuracy
 evidence. See [the corpus schema](docs/recommendation-corpus.md).
+
+For a reproducible real-world check, acquire the three approved public repositories only after
+network approval, pin them to the manifest commits, then run:
+
+```text
+intentatlas evaluate-real-world benchmarks/real-world/manifest.json .intentatlas/real-world/checkouts
+```
+
+The command verifies origin, commit, clean state, and reviewed license hash before scanning in
+memory. It does not clone, install, execute tests, run project code, or retain third-party source,
+history, logos, or generated graphs. See the
+[real-world validation protocol](docs/real-world-validation.md).
 
 To run the offline query-scale probe without reading or executing a project:
 
@@ -215,6 +230,12 @@ tests, evidence, coverage, test results, commits, and pull requests. These paths
 intent-to-proof story easier to follow; they explain graph connectivity and do not claim causality,
 completeness, freshness, or test necessity. `intentatlas demo` opens the same production viewer on
 a packaged nine-node first-party example and removes its temporary graph when the viewer stops.
+
+The real-world evaluator adds a provenance gate around the same scanner and corpus evaluator. A
+strict manifest binds each local checkout to an exact GitHub origin, commit, SPDX identifier,
+license-file hash, and reviewed labels. The included nine cases across Python, JavaScript, and Go
+are useful validation evidence for those pinned changes only; they are not a general accuracy
+claim.
 
 Ongoing work and completion status are tracked in the
 [Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as

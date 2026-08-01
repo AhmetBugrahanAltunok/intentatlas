@@ -11,7 +11,7 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>17210</code>
+- **Size Bytes:** <code>17897</code>
 
 ## Outgoing relationships
 
@@ -27,6 +27,7 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_recognizes_root_test_javascript_file - tests - test_scanner.py|test_scanner_recognizes_root_test_javascript_file]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: filename-convention)_

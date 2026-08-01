@@ -340,6 +340,7 @@ def _file_kind(path: Path) -> str:
         "tests" in lowered_parts
         or "test" in lowered_parts
         or "__tests__" in lowered_parts
+        or stem in {"test", "tests"}
         or stem.startswith("test_")
         or stem.endswith("_test")
         or stem.endswith(".test")

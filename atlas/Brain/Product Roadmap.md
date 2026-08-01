@@ -208,19 +208,27 @@ Status: complete (2026-08-01)
 
 ## Phase 6B2B2B2B — License-reviewed real-world validation
 
-Status: planned
+Status: complete (2026-08-01)
 
 - Add public real-world benchmark repositories only after explicit network approval and license
   review.
 - Add independently reviewed labels and scanner-to-recommendation measurements without copying
   third-party history, branding, or source into the product.
 - Define generated-output policies that further reduce Git noise.
+- Requirement: [[Requirements/REQ-015 - Validate recommendations on pinned public projects]]
+- Decision: [[Decisions/ADR-015 - Separate public acquisition from offline evaluation]]
+- Delivery issue: [[Issues/ISSUE-013 - Implement license-reviewed real-world validation]]
+- Evidence: [[Evidence/EVD-015 - Phase 6B2B2B2B real-world verification]]
+- Review: [[Reviews/Phase 6B2B2B2B Real-World Validation Review]]
+- Outcome: three pinned MIT-licensed Python, JavaScript, and Go changes now exercise the unchanged
+  scanner-to-recommendation pipeline through nine reviewed commit, file, and symbol cases; all
+  checkout and generated data remains approval-gated, ignored, and ephemeral.
 
 ## Phase 7 — Open-source release readiness
 
 Status: planned
 
-- Add public real-world fixtures and cross-platform end-to-end tests.
+- Expand public benchmark breadth and add cross-platform end-to-end tests.
 - Verify packaging, release documentation, attribution, and reproducible release checks.
 
 ## Completion rule

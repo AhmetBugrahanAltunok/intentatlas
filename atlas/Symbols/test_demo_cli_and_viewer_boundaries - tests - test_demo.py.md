@@ -17,3 +17,4 @@ source_path: "tests/test_demo.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-diff-hunk)_

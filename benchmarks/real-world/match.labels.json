@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "tidwall/match 9eab4b2 complete test set",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "match-nocase",
+      "target": "commit:9eab4b2d580b9e1c5ef6399492a09f5a2bdd286b",
+      "expected_tests": [
+        "match_test.go"
+      ]
+    },
+    {
+      "id": "match-source-file",
+      "target": "file:match.go",
+      "expected_tests": [
+        "match_test.go"
+      ]
+    },
+    {
+      "id": "match-symbol",
+      "target": "symbol:match.go::MatchNoCase",
+      "expected_tests": [
+        "match_test.go"
+      ]
+    }
+  ]
+}

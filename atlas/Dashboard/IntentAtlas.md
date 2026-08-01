@@ -17,36 +17,36 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 13
+- **commit:** 14
 - **config:** 6
-- **decision:** 14
-- **document:** 17
-- **evidence:** 14
-- **file:** 28
-- **issue:** 12
+- **decision:** 15
+- **document:** 18
+- **evidence:** 15
+- **file:** 29
+- **issue:** 13
 - **memory:** 4
-- **requirement:** 14
-- **review:** 14
+- **requirement:** 15
+- **review:** 15
 - **session:** 1
-- **symbol:** 457
-- **test:** 49
-- **relationships:** 1356
+- **symbol:** 493
+- **test:** 50
+- **relationships:** 1421
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 83 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 51 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 89 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 53 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 52 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 49 relationships
 - [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] — 48 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 46 relationships
 - [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 45 relationships
 - [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] — 44 relationships
 - [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] — 42 relationships
-- [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] — 41 relationships
 - [[Tests/tests - test_vault.py|tests/test_vault.py]] — 41 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 39 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 40 relationships
 - [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 38 relationships
+- [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] — 36 relationships
 
 ## Workflow
 

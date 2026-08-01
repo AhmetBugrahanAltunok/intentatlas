@@ -19,6 +19,11 @@ from .demo import serve_demo
 from .evaluation import evaluate_recommendations, load_evaluation_labels, render_evaluation
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
+from .real_world import (
+    evaluate_real_world,
+    load_real_world_manifest,
+    render_real_world,
+)
 from .recommendations import recommend_tests, render_recommendations
 from .scale import render_scale_benchmark, run_scale_benchmark
 from .scanner import USER_VAULT_AREAS, scan_repository
@@ -111,6 +116,27 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
     )
 
+    real_world_parser = commands.add_parser(
+        "evaluate-real-world",
+        help="Evaluate pinned, license-reviewed checkouts without executing project code",
+    )
+    real_world_parser.add_argument(
+        "manifest",
+        help="Real-world manifest JSON path below the project root",
+    )
+    real_world_parser.add_argument(
+        "checkouts",
+        help="Directory of pinned checkouts below the project root",
+    )
+    _path_argument(real_world_parser)
+    real_world_parser.add_argument("--limit", type=int, default=20)
+    real_world_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
+    )
+
     scale_parser = commands.add_parser(
         "benchmark-scale",
         help="Measure indexed queries on a bounded synthetic graph",
@@ -190,6 +216,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _evaluate_corpus(
                 root,
                 args.corpus,
+                args.limit,
+                args.output_format,
+            )
+        if args.command == "evaluate-real-world":
+            return _evaluate_real_world(
+                root,
+                args.manifest,
+                args.checkouts,
                 args.limit,
                 args.output_format,
             )
@@ -380,6 +414,33 @@ def _evaluate_corpus(
     return 0
 
 
+def _evaluate_real_world(
+    root: Path,
+    manifest: str,
+    checkouts: str,
+    limit: int,
+    output_format: str,
+) -> int:
+    config = ProjectConfig.load(root)
+    manifest_path = _project_path(
+        root,
+        config,
+        manifest,
+        "real-world manifest",
+        must_exist=True,
+    )
+    checkouts_path = _project_directory(
+        root,
+        config,
+        checkouts,
+        "real-world checkout root",
+    )
+    parsed = load_real_world_manifest(manifest_path)
+    result = evaluate_real_world(root, checkouts_path, parsed, limit=limit)
+    print(render_real_world(result, output_format), end="")
+    return 0
+
+
 def _open(root: Path, host: str, port: int, open_browser: bool) -> int:
     config = ProjectConfig.load(root)
     graph_path = config.graph_path(root)
@@ -428,5 +489,26 @@ def _project_path(
     if target == private or private in target.parents:
         raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
     if must_exist and not target.is_file():
+        raise ValueError(f"Configured {label} does not exist: {configured}")
+    return target
+
+
+def _project_directory(
+    root: Path,
+    config: ProjectConfig,
+    configured: str,
+    label: str,
+) -> Path:
+    candidate = Path(configured)
+    unresolved = candidate if candidate.is_absolute() else root / candidate
+    if unresolved.is_symlink():
+        raise ValueError(f"Configured {label} may not be a symbolic link: {configured}")
+    target = unresolved.resolve()
+    if target == root or root not in target.parents:
+        raise ValueError(f"Configured {label} must be below the project root: {configured}")
+    private = (config.vault_path(root) / "Private").resolve()
+    if target == private or private in target.parents:
+        raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
+    if not target.is_dir():
         raise ValueError(f"Configured {label} does not exist: {configured}")
     return target

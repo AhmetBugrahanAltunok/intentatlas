@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "dbader/schedule 2dcb583 complete test set",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "timezone-fix",
+      "target": "commit:2dcb5833cdf2b7d7a1bda90c19e2fb7e373e66df",
+      "expected_tests": [
+        "test_schedule.py"
+      ]
+    },
+    {
+      "id": "schedule-source-file",
+      "target": "file:schedule/__init__.py",
+      "expected_tests": [
+        "test_schedule.py"
+      ]
+    },
+    {
+      "id": "schedule-symbol",
+      "target": "symbol:schedule/__init__.py::Job._schedule_next_run",
+      "expected_tests": [
+        "test_schedule.py"
+      ]
+    }
+  ]
+}

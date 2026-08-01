@@ -13,6 +13,6 @@ source_path: "docs/guided-demo.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1601</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_

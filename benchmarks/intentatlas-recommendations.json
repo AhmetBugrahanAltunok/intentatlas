@@ -21,6 +21,7 @@
         "tests/test_corpus.py",
         "tests/test_demo.py",
         "tests/test_evaluation.py",
+        "tests/test_real_world.py",
         "tests/test_recommendations.py",
         "tests/test_scale.py"
       ]

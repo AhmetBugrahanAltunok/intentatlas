@@ -34,6 +34,9 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   recommendation queries, plus a bounded offline synthetic scale benchmark command.
 - A one-command original local showcase and bounded viewer evidence paths that connect selected
   intent, implementation, delivery, test, evidence, and history nodes.
+- Offline real-world recommendation evaluation for clean, pinned, license-reviewed public
+  checkouts, with strict provenance validation, nine reviewed Python/JavaScript/Go cases, and an
+  ephemeral-only generated-output policy.
 
 ### Changed
 
@@ -53,6 +56,7 @@ The format is based on Keep a Changelog and the project follows Semantic Version
   built-in demo use.
 - Python structural analysis now runs behind the same graph-fragment adapter contract used by
   TypeScript and JavaScript without changing its graph semantics.
+- Root-level JavaScript files named `test.js` or `tests.js` are now recognized as tests.
 - Relation schema 2 adds `addressed-by`/`addresses` delivery semantics and broadens `changes` to
   version-control delivery records; existing graph caches require a new scan.
 - Relation schema 3 adds direct `modifies`/`modified-by` history semantics while preserving

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "name": "IntentAtlas pinned real-world validation",
+  "generated_output_policy": "ephemeral-only",
+  "projects": [
+    {
+      "id": "match",
+      "name": "tidwall/match case-insensitive matching change",
+      "language": "Go",
+      "repository": "https://github.com/tidwall/match",
+      "commit": "9eab4b2d580b9e1c5ef6399492a09f5a2bdd286b",
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "677524ffb56d765c88cd841ce04b8f2144e1e65816b084ecbc464463ef87a117"
+      },
+      "labels": "benchmarks/real-world/match.labels.json"
+    },
+    {
+      "id": "p-limit",
+      "name": "sindresorhus/p-limit detached map change",
+      "language": "JavaScript",
+      "repository": "https://github.com/sindresorhus/p-limit",
+      "commit": "ef37eb2f372d385883d113803c98ba0bf3828ad1",
+      "license": {
+        "spdx": "MIT",
+        "path": "license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      "labels": "benchmarks/real-world/p-limit.labels.json"
+    },
+    {
+      "id": "schedule",
+      "name": "dbader/schedule timezone bugfix",
+      "language": "Python",
+      "repository": "https://github.com/dbader/schedule",
+      "commit": "2dcb5833cdf2b7d7a1bda90c19e2fb7e373e66df",
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE.txt",
+        "sha256": "49469f2d42facf357213ad2cda29da188fa418a16fccfe7c6bbb3e3fc07bf4ff"
+      },
+      "labels": "benchmarks/real-world/schedule.labels.json"
+    }
+  ]
+}

@@ -79,6 +79,20 @@ Corpus çıktısı proje başına ve mikro toplamları birlikte gösterir. Bu k�
 agregasyon ile güven davranışını doğrular; kopyalanmış repo veya gerçek dünya doğruluk kanıtı
 değildir. Ayrıntılar [corpus şemasında](docs/recommendation-corpus.md) bulunur.
 
+Lisansı incelenmiş gerçek projelerde yeniden üretilebilir doğrulama için, onaylı üç açık kaynak
+depoyu yalnızca ağ izninden sonra manifestteki commit’lere sabitleyin ve şunu çalıştırın:
+
+```text
+intentatlas evaluate-real-world benchmarks/real-world/manifest.json .intentatlas/real-world/checkouts
+```
+
+Komut taramadan önce origin, commit, temiz çalışma ağacı ve incelenmiş lisans özetini doğrular.
+Repo klonlamaz, bağımlılık kurmaz, test veya proje kodu çalıştırmaz; üçüncü taraf kaynak, Git
+geçmişi, logo ya da üretilmiş grafiği üründe saklamaz. Ayrıntılar
+[gerçek proje doğrulama protokolünde](docs/real-world-validation.md) bulunur. Dokuz sabit vaka
+yalnızca seçilen Python, JavaScript ve Go değişiklikleri için kanıttır; genel doğruluk iddiası
+değildir.
+
 Bir projeyi okumadan veya çalıştırmadan çevrimdışı ölçek kontrolü yapmak için:
 
 ```text

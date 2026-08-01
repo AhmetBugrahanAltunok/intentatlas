@@ -24,8 +24,8 @@ MAX_CORPUS_GRAPH_BYTES_TOTAL = 250_000_000
 SAFE_PROJECT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$")
 WINDOWS_ABSOLUTE = re.compile(r"^[A-Za-z]:[/\\]")
 ADVISORY = (
-    "Corpus metrics depend on exhaustive and correct labels; fixture results do not prove "
-    "accuracy on real-world repositories."
+    "Corpus metrics depend on exhaustive and correct labels; results do not prove accuracy "
+    "beyond the evaluated cases."
 )
 
 

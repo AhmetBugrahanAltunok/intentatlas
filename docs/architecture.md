@@ -8,6 +8,7 @@ Repository ──scan──> AtlasGraph ──sync──> Obsidian vault
                          ├──query──> impact/status/test recommendation CLI
                          ├──evaluate──> labeled precision/recall report
                          ├──aggregate──> cross-project threshold corpus
+                         ├──validate──> pinned real-world checkout metrics
                          ├──compare──> deterministic CI graph diff
                          └──serve──> local web viewer
 first-party demo graph ────────────> local web viewer
@@ -101,6 +102,14 @@ same evaluator runs at low, medium, and high confidence with one shared result l
 counts remain separate; corpus totals are micro aggregates from summed TP, FP, and FN. Output
 contains aggregates rather than every ranked case, keeping the schema bounded while individual
 evaluation remains available for diagnosis. One invalid graph or label aborts the corpus.
+
+Real-world evaluation places a provenance gate before the same scanner, recommendation query, and
+corpus evaluator. Its strict manifest records only a GitHub URL, full commit, language, SPDX
+identifier, bounded license path and SHA-256, and project-local labels. Every checkout must match
+the origin and commit, be clean, and contain the reviewed license bytes. The evaluator constructs a
+fixed default configuration instead of loading checkout-owned configuration, scans in memory, and
+persists nothing. Repository acquisition remains a separate approval-gated action; third-party
+source, history, branding, and generated graphs remain outside the product.
 
 The synthetic scale benchmark constructs a relevant commit/file/test chain and bounded unrelated
 edges entirely in memory. It reports graph and result counts, a full-scan reference work estimate,

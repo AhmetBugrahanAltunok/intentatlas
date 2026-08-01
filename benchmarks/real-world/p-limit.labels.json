@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "sindresorhus/p-limit ef37eb2 complete test set",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "detached-map",
+      "target": "commit:ef37eb2f372d385883d113803c98ba0bf3828ad1",
+      "expected_tests": [
+        "test.js"
+      ]
+    },
+    {
+      "id": "p-limit-source-file",
+      "target": "file:index.js",
+      "expected_tests": [
+        "test.js"
+      ]
+    },
+    {
+      "id": "p-limit-symbol",
+      "target": "symbol:index.js::pLimit",
+      "expected_tests": [
+        "test.js"
+      ]
+    }
+  ]
+}
