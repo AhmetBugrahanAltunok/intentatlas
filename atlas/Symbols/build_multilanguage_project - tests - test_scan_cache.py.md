@@ -17,3 +17,4 @@ source_path: "tests/test_scan_cache.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_scan_cache.py|tests/test_scan_cache.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-diff-hunk)_

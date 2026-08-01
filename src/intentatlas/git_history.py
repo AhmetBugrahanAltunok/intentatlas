@@ -38,6 +38,96 @@ class CommitRecord:
     hunks: tuple[DiffHunk, ...] = ()
 
 
+def resolve_git_head(root: Path) -> str | None:
+    """Resolve the current commit through a fixed read-only Git invocation."""
+
+    if not (root / ".git").exists():
+        return None
+    executable = shutil.which("git")
+    if executable is None:
+        return None
+    command = [
+        executable,
+        "-c",
+        f"safe.directory={root.resolve().as_posix()}",
+        "-C",
+        str(root.resolve()),
+        "rev-parse",
+        "--verify",
+        "--end-of-options",
+        "HEAD^{commit}",
+    ]
+    try:
+        result = subprocess.run(  # noqa: S603  # nosec B603
+            command,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=10,
+            shell=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    value = result.stdout.strip()
+    return value if result.returncode == 0 and FULL_SHA.fullmatch(value) else None
+
+
+def git_paths_match_head(root: Path, paths: tuple[str, ...]) -> bool | None:
+    """Return whether every mapped artifact is tracked and byte-equivalent to HEAD."""
+
+    if not paths:
+        return True
+    if not (root / ".git").exists():
+        return None
+    executable = shutil.which("git")
+    if executable is None:
+        return None
+    prefix = [
+        executable,
+        "-c",
+        f"safe.directory={root.resolve().as_posix()}",
+        "-c",
+        "core.quotePath=false",
+        "-C",
+        str(root.resolve()),
+    ]
+    try:
+        tracked = subprocess.run(  # noqa: S603  # nosec B603
+            [*prefix, "ls-files", "--error-unmatch", "--", *paths],
+            check=False,
+            capture_output=True,
+            timeout=10,
+            shell=False,
+        )
+        if tracked.returncode != 0:
+            return False
+        changed = subprocess.run(  # noqa: S603  # nosec B603
+            [
+                *prefix,
+                "diff",
+                "--quiet",
+                "--no-ext-diff",
+                "--ignore-submodules=all",
+                "HEAD",
+                "--",
+                *paths,
+            ],
+            check=False,
+            capture_output=True,
+            timeout=10,
+            shell=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if changed.returncode == 0:
+        return True
+    if changed.returncode == 1:
+        return False
+    return None
+
+
 def collect_git_history(
     root: Path,
     limit: int = 25,

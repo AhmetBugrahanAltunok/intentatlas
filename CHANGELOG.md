@@ -8,6 +8,10 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Added
 
+- Explicit bounded imports for SCIP protobuf JSON, SARIF 2.1.0, and commit-keyed per-test execution
+  maps, retaining only source-free aggregate metadata and safe local graph identities.
+- Aligned-only runtime test relationships: execution maps influence recommendations only when their
+  full commit exactly matches repository HEAD; stale or unknown maps remain observations.
 - Content-addressed per-adapter scan fragments that reuse unchanged Python, JavaScript/TypeScript,
   and Go analysis while retaining a cache-independent full-scan reference and visible CLI metrics.
 - Strict bounded adapter-cache validation and atomic graph/cache replacement that preserves the

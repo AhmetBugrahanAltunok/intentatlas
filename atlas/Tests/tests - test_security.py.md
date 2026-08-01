@@ -19,7 +19,3 @@ source_path: "tests/test_security.py"
 - <code>defines</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(verification; evidence: python-symbol-reference)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_

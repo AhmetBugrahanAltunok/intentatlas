@@ -364,6 +364,25 @@ Status: complete (2026-08-01)
 Planned later slices remain Phase 10B open evidence imports, Phase 10C adapter conformance and
 large-graph viewer work, and Phase 10D provenance, property/fuzz, browser, and release hardening.
 
+### Phase 10B — Open evidence imports
+
+Status: complete (2026-08-01)
+
+- Import bounded SCIP protobuf-JSON and SARIF 2.1.0 observations without retaining source or raw
+  diagnostic content.
+- Import a strict commit-keyed per-test execution map and create runtime test relationships only
+  when its commit exactly matches the scanned repository HEAD.
+- Keep every input explicit, local, offline, deterministic, project-relative, and disposable.
+- Requirement: [[Requirements/REQ-023 - Import open evidence without overstating certainty]]
+- Decision: [[Decisions/ADR-023 - Separate observations from aligned execution evidence]]
+- Delivery issue: [[Issues/ISSUE-021 - Implement bounded open evidence imports]]
+- Kickoff: [[Sessions/2026-08-01 - Phase 10B kickoff]]
+- Evidence: [[Evidence/EVD-023 - Phase 10B open evidence verification]]
+- Review: [[Reviews/Phase 10B Open Evidence Review]]
+- Outcome: explicit SCIP protobuf-JSON and SARIF 2.1.0 reports become bounded source-free file
+  observations, while commit-keyed execution maps add runtime test relationships only when both
+  commit and every mapped worktree artifact align exactly with HEAD.
+
 ## Completion rule
 
 Every phase must end with a linked Evidence note and Review note containing the full change

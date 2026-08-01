@@ -13,6 +13,9 @@ def test_config_round_trip_and_bounds(tmp_path) -> None:
         coverage_reports=["reports/coverage.xml"],
         test_reports=["reports/junit.xml"],
         delivery_reports=["reports/delivery.json"],
+        scip_reports=["reports/index.scip.json"],
+        sarif_reports=["reports/results.sarif"],
+        test_execution_reports=["reports/execution.json"],
     )
     path = config.save_if_missing(tmp_path)
     assert path.exists()
@@ -21,6 +24,9 @@ def test_config_round_trip_and_bounds(tmp_path) -> None:
     assert loaded.coverage_reports == ["reports/coverage.xml"]
     assert loaded.test_reports == ["reports/junit.xml"]
     assert loaded.delivery_reports == ["reports/delivery.json"]
+    assert loaded.scip_reports == ["reports/index.scip.json"]
+    assert loaded.sarif_reports == ["reports/results.sarif"]
+    assert loaded.test_execution_reports == ["reports/execution.json"]
     assert ".obsidian" in loaded.exclude
     assert loaded.vault_path(tmp_path) == (tmp_path / "atlas").resolve()
 
@@ -54,6 +60,12 @@ def test_config_rejects_project_root_as_an_output_path(tmp_path) -> None:
 def test_config_rejects_invalid_report_source_lists(tmp_path) -> None:
     (tmp_path / "intentatlas.json").write_text(
         json.dumps({"coverage_reports": "coverage.xml"}), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="must be a list"):
+        ProjectConfig.load(tmp_path)
+
+    (tmp_path / "intentatlas.json").write_text(
+        json.dumps({"scip_reports": "index.scip.json"}), encoding="utf-8"
     )
     with pytest.raises(ValueError, match="must be a list"):
         ProjectConfig.load(tmp_path)

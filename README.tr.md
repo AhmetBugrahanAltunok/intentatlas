@@ -213,6 +213,15 @@ Doğrudan test edilen bir Go sarmalayıcısı değişen sembolü çağırıyorsa
 yalnızca dosya başına sınırlı özetleri grafiğe ekler. `intentatlas diff` komutu da mevcut grafiği bir
 temel grafikle karşılaştırarak CI için deterministik ve zaman damgasız JSON üretir.
 
+SCIP protobuf-JSON, SARIF 2.1.0 ve commit-kimli test execution map raporları da sırasıyla
+`scip_reports`, `sarif_reports` ve `test_execution_reports` listeleriyle açıkça etkinleştirilebilir.
+İkili SCIP bu fazda desteklenmez. SCIP ve SARIF yalnız dosya gözlemi olarak kalır; etki veya test
+zorunluluğu iddiası üretmez. Execution map yalnız tam commit kimliği güncel Git HEAD ile eşleşir ve
+eşlenen tüm dosyalar o HEAD'e göre takip edilen/değişmemiş durumdaysa testten kaynak dosyaya
+çalışma-zamanı kanıtı ekler; eski ya da kimliği çözülemeyen rapor önerileri etkilemez. Ham semboller,
+tanılar, mesajlar, snippet'ler, düzeltmeler, kod akışları ve kaynak metni
+saklanmaz. Ayrıntılar [açık kanıt belgesinde](docs/open-evidence.md) açıklanır.
+
 Issue ve pull request bağlamı da isteğe bağlı yerel JSON snapshot dosyalarından içe aktarılabilir.
 `delivery_reports` kaynakları gereksinim ve kararları issue, pull request, değişen dosya ve bilinen
 commitlerle bağlar. Gövdeler, yorumlar ve ham API yanıtları saklanmaz; ayrıntılar

@@ -18,6 +18,9 @@ class ProjectConfig:
     coverage_reports: list[str] = field(default_factory=list)
     test_reports: list[str] = field(default_factory=list)
     delivery_reports: list[str] = field(default_factory=list)
+    scip_reports: list[str] = field(default_factory=list)
+    sarif_reports: list[str] = field(default_factory=list)
+    test_execution_reports: list[str] = field(default_factory=list)
     exclude: list[str] = field(
         default_factory=lambda: [
             ".git",
@@ -56,6 +59,9 @@ class ProjectConfig:
             coverage_reports=_report_sources(raw, "coverage_reports"),
             test_reports=_report_sources(raw, "test_reports"),
             delivery_reports=_report_sources(raw, "delivery_reports"),
+            scip_reports=_report_sources(raw, "scip_reports"),
+            sarif_reports=_report_sources(raw, "sarif_reports"),
+            test_execution_reports=_report_sources(raw, "test_execution_reports"),
             exclude=[str(item) for item in raw.get("exclude", cls().exclude)],
         )
 

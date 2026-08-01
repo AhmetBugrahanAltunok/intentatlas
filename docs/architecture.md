@@ -78,6 +78,22 @@ Configured evidence adapters read only explicit project-local reports. The Cober
 importers reject DTD/entity declarations, enforce byte and record limits, map report paths only to
 one discovered file, and aggregate coverage or result counts without retaining raw failure output.
 
+Open JSON evidence uses the same explicit path, byte, link, and private-vault boundary plus
+duplicate-key, depth, value, string, record, and format limits. SCIP protobuf JSON is reduced to
+per-file occurrence/definition/reference/diagnostic counts. SARIF 2.1.0 is reduced to per-file
+level/rule counts after percent-decoded URIs resolve uniquely inside the project. Both summary kinds
+use neutral `references` edges: they do not imply causality, correctness, impact, or test necessity.
+Binary SCIP, raw external symbols, diagnostic messages, SARIF snippets/fixes/code flows/properties,
+and absolute locations are not persisted.
+
+Test Execution Map schema 1 binds unique test/source path sets to one full Git commit and the fixed
+`complete-observed-set` policy. Fixed read-only Git commands resolve current HEAD and require every
+mapped test/source artifact to be tracked and unchanged from that HEAD. Every report creates a
+bounded per-test summary with `aligned`, `stale`, or `unknown` freshness; only exact `aligned`
+reports add `tests` edges with `test-execution-map` provenance. The existing recommendation
+query consumes that normal graph evidence, while stale and unknown reports cannot affect ranking.
+See [open evidence imports](open-evidence.md).
+
 The delivery adapter reads only explicit project-local schema-1 JSON snapshots after path, byte,
 record, link, field, type, duplicate-key, and URL validation. It creates bounded delivery-issue and
 pull-request nodes, then links only exact local intent IDs, issue IDs, file paths, and commit SHAs.

@@ -34,3 +34,7 @@ source_path: "tests/test_scan_cache.py"
 - <code>tests</code> → [[Symbols/AdapterFragmentCache - src - intentatlas - scan_cache.py|AdapterFragmentCache]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_

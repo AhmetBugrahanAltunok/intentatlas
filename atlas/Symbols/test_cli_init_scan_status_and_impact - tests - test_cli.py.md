@@ -17,3 +17,4 @@ source_path: "tests/test_cli.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-diff-hunk)_

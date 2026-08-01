@@ -31,8 +31,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_graph.py|tests/test_graph.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/ProjectConfig.load - src - intentatlas - config.py|ProjectConfig.load]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/DeliveryFragment - src - intentatlas - delivery.py|DeliveryFragment]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_component - src - intentatlas - delivery.py|_component]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_delivery_fragment - src - intentatlas - delivery.py|_delivery_fragment]] _(history; evidence: git-diff-hunk)_
@@ -50,8 +48,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/_url - src - intentatlas - delivery.py|_url]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/import_delivery - src - intentatlas - delivery.py|import_delivery]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/run - tests - fixtures - delivery_project - src - app.py|run]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_config_rejects_invalid_report_source_lists - tests - test_config.py|test_config_rejects_invalid_report_source_lists]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_config_round_trip_and_bounds - tests - test_config.py|test_config_round_trip_and_bounds]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_delivery_links_only_exact_known_commit_shas - tests - test_delivery.py|test_delivery_links_only_exact_known_commit_shas]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_delivery_nodes_sync_to_generated_commit_subfolders - tests - test_delivery.py|test_delivery_nodes_sync_to_generated_commit_subfolders]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_imports_local_delivery_context_deterministically - tests - test_delivery.py|test_imports_local_delivery_context_deterministically]] _(history; evidence: git-diff-hunk)_

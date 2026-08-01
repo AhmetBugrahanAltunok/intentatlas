@@ -17,4 +17,3 @@ source_path: "tests/test_security.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-diff-hunk)_

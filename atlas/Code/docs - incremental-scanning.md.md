@@ -13,6 +13,6 @@ source_path: "docs/incremental-scanning.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>2541</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_

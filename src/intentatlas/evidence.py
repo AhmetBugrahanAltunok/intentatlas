@@ -9,6 +9,12 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .models import Edge, Node
+from .open_evidence import (
+    execution_map_fragment,
+    load_json_report,
+    sarif_fragment,
+    scip_fragment,
+)
 
 MAX_REPORT_BYTES = 10_000_000
 MAX_REPORT_RECORDS = 100_000
@@ -31,6 +37,10 @@ def import_evidence(
     vault: Path,
     coverage_reports: list[str],
     test_reports: list[str],
+    scip_reports: list[str],
+    sarif_reports: list[str],
+    test_execution_reports: list[str],
+    head_revision: str | None,
 ) -> EvidenceFragment:
     nodes: list[Node] = []
     edges: list[Edge] = []
@@ -47,6 +57,34 @@ def import_evidence(
         report, relative = _report_path(root, vault, configured, "test report")
         document = _read_xml(report, relative)
         report_nodes, report_edges = _test_fragment(document, relative, aliases, kinds)
+        nodes.extend(report_nodes)
+        edges.extend(report_edges)
+
+    for configured in scip_reports:
+        report, relative = _report_path(root, vault, configured, "SCIP report")
+        document = load_json_report(report, relative)
+        report_nodes, report_edges = scip_fragment(document, relative, aliases)
+        nodes.extend(report_nodes)
+        edges.extend(report_edges)
+
+    for configured in sarif_reports:
+        report, relative = _report_path(root, vault, configured, "SARIF report")
+        document = load_json_report(report, relative)
+        report_nodes, report_edges = sarif_fragment(document, relative, aliases)
+        nodes.extend(report_nodes)
+        edges.extend(report_edges)
+
+    for configured in test_execution_reports:
+        report, relative = _report_path(root, vault, configured, "test execution report")
+        document = load_json_report(report, relative)
+        report_nodes, report_edges = execution_map_fragment(
+            document,
+            relative,
+            root,
+            aliases,
+            kinds,
+            head_revision,
+        )
         nodes.extend(report_nodes)
         edges.extend(report_edges)
 

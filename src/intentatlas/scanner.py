@@ -13,7 +13,7 @@ from .adapters import BUILTIN_ADAPTERS, AdapterContext
 from .config import ProjectConfig
 from .delivery import import_delivery
 from .evidence import import_evidence
-from .git_history import DiffHunk, collect_git_history
+from .git_history import DiffHunk, collect_git_history, resolve_git_head
 from .graph import AtlasGraph
 from .models import Edge, Node
 from .naming import note_title, safe_filename
@@ -307,6 +307,10 @@ class RepositoryScanner:
             vault=self.config.vault_path(self.root),
             coverage_reports=self.config.coverage_reports,
             test_reports=self.config.test_reports,
+            scip_reports=self.config.scip_reports,
+            sarif_reports=self.config.sarif_reports,
+            test_execution_reports=self.config.test_execution_reports,
+            head_revision=resolve_git_head(self.root),
         )
         for node in fragment.nodes:
             self.graph.add_node(node)

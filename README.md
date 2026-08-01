@@ -167,8 +167,27 @@ reports with your existing CI tools, and run `intentatlas scan`:
 ```
 
 IntentAtlas reads these XML files offline and stores only bounded per-file aggregates. It does not
-run a test command, retain failure output, or persist absolute source paths. To compare the current
-cache with a saved baseline:
+run a test command, retain failure output, or persist absolute source paths.
+
+Open evidence reports are also opt-in:
+
+```json
+{
+  "scip_reports": ["reports/index.scip.json"],
+  "sarif_reports": ["reports/results.sarif"],
+  "test_execution_reports": ["reports/test-execution.json"]
+}
+```
+
+SCIP support accepts the protobuf JSON mapping, not binary protobuf. SCIP and SARIF become bounded
+file observations and never imply impact or test necessity. A strict execution map can add observed
+`test -> source` evidence only when its full commit equals current Git HEAD and every mapped file is
+tracked and unchanged from that HEAD. Stale or unknown maps are visible
+but withheld from recommendations. Raw symbols, diagnostics, messages, snippets, fixes,
+code flows, source content, and absolute paths are not retained. See
+[open evidence imports](docs/open-evidence.md).
+
+To compare the current cache with a saved baseline:
 
 ```text
 intentatlas diff .intentatlas/baseline.json --output .intentatlas/diff.json --check

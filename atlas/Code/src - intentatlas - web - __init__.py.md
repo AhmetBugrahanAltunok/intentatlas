@@ -13,6 +13,6 @@ source_path: "src/intentatlas/web/__init__.py"
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>54</code>
 
-## Incoming relationships
+## Graph health
 
-- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- Orphaned generated node
