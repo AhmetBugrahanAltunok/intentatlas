@@ -11,7 +11,7 @@ source_path: "src/intentatlas/relations.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2253</code>
+- **Size Bytes:** <code>2398</code>
 
 ## Outgoing relationships
 

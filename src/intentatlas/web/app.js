@@ -11,7 +11,7 @@ const colors = {
 const kindOrder = ["requirement", "decision", "issue", "delivery-issue", "pull-request", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "coverage", "test-result", "commit"];
 const proofKinds = new Set(["test", "evidence", "coverage", "test-result", "commit", "pull-request"]);
 const pathLimits = { depth: 6, visited: 800, results: 6 };
-const state = { data: null, nodeById: new Map(), pathAdjacency: new Map(), enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
+const state = { data: null, report: null, nodeById: new Map(), pathAdjacency: new Map(), enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
 const svg = document.querySelector("#graph");
 const viewport = document.querySelector("#viewport");
 const edgeLayer = document.querySelector("#edges");
@@ -25,13 +25,53 @@ boot().catch(error => {
 });
 
 async function boot() {
-  const response = await fetch("/graph.json", { cache: "no-store" });
+  const [response, reportResponse] = await Promise.all([
+    fetch("/graph.json", { cache: "no-store" }),
+    fetch("/change-report.json", { cache: "no-store" })
+  ]);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   state.data = await response.json();
+  if (reportResponse.ok) state.report = await reportResponse.json();
   state.nodeById = new Map(state.data.nodes.map(node => [node.id, node]));
   state.pathAdjacency = buildPathAdjacency();
   for (const node of state.data.nodes) state.enabled.add(node.kind);
-  renderStats(); renderFilters(); rebuild(); bindEvents(); fitGraph();
+  renderStats(); renderFilters(); renderChangeReport(); rebuild(); bindEvents(); fitGraph();
+}
+
+function renderChangeReport() {
+  if (!state.report) return;
+  const report = state.report;
+  document.querySelector("#report-toggle").hidden = false;
+  document.querySelector("#report-summary").innerHTML = [
+    reportDatum("strategy", report.test_strategy.replaceAll("-", " ")),
+    reportDatum("analysis", report.analysis_state),
+    reportDatum("coverage", report.analysis_coverage_complete ? "complete" : "fallback required")
+  ].join("");
+  renderReportItems("#report-requirements", report.requirements, item => ({
+    id: item.requirement.id,
+    label: item.requirement.label,
+    score: item.score,
+    confidence: item.confidence
+  }));
+  renderReportItems("#report-tests", report.tests, item => ({
+    id: item.test.id,
+    label: item.test.path || item.test.label,
+    score: item.score,
+    confidence: item.confidence
+  }));
+}
+
+function reportDatum(label, value) {
+  return `<div class="report-datum"><span>${escapeHTML(label)}</span><strong>${escapeHTML(String(value))}</strong></div>`;
+}
+
+function renderReportItems(selector, items, valueOf) {
+  const container = document.querySelector(selector);
+  container.innerHTML = items.length ? items.map(item => {
+    const value = valueOf(item);
+    return `<button class="report-item" data-node="${escapeAttr(value.id)}"><strong>${escapeHTML(value.label)}</strong><small>${escapeHTML(value.confidence)} · ${value.score}/100</small></button>`;
+  }).join("") : "<p class='hint'>No ranked items at this confidence threshold.</p>";
+  for (const button of container.querySelectorAll(".report-item")) bindFocusButton(button);
 }
 
 function renderStats() {
@@ -168,10 +208,12 @@ function bindEvents() {
   search.addEventListener("input", applySearch);
   document.addEventListener("keydown", event => {
     if (event.key === "/" && document.activeElement !== search) { event.preventDefault(); search.focus(); }
-    if (event.key === "Escape") closeDetail();
+    if (event.key === "Escape") { closeDetail(); closeChangeReport(); }
   });
   document.querySelector("#fit").addEventListener("click", fitGraph);
   document.querySelector("#close-detail").addEventListener("click", closeDetail);
+  document.querySelector("#report-toggle").addEventListener("click", openChangeReport);
+  document.querySelector("#close-report").addEventListener("click", closeChangeReport);
   let pan = null;
   svg.addEventListener("pointerdown", event => {
     if (event.target.closest(".node")) return;
@@ -284,11 +326,14 @@ function buildPathAdjacency() {
 }
 
 function focusNode(id) {
+  closeChangeReport();
   const node = state.nodes.find(item => item.id === id);
   if (!node) { search.value = id; applySearch(); return; }
   state.scale = Math.max(state.scale, 1.2); state.tx = stage.clientWidth * .54 - node.x * state.scale; state.ty = stage.clientHeight * .5 - node.y * state.scale; transform(); selectNode(id);
 }
 function closeDetail() { document.querySelector("#detail").classList.remove("open"); state.selected = null; for (const item of document.querySelectorAll(".selected,.active")) item.classList.remove("selected", "active"); }
+function openChangeReport() { closeDetail(); document.querySelector("#change-report").classList.add("open"); }
+function closeChangeReport() { document.querySelector("#change-report").classList.remove("open"); }
 
 function fitGraph() {
   if (!state.nodes.length) return;

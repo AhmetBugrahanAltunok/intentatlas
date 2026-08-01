@@ -10,11 +10,10 @@ source_path: "tests/test_viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>74</code>
-- **Line:** <code>52</code>
+- **End Line:** <code>78</code>
+- **Line:** <code>56</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 28cf029 - fix- avoid reverse DNS in local viewer|fix: avoid reverse DNS in local viewer]] _(history; evidence: git-diff-hunk)_

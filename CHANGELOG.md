@@ -8,6 +8,13 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Added
 
+- Deterministic ChangeSet schema 1 and a `changes` command for bounded commit, revision-range,
+  staged, and worktree metadata without retaining raw diffs or untracked contents.
+- Optional Change Analysis schema 1 with explicit `analyzed`/`fallback`/`unknown` state,
+  revision-to-worktree freshness, confidence, artifact identity, and evidence provenance.
+- Deterministic Change Report schema 1 with conservative requirement-impact ranking, advisory
+  test targets, explicit abstention, targeted-plus-full-suite fallback strategies, and an optional
+  loopback viewer panel backed by the same fresh in-memory graph.
 - Initial local intent graph scanner.
 - Obsidian-compatible project brain and generated graph notes.
 - Local interactive viewer, impact tracing, and health status commands.
@@ -48,6 +55,12 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Changed
 
+- Fresh vault initialization now creates generic guidance and templates without seeding
+  IntentAtlas-specific project memory into user repositories.
+- Go test references retain exact symbol targets alongside separate file navigation edges, and
+  unrelated same-file symbol fallback no longer appears at the default confidence threshold.
+- Graph schema 3 and relation schema 4 add bounded `calls`/`called-by` evidence so a directly
+  tested Go wrapper can recover one exact callee without broad file fallback.
 - Repository discovery now prunes excluded directories before descent and never walks the vault.
 - Graph and vault generation reject identity collisions and escape untrusted Markdown content.
 - The Product Roadmap is now the clearly identified active plan; the original version-oriented

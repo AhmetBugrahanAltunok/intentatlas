@@ -11,7 +11,7 @@ source_path: "src/intentatlas/graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12355</code>
+- **Size Bytes:** <code>13612</code>
 
 ## Outgoing relationships
 
@@ -37,6 +37,7 @@ source_path: "src/intentatlas/graph.py"
 - <code>defines</code> → [[Symbols/GraphIndex.outgoing - src - intentatlas - graph.py|GraphIndex.outgoing]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_freeze_buckets - src - intentatlas - graph.py|_freeze_buckets]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_unique_object - src - intentatlas - graph.py|_unique_object]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_validate_legacy_relation_catalog - src - intentatlas - graph.py|_validate_legacy_relation_catalog]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
@@ -55,6 +56,8 @@ source_path: "src/intentatlas/graph.py"
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_

@@ -29,6 +29,12 @@ _RELATION_TYPES = (
         "history",
         "A version-control delivery record changes an artifact.",
     ),
+    RelationType(
+        "calls",
+        "called-by",
+        "structure",
+        "A code symbol directly calls another code symbol.",
+    ),
     RelationType("defines", "defined-in", "structure", "A file defines a symbol."),
     RelationType("drives", "driven-by", "intent", "A requirement drives a decision."),
     RelationType(
@@ -55,7 +61,7 @@ RELATION_TYPES = {relation.name: relation for relation in _RELATION_TYPES}
 USER_RELATIONS = frozenset(
     {"drives", "implemented-by", "proves", "recorded-in", "references", "tracked-by"}
 )
-RELATION_SCHEMA_VERSION = 3
+RELATION_SCHEMA_VERSION = 4
 
 
 def relation_type(name: str) -> RelationType:

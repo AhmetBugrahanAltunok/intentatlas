@@ -56,6 +56,45 @@ def test_vault_initializes_obsidian_and_preserves_user_owned_notes(tmp_path) -> 
     assert (tmp_path / "atlas" / "Templates" / "Issue.md").exists()
 
 
+def test_vault_initialization_is_generic_minimal_and_idempotent(tmp_path) -> None:
+    root = tmp_path / "atlas"
+    vault = ProjectVault(root)
+
+    vault.initialize()
+
+    for area in ("Requirements", "Decisions", "Evidence", "Reviews", "Sessions"):
+        assert list((root / area).iterdir()) == []
+    assert list((root / "Brain").iterdir()) == []
+    assert sorted(path.name for path in (root / "Templates").iterdir()) == [
+        "Decision.md",
+        "Evidence.md",
+        "Issue.md",
+        "Requirement.md",
+    ]
+    home = (root / "Home.md").read_text(encoding="utf-8")
+    assert "# Project atlas" in home
+    assert "REQ-001" not in home
+    assert "IntentAtlas started" not in home
+
+    (root / "Home.md").write_text("# My project map\n", encoding="utf-8")
+    vault.initialize()
+
+    assert (root / "Home.md").read_text(encoding="utf-8") == "# My project map\n"
+
+
+def test_dashboard_does_not_seed_project_specific_intent_links(tmp_path) -> None:
+    vault = ProjectVault(tmp_path / "atlas")
+
+    vault.sync(graph_fixture())
+
+    dashboard = (tmp_path / "atlas" / "Dashboard" / "IntentAtlas.md").read_text(
+        encoding="utf-8"
+    )
+    assert "REQ-001 - Explain change impact" not in dashboard
+    assert "ADR-001 - Vault-first intent graph" not in dashboard
+    assert "Initial Project Review" not in dashboard
+
+
 def test_sync_removes_only_generated_notes(tmp_path) -> None:
     vault = ProjectVault(tmp_path / "atlas")
     vault.initialize()

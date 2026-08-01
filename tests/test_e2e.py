@@ -5,6 +5,7 @@ import json
 import os
 import queue
 import re
+import shutil
 import subprocess
 import sys
 import threading
@@ -61,6 +62,22 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
         encoding="utf-8",
     )
 
+    git = shutil.which("git")
+    if git is not None:
+        subprocess.run([git, "init", "-q"], cwd=project, check=True)
+        changes = _cli(
+            "changes",
+            str(project),
+            "--worktree",
+            "--format",
+            "json",
+            cwd=tmp_path,
+        )
+        assert changes.returncode == 0, changes.stderr
+        change_payload = json.loads(changes.stdout)
+        assert change_payload["scope"] == "worktree"
+        assert "app.py" in {item["path"] for item in change_payload["files"]}
+
     scanned = _cli("scan", str(project), cwd=tmp_path)
     assert scanned.returncode == 0, scanned.stderr
     assert "relationships" in scanned.stdout
@@ -97,8 +114,11 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
             "-u",
             "-m",
             "intentatlas",
-            "open",
+            "changes",
             str(project),
+            "--worktree",
+            "--report",
+            "--open",
             "--port",
             "0",
             "--no-browser",
@@ -146,6 +166,13 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
         assert "IntentAtlas" in viewer_html
         graph = json.loads(_http_get(port, "/graph.json").decode("utf-8"))
         assert any(node["path"] == "app.py" for node in graph["nodes"])
+        report = json.loads(_http_get(port, "/change-report.json").decode("utf-8"))
+        assert report["schema_version"] == 1
+        assert report["analysis_state"] == "fallback"
+        assert report["test_strategy"] in {
+            "full-suite-fallback",
+            "targeted-plus-full-suite",
+        }
     finally:
         if server.poll() is None:
             server.terminate()

@@ -23,7 +23,10 @@
       <input id="search" type="search" placeholder="Find a requirement, file, symbol…" autocomplete="off">
       <kbd>/</kbd>
     </label>
-    <button id="fit" class="ghost" type="button">Fit graph</button>
+    <div class="actions">
+      <button id="report-toggle" class="ghost report-toggle" type="button" hidden>Change report</button>
+      <button id="fit" class="ghost" type="button">Fit graph</button>
+    </div>
   </header>
 
   <main>
@@ -70,6 +73,19 @@
       <div id="detail-paths" class="evidence-paths"></div>
       <h3>Relationships</h3>
       <div id="detail-links" class="relationships"></div>
+    </aside>
+
+    <aside id="change-report" class="detail report-detail" aria-live="polite">
+      <button id="close-report" class="close" type="button" aria-label="Close change report">×</button>
+      <p class="eyebrow">Change intelligence</p>
+      <h2>Change report</h2>
+      <div id="report-summary" class="report-summary"></div>
+      <h3>Possible requirement impacts</h3>
+      <p class="path-note">Confidence-ranked structural evidence; omitted intent is not proven unaffected.</p>
+      <div id="report-requirements" class="report-items"></div>
+      <h3>Candidate tests</h3>
+      <p class="path-note">Follow the displayed strategy; targeted tests may not replace the full suite.</p>
+      <div id="report-tests" class="report-items"></div>
     </aside>
   </main>
 

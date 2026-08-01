@@ -59,8 +59,8 @@ button, input { font: inherit; }
 .search input::placeholder { color: #737895; }
 kbd { border: 1px solid var(--line); border-radius: 6px; color: #747992; padding: 2px 7px; font-size: 11px; }
 
+.actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 .ghost {
-  justify-self: end;
   color: #cbc8dc;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, .025);
@@ -146,12 +146,24 @@ main { height: calc(100% - 72px); display: grid; grid-template-columns: 236px 1f
 .evidence-path:hover { border-color: rgba(45,212,191,.5); }
 .evidence-path strong { display: block; color: #d8fff8; font-size: 11px; }
 .evidence-path small { display: block; color: #7f91a1; margin-top: 5px; line-height: 1.45; overflow-wrap: anywhere; }
+.report-toggle { border-color: rgba(45,212,191,.28); color: #b9fff4; }
+.report-detail { border-color: rgba(45,212,191,.24); }
+.report-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 18px; }
+.report-datum { padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); }
+.report-datum:first-child { grid-column: 1 / -1; }
+.report-datum span { display: block; color: #737892; font-size: 9px; text-transform: uppercase; letter-spacing: .1em; }
+.report-datum strong { display: block; margin-top: 4px; color: #d8fff8; font-size: 11px; text-transform: capitalize; }
+.report-items { display: grid; gap: 7px; }
+.report-item { width: 100%; text-align: left; border: 1px solid rgba(45,212,191,.15); border-radius: 10px; background: rgba(45,212,191,.035); padding: 9px 10px; color: #c8cad9; cursor: pointer; }
+.report-item:hover { border-color: rgba(45,212,191,.5); }
+.report-item strong { display: block; color: #d8fff8; font-size: 11px; overflow-wrap: anywhere; }
+.report-item small { display: block; color: #7f91a1; margin-top: 4px; text-transform: capitalize; }
 
 @media (max-width: 780px) {
   .topbar { grid-template-columns: 1fr auto; gap: 10px; height: 116px; padding: 12px 14px; }
   .brand { grid-column: 1; }
   .search { grid-column: 1 / -1; grid-row: 2; }
-  .ghost { grid-column: 2; grid-row: 1; }
+  .actions { grid-column: 2; grid-row: 1; }
   main { height: calc(100% - 116px); grid-template-columns: 1fr; }
   .rail { display: none; }
   .detail { width: calc(100vw - 24px); right: 12px; top: 12px; }

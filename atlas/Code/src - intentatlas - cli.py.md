@@ -11,10 +11,11 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>17452</code>
+- **Size Bytes:** <code>22872</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/_changes - src - intentatlas - cli.py|_changes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_diff - src - intentatlas - cli.py|_diff]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_corpus - src - intentatlas - cli.py|_evaluate_corpus]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_real_world - src - intentatlas - cli.py|_evaluate_real_world]] _(structure; evidence: python-ast)_
@@ -32,6 +33,9 @@ source_path: "src/intentatlas/cli.py"
 - <code>defines</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
@@ -44,6 +48,13 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/analyze_change_set - src - intentatlas - change_analysis.py|analyze_change_set]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_change_analysis - src - intentatlas - change_analysis.py|render_change_analysis]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/collect_change_report - src - intentatlas - change_report.py|collect_change_report]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/collect_change_report_context - src - intentatlas - change_report.py|collect_change_report_context]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_change_set - src - intentatlas - change_set.py|render_change_set]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/CorpusProject - src - intentatlas - corpus.py|CorpusProject]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/evaluate_corpus - src - intentatlas - corpus.py|evaluate_corpus]] _(structure; evidence: python-symbol-reference)_

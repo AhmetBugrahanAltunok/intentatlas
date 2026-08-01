@@ -55,6 +55,6 @@ intentatlas evaluate-corpus benchmarks/recommendation-corpus.json --limit 20 --f
 ```
 
 The bundled corpus contains small, original, MIT-licensed graph scenarios representing Python,
-TypeScript, and Go relationships. They verify aggregation and confidence semantics but are not full
-repositories and cannot establish real-world accuracy. Public repository benchmarks require
-separate license review and remain future work.
+TypeScript, and Go relationships. Separately acquired, pinned public-project benchmarks exercise
+the production scanner under explicit license and provenance controls. Both remain bounded samples:
+they verify known cases and confidence semantics but cannot establish general real-world accuracy.

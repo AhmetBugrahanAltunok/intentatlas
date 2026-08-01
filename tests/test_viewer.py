@@ -14,6 +14,8 @@ def test_viewer_assets_are_packaged() -> None:
     assert "--accent" in web.joinpath("styles.css").read_text(encoding="utf-8")
     app = web.joinpath("app.js").read_text(encoding="utf-8")
     assert 'fetch("/graph.json"' in app
+    assert 'fetch("/change-report.json"' in app
+    assert "renderChangeReport" in app
     pointerup = app.split('group.addEventListener("pointerup"', maxsplit=1)[1].split(
         'group.addEventListener("pointercancel"', maxsplit=1
     )[0]
@@ -31,6 +33,8 @@ def test_viewer_assets_are_packaged() -> None:
     assert "state.pathAdjacency = buildPathAdjacency();" in app
     index = web.joinpath("index.html").read_text(encoding="utf-8")
     assert 'id="detail-paths"' in index
+    assert 'id="report-toggle"' in index
+    assert 'id="change-report"' in index
 
 
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:

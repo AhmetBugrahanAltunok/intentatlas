@@ -51,8 +51,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/render_graph_diff - src - intentatlas - graph_diff.py|render_graph_diff]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/run - tests - fixtures - evidence_project - src - app.py|run]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_run - tests - fixtures - evidence_project - tests - app_check.py|test_run]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_cli_rejects_unsafe_graph_diff_paths - tests - test_cli.py|test_cli_rejects_unsafe_graph_diff_paths]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_cli_writes_deterministic_graph_diff_and_supports_ci_check - tests - test_cli.py|test_cli_writes_deterministic_graph_diff_and_supports_ci_check]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_evidence_project - tests - test_evidence.py|_evidence_project]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_imports_bounded_coverage_and_test_evidence_deterministically - tests - test_evidence.py|test_imports_bounded_coverage_and_test_evidence_deterministically]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_rejects_entity_malformed_oversized_and_excessive_reports - tests - test_evidence.py|test_rejects_entity_malformed_oversized_and_excessive_reports]] _(history; evidence: git-diff-hunk)_

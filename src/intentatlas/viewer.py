@@ -24,25 +24,33 @@ class LoopbackHTTPServer(ThreadingHTTPServer):
 
 
 def serve_graph(
-    graph_path: Path,
+    graph_path: Path | None,
     *,
     host: str = "127.0.0.1",
     port: int = 4317,
     open_browser: bool = True,
+    graph_document: bytes | None = None,
+    change_report_document: bytes | None = None,
 ) -> None:
     if host not in {"127.0.0.1", "localhost", "::1"}:
         raise ValueError("The viewer may only bind to a loopback address")
     if isinstance(port, bool) or not isinstance(port, int) or port < 0 or port > 65535:
         raise ValueError("Port must be between 0 and 65535")
-    if not graph_path.is_file():
-        raise ValueError(f"Graph not found: {graph_path}. Run `intentatlas scan` first.")
+    if graph_document is None:
+        if graph_path is None or not graph_path.is_file():
+            raise ValueError(f"Graph not found: {graph_path}. Run `intentatlas scan` first.")
+        served_graph_document = graph_path.read_bytes()
+    else:
+        served_graph_document = graph_document
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:  # noqa: N802
             route = self.path.split("?", maxsplit=1)[0]
             if route == "/graph.json":
-                body = graph_path.read_bytes()
-                self._send(body, "application/json; charset=utf-8")
+                self._send(served_graph_document, "application/json; charset=utf-8")
+                return
+            if route == "/change-report.json" and change_report_document is not None:
+                self._send(change_report_document, "application/json; charset=utf-8")
                 return
             asset = CONTENT_TYPES.get(route)
             if asset is None:

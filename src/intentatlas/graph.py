@@ -64,8 +64,8 @@ class GraphIndex:
 class AtlasGraph:
     """Language-neutral, deterministic graph of project intent and implementation."""
 
-    schema_version = 2
-    supported_schema_versions = {1, schema_version}
+    schema_version = 3
+    supported_schema_versions = {1, 2, schema_version}
 
     def __init__(self) -> None:
         self.nodes: dict[str, Node] = {}
@@ -272,6 +272,15 @@ class AtlasGraph:
         edges = value.get("edges", [])
         if not isinstance(nodes, list) or not isinstance(edges, list):
             raise ValueError(f"Invalid graph document at {path}: nodes and edges must be lists")
+        if schema_version == 2:
+            relation_schema_version = value.get("relation_schema_version")
+            if (
+                type(relation_schema_version) is not int
+                or relation_schema_version < 1
+                or relation_schema_version >= RELATION_SCHEMA_VERSION
+            ):
+                raise ValueError(f"Unsupported relation schema: {relation_schema_version}")
+            _validate_legacy_relation_catalog(value.get("relation_types"), edges)
         graph = cls()
         for index, item in enumerate(nodes):
             if not isinstance(item, dict):
@@ -300,6 +309,23 @@ def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
             raise ValueError(f"Duplicate JSON key: {key}")
         value[key] = item
     return value
+
+
+def _validate_legacy_relation_catalog(catalog: Any, edges: list[Any]) -> None:
+    if not isinstance(catalog, list) or not catalog:
+        raise ValueError("Invalid relation catalog")
+    current = {item["name"]: item for item in relation_catalog()}
+    declared: set[str] = set()
+    for item in catalog:
+        if not isinstance(item, dict):
+            raise ValueError("Invalid relation catalog")
+        name = item.get("name")
+        if not isinstance(name, str) or name in declared or item != current.get(name):
+            raise ValueError("Invalid relation catalog")
+        declared.add(name)
+    for edge in edges:
+        if not isinstance(edge, dict) or edge.get("relation") not in declared:
+            raise ValueError("Invalid relation catalog")
 
 
 def _freeze_buckets(

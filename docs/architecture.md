@@ -72,12 +72,12 @@ Raw provider payloads, bodies, comments, authors, credentials, and unknown field
 
 `AtlasGraph` is the language-neutral contract. Nodes have a stable ID, kind, label, path,
 and small metadata object. Directed edges have a source, target, typed relation, inverse label,
-category, and provenance. The graph schema is versioned; schema 2 loads schema-1 caches and
-rebuilds them with the current relation catalog. Schema-2 caches are accepted only when their
-embedded catalog, edge categories, and inverse labels match the runtime registry.
-Relation schema 3 adds invertible `modifies`/`modified-by` semantics for direct symbol-change
-evidence. The graph is serialized to `.intentatlas/graph.json`; it is a rebuildable cache, not the
-source of truth.
+category, and provenance. The graph schema is versioned; schema 3 loads schema-1 and schema-2
+caches and rebuilds them with the current relation catalog. Current-schema caches are accepted
+only when their embedded catalog, edge categories, and inverse labels match the runtime registry.
+Relation schema 4 retains direct `modifies`/`modified-by` change evidence and adds invertible
+`calls`/`called-by` structure for bounded exact symbol calls. The graph is serialized to
+`.intentatlas/graph.json`; it is a rebuildable cache, not the source of truth.
 
 `GraphIndex` is a lazy in-memory view over canonical edges. It stores immutable incoming and
 outgoing tuples by node and by exact `(node, relation)` key. Degree, orphan health, breadth-first
@@ -99,9 +99,48 @@ Graph comparison is a pure operation over two validated caches. Diff schema 1 ex
 timestamps and sorts added, removed, and changed nodes plus added and removed edges. The same two
 graphs therefore produce byte-for-byte identical JSON suitable for CI artifacts or `--check` gates.
 
+ChangeSet schema 1 is a separate, deterministic Git input boundary. Commit and range scopes resolve
+user revisions to full commit IDs before diffing; commit scope compares with its first parent and
+uses an explicit root-commit path when no parent exists. Staged scope compares the index, while
+worktree scope compares tracked state with `HEAD` and separately enumerates ignored-aware untracked
+paths. The model stores status, project-relative current/previous paths, and bounded current-side
+hunk ranges only. It does not retain raw patch lines or read untracked file contents. Fixed Git
+arguments disable external diffs, text conversion, color, and submodule traversal; revision, byte,
+file, hunk, path, and timeout bounds fail closed.
+
+Optional Change Analysis schema 1 always builds a fresh read-only graph of the current worktree.
+For worktree scope that scan is aligned by construction. For staged, commit, and range scopes,
+bounded blob comparison checks each current artifact against the index or resolved head revision;
+line endings are normalized and mismatches become `unknown/stale` before symbol inference. A file
+is `analyzed/high` only when every current-side hunk maps to validated source spans (currently the
+Python AST adapter). Existing artifacts without complete spans remain `fallback/low`; deleted,
+missing, private, unmerged, or stale artifacts remain `unknown/none`. Unsupported but present files
+are explicit file fallbacks. Durable vault notes map through frontmatter identity, generated vault
+outputs are recognized as derived artifacts, and `Private/` is excluded before Git metadata
+collection. The result embeds ChangeSet scope/revisions and per-file freshness, confidence,
+artifact IDs, and provenance without treating absence as proof of no impact.
+
+Change Report schema 1 composes that aligned analysis with two bounded graph queries. Requirement
+ranking walks only incoming `implemented-by`, `tracked-by`, and `drives` intent links. Exact symbol
+paths can reach the default medium threshold; any route that begins at a file or crosses `defines`
+is capped at low confidence, so two requirements sharing one file are not treated as sharing one
+changed symbol. Test candidates reuse the existing recommendation engine. File fallbacks may
+inspect bounded defined symbols to find useful targets, but their scores are capped and the policy
+still requires the full suite. `unknown` analysis abstains completely; `fallback` reports either
+targeted-plus-full-suite or full-suite-fallback. The report is deterministic, advisory, and never
+claims behavioral completeness.
+
+`changes --report --open` serves the exact fresh in-memory graph used for analysis together with
+the report; it does not fall back to a potentially stale graph cache or persist an extra report.
+The loopback viewer fetches the optional report endpoint, renders strategy/coverage plus ranked
+requirements and tests, and focuses the corresponding graph node when a report item is selected.
+The normal viewer receives a 404 for that optional endpoint and continues with graph-only mode.
+
 Test recommendation is also a pure graph query. Recommendation schema 1 accepts commit, file,
 symbol, or test targets. Fixed scores distinguish exactly changed tests, exact-symbol structural
 links, recent co-change, one-hop exact-symbol dependents, file fallback, and filename convention.
+For a symbol target, file fallback stays below the default medium threshold. If a candidate test
+has exact evidence for a different symbol in the same file, that file fallback is suppressed.
 Nested symbols can fall back to a referenced owning symbol; when an owner-named test exists, that
 focused match replaces unrelated users of the same large class. A selected file uses exact symbols
 from its most recent dated analyzed change when available. A selected file or symbol can also use
@@ -112,8 +151,9 @@ exact target symbol are inspected, and only tests directly linked to that depend
 There is no unrestricted file-level transitive or barrel traversal. Recent co-change commits are
 limited to five latest-date records, exact-symbol dependents to 1,000, and the existing artifact,
 candidate, reason, observation, and result bounds still apply. The default medium threshold hides
-weak filename-only file matches. JUnit aggregates remain unscored observations because freshness
-is unknown. No test is executed, and missing output is never treated as proof of no impact.
+weak file and filename-only symbol fallback. JUnit aggregates remain unscored observations because
+freshness is unknown. No test is executed, and missing output is never treated as proof of no
+impact.
 
 Recommendation evaluation is a second pure layer around the unchanged production query. Schema-1
 label files declare a closed-world `complete-test-set` policy, exact graph target IDs, and complete

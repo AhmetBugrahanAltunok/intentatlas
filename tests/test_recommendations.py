@@ -93,6 +93,12 @@ def recommendation_graph() -> AtlasGraph:
             ),
             Edge("file:tests/test_auth.py", "file:src/auth.py", "tests", "python-ast"),
             Edge(
+                "file:tests/test_auth.py",
+                "symbol:src/auth.py::login",
+                "tests",
+                "python-ast",
+            ),
+            Edge(
                 "file:tests/auth_test.py",
                 "file:src/auth.py",
                 "tests",
@@ -119,11 +125,10 @@ def recommendation_graph() -> AtlasGraph:
 def test_recommendations_rank_deduplicate_filter_and_explain() -> None:
     result = recommend_tests(recommendation_graph(), "commit:abc")
 
-    assert result.candidate_count == 5
+    assert result.candidate_count == 4
     assert [(item.test.id, item.score, item.confidence) for item in result.recommendations] == [
         ("file:tests/test_changed.py", 100, "high"),
         ("file:tests/test_auth.py", 80, "medium"),
-        ("file:tests/auth_test.py", 70, "medium"),
         ("file:tests/test_util.py", 65, "medium"),
     ]
     auth = result.recommendations[1]
@@ -133,10 +138,9 @@ def test_recommendations_rank_deduplicate_filter_and_explain() -> None:
     assert auth.reasons[0].path.nodes == (
         "commit:abc",
         "symbol:src/auth.py::login",
-        "file:src/auth.py",
         "file:tests/test_auth.py",
     )
-    assert auth.reasons[0].path.relations == ("modifies", "defined-in", "tested-by")
+    assert auth.reasons[0].path.relations == ("modifies", "tested-by")
     assert auth.reasons[0].evidence == ("git-diff-hunk", "python-ast")
     assert auth.observations[0].report == "reports/junit.xml"
     assert auth.observation_count == 1
@@ -359,7 +363,7 @@ def test_recommendation_json_and_cli_are_deterministic(tmp_path, capsys) -> None
     assert first == second
     value = json.loads(first)
     assert value["schema_version"] == 1
-    assert value["candidate_count"] == 5
+    assert value["candidate_count"] == 4
     assert "not proof" in value["advisory"]
 
     ProjectConfig().save_if_missing(tmp_path)

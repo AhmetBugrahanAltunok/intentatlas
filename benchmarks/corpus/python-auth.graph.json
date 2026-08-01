@@ -14,6 +14,7 @@
     {"source": "commit:python-auth", "target": "file:python/tests/test_changed_auth.py", "relation": "changes", "evidence": "reviewed-history"},
     {"source": "file:python/auth.py", "target": "symbol:python/auth.py::login", "relation": "defines", "evidence": "python-ast"},
     {"source": "file:python/tests/test_auth_helpers.py", "target": "file:python/auth.py", "relation": "tests", "evidence": "python-ast"},
-    {"source": "file:python/tests/test_auth_unit.py", "target": "file:python/auth.py", "relation": "tests", "evidence": "python-ast"}
+    {"source": "file:python/tests/test_auth_unit.py", "target": "file:python/auth.py", "relation": "tests", "evidence": "python-ast"},
+    {"source": "file:python/tests/test_auth_unit.py", "target": "symbol:python/auth.py::login", "relation": "tests", "evidence": "python-symbol-reference"}
   ]
 }

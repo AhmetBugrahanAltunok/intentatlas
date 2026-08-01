@@ -38,6 +38,12 @@ class GoAdapter:
         package_declarations: dict[
             tuple[str, str], dict[str, set[str]]
         ] = defaultdict(lambda: defaultdict(set))
+        package_callables: dict[
+            tuple[str, str], dict[str, set[str]]
+        ] = defaultdict(lambda: defaultdict(set))
+        package_calls: list[
+            tuple[str, tuple[str, str], frozenset[str]]
+        ] = []
         package_test_identifiers: list[
             tuple[str, str, str, frozenset[str]]
         ] = []
@@ -82,8 +88,16 @@ class GoAdapter:
                     declarations = package_declarations[(directory, package)]
                     for node in file_symbols:
                         reference = node.label.rsplit(".", 1)[-1]
+                        if node.metadata.get("symbol_kind") == "function":
+                            package_callables[(directory, package)][reference].add(node.id)
                         if reference[:1].isupper():
-                            declarations[reference].add(file_node)
+                            declarations[reference].add(node.id)
+                    package_calls.extend(
+                        (caller_id, (directory, package), references)
+                        for caller_id, references in _function_call_references(
+                            relative, symbol_source
+                        )
+                    )
 
             if context.kinds[relative] == "test":
                 package_test_imports.append((relative, tokens, import_bindings))
@@ -111,6 +125,7 @@ class GoAdapter:
                 tests=package_test_imports,
             )
         )
+        edges.extend(_package_call_edges(package_callables, package_calls))
         edges.extend(_filename_test_edges(context))
         return GraphFragment(
             nodes=tuple(sorted(nodes, key=lambda node: node.id)),
@@ -161,6 +176,90 @@ def _line_number(source: str, offset: int) -> int:
     return source.count("\n", 0, offset) + 1
 
 
+def _function_call_references(
+    relative: str, source: str
+) -> list[tuple[str, frozenset[str]]]:
+    matches = list(_FUNCTION_DECLARATION.finditer(source))
+    references: list[tuple[str, frozenset[str]]] = []
+    for index, match in enumerate(matches):
+        receiver, name = match.groups()
+        label = f"{receiver}.{name}" if receiver else name
+        boundary = matches[index + 1].start() if index + 1 < len(matches) else len(source)
+        body_start = _function_body_start(source, match.end() - 1, boundary)
+        if body_start is None:
+            continue
+        body_end = _matching_delimiter(source, body_start, "{", "}")
+        if body_end is None or body_end >= boundary:
+            continue
+        calls = _called_identifiers(_go_tokens(source[body_start + 1 : body_end]))
+        references.append((f"symbol:{relative}::{label}", frozenset(calls)))
+    return references
+
+
+def _function_body_start(source: str, parameter_start: int, boundary: int) -> int | None:
+    parameter_end = _matching_delimiter(source, parameter_start, "(", ")")
+    if parameter_end is None or parameter_end >= boundary:
+        return None
+    cursor = parameter_end + 1
+    while cursor < boundary:
+        candidate = source.find("{", cursor, boundary)
+        if candidate < 0:
+            return None
+        prefix_tokens = _go_tokens(source[cursor:candidate])
+        if prefix_tokens and prefix_tokens[-1] in {
+            ("identifier", "interface"),
+            ("identifier", "struct"),
+        }:
+            type_end = _matching_delimiter(source, candidate, "{", "}")
+            if type_end is None or type_end >= boundary:
+                return None
+            cursor = type_end + 1
+            continue
+        return candidate
+    return None
+
+
+def _matching_delimiter(
+    source: str, start: int, opening: str, closing: str
+) -> int | None:
+    if start >= len(source) or source[start] != opening:
+        return None
+    depth = 0
+    for index in range(start, len(source)):
+        if source[index] == opening:
+            depth += 1
+        elif source[index] == closing:
+            depth -= 1
+            if depth == 0:
+                return index
+    return None
+
+
+def _called_identifiers(tokens: tuple[tuple[str, str], ...]) -> set[str]:
+    return {
+        value
+        for index, (kind, value) in enumerate(tokens[:-1])
+        if kind == "identifier" and tokens[index + 1] == ("punctuation", "(")
+    }
+
+
+def _package_call_edges(
+    declarations: Mapping[tuple[str, str], Mapping[str, set[str]]],
+    calls: Iterable[tuple[str, tuple[str, str], frozenset[str]]],
+) -> list[Edge]:
+    edges: set[Edge] = set()
+    for caller_id, package_key, references in sorted(calls):
+        package_symbols = declarations.get(package_key, {})
+        for reference in sorted(references):
+            symbol_ids = package_symbols.get(reference, set())
+            if len(symbol_ids) != 1:
+                continue
+            target_id = next(iter(symbol_ids))
+            if target_id != caller_id:
+                edges.add(Edge(caller_id, target_id, "calls", "go-call-reference"))
+    return sorted(edges, key=lambda edge: (edge.source, edge.target, edge.evidence))
+
+
 def _package_name(source: str) -> str | None:
     match = _PACKAGE_DECLARATION.search(source)
     return match.group(1) if match is not None else None
@@ -179,19 +278,13 @@ def _package_symbol_test_edges(
         if package_symbols is None:
             continue
 
-        targets = {
-            next(iter(source_files))
-            for reference, source_files in package_symbols.items()
-            if reference in identifiers and len(source_files) == 1
+        target_symbols = {
+            next(iter(symbol_ids))
+            for reference, symbol_ids in package_symbols.items()
+            if reference in identifiers and len(symbol_ids) == 1
         }
         edges.extend(
-            Edge(
-                f"file:{relative}",
-                target,
-                "tests",
-                "go-symbol-reference",
-            )
-            for target in sorted(targets)
+            _go_symbol_test_edges(f"file:{relative}", target_symbols)
         )
     return edges
 
@@ -214,7 +307,7 @@ def _imported_package_test_edges(
     for package_key in declarations:
         package_keys_by_directory[package_key[0]].append(package_key)
     for relative, tokens, bindings in sorted(tests):
-        targets: set[str] = set()
+        target_symbols: set[str] = set()
         for alias, import_path in bindings:
             package_targets = _resolve_local_import(
                 import_path,
@@ -236,16 +329,29 @@ def _imported_package_test_edges(
                 if package_alias == "."
                 else _qualified_identifiers(tokens, package_alias)
             )
-            targets.update(
-                next(iter(source_files))
-                for reference, source_files in declarations[package_key].items()
-                if reference in references and len(source_files) == 1
+            target_symbols.update(
+                next(iter(symbol_ids))
+                for reference, symbol_ids in declarations[package_key].items()
+                if reference in references and len(symbol_ids) == 1
             )
         edges.extend(
-            Edge(f"file:{relative}", target, "tests", "go-symbol-reference")
-            for target in sorted(targets)
+            _go_symbol_test_edges(f"file:{relative}", target_symbols)
         )
     return edges
+
+
+def _go_symbol_test_edges(test_id: str, symbol_ids: Iterable[str]) -> list[Edge]:
+    """Retain exact symbol evidence and a separate file-level navigation edge."""
+
+    targets: set[str] = set()
+    for symbol_id in symbol_ids:
+        targets.add(symbol_id)
+        symbol_path = symbol_id.removeprefix("symbol:").split("::", 1)[0]
+        targets.add(f"file:{symbol_path}")
+    return [
+        Edge(test_id, target, "tests", "go-symbol-reference")
+        for target in sorted(targets)
+    ]
 
 
 def _qualified_identifiers(

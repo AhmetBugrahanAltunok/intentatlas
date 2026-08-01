@@ -1,11 +1,19 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections.abc import Sequence
 from pathlib import Path
 
 from . import __version__
+from .change_analysis import analyze_change_set, render_change_analysis
+from .change_report import (
+    collect_change_report,
+    collect_change_report_context,
+    render_change_report,
+)
+from .change_set import collect_change_set, render_change_set
 from .config import ProjectConfig
 from .corpus import (
     MAX_CORPUS_GRAPH_BYTES_TOTAL,
@@ -76,6 +84,50 @@ def build_parser() -> argparse.ArgumentParser:
         choices=("text", "json"),
         default="text",
     )
+
+    changes_parser = commands.add_parser(
+        "changes",
+        help="Inspect a bounded commit, range, staged, or worktree change set",
+    )
+    _path_argument(changes_parser)
+    changes_parser.add_argument("--commit", help="Commit revision to inspect")
+    changes_parser.add_argument("--base", help="Base revision for a revision range")
+    changes_parser.add_argument("--head", help="Head revision for a revision range")
+    changes_parser.add_argument("--staged", action="store_true", help="Inspect staged changes")
+    changes_parser.add_argument(
+        "--worktree",
+        action="store_true",
+        help="Inspect tracked worktree changes and untracked paths",
+    )
+    changes_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
+    )
+    changes_parser.add_argument(
+        "--analyze",
+        action="store_true",
+        help="Scan the current worktree and report analysis state and freshness",
+    )
+    changes_parser.add_argument(
+        "--report",
+        action="store_true",
+        help="Rank affected requirements and tests with explicit fallback policy",
+    )
+    changes_parser.add_argument(
+        "--minimum-confidence",
+        choices=("low", "medium", "high"),
+        default="medium",
+    )
+    changes_parser.add_argument("--limit", type=int, default=20)
+    changes_parser.add_argument(
+        "--open",
+        dest="open_report",
+        action="store_true",
+        help="Open the report in the local interactive viewer",
+    )
+    _viewer_arguments(changes_parser)
 
     evaluate_parser = commands.add_parser(
         "evaluate-recommendations",
@@ -203,6 +255,24 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.minimum_confidence,
                 args.limit,
                 args.output_format,
+            )
+        if args.command == "changes":
+            return _changes(
+                root,
+                args.commit,
+                args.base,
+                args.head,
+                args.staged,
+                args.worktree,
+                args.analyze,
+                args.report,
+                args.open_report,
+                args.minimum_confidence,
+                args.limit,
+                args.output_format,
+                args.host,
+                args.port,
+                not args.no_browser,
             )
         if args.command == "evaluate-recommendations":
             return _evaluate_recommendations(
@@ -333,6 +403,96 @@ def _recommend_tests(
         limit=limit,
     )
     print(render_recommendations(result, output_format), end="")
+    return 0
+
+
+def _changes(
+    root: Path,
+    commit: str | None,
+    base: str | None,
+    head: str | None,
+    staged: bool,
+    worktree: bool,
+    analyze: bool,
+    report: bool,
+    open_report: bool,
+    minimum_confidence: str,
+    limit: int,
+    output_format: str,
+    host: str,
+    port: int,
+    open_browser: bool,
+) -> int:
+    config = ProjectConfig.load(root)
+    private_path = (config.vault_path(root) / "Private").relative_to(root).as_posix()
+    range_selected = base is not None or head is not None
+    selections = sum((commit is not None, range_selected, staged, worktree))
+    if selections != 1:
+        raise ValueError(
+            "Select exactly one change scope: --commit, --base with --head, --staged, "
+            "or --worktree"
+        )
+    if range_selected and (base is None or head is None):
+        raise ValueError("Revision range requires both --base and --head")
+    if analyze and report:
+        raise ValueError("Select either --analyze or --report, not both")
+    if open_report and not report:
+        raise ValueError("--open requires --report")
+    if commit is not None:
+        result = collect_change_set(
+            root, scope="commit", revision=commit, excluded_paths=(private_path,)
+        )
+    elif range_selected:
+        result = collect_change_set(
+            root,
+            scope="range",
+            base=base,
+            head=head,
+            excluded_paths=(private_path,),
+        )
+    elif staged:
+        result = collect_change_set(
+            root, scope="staged", excluded_paths=(private_path,)
+        )
+    else:
+        result = collect_change_set(
+            root, scope="worktree", excluded_paths=(private_path,)
+        )
+    if report:
+        if open_report:
+            graph, change_report = collect_change_report_context(
+                root,
+                result,
+                config,
+                minimum_confidence=minimum_confidence,
+                limit=limit,
+            )
+            graph_document = (
+                json.dumps(graph.to_dict(), ensure_ascii=False, sort_keys=True) + "\n"
+            ).encode("utf-8")
+            report_document = render_change_report(change_report, "json").encode("utf-8")
+            serve_graph(
+                None,
+                host=host,
+                port=port,
+                open_browser=open_browser,
+                graph_document=graph_document,
+                change_report_document=report_document,
+            )
+        else:
+            change_report = collect_change_report(
+                root,
+                result,
+                config,
+                minimum_confidence=minimum_confidence,
+                limit=limit,
+            )
+            print(render_change_report(change_report, output_format), end="")
+    elif analyze:
+        analyzed = analyze_change_set(root, result, config)
+        print(render_change_analysis(analyzed, output_format), end="")
+    else:
+        print(render_change_set(result, output_format), end="")
     return 0
 
 

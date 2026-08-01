@@ -15,5 +15,3 @@ generated: true
 ## Outgoing relationships
 
 - <code>changes</code> → [[Tests/tests - test_e2e.py|tests/test_e2e.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_http_get - tests - test_e2e.py|_http_get]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_installed_cli_scan_recommend_and_viewer_workflow - tests - test_e2e.py|test_installed_cli_scan_recommend_and_viewer_workflow]] _(history; evidence: git-diff-hunk)_

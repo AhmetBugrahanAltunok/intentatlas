@@ -167,6 +167,16 @@ def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> N
         for edge in first.edges
     )
 
+    calculator = recommend_tests(first, "symbol:src/math.ts::Calculator")
+    assert [item.test.id for item in calculator.recommendations] == [
+        "file:src/main.test.ts"
+    ]
+    assert calculator.recommendations[0].score == 65
+    assert all(
+        item.test.id != "file:src/math.test.ts"
+        for item in calculator.recommendations
+    )
+
 
 def test_scanner_resolves_python_reexports_to_exact_symbols(tmp_path) -> None:
     (tmp_path / "src" / "sample").mkdir(parents=True)
@@ -305,6 +315,57 @@ def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
     assert (add_test.score, add_test.confidence) == (65, "medium")
     assert "go-symbol-reference" in add_test.reasons[0].evidence
 
+    calculator = recommend_tests(first, "symbol:internal/math/add.go::Calculator")
+    assert calculator.recommendations == ()
+
+    exact_add = recommend_tests(first, "symbol:internal/math/add.go::Add")
+    assert {
+        (item.test.id, item.score) for item in exact_add.recommendations
+    } == {
+        ("file:internal/math/add_test.go", 80),
+        ("file:internal/math/integration_test.go", 80),
+    }
+    assert all(
+        reason.path.nodes[-2] == "symbol:internal/math/add.go::Add"
+        for item in exact_add.recommendations
+        for reason in item.reasons
+    )
+
+
+def test_go_recommendations_follow_one_exact_intra_package_caller(tmp_path) -> None:
+    (tmp_path / "go.mod").write_text("module example.com/calls\n", encoding="utf-8")
+    (tmp_path / "service.go").write_text(
+        "package calls\n\n"
+        "func hidden() int { return 1 }\n\n"
+        "func Public() int { return hidden() }\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "service_test.go").write_text(
+        "package calls\n\n"
+        "import \"testing\"\n\n"
+        "func TestPublic(t *testing.T) {\n"
+        "\tif Public() != 1 { t.Fatal(\"unexpected\") }\n"
+        "}\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    assert any(
+        edge.source == "symbol:service.go::Public"
+        and edge.target == "symbol:service.go::hidden"
+        and edge.relation == "calls"
+        and edge.evidence == "go-call-reference"
+        for edge in graph.edges
+    )
+    result = recommend_tests(graph, "symbol:service.go::hidden")
+    assert [(item.test.id, item.score) for item in result.recommendations] == [
+        ("file:service_test.go", 65)
+    ]
+    reason = result.recommendations[0].reasons[0]
+    assert reason.signal == "direct-symbol-caller-test"
+    assert reason.path.relations[-2:] == ("called-by", "tested-by")
+
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
 def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
@@ -438,6 +499,18 @@ def test_scanner_reads_user_vault_links_without_enumerating_private(
     config = ProjectConfig(git_history_limit=0)
     vault = ProjectVault(config.vault_path(tmp_path))
     vault.initialize()
+    requirement = config.vault_path(tmp_path) / "Requirements" / "REQ-001.md"
+    requirement.write_text(
+        "---\nid: REQ-001\ntype: requirement\nstatus: accepted\n---\n"
+        "# Test requirement\n\nReferences [[Decisions/ADR-001]].\n",
+        encoding="utf-8",
+    )
+    decision = config.vault_path(tmp_path) / "Decisions" / "ADR-001.md"
+    decision.write_text(
+        "---\nid: ADR-001\ntype: decision\nstatus: accepted\n---\n"
+        "# Test decision\n\nSupports [[Requirements/REQ-001]].\n",
+        encoding="utf-8",
+    )
     private = config.vault_path(tmp_path) / "Private" / "secret.md"
     private.write_text("password=hunter2", encoding="utf-8")
 

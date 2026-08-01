@@ -10,8 +10,8 @@ source_path: "tests/test_recommendations.py"
 
 ## Metadata
 
-- **End Line:** <code>351</code>
-- **Line:** <code>329</code>
+- **End Line:** <code>355</code>
+- **Line:** <code>333</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

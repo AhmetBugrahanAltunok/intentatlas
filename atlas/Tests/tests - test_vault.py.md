@@ -11,11 +11,12 @@ source_path: "tests/test_vault.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>13370</code>
+- **Size Bytes:** <code>14708</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/graph_fixture - tests - test_vault.py|graph_fixture]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_dashboard_does_not_seed_project_specific_intent_links - tests - test_vault.py|test_dashboard_does_not_seed_project_specific_intent_links]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_missing_atomic_replace_source_is_not_treated_as_success - tests - test_vault.py|test_missing_atomic_replace_source_is_not_treated_as_success]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_missing_atomic_replace_source_is_not_treated_as_success.missing_replace - tests - test_vault.py|test_missing_atomic_replace_source_is_not_treated_as_success.missing_replace]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_non_transient_replace_failure_is_not_retried - tests - test_vault.py|test_non_transient_replace_failure_is_not_retried]] _(structure; evidence: python-ast)_
@@ -45,6 +46,7 @@ source_path: "tests/test_vault.py"
 - <code>defines</code> → [[Symbols/test_temporary_file_is_cleaned_when_writing_it_fails.FailingTemporaryFile.name - tests - test_vault.py|test_temporary_file_is_cleaned_when_writing_it_fails.FailingTemporaryFile.name]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_temporary_file_is_cleaned_when_writing_it_fails.FailingTemporaryFile.write - tests - test_vault.py|test_temporary_file_is_cleaned_when_writing_it_fails.FailingTemporaryFile.write]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_vault_escapes_untrusted_markdown_in_generated_notes - tests - test_vault.py|test_vault_escapes_untrusted_markdown_in_generated_notes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_vault_initialization_is_generic_minimal_and_idempotent - tests - test_vault.py|test_vault_initialization_is_generic_minimal_and_idempotent]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_vault_initializes_obsidian_and_preserves_user_owned_notes - tests - test_vault.py|test_vault_initializes_obsidian_and_preserves_user_owned_notes]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
@@ -60,3 +62,4 @@ source_path: "tests/test_vault.py"
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-008 - Implement resilient generated vault synchronization|ISSUE-008 - Implement resilient generated vault synchronization]] _(implementation; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_

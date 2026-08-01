@@ -11,7 +11,7 @@ source_path: "README.tr.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>10615</code>
+- **Size Bytes:** <code>13110</code>
 
 ## Incoming relationships
 

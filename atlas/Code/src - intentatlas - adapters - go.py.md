@@ -11,21 +11,27 @@ source_path: "src/intentatlas/adapters/go.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>19429</code>
+- **Size Bytes:** <code>23722</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/GoAdapter - src - intentatlas - adapters - go.py|GoAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/GoAdapter.scan - src - intentatlas - adapters - go.py|GoAdapter.scan]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_called_identifiers - src - intentatlas - adapters - go.py|_called_identifiers]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_collect_import_declaration - src - intentatlas - adapters - go.py|_collect_import_declaration]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - go.py|_filename_test_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_function_body_start - src - intentatlas - adapters - go.py|_function_body_start]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_function_call_references - src - intentatlas - adapters - go.py|_function_call_references]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_go_symbol_test_edges - src - intentatlas - adapters - go.py|_go_symbol_test_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_go_tokens - src - intentatlas - adapters - go.py|_go_tokens]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_import_bindings - src - intentatlas - adapters - go.py|_import_bindings]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_import_paths - src - intentatlas - adapters - go.py|_import_paths]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_imported_package_test_edges - src - intentatlas - adapters - go.py|_imported_package_test_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_line_number - src - intentatlas - adapters - go.py|_line_number]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_mask_comments_and_literals - src - intentatlas - adapters - go.py|_mask_comments_and_literals]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_matching_delimiter - src - intentatlas - adapters - go.py|_matching_delimiter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_module_roots - src - intentatlas - adapters - go.py|_module_roots]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_package_call_edges - src - intentatlas - adapters - go.py|_package_call_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_files - src - intentatlas - adapters - go.py|_package_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_name - src - intentatlas - adapters - go.py|_package_name]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_symbol_test_edges - src - intentatlas - adapters - go.py|_package_symbol_test_edges]] _(structure; evidence: python-ast)_
@@ -48,4 +54,5 @@ source_path: "src/intentatlas/adapters/go.py"
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-015 - Expand and refine real-world validation|ISSUE-015 - Expand and refine real-world validation]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_

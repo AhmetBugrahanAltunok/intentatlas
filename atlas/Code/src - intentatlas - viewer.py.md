@@ -11,7 +11,7 @@ source_path: "src/intentatlas/viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2973</code>
+- **Size Bytes:** <code>3409</code>
 
 ## Outgoing relationships
 

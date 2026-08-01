@@ -46,6 +46,7 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
   candidates whose repeated wheel or source builds differ byte-for-byte.
 - Link Go tests to uniquely owned exported declarations they actually reference, while keeping
   ambiguous and filename-only matches conservative.
+- Follow one exact Go symbol-caller hop when a directly tested wrapper calls the changed symbol.
 - Reuse a lazy deterministic adjacency index for impact and recommendation queries, with a bounded
   synthetic scale benchmark for contributors.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
@@ -69,6 +70,9 @@ python -m venv .venv
 .\.venv\Scripts\intentatlas.exe open
 ```
 
+`init` creates generic guidance and empty intent folders; it never seeds IntentAtlas's own
+requirements, decisions, evidence, reviews, or dated sessions into the target repository.
+
 Then open the `atlas/` directory as an Obsidian vault. The standard Graph View will
 show requirements, decisions, code, tests, evidence, and commits as color-coded nodes.
 
@@ -88,6 +92,7 @@ intentatlas scan [PATH]                  Rebuild the graph and generated vault n
 intentatlas status [PATH]                Show graph and orphan-note health
 intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships
 intentatlas recommend-tests TARGET       Rank advisory test candidates with explanations
+intentatlas changes --commit REV         Inspect bounded revision-scoped change metadata
 intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
 intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
 intentatlas evaluate-real-world MANIFEST CHECKOUTS  Validate pinned public checkouts offline
@@ -96,6 +101,36 @@ intentatlas demo                         Open the built-in intent-to-proof showc
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
 intentatlas open [PATH]                  Launch the local interactive graph
 ```
+
+The same deterministic ChangeSet schema covers a commit, endpoint range, index, or current
+worktree:
+
+```text
+intentatlas changes --commit HEAD
+intentatlas changes --base main --head HEAD --format json
+intentatlas changes --staged
+intentatlas changes --worktree
+intentatlas changes --staged --analyze --format json
+intentatlas changes --staged --report --format json
+intentatlas changes --worktree --report --open
+```
+
+ChangeSet output contains statuses, safe project-relative paths, resolved commit IDs, and
+current-side hunk ranges. It never stores raw diff lines. Worktree mode includes ignored-aware
+untracked paths but does not read or emit their contents. `--analyze` explicitly performs a fresh,
+bounded local scan and labels each file `analyzed`, `fallback`, or `unknown`, with
+`aligned`/`stale` freshness, confidence, artifact IDs, and evidence. It may read supported
+worktree files through the normal scanner but never executes project code or persists raw source.
+The configured vault's `Private/` area is excluded before Git metadata is collected.
+
+`--report` performs the same aligned analysis and ranks requirement impacts plus candidate tests.
+Exact symbol-to-intent paths may meet the default medium threshold; a relationship found only by
+sharing a file stays low confidence. `fallback` analysis never treats targeted tests as sufficient:
+it emits a targeted-plus-full-suite or full-suite-fallback strategy. `unknown` analysis abstains
+from ranked claims and requires the full suite. The report is advisory and does not prove that
+unlisted requirements or tests are unaffected.
+Add `--open` to inspect that same in-memory report in the loopback viewer without persisting a
+second graph or report artifact.
 
 Verification reports are opt-in. Add project-relative paths to `intentatlas.json`, generate the
 reports with your existing CI tools, and run `intentatlas scan`:
@@ -122,10 +157,12 @@ intentatlas recommend-tests commit:FULL_SHA --minimum-confidence medium
 intentatlas recommend-tests src/auth.py --minimum-confidence low --format json
 ```
 
-Scores are fixed, inspectable structural signals. Exact symbol changes plus static test links rank
-above file-level or filename-convention evidence. Results are advisory: omitted tests and absent
-recommendations never prove that behavior is unaffected. Imported JUnit summaries are displayed
-only as observations because their freshness is unknown.
+Scores are fixed, inspectable structural signals. Exact symbol changes plus exact static test
+links rank above file-level or filename-convention evidence. A file-level relationship cannot
+become a default medium-confidence claim for an unrelated symbol in the same file; such fallback
+is low confidence or omitted when contradictory exact-symbol evidence exists. Results are
+advisory: omitted tests and absent recommendations never prove that behavior is unaffected.
+Imported JUnit summaries are displayed only as observations because their freshness is unknown.
 
 To measure recommendation quality against an explicitly exhaustive reviewed label set:
 

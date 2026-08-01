@@ -11,7 +11,7 @@ source_path: "tests/test_graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>7937</code>
+- **Size Bytes:** <code>8307</code>
 
 ## Outgoing relationships
 

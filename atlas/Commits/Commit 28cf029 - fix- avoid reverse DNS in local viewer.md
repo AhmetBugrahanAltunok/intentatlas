@@ -19,7 +19,3 @@ generated: true
 - <code>changes</code> → [[Code/docs - architecture.md|docs/architecture.md]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/LoopbackHTTPServer.server_bind - src - intentatlas - viewer.py|LoopbackHTTPServer.server_bind]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(history; evidence: git-diff-hunk)_

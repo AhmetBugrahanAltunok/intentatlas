@@ -11,12 +11,13 @@ source_path: "tests/test_cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3384</code>
+- **Size Bytes:** <code>5324</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_cli_init_scan_status_and_impact - tests - test_cli.py|test_cli_init_scan_status_and_impact]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_rejects_unsafe_graph_diff_paths - tests - test_cli.py|test_cli_rejects_unsafe_graph_diff_paths]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cli_renders_worktree_change_set_as_deterministic_json - tests - test_cli.py|test_cli_renders_worktree_change_set_as_deterministic_json]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_reports_invalid_requests - tests - test_cli.py|test_cli_reports_invalid_requests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_writes_deterministic_graph_diff_and_supports_ci_check - tests - test_cli.py|test_cli_writes_deterministic_graph_diff_and_supports_ci_check]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: filename-convention)_
@@ -29,3 +30,4 @@ source_path: "tests/test_cli.py"
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_

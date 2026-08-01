@@ -17,4 +17,3 @@ source_path: "tests/test_corpus.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-diff-hunk)_

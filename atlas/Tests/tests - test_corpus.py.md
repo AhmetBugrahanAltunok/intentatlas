@@ -11,7 +11,7 @@ source_path: "tests/test_corpus.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9923</code>
+- **Size Bytes:** <code>9913</code>
 
 ## Outgoing relationships
 

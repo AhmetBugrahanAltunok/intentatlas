@@ -10,11 +10,10 @@ source_path: "tests/test_vault.py"
 
 ## Metadata
 
-- **End Line:** <code>77</code>
-- **Line:** <code>76</code>
+- **End Line:** <code>116</code>
+- **Line:** <code>115</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 658cbad - fix- preserve generated vault during sync failures|fix: preserve generated vault during sync failures]] _(history; evidence: git-diff-hunk)_

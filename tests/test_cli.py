@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
+
+import pytest
 
 from intentatlas.cli import main
 
@@ -91,3 +94,47 @@ def test_cli_rejects_unsafe_graph_diff_paths(tmp_path, capsys) -> None:
         == 2
     )
     assert "may not overwrite" in capsys.readouterr().err
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_cli_renders_worktree_change_set_as_deterministic_json(tmp_path, capsys) -> None:
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    (tmp_path / "new.py").write_text("value = 1\n", encoding="utf-8")
+    (tmp_path / "atlas" / "Private").mkdir(parents=True)
+    (tmp_path / "atlas" / "Private" / "secret.md").write_text(
+        "must stay outside change metadata\n", encoding="utf-8"
+    )
+
+    arguments = ["changes", str(tmp_path), "--worktree", "--format", "json"]
+    assert main(arguments) == 0
+    first = capsys.readouterr().out
+    assert main(arguments) == 0
+    assert capsys.readouterr().out == first
+    payload = json.loads(first)
+    assert payload["scope"] == "worktree"
+    assert payload["files"] == [
+        {"hunks": [], "path": "new.py", "status": "untracked"}
+    ]
+
+    assert main([*arguments, "--analyze"]) == 0
+    analyzed = json.loads(capsys.readouterr().out)
+    assert analyzed["state"] == "fallback"
+    assert analyzed["files"][0]["freshness"] == "aligned"
+
+    assert main([*arguments, "--report"]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["schema_version"] == 1
+    assert report["analysis_state"] == "fallback"
+    assert report["test_strategy"] == "full-suite-fallback"
+    assert report["requirements"] == []
+    assert report["tests"] == []
+
+    assert main([*arguments, "--analyze", "--report"]) == 2
+    assert "either --analyze or --report" in capsys.readouterr().err
+    assert main([*arguments, "--open"]) == 2
+    assert "--open requires --report" in capsys.readouterr().err
+
+    assert main(["changes", str(tmp_path)]) == 2
+    assert "Select exactly one change scope" in capsys.readouterr().err
+    assert main(["changes", str(tmp_path), "--base", "HEAD"]) == 2
+    assert "both --base and --head" in capsys.readouterr().err

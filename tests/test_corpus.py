@@ -78,21 +78,21 @@ def test_original_corpus_compares_all_thresholds_deterministically(capsys) -> No
         {
             "case_count": 3,
             "expected_count": 4,
-            "recommendation_count": 7,
-            "true_positive_count": 4,
-            "false_positive_count": 3,
-            "false_negative_count": 0,
-            "precision": 0.571429,
-            "recall": 1.0,
-        },
-        {
-            "case_count": 3,
-            "expected_count": 4,
             "recommendation_count": 6,
             "true_positive_count": 4,
             "false_positive_count": 2,
             "false_negative_count": 0,
             "precision": 0.666667,
+            "recall": 1.0,
+        },
+        {
+            "case_count": 3,
+            "expected_count": 4,
+            "recommendation_count": 5,
+            "true_positive_count": 4,
+            "false_positive_count": 1,
+            "false_negative_count": 0,
+            "precision": 0.8,
             "recall": 1.0,
         },
         {
@@ -131,7 +131,7 @@ def test_original_corpus_compares_all_thresholds_deterministically(capsys) -> No
         )
         == 0
     )
-    assert json.loads(capsys.readouterr().out)["thresholds"][1]["totals"]["precision"] == 0.666667
+    assert json.loads(capsys.readouterr().out)["thresholds"][1]["totals"]["precision"] == 0.8
 
 
 @pytest.mark.parametrize(

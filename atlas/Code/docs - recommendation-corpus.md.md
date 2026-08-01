@@ -11,7 +11,7 @@ source_path: "docs/recommendation-corpus.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>2574</code>
+- **Size Bytes:** <code>2630</code>
 
 ## Incoming relationships
 

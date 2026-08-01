@@ -180,9 +180,9 @@ def recommend_tests(
                 continue
             convention = edge.evidence == "filename-convention"
             if signal.symbol is not None:
-                score = 70 if convention else 80
-                signal_name = "symbol-filename-test" if convention else "symbol-structural-test"
                 if match.matched_symbol_id is not None:
+                    score = 80
+                    signal_name = "symbol-structural-test"
                     owner_match = match.matched_symbol_id != signal.symbol.id
                     summary = (
                         "The test references the owning symbol of an exactly modified nested "
@@ -192,12 +192,16 @@ def recommend_tests(
                     )
                     path = _symbol_test_path(signal, match.matched_symbol_id, test.id)
                 else:
+                    score = 45 if convention else 60
+                    signal_name = (
+                        "symbol-filename-fallback" if convention else "symbol-file-fallback"
+                    )
                     summary = (
-                        "The filename convention associates this test with the file containing an "
-                        "exactly modified symbol."
+                        "The filename convention weakly associates this test with the file "
+                        "containing an exactly modified symbol; no exact symbol evidence exists."
                         if convention
-                        else "The test structurally targets the file containing an exactly "
-                        "modified symbol."
+                        else "The test targets the file containing an exactly modified symbol, "
+                        "but no exact symbol evidence connects this test to that symbol."
                     )
                     path = RecommendationPath(
                         (*signal.path.nodes, test.id),
@@ -228,6 +232,12 @@ def recommend_tests(
                         (
                             *signal.evidence,
                             edge.evidence,
+                            *(
+                                ("file-level-fallback",)
+                                if signal.symbol is not None
+                                and match.matched_symbol_id is None
+                                else ()
+                            ),
                             *(
                                 ("owner-name-convention",)
                                 if match.matched_symbol_id is not None
@@ -416,10 +426,20 @@ def _preferred_test_edges(
                 return tuple(
                     _PreferredTestEdge(edge, symbol_id) for edge in symbol_edges
                 )
-    return tuple(
-        _PreferredTestEdge(edge)
-        for edge in _select_test_edges(index.incoming(target_id, "tests"))
-    )
+    file_edges = _select_test_edges(index.incoming(target_id, "tests"))
+    if symbol is not None:
+        defined_symbols = {
+            edge.target for edge in index.outgoing(target_id, "defines")
+        }
+        file_edges = tuple(
+            edge
+            for edge in file_edges
+            if not any(
+                candidate.target in defined_symbols
+                for candidate in index.outgoing(edge.source, "tests")
+            )
+        )
+    return tuple(_PreferredTestEdge(edge) for edge in file_edges)
 
 
 def _select_test_edges(edges: tuple[Edge, ...]) -> tuple[Edge, ...]:
@@ -490,7 +510,8 @@ def _add_direct_dependent_reasons(
     if signal.symbol is None:
         return
     dependency_edges = index.incoming(signal.symbol.id, "imports")
-    if len(dependency_edges) > MAX_DIRECT_SYMBOL_DEPENDENTS:
+    caller_edges = index.incoming(signal.symbol.id, "calls")
+    if len(dependency_edges) + len(caller_edges) > MAX_DIRECT_SYMBOL_DEPENDENTS:
         raise ValueError(
             "Recommendation symbol exceeds the "
             f"{MAX_DIRECT_SYMBOL_DEPENDENTS}-direct-dependent limit"
@@ -523,6 +544,45 @@ def _add_direct_dependent_reasons(
                     ),
                     evidence=_unique_values(
                         (*signal.evidence, dependency_edge.evidence, match.edge.evidence)
+                    ),
+                ),
+            )
+
+    for caller_edge in caller_edges:
+        caller = graph.nodes.get(caller_edge.source)
+        if caller is None or caller.kind != "symbol":
+            continue
+        caller_location = _symbol_file(graph, caller, index)
+        if caller_location is None:
+            continue
+        caller_file, _defines_evidence = caller_location
+        for match in _preferred_test_edges(graph, index, caller_file.id, caller):
+            if match.matched_symbol_id is None:
+                continue
+            test = graph.nodes.get(match.edge.source)
+            if test is None or test.kind != "test":
+                continue
+            nodes = list(signal.path.nodes)
+            relations = list(signal.path.relations)
+            if nodes and nodes[-1] == signal.file.id and len(nodes) > 1:
+                nodes.pop()
+                relations.pop()
+            _add_reason(
+                reasons_by_test,
+                test.id,
+                RecommendationReason(
+                    signal="direct-symbol-caller-test",
+                    score=65,
+                    summary=(
+                        "The test directly references a symbol that calls the exact changed "
+                        "symbol."
+                    ),
+                    path=RecommendationPath(
+                        (*nodes, caller.id, test.id),
+                        (*relations, "called-by", "tested-by"),
+                    ),
+                    evidence=_unique_values(
+                        (*signal.evidence, caller_edge.evidence, match.edge.evidence)
                     ),
                 ),
             )

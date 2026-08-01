@@ -10,11 +10,10 @@ source_path: "tests/test_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>39</code>
-- **Line:** <code>31</code>
+- **End Line:** <code>40</code>
+- **Line:** <code>32</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_e2e.py|tests/test_e2e.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 5a0dba8 - test- synchronize viewer readiness|test: synchronize viewer readiness]] _(history; evidence: git-diff-hunk)_

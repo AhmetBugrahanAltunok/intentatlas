@@ -10,7 +10,7 @@ source_path: "tests/test_recommendations.py"
 
 ## Metadata
 
-- **End Line:** <code>116</code>
+- **End Line:** <code>122</code>
 - **Line:** <code>15</code>
 - **Symbol Kind:** <code>"function"</code>
 

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>17714</code>
+- **Size Bytes:** <code>19937</code>
 
 ## Outgoing relationships
 
@@ -24,6 +24,7 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/boot - src - intentatlas - web - app.js|boot]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/buildPathAdjacency - src - intentatlas - web - app.js|buildPathAdjacency]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/clamp - src - intentatlas - web - app.js|clamp]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/closeChangeReport - src - intentatlas - web - app.js|closeChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/closeDetail - src - intentatlas - web - app.js|closeDetail]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/color - src - intentatlas - web - app.js|color]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/degree - src - intentatlas - web - app.js|degree]] _(structure; evidence: javascript-structural)_
@@ -34,11 +35,15 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/fitGraph - src - intentatlas - web - app.js|fitGraph]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/focusNode - src - intentatlas - web - app.js|focusNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/graphPoint - src - intentatlas - web - app.js|graphPoint]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/openChangeReport - src - intentatlas - web - app.js|openChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/radius - src - intentatlas - web - app.js|radius]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/rebuild - src - intentatlas - web - app.js|rebuild]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/renderChangeReport - src - intentatlas - web - app.js|renderChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderEvidencePaths - src - intentatlas - web - app.js|renderEvidencePaths]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderFilters - src - intentatlas - web - app.js|renderFilters]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/renderReportItems - src - intentatlas - web - app.js|renderReportItems]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderStats - src - intentatlas - web - app.js|renderStats]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/reportDatum - src - intentatlas - web - app.js|reportDatum]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/seeded - src - intentatlas - web - app.js|seeded]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/selectNode - src - intentatlas - web - app.js|selectNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortLabel - src - intentatlas - web - app.js|shortLabel]] _(structure; evidence: javascript-structural)_

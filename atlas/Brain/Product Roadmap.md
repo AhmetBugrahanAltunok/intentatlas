@@ -290,8 +290,48 @@ Status: complete
 - Requirement: [[Requirements/REQ-019 - Ship verifiable cross-platform releases]]
 - Decision: [[Decisions/ADR-019 - Separate reproducible verification from publication]]
 - Delivery issue: [[Issues/ISSUE-017 - Implement open-source release gates]]
-- Planned evidence: [[Evidence/EVD-019 - Phase 7D release readiness verification]]
-- Planned review: [[Reviews/Phase 7D Open-Source Release Readiness Review]]
+- Evidence: [[Evidence/EVD-019 - Phase 7D release readiness verification]]
+- Review: [[Reviews/Phase 7D Open-Source Release Readiness Review]]
+
+## Phase 8 — Trustworthy change intelligence
+
+Status: complete (2026-08-01)
+
+- Remove project-specific sample memory from fresh user vaults.
+- Represent commit, range, staged, and worktree changes through one bounded change-set model.
+- Distinguish exact symbol evidence from conservative file fallback and unknown analysis.
+- Rank requirement impact and test candidates with revision, scope, provenance, freshness, and
+  explainable confidence.
+- Prefer honest abstention or a full-test fallback when evidence is incomplete.
+- Requirement: [[Requirements/REQ-020 - Explain revision-scoped change confidence]]
+- Decision: [[Decisions/ADR-020 - Separate exact change evidence from fallback]]
+- Delivery issue: [[Issues/ISSUE-018 - Implement trustworthy change intelligence]]
+- Strategy: [[Brain/Phase 8-10 Strategy]]
+- Kickoff: [[Sessions/2026-08-01 - Phase 8 kickoff]]
+- Evidence: [[Evidence/EVD-020 - Phase 8 trustworthy change intelligence verification]]
+- Review: [[Reviews/Phase 8 Trustworthy Change Intelligence Review]]
+- Outcome: one bounded change model now carries exact, fallback, or unknown evidence into
+  deterministic requirement/test reports and the local UI; same-file ambiguity stays below the
+  default threshold and incomplete analysis abstains or includes the full suite.
+
+## Phase 9 — Pull-request and CI evidence loop
+
+Status: proposed
+
+- Add a deterministic revision-range review command with Markdown, JSON, and SARIF output.
+- Publish nothing by default; begin with a read-only, shadow-mode CI integration.
+- Import actual test results with commit identity and freshness, then surface change-centric views.
+- Strategy: [[Brain/Phase 8-10 Strategy]]
+
+## Phase 10 — Scale and open evidence ecosystem
+
+Status: proposed
+
+- Add incremental scanning and atomic derived indexes without weakening Markdown portability.
+- Import open evidence formats such as SCIP, SARIF, and per-test execution maps.
+- Define an adapter conformance contract and make the viewer responsive on large repositories.
+- Harden release provenance, fuzz/property coverage, browser E2E, and pinned CI dependencies.
+- Strategy: [[Brain/Phase 8-10 Strategy]]
 
 ## Completion rule
 

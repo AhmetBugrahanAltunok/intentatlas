@@ -291,12 +291,6 @@ class ProjectVault:
             "",
             "> The living map from project intent to implementation evidence.",
             "",
-            "- North star: [[Brain/North Star]]",
-            "- Active requirement: [[Requirements/REQ-001 - Explain change impact]]",
-            "- Architecture decision: [[Decisions/ADR-001 - Vault-first intent graph]]",
-            "- Latest evidence: [[Evidence/EVD-001 - Initial scanner acceptance]]",
-            "- Project review: [[Reviews/Initial Project Review]]",
-            "",
             "## Graph summary",
             "",
         ]
@@ -455,121 +449,18 @@ _STARTER_NOTES: dict[str, str] = {
 id: home
 type: map
 ---
-# IntentAtlas
+# Project atlas
 
-> Start with [[Dashboard/IntentAtlas|the living dashboard]] and [[Brain/North Star]].
+> Start with [[Dashboard/IntentAtlas|the living dashboard]], then define the project's durable
+> outcome in `Brain/`.
 
-## Intent chain
+## Build the intent chain
 
-[[Requirements/REQ-001 - Explain change impact]] →
-[[Decisions/ADR-001 - Vault-first intent graph]] →
-[[Evidence/EVD-001 - Initial scanner acceptance]] →
-[[Reviews/Initial Project Review]]
+Create the first requirement, decision, issue, and evidence notes from [[Templates/Requirement]],
+[[Templates/Decision]], [[Templates/Issue]], and [[Templates/Evidence]]. Link them to the code and
+tests they explain, then run `intentatlas scan`.
 
 Folders group by purpose. Links group by meaning. A durable note without a link is a bug.
-""",
-    "Brain/North Star.md": """
----
-id: north-star
-type: memory
-status: active
----
-# North Star
-
-Make the reason behind software changes as inspectable as the code itself.
-
-The first promise is [[Requirements/REQ-001 - Explain change impact]]. Decisions must carry
-forward into code, tests, evidence, reviews, and commits without locking the user into a
-hosted service.
-""",
-    "Requirements/REQ-001 - Explain change impact.md": """
----
-id: REQ-001
-type: requirement
-status: accepted
----
-# Explain change impact
-
-Before changing a project artifact, a developer can see its upstream intent and downstream
-implementation or verification relationships.
-
-## Acceptance
-
-- A local scan creates a deterministic relationship graph.
-- The graph is explorable in Obsidian and a standalone local viewer.
-- Impact can be queried without sending source code to an external service.
-
-Implemented through [[Decisions/ADR-001 - Vault-first intent graph]] and verified by
-[[Evidence/EVD-001 - Initial scanner acceptance]].
-""",
-    "Decisions/ADR-001 - Vault-first intent graph.md": """
----
-id: ADR-001
-type: decision
-status: accepted
----
-# ADR-001 — Vault-first intent graph
-
-## Decision
-
-Human and agent knowledge remains portable Markdown with wikilinks. Rebuildable scanner
-output connects that knowledge to code structure and Git history.
-
-## Why
-
-The vault stays useful without IntentAtlas, Obsidian, an account, or an API key. This supports
-[[Requirements/REQ-001 - Explain change impact]] while keeping meaning under user control.
-
-## Implementation
-
-The language-neutral graph lives in [[src - intentatlas - graph.py]]. Generated notes are
-separate from user-owned notes so scans cannot overwrite decisions.
-""",
-    "Evidence/EVD-001 - Initial scanner acceptance.md": """
----
-id: EVD-001
-type: evidence
-status: pending
----
-# Initial scanner acceptance
-
-Evidence for [[Requirements/REQ-001 - Explain change impact]]:
-
-- Scanner and graph tests: [[tests - test_scanner.py]] and [[tests - test_graph.py]]
-- Vault ownership tests: [[tests - test_vault.py]]
-- CLI acceptance tests: [[tests - test_cli.py]]
-
-Update this note with verified command output before the first public release.
-""",
-    "Reviews/Initial Project Review.md": """
----
-id: REVIEW-001
-type: review
-status: open
----
-# Initial Project Review
-
-Review [[Evidence/EVD-001 - Initial scanner acceptance]] against
-[[Requirements/REQ-001 - Explain change impact]] before publishing.
-
-## Checklist
-
-- [ ] A fresh install works without network access after dependencies are installed.
-- [ ] Generated notes contain no raw source or secrets.
-- [ ] Obsidian Graph View clearly separates intent, implementation, tests, and evidence.
-- [ ] The local viewer works on a representative repository.
-""",
-    "Sessions/2026-07-30 - Project bootstrap.md": """
----
-id: SESSION-2026-07-30-BOOTSTRAP
-type: session
-status: complete
----
-# 2026-07-30 — Project bootstrap
-
-IntentAtlas started from [[Brain/North Star]] with a clean repository and a vault-first
-architecture inspired by obsidian-mind. The first delivery target is
-[[Requirements/REQ-001 - Explain change impact]].
 """,
     "Templates/Requirement.md": """
 ---

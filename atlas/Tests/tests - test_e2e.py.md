@@ -11,7 +11,7 @@ source_path: "tests/test_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4993</code>
+- **Size Bytes:** <code>5935</code>
 
 ## Outgoing relationships
 
@@ -25,3 +25,4 @@ source_path: "tests/test_e2e.py"
 - <code>changed-by</code> ← [[Commits/Commit 5a0dba8 - test- synchronize viewer readiness|test: synchronize viewer readiness]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 74df114 - fix- bypass proxies in loopback e2e|fix: bypass proxies in loopback e2e]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_

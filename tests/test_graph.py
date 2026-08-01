@@ -97,8 +97,8 @@ def test_graph_round_trip_and_summary(tmp_path) -> None:
     assert restored.find("app.py").id == "file:app.py"
     assert restored.orphans() == []
     payload = graph.to_dict()
-    assert payload["schema_version"] == 2
-    assert payload["relation_schema_version"] == 3
+    assert payload["schema_version"] == 3
+    assert payload["relation_schema_version"] == 4
     drives = next(edge for edge in payload["edges"] if edge["relation"] == "drives")
     assert drives["category"] == "intent"
     assert drives["inverse"] == "driven-by"
@@ -190,7 +190,7 @@ def test_load_migrates_schema_one_and_rejects_invalid_typed_relations(tmp_path) 
     path.write_text(json.dumps(legacy), encoding="utf-8")
     migrated = AtlasGraph.load(path)
     assert migrated.edges[0].category == "intent"
-    assert migrated.to_dict()["schema_version"] == 2
+    assert migrated.to_dict()["schema_version"] == 3
 
     graph = AtlasGraph()
     graph.extend(
@@ -203,8 +203,8 @@ def test_load_migrates_schema_one_and_rejects_invalid_typed_relations(tmp_path) 
 
     invalid_v2 = {
         **legacy,
-        "schema_version": 2,
-        "relation_schema_version": 3,
+        "schema_version": 3,
+        "relation_schema_version": 4,
         "relation_types": relation_catalog(),
         "edges": [{**legacy["edges"][0], "inverse": "wrong"}],
     }
@@ -217,3 +217,12 @@ def test_load_migrates_schema_one_and_rejects_invalid_typed_relations(tmp_path) 
     path.write_text(json.dumps(invalid_v2), encoding="utf-8")
     with pytest.raises(ValueError, match="Invalid relation catalog"):
         AtlasGraph.load(path)
+
+    prior_v2 = sample_graph().to_dict()
+    prior_v2["schema_version"] = 2
+    prior_v2["relation_schema_version"] = 3
+    prior_v2["relation_types"] = [
+        relation for relation in relation_catalog() if relation["name"] != "calls"
+    ]
+    path.write_text(json.dumps(prior_v2), encoding="utf-8")
+    assert AtlasGraph.load(path).to_dict()["schema_version"] == 3

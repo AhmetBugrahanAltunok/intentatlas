@@ -41,6 +41,9 @@ python -m venv .venv
 .\.venv\Scripts\intentatlas.exe open
 ```
 
+`init`, genel yönlendirme ile boş niyet klasörleri oluşturur; IntentAtlas'ın kendi gereksinim,
+karar, kanıt, inceleme veya tarihli oturumlarını hedef depoya örnek veri olarak eklemez.
+
 Ardından `atlas/` klasörünü Obsidian’da vault olarak açın. Graph View; gereksinimleri,
 kararları, kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak
 gösterecektir.
@@ -50,6 +53,38 @@ tarama, test önerisi ve yerel görüntüleyici akışı ise en eski ve en yeni 
 sürümlerinde Linux, Windows ve macOS üzerinde CI tarafından doğrulanır. Yerel, tekrarlanabilir
 paket kontrolleri için [sürüm sürecine](RELEASING.md) bakın.
 
+Aynı deterministik ChangeSet şeması commit, revision aralığı, index veya mevcut çalışma ağacını
+kapsar:
+
+```text
+intentatlas changes --commit HEAD
+intentatlas changes --base main --head HEAD --format json
+intentatlas changes --staged
+intentatlas changes --worktree
+intentatlas changes --staged --analyze --format json
+intentatlas changes --staged --report --format json
+intentatlas changes --worktree --report --open
+```
+
+`--open`, aynı bellek içi raporu ikinci bir grafik veya rapor dosyası kaydetmeden yalnızca yerel
+arayüzde açar.
+
+Çıktı yalnız durumları, güvenli proje-göreli yolları, çözümlenmiş commit kimliklerini ve yeni taraf
+satır aralıklarını taşır; ham diff satırlarını saklamaz. Worktree modu ignore kurallarına uyan
+takip edilmeyen yolları gösterir ancak içeriklerini okumaz veya yazmaz. `--analyze`, açıkça yeni ve
+sınırlı bir yerel tarama yaparak her dosyayı `analyzed`, `fallback` veya `unknown`; güncelliği
+`aligned` veya `stale` olarak işaretler ve güven, eser kimliği ile kanıtı gösterir. Bu seçenek normal
+tarayıcı üzerinden desteklenen çalışma ağacı dosyalarını okuyabilir ancak proje kodunu çalıştırmaz
+ve ham kaynağı saklamaz. Yapılandırılmış vault'un `Private/` alanı Git meta verisi toplanmadan önce
+kapsam dışında bırakılır.
+
+`--report` aynı hizalanmış analizi kullanarak olası gereksinim etkilerini ve aday testleri sıralar.
+Kesin sembol-niyet yolu varsayılan orta güven eşiğine ulaşabilir; yalnızca aynı dosyada bulunmaya
+dayanan ilişki düşük güvenli kalır. `fallback` durumunda hedefli testler tek başına yeterli sayılmaz
+ve tam test paketi de istenir. `unknown` durumunda sistem sıralama iddiasından kaçınır ve tam test
+paketine yönlendirir. Rapor tavsiye niteliğindedir; listede olmayan gereksinim veya testlerin
+etkilenmediğini kanıtlamaz.
+
 Bir commit, dosya veya sembol için test dosyalarını çalıştırmadan sıralamak için:
 
 ```text
@@ -57,9 +92,11 @@ intentatlas recommend-tests commit:TAM_SHA --minimum-confidence medium
 intentatlas recommend-tests src/auth.py --minimum-confidence low --format json
 ```
 
-Puanlar sabit ve incelenebilir yapısal kanıtlara dayanır. Kesin sembol değişikliği ile statik test
-bağlantısı, yalnız dosya veya adlandırma kuralı kanıtından daha yüksek sıralanır. Sonuçlar
-tavsiyedir; listede olmayan bir test, davranışın etkilenmediğini kanıtlamaz.
+Puanlar sabit ve incelenebilir yapısal kanıtlara dayanır. Kesin sembol değişikliği ile kesin statik
+test bağlantısı, yalnız dosya veya adlandırma kuralı kanıtından daha yüksek sıralanır. Dosya
+düzeyindeki bir ilişki, aynı dosyadaki ilgisiz bir sembol için varsayılan orta güvenli iddiaya
+dönüşmez; bu yedek kanıt düşük güvenli kalır veya çelişen kesin sembol kanıtı varsa elenir.
+Sonuçlar tavsiyedir; listede olmayan bir test, davranışın etkilenmediğini kanıtlamaz.
 
 Öneri kalitesini eksiksiz olduğu açıkça belirtilen, insan incelemeli yerel etiketlerle ölçmek için:
 
@@ -141,6 +178,8 @@ adlandırılmış türleri, fonksiyonları, metotları, modül-içi paket import
 Aynı klasördeki testler yalnızca tek bir üretim dosyasına ait, gerçekten başvurulan dışa açık
 bildirimler için yapısal kanıt kazanır; belirsiz adlar bağlanmaz ve dosya adı eşleşmesi zayıf yedek
 olarak kalır. Hiçbir adaptör dil çalışma zamanını veya proje kodunu çalıştırmaz.
+Doğrudan test edilen bir Go sarmalayıcısı değişen sembolü çağırıyorsa yalnızca bir kesin
+`calls`/`called-by` adımı izlenir; sınırsız çağrı grafiği yayılımı yapılmaz.
 
 İsteğe bağlı Cobertura coverage ve JUnit test raporları `intentatlas.json` içindeki proje-göreli
 `coverage_reports` ve `test_reports` listeleriyle içe aktarılabilir. IntentAtlas testleri çalıştırmaz;
