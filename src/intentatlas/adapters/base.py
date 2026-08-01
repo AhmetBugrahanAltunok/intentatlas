@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
@@ -36,6 +36,37 @@ class GraphFragment:
     edges: tuple[Edge, ...] = ()
 
 
+def canonical_graph_fragment(
+    nodes: Iterable[Node],
+    edges: Iterable[Edge],
+) -> GraphFragment:
+    """Build stable adapter output while collapsing identical discoveries."""
+
+    node_values: dict[str, Node] = {}
+    for node in nodes:
+        existing = node_values.get(node.id)
+        if existing is not None and existing != node:
+            raise ValueError(f"Conflicting adapter node identity: {node.id!r}")
+        node_values[node.id] = node
+    edge_values = {
+        (edge.source, edge.target, edge.relation, edge.evidence): edge for edge in edges
+    }
+    return GraphFragment(
+        nodes=tuple(sorted(node_values.values(), key=lambda node: node.id)),
+        edges=tuple(
+            sorted(
+                edge_values.values(),
+                key=lambda edge: (
+                    edge.source,
+                    edge.target,
+                    edge.relation,
+                    edge.evidence,
+                ),
+            )
+        ),
+    )
+
+
 class LanguageAdapter(Protocol):
     """Contract implemented by offline, non-executing language analyzers."""
 
@@ -43,5 +74,6 @@ class LanguageAdapter(Protocol):
     suffixes: frozenset[str]
     cache_input_suffixes: frozenset[str]
     cache_version: int
+    evidence_kinds: frozenset[str]
 
     def scan(self, context: AdapterContext) -> GraphFragment: ...

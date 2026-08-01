@@ -17,3 +17,4 @@ source_path: "src/intentatlas/open_evidence.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-diff-hunk)_

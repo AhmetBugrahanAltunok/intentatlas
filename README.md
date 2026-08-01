@@ -288,6 +288,11 @@ module-local package imports, and tests. Same-directory tests gain structural ev
 referenced exported declarations owned by one production file; ambiguous names remain unlinked and
 filename matching stays a weak fallback. Neither adapter runs a language runtime or project code.
 
+Adapter conformance contract version 1 turns the shared boundary into an executable check. Fresh
+and cached fragments must satisfy the same bounded symbol, relation, endpoint, evidence, ordering,
+and determinism rules before graph merge. Built-in adapters pass one fixture-driven helper; this is
+not an external plugin loader. See [language adapter conformance](docs/adapter-conformance.md).
+
 Configured Cobertura and JUnit reports now create generated coverage and test-result evidence in
 the graph. Graph diff schema 1 provides stable node and relationship changes for CI without a
 generation timestamp.
@@ -326,6 +331,12 @@ tests, evidence, coverage, test results, commits, and pull requests. These paths
 intent-to-proof story easier to follow; they explain graph connectivity and do not claim causality,
 completeness, freshness, or test necessity. `intentatlas demo` opens the same production viewer on
 a packaged nine-node first-party example and removes its temporary graph when the viewer stops.
+
+For large repositories, the viewer retains the complete graph for local navigation but renders a
+deterministic window of at most 240 nodes and 900 edges. The default overview balances graph layers;
+global search, report links, and relationship links can open a bounded two-hop neighborhood around
+any hidden node. Total and rendered counts remain visible, and relationship details explicitly
+report omitted items instead of creating unbounded browser DOM.
 
 The real-world evaluator adds a provenance gate around the same scanner and corpus evaluator. A
 strict manifest binds each local checkout to an exact GitHub origin, commit, SPDX identifier,

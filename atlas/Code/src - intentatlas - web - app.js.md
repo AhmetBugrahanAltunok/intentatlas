@@ -11,32 +11,41 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>22308</code>
+- **Size Bytes:** <code>28601</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/activate - src - intentatlas - web - app.js|activate]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/add - src - intentatlas - web - app.js|add]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/applySearch - src - intentatlas - web - app.js|applySearch]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/bestSearchMatch - src - intentatlas - web - app.js|bestSearchMatch]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/bindEvents - src - intentatlas - web - app.js|bindEvents]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/bindFocusButton - src - intentatlas - web - app.js|bindFocusButton]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/bindNode - src - intentatlas - web - app.js|bindNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/boot - src - intentatlas - web - app.js|boot]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/buildGraphIndexes - src - intentatlas - web - app.js|buildGraphIndexes]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/buildPathAdjacency - src - intentatlas - web - app.js|buildPathAdjacency]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/clamp - src - intentatlas - web - app.js|clamp]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/closeChangeReport - src - intentatlas - web - app.js|closeChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/closeDetail - src - intentatlas - web - app.js|closeDetail]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/color - src - intentatlas - web - app.js|color]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/compareEdges - src - intentatlas - web - app.js|compareEdges]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/compareOverviewNodes - src - intentatlas - web - app.js|compareOverviewNodes]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/compareWindowEdges - src - intentatlas - web - app.js|compareWindowEdges]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/degree - src - intentatlas - web - app.js|degree]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/draw - src - intentatlas - web - app.js|draw]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/edgeKey - src - intentatlas - web - app.js|edgeKey]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/escapeAttr - src - intentatlas - web - app.js|escapeAttr]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/escapeHTML - src - intentatlas - web - app.js|escapeHTML]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/findEvidencePaths - src - intentatlas - web - app.js|findEvidencePaths]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/fitGraph - src - intentatlas - web - app.js|fitGraph]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/focusNode - src - intentatlas - web - app.js|focusNode]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/focusedNodes - src - intentatlas - web - app.js|focusedNodes]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/graphPoint - src - intentatlas - web - app.js|graphPoint]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/kindPriority - src - intentatlas - web - app.js|kindPriority]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/openChangeReport - src - intentatlas - web - app.js|openChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/outcomePaths - src - intentatlas - web - app.js|outcomePaths]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/overviewNodes - src - intentatlas - web - app.js|overviewNodes]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/radius - src - intentatlas - web - app.js|radius]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/rebuild - src - intentatlas - web - app.js|rebuild]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderChangeReport - src - intentatlas - web - app.js|renderChangeReport]] _(structure; evidence: javascript-structural)_
@@ -50,20 +59,24 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/selectNode - src - intentatlas - web - app.js|selectNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortLabel - src - intentatlas - web - app.js|shortLabel]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortRevision - src - intentatlas - web - app.js|shortRevision]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/showFocusedWindow - src - intentatlas - web - app.js|showFocusedWindow]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/showOverview - src - intentatlas - web - app.js|showOverview]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/stat - src - intentatlas - web - app.js|stat]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/svgElement - src - intentatlas - web - app.js|svgElement]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/syncFilter - src - intentatlas - web - app.js|syncFilter]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/tick - src - intentatlas - web - app.js|tick]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/transform - src - intentatlas - web - app.js|transform]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/updatePositions - src - intentatlas - web - app.js|updatePositions]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/windowEdges - src - intentatlas - web - app.js|windowEdges]] _(structure; evidence: javascript-structural)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths|ISSUE-012 - Implement guided demo and viewer evidence paths]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(implementation; evidence: wikilink)_

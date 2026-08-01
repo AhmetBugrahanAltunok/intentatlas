@@ -30,3 +30,7 @@ source_path: "tests/test_open_evidence.py"
 - <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_

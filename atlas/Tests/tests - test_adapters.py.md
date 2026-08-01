@@ -11,7 +11,7 @@ source_path: "tests/test_adapters.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6064</code>
+- **Size Bytes:** <code>6174</code>
 
 ## Outgoing relationships
 

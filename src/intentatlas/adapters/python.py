@@ -6,7 +6,7 @@ from collections.abc import Iterable
 from pathlib import Path
 
 from ..models import Edge, Node
-from .base import AdapterContext, GraphFragment
+from .base import AdapterContext, GraphFragment, canonical_graph_fragment
 
 
 class PythonAdapter:
@@ -14,6 +14,9 @@ class PythonAdapter:
     suffixes = frozenset({".py"})
     cache_input_suffixes = suffixes
     cache_version = 1
+    evidence_kinds = frozenset(
+        {"filename-convention", "python-ast", "python-symbol-reference"}
+    )
 
     def scan(self, context: AdapterContext) -> GraphFragment:
         module_to_node, path_to_module = _build_module_maps(context.files)
@@ -70,20 +73,7 @@ class PythonAdapter:
                     edges.append(Edge(file_node, target, relation, "python-ast"))
 
         edges.extend(_filename_test_edges(context))
-        return GraphFragment(
-            nodes=tuple(sorted(nodes, key=lambda node: node.id)),
-            edges=tuple(
-                sorted(
-                    edges,
-                    key=lambda edge: (
-                        edge.source,
-                        edge.target,
-                        edge.relation,
-                        edge.evidence,
-                    ),
-                )
-            ),
-        )
+        return canonical_graph_fragment(nodes, edges)
 
 
 class _SymbolVisitor(ast.NodeVisitor):

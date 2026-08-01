@@ -8,6 +8,10 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Added
 
+- Executable language-adapter conformance contract version 1, shared by fresh and cached fragments,
+  with deterministic fixture checks and fail-closed structural validation before graph merge.
+- Deterministic bounded viewer overview and two-hop focus windows with global search, indexed graph
+  access, total/rendered counts, and explicit relationship omission at large repository scale.
 - Explicit bounded imports for SCIP protobuf JSON, SARIF 2.1.0, and commit-keyed per-test execution
   maps, retaining only source-free aggregate metadata and safe local graph identities.
 - Aligned-only runtime test relationships: execution maps influence recommendations only when their

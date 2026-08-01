@@ -6,7 +6,7 @@ from collections.abc import Iterable, Mapping
 from pathlib import PurePosixPath
 
 from ..models import Edge, Node
-from .base import AdapterContext, GraphFragment
+from .base import AdapterContext, GraphFragment, canonical_graph_fragment
 
 _IDENTIFIER = r"[A-Za-z_][A-Za-z0-9_]*"
 _FUNCTION_DECLARATION = re.compile(
@@ -31,6 +31,9 @@ class GoAdapter:
     suffixes = frozenset({".go"})
     cache_input_suffixes = frozenset({".go", ".mod"})
     cache_version = 1
+    evidence_kinds = frozenset(
+        {"filename-convention", "go-call-reference", "go-structural", "go-symbol-reference"}
+    )
 
     def scan(self, context: AdapterContext) -> GraphFragment:
         modules = _module_roots(context)
@@ -129,20 +132,7 @@ class GoAdapter:
         )
         edges.extend(_package_call_edges(package_callables, package_calls))
         edges.extend(_filename_test_edges(context))
-        return GraphFragment(
-            nodes=tuple(sorted(nodes, key=lambda node: node.id)),
-            edges=tuple(
-                sorted(
-                    edges,
-                    key=lambda edge: (
-                        edge.source,
-                        edge.target,
-                        edge.relation,
-                        edge.evidence,
-                    ),
-                )
-            ),
-        )
+        return canonical_graph_fragment(nodes, edges)
 
 
 def _symbols(relative: str, source: str) -> list[Node]:

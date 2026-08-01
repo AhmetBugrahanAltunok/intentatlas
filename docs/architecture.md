@@ -23,6 +23,13 @@ explicit `from` imports and qualified module attributes to exact local top-level
 at most eight deterministic package re-export hops and rejecting cycles. A test with exact symbol
 evidence does not also inherit the broader file edge for that resolved module.
 
+Adapter conformance contract version 1 validates stable names, complete suffix inputs, cache
+versions, declared evidence, canonical symbol nodes, structural endpoint shapes, bounded counts,
+and deterministic repeated output. Fresh fragments are validated before merge or cache storage;
+strictly decoded cache fragments pass the same validator before reuse. The public fixture helper is
+an executable compatibility target, not an external adapter loader. See
+[language adapter conformance](adapter-conformance.md).
+
 The CLI may reuse a complete adapter fragment through a disposable content-addressed cache. The
 fingerprint covers adapter identity and cache version, the parse limit, and every declared input's
 project-relative path, derived kind, and bytes. Python declares `.py`; JavaScript/TypeScript declares
@@ -125,6 +132,13 @@ locally with deterministic breadth-first traversal in both edge directions, limi
 800 visited nodes, and 6 proof-oriented results. Path labels use
 the stored forward or inverse relation; they are structural explanations, not proof of causality
 or completeness.
+
+The client also builds stable node, edge, degree, search, and adjacency indexes once. SVG rendering
+is limited to a deterministic 240-node/900-edge window: a layer-balanced overview or a two-hop
+focus neighborhood. Global search and linked navigation can focus a node outside the current
+window; relationship details are capped at 80 items with an explicit omitted count. The complete
+graph remains available in memory, so a window is a rendering projection rather than data loss.
+Initial JSON transfer still scales with total graph size; server-side shards remain a later option.
 
 Graph comparison is a pure operation over two validated caches. Diff schema 1 excludes generation
 timestamps and sorts added, removed, and changed nodes plus added and removed edges. The same two

@@ -6,26 +6,19 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .adapters import GraphFragment, LanguageAdapter
+from .adapters import GraphFragment, LanguageAdapter, validate_adapter_fragment
+from .adapters.conformance import (
+    MAX_FRAGMENT_EDGES,
+    MAX_FRAGMENT_NODES,
+    SAFE_ADAPTER_NAME,
+)
 from .models import Edge, Node
 from .storage import atomic_write_text
 
 CACHE_SCHEMA_VERSION = 1
 MAX_CACHE_BYTES = 64 * 1024 * 1024
-MAX_FRAGMENT_NODES = 500_000
-MAX_FRAGMENT_EDGES = 2_000_000
 MAX_CACHE_STRING = 4096
-SAFE_ADAPTER_NAME = re.compile(r"[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?")
 HEX_SHA256 = re.compile(r"[0-9a-f]{64}")
-ADAPTER_EVIDENCE = {
-    "go": {"filename-convention", "go-call-reference", "go-structural", "go-symbol-reference"},
-    "javascript-typescript": {
-        "filename-convention",
-        "javascript-structural",
-        "javascript-symbol-reference",
-    },
-    "python": {"filename-convention", "python-ast", "python-symbol-reference"},
-}
 
 
 @dataclass(frozen=True, slots=True)
@@ -155,26 +148,10 @@ def _fragment_from_document(
         raise ValueError("Unbounded adapter cache fragment")
 
     nodes = tuple(_strict_node(item) for item in node_values)
-    edges = tuple(_strict_edge(item, adapter.name) for item in edge_values)
-    if len({node.id for node in nodes}) != len(nodes):
-        raise ValueError("Duplicate adapter cache node")
-    edge_keys = {(edge.source, edge.target, edge.relation, edge.evidence) for edge in edges}
-    if len(edge_keys) != len(edges):
-        raise ValueError("Duplicate adapter cache edge")
-    if tuple(sorted(nodes, key=lambda node: node.id)) != nodes:
-        raise ValueError("Unordered adapter cache nodes")
-    if tuple(sorted(edges, key=_edge_key)) != edges:
-        raise ValueError("Unordered adapter cache edges")
-    node_ids = {node.id for node in nodes}
-    valid_endpoints = known_file_nodes | node_ids
-    if any(f"file:{node.path}" not in known_file_nodes for node in nodes):
-        raise ValueError("Cached symbol does not belong to a discovered file")
-    if any(
-        edge.source not in valid_endpoints or edge.target not in valid_endpoints
-        for edge in edges
-    ):
-        raise ValueError("Cached edge references an unknown node")
-    return GraphFragment(nodes=nodes, edges=edges)
+    edges = tuple(_strict_edge(item, adapter) for item in edge_values)
+    result = GraphFragment(nodes=nodes, edges=edges)
+    validate_adapter_fragment(adapter, result, known_file_nodes)
+    return result
 
 
 def _strict_node(value: Any) -> Node:
@@ -213,7 +190,7 @@ def _strict_node(value: Any) -> Node:
     return Node.from_dict(value)
 
 
-def _strict_edge(value: Any, adapter_name: str) -> Edge:
+def _strict_edge(value: Any, adapter: LanguageAdapter) -> Edge:
     if not isinstance(value, dict) or set(value) != {
         "source",
         "target",
@@ -229,7 +206,7 @@ def _strict_edge(value: Any, adapter_name: str) -> Edge:
     edge = Edge.from_dict(value)
     if edge.relation not in {"calls", "defines", "imports", "tests"}:
         raise ValueError("Invalid cached adapter relation")
-    if edge.evidence not in ADAPTER_EVIDENCE.get(adapter_name, set()):
+    if edge.evidence not in adapter.evidence_kinds:
         raise ValueError("Invalid cached adapter evidence")
     return edge
 

@@ -179,6 +179,18 @@ bağlantısını açıklar; nedensellik, eksiksizlik, güncellik veya test zorun
 `intentatlas demo`, aynı üretim görüntüleyicisini dokuz düğümlü özgün bir örnek üzerinde açar ve
 görüntüleyici kapandığında geçici grafiği temizler.
 
+Büyük depolarda görüntüleyici, grafiğin tamamını yerel gezinme için bellekte korur; aynı anda en
+fazla 240 düğüm ve 900 kenardan oluşan deterministik bir pencere çizer. Genel görünüm katmanları
+dengeler; genel arama, rapor ve ilişki bağlantıları gizli bir düğümün iki adımlı sınırlı çevresini
+açabilir. Toplam/gösterilen sayıları görünür kalır ve ilişki ayrıntıları sınırsız tarayıcı öğesi
+üretmek yerine kaç sonucun gösterilmediğini açıkça belirtir.
+
+Adapter conformance sözleşmesi sürüm 1, ortak adapter sınırını çalıştırılabilir bir denetime
+dönüştürür. Yeni ve cache’den okunan fragment’lar grafiğe katılmadan önce aynı sınırlı sembol,
+ilişki, uç nokta, kanıt, sıralama ve determinizm kurallarını geçmelidir. Built-in adapter’lar aynı
+fixture tabanlı yardımcıyla doğrulanır; bu özellik harici plugin yükleyicisi değildir. Ayrıntılar
+[dil adapter conformance belgesinde](docs/adapter-conformance.md) bulunur.
+
 ## Temel yaklaşım
 
 - Klasörler amaca göre, bağlantılar anlama göre düzenlenir.

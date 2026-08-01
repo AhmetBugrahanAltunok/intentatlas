@@ -11,7 +11,13 @@ const colors = {
 const kindOrder = ["requirement", "decision", "issue", "delivery-issue", "pull-request", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "coverage", "test-result", "commit"];
 const proofKinds = new Set(["test", "evidence", "coverage", "test-result", "commit", "pull-request"]);
 const pathLimits = { depth: 6, visited: 800, results: 6 };
-const state = { data: null, report: null, review: null, nodeById: new Map(), pathAdjacency: new Map(), enabled: new Set(), nodes: [], edges: [], selected: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null };
+const renderLimits = { nodes: 240, edges: 900, focusDepth: 2, relationships: 80 };
+const state = {
+  data: null, report: null, review: null, nodeById: new Map(), edgeByNode: new Map(),
+  degreeById: new Map(), searchIndex: [], pathAdjacency: new Map(), enabled: new Set(),
+  nodes: [], edges: [], visibleNodeById: new Map(), selected: null, viewMode: "overview",
+  focus: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null
+};
 const svg = document.querySelector("#graph");
 const viewport = document.querySelector("#viewport");
 const edgeLayer = document.querySelector("#edges");
@@ -37,9 +43,29 @@ async function boot() {
     state.report = state.review.change_report;
   } else if (reportResponse.ok) state.report = await reportResponse.json();
   state.nodeById = new Map(state.data.nodes.map(node => [node.id, node]));
+  buildGraphIndexes();
   state.pathAdjacency = buildPathAdjacency();
   for (const node of state.data.nodes) state.enabled.add(node.kind);
-  renderStats(); renderFilters(); renderChangeReport(); rebuild(); bindEvents(); fitGraph();
+  renderFilters(); renderChangeReport(); rebuild(); bindEvents(); fitGraph();
+}
+
+function buildGraphIndexes() {
+  state.edgeByNode = new Map(); state.degreeById = new Map();
+  for (const node of state.data.nodes) {
+    state.edgeByNode.set(node.id, []); state.degreeById.set(node.id, 0);
+  }
+  for (const edge of state.data.edges) {
+    if (!state.nodeById.has(edge.source) || !state.nodeById.has(edge.target)) continue;
+    state.edgeByNode.get(edge.source).push(edge);
+    state.edgeByNode.get(edge.target).push(edge);
+    state.degreeById.set(edge.source, state.degreeById.get(edge.source) + 1);
+    state.degreeById.set(edge.target, state.degreeById.get(edge.target) + 1);
+  }
+  for (const edges of state.edgeByNode.values()) edges.sort(compareEdges);
+  state.searchIndex = state.data.nodes.map(node => ({
+    node,
+    text: `${node.id} ${node.label} ${node.path || ""} ${node.kind}`.toLowerCase()
+  }));
 }
 
 function renderChangeReport() {
@@ -124,7 +150,16 @@ function renderReportItems(selector, items, valueOf) {
 
 function renderStats() {
   const stats = document.querySelector("#stats");
-  stats.innerHTML = stat(state.data.nodes.length, "nodes") + stat(state.data.edges.length, "links");
+  stats.innerHTML = stat(state.data.nodes.length, "total nodes")
+    + stat(state.data.edges.length, "total links")
+    + stat(state.nodes.length, "shown nodes")
+    + stat(state.edges.length, "shown links");
+  const hiddenNodes = Math.max(0, state.data.nodes.length - state.nodes.length);
+  const mode = state.viewMode === "focus" ? "Focused neighborhood" : "Ranked overview";
+  document.querySelector("#window-status").textContent = hiddenNodes
+    ? `${mode}; ${hiddenNodes} nodes remain available through global search and linked navigation.`
+    : `${mode}; every enabled node is visible.`;
+  document.querySelector("#overview").disabled = state.viewMode === "overview";
 }
 function stat(value, label) { return `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`; }
 
@@ -139,7 +174,7 @@ function renderFilters() {
   filters.innerHTML = "";
   for (const kind of kinds) {
     const label = document.createElement("label");
-    label.className = "filter";
+    label.className = "filter"; label.dataset.kind = kind;
     label.innerHTML = `<input type="checkbox" checked><span class="swatch" style="color:${color(kind)};background:${color(kind)}"></span><span>${escapeHTML(kind)}</span><span class="count">${counts.get(kind)}</span>`;
     const input = label.querySelector("input");
     input.addEventListener("change", () => {
@@ -153,7 +188,7 @@ function renderFilters() {
 function rebuild() {
   if (state.frame) cancelAnimationFrame(state.frame);
   const prior = new Map(state.nodes.map(node => [node.id, node]));
-  const rawNodes = state.data.nodes.filter(node => state.enabled.has(node.kind));
+  const rawNodes = state.viewMode === "focus" ? focusedNodes() : overviewNodes();
   const ids = new Set(rawNodes.map(node => node.id));
   const width = stage.clientWidth || 900, height = stage.clientHeight || 600;
   state.nodes = rawNodes.map((raw, index) => {
@@ -162,13 +197,89 @@ function rebuild() {
     const radius = 80 + (index % 11) * 13;
     return { ...raw, x: width / 2 + Math.cos(angle) * radius, y: height / 2 + Math.sin(angle) * radius, vx: 0, vy: 0 };
   });
-  state.edges = state.data.edges.filter(edge => ids.has(edge.source) && ids.has(edge.target));
+  state.visibleNodeById = new Map(state.nodes.map(node => [node.id, node]));
+  state.edges = windowEdges(ids);
   document.querySelector("#empty").hidden = state.nodes.length > 0;
-  draw(); state.alpha = 1; tick(); applySearch();
+  draw(); renderStats(); state.alpha = 1; tick(); applySearch();
+}
+
+function overviewNodes() {
+  const enabled = state.data.nodes.filter(node => state.enabled.has(node.kind));
+  if (enabled.length <= renderLimits.nodes) return enabled;
+  const groups = new Map();
+  for (const node of enabled) {
+    if (!groups.has(node.kind)) groups.set(node.kind, []);
+    groups.get(node.kind).push(node);
+  }
+  const orderedGroups = [...groups.entries()]
+    .sort((a, b) => kindPriority(a[0]) - kindPriority(b[0]) || a[0].localeCompare(b[0]))
+    .map(([, nodes]) => nodes.sort(compareOverviewNodes));
+  const selected = [];
+  let offset = 0;
+  while (selected.length < renderLimits.nodes) {
+    let added = false;
+    for (const nodes of orderedGroups) {
+      if (offset >= nodes.length) continue;
+      selected.push(nodes[offset]); added = true;
+      if (selected.length >= renderLimits.nodes) break;
+    }
+    if (!added) break;
+    offset += 1;
+  }
+  return selected;
+}
+
+function focusedNodes() {
+  const target = state.nodeById.get(state.focus);
+  if (!target || !state.enabled.has(target.kind)) return [];
+  const included = new Map([[target.id, target]]);
+  let frontier = [target.id];
+  for (let depth = 0; depth < renderLimits.focusDepth && frontier.length; depth++) {
+    const next = [];
+    for (const id of frontier) {
+      for (const edge of state.edgeByNode.get(id) || []) {
+        const neighborId = edge.source === id ? edge.target : edge.source;
+        const neighbor = state.nodeById.get(neighborId);
+        if (!neighbor || included.has(neighborId) || !state.enabled.has(neighbor.kind)) continue;
+        included.set(neighborId, neighbor); next.push(neighborId);
+        if (included.size >= renderLimits.nodes) break;
+      }
+      if (included.size >= renderLimits.nodes) break;
+    }
+    frontier = next.sort();
+    if (included.size >= renderLimits.nodes) break;
+  }
+  return [...included.values()];
+}
+
+function windowEdges(ids) {
+  const values = new Map();
+  for (const id of ids) {
+    for (const edge of state.edgeByNode.get(id) || []) {
+      if (!ids.has(edge.source) || !ids.has(edge.target)) continue;
+      values.set(edgeKey(edge), edge);
+    }
+  }
+  return [...values.values()].sort(compareWindowEdges).slice(0, renderLimits.edges);
+}
+
+function compareWindowEdges(a, b) {
+  const aFocus = state.viewMode === "focus" && (a.source === state.focus || a.target === state.focus);
+  const bFocus = state.viewMode === "focus" && (b.source === state.focus || b.target === state.focus);
+  return Number(bFocus) - Number(aFocus) || compareEdges(a, b);
+}
+
+function compareOverviewNodes(a, b) {
+  return (state.degreeById.get(b.id) || 0) - (state.degreeById.get(a.id) || 0)
+    || a.id.localeCompare(b.id);
+}
+
+function kindPriority(kind) {
+  const index = kindOrder.indexOf(kind);
+  return index < 0 ? kindOrder.length : index;
 }
 
 function draw() {
-  const byId = new Map(state.nodes.map(node => [node.id, node]));
   edgeLayer.innerHTML = ""; nodeLayer.innerHTML = "";
   for (const edge of state.edges) {
     const line = svgElement("line"); line.dataset.source = edge.source; line.dataset.target = edge.target;
@@ -178,9 +289,9 @@ function draw() {
     const group = svgElement("g"); group.classList.add("node"); group.dataset.id = node.id;
     group.setAttribute("role", "button"); group.setAttribute("tabindex", "0");
     group.setAttribute("aria-label", `${node.label} · ${node.kind}`);
-    const circle = svgElement("circle"); circle.setAttribute("r", String(radius(node, byId)));
+    const circle = svgElement("circle"); circle.setAttribute("r", String(radius(node)));
     circle.setAttribute("fill", color(node.kind));
-    const label = svgElement("text"); label.setAttribute("x", String(radius(node, byId) + 5)); label.setAttribute("y", "3");
+    const label = svgElement("text"); label.setAttribute("x", String(radius(node) + 5)); label.setAttribute("y", "3");
     label.textContent = shortLabel(node.label); label.hidden = degree(node.id) < 2 && state.nodes.length > 80;
     const title = svgElement("title"); title.textContent = `${node.label} · ${node.kind}`;
     group.append(circle, label, title); bindNode(group, node); nodeLayer.append(group);
@@ -191,7 +302,7 @@ function draw() {
 function tick() {
   if (!state.nodes.length) return;
   const width = stage.clientWidth, height = stage.clientHeight;
-  const byId = new Map(state.nodes.map(node => [node.id, node]));
+  const byId = state.visibleNodeById;
   const alpha = state.alpha;
   for (const edge of state.edges) {
     const a = byId.get(edge.source), b = byId.get(edge.target); if (!a || !b) continue;
@@ -218,7 +329,7 @@ function tick() {
 }
 
 function updatePositions() {
-  const byId = new Map(state.nodes.map(node => [node.id, node]));
+  const byId = state.visibleNodeById;
   for (const line of edgeLayer.children) {
     const a = byId.get(line.dataset.source), b = byId.get(line.dataset.target); if (!a || !b) continue;
     line.setAttribute("x1", a.x); line.setAttribute("y1", a.y); line.setAttribute("x2", b.x); line.setAttribute("y2", b.y);
@@ -254,11 +365,20 @@ function bindNode(group, node) {
 
 function bindEvents() {
   search.addEventListener("input", applySearch);
+  search.addEventListener("keydown", event => {
+    if (event.key !== "Enter") return;
+    const match = bestSearchMatch(search.value);
+    if (match) { event.preventDefault(); focusNode(match.id); }
+  });
   document.addEventListener("keydown", event => {
     if (event.key === "/" && document.activeElement !== search) { event.preventDefault(); search.focus(); }
     if (event.key === "Escape") { closeDetail(); closeChangeReport(); }
   });
   document.querySelector("#fit").addEventListener("click", fitGraph);
+  document.querySelector("#overview").addEventListener("click", showOverview);
+  document.querySelector("#focus-neighborhood").addEventListener("click", () => {
+    if (state.selected) showFocusedWindow(state.selected);
+  });
   document.querySelector("#close-detail").addEventListener("click", closeDetail);
   document.querySelector("#report-toggle").addEventListener("click", openChangeReport);
   document.querySelector("#close-report").addEventListener("click", closeChangeReport);
@@ -283,15 +403,31 @@ function bindEvents() {
 function applySearch() {
   const query = search.value.trim().toLowerCase();
   for (const group of nodeLayer.children) {
-    const node = state.nodes.find(item => item.id === group.dataset.id);
+    const node = state.visibleNodeById.get(group.dataset.id);
     const haystack = `${node.id} ${node.label} ${node.path || ""} ${node.kind}`.toLowerCase();
     group.classList.toggle("dim", Boolean(query) && !haystack.includes(query));
     const text = group.querySelector("text"); if (query && haystack.includes(query)) text.hidden = false;
   }
 }
 
+function bestSearchMatch(value) {
+  const query = value.trim().toLowerCase();
+  if (!query) return null;
+  let partial = null;
+  for (const entry of state.searchIndex) {
+    const node = entry.node;
+    if (
+      node.id.toLowerCase() === query
+      || node.label.toLowerCase() === query
+      || (node.path || "").toLowerCase() === query
+    ) return node;
+    if (!partial && entry.text.includes(query)) partial = node;
+  }
+  return partial;
+}
+
 function selectNode(id) {
-  const node = state.nodes.find(item => item.id === id); if (!node) return;
+  const node = state.visibleNodeById.get(id); if (!node) return;
   state.selected = id;
   for (const group of nodeLayer.children) group.classList.toggle("selected", group.dataset.id === id);
   for (const line of edgeLayer.children) line.classList.toggle("active", line.dataset.source === id || line.dataset.target === id);
@@ -301,14 +437,16 @@ function selectNode(id) {
   const metadata = { ...(node.path ? { path: node.path } : {}), ...node.metadata };
   document.querySelector("#detail-meta").innerHTML = Object.entries(metadata).map(([key, value]) => `<div class="meta-row"><span>${escapeHTML(key.replaceAll("_", " "))}</span><span>${escapeHTML(typeof value === "object" ? JSON.stringify(value) : String(value))}</span></div>`).join("");
   renderEvidencePaths(node);
-  const connected = state.data.edges.filter(edge => edge.source === id || edge.target === id);
-  document.querySelector("#detail-links").innerHTML = connected.length ? connected.map(edge => {
+  const connected = state.edgeByNode.get(id) || [];
+  const shownRelationships = connected.slice(0, renderLimits.relationships);
+  const omitted = connected.length - shownRelationships.length;
+  document.querySelector("#detail-links").innerHTML = connected.length ? shownRelationships.map(edge => {
     const outgoing = edge.source === id, otherId = outgoing ? edge.target : edge.source;
-    const other = state.data.nodes.find(item => item.id === otherId);
+    const other = state.nodeById.get(otherId);
     const relation = outgoing ? edge.relation : (edge.inverse || edge.relation);
     const detail = [edge.category, edge.evidence].filter(Boolean).join(" · ");
     return `<button class="relationship" data-node="${escapeAttr(otherId)}"><b>${outgoing ? "→" : "←"} ${escapeHTML(relation)}</b> ${escapeHTML(other?.label || otherId)}<small>${escapeHTML(detail)}</small></button>`;
-  }).join("") : "<p class='hint'>No relationships yet.</p>";
+  }).join("") + (omitted > 0 ? `<p class="path-note">${omitted} additional relationships are omitted from this bounded detail view.</p>` : "") : "<p class='hint'>No relationships yet.</p>";
   for (const button of document.querySelectorAll(".relationship")) bindFocusButton(button);
   document.querySelector("#detail").classList.add("open");
 }
@@ -375,9 +513,30 @@ function buildPathAdjacency() {
 
 function focusNode(id) {
   closeChangeReport();
-  const node = state.nodes.find(item => item.id === id);
-  if (!node) { search.value = id; applySearch(); return; }
+  const globalNode = state.nodeById.get(id); if (!globalNode) return;
+  if (!state.enabled.has(globalNode.kind)) {
+    state.enabled.add(globalNode.kind); syncFilter(globalNode.kind);
+  }
+  const node = state.visibleNodeById.get(id);
+  if (!node) { showFocusedWindow(id); return; }
   state.scale = Math.max(state.scale, 1.2); state.tx = stage.clientWidth * .54 - node.x * state.scale; state.ty = stage.clientHeight * .5 - node.y * state.scale; transform(); selectNode(id);
+}
+
+function showFocusedWindow(id) {
+  if (!state.nodeById.has(id)) return;
+  state.viewMode = "focus"; state.focus = id; rebuild(); fitGraph();
+  const node = state.visibleNodeById.get(id);
+  if (node) selectNode(id);
+}
+
+function showOverview() {
+  closeDetail(); search.value = ""; state.viewMode = "overview"; state.focus = null; rebuild(); fitGraph();
+}
+
+function syncFilter(kind) {
+  const label = [...document.querySelectorAll(".filter")].find(item => item.dataset.kind === kind);
+  if (!label) return;
+  label.querySelector("input").checked = true; label.classList.remove("off");
 }
 function closeDetail() { document.querySelector("#detail").classList.remove("open"); state.selected = null; for (const item of document.querySelectorAll(".selected,.active")) item.classList.remove("selected", "active"); }
 function openChangeReport() { closeDetail(); document.querySelector("#change-report").classList.add("open"); }
@@ -393,7 +552,7 @@ function fitGraph() {
 }
 function transform() { viewport.setAttribute("transform", `translate(${state.tx} ${state.ty}) scale(${state.scale})`); }
 function graphPoint(event) { const rect = svg.getBoundingClientRect(); return { x: (event.clientX - rect.left - state.tx) / state.scale, y: (event.clientY - rect.top - state.ty) / state.scale }; }
-function degree(id) { return state.edges.reduce((sum, edge) => sum + Number(edge.source === id || edge.target === id), 0); }
+function degree(id) { return state.degreeById.get(id) || 0; }
 function radius(node) { return 5.2 + Math.min(8, Math.sqrt(degree(node.id)) * 1.55) + (node.kind === "requirement" || node.kind === "decision" ? 2 : 0); }
 function color(kind) { return colors[kind] || "#a3a3a3"; }
 function seeded(value) { let hash = 2166136261; for (const char of value) { hash ^= char.charCodeAt(0); hash = Math.imul(hash, 16777619); } return (hash >>> 0) / 4294967295; }
@@ -402,3 +561,5 @@ function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
 function svgElement(name) { return document.createElementNS("http://www.w3.org/2000/svg", name); }
 function escapeHTML(value) { const span = document.createElement("span"); span.textContent = value; return span.innerHTML; }
 function escapeAttr(value) { return escapeHTML(value).replaceAll('"', "&quot;"); }
+function edgeKey(edge) { return `${edge.source}\u0000${edge.target}\u0000${edge.relation}\u0000${edge.evidence}`; }
+function compareEdges(a, b) { return edgeKey(a).localeCompare(edgeKey(b)); }

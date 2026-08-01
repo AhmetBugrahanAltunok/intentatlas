@@ -10,8 +10,8 @@ source_path: "src/intentatlas/adapters/javascript.py"
 
 ## Metadata
 
-- **End Line:** <code>129</code>
-- **Line:** <code>57</code>
+- **End Line:** <code>123</code>
+- **Line:** <code>64</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

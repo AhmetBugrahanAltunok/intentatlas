@@ -13,6 +13,6 @@ source_path: "docs/open-evidence.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>3349</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_

@@ -13,34 +13,34 @@ generated: true
 
 - **commit:** 25
 - **config:** 7
-- **decision:** 23
-- **document:** 23
-- **evidence:** 23
-- **file:** 37
-- **issue:** 21
+- **decision:** 24
+- **document:** 24
+- **evidence:** 24
+- **file:** 38
+- **issue:** 22
 - **memory:** 5
-- **requirement:** 23
-- **review:** 23
-- **session:** 5
-- **symbol:** 725
-- **test:** 62
-- **relationships:** 2335
+- **requirement:** 24
+- **review:** 24
+- **session:** 6
+- **symbol:** 764
+- **test:** 63
+- **relationships:** 2450
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 145 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 153 relationships
 - [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 95 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 90 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 74 relationships
-- [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] — 62 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 55 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 77 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 62 relationships
+- [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] — 61 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 54 relationships
 - [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 54 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 49 relationships
-- [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] — 45 relationships
-- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 45 relationships
+- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 44 relationships
 - [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] — 41 relationships
 - [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] — 41 relationships
+- [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] — 41 relationships
 
 ## Workflow
 

@@ -20,11 +20,12 @@
     </div>
     <label class="search">
       <span>⌕</span>
-      <input id="search" type="search" placeholder="Find a requirement, file, symbol…" autocomplete="off">
+      <input id="search" type="search" placeholder="Find globally and press Enter…" autocomplete="off">
       <kbd>/</kbd>
     </label>
     <div class="actions">
       <button id="report-toggle" class="ghost report-toggle" type="button" hidden>Change report</button>
+      <button id="overview" class="ghost" type="button" disabled>Overview</button>
       <button id="fit" class="ghost" type="button">Fit graph</button>
     </div>
   </header>
@@ -34,6 +35,7 @@
       <section>
         <p class="eyebrow">Graph</p>
         <div id="stats" class="stats" aria-live="polite"></div>
+        <p id="window-status" class="window-status" aria-live="polite"></p>
       </section>
       <section>
         <p class="eyebrow">Layers</p>
@@ -67,6 +69,7 @@
       <p id="detail-kind" class="eyebrow"></p>
       <h2 id="detail-title">Select a node</h2>
       <code id="detail-id"></code>
+      <button id="focus-neighborhood" class="ghost detail-action" type="button">Focus neighborhood</button>
       <div id="detail-meta" class="meta"></div>
       <h3>Evidence paths</h3>
       <p class="path-note">Shortest bounded structural paths; they explain connectivity, not certainty.</p>

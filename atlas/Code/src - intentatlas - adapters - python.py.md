@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/python.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12082</code>
+- **Size Bytes:** <code>11844</code>
 
 ## Outgoing relationships
 
@@ -37,6 +37,7 @@ source_path: "src/intentatlas/adapters/python.py"
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/canonical_graph_fragment - src - intentatlas - adapters - base.py|canonical_graph_fragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 

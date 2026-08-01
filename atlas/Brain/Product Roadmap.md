@@ -334,7 +334,7 @@ Status: complete (2026-08-01)
 
 ## Phase 10 — Scale and open evidence ecosystem
 
-Status: active (Phase 10A started 2026-08-01)
+Status: active (Phases 10A–10C complete; Phase 10D planned)
 
 - Add incremental scanning and atomic derived indexes without weakening Markdown portability.
 - Import open evidence formats such as SCIP, SARIF, and per-test execution maps.
@@ -361,8 +361,8 @@ Status: complete (2026-08-01)
   changed language inputs, reject unsafe or corrupt derived state, and atomically preserve the last
   complete graph/cache artifact without storing source content.
 
-Planned later slices remain Phase 10B open evidence imports, Phase 10C adapter conformance and
-large-graph viewer work, and Phase 10D provenance, property/fuzz, browser, and release hardening.
+Phase 10A established the incremental foundation. The sections below record completed Phase 10B
+and 10C delivery; Phase 10D provenance, property/fuzz, browser, and release hardening remains.
 
 ### Phase 10B — Open evidence imports
 
@@ -382,6 +382,26 @@ Status: complete (2026-08-01)
 - Outcome: explicit SCIP protobuf-JSON and SARIF 2.1.0 reports become bounded source-free file
   observations, while commit-keyed execution maps add runtime test relationships only when both
   commit and every mapped worktree artifact align exactly with HEAD.
+
+### Phase 10C — Adapter conformance and large-graph viewer
+
+Status: complete (2026-08-01)
+
+- Publish one executable conformance contract for safe deterministic language-adapter definitions
+  and fragments, shared by fresh and cached scan paths.
+- Render deterministic bounded overview and focus windows instead of materializing the complete
+  graph as SVG, while retaining global search and linked navigation.
+- Precompute browser indexes and bound relationship details so interaction cost follows the visible
+  subgraph rather than total repository size.
+- Requirement: [[Requirements/REQ-024 - Keep adapters trustworthy and large graphs responsive]]
+- Decision: [[Decisions/ADR-024 - Validate adapters and render bounded graph windows]]
+- Delivery issue: [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows]]
+- Kickoff: [[Sessions/2026-08-01 - Phase 10C kickoff]]
+- Evidence: [[Evidence/EVD-024 - Phase 10C adapter and viewer verification]]
+- Review: [[Reviews/Phase 10C Adapter and Large Graph Review]]
+- Outcome: built-in adapters now pass one executable fresh/cache conformance boundary, while the
+  local viewer navigates complete large graphs through indexed deterministic 240-node/900-edge
+  overview and focus windows with explicit omission and global hidden-node access.
 
 ## Completion rule
 

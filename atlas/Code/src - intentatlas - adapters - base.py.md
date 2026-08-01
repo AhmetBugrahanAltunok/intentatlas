@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/base.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1264</code>
+- **Size Bytes:** <code>2287</code>
 
 ## Outgoing relationships
 
@@ -20,6 +20,7 @@ source_path: "src/intentatlas/adapters/base.py"
 - <code>defines</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/LanguageAdapter - src - intentatlas - adapters - base.py|LanguageAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/LanguageAdapter.scan - src - intentatlas - adapters - base.py|LanguageAdapter.scan]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/canonical_graph_fragment - src - intentatlas - adapters - base.py|canonical_graph_fragment]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
@@ -30,6 +31,7 @@ source_path: "src/intentatlas/adapters/base.py"
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - adapters - conformance.py|src/intentatlas/adapters/conformance.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - javascript.py|src/intentatlas/adapters/javascript.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] _(structure; evidence: python-ast)_

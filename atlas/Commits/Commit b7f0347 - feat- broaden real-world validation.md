@@ -23,4 +23,3 @@ generated: true
 - <code>changes</code> → [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/test_go_adapter_links_only_unique_exported_symbol_references - tests - test_adapters.py|test_go_adapter_links_only_unique_exported_symbol_references]] _(history; evidence: git-diff-hunk)_

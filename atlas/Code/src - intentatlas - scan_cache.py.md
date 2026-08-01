@@ -11,7 +11,7 @@ source_path: "src/intentatlas/scan_cache.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9633</code>
+- **Size Bytes:** <code>8393</code>
 
 ## Outgoing relationships
 
@@ -28,10 +28,12 @@ source_path: "src/intentatlas/scan_cache.py"
 - <code>defines</code> → [[Symbols/_strict_node - src - intentatlas - scan_cache.py|_strict_node]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_unique_object - src - intentatlas - scan_cache.py|_unique_object]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - adapters - conformance.py|src/intentatlas/adapters/conformance.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - storage.py|src/intentatlas/storage.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/LanguageAdapter - src - intentatlas - adapters - base.py|LanguageAdapter]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/validate_adapter_fragment - src - intentatlas - adapters - conformance.py|validate_adapter_fragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/atomic_write_text - src - intentatlas - storage.py|atomic_write_text]] _(structure; evidence: python-symbol-reference)_

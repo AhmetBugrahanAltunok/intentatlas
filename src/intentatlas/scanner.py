@@ -9,7 +9,12 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from types import MappingProxyType
 
-from .adapters import BUILTIN_ADAPTERS, AdapterContext
+from .adapters import (
+    BUILTIN_ADAPTERS,
+    AdapterContext,
+    validate_adapter_definition,
+    validate_adapter_fragment,
+)
 from .config import ProjectConfig
 from .delivery import import_delivery
 from .evidence import import_evidence
@@ -227,6 +232,8 @@ class RepositoryScanner:
             max_parse_bytes=MAX_PARSE_BYTES,
         )
         for adapter in sorted(BUILTIN_ADAPTERS, key=lambda item: item.name):
+            validate_adapter_definition(adapter)
+            cache_miss = False
             if cache is None:
                 fragment = adapter.scan(context)
             else:
@@ -240,6 +247,7 @@ class RepositoryScanner:
                 if fragment is None:
                     fragment = adapter.scan(context)
                     self.rebuilt_adapters.append(adapter.name)
+                    cache_miss = True
                 else:
                     self.reused_adapters.append(adapter.name)
 
@@ -247,12 +255,13 @@ class RepositoryScanner:
                     raise ValueError(
                         f"{adapter.name} inputs changed during scan; retry with a stable worktree"
                     )
-                if cached.fragment is None and not cache.store(
-                    adapter,
-                    fingerprint,
-                    fragment,
-                ):
-                    self.skipped_cache_writes.append(adapter.name)
+            validate_adapter_fragment(adapter, fragment, frozenset(self.graph.nodes))
+            if (
+                cache is not None
+                and cache_miss
+                and not cache.store(adapter, fingerprint, fragment)
+            ):
+                self.skipped_cache_writes.append(adapter.name)
             for node in sorted(fragment.nodes, key=lambda item: item.id):
                 self.graph.add_node(node)
             for edge in sorted(

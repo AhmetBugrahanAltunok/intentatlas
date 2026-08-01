@@ -75,4 +75,3 @@ generated: true
 - <code>modifies</code> → [[Symbols/test_stale_outcomes_never_create_prediction_comparison_claims - tests - test_test_outcomes.py|test_stale_outcomes_never_create_prediction_comparison_claims]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/valid_document - tests - test_test_outcomes.py|valid_document]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/write_outcomes - tests - test_test_outcomes.py|write_outcomes]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(history; evidence: git-diff-hunk)_

@@ -11,17 +11,24 @@ source_path: "src/intentatlas/adapters/__init__.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>451</code>
+- **Size Bytes:** <code>914</code>
 
 ## Outgoing relationships
 
 - <code>imports</code> → [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - adapters - conformance.py|src/intentatlas/adapters/conformance.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - javascript.py|src/intentatlas/adapters/javascript.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/LanguageAdapter - src - intentatlas - adapters - base.py|LanguageAdapter]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/canonical_graph_fragment - src - intentatlas - adapters - base.py|canonical_graph_fragment]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/AdapterConformanceError - src - intentatlas - adapters - conformance.py|AdapterConformanceError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/AdapterConformanceReport - src - intentatlas - adapters - conformance.py|AdapterConformanceReport]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/assert_adapter_conforms - src - intentatlas - adapters - conformance.py|assert_adapter_conforms]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/validate_adapter_definition - src - intentatlas - adapters - conformance.py|validate_adapter_definition]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/validate_adapter_fragment - src - intentatlas - adapters - conformance.py|validate_adapter_fragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/GoAdapter - src - intentatlas - adapters - go.py|GoAdapter]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/JavaScriptAdapter - src - intentatlas - adapters - javascript.py|JavaScriptAdapter]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(structure; evidence: python-symbol-reference)_
@@ -33,4 +40,5 @@ source_path: "src/intentatlas/adapters/__init__.py"
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_adapter_conformance.py|tests/test_adapter_conformance.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-ast)_

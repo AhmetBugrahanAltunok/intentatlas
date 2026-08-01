@@ -10,11 +10,10 @@ source_path: "tests/test_adapters.py"
 
 ## Metadata
 
-- **End Line:** <code>162</code>
-- **Line:** <code>89</code>
+- **End Line:** <code>165</code>
+- **Line:** <code>92</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-diff-hunk)_

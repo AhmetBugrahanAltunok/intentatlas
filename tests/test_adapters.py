@@ -42,6 +42,9 @@ def test_scanner_rejects_invalid_adapter_fragments(tmp_path: Path, monkeypatch) 
     class InvalidAdapter:
         name = "invalid"
         suffixes = frozenset({".md"})
+        cache_input_suffixes = suffixes
+        cache_version = 1
+        evidence_kinds = frozenset({"invalid"})
 
         def scan(self, _context: AdapterContext) -> GraphFragment:
             return GraphFragment(
@@ -49,7 +52,7 @@ def test_scanner_rejects_invalid_adapter_fragments(tmp_path: Path, monkeypatch) 
             )
 
     monkeypatch.setattr(scanner_module, "BUILTIN_ADAPTERS", (InvalidAdapter(),))
-    with pytest.raises(ValueError, match="emitted invalid edge"):
+    with pytest.raises(ValueError, match="unknown endpoint"):
         scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
 
 

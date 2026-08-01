@@ -32,12 +32,30 @@ def test_viewer_assets_are_packaged() -> None:
     assert "No bounded evidence path found." in app
     assert "function bindFocusButton(button)" in app
     assert "state.pathAdjacency = buildPathAdjacency();" in app
+    assert (
+        "const renderLimits = { nodes: 240, edges: 900, focusDepth: 2, relationships: 80 };"
+        in app
+    )
+    assert "function buildGraphIndexes()" in app
+    assert "function overviewNodes()" in app
+    assert "function focusedNodes()" in app
+    assert "function windowEdges(ids)" in app
+    assert "function compareWindowEdges(a, b)" in app
+    assert "function bestSearchMatch(value)" in app
+    assert "state.edgeByNode.get(id) || []" in app
+    assert "state.visibleNodeById.get(group.dataset.id)" in app
+    assert "state.data.edges.filter" not in app
+    assert "state.nodes.find" not in app
+    assert "state.edges.reduce" not in app
     index = web.joinpath("index.html").read_text(encoding="utf-8")
     assert 'id="detail-paths"' in index
     assert 'id="report-toggle"' in index
     assert 'id="change-report"' in index
     assert 'id="report-outcomes"' in index
     assert 'id="report-title"' in index
+    assert 'id="overview"' in index
+    assert 'id="window-status"' in index
+    assert 'id="focus-neighborhood"' in index
 
 
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:

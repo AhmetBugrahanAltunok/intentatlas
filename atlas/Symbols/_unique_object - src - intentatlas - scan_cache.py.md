@@ -10,11 +10,10 @@ source_path: "src/intentatlas/scan_cache.py"
 
 ## Metadata
 
-- **End Line:** <code>261</code>
-- **Line:** <code>255</code>
+- **End Line:** <code>238</code>
+- **Line:** <code>232</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-diff-hunk)_

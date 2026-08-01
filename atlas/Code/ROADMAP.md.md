@@ -13,6 +13,6 @@ source_path: "ROADMAP.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1423</code>
 
-## Incoming relationships
+## Graph health
 
-- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- Orphaned generated node
