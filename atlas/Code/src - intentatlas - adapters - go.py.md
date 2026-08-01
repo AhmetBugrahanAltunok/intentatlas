@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/go.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>13463</code>
+- **Size Bytes:** <code>16094</code>
 
 ## Outgoing relationships
 
@@ -25,6 +25,8 @@ source_path: "src/intentatlas/adapters/go.py"
 - <code>defines</code> → [[Symbols/_mask_comments_and_literals - src - intentatlas - adapters - go.py|_mask_comments_and_literals]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_module_roots - src - intentatlas - adapters - go.py|_module_roots]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_files - src - intentatlas - adapters - go.py|_package_files]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_package_name - src - intentatlas - adapters - go.py|_package_name]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_package_symbol_test_edges - src - intentatlas - adapters - go.py|_package_symbol_test_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_local_import - src - intentatlas - adapters - go.py|_resolve_local_import]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_symbols - src - intentatlas - adapters - go.py|_symbols]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_valid_import_path - src - intentatlas - adapters - go.py|_valid_import_path]] _(structure; evidence: python-ast)_
@@ -35,4 +37,5 @@ source_path: "src/intentatlas/adapters/go.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_

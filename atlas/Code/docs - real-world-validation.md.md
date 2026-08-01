@@ -13,6 +13,6 @@ source_path: "docs/real-world-validation.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>3932</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_

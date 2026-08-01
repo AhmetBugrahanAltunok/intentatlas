@@ -29,6 +29,13 @@ resolution boundaries, including nested modules. A local package import projects
 non-test Go files; external and unresolved imports are omitted rather than guessed. Import-like
 text inside comments or literals is never treated as a relationship.
 
+For same-directory tests, the adapter also records `go-symbol-reference` evidence when an
+identifier names an exported declaration owned by exactly one production file in the compatible
+package. Conventional external `<package>_test` files are compatible with `<package>`. Duplicate
+declaration names across files, unexported names, comments, literals, missing packages, and
+oversized files create no such edge. Filename convention remains separate weak evidence; lexical
+reference is advisory structural evidence rather than call-resolution or execution proof.
+
 The Git adapter reads commit metadata, changed paths, and a bounded recent window of zero-context
 diff hunks with fixed read-only commands. Changed new-side lines project to the most-specific
 Python symbol only when the current file matches that commit's bounded raw Git blob after

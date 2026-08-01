@@ -37,6 +37,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 - Offline real-world recommendation evaluation for clean, pinned, license-reviewed public
   checkouts, with strict provenance validation, nine reviewed Python/JavaScript/Go cases, and an
   ephemeral-only generated-output policy.
+- Conservative Go same-package test links based on referenced exported declarations uniquely owned
+  by one production file, with filename convention retained as weak fallback evidence.
 
 ### Changed
 

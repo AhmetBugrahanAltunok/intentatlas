@@ -42,6 +42,8 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 - Compare low, medium, and high confidence across a bounded corpus of labeled local graphs.
 - Re-run the unchanged recommendation query against clean, pinned, license-reviewed public
   checkouts without bundling or executing third-party code.
+- Link Go tests to uniquely owned exported declarations they actually reference, while keeping
+  ambiguous and filename-only matches conservative.
 - Reuse a lazy deterministic adjacency index for impact and recommendation queries, with a bounded
   synthetic scale benchmark for contributors.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
@@ -195,7 +197,9 @@ IntentAtlas is an early working prototype. Python, TypeScript/JavaScript, and Go
 language-neutral built-in adapter contract. The TypeScript/JavaScript adapter covers `.ts`, `.tsx`,
 `.js`, and `.jsx` files with conservative symbol, local-import, re-export, and test relationships.
 The Go adapter covers `.go` files, `go.mod` module boundaries, named types, functions, methods,
-module-local package imports, and tests. Neither adapter runs a language runtime or project code.
+module-local package imports, and tests. Same-directory tests gain structural evidence only for
+referenced exported declarations owned by one production file; ambiguous names remain unlinked and
+filename matching stays a weak fallback. Neither adapter runs a language runtime or project code.
 
 Configured Cobertura and JUnit reports now create generated coverage and test-result evidence in
 the graph. Graph diff schema 1 provides stable node and relationship changes for CI without a

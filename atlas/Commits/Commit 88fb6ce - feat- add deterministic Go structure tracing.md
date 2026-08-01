@@ -34,20 +34,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - fixtures - go_project - third_party - external.go|tests/fixtures/go_project/third_party/external.go]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/GoAdapter.scan - src - intentatlas - adapters - go.py|GoAdapter.scan]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_collect_import_declaration - src - intentatlas - adapters - go.py|_collect_import_declaration]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - go.py|_filename_test_edges]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_go_tokens - src - intentatlas - adapters - go.py|_go_tokens]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_import_paths - src - intentatlas - adapters - go.py|_import_paths]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_line_number - src - intentatlas - adapters - go.py|_line_number]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_mask_comments_and_literals - src - intentatlas - adapters - go.py|_mask_comments_and_literals]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_module_roots - src - intentatlas - adapters - go.py|_module_roots]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_package_files - src - intentatlas - adapters - go.py|_package_files]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_resolve_local_import - src - intentatlas - adapters - go.py|_resolve_local_import]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_symbols - src - intentatlas - adapters - go.py|_symbols]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_valid_import_path - src - intentatlas - adapters - go.py|_valid_import_path]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_adapter_contract_is_offline_bounded_and_immutable - tests - test_adapters.py|test_adapter_contract_is_offline_bounded_and_immutable]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_go_adapter_skips_oversized_files_and_unclosed_import_blocks - tests - test_adapters.py|test_go_adapter_skips_oversized_files_and_unclosed_import_blocks]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

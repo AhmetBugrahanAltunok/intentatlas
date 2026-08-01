@@ -23,6 +23,7 @@ _BLOCK_TYPE_DECLARATION = re.compile(
     rf"(?m)^[ \t]*({_IDENTIFIER})(?:[ \t]*\[[^\]\n]*\])?[ \t]+"
 )
 _MODULE_DECLARATION = re.compile(r"(?m)^[ \t]*module[ \t]+([^ \t\r\n]+)")
+_PACKAGE_DECLARATION = re.compile(rf"(?m)^[ \t]*package[ \t]+({_IDENTIFIER})")
 
 
 class GoAdapter:
@@ -34,6 +35,12 @@ class GoAdapter:
         package_files = _package_files(context)
         nodes: list[Node] = []
         edges: list[Edge] = []
+        package_declarations: dict[
+            tuple[str, str], dict[str, set[str]]
+        ] = defaultdict(lambda: defaultdict(set))
+        package_test_identifiers: list[
+            tuple[str, str, str, frozenset[str]]
+        ] = []
 
         for relative in sorted(context.files):
             if PurePosixPath(relative).suffix.casefold() not in self.suffixes:
@@ -51,6 +58,26 @@ class GoAdapter:
                 for node in file_symbols
             )
 
+            package = _package_name(symbol_source)
+            if package is not None:
+                directory = PurePosixPath(relative).parent.as_posix()
+                directory = "" if directory == "." else directory
+                if context.kinds[relative] == "test":
+                    identifiers = frozenset(
+                        value
+                        for kind, value in _go_tokens(source)
+                        if kind == "identifier"
+                    )
+                    package_test_identifiers.append(
+                        (relative, directory, package, identifiers)
+                    )
+                else:
+                    declarations = package_declarations[(directory, package)]
+                    for node in file_symbols:
+                        reference = node.label.rsplit(".", 1)[-1]
+                        if reference[:1].isupper():
+                            declarations[reference].add(file_node)
+
             relation = "tests" if context.kinds[relative] == "test" else "imports"
             for import_path in _import_paths(source):
                 for target in _resolve_local_import(
@@ -61,6 +88,12 @@ class GoAdapter:
                     if target != file_node:
                         edges.append(Edge(file_node, target, relation, "go-structural"))
 
+        edges.extend(
+            _package_symbol_test_edges(
+                package_declarations,
+                package_test_identifiers,
+            )
+        )
         edges.extend(_filename_test_edges(context))
         return GraphFragment(
             nodes=tuple(sorted(nodes, key=lambda node: node.id)),
@@ -109,6 +142,41 @@ def _symbols(relative: str, source: str) -> list[Node]:
 
 def _line_number(source: str, offset: int) -> int:
     return source.count("\n", 0, offset) + 1
+
+
+def _package_name(source: str) -> str | None:
+    match = _PACKAGE_DECLARATION.search(source)
+    return match.group(1) if match is not None else None
+
+
+def _package_symbol_test_edges(
+    declarations: Mapping[tuple[str, str], Mapping[str, set[str]]],
+    tests: Iterable[tuple[str, str, str, frozenset[str]]],
+) -> list[Edge]:
+    edges: list[Edge] = []
+    for relative, directory, package, identifiers in sorted(tests):
+        package_key = (directory, package)
+        package_symbols = declarations.get(package_key)
+        if package_symbols is None and package.endswith("_test"):
+            package_symbols = declarations.get((directory, package.removesuffix("_test")))
+        if package_symbols is None:
+            continue
+
+        targets = {
+            next(iter(source_files))
+            for reference, source_files in package_symbols.items()
+            if reference in identifiers and len(source_files) == 1
+        }
+        edges.extend(
+            Edge(
+                f"file:{relative}",
+                target,
+                "tests",
+                "go-symbol-reference",
+            )
+            for target in sorted(targets)
+        )
+    return edges
 
 
 def _module_roots(context: AdapterContext) -> tuple[tuple[str, str], ...]:

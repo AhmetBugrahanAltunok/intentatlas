@@ -17,3 +17,4 @@ source_path: "src/intentatlas/scanner.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-diff-hunk)_

@@ -23,7 +23,8 @@
         "tests/test_evaluation.py",
         "tests/test_real_world.py",
         "tests/test_recommendations.py",
-        "tests/test_scale.py"
+        "tests/test_scale.py",
+        "tests/test_scanner.py"
       ]
     }
   ]

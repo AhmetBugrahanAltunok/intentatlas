@@ -11,7 +11,7 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>17897</code>
+- **Size Bytes:** <code>18474</code>
 
 ## Outgoing relationships
 
@@ -30,6 +30,7 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_scanner_recognizes_root_test_javascript_file - tests - test_scanner.py|test_scanner_recognizes_root_test_javascript_file]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: python-ast)_
@@ -39,9 +40,11 @@ source_path: "tests/test_scanner.py"
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

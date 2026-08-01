@@ -22,6 +22,9 @@ reproduction steps, impact, and any suggested mitigation.
   names, dynamic imports, and paths escaping the scanned repository are not followed.
 - Go resolution accepts only imports matching a discovered local `go.mod` module path, prefers the
   longest nested-module match, and does not invoke the Go toolchain or resolve external modules.
+  Same-directory test links require a compatible package plus an exported identifier uniquely
+  owned by one production file; ambiguous names, unexported declarations, comments, and literals
+  do not create symbol-reference evidence.
 - Coverage and test reports are opt-in, project-local XML inputs. Import rejects symbolic links,
   paths outside the project or inside `atlas/Private/`, DTD/entity declarations, oversized files,
   excessive records, malformed XML, and ambiguous file mappings.

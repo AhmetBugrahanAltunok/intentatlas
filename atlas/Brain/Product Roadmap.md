@@ -224,11 +224,35 @@ Status: complete (2026-08-01)
   scanner-to-recommendation pipeline through nine reviewed commit, file, and symbol cases; all
   checkout and generated data remains approval-gated, ignored, and ephemeral.
 
-## Phase 7 — Open-source release readiness
+## Phase 7A — Evidence-derived Go test links
+
+Status: complete (2026-08-01)
+
+- Replace a verified Go filename-only gap with conservative same-package symbol-reference evidence.
+- Reject ambiguous, unexported, comment-only, and literal-only matches rather than widening package
+  relationships.
+- Requirement: [[Requirements/REQ-016 - Link Go tests through unique symbol references]]
+- Decision: [[Decisions/ADR-016 - Prefer unique Go symbol evidence over filename convention]]
+- Delivery issue: [[Issues/ISSUE-014 - Implement conservative Go symbol test links]]
+- Evidence: [[Evidence/EVD-016 - Phase 7A Go symbol-reference verification]]
+- Review: [[Reviews/Phase 7A Go Symbol-Reference Review]]
+- Outcome: same-directory Go tests now gain medium-confidence structural evidence only when they
+  reference exported declarations uniquely owned by one compatible production file; the pinned
+  nine-case benchmark reaches 100% medium precision and recall without changing scores or labels.
+
+## Phase 7B — Broader open-source validation
 
 Status: planned
 
-- Expand public benchmark breadth and add cross-platform end-to-end tests.
+- Expand public benchmarks to larger and more diverse projects with multiple relevant tests,
+  source-only commits, indirect dependencies, monorepo layouts, and explicit negative cases.
+- Preserve license, provenance, offline evaluation, and independently reviewed label boundaries.
+
+## Phase 7C — Open-source release readiness
+
+Status: planned
+
+- Add cross-platform end-to-end tests.
 - Verify packaging, release documentation, attribution, and reproducible release checks.
 
 ## Completion rule

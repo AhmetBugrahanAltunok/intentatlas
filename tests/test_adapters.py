@@ -84,3 +84,49 @@ def test_go_adapter_skips_oversized_files_and_unclosed_import_blocks(tmp_path: P
     assert "symbol:internal/value.go::Value" in {node.id for node in fragment.nodes}
     assert not any(node.path == "large.go" for node in fragment.nodes)
     assert not any(edge.source == "file:broken.go" for edge in fragment.edges)
+
+
+def test_go_adapter_links_only_unique_exported_symbol_references(tmp_path: Path) -> None:
+    sources = {
+        "alpha.go": (
+            "package sample\n\n"
+            "func Alpha() int { return 1 }\n"
+            "func Shared() int { return 2 }\n"
+        ),
+        "beta.go": (
+            "package sample\n\n"
+            "type Beta struct{}\n"
+            "func (Beta) Shared() int { return 3 }\n"
+        ),
+        "focused_test.go": (
+            "package sample\n\n"
+            "func TestFocused() { _ = Alpha(); _ = Shared() }\n"
+        ),
+        "ambiguous_test.go": (
+            "package sample_test\n\n"
+            "func TestAmbiguous() { _ = Shared; _ = \"Alpha\" }\n"
+        ),
+    }
+    files = {}
+    kinds = {}
+    for relative, source in sources.items():
+        path = tmp_path / relative
+        path.write_text(source, encoding="utf-8")
+        files[relative] = path
+        kinds[relative] = "test" if relative.endswith("_test.go") else "file"
+    context = AdapterContext(
+        files=MappingProxyType(files),
+        kinds=MappingProxyType(kinds),
+        max_parse_bytes=1_000,
+    )
+
+    fragment = GoAdapter().scan(context)
+    symbol_edges = {
+        (edge.source, edge.target)
+        for edge in fragment.edges
+        if edge.evidence == "go-symbol-reference"
+    }
+
+    assert ("file:focused_test.go", "file:alpha.go") in symbol_edges
+    assert not any(source == "file:ambiguous_test.go" for source, _target in symbol_edges)
+    assert ("file:focused_test.go", "file:beta.go") not in symbol_edges

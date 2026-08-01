@@ -9,6 +9,7 @@ import pytest
 
 import intentatlas.scanner as scanner_module
 from intentatlas.config import ProjectConfig
+from intentatlas.recommendations import recommend_tests
 from intentatlas.scanner import scan_repository
 from intentatlas.vault import ProjectVault
 
@@ -225,6 +226,12 @@ def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
         "file:internal/math/add_test.go",
         "file:internal/math/add.go",
         "tests",
+        "go-symbol-reference",
+    ) in relationships
+    assert (
+        "file:internal/math/add_test.go",
+        "file:internal/math/add.go",
+        "tests",
         "filename-convention",
     ) in relationships
     assert not any(
@@ -243,6 +250,14 @@ def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
         and edge.target == "file:submodule/worker/worker.go"
         for edge in first.edges
     )
+    recommendations = recommend_tests(first, "file:internal/math/add.go")
+    add_test = next(
+        item
+        for item in recommendations.recommendations
+        if item.test.id == "file:internal/math/add_test.go"
+    )
+    assert (add_test.score, add_test.confidence) == (65, "medium")
+    assert "go-symbol-reference" in add_test.reasons[0].evidence
 
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
