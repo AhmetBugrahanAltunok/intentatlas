@@ -83,6 +83,7 @@ reproduction steps, impact, and any suggested mitigation.
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during
   cleanup, and temporary files are removed on success or failure.
 - The local viewer validates loopback-only binding for both project and demo entry points and uses
-  `127.0.0.1` by default.
+  `127.0.0.1` by default. Its server binding records the already validated numeric loopback address
+  directly and performs no reverse DNS lookup.
 
 Security reports are acknowledged in release notes unless the reporter requests anonymity.

@@ -10,11 +10,10 @@ source_path: "tests/test_viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>32</code>
-- **Line:** <code>10</code>
+- **End Line:** <code>33</code>
+- **Line:** <code>11</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-diff-hunk)_

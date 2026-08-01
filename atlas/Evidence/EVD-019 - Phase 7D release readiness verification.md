@@ -35,7 +35,7 @@ phase: 7D
 
 - `.venv\Scripts\python.exe -m pytest tests\test_e2e.py tests\test_release.py -q` — 3 passed.
 - `.venv\Scripts\python.exe -m pytest --cov=intentatlas --cov-report=term-missing
-  --cov-fail-under=80` — 160 passed; total branch-aware coverage 90.31%.
+  --cov-fail-under=80` — 161 passed; total branch-aware coverage 90.32%.
 - `.venv\Scripts\python.exe -m ruff check .` — passed.
 - `.venv\Scripts\python.exe -m bandit -q -r src` — passed.
 - `.venv\Scripts\python.exe -m pip check` — no broken requirements.
@@ -43,8 +43,8 @@ phase: 7D
   `intentatlas` distribution was skipped because it is absent from PyPI.
 - `node --check src/intentatlas/web/app.js` and `git diff --check` — passed.
 - Two final fixed-timestamp builds were byte-identical. Wheel SHA-256:
-  `5662bd344e7b82268517cc8943335f6fff84d460f15bdefaa27ab71b36daf40c`; source archive SHA-256:
-  `166272c915484ca6acde6e5b30983a02ddfa0b155c12a719a235ebd8ffbe8f94`. The verifier validated
+  `837834775f34ce4ffb68bf7b26f0f346b92e479464f376f2ae50cbea550e24e5`; source archive SHA-256:
+  `3207b43a51970e5a7f4912ea7b71a21ece26842a758d80c6fa907eb4f0d67bfb`. The verifier validated
   36 wheel files and 109 source files.
 - A fresh virtual environment installed the exact wheel with `--no-deps`, reported IntentAtlas
   0.1.0, and completed init, scan, zero-orphan status, and advisory test recommendation commands.
@@ -60,12 +60,14 @@ phase: 7D
 - Network-backed dependency audit: passed after explicit approval.
 - The first remote run (`30691033738`) passed security, reproducible package, Python
   3.11/3.12/3.13 full tests, and Linux/Windows E2E. Both macOS E2E cells timed out while polling a
-  preselected port without a positive server-readiness signal. A second run (`30691140214`) proved
-  that bypassing proxy variables alone did not resolve that platform race. The final regression
-  lets the server atomically choose port 0, reads its unbuffered loopback address as the readiness
-  handshake, and uses direct `http.client` requests. A local run with deliberately invalid proxy
-  variables passed.
-- Remote rerun after the deterministic macOS readiness correction: pending.
+  preselected port without a positive server-readiness signal. A second run (`30691140214`) ruled
+  out proxy interception. A third run (`30691236189`) used server-selected port 0 and unbuffered
+  output, then proved the child stalled before reporting its bound address. This isolated the
+  standard `HTTPServer.server_bind` reverse DNS lookup, which can block on the macOS runner before
+  listening. `LoopbackHTTPServer` now binds through `TCPServer` and records the already validated
+  numeric address without DNS. An independent regression fails any attempted `socket.getfqdn`
+  call, and the local installed workflow still passes.
+- Remote rerun after the reverse-DNS-free server correction: pending.
 
 ## Remaining risks
 

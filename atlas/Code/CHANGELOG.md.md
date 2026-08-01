@@ -11,7 +11,7 @@ source_path: "CHANGELOG.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>5885</code>
+- **Size Bytes:** <code>6056</code>
 
 ## Incoming relationships
 

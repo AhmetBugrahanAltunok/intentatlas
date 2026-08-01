@@ -29,9 +29,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
 - <code>modifies</code> → [[Symbols/build_demo_graph - src - intentatlas - demo.py|build_demo_graph]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_demo_cli_and_viewer_boundaries - tests - test_demo.py|test_demo_cli_and_viewer_boundaries]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_demo_graph_is_deterministic_and_covers_intent_to_proof - tests - test_demo.py|test_demo_graph_is_deterministic_and_covers_intent_to_proof]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it.fake_serve - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it.fake_serve]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_serve_graph_rejects_non_loopback_and_invalid_ports - tests - test_viewer.py|test_serve_graph_rejects_non_loopback_and_invalid_ports]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(history; evidence: git-diff-hunk)_

@@ -11,7 +11,7 @@ source_path: "docs/architecture.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>13054</code>
+- **Size Bytes:** <code>13358</code>
 
 ## Incoming relationships
 

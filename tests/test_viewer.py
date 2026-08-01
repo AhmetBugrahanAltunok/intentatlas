@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import socket
 from importlib.resources import files
 
 import pytest
@@ -67,7 +68,20 @@ def test_serve_graph_starts_and_closes_server(tmp_path, monkeypatch, capsys) -> 
             self.closed = True
 
     fake = FakeServer(("127.0.0.1", 0), object)
-    monkeypatch.setattr(viewer, "ThreadingHTTPServer", lambda address, handler: fake)
+    monkeypatch.setattr(viewer, "LoopbackHTTPServer", lambda address, handler: fake)
     viewer.serve_graph(graph, port=0, open_browser=False)
     assert fake.closed
     assert "http://127.0.0.1:1234" in capsys.readouterr().out
+
+
+def test_loopback_server_binding_does_not_require_reverse_dns(monkeypatch) -> None:
+    def reject_reverse_dns(host: str) -> str:
+        raise AssertionError(f"unexpected reverse DNS lookup for {host}")
+
+    monkeypatch.setattr(socket, "getfqdn", reject_reverse_dns)
+    server = viewer.LoopbackHTTPServer(("127.0.0.1", 0), object)
+    try:
+        assert server.server_name == "127.0.0.1"
+        assert server.server_port == server.server_address[1]
+    finally:
+        server.server_close()

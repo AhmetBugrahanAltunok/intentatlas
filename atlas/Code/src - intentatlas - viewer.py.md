@@ -11,10 +11,12 @@ source_path: "src/intentatlas/viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2700</code>
+- **Size Bytes:** <code>2973</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/LoopbackHTTPServer - src - intentatlas - viewer.py|LoopbackHTTPServer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/LoopbackHTTPServer.server_bind - src - intentatlas - viewer.py|LoopbackHTTPServer.server_bind]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler - src - intentatlas - viewer.py|serve_graph.Handler]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler._send - src - intentatlas - viewer.py|serve_graph.Handler._send]] _(structure; evidence: python-ast)_

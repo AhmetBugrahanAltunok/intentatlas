@@ -5,6 +5,7 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 from pathlib import Path
+from socketserver import TCPServer
 
 CONTENT_TYPES = {
     "/": ("index.html", "text/html; charset=utf-8"),
@@ -12,6 +13,14 @@ CONTENT_TYPES = {
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/styles.css": ("styles.css", "text/css; charset=utf-8"),
 }
+
+
+class LoopbackHTTPServer(ThreadingHTTPServer):
+    def server_bind(self) -> None:
+        TCPServer.server_bind(self)
+        host, port = self.server_address[:2]
+        self.server_name = str(host)
+        self.server_port = int(port)
 
 
 def serve_graph(
@@ -59,7 +68,7 @@ def serve_graph(
         def log_message(self, format: str, *args: object) -> None:
             return
 
-    server = ThreadingHTTPServer((host, port), Handler)
+    server = LoopbackHTTPServer((host, port), Handler)
     actual_port = server.server_address[1]
     url = f"http://{host}:{actual_port}"
     print(f"IntentAtlas viewer: {url}")

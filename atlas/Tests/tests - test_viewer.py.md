@@ -11,10 +11,12 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2954</code>
+- **Size Bytes:** <code>3465</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_rejects_missing_graph - tests - test_viewer.py|test_serve_graph_rejects_missing_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_rejects_non_loopback_and_invalid_ports - tests - test_viewer.py|test_serve_graph_rejects_non_loopback_and_invalid_ports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(structure; evidence: python-ast)_
@@ -24,6 +26,7 @@ source_path: "tests/test_viewer.py"
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.server_close - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.server_close]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/LoopbackHTTPServer - src - intentatlas - viewer.py|LoopbackHTTPServer]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships

@@ -11,7 +11,7 @@ source_path: "SECURITY.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>7062</code>
+- **Size Bytes:** <code>7183</code>
 
 ## Incoming relationships
 

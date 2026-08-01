@@ -152,6 +152,11 @@ entry point, web assets, and MIT license bytes, and rejects project-only vault, 
 workflow, and local configuration data from the source archive. Publication remains a separate,
 explicitly approved external action.
 
+The loopback viewer uses a narrow `ThreadingHTTPServer` subclass that binds through `TCPServer`
+and records the validated numeric server address directly. It avoids the standard HTTP server's
+reverse DNS lookup, which is unnecessary for local serving and can delay startup on constrained
+macOS runners.
+
 ## 3. Project brain
 
 The `atlas/` folder is an Obsidian vault and the durable human-readable layer.

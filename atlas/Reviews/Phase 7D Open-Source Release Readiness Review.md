@@ -12,15 +12,14 @@ phase: 7D
 - [x] Installed-wheel E2E and release-verifier regressions are implemented.
 - [x] The cross-platform and reproducible-package CI jobs are defined.
 - [x] Source-package boundaries and release instructions are documented.
-- [x] Focused/full tests, 90.31% coverage, lint, Bandit, dependency consistency, JavaScript syntax,
+- [x] Focused/full tests, 90.32% coverage, lint, Bandit, dependency consistency, JavaScript syntax,
   package reproducibility, clean-wheel installation, and real viewer interaction pass locally.
 - [x] Deterministic vault closure passes with zero durable orphans and stable graph/generated
   output.
 - [x] Network-backed dependency audit passes with no known vulnerabilities.
 - [ ] Remote Linux, Windows, macOS, and package jobs pass on the implementation commit.
-- [x] Two macOS-only failures narrowed the issue from proxy interception to a missing deterministic
-  readiness handshake; the E2E test now uses server-selected port 0, unbuffered readiness output,
-  and direct loopback HTTP.
+- [x] Three macOS-only runs isolated a blocking standard-library reverse DNS lookup before server
+  readiness; the loopback server now binds without DNS and a regression rejects any lookup.
 - [ ] Exact final verification results, hashes, remaining risks, and decision are recorded.
 
 ## Evidence examined
