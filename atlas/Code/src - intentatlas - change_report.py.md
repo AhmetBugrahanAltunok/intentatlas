@@ -51,6 +51,7 @@ source_path: "src/intentatlas/change_report.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(implementation; evidence: wikilink)_

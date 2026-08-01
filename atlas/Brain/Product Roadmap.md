@@ -417,6 +417,7 @@ Status: active (2026-08-01)
 - Delivery issue: [[Issues/ISSUE-023 - Implement verification and provenance hardening]]
 - Kickoff: [[Sessions/2026-08-01 - Phase 10D kickoff]]
 - Planned evidence: [[Evidence/EVD-025 - Phase 10D verification and provenance]]
+- Planned review: [[Reviews/Phase 10D Verification and Release Provenance Review]]
 
 ## Completion rule
 

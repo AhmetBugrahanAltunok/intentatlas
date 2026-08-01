@@ -16,7 +16,3 @@ source_path: "tests/fixtures/typescript_project/src/card.tsx"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/CardView - tests - fixtures - typescript_project - src - card.tsx|CardView]] _(structure; evidence: javascript-structural)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

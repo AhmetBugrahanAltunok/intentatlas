@@ -21,6 +21,7 @@ source_path: "src/intentatlas/recommendations.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-symbol-reference)_
+- <code>modified-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-diff-hunk)_
 - <code>tested-by</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(verification; evidence: python-symbol-reference)_

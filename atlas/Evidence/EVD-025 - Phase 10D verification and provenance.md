@@ -11,6 +11,7 @@ phase: 10D
 - proves:: [[Requirements/REQ-025 - Harden verification and release provenance]]
 - Decision: [[Decisions/ADR-025 - Layer offline verification before trusted publishing]]
 - Delivery issue: [[Issues/ISSUE-023 - Implement verification and provenance hardening]]
+- Review: [[Reviews/Phase 10D Verification and Release Provenance Review]]
 
 ## Interim change inventory
 
@@ -48,8 +49,8 @@ phase: 10D
   `git diff --check` — passed.
 - Focused scanner, vault, browser, release, Action-policy, and property/fuzz regression — 139
   passed after materializing the updated project graph.
-- Two consecutive repository scans after the final local implementation produced 1,075 nodes,
-  2,436 relationships, 941 generated
+- Two consecutive repository scans after the final local implementation produced 1,076 nodes,
+  2,473 relationships, 941 generated
   notes, and zero durable orphans. The first scan reused two adapters and rebuilt the changed
   Python fragment; the second reused all three adapters with zero rebuilds.
 - Two final local Hatchling builds under epoch `1704067200` were byte-identical and matched both
@@ -61,9 +62,18 @@ phase: 10D
   release closure.
 - A fresh environment imported IntentAtlas from the exact final wheel, not the editable source,
   and passed both installed CLI/review E2E cases plus the real Chrome large-graph E2E — 3 passed.
+- Clean implementation commit `2f3d69542b0877174529470335a4e7e22bd3632a` was rebuilt twice
+  under its own commit epoch `1785610201`. Exact source-bound provenance passed with wheel SHA-256
+  `87d9f221a7e79925c73229637a23834f3c8b35cbb20f92ec447ca9e134930a4b` and source SHA-256
+  `9f32b351850576f6414b785dcb83da3b827f0505484ee7ed94d758a843a73199`; both approved-hash
+  checks matched, with 45 wheel and 135 source files validated.
 - Official Git references resolved the pinned checkout `v4.2.2` to `11bd719...`, setup-python
   `v5.6.0` to `a26af69...`, and the PyPI trusted-publishing `release/v1` branch to immutable
   `dc37677...` on 2026-08-01. The local policy accepted every external reference.
+- A no-change closure scan kept generated-note bytes and nanosecond modification times stable at
+  SHA-256 `16e9cff43c3e044e62ed247599e83edef344e6663e09f5f932146ba22f1fbde6`;
+  the explicit user-owned Brain/Requirement/Decision/Issue/Evidence/Review/Session areas were
+  byte-stable across the same scan. `atlas/Private/` was not enumerated or read.
 
 ## Open gates
 
@@ -71,11 +81,10 @@ phase: 10D
 - The trusted-publishing workflow requires the repository owner to configure protected `pypi`
   reviewers and matching package-index trust before first use. No workflow dispatch or package
   publication has occurred or is authorized by this evidence.
-- Final deterministic vault, remote CI, dependency-audit, exact source-bound
-  provenance, and Review closure remain pending.
+- Final deterministic vault, remote CI, dependency-audit, and Review closure remain pending.
 
 ## Interim decision
 
 Phase 10D remains active. Local property/fuzz, browser, typing, policy, package, installed-wheel,
-and provenance behavior passes, but the remote CI, dependency-audit, exact committed-source
-provenance, and final Review gates prevent completion.
+and committed-source provenance behavior passes, but the remote CI, dependency-audit, and final
+Review gates prevent completion.

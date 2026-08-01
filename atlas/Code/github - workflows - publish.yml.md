@@ -13,6 +13,6 @@ source_path: ".github/workflows/publish.yml"
 - **Language:** <code>"YAML"</code>
 - **Size Bytes:** <code>3209</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_

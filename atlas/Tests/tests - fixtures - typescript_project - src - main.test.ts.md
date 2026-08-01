@@ -19,7 +19,3 @@ source_path: "tests/fixtures/typescript_project/src/main.test.ts"
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - main.ts|tests/fixtures/typescript_project/src/main.ts]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - main.ts|tests/fixtures/typescript_project/src/main.ts]] _(verification; evidence: javascript-structural)_
 - <code>tests</code> → [[Symbols/boot - tests - fixtures - typescript_project - src - main.ts|boot]] _(verification; evidence: javascript-symbol-reference)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

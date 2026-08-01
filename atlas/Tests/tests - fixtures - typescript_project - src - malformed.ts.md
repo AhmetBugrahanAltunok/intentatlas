@@ -13,6 +13,6 @@ source_path: "tests/fixtures/typescript_project/src/malformed.ts"
 - **Language:** <code>"TypeScript"</code>
 - **Size Bytes:** <code>28</code>
 
-## Incoming relationships
+## Graph health
 
-- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
+- Orphaned generated node

@@ -16,7 +16,3 @@ source_path: "tests/fixtures/typescript_project/src/dual.ts"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/typedDual - tests - fixtures - typescript_project - src - dual.ts|typedDual]] _(structure; evidence: javascript-structural)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

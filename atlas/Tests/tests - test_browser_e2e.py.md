@@ -20,3 +20,7 @@ source_path: "tests/test_browser_e2e.py"
 - <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_

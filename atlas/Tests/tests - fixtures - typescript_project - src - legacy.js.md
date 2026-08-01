@@ -17,7 +17,3 @@ source_path: "tests/fixtures/typescript_project/src/legacy.js"
 
 - <code>defines</code> → [[Symbols/legacyAdd - tests - fixtures - typescript_project - src - legacy.js|legacyAdd]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(verification; evidence: javascript-structural)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_

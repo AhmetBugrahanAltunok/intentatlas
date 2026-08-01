@@ -30,5 +30,6 @@ source_path: "tests/test_release.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_

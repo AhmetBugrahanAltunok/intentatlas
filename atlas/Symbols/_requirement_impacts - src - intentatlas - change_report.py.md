@@ -17,3 +17,4 @@ source_path: "src/intentatlas/change_report.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-diff-hunk)_
