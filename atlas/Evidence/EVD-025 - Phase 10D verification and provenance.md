@@ -82,12 +82,13 @@ phase: 10D
   known vulnerabilities. The unpublished local `intentatlas` distribution was the only skipped
   item because it is not available from PyPI; the hosted security job independently passed its
   Bandit and dependency-audit steps.
-- Implementation and local-evidence commits through `583bf932f0a975c30afc311e903c3d86e47388ec`
-  were pushed to `origin/main`. GitHub Actions run
-  [30714014834](https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30714014834)
+- Implementation, evidence, closure, and Node 24 Action-pin commits through
+  `87e7555fc9f4d1d8ff3b9768df2ba011695220a0` were pushed to `origin/main`. GitHub Actions run
+  [30714455488](https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30714455488)
   completed successfully on 2026-08-01. All 13 jobs passed: Python 3.11/3.12/3.13 tests, the six
   Windows/Linux/macOS installed-wheel E2E combinations, reproducible package/provenance, real
-  browser E2E, static typing, and security.
+  browser E2E, static typing, and security. All 13 check runs reported zero annotations after the
+  Node 20 deprecation was removed.
 
 ## Remaining operational limits
 
