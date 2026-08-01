@@ -1,7 +1,7 @@
 ---
 id: ISSUE-017
 type: issue
-status: in-progress
+status: closed
 phase: 7D
 ---
 # ISSUE-017 — Implement open-source release gates
@@ -20,8 +20,8 @@ Implement ADR-019 without publishing, deploying, or executing scanned repository
 - [x] English/Turkish setup context, architecture, security, changelog, contribution, and release
   documentation are updated.
 - [x] Complete local quality gates pass and are recorded.
-- [ ] Remote quality gates pass and are recorded.
-- [ ] Evidence and final review record exact results, hashes, CI run, and remaining risks.
+- [x] Remote quality gates pass and are recorded.
+- [x] Evidence and final review record exact results, hashes, CI run, and remaining risks.
 
 ## Planned implementation links
 

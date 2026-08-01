@@ -17,7 +17,7 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 21
+- **commit:** 22
 - **config:** 6
 - **decision:** 19
 - **document:** 19
@@ -30,7 +30,7 @@ generated: true
 - **session:** 1
 - **symbol:** 540
 - **test:** 52
-- **relationships:** 1797
+- **relationships:** 1806
 - **orphaned durable notes:** 0
 
 ## Most connected

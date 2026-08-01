@@ -1,7 +1,7 @@
 ---
 id: EVD-019
 type: evidence
-status: pending
+status: verified
 phase: 7D
 ---
 # EVD-019 — Phase 7D release readiness verification
@@ -51,11 +51,11 @@ phase: 7D
 - The installed wheel's real viewer loaded 8 nodes and 10 links. Keyboard selection of `app.py`
   displayed the `test_app.py` evidence path, and the browser console contained no errors. The tab
   and loopback server were closed after verification.
-- Two closure scans each produced 759 nodes, 1,765 relationships, 661 generated notes, and zero
+- Two final closure scans each produced 767 nodes, 1,806 relationships, 669 generated notes, and zero
   durable orphans. The normalized graph SHA-256 was stable at
-  `01e01b464afb4d25a305171ea7b7c6d853ab8ce1b4f483a5083de2567b778a38`; generated-note bytes plus
+  `058331587e99934a6314d5d576a731c69f073ca3e3d00acea88c3ed1123bc95a`; generated-note bytes plus
   nanosecond modification times were stable at
-  `e51fa68d8c116eb71224926d872a61de3d31593d8a6c4d49a5f7723d2bf93d4a`. Explicit user-owned areas
+  `6d1183d07f379d72afcf538c63f4080528c151c5155c885b8fdb0e3ca4f0e01a`. Explicit user-owned areas
   were byte-stable, and `atlas/Private/` was not enumerated or read.
 - Network-backed dependency audit: passed after explicit approval.
 - The first remote run (`30691033738`) passed security, reproducible package, Python
@@ -67,16 +67,18 @@ phase: 7D
   listening. `LoopbackHTTPServer` now binds through `TCPServer` and records the already validated
   numeric address without DNS. An independent regression fails any attempted `socket.getfqdn`
   call, and the local installed workflow still passes.
-- Remote rerun after the reverse-DNS-free server correction: pending.
+- The final remote run
+  [`30691379415`](https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30691379415)
+  passed all 11 jobs: security, reproducible package, full tests on Python 3.11/3.12/3.13, and
+  installed-wheel E2E on Linux, Windows, and macOS with Python 3.11 and 3.13.
 
 ## Remaining risks
 
-- The corrected cross-platform CI run has not yet completed.
 - Reproducibility was demonstrated with the same source, timestamp, Python, Hatchling, and local
   environment; different build-tool or compression versions can produce different bytes.
 - Publication is outside this phase and remains approval-gated.
 
 ## Decision
 
-Pending. All local acceptance gates, including the approved network-backed dependency audit, pass.
-Phase 7D remains open until the remote CI matrix passes on the implementation commit.
+REQ-019 acceptance criteria are satisfied. Phase 7D passes with all local quality, security,
+package, CLI/UI, deterministic vault, dependency-audit, and remote cross-platform gates complete.

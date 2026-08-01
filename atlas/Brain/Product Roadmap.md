@@ -274,7 +274,7 @@ Status: complete (2026-08-01)
 
 ## Phase 7D — Open-source release readiness
 
-Status: in progress
+Status: complete
 
 - [x] Add an installed-wheel end-to-end test for init, scan, status, impact, recommendation, and
   loopback viewer retrieval.
@@ -284,7 +284,7 @@ Status: in progress
 - [x] Document the release process and keep publishing as a separate approval-gated action.
 - [x] Pass the complete local quality, security, package, CLI/UI, determinism, attribution, and
   Obsidian closure gates.
-- [ ] Pass the new cross-platform and reproducible-package jobs in remote CI before closing the
+- [x] Pass the new cross-platform and reproducible-package jobs in remote CI before closing the
   phase.
 
 - Requirement: [[Requirements/REQ-019 - Ship verifiable cross-platform releases]]

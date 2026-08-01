@@ -1,7 +1,7 @@
 ---
 id: review-phase-7d-open-source-release-readiness
 type: review
-status: pending
+status: pass
 phase: 7D
 ---
 # Phase 7D Open-Source Release Readiness Review
@@ -17,10 +17,10 @@ phase: 7D
 - [x] Deterministic vault closure passes with zero durable orphans and stable graph/generated
   output.
 - [x] Network-backed dependency audit passes with no known vulnerabilities.
-- [ ] Remote Linux, Windows, macOS, and package jobs pass on the implementation commit.
+- [x] Remote Linux, Windows, macOS, and package jobs pass on the implementation commit.
 - [x] Three macOS-only runs isolated a blocking standard-library reverse DNS lookup before server
   readiness; the loopback server now binds without DNS and a regression rejects any lookup.
-- [ ] Exact final verification results, hashes, remaining risks, and decision are recorded.
+- [x] Exact final verification results, hashes, remaining risks, and decision are recorded.
 
 ## Evidence examined
 
@@ -31,6 +31,6 @@ phase: 7D
 
 ## Review decision
 
-Pending. Every local implementation, package, quality, security, UI, dependency-audit, and vault
-gate passes. Cross-platform acceptance still requires a remote CI run after the implementation
-commit is pushed.
+Pass. All local and remote acceptance gates are complete. The macOS failures were not waived: they
+exposed a real reverse-DNS startup dependency, which was removed and independently regression
+tested before the final 11-job CI matrix passed.

@@ -1,7 +1,7 @@
 ---
 id: REQ-019
 type: requirement
-status: active
+status: accepted
 phase: 7D
 ---
 # Ship verifiable cross-platform releases
