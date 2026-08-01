@@ -17,4 +17,5 @@ source_path: "tools/verify_release.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/tools - verify_release.py|tools/verify_release.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-diff-hunk)_
 - <code>tested-by</code> ← [[Tests/tests - test_release.py|tests/test_release.py]] _(verification; evidence: python-symbol-reference)_

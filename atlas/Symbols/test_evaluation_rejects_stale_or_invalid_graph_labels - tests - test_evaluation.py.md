@@ -17,4 +17,3 @@ source_path: "tests/test_evaluation.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit d9cd557 - feat- measure test recommendation quality|feat: measure test recommendation quality]] _(history; evidence: git-diff-hunk)_

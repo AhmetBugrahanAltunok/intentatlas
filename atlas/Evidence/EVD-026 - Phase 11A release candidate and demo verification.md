@@ -93,6 +93,23 @@ phase: 11A
 - These hashes describe the final pre-commit working tree, not yet a Git source identity. A clean
   local implementation commit and source-revision-bound provenance are still required.
 
+## Exact committed candidate provenance
+
+- Local audit commit `0f9d6cbc722c814d49abc26949b4be38c30a75b1`
+  (`fix: harden release candidate verification`) was cleanly rebuilt twice with its recorded
+  `SOURCE_DATE_EPOCH=1785624255` through `build==1.3.0` and isolated `hatchling==1.31.0`.
+- Deterministic provenance schema 1 binds that exact source revision and epoch to:
+  - `intentatlas-0.3.0rc1-py3-none-any.whl`: 125,896 bytes,
+    SHA-256 `f6ee19a3f1f3d0a15abdfd18f557e6270f34f46fe913c857a8939c14713750c4`.
+  - `intentatlas-0.3.0rc1.tar.gz`: 210,901 bytes,
+    SHA-256 `dda498a0ee444950fcbcb0045091aa48a58c83d0692c07b07cb1705bdbed7b56`.
+- The verifier accepted 45 exact wheel members and 143 exact sdist files and recorded Hatchling
+  1.31.0 as generator. Rebuilding the committed sdist reproduced the wheel SHA-256 exactly.
+- A fresh environment installed the committed wheel with `--no-deps`, reported
+  `IntentAtlas 0.3.0rc1`, and returned the expected rotation-test demo result.
+- The provenance JSON remains a local ignored audit artifact under `var/`; it describes verified
+  bytes and is not represented as a signature, hosted attestation, tag, or publication approval.
+
 ## Network and immutable-dependency verification
 
 - The combined development/release/security/typing environment installed the fixed
@@ -122,17 +139,18 @@ phase: 11A
 - The first final scan produced 1,144 nodes, 2,480 relationships, and 1,002 generated notes; two
   adapter fragments were reused and one was rebuilt. The immediate second scan reused all three
   fragments and rebuilt none while preserving the same graph and note counts.
+- After the exact audit commit and provenance update, final materialization retained 1,144 nodes
+  and 1,002 generated notes, incorporated the new commit evidence at 2,550 relationships, reused
+  all three adapter fragments, and rebuilt none. Its immediate second scan was identical.
 - Explicit snapshots covered 142 files in `Brain/`, `Requirements/`, `Decisions/`, `Issues/`,
   `Evidence/`, `Reviews/`, and `Sessions/`, never `Private/`. Hash, length, path, and UTC mtime were
   identical before/after the first scan and after the second scan.
 - The 1,003-file generated snapshot across `Code/`, `Symbols/`, `Tests/`, `Commits/`, and
   `Dashboard/` was byte- and mtime-identical across the two scans.
-- `intentatlas status` reported 2,480 relationships and zero durable orphans.
+- Final `intentatlas status` reported 2,550 relationships and zero durable orphans.
 
 ## Open gates
 
-- Create a clean local audit-fix commit, rebuild it twice under a fixed recorded epoch, bind
-  provenance to that exact source revision, and record the resulting hashes here.
 - Push and remote CI remain pending by explicit instruction; Phase 11A cannot close before they
   pass.
 - Before any public launch, the owner must verify GitHub private vulnerability reporting and the
@@ -142,6 +160,6 @@ phase: 11A
 
 ## Interim decision
 
-All currently executable source, browser, security, dependency, package, install, sdist, and vault
-gates pass. Phase 11A remains active until exact committed provenance, push/remote CI, and the
+All currently executable source, browser, security, dependency, package, install, sdist, vault,
+and exact-commit provenance gates pass. Phase 11A remains active until push/remote CI and the
 external launch controls above are verified.

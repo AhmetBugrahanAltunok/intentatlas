@@ -27,7 +27,8 @@ phase: 11A
 - [x] Third-party dependency audit and official Action-SHA identity/signature checks pass.
 - [x] Final vault materialization, zero-orphan health, user-owned-area preservation, and generated
       byte/mtime determinism pass.
-- [ ] Exact committed provenance passes.
+- [x] Exact committed source revision, commit-epoch repeated builds, deterministic provenance,
+      sdist-to-wheel equality, and clean candidate installation pass.
 - [ ] Push and remote CI pass.
 - [ ] GitHub private vulnerability reporting and protected `pypi` environment controls are
       externally verified before public launch.
@@ -45,5 +46,5 @@ phase: 11A
 Pending. The deep audit corrected material demo-evidence, artifact-integrity, metadata, build-hook,
 publishing-identity, workflow-policy, local-viewer security, stale-artifact, documentation, and
 environment-isolation problems. Every local and authorized network gate currently passes, but
-Phase 11A remains open until the unchecked provenance, push/remote-CI, and external launch-control
+Phase 11A remains open until the unchecked push/remote-CI and external launch-control
 items pass. No release or publication action is approved by this review.
