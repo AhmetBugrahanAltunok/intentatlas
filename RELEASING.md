@@ -7,7 +7,9 @@ does not publish a package.
 ## 1. Prepare the release
 
 - Start from a clean, reviewed commit on `main`.
-- Update the version in `pyproject.toml` and `src/intentatlas/__init__.py` together.
+- Update `__version__` in `src/intentatlas/__init__.py`; Hatchling reads this canonical value
+  through `[tool.hatch.version]`, so `pyproject.toml` must not contain a second static version.
+- Run `intentatlas --version` and the version-consistency regression before building.
 - Move the relevant `CHANGELOG.md` entries from `Unreleased` into a dated version section.
 - Confirm that README, security, contribution, license, attribution, requirement, evidence, and
   review records describe the release accurately.
@@ -52,13 +54,16 @@ reviewed bytes but is not a signature or hosted attestation.
 ## 4. Install the exact candidate
 
 Create a fresh virtual environment, install the wheel from `var/release-a` with `--no-deps`, then
-verify `intentatlas --version`, `intentatlas demo`, and the init/scan/status/impact workflow on a
-temporary example repository. Run the real-browser E2E gate with
+verify `intentatlas --version`, deterministic `intentatlas demo --report text` and `--report json`,
+interactive `intentatlas demo`, and the init/scan/status/impact workflow on a temporary example
+repository. Run the real-browser E2E gate with
 `INTENTATLAS_REQUIRE_BROWSER=1`. Record the provenance file and results in the release evidence.
 
 ## 5. Publish only after approval
 
-Tagging, creating a public release, and uploading to a package index are separate external actions.
+An `rc` version only identifies reviewed candidate bytes; it is not release approval. Tagging,
+creating a public release, changing repository visibility, and uploading to a package index are
+separate external actions.
 Perform them only after the recorded review passes and the release owner explicitly approves the
 exact version and artifact hashes. Never rebuild between approval and publication.
 

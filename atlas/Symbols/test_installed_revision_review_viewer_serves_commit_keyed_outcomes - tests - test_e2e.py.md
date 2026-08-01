@@ -10,11 +10,10 @@ source_path: "tests/test_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>308</code>
-- **Line:** <code>188</code>
+- **End Line:** <code>324</code>
+- **Line:** <code>204</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_e2e.py|tests/test_e2e.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-diff-hunk)_

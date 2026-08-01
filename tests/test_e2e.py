@@ -43,6 +43,22 @@ def _http_get(port: int, path: str) -> bytes:
 
 
 def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
+    version = _cli("--version", cwd=tmp_path)
+    assert version.returncode == 0, version.stderr
+    assert version.stdout.strip() == "IntentAtlas 0.3.0rc1"
+
+    demo_report = _cli("demo", "--report", "json", cwd=tmp_path)
+    assert demo_report.returncode == 0, demo_report.stderr
+    demo_payload = json.loads(demo_report.stdout)
+    assert demo_payload["schema_version"] == 1
+    assert [
+        item["test"]["path"]
+        for item in demo_payload["test_recommendations"]["recommendations"]
+    ] == ["tests/test_auth_rotation.py"]
+    assert demo_payload["same_file_tests_not_recommended"][0]["path"] == (
+        "tests/test_auth_audit.py"
+    )
+
     project = tmp_path / "project with spaces"
     project.mkdir()
 

@@ -11,17 +11,20 @@ source_path: "tests/test_demo.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2512</code>
+- **Size Bytes:** <code>4474</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_demo_cli_and_viewer_boundaries - tests - test_demo.py|test_demo_cli_and_viewer_boundaries]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_demo_graph_is_deterministic_and_covers_intent_to_proof - tests - test_demo.py|test_demo_graph_is_deterministic_and_covers_intent_to_proof]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_demo_report_is_deterministic_and_exposes_same_file_boundary - tests - test_demo.py|test_demo_report_is_deterministic_and_exposes_same_file_boundary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it.fake_serve - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it.fake_serve]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/build_demo_graph - src - intentatlas - demo.py|build_demo_graph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/build_demo_report - src - intentatlas - demo.py|build_demo_report]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_demo_report - src - intentatlas - demo.py|render_demo_report]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(verification; evidence: python-symbol-reference)_

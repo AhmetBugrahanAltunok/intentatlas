@@ -11,12 +11,17 @@ source_path: "tests/test_browser_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4939</code>
+- **Size Bytes:** <code>6644</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_browser - tests - test_browser_e2e.py|_browser]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_dump_dom - tests - test_browser_e2e.py|_dump_dom]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_stop_server - tests - test_browser_e2e.py|_stop_server]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_viewer_url - tests - test_browser_e2e.py|_viewer_url]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_viewer_url.read_ready - tests - test_browser_e2e.py|_viewer_url.read_ready]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_browser_renders_bounded_large_graph_window - tests - test_browser_e2e.py|test_real_browser_renders_bounded_large_graph_window]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_

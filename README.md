@@ -55,12 +55,32 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
   synthetic scale benchmark for contributors.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
+## Release candidate status
+
+The reviewed source currently identifies itself as `0.3.0rc1`. This is a release candidate, not a
+published package or compatibility promise. No tag or package-index release is implied. From a
+trusted source checkout, verify the exact candidate before exploring it:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\intentatlas.exe --version
+.\.venv\Scripts\intentatlas.exe demo --report text
+```
+
+The report exits without opening a listener and shows why one test is recommended while another
+test connected to a different symbol in the same source file is not recommended from the available
+exact-symbol evidence. Omission is not a claim that the other requirement is unaffected or that
+its test is unnecessary.
+
 ## Quick start
 
 Try the complete intent-to-proof story immediately after installation:
 
 ```powershell
 intentatlas demo
+intentatlas demo --report text
+intentatlas demo --report json
 ```
 
 The built-in showcase is original, offline, and temporary. It does not scan the current directory.
@@ -108,7 +128,7 @@ intentatlas evaluate-recommendations LABELS  Measure recommendations against rev
 intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
 intentatlas evaluate-real-world MANIFEST CHECKOUTS  Validate pinned public checkouts offline
 intentatlas benchmark-scale              Measure indexed queries on a synthetic large graph
-intentatlas demo                         Open the built-in intent-to-proof showcase
+intentatlas demo [--report text|json]    Open the showcase or print its bounded evidence report
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
 intentatlas open [PATH]                  Launch the local interactive graph
 ```
@@ -335,7 +355,9 @@ The local viewer also derives a bounded set of shortest structural paths from th
 tests, evidence, coverage, test results, commits, and pull requests. These paths make the
 intent-to-proof story easier to follow; they explain graph connectivity and do not claim causality,
 completeness, freshness, or test necessity. `intentatlas demo` opens the same production viewer on
-a packaged nine-node first-party example and removes its temporary graph when the viewer stops.
+an original twelve-node same-file counterexample and removes its temporary graph when the viewer
+stops. `intentatlas demo --report text` and `--report json` render the same bounded evidence story
+without starting a listener.
 
 For large repositories, the viewer retains the complete graph for local navigation but renders a
 deterministic window of at most 240 nodes and 900 edges. The default overview balances graph layers;

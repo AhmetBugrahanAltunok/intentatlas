@@ -11,7 +11,7 @@ source_path: "pyproject.toml"
 ## Metadata
 
 - **Language:** <code>"TOML"</code>
-- **Size Bytes:** <code>2290</code>
+- **Size Bytes:** <code>2353</code>
 
 ## Incoming relationships
 

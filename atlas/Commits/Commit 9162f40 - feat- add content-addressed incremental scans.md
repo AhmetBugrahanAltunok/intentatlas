@@ -31,7 +31,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_cli.py|tests/test_cli.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_graph.py|tests/test_graph.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_scan_cache.py|tests/test_scan_cache.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_scan - src - intentatlas - cli.py|_scan]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/AtlasGraph.save - src - intentatlas - graph.py|AtlasGraph.save]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/atomic_write_text - src - intentatlas - storage.py|atomic_write_text]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_cli_init_scan_status_and_impact - tests - test_cli.py|test_cli_init_scan_status_and_impact]] _(history; evidence: git-diff-hunk)_

@@ -16,7 +16,3 @@ source_path: "tests/fixtures/delivery_project/src/app.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/run - tests - fixtures - delivery_project - src - app.py|run]] _(structure; evidence: python-ast)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_

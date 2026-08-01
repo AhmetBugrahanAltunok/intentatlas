@@ -10,8 +10,8 @@ source_path: "src/intentatlas/cli.py"
 
 ## Metadata
 
-- **End Line:** <code>698</code>
-- **Line:** <code>650</code>
+- **End Line:** <code>707</code>
+- **Line:** <code>659</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

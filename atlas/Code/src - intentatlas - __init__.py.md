@@ -11,7 +11,7 @@ source_path: "src/intentatlas/__init__.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>160</code>
+- **Size Bytes:** <code>163</code>
 
 ## Outgoing relationships
 
@@ -25,3 +25,4 @@ source_path: "src/intentatlas/__init__.py"
 
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_version.py|tests/test_version.py]] _(verification; evidence: python-ast)_

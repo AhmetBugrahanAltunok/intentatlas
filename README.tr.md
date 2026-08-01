@@ -23,12 +23,31 @@ Güncel fazlar ve tamamlanma durumları
 [Ürün Yol Haritası](atlas/Brain/Product%20Roadmap.md) belgesinde izlenir. Repo kökündeki
 `ROADMAP.md`, ilk 0.1–0.3 teknik planının açıkça arşivlenmiş tarihsel kaydıdır.
 
+## Sürüm adayı durumu
+
+İncelenen kaynak şu anda kendisini `0.3.0rc1` olarak tanımlar. Bu bir sürüm adayıdır; yayımlanmış
+paket veya uyumluluk sözü değildir. Tag ya da paket indeksi yayını anlamına gelmez. Güvenilen bir
+kaynak checkout'unda adayı şöyle doğrulayabilirsiniz:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\intentatlas.exe --version
+.\.venv\Scripts\intentatlas.exe demo --report text
+```
+
+Rapor listener açmadan sonlanır; aynı kaynak dosyadaki farklı sembole bağlı bir test mevcut kesin
+sembol kanıtıyla önerilmezken diğer testin neden önerildiğini gösterir. Bir kaydın gösterilmemesi,
+diğer gereksinimin etkilenmediği veya testinin gereksiz olduğu iddiası değildir.
+
 ## Hızlı başlangıç
 
 Kurulumdan hemen sonra eksiksiz niyet-kanıt zincirini deneyin:
 
 ```powershell
 intentatlas demo
+intentatlas demo --report text
+intentatlas demo --report json
 ```
 
 Yerleşik örnek özgün, çevrimdışı ve geçicidir; geçerli klasörü taramaz. Kendi deponuz için:
@@ -179,8 +198,10 @@ garantisi değil, regresyon ve tanılama aracıdır. Ayrıntılar
 Yerel görüntüleyici, seçilen düğümden testlere, kanıtlara, coverage sonuçlarına, test sonuçlarına,
 commit'lere ve pull request'lere giden sınırlı en kısa yapısal yolları da gösterir. Bu yollar grafik
 bağlantısını açıklar; nedensellik, eksiksizlik, güncellik veya test zorunluluğu iddia etmez.
-`intentatlas demo`, aynı üretim görüntüleyicisini dokuz düğümlü özgün bir örnek üzerinde açar ve
-görüntüleyici kapandığında geçici grafiği temizler.
+`intentatlas demo`, aynı üretim görüntüleyicisini aynı-dosya karşı örneği içeren on iki düğümlü
+özgün bir grafik üzerinde açar ve görüntüleyici kapandığında geçici grafiği temizler.
+`intentatlas demo --report text` ve `--report json`, listener başlatmadan aynı sınırlı kanıt
+hikâyesini üretir.
 
 Büyük depolarda görüntüleyici, grafiğin tamamını yerel gezinme için bellekte korur; aynı anda en
 fazla 240 düğüm ve 900 kenardan oluşan deterministik bir pencere çizer. Genel görünüm katmanları

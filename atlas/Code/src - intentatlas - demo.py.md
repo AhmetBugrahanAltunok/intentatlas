@@ -11,18 +11,26 @@ source_path: "src/intentatlas/demo.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5017</code>
+- **Size Bytes:** <code>11521</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/DemoReport - src - intentatlas - demo.py|DemoReport]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/DemoReport.to_dict - src - intentatlas - demo.py|DemoReport.to_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_incoming_nodes - src - intentatlas - demo.py|_incoming_nodes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/build_demo_graph - src - intentatlas - demo.py|build_demo_graph]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/build_demo_report - src - intentatlas - demo.py|build_demo_report]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/render_demo_report - src - intentatlas - demo.py|render_demo_report]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/RecommendationResult - src - intentatlas - recommendations.py|RecommendationResult]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships

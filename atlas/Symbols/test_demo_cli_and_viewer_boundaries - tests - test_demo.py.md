@@ -10,11 +10,10 @@ source_path: "tests/test_demo.py"
 
 ## Metadata
 
-- **End Line:** <code>71</code>
-- **Line:** <code>55</code>
+- **End Line:** <code>120</code>
+- **Line:** <code>98</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-diff-hunk)_

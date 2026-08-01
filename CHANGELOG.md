@@ -6,8 +6,15 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ## [Unreleased]
 
+No changes yet.
+
+## [0.3.0rc1] - 2026-08-01
+
 ### Added
 
+- A deterministic text/JSON same-file demo report derived from production recommendation logic,
+  with an independent requirement/symbol/test path that remains explicitly unpromoted when the
+  example commit modifies only `rotate_session`.
 - Fixed-seed property and mutation-fuzz coverage for generated graphs and untrusted JSON, plus a
   real Chrome-family browser E2E gate for the bounded 320-node viewer scenario.
 - Deterministic release provenance records bound to exact source revision, build epoch, artifact
@@ -84,6 +91,8 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Changed
 
+- Package versioning now has one canonical Hatchling source and identifies reviewed candidate
+  builds as `0.3.0rc1` without implying tag or publication approval.
 - Fresh vault initialization now creates generic guidance and templates without seeding
   IntentAtlas-specific project memory into user repositories.
 - Go test references retain exact symbol targets alongside separate file navigation edges, and

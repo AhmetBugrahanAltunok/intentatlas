@@ -423,6 +423,32 @@ Status: complete (2026-08-01)
   the verification boundary. All local gates, the network dependency audit, and 13 remote CI jobs
   passed; publishing remains manual, protected, and unexecuted.
 
+## Phase 11 — Release candidate and adoption evidence
+
+Status: active (Phase 11A active)
+
+- Turn the completed Phase 10 capability into an honest, immediately evaluable release candidate.
+- Demonstrate conservative same-file behavior rather than presenting only a perfect linear chain.
+- Keep sustained pilots, compatibility policy, public launch, and publication as separately gated
+  follow-up work.
+- Strategy: [[Brain/Phase 11 Strategy]]
+
+### Phase 11A — Honest release candidate and evaluable demo
+
+Status: active (2026-08-01)
+
+- Establish one canonical `0.3.0rc1` version source without tagging or publishing.
+- Add an original same-file two-requirement/two-test counterexample to the built-in demo.
+- Provide deterministic text and JSON demo reports while retaining the interactive viewer default.
+- Verify documentation, exact-wheel installation, browser behavior, provenance, and complete phase
+  gates before closure.
+- Requirement: [[Requirements/REQ-026 - Make the release candidate honest and immediately evaluable]]
+- Decision: [[Decisions/ADR-026 - Separate scriptable demo evidence from interactive viewing and publication]]
+- Delivery issue: [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo]]
+- Kickoff: [[Sessions/2026-08-01 - Phase 11A kickoff]]
+- Planned evidence: [[Evidence/EVD-026 - Phase 11A release candidate and demo verification]]
+- Planned review: [[Reviews/Phase 11A Release Candidate and Demo Review]]
+
 ## Completion rule
 
 Every phase must end with a linked Evidence note and Review note containing the full change

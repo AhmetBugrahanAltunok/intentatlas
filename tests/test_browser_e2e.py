@@ -34,6 +34,68 @@ def _browser() -> str | None:
     return next((str(path) for path in candidates if path.is_file()), None)
 
 
+def _viewer_url(server: subprocess.Popen[str]) -> str:
+    assert server.stdout is not None
+    ready: queue.Queue[str] = queue.Queue()
+
+    def read_ready() -> None:
+        for _ in range(3):
+            line = server.stdout.readline()
+            match = re.fullmatch(r"IntentAtlas viewer: (http://127\.0\.0\.1:\d+)\s*", line)
+            if match is not None:
+                ready.put(match.group(1))
+                return
+        ready.put("")
+
+    threading.Thread(target=read_ready, daemon=True).start()
+    try:
+        url = ready.get(timeout=10)
+    except queue.Empty as exc:
+        raise AssertionError("viewer did not report its loopback address") from exc
+    assert url, "viewer did not emit a valid loopback address"
+    return url
+
+
+def _dump_dom(browser: str, url: str, profile: Path) -> str:
+    completed = subprocess.run(
+        [
+            browser,
+            "--headless=new",
+            "--disable-background-networking",
+            "--disable-default-apps",
+            "--disable-extensions",
+            "--disable-gpu",
+            "--disable-sync",
+            "--metrics-recording-only",
+            "--no-first-run",
+            "--no-sandbox",
+            "--run-all-compositor-stages-before-draw",
+            f"--user-data-dir={profile}",
+            "--virtual-time-budget=5000",
+            "--dump-dom",
+            url,
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=30,
+    )
+    assert completed.returncode == 0, completed.stderr
+    return completed.stdout
+
+
+def _stop_server(server: subprocess.Popen[str]) -> None:
+    if server.poll() is None:
+        server.terminate()
+        try:
+            server.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            server.kill()
+            server.wait(timeout=5)
+
+
 def test_real_browser_renders_bounded_large_graph_window(tmp_path: Path) -> None:
     browser = _browser()
     if browser is None:
@@ -84,45 +146,8 @@ def test_real_browser_renders_bounded_large_graph_window(tmp_path: Path) -> None
         encoding="utf-8",
     )
     try:
-        assert server.stdout is not None
-        ready: queue.Queue[str] = queue.Queue()
-        threading.Thread(target=lambda: ready.put(server.stdout.readline()), daemon=True).start()
-        try:
-            ready_line = ready.get(timeout=10)
-        except queue.Empty as exc:
-            raise AssertionError("viewer did not report its loopback address") from exc
-        match = re.fullmatch(r"IntentAtlas viewer: (http://127\.0\.0\.1:\d+)\s*", ready_line)
-        assert match is not None, ready_line
-        url = match.group(1)
-
-        profile = tmp_path / "browser-profile"
-        completed = subprocess.run(
-            [
-                browser,
-                "--headless=new",
-                "--disable-background-networking",
-                "--disable-default-apps",
-                "--disable-extensions",
-                "--disable-gpu",
-                "--disable-sync",
-                "--metrics-recording-only",
-                "--no-first-run",
-                "--no-sandbox",
-                "--run-all-compositor-stages-before-draw",
-                f"--user-data-dir={profile}",
-                "--virtual-time-budget=5000",
-                "--dump-dom",
-                url,
-            ],
-            check=False,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            timeout=30,
-        )
-        assert completed.returncode == 0, completed.stderr
-        rendered = completed.stdout
+        url = _viewer_url(server)
+        rendered = _dump_dom(browser, url, tmp_path / "browser-profile")
         assert "Could not load graph" not in rendered
         assert "<strong>320</strong><span>total nodes</span>" in rendered
         assert "<strong>319</strong><span>total links</span>" in rendered
@@ -131,10 +156,46 @@ def test_real_browser_renders_bounded_large_graph_window(tmp_path: Path) -> None
         assert rendered.count('class="node"') == 240
         assert json.loads(graph_path.read_text(encoding="utf-8"))["summary"] == {"file": 320}
     finally:
-        if server.poll() is None:
-            server.terminate()
-            try:
-                server.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                server.kill()
-                server.wait(timeout=5)
+        _stop_server(server)
+
+
+def test_real_browser_renders_same_file_demo_story(tmp_path: Path) -> None:
+    browser = _browser()
+    if browser is None:
+        if os.environ.get("INTENTATLAS_REQUIRE_BROWSER") == "1":
+            pytest.fail("A Chrome-family browser is required for the browser E2E gate")
+        pytest.skip("No installed Chrome-family browser")
+
+    environment = os.environ.copy()
+    environment["PYTHONIOENCODING"] = "utf-8"
+    environment["PYTHONUTF8"] = "1"
+    server = subprocess.Popen(
+        [
+            sys.executable,
+            "-u",
+            "-m",
+            "intentatlas",
+            "demo",
+            "--port",
+            "0",
+            "--no-browser",
+        ],
+        cwd=tmp_path,
+        env=environment,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+    )
+    try:
+        url = _viewer_url(server)
+        rendered = _dump_dom(browser, url, tmp_path / "demo-browser-profile")
+        assert "Could not load graph" not in rendered
+        assert "<strong>12</strong><span>total nodes</span>" in rendered
+        assert "<strong>16</strong><span>total links</span>" in rendered
+        assert "Keep customer sessions secure" in rendered
+        assert "Preserve login audit events" in rendered
+        assert "rotate_session" in rendered
+        assert "record_login_audit" in rendered
+    finally:
+        _stop_server(server)

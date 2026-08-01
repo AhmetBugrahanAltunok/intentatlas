@@ -124,12 +124,15 @@ invalidates the cached view; the next read rebuilds it in O(E). Local traversal 
 the matching adjacency bucket rather than unrelated graph edges. The index is rebuildable and is
 not serialized into the graph cache.
 
-The `demo` command builds a compact first-party graph through the same `AtlasGraph`, relation
-catalog, serializer, and viewer used by scanned projects. It writes the graph only to an
-automatically cleaned temporary directory and never scans the current working directory. The
-viewer builds one reusable adjacency view after loading the graph, then derives evidence paths
-locally with deterministic breadth-first traversal in both edge directions, limited to depth 6,
-800 visited nodes, and 6 proof-oriented results. Path labels use
+The `demo` command builds a compact first-party same-file counterexample through the same
+`AtlasGraph`, relation catalog, recommendation engine, serializer, and viewer used by scanned
+projects. The interactive default writes the graph only to an automatically cleaned temporary
+directory and never scans the current working directory. Explicit text/JSON report modes derive
+the exact-symbol requirement and test evidence from graph indexes and production recommendations,
+then exit without a listener. Both modes state that an omitted same-file path is not proof of no
+impact or no test need. The viewer builds one reusable adjacency view after loading the graph, then
+derives evidence paths locally with deterministic breadth-first traversal in both edge directions,
+limited to depth 6, 800 visited nodes, and 6 proof-oriented results. Path labels use
 the stored forward or inverse relation; they are structural explanations, not proof of causality
 or completeness.
 

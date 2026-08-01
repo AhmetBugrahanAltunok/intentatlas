@@ -11,7 +11,7 @@ source_path: "tests/test_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>10245</code>
+- **Size Bytes:** <code>10900</code>
 
 ## Outgoing relationships
 

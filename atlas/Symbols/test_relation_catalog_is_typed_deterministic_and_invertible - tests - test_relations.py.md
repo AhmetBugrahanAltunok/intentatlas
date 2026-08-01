@@ -17,4 +17,3 @@ source_path: "tests/test_relations.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_relations.py|tests/test_relations.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-diff-hunk)_

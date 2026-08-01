@@ -19,6 +19,8 @@ from tools.verify_release import (
     write_release_provenance,
 )
 
+FIXTURE_VERSION = "9.8.7"
+
 
 def _digest(value: bytes) -> str:
     encoded = base64.urlsafe_b64encode(hashlib.sha256(value).digest()).rstrip(b"=")
@@ -27,7 +29,7 @@ def _digest(value: bytes) -> str:
 
 def _write_wheel(directory: Path, license_bytes: bytes, package_value: bytes = b"package") -> Path:
     directory.mkdir(parents=True)
-    dist_info = "intentatlas-0.1.0.dist-info"
+    dist_info = f"intentatlas-{FIXTURE_VERSION}.dist-info"
     values = {
         "intentatlas/__init__.py": package_value,
         "intentatlas/__main__.py": b"main",
@@ -36,9 +38,9 @@ def _write_wheel(directory: Path, license_bytes: bytes, package_value: bytes = b
         "intentatlas/web/index.html": b"html",
         "intentatlas/web/styles.css": b"css",
         f"{dist_info}/METADATA": (
-            b"Metadata-Version: 2.4\nName: intentatlas\nVersion: 0.1.0\n"
-            b"Author: IntentAtlas contributors\nLicense-Expression: MIT\nRequires-Python: >=3.11\n"
-        ),
+            f"Metadata-Version: 2.4\nName: intentatlas\nVersion: {FIXTURE_VERSION}\n"
+            "Author: IntentAtlas contributors\nLicense-Expression: MIT\nRequires-Python: >=3.11\n"
+        ).encode(),
         f"{dist_info}/WHEEL": b"Wheel-Version: 1.0\nTag: py3-none-any\n",
         f"{dist_info}/entry_points.txt": (
             b"[console_scripts]\nintentatlas = intentatlas.cli:main\n"
@@ -53,7 +55,7 @@ def _write_wheel(directory: Path, license_bytes: bytes, package_value: bytes = b
     writer.writerow((record_name, "", ""))
     values[record_name] = output.getvalue().encode("utf-8")
 
-    wheel = directory / "intentatlas-0.1.0-py3-none-any.whl"
+    wheel = directory / f"intentatlas-{FIXTURE_VERSION}-py3-none-any.whl"
     with ZipFile(wheel, "w", ZIP_DEFLATED) as archive:
         for name, value in values.items():
             archive.writestr(name, value)
@@ -62,7 +64,7 @@ def _write_wheel(directory: Path, license_bytes: bytes, package_value: bytes = b
 
 def _write_sdist(directory: Path) -> Path:
     directory.mkdir(exist_ok=True)
-    root = "intentatlas-0.1.0"
+    root = f"intentatlas-{FIXTURE_VERSION}"
     values = {
         "LICENSE": b"license",
         "README.md": b"readme",
@@ -79,7 +81,7 @@ def _write_sdist(directory: Path) -> Path:
             info.size = len(value)
             info.mtime = 0
             archive.addfile(info, io.BytesIO(value))
-    sdist = directory / "intentatlas-0.1.0.tar.gz"
+    sdist = directory / f"intentatlas-{FIXTURE_VERSION}.tar.gz"
     sdist.write_bytes(gzip.compress(tar_bytes.getvalue(), mtime=0))
     return sdist
 
@@ -97,7 +99,7 @@ def test_release_verifier_accepts_repeated_project_archives(tmp_path) -> None:
     result = verify_release(first, second, project_root)
 
     assert result.wheel == first_wheel.name
-    assert result.version == "0.1.0"
+    assert result.version == FIXTURE_VERSION
     assert result.wheel_size == first_wheel.stat().st_size
     assert result.wheel_files == 11
     assert result.sdist_files == 7

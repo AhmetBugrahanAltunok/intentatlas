@@ -16,3 +16,4 @@ source_path: ".github/workflows/publish.yml"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 87e7555 - ci- update pinned actions to node 24|ci: update pinned actions to node 24]] _(history; evidence: git-log)_

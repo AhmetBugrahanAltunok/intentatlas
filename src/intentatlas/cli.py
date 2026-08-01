@@ -23,7 +23,7 @@ from .corpus import (
     render_corpus,
     validate_corpus_graph_size,
 )
-from .demo import serve_demo
+from .demo import build_demo_report, render_demo_report, serve_demo
 from .evaluation import evaluate_recommendations, load_evaluation_labels, render_evaluation
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
@@ -240,6 +240,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Launch the built-in intent-to-proof showcase",
     )
     _viewer_arguments(demo_parser)
+    demo_parser.add_argument(
+        "--report",
+        dest="report_format",
+        choices=("text", "json"),
+        help="Print the deterministic same-file evidence report and exit",
+    )
 
     diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
     diff_parser.add_argument("base", help="Baseline graph path below the project root")
@@ -352,6 +358,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(render_scale_benchmark(result, args.output_format), end="")
             return 0
         if args.command == "demo":
+            if args.report_format:
+                print(render_demo_report(build_demo_report(), args.report_format), end="")
+                return 0
             serve_demo(host=args.host, port=args.port, open_browser=not args.no_browser)
             return 0
         if args.command == "diff":

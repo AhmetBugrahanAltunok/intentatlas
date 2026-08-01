@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>26785</code>
+- **Size Bytes:** <code>27170</code>
 
 ## Outgoing relationships
 
@@ -64,6 +64,8 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Symbols/load_corpus_manifest - src - intentatlas - corpus.py|load_corpus_manifest]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_corpus - src - intentatlas - corpus.py|render_corpus]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/validate_corpus_graph_size - src - intentatlas - corpus.py|validate_corpus_graph_size]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/build_demo_report - src - intentatlas - demo.py|build_demo_report]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_demo_report - src - intentatlas - demo.py|render_demo_report]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/evaluate_recommendations - src - intentatlas - evaluation.py|evaluate_recommendations]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_evaluation_labels - src - intentatlas - evaluation.py|load_evaluation_labels]] _(structure; evidence: python-symbol-reference)_

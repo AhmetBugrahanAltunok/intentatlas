@@ -11,7 +11,7 @@ source_path: "tests/test_release.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>7508</code>
+- **Size Bytes:** <code>7615</code>
 
 ## Outgoing relationships
 

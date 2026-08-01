@@ -11,7 +11,7 @@ source_path: "docs/guided-demo.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>1601</code>
+- **Size Bytes:** <code>2182</code>
 
 ## Incoming relationships
 

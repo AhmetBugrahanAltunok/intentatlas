@@ -10,8 +10,8 @@ source_path: "tests/test_release.py"
 
 ## Metadata
 
-- **End Line:** <code>60</code>
-- **Line:** <code>28</code>
+- **End Line:** <code>62</code>
+- **Line:** <code>30</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

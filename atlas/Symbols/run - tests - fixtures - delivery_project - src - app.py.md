@@ -17,4 +17,3 @@ source_path: "tests/fixtures/delivery_project/src/app.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - fixtures - delivery_project - src - app.py|tests/fixtures/delivery_project/src/app.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-diff-hunk)_
