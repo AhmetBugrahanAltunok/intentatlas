@@ -82,6 +82,7 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
     assert [item["test"]["path"] for item in payload["recommendations"]] == ["test_app.py"]
 
     port = _free_loopback_port()
+    loopback = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     environment = os.environ.copy()
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONUTF8"] = "1"
@@ -111,7 +112,7 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
             if server.poll() is not None:
                 break
             try:
-                with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=1) as response:
+                with loopback.open(f"http://127.0.0.1:{port}/", timeout=1) as response:
                     viewer_html = response.read().decode("utf-8")
                 break
             except OSError as exc:
@@ -125,9 +126,7 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
                 f"viewer did not start: {last_error}; stdout={stdout!r}; stderr={stderr!r}"
             )
         assert "IntentAtlas" in viewer_html
-        with urllib.request.urlopen(
-            f"http://127.0.0.1:{port}/graph.json", timeout=2
-        ) as response:
+        with loopback.open(f"http://127.0.0.1:{port}/graph.json", timeout=2) as response:
             graph = json.loads(response.read().decode("utf-8"))
         assert any(node["path"] == "app.py" for node in graph["nodes"])
     finally:

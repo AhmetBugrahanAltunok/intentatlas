@@ -44,7 +44,7 @@ phase: 7D
 - `node --check src/intentatlas/web/app.js` and `git diff --check` — passed.
 - Two final fixed-timestamp builds were byte-identical. Wheel SHA-256:
   `5662bd344e7b82268517cc8943335f6fff84d460f15bdefaa27ab71b36daf40c`; source archive SHA-256:
-  `60dbdfe8c3b7da865899cf39d7eceaa04293899952f969787802c4dea2b7dd98`. The verifier validated
+  `ec91ea4ce9ea24ddcaecc594f50993513713cce8505963d35e3b3e8a7a3e4e96`. The verifier validated
   36 wheel files and 109 source files.
 - A fresh virtual environment installed the exact wheel with `--no-deps`, reported IntentAtlas
   0.1.0, and completed init, scan, zero-orphan status, and advisory test recommendation commands.
@@ -58,11 +58,16 @@ phase: 7D
   `e51fa68d8c116eb71224926d872a61de3d31593d8a6c4d49a5f7723d2bf93d4a`. Explicit user-owned areas
   were byte-stable, and `atlas/Private/` was not enumerated or read.
 - Network-backed dependency audit: passed after explicit approval.
-- Remote Linux, Windows, macOS, and reproducible-package CI jobs: pending push and run.
+- The first remote run (`30691033738`) passed security, reproducible package, Python
+  3.11/3.12/3.13 full tests, and Linux/Windows E2E. Both macOS E2E cells exposed that runner proxy
+  variables could intercept the test's loopback `urllib` request. The product server remained
+  running, but the request timed out. The regression now uses an explicit no-proxy opener for
+  `127.0.0.1`; a local run with deliberately invalid proxy variables passed.
+- Remote rerun after the macOS regression correction: pending.
 
 ## Remaining risks
 
-- Cross-platform CI has not yet run on the implementation commit.
+- The corrected cross-platform CI run has not yet completed.
 - Reproducibility was demonstrated with the same source, timestamp, Python, Hatchling, and local
   environment; different build-tool or compression versions can produce different bytes.
 - Publication is outside this phase and remains approval-gated.

@@ -18,6 +18,8 @@ phase: 7D
   output.
 - [x] Network-backed dependency audit passes with no known vulnerabilities.
 - [ ] Remote Linux, Windows, macOS, and package jobs pass on the implementation commit.
+- [x] The first remote run's macOS-only proxy interception was diagnosed and reproduced locally
+  with invalid proxy variables; the loopback test now bypasses proxies explicitly.
 - [ ] Exact final verification results, hashes, remaining risks, and decision are recorded.
 
 ## Evidence examined

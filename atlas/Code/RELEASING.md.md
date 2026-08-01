@@ -13,6 +13,6 @@ source_path: "RELEASING.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>2392</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-log)_
