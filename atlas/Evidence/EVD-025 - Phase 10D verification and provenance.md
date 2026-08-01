@@ -67,11 +67,13 @@ phase: 10D
   `87d9f221a7e79925c73229637a23834f3c8b35cbb20f92ec447ca9e134930a4b` and source SHA-256
   `9f32b351850576f6414b785dcb83da3b827f0505484ee7ed94d758a843a73199`; both approved-hash
   checks matched, with 45 wheel and 135 source files validated.
-- Official Git references resolved the pinned checkout `v4.2.2` to `11bd719...`, setup-python
-  `v5.6.0` to `a26af69...`, and the PyPI trusted-publishing `release/v1` branch to immutable
-  `dc37677...` on 2026-08-01. The local policy accepted every external reference.
-- Final post-CI vault materialization produced 1,076 nodes, 2,444 relationships, 941 generated
-  notes, `3 reused, 0 rebuilt`, and zero durable orphans. A subsequent no-change scan kept
+- Official GitHub releases resolved checkout `v7.0.1` to `3d3c42e...` and setup-python `v7.0.0`
+  to `5fda3b95...`; both declare the Node 24 runtime. The PyPI trusted-publishing `release/v1`
+  branch resolved to immutable `dc37677...`. Every external reference is full-SHA pinned and the
+  local policy accepted all of them on 2026-08-01.
+- The post-CI closure materialization before the final record commit produced 1,076 nodes, 2,444
+  relationships, 941 generated notes, `3 reused, 0 rebuilt`, and zero durable orphans. A
+  subsequent no-change scan kept
   generated-note bytes, lengths, and modification times stable at SHA-256
   `f28acff89fce76184d892038eaaec2a2052ee8ed438c41499c3c4b1eb25e2c29`; the explicit user-owned
   Brain/Requirement/Decision/Issue/Evidence/Review/Session snapshot remained byte-and-mtime stable

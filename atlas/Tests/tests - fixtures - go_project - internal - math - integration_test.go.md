@@ -16,7 +16,3 @@ source_path: "tests/fixtures/go_project/internal/math/integration_test.go"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/TestIntegration - tests - fixtures - go_project - internal - math - integration_test.go|TestIntegration]] _(structure; evidence: go-structural)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_

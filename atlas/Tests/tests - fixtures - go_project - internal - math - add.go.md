@@ -20,7 +20,3 @@ source_path: "tests/fixtures/go_project/internal/math/add.go"
 - <code>defines</code> → [[Symbols/Calculator.Sum - tests - fixtures - go_project - internal - math - add.go|Calculator.Sum]] _(structure; evidence: go-structural)_
 - <code>defines</code> → [[Symbols/Number - tests - fixtures - go_project - internal - math - add.go|Number]] _(structure; evidence: go-structural)_
 - <code>defines</code> → [[Symbols/Operation - tests - fixtures - go_project - internal - math - add.go|Operation]] _(structure; evidence: go-structural)_
-
-## Incoming relationships
-
-- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
