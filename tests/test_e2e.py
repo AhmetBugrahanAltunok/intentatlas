@@ -1,12 +1,14 @@
 from __future__ import annotations
 
+import http.client
 import json
 import os
-import socket
+import queue
+import re
 import subprocess
 import sys
+import threading
 import time
-import urllib.request
 from pathlib import Path
 
 
@@ -26,10 +28,15 @@ def _cli(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
     )
 
 
-def _free_loopback_port() -> int:
-    with socket.socket() as probe:
-        probe.bind(("127.0.0.1", 0))
-        return int(probe.getsockname()[1])
+def _http_get(port: int, path: str) -> bytes:
+    connection = http.client.HTTPConnection("127.0.0.1", port, timeout=2)
+    try:
+        connection.request("GET", path)
+        response = connection.getresponse()
+        assert response.status == 200
+        return response.read()
+    finally:
+        connection.close()
 
 
 def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
@@ -81,20 +88,19 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
     payload = json.loads(recommendation.stdout)
     assert [item["test"]["path"] for item in payload["recommendations"]] == ["test_app.py"]
 
-    port = _free_loopback_port()
-    loopback = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     environment = os.environ.copy()
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONUTF8"] = "1"
     server = subprocess.Popen(
         [
             sys.executable,
+            "-u",
             "-m",
             "intentatlas",
             "open",
             str(project),
             "--port",
-            str(port),
+            "0",
             "--no-browser",
         ],
         cwd=tmp_path,
@@ -105,15 +111,27 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
         encoding="utf-8",
     )
     try:
-        deadline = time.monotonic() + 10
+        assert server.stdout is not None
+        ready_lines: queue.Queue[str] = queue.Queue()
+        threading.Thread(
+            target=lambda: ready_lines.put(server.stdout.readline()), daemon=True
+        ).start()
+        try:
+            ready_line = ready_lines.get(timeout=10)
+        except queue.Empty as exc:
+            raise AssertionError("viewer did not report its loopback address") from exc
+        match = re.fullmatch(r"IntentAtlas viewer: http://127\.0\.0\.1:(\d+)\s*", ready_line)
+        assert match is not None, ready_line
+        port = int(match.group(1))
+
+        deadline = time.monotonic() + 5
         viewer_html = ""
         last_error: OSError | None = None
         while time.monotonic() < deadline:
             if server.poll() is not None:
                 break
             try:
-                with loopback.open(f"http://127.0.0.1:{port}/", timeout=1) as response:
-                    viewer_html = response.read().decode("utf-8")
+                viewer_html = _http_get(port, "/").decode("utf-8")
                 break
             except OSError as exc:
                 last_error = exc
@@ -126,8 +144,7 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
                 f"viewer did not start: {last_error}; stdout={stdout!r}; stderr={stderr!r}"
             )
         assert "IntentAtlas" in viewer_html
-        with loopback.open(f"http://127.0.0.1:{port}/graph.json", timeout=2) as response:
-            graph = json.loads(response.read().decode("utf-8"))
+        graph = json.loads(_http_get(port, "/graph.json").decode("utf-8"))
         assert any(node["path"] == "app.py" for node in graph["nodes"])
     finally:
         if server.poll() is None:

@@ -44,7 +44,7 @@ phase: 7D
 - `node --check src/intentatlas/web/app.js` and `git diff --check` — passed.
 - Two final fixed-timestamp builds were byte-identical. Wheel SHA-256:
   `5662bd344e7b82268517cc8943335f6fff84d460f15bdefaa27ab71b36daf40c`; source archive SHA-256:
-  `ec91ea4ce9ea24ddcaecc594f50993513713cce8505963d35e3b3e8a7a3e4e96`. The verifier validated
+  `166272c915484ca6acde6e5b30983a02ddfa0b155c12a719a235ebd8ffbe8f94`. The verifier validated
   36 wheel files and 109 source files.
 - A fresh virtual environment installed the exact wheel with `--no-deps`, reported IntentAtlas
   0.1.0, and completed init, scan, zero-orphan status, and advisory test recommendation commands.
@@ -59,11 +59,13 @@ phase: 7D
   were byte-stable, and `atlas/Private/` was not enumerated or read.
 - Network-backed dependency audit: passed after explicit approval.
 - The first remote run (`30691033738`) passed security, reproducible package, Python
-  3.11/3.12/3.13 full tests, and Linux/Windows E2E. Both macOS E2E cells exposed that runner proxy
-  variables could intercept the test's loopback `urllib` request. The product server remained
-  running, but the request timed out. The regression now uses an explicit no-proxy opener for
-  `127.0.0.1`; a local run with deliberately invalid proxy variables passed.
-- Remote rerun after the macOS regression correction: pending.
+  3.11/3.12/3.13 full tests, and Linux/Windows E2E. Both macOS E2E cells timed out while polling a
+  preselected port without a positive server-readiness signal. A second run (`30691140214`) proved
+  that bypassing proxy variables alone did not resolve that platform race. The final regression
+  lets the server atomically choose port 0, reads its unbuffered loopback address as the readiness
+  handshake, and uses direct `http.client` requests. A local run with deliberately invalid proxy
+  variables passed.
+- Remote rerun after the deterministic macOS readiness correction: pending.
 
 ## Remaining risks
 

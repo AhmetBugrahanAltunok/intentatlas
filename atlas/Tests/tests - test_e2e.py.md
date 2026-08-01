@@ -11,15 +11,16 @@ source_path: "tests/test_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4476</code>
+- **Size Bytes:** <code>4993</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_cli - tests - test_e2e.py|_cli]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_free_loopback_port - tests - test_e2e.py|_free_loopback_port]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_http_get - tests - test_e2e.py|_http_get]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_installed_cli_scan_recommend_and_viewer_workflow - tests - test_e2e.py|test_installed_cli_scan_recommend_and_viewer_workflow]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 74df114 - fix- bypass proxies in loopback e2e|fix: bypass proxies in loopback e2e]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_
