@@ -11,16 +11,17 @@ the local-first product contract or implying that impact analysis is perfect.
 
 ## Product target
 
-A developer should be able to install one reviewed candidate, confirm its exact version, run one
-offline command, and see both the useful recommendation and the deliberately excluded same-file
-false positive. Interactive exploration and machine-readable evidence should tell the same story.
+A developer should be able to install one candidate, confirm its exact version, run one offline
+command, and see both the useful recommendation and the deliberately unpromoted same-file path.
+Interactive exploration and machine-readable evidence should tell the same story. Formal review
+status must remain separate from the candidate version until every phase gate passes.
 
 ## Phase 11A — Honest release candidate and evaluable demo
 
 1. Use one canonical package-version source and prepare `0.3.0rc1` without tagging or publishing.
 2. Extend the original demo with two requirements, symbols, and tests sharing one source file.
-3. Modify only one symbol and prove the unrelated same-file test is not recommended from the
-   available evidence.
+3. Modify only one symbol and demonstrate that the supplied exact-symbol evidence does not rank
+   the unrelated same-file test.
 4. Add deterministic text and JSON demo reports that exit without starting a server; keep the
    current interactive viewer as the default experience.
 5. Verify the exact built wheel, version, report, browser, provenance, and complete quality gates.

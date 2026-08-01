@@ -10,69 +10,138 @@ phase: 11A
 
 - proves:: [[Requirements/REQ-026 - Make the release candidate honest and immediately evaluable]]
 - Decision: [[Decisions/ADR-026 - Separate scriptable demo evidence from interactive viewing and publication]]
+- Release boundary: [[Decisions/ADR-025 - Layer offline verification before trusted publishing]]
 - Delivery issue: [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo]]
 - Review: [[Reviews/Phase 11A Release Candidate and Demo Review]]
 
-## Interim change inventory
+## Deep-audit change inventory
 
-- Replaced duplicated static package-version configuration with Hatchling dynamic versioning from
-  `src/intentatlas/__init__.py` and prepared `0.3.0rc1` without a tag or publication.
-- Expanded the original demo from 9 nodes/13 relationships to 12 nodes/16 relationships with two
-  requirements, two symbols, and two tests sharing `src/auth.py`; the example commit modifies only
-  `rotate_session`.
-- Added deterministic schema-1 text and JSON reports derived from graph indexes and the production
-  recommendation engine. The report selects `tests/test_auth_rotation.py`, leaves
-  `tests/test_auth_audit.py` unpromoted at the default threshold, and explicitly rejects an
-  “unaffected” or “unnecessary” interpretation.
-- Preserved `intentatlas demo` as the production loopback viewer default and added report mode as an
-  immediate no-listener path.
-- Extended source and exact-wheel CLI E2E, real Chrome-family rendering, version consistency,
-  release-verifier fixtures, English/Turkish onboarding, guided demo, architecture, changelog, and
-  release instructions.
-- Added the Phase 11 strategy and linked REQ-026, ADR-026, ISSUE-024, kickoff, Evidence, Review, and
-  Product Roadmap records.
+- Retained one Hatchling-backed version source at `src/intentatlas/__init__.py` and candidate
+  identity `0.3.0rc1`; no tag, release, publication, deployment, visibility change, or push
+  occurred.
+- Expanded the original prebuilt demo from 9 nodes/13 relationships to 12 nodes/18 relationships.
+  Two requirements, two symbols, and two tests share `src/auth.py`; broad test-to-file fallback
+  edges remain present, while the example commit has one canonical `modifies` edge to
+  `symbol:src/auth.py::rotate_session`.
+- Derived the demo's changed symbol and defining file from graph edges, then exercised production
+  recommendation and Change Report contracts. `tests/test_auth_rotation.py` is selected;
+  `tests/test_auth_audit.py` stays visible but is not ranked from the supplied exact-symbol
+  evidence. Removing the exact `modifies` edge restores both file-fallback candidates, showing
+  that the holdout is evidence-sensitive rather than graph-sparse.
+- Served the production-shaped Change Report from the same graph snapshot as the interactive demo
+  and rendered the complete advisory: omission is not proof that a requirement is unaffected or a
+  test unnecessary.
+- Hardened the local viewer boundary by normalizing `localhost` to numeric IPv4, rejecting `::1`
+  and non-loopback binds, rejecting foreign `Host` headers, and returning CSP, anti-framing,
+  no-sniff, no-referrer, same-origin-resource, and no-store response policies.
+- Bound release artifacts to reviewed checkout bytes with exact wheel and positive sdist
+  manifests, package-payload parity, complete Core Metadata 2.4 validation, fixed project fields,
+  fixed base/extra dependencies, a hook-free Hatch configuration, one declarative version source,
+  exact WHEEL fields/generator, complete `RECORD`, MIT license bytes, and bounded archives.
+- Rejected encrypted and non-regular wheel members, undeclared dist-info files, duplicate or
+  Unicode/case-colliding paths, Win32 trailing-dot/reserved paths, unsafe tar links, local-state
+  roots, injected dependencies, conflicting metadata, indirect runtime version mutation,
+  `backend-path`, and custom build hooks. Deterministic fixtures prevent timestamp-flaky negative
+  tests.
+- Split publishing into an OIDC-free source/build/verification job and a three-step protected OIDC
+  job that only downloads, rechecks, and publishes the approved bytes. Semantic YAML tests bind
+  the dispatch revision to protected `main`, exact checkout settings, approval commands, artifact
+  paths, hash rechecks, permissions, job shape, and immutable Action identities.
+- Extended the security gate to `src` plus `tools`, made editable-package exclusion explicit for
+  third-party dependency auditing, and documented fresh per-run release/sdist directories so stale
+  local artifacts cannot mask an incomplete package.
+- Corrected English/Turkish onboarding, prebuilt-demo limits, repository-only benchmark commands,
+  candidate-versus-release status, source reconstruction, protected-environment requirements,
+  MIT/third-party attribution, and original open-source positioning. Active roadmap links remain
+  the deliberate absolute exception because `atlas/` is excluded from the source archive.
 
-## Interim local verification
+## Focused and complete local verification
 
-- `.venv\Scripts\python.exe -m pytest tests/test_demo.py tests/test_version.py
-  tests/test_release.py tests/test_e2e.py tests/test_browser_e2e.py -q` with
-  `INTENTATLAS_REQUIRE_BROWSER=1` — 17 passed.
-- `.venv\Scripts\python.exe -m pytest --cov=intentatlas --cov-report=term-missing
-  --cov-fail-under=80` — 346 passed; total branch-aware coverage 88.00%.
+- Source-directed commands used absolute `PYTHONPATH=D:\Projects\IntentAtlas\src`; installed-wheel
+  commands removed it and resolved `intentatlas` from
+  `.venv\Lib\site-packages\intentatlas\__init__.py`.
+- Focused release, workflow, demo, viewer, version, and required real-browser suite: `53 passed`.
+- Complete source suite with `INTENTATLAS_REQUIRE_BROWSER=1`:
+  `.venv\Scripts\python.exe -m pytest --cov=intentatlas --cov-report=term-missing
+  --cov-fail-under=80` — `376 passed`; branch-aware coverage `87.92%`.
 - `.venv\Scripts\python.exe -m ruff check .` — passed.
-- `.venv\Scripts\python.exe -m mypy` — success, no issues in 38 maintained source files.
-- `.venv\Scripts\python.exe -m bandit -q -r src` — passed.
+- `.venv\Scripts\python.exe -m mypy` — no issues in 38 maintained source files.
+- `.venv\Scripts\python.exe -m bandit -q -r src tools` — passed.
 - `.venv\Scripts\python.exe -m pip check` — no broken requirements.
-- `node --check src/intentatlas/web/app.js` and `git diff --check` — passed.
-- Two Hatchling builds under epoch `1704067200` were byte-identical and passed the release
-  verifier: wheel SHA-256 `de660a8d63eb834bf06b69e91c5015199ca3bd7279ccd71901f8e0b75089343a`,
-  sdist SHA-256 `ac1ab1e23c5e1ab6c84bc6376a7b4f39ff42a7e4da99a5b8cb2d8eecb5754925`,
-  with 45 wheel and 136 source files. These are working-tree verification artifacts, not yet the
-  source-bound final candidate.
-- A new environment installed that exact wheel with `--no-deps`, reported
-  `IntentAtlas 0.3.0rc1`, and rendered both text and valid JSON reports without using the source
-  tree.
-- Clean implementation commit `1c640192410c35b7287b2aaddeae6b8cdadcc75d` was rebuilt twice under
-  its own commit epoch `1785613103`. Exact source-bound provenance and approved-hash matching
-  passed: wheel SHA-256 `44a8f7ec7a9c880fecdf605c9ba6ffde4c6a48986c8a99636281a6485dae496a`
-  at 124,511 bytes and sdist SHA-256
-  `c8aaa0ac3486fbab41921e2bc97bf763680a00e212d9a1c86712d0e841fad758` at 192,167 bytes, with 45
-  wheel and 136 source files. A new environment installed the exact committed wheel, reported the
-  candidate version, and parsed its JSON demo report successfully.
-- Final local vault materialization produced 1,096 nodes, 2,422 relationships, 954 generated notes,
-  `3 reused, 0 rebuilt`, and zero durable orphans. A subsequent no-change scan kept generated
-  bytes, lengths, and mtimes stable at SHA-256
-  `875153455001f8da8ddb18088e696bbc842d3f93a7f7091c050d09c2ee562fc7`; explicit user-owned areas
-  were byte-and-mtime stable. `atlas/Private/` was not enumerated or read.
+- `node --check src/intentatlas/web/app.js` — passed.
+- All four PowerShell blocks in `RELEASING.md` parsed as script blocks; semantic workflow tests and
+  `git diff --check` passed.
+- Installed-wheel CLI and real-browser E2E: `4 passed`. Coverage includes version, demo JSON,
+  init/scan/status/changes/impact/recommendation, Change Report retrieval, commit-keyed review,
+  loopback security headers/foreign-Host rejection, the 320-node bounded viewer, and the
+  12-node/18-link same-file demo.
+
+## Working-tree package verification
+
+- `build==1.3.0` with isolated `hatchling==1.31.0` built the reviewed working tree twice under
+  `SOURCE_DATE_EPOCH=1704067200`. `tools/verify_release.py` accepted byte-identical artifacts with
+  45 wheel files and 143 sdist files:
+  - `intentatlas-0.3.0rc1-py3-none-any.whl`: 125,896 bytes,
+    SHA-256 `5ecd54fac264d068419c92451676b3cb3c8e704fe6ba791e63a60500f58d9347`.
+  - `intentatlas-0.3.0rc1.tar.gz`: 210,899 bytes,
+    SHA-256 `7ee2a8f453ce6e8215375fe0d8b13f53eafd47eb831b39734071b872719ebb0c`.
+- Rebuilding the verified sdist wheel with `--no-build-isolation` produced the exact direct-wheel
+  SHA-256. A separate clean environment installed that wheel, reported `IntentAtlas 0.3.0rc1`, and
+  returned the expected schema-1 rotation-test demo result.
+- Extracted verified-sdist tests with a required Chrome-family browser: `370 passed, 6 skipped`.
+  The six skips are repository-only workflow tests because `.github/` is intentionally excluded.
+- These hashes describe the final pre-commit working tree, not yet a Git source identity. A clean
+  local implementation commit and source-revision-bound provenance are still required.
+
+## Network and immutable-dependency verification
+
+- The combined development/release/security/typing environment installed the fixed
+  `build==1.3.0`; `pip check` passed.
+- `.venv\Scripts\python.exe -m pip_audit --skip-editable` reported no known vulnerabilities. The
+  unpublished editable IntentAtlas distribution was the only explicit skip; all installed
+  third-party dependencies were audited.
+- GitHub's commit API resolved all five configured Action SHAs in their declared official
+  repositories on 2026-08-02. Checkout, setup-python, upload-artifact, download-artifact, and the
+  PyPI publishing Action all returned the exact requested SHA with a valid verified signature.
+- Network use was limited to package resolution/audit and these Action identity checks. No project
+  source, graph, vault content, artifact, or telemetry was uploaded.
+
+## Safety and boundary observations
+
+- `atlas/Private/` was not enumerated, read, indexed, or modified. The ignored root `.obsidian/`
+  directory was not treated as a vault or package source; `atlas/` remains the only project vault.
+- No old ProjectOS content or history and no Obsidian Mind code, logo, or file was imported. The
+  existing MIT and legitimate inspiration/third-party attribution boundaries remain intact.
+- Commit metadata and tracked project files preserve the existing tool-neutral authorship and
+  attribution boundary; IntentAtlas's own generated-note marker remains unaffected.
+- No secrets, environment values, raw source bodies, package credentials, deployment, tag,
+  release, visibility change, or push were introduced.
+
+## Vault verification
+
+- The first final scan produced 1,144 nodes, 2,480 relationships, and 1,002 generated notes; two
+  adapter fragments were reused and one was rebuilt. The immediate second scan reused all three
+  fragments and rebuilt none while preserving the same graph and note counts.
+- Explicit snapshots covered 142 files in `Brain/`, `Requirements/`, `Decisions/`, `Issues/`,
+  `Evidence/`, `Reviews/`, and `Sessions/`, never `Private/`. Hash, length, path, and UTC mtime were
+  identical before/after the first scan and after the second scan.
+- The 1,003-file generated snapshot across `Code/`, `Symbols/`, `Tests/`, `Commits/`, and
+  `Dashboard/` was byte- and mtime-identical across the two scans.
+- `intentatlas status` reported 2,480 relationships and zero durable orphans.
 
 ## Open gates
 
-- Re-run the complete local gates after final Evidence/Review materialization.
-- Network dependency audit, push, remote CI, final Review, and acceptance remain pending and need
-  separate authorization where required.
-- No tag, release, package publication, deployment, or repository-visibility change is authorized.
+- Create a clean local audit-fix commit, rebuild it twice under a fixed recorded epoch, bind
+  provenance to that exact source revision, and record the resulting hashes here.
+- Push and remote CI remain pending by explicit instruction; Phase 11A cannot close before they
+  pass.
+- Before any public launch, the owner must verify GitHub private vulnerability reporting and the
+  external `pypi` environment's required reviewers/deployment-branch protection. These remote
+  settings cannot be proven from local files.
+- No tag, release, publication, deployment, or repository-visibility change is authorized.
 
 ## Interim decision
 
-Phase 11A remains active. All implemented behavior and current local gates pass, but exact committed
-provenance, remote closure, and final Review prevent acceptance.
+All currently executable source, browser, security, dependency, package, install, sdist, and vault
+gates pass. Phase 11A remains active until exact committed provenance, push/remote CI, and the
+external launch controls above are verified.

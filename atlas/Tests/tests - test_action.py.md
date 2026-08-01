@@ -11,11 +11,21 @@ source_path: "tests/test_action.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3545</code>
+- **Size Bytes:** <code>13540</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/_job_steps - tests - test_action.py|_job_steps]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_load_yaml - tests - test_action.py|_load_yaml]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_mapping_children - tests - test_action.py|_mapping_children]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_named_step - tests - test_action.py|_named_step]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_shell_commands - tests - test_action.py|_shell_commands]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_uses_references - tests - test_action.py|_uses_references]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_workflow_triggers - tests - test_action.py|_workflow_triggers]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_action_policy_parser_observes_semantically_spaced_yaml_keys - tests - test_action.py|test_action_policy_parser_observes_semantically_spaced_yaml_keys]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_external_actions_are_pinned_to_immutable_full_commit_shas - tests - test_action.py|test_external_actions_are_pinned_to_immutable_full_commit_shas]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_publish_identity_is_isolated_from_build_and_project_execution - tests - test_action.py|test_publish_identity_is_isolated_from_build_and_project_execution]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_security_job_audits_release_tools_and_third_party_environment - tests - test_action.py|test_security_job_audits_release_tools_and_third_party_environment]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_shadow_review_action_is_opt_in_local_and_credential_free - tests - test_action.py|test_shadow_review_action_is_opt_in_local_and_credential_free]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_trusted_publish_workflow_is_manual_protected_and_hash_bound - tests - test_action.py|test_trusted_publish_workflow_is_manual_protected_and_hash_bound]] _(structure; evidence: python-ast)_
 

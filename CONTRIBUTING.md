@@ -6,12 +6,19 @@ Thanks for helping make software intent easier to understand.
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pip install -e ".[dev,release,security,typing]"
 .\.venv\Scripts\python.exe -m pytest
 .\.venv\Scripts\python.exe -m ruff check .
-.\.venv\Scripts\python.exe -m pip install -e ".[typing]"
 .\.venv\Scripts\python.exe -m mypy
+.\.venv\Scripts\python.exe -m bandit -q -r src
+.\.venv\Scripts\python.exe -m pip check
 ```
+
+Release work also runs `python -m pip_audit`; that advisory lookup uses the network and must follow
+the repository's explicit network-approval policy.
+
+On macOS or Linux, use `./.venv/bin/python` in place of
+`.\.venv\Scripts\python.exe`; the gate commands and expected results are the same.
 
 Release-affecting changes must also pass the installed CLI and real-browser E2E tests, build twice under a fixed
 `SOURCE_DATE_EPOCH`, and pass `tools/verify_release.py` as described in
@@ -23,7 +30,7 @@ Release-affecting changes must also pass the installed CLI and real-browser E2E 
 2. Keep adapters small and keep the core graph language-neutral.
 3. Add tests for behavior and a fixture for each new language adapter.
 4. Do not commit private vault material, secrets, generated caches, or local workspaces.
-5. Update the canonical [`Product Roadmap`](atlas/Brain/Product%20Roadmap.md) or an ADR when a
+5. Update the canonical [`Product Roadmap`](https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md) or an ADR when a
    change alters a product or architecture decision. The root `ROADMAP.md` is archival only.
 6. For phase work, record the complete change inventory, exact verification results, remaining
    risks, and review outcome in the vault before marking the phase complete.

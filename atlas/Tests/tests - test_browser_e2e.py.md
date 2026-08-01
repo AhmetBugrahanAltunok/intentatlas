@@ -11,7 +11,7 @@ source_path: "tests/test_browser_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6644</code>
+- **Size Bytes:** <code>7673</code>
 
 ## Outgoing relationships
 
@@ -28,4 +28,5 @@ source_path: "tests/test_browser_e2e.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_

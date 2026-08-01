@@ -11,7 +11,7 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>28601</code>
+- **Size Bytes:** <code>28691</code>
 
 ## Outgoing relationships
 

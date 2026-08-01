@@ -10,8 +10,8 @@ source_path: "src/intentatlas/viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>81</code>
-- **Line:** <code>47</code>
+- **End Line:** <code>94</code>
+- **Line:** <code>48</code>
 - **Symbol Kind:** <code>"class"</code>
 
 ## Incoming relationships

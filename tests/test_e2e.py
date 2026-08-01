@@ -31,15 +31,23 @@ def _cli(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
     )
 
 
-def _http_get(port: int, path: str) -> bytes:
+def _http_response(
+    port: int, path: str, *, host_header: str | None = None
+) -> tuple[int, dict[str, str], bytes]:
     connection = http.client.HTTPConnection("127.0.0.1", port, timeout=2)
     try:
-        connection.request("GET", path)
+        headers = {"Host": host_header} if host_header is not None else {}
+        connection.request("GET", path, headers=headers)
         response = connection.getresponse()
-        assert response.status == 200
-        return response.read()
+        return response.status, dict(response.getheaders()), response.read()
     finally:
         connection.close()
+
+
+def _http_get(port: int, path: str) -> bytes:
+    status, _, body = _http_response(port, path)
+    assert status == 200
+    return body
 
 
 def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
@@ -182,6 +190,18 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
                 f"viewer did not start: {last_error}; stdout={stdout!r}; stderr={stderr!r}"
             )
         assert "IntentAtlas" in viewer_html
+        status, headers, _ = _http_response(port, "/")
+        assert status == 200
+        assert "frame-ancestors 'none'" in headers["Content-Security-Policy"]
+        assert headers["Cross-Origin-Resource-Policy"] == "same-origin"
+        assert headers["Referrer-Policy"] == "no-referrer"
+        assert headers["X-Content-Type-Options"] == "nosniff"
+        assert headers["X-Frame-Options"] == "DENY"
+        foreign_status, _, foreign_body = _http_response(
+            port, "/graph.json", host_header="attacker.invalid"
+        )
+        assert foreign_status == 421
+        assert b"app.py" not in foreign_body
         graph = json.loads(_http_get(port, "/graph.json").decode("utf-8"))
         assert any(node["path"] == "app.py" for node in graph["nodes"])
         report = json.loads(_http_get(port, "/change-report.json").decode("utf-8"))

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3625</code>
+- **Size Bytes:** <code>4322</code>
 
 ## Outgoing relationships
 
@@ -21,6 +21,7 @@ source_path: "src/intentatlas/viewer.py"
 - <code>defines</code> → [[Symbols/serve_graph.Handler - src - intentatlas - viewer.py|serve_graph.Handler]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler._send - src - intentatlas - viewer.py|serve_graph.Handler._send]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/serve_graph.Handler.end_headers - src - intentatlas - viewer.py|serve_graph.Handler.end_headers]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler.log_message - src - intentatlas - viewer.py|serve_graph.Handler.log_message]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships

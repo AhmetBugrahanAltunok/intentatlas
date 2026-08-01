@@ -7,7 +7,7 @@ phase: 11A
 # Make the release candidate honest and immediately evaluable
 
 A developer can verify the exact IntentAtlas release candidate and run one original, offline demo
-that shows both a supported recommendation and an avoided same-file false positive through
+that shows both a supported recommendation and an unpromoted same-file candidate through
 interactive and deterministic machine-readable views.
 
 ## Acceptance

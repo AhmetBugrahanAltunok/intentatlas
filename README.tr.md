@@ -6,7 +6,7 @@
 
 <p align="center"><strong>Yazılım projeleri için yaşayan niyet haritası.</strong></p>
 
-<p align="center"><a href="README.md">English</a> · <a href="atlas/Brain/Product%20Roadmap.md">Ürün yol haritası</a></p>
+<p align="center"><a href="README.md">English</a> · <a href="https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md">Ürün yol haritası</a></p>
 
 IntentAtlas bir sistemin neden var olduğunu, onu gerçekleştiren kod ve kanıtlarla bağlar:
 
@@ -20,14 +20,14 @@ gösterir. Yerel çalışır, API anahtarı istemez ve proje hafızasını Obsid
 Git ile izlenebilir Markdown dosyalarında tutar.
 
 Güncel fazlar ve tamamlanma durumları
-[Ürün Yol Haritası](atlas/Brain/Product%20Roadmap.md) belgesinde izlenir. Repo kökündeki
+[Ürün Yol Haritası](https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md) belgesinde izlenir. Repo kökündeki
 `ROADMAP.md`, ilk 0.1–0.3 teknik planının açıkça arşivlenmiş tarihsel kaydıdır.
 
 ## Sürüm adayı durumu
 
-İncelenen kaynak şu anda kendisini `0.3.0rc1` olarak tanımlar. Bu bir sürüm adayıdır; yayımlanmış
+Mevcut aday kaynak şu anda kendisini `0.3.0rc1` olarak tanımlar. Bu bir sürüm adayıdır; yayımlanmış
 paket veya uyumluluk sözü değildir. Tag ya da paket indeksi yayını anlamına gelmez. Güvenilen bir
-kaynak checkout'unda adayı şöyle doğrulayabilirsiniz:
+kaynak revision checkout'unda o checkout'u derleyip şöyle deneyebilirsiniz:
 
 ```powershell
 python -m venv .venv
@@ -36,13 +36,17 @@ python -m venv .venv
 .\.venv\Scripts\intentatlas.exe demo --report text
 ```
 
+Bu işlem mevcut checkout'un sürümünü ve davranışını doğrular; Git revision'ını veya artifact
+hash'ini tek başına kanıtlamaz. Kesin kaynak, tekrarlanabilir derleme, provenance ve hash süreci
+[sürüm belgesinde](RELEASING.md) açıklanır.
+
 Rapor listener açmadan sonlanır; aynı kaynak dosyadaki farklı sembole bağlı bir test mevcut kesin
 sembol kanıtıyla önerilmezken diğer testin neden önerildiğini gösterir. Bir kaydın gösterilmemesi,
 diğer gereksinimin etkilenmediği veya testinin gereksiz olduğu iddiası değildir.
 
 ## Hızlı başlangıç
 
-Kurulumdan hemen sonra eksiksiz niyet-kanıt zincirini deneyin:
+Kurulumdan sonra niyet-kanıt öneri ve sunum yolunu deneyin:
 
 ```powershell
 intentatlas demo
@@ -50,14 +54,18 @@ intentatlas demo --report text
 intentatlas demo --report json
 ```
 
-Yerleşik örnek özgün, çevrimdışı ve geçicidir; geçerli klasörü taramaz. Kendi deponuz için:
+Yerleşik örnek özgün, çevrimdışı ve geçicidir. Sentetik grafiği ve ilişkileri önceden hazırlanır;
+üretim graph, öneri, rapor ve görüntüleyici katmanlarını çalıştırır ancak repo keşfi, AST ayrıştırma
+veya Git diff çıkarımını sınamaz. İnteraktif görünümde **Change report** düğmesini açarak seçilen
+`tests/test_auth_rotation.py` testini, gösterilen uyarı sınırını ve grafikte bulunmasına rağmen
+sıralanmayan `tests/test_auth_audit.py` testini karşılaştırın. Ayrıntılı tur için
+[yönlendirmeli demo belgesine](docs/guided-demo.md) bakın. Geçerli klasörü taramaz. IntentAtlas
+kaynak checkout'unu yanlışlıkla başlatmamak için kendi deponuzun yolunu açıkça verin:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-.\.venv\Scripts\intentatlas.exe init
-.\.venv\Scripts\intentatlas.exe scan
-.\.venv\Scripts\intentatlas.exe open
+.\.venv\Scripts\intentatlas.exe init C:\projenizin\yolu
+.\.venv\Scripts\intentatlas.exe scan C:\projenizin\yolu
+.\.venv\Scripts\intentatlas.exe open C:\projenizin\yolu
 ```
 
 `init`, genel yönlendirme ile boş niyet klasörleri oluşturur; IntentAtlas'ın kendi gereksinim,
@@ -72,6 +80,9 @@ eski kayıt yeniden üretilir. Grafik ve cache dosyaları atomik olarak değişt
 Ardından `atlas/` klasörünü Obsidian’da vault olarak açın. Graph View; gereksinimleri,
 kararları, kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak
 gösterecektir.
+
+macOS veya Linux'ta `.\.venv\Scripts\intentatlas.exe` yerine `./.venv/bin/intentatlas` ve
+`/projenizin/yolu` gibi açık bir hedef yol kullanın.
 
 Python 3.11, 3.12 ve 3.13 desteklenir. Tam test paketi Linux üzerinde; kurulmuş wheel ile CLI,
 tarama, test önerisi ve yerel görüntüleyici akışı ise en eski ve en yeni desteklenen Python
@@ -147,7 +158,8 @@ düzeyindeki bir ilişki, aynı dosyadaki ilgisiz bir sembol için varsayılan o
 dönüşmez; bu yedek kanıt düşük güvenli kalır veya çelişen kesin sembol kanıtı varsa elenir.
 Sonuçlar tavsiyedir; listede olmayan bir test, davranışın etkilenmediğini kanıtlamaz.
 
-Öneri kalitesini eksiksiz olduğu açıkça belirtilen, insan incelemeli yerel etiketlerle ölçmek için:
+Tam IntentAtlas repo checkout'unda, öneri kalitesini eksiksiz olduğu açıkça belirtilen insan
+incelemeli yerel etiketlerle ölçmek için:
 
 ```text
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
@@ -155,8 +167,8 @@ intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 ```
 
 Değerlendirme testleri çalıştırmadan ve sıralama puanlarını değiştirmeden TP, FP, FN, precision ve
-recall üretir. Birlikte gelen iki vakalık temel ölçüm yalnızca regresyon yardımcısıdır; başka
-repolardaki doğruluğu kanıtlamaz. Şema ve metrik sözleşmesi
+recall üretir. Yalnız tam repoda bulunan iki vakalık temel ölçüm regresyon yardımcısıdır; sdist
+corpus'una dahil değildir ve başka repolardaki doğruluğu kanıtlamaz. Şema ve metrik sözleşmesi
 [değerlendirme belgesinde](docs/recommendation-evaluation.md) açıklanır.
 
 Özgün Python, TypeScript ve Go grafik senaryolarında bütün güven eşiklerini karşılaştırmak için:
@@ -170,8 +182,9 @@ Corpus çıktısı proje başına ve mikro toplamları birlikte gösterir. Bu k�
 agregasyon ile güven davranışını doğrular; kopyalanmış repo veya gerçek dünya doğruluk kanıtı
 değildir. Ayrıntılar [corpus şemasında](docs/recommendation-corpus.md) bulunur.
 
-Lisansı incelenmiş gerçek projelerde yeniden üretilebilir doğrulama için, onaylı altı açık kaynak
-depoyu yalnızca ağ izninden sonra manifestteki commit’lere sabitleyin ve şunu çalıştırın:
+Tam IntentAtlas repo checkout'unda lisansı incelenmiş gerçek projelerle yeniden üretilebilir
+doğrulama için, onaylı altı açık kaynak depoyu yalnızca ağ izninden sonra yalnız repoda bulunan
+manifestteki commit’lere sabitleyin ve şunu çalıştırın:
 
 ```text
 intentatlas evaluate-real-world benchmarks/real-world/manifest.json .intentatlas/real-world/checkouts
@@ -293,3 +306,6 @@ indeks geçersizleştirilip güvenle yeniden kurulur.
 Vault-first hafıza yaklaşımı
 [breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden
 esinlenmiştir. IntentAtlas buna kod, test, Git ve teslimat niyeti katmanını ekler.
+Üçüncü taraf kaynak kodu, logosu veya vault içeriği paketlenmez.
+
+MIT lisanslıdır. Katkı göndermeden önce [CONTRIBUTING.md](CONTRIBUTING.md) belgesini okuyun.

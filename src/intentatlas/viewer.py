@@ -33,10 +33,11 @@ def serve_graph(
     change_report_document: bytes | None = None,
     review_document: bytes | None = None,
 ) -> None:
-    if host not in {"127.0.0.1", "localhost", "::1"}:
-        raise ValueError("The viewer may only bind to a loopback address")
+    if host not in {"127.0.0.1", "localhost"}:
+        raise ValueError("The viewer may only bind to the IPv4 loopback address")
     if isinstance(port, bool) or not isinstance(port, int) or port < 0 or port > 65535:
         raise ValueError("Port must be between 0 and 65535")
+    bind_host = "127.0.0.1" if host == "localhost" else host
     if graph_document is None:
         if graph_path is None or not graph_path.is_file():
             raise ValueError(f"Graph not found: {graph_path}. Run `intentatlas scan` first.")
@@ -46,6 +47,9 @@ def serve_graph(
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:  # noqa: N802
+            if self.headers.get("Host") not in allowed_hosts:
+                self.send_error(421, "Unexpected Host header")
+                return
             route = self.path.split("?", maxsplit=1)[0]
             if route == "/graph.json":
                 self._send(served_graph_document, "application/json; charset=utf-8")
@@ -69,20 +73,30 @@ def serve_graph(
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Cache-Control", "no-store")
+
+            self.end_headers()
+            self.wfile.write(body)
+
+        def end_headers(self) -> None:
             self.send_header(
                 "Content-Security-Policy",
                 "default-src 'self'; style-src 'self' 'unsafe-inline'; "
-                "script-src 'self'; connect-src 'self'",
+                "script-src 'self'; connect-src 'self'; base-uri 'none'; "
+                "form-action 'none'; frame-ancestors 'none'",
             )
-            self.end_headers()
-            self.wfile.write(body)
+            self.send_header("Cross-Origin-Resource-Policy", "same-origin")
+            self.send_header("Referrer-Policy", "no-referrer")
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.send_header("X-Frame-Options", "DENY")
+            super().end_headers()
 
         def log_message(self, format: str, *args: object) -> None:
             return
 
-    server = LoopbackHTTPServer((host, port), Handler)
+    server = LoopbackHTTPServer((bind_host, port), Handler)
     actual_port = server.server_address[1]
-    url = f"http://{host}:{actual_port}"
+    allowed_hosts = {bind_host, f"{bind_host}:{actual_port}"}
+    url = f"http://{bind_host}:{actual_port}"
     print(f"IntentAtlas viewer: {url}")
     print("Press Ctrl+C to stop.")
     if open_browser:

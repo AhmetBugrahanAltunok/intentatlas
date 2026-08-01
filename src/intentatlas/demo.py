@@ -6,16 +6,21 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
 
+from .change_analysis import ChangeAnalysis, ChangeAnalysisFile
+from .change_report import ChangeReport, build_change_report, render_change_report
+from .change_set import ChangeFile, ChangeSet
+from .git_history import DiffHunk
 from .graph import AtlasGraph
 from .models import Edge, Node
 from .recommendations import RecommendationResult, recommend_tests
 from .viewer import serve_graph
 
 DEMO_COMMIT_SHA = "1111111111111111111111111111111111111111"
+DEMO_COMMIT_ID = f"commit:{DEMO_COMMIT_SHA}"
 DEMO_REPORT_SCHEMA_VERSION = 1
 DEMO_SOURCE_FILE_ID = "file:src/auth.py"
-DEMO_CHANGED_SYMBOL_ID = "symbol:src/auth.py:rotate_session"
-DEMO_UNRELATED_SYMBOL_ID = "symbol:src/auth.py:record_login_audit"
+DEMO_CHANGED_SYMBOL_ID = "symbol:src/auth.py::rotate_session"
+DEMO_UNRELATED_SYMBOL_ID = "symbol:src/auth.py::record_login_audit"
 DEMO_ADVISORY = (
     "This original synthetic scenario demonstrates available structural evidence. A requirement "
     "or test omitted from the exact-symbol result is not proven unaffected or unnecessary."
@@ -103,7 +108,13 @@ def build_demo_graph() -> AtlasGraph:
                 "symbol",
                 "rotate_session",
                 "src/auth.py",
-                {"owner": "demo", "qualified_name": "rotate_session", "symbol_kind": "function"},
+                {
+                    "owner": "demo",
+                    "qualified_name": "rotate_session",
+                    "symbol_kind": "function",
+                    "line": 1,
+                    "end_line": 2,
+                },
             ),
             Node(
                 DEMO_UNRELATED_SYMBOL_ID,
@@ -114,6 +125,8 @@ def build_demo_graph() -> AtlasGraph:
                     "owner": "demo",
                     "qualified_name": "record_login_audit",
                     "symbol_kind": "function",
+                    "line": 5,
+                    "end_line": 6,
                 },
             ),
             Node(
@@ -138,7 +151,7 @@ def build_demo_graph() -> AtlasGraph:
                 {"owner": "demo", "status": "verified"},
             ),
             Node(
-                f"commit:{DEMO_COMMIT_SHA}",
+                DEMO_COMMIT_ID,
                 "commit",
                 "feat: rotate authenticated sessions",
                 metadata={"owner": "demo", "sha": DEMO_COMMIT_SHA},
@@ -177,26 +190,38 @@ def build_demo_graph() -> AtlasGraph:
                 "demo-ast",
             ),
             Edge(
+                "file:tests/test_auth_rotation.py",
+                DEMO_SOURCE_FILE_ID,
+                "tests",
+                "demo-file-fallback",
+            ),
+            Edge(
                 "file:tests/test_auth_audit.py",
                 DEMO_UNRELATED_SYMBOL_ID,
                 "tests",
                 "demo-ast",
             ),
+            Edge(
+                "file:tests/test_auth_audit.py",
+                DEMO_SOURCE_FILE_ID,
+                "tests",
+                "demo-file-fallback",
+            ),
             Edge("EVD-DEMO-001", "file:tests/test_auth_rotation.py", "proves", "demo-review"),
             Edge(
                 "EVD-DEMO-001",
-                f"commit:{DEMO_COMMIT_SHA}",
+                DEMO_COMMIT_ID,
                 "recorded-in",
                 "demo-review",
             ),
             Edge(
-                f"commit:{DEMO_COMMIT_SHA}",
+                DEMO_COMMIT_ID,
                 DEMO_SOURCE_FILE_ID,
                 "changes",
                 "demo-git",
             ),
             Edge(
-                f"commit:{DEMO_COMMIT_SHA}",
+                DEMO_COMMIT_ID,
                 DEMO_CHANGED_SYMBOL_ID,
                 "modifies",
                 "demo-diff-hunk",
@@ -208,11 +233,33 @@ def build_demo_graph() -> AtlasGraph:
 
 def build_demo_report() -> DemoReport:
     """Derive the same-file demo result through production graph and recommendation contracts."""
-    graph = build_demo_graph()
+    return _build_demo_report(build_demo_graph())
+
+
+def _build_demo_report(graph: AtlasGraph) -> DemoReport:
+    target = graph.nodes.get(DEMO_COMMIT_ID)
+    if target is None or target.kind != "commit":
+        raise ValueError("Demo graph must contain its target commit")
     index = graph.index
+    changed_symbols = tuple(
+        graph.nodes[edge.target]
+        for edge in index.outgoing(target.id, "modifies")
+        if edge.target in graph.nodes and graph.nodes[edge.target].kind == "symbol"
+    )
+    if len(changed_symbols) != 1:
+        raise ValueError("Demo commit must modify exactly one symbol")
+    changed_symbol = changed_symbols[0]
+    source_files = tuple(
+        graph.nodes[edge.source]
+        for edge in index.incoming(changed_symbol.id, "defines")
+        if edge.source in graph.nodes and graph.nodes[edge.source].kind == "file"
+    )
+    if len(source_files) != 1:
+        raise ValueError("Demo changed symbol must have exactly one defining file")
+    source_file = source_files[0]
     source_symbols = {
         edge.target
-        for edge in index.outgoing(DEMO_SOURCE_FILE_ID)
+        for edge in index.outgoing(source_file.id)
         if edge.relation == "defines" and graph.nodes[edge.target].kind == "symbol"
     }
     same_file_requirements = _incoming_nodes(
@@ -223,7 +270,7 @@ def build_demo_report() -> DemoReport:
     )
     exact_symbol_requirements = _incoming_nodes(
         graph,
-        {DEMO_CHANGED_SYMBOL_ID},
+        {changed_symbol.id},
         relation="implemented-by",
         kind="requirement",
     )
@@ -233,11 +280,11 @@ def build_demo_report() -> DemoReport:
         relation="tests",
         kind="test",
     )
-    recommendations = recommend_tests(graph, f"commit:{DEMO_COMMIT_SHA}")
+    recommendations = recommend_tests(graph, target.id)
     recommended_ids = {item.test.id for item in recommendations.recommendations}
     return DemoReport(
-        target=graph.nodes[f"commit:{DEMO_COMMIT_SHA}"],
-        changed_symbol=graph.nodes[DEMO_CHANGED_SYMBOL_ID],
+        target=target,
+        changed_symbol=changed_symbol,
         same_file_requirements=same_file_requirements,
         exact_symbol_requirements=exact_symbol_requirements,
         recommendations=recommendations,
@@ -245,6 +292,53 @@ def build_demo_report() -> DemoReport:
             node for node in same_file_tests if node.id not in recommended_ids
         ),
     )
+
+
+def build_demo_change_report(graph: AtlasGraph | None = None) -> ChangeReport:
+    """Build the production-shaped report served beside the interactive demo graph."""
+    active_graph = graph or build_demo_graph()
+    demo = _build_demo_report(active_graph)
+    if demo.changed_symbol.path is None:
+        raise ValueError("Demo changed symbol must have a source path")
+    start = demo.changed_symbol.metadata.get("line")
+    end = demo.changed_symbol.metadata.get("end_line")
+    if (
+        isinstance(start, bool)
+        or not isinstance(start, int)
+        or isinstance(end, bool)
+        or not isinstance(end, int)
+        or start < 1
+        or end < start
+    ):
+        raise ValueError("Demo changed symbol must have a valid source span")
+    change_set = ChangeSet(
+        "commit",
+        None,
+        DEMO_COMMIT_SHA,
+        (
+            ChangeFile(
+                "modified",
+                demo.changed_symbol.path,
+                hunks=(DiffHunk(demo.changed_symbol.path, start, end - start + 1),),
+            ),
+        ),
+    )
+    analysis = ChangeAnalysis(
+        change_set,
+        "analyzed",
+        (
+            ChangeAnalysisFile(
+                demo.changed_symbol.path,
+                "modified",
+                "analyzed",
+                "aligned",
+                "high",
+                (demo.changed_symbol.id,),
+                ("demo-commit-modifies", "validated-symbol-span"),
+            ),
+        ),
+    )
+    return build_change_report(active_graph, analysis)
 
 
 def _incoming_nodes(
@@ -287,6 +381,11 @@ def render_demo_report(report: DemoReport, output_format: str = "text") -> str:
         f"- {item.test.path or item.test.label} [{item.confidence} {item.score}]"
         for item in report.recommendations.recommendations
     )
+    for item in report.recommendations.recommendations:
+        for reason in item.reasons:
+            lines.append(f"  Why: {reason.summary}")
+            lines.append(f"  Path: {reason.path.render()}")
+            lines.append(f"  Evidence: {', '.join(reason.evidence)}")
     lines.append("Same-file tests not recommended from available exact-symbol evidence:")
     lines.extend(
         f"- {node.path or node.label}" for node in report.same_file_tests_not_recommended
@@ -299,6 +398,16 @@ def serve_demo(*, host: str = "127.0.0.1", port: int = 4317, open_browser: bool 
     """Serve the showcase from automatically cleaned temporary storage."""
     with TemporaryDirectory(prefix="intentatlas-demo-") as temporary:
         graph_path = Path(temporary) / "graph.json"
-        build_demo_graph().save(graph_path)
+        graph = build_demo_graph()
+        graph.save(graph_path)
+        change_report_document = render_change_report(
+            build_demo_change_report(graph), "json"
+        ).encode("utf-8")
         print("Opening the built-in IntentAtlas intent-to-proof demo.")
-        serve_graph(graph_path, host=host, port=port, open_browser=open_browser)
+        serve_graph(
+            graph_path,
+            host=host,
+            port=port,
+            open_browser=open_browser,
+            change_report_document=change_report_document,
+        )

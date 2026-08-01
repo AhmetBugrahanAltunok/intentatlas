@@ -50,4 +50,3 @@ generated: true
 - <code>modifies</code> → [[Symbols/test_fresh_and_incremental_scans_reject_before_merge_or_cache.DuplicateAdapter.scan - tests - test_adapter_conformance.py|test_fresh_and_incremental_scans_reject_before_merge_or_cache.DuplicateAdapter.scan]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(history; evidence: git-diff-hunk)_

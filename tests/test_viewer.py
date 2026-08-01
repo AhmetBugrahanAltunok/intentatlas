@@ -68,6 +68,8 @@ def test_serve_graph_rejects_non_loopback_and_invalid_ports(tmp_path) -> None:
     graph.write_text("{}", encoding="utf-8")
     with pytest.raises(ValueError, match="loopback"):
         viewer.serve_graph(graph, host="0.0.0.0", open_browser=False)
+    with pytest.raises(ValueError, match="IPv4 loopback"):
+        viewer.serve_graph(graph, host="::1", open_browser=False)
     with pytest.raises(ValueError, match="between 0 and 65535"):
         viewer.serve_graph(graph, port=65536, open_browser=False)
     with pytest.raises(ValueError, match="between 0 and 65535"):
@@ -92,10 +94,18 @@ def test_serve_graph_starts_and_closes_server(tmp_path, monkeypatch, capsys) -> 
         def server_close(self):
             self.closed = True
 
+    observed: dict[str, object] = {}
     fake = FakeServer(("127.0.0.1", 0), object)
-    monkeypatch.setattr(viewer, "LoopbackHTTPServer", lambda address, handler: fake)
-    viewer.serve_graph(graph, port=0, open_browser=False)
+
+    def fake_server(address, handler):
+        observed["address"] = address
+        observed["handler"] = handler
+        return fake
+
+    monkeypatch.setattr(viewer, "LoopbackHTTPServer", fake_server)
+    viewer.serve_graph(graph, host="localhost", port=0, open_browser=False)
     assert fake.closed
+    assert observed["address"] == ("127.0.0.1", 0)
     assert "http://127.0.0.1:1234" in capsys.readouterr().out
 
 

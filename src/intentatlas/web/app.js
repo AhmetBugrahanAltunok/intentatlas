@@ -88,6 +88,7 @@ function renderChangeReport() {
     summary.push(reportDatum("head", shortRevision(state.review.head_revision)));
   }
   document.querySelector("#report-summary").innerHTML = summary.join("");
+  document.querySelector("#report-advisory").textContent = String(report.advisory || "");
   renderReportItems("#report-requirements", report.requirements, item => ({
     id: item.requirement.id,
     label: item.requirement.label,

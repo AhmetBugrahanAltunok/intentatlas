@@ -42,8 +42,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/_unique_object - src - intentatlas - test_outcomes.py|_unique_object]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/compare_test_outcomes - src - intentatlas - test_outcomes.py|compare_test_outcomes]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/load_test_outcomes - src - intentatlas - test_outcomes.py|load_test_outcomes]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/review_fixture - tests - test_review.py|review_fixture]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_review_report_rejects_non_range_input_and_unknown_formats - tests - test_review.py|test_review_report_rejects_non_range_input_and_unknown_formats]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_review_report_renders_deterministic_markdown_json_and_sarif - tests - test_review.py|test_review_report_renders_deterministic_markdown_json_and_sarif]] _(history; evidence: git-diff-hunk)_

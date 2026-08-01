@@ -2,13 +2,16 @@
 
 All notable changes will be documented in this file.
 
-The format is based on Keep a Changelog and the project follows Semantic Versioning.
+The format is based on Keep a Changelog. Python artifacts use PEP 440; `0.3.0rc1` is the PEP 440
+form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ## [Unreleased]
 
 No changes yet.
 
 ## [0.3.0rc1] - 2026-08-01
+
+Candidate preparation record only; this version has not been tagged or published.
 
 ### Added
 
@@ -91,7 +94,25 @@ No changes yet.
 
 ### Changed
 
-- Package versioning now has one canonical Hatchling source and identifies reviewed candidate
+- The interactive demo now serves a production-shaped Change Report from the same graph snapshot,
+  visibly selects the exact-symbol test, and keeps the independent same-file test outside the
+  ranked panel while rendering the full advisory boundary.
+- Demo change identity is derived from the commit's `modifies` edge, symbol IDs use the canonical
+  scanner grammar, and explicit file fallback edges make the false-positive counterexample
+  adversarial instead of threshold-only.
+- Release verification now requires exact artifact/dist-info/version identity, a hook-free fixed
+  build configuration, canonical source and complete project/dependency metadata, positive source
+  and wheel manifests, artifact-to-reviewed-checkout byte parity, bounded cross-platform-safe
+  archive members, and matching MIT license bytes. The small
+  original corpus required by packaged tests is the only benchmark material admitted to the source
+  archive, and rebuilding it under the fixed epoch must reproduce the direct wheel byte-for-byte.
+- Publishing policy regressions are checked through semantic YAML parsing, while the build job has
+  no publishing identity and the protected OIDC job runs no checkout, build backend, package, or
+  project code.
+- `localhost` viewer input is normalized to numeric IPv4 loopback before binding; unsupported IPv6
+  input fails explicitly, foreign `Host` headers are rejected, and local responses carry
+  anti-framing, no-sniff, no-referrer, same-origin-resource, and content-security policies.
+- Package versioning now has one canonical Hatchling source and identifies candidate
   builds as `0.3.0rc1` without implying tag or publication approval.
 - Fresh vault initialization now creates generic guidance and templates without seeding
   IntentAtlas-specific project memory into user repositories.
@@ -125,8 +146,9 @@ No changes yet.
 - Relation schema 3 adds direct `modifies`/`modified-by` history semantics while preserving
   commit-to-file `changes` as the conservative fallback.
 - Source distributions now contain reviewable source, tests, documentation, release tooling, and
-  required project metadata without bundling the Obsidian vault, benchmarks, workflows, or local
-  IntentAtlas configuration.
+  required project metadata without bundling the Obsidian vault, real-world benchmark records,
+  workflows, or local IntentAtlas configuration. The small original offline corpus needed by
+  packaged tests remains included.
 
 ### Fixed
 

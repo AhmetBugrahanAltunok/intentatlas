@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="README.tr.md">Türkçe</a> ·
-  <a href="atlas/Brain/Product%20Roadmap.md">Product roadmap</a> ·
+  <a href="https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md">Product roadmap</a> ·
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
@@ -57,9 +57,9 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 
 ## Release candidate status
 
-The reviewed source currently identifies itself as `0.3.0rc1`. This is a release candidate, not a
+The current candidate source identifies itself as `0.3.0rc1`. This is a release candidate, not a
 published package or compatibility promise. No tag or package-index release is implied. From a
-trusted source checkout, verify the exact candidate before exploring it:
+trusted checkout of the intended source revision, build and exercise that checkout:
 
 ```powershell
 python -m venv .venv
@@ -68,6 +68,10 @@ python -m venv .venv
 .\.venv\Scripts\intentatlas.exe demo --report text
 ```
 
+This confirms the version and behavior of the current checkout; it does not by itself prove the
+Git revision or artifact hash. The exact source, reproducible-build, provenance, and hash procedure
+is documented in [the release process](RELEASING.md).
+
 The report exits without opening a listener and shows why one test is recommended while another
 test connected to a different symbol in the same source file is not recommended from the available
 exact-symbol evidence. Omission is not a claim that the other requirement is unaffected or that
@@ -75,7 +79,7 @@ its test is unnecessary.
 
 ## Quick start
 
-Try the complete intent-to-proof story immediately after installation:
+Try the downstream intent-to-proof recommendation and presentation path after installation:
 
 ```powershell
 intentatlas demo
@@ -83,15 +87,16 @@ intentatlas demo --report text
 intentatlas demo --report json
 ```
 
-The built-in showcase is original, offline, and temporary. It does not scan the current directory.
-See the [guided demo](docs/guided-demo.md). For your own repository:
+The built-in showcase is original, offline, and temporary. Its synthetic graph and relationships
+are prebuilt, so it exercises the production graph, recommendation, report, and viewer layers but
+does not exercise repository discovery, AST parsing, or Git diff extraction. It does not scan the
+current directory. See the [guided demo](docs/guided-demo.md). For your own repository, pass the
+target explicitly so the IntentAtlas source checkout is never initialized by accident:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-.\.venv\Scripts\intentatlas.exe init
-.\.venv\Scripts\intentatlas.exe scan
-.\.venv\Scripts\intentatlas.exe open
+.\.venv\Scripts\intentatlas.exe init C:\path\to\your-project
+.\.venv\Scripts\intentatlas.exe scan C:\path\to\your-project
+.\.venv\Scripts\intentatlas.exe open C:\path\to\your-project
 ```
 
 `init` creates generic guidance and empty intent folders; it never seeds IntentAtlas's own
@@ -106,7 +111,7 @@ Then open the `atlas/` directory as an Obsidian vault. The standard Graph View w
 show requirements, decisions, code, tests, evidence, and commits as color-coded nodes.
 
 On macOS or Linux, replace `.\.venv\Scripts\intentatlas.exe` with
-`./.venv/bin/intentatlas`.
+`./.venv/bin/intentatlas` and use an explicit path such as `/path/to/your-project`.
 
 Python 3.11, 3.12, and 3.13 are supported. The complete suite runs on Linux, while an installed
 wheel smoke test covers the CLI, scan, recommendation, and loopback viewer workflow on Linux,
@@ -232,7 +237,8 @@ is low confidence or omitted when contradictory exact-symbol evidence exists. Re
 advisory: omitted tests and absent recommendations never prove that behavior is unaffected.
 Imported JUnit summaries are displayed only as observations because their freshness is unknown.
 
-To measure recommendation quality against an explicitly exhaustive reviewed label set:
+From a full IntentAtlas repository checkout, measure recommendation quality against its explicitly
+exhaustive reviewed label set:
 
 ```text
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
@@ -240,8 +246,9 @@ intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 ```
 
 Evaluation reports TP, FP, FN, precision, and recall without running tests or changing ranking
-scores. The bundled two-case baseline is a regression aid, not evidence of accuracy on other
-repositories. See [the evaluation schema and metric contract](docs/recommendation-evaluation.md).
+scores. This repository-only two-case baseline is a regression aid, not evidence of accuracy on
+other repositories; it is not included in the source-distribution corpus. See
+[the evaluation schema and metric contract](docs/recommendation-evaluation.md).
 
 To compare all confidence thresholds across the original Python, TypeScript, and Go graph
 scenarios:
@@ -255,8 +262,9 @@ Corpus output contains compact per-project and micro totals. These small origina
 aggregation and confidence behavior; they are not copied repositories or real-world accuracy
 evidence. See [the corpus schema](docs/recommendation-corpus.md).
 
-For a reproducible real-world check, acquire the six approved public repositories only after
-network approval, pin them to the manifest commits, then run:
+For a reproducible real-world check from a full IntentAtlas repository checkout, acquire the six
+approved public repositories only after network approval, pin them to the repository-only manifest
+commits, then run:
 
 ```text
 intentatlas evaluate-real-world benchmarks/real-world/manifest.json .intentatlas/real-world/checkouts
@@ -372,7 +380,7 @@ are useful validation evidence for those pinned changes only; they are not a gen
 claim.
 
 Ongoing work and completion status are tracked in the
-[Product Roadmap](atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as
+[Product Roadmap](https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md). The root `ROADMAP.md` is retained only as
 an explicitly archived snapshot of the original 0.1–0.3 technical plan.
 
 ## Inspiration

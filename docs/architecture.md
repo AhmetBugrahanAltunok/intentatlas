@@ -124,17 +124,20 @@ invalidates the cached view; the next read rebuilds it in O(E). Local traversal 
 the matching adjacency bucket rather than unrelated graph edges. The index is rebuildable and is
 not serialized into the graph cache.
 
-The `demo` command builds a compact first-party same-file counterexample through the same
-`AtlasGraph`, relation catalog, recommendation engine, serializer, and viewer used by scanned
-projects. The interactive default writes the graph only to an automatically cleaned temporary
-directory and never scans the current working directory. Explicit text/JSON report modes derive
-the exact-symbol requirement and test evidence from graph indexes and production recommendations,
-then exit without a listener. Both modes state that an omitted same-file path is not proof of no
-impact or no test need. The viewer builds one reusable adjacency view after loading the graph, then
-derives evidence paths locally with deterministic breadth-first traversal in both edge directions,
-limited to depth 6, 800 visited nodes, and 6 proof-oriented results. Path labels use
-the stored forward or inverse relation; they are structural explanations, not proof of causality
-or completeness.
+The `demo` command builds a compact, pre-authored first-party same-file counterexample through the
+same `AtlasGraph`, relation catalog, recommendation engine, Change Report, serializer, and viewer
+used after real scans. It demonstrates downstream inference and presentation, not repository
+discovery, AST parsing, or Git diff extraction. The interactive default writes the graph only to an
+automatically cleaned temporary directory, serves a production-shaped report from the same graph
+snapshot, and never scans the current working directory. Explicit text/JSON report modes derive
+the changed symbol, exact-symbol requirement, and test evidence from graph indexes and production
+recommendations, then exit without a listener. Both modes state that an omitted same-file path is
+not proof of no impact or no test need. The viewer normalizes accepted names to numeric IPv4
+loopback, rejects foreign `Host` headers, and applies defensive response policies before returning
+local graph data. It builds one reusable adjacency view after loading the graph, then derives
+evidence paths locally with deterministic breadth-first traversal in both edge directions, limited
+to depth 6, 800 visited nodes, and 6 proof-oriented results. Path labels use the stored forward or
+inverse relation; they are structural explanations, not proof of causality or completeness.
 
 The client also builds stable node, edge, degree, search, and adjacency indexes once. SVG rendering
 is limited to a deterministic 240-node/900-edge window: a layer-balanced overview or a two-hop
@@ -257,9 +260,19 @@ cross-platform subprocess test exercises the installed console module from initi
 scan, impact, recommendation, and loopback HTTP retrieval. The release builder creates a wheel and
 source distribution twice under one fixed `SOURCE_DATE_EPOCH`; the verifier requires matching
 artifact names and SHA-256 hashes, checks every wheel `RECORD` entry, validates package metadata,
-entry point, web assets, and MIT license bytes, and rejects project-only vault, benchmark,
-workflow, and local configuration data from the source archive. Publication remains a separate,
-explicitly approved external action.
+entry point, pure-Python tag, web assets, canonical version source, dependency contract, and MIT
+license bytes. It also requires exact metadata-derived outer names, rejects
+duplicate/platform-colliding or unsafe archive paths, compares every source-archive file against a
+positive reviewed-checkout manifest, requires the wheel's complete member set, and requires both
+artifact runtime payloads to match those reviewed bytes. Generated `PKG-INFO` is validated
+semantically against the checkout's fixed backend, hook-free build configuration, complete project
+metadata field set, and dependency metadata. Rebuilding the verified source archive under the same
+epoch must reproduce the direct wheel byte-for-byte. The source archive includes only the small
+original closed-world corpus needed by its test suite plus declared source, tests, docs, tools, and
+release files; vault data,
+local state, real-world benchmark records, workflows, and undeclared roots remain excluded.
+Release backend/frontend versions are fixed for candidate reproduction. Publication remains a
+separate, explicitly approved external action.
 
 Release hardening adds three independent gates around that verifier. Fixed-seed generated graphs
 and hostile JSON mutations must either preserve graph invariants or fail with a bounded validation
@@ -271,12 +284,13 @@ After repeated archive verification, the verifier can write canonical provenance
 the exact source revision, fixed build epoch, artifact names, sizes, SHA-256 digests, and completed
 checks. This record is deterministic descriptive evidence, not a signature. Default CI remains
 verification-only; trusted publishing is a separate protected manual boundary over explicitly
-approved source and artifact identities.
+approved source and artifact identities. External environment configuration must restrict that
+identity to protected `main` or an explicitly approved release ref.
 
-The loopback viewer uses a narrow `ThreadingHTTPServer` subclass that binds through `TCPServer`
-and records the validated numeric server address directly. It avoids the standard HTTP server's
-reverse DNS lookup, which is unnecessary for local serving and can delay startup on constrained
-macOS runners.
+The loopback viewer uses a narrow IPv4 `ThreadingHTTPServer` subclass that binds through
+`TCPServer`. The accepted `localhost` alias is normalized to numeric `127.0.0.1` before binding and
+the emitted URL uses that validated address. This avoids the standard HTTP server's reverse DNS
+lookup, which is unnecessary for local serving and can delay startup on constrained macOS runners.
 
 ## 3. Project brain
 

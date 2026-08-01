@@ -192,10 +192,35 @@ def test_real_browser_renders_same_file_demo_story(tmp_path: Path) -> None:
         rendered = _dump_dom(browser, url, tmp_path / "demo-browser-profile")
         assert "Could not load graph" not in rendered
         assert "<strong>12</strong><span>total nodes</span>" in rendered
-        assert "<strong>16</strong><span>total links</span>" in rendered
+        assert "<strong>18</strong><span>total links</span>" in rendered
         assert "Keep customer sessions secure" in rendered
         assert "Preserve login audit events" in rendered
         assert "rotate_session" in rendered
         assert "record_login_audit" in rendered
+
+        toggle = re.search(r'<button id="report-toggle"[^>]*>', rendered)
+        assert toggle is not None
+        assert "hidden" not in toggle.group(0)
+        summary = re.search(
+            r'<div id="report-summary"[^>]*>(.*?)</div>\s*<h3>',
+            rendered,
+            re.DOTALL,
+        )
+        assert summary is not None
+        assert "<strong>targeted</strong>" in summary.group(1)
+        assert "<strong>analyzed</strong>" in summary.group(1)
+        assert (
+            "Impact and test recommendations are bounded structural evidence, not proof that an "
+            "omitted requirement is unaffected or that a suggested test is sufficient."
+            in rendered
+        )
+        report_tests = re.search(
+            r'<div id="report-tests"[^>]*>(.*?)</div>',
+            rendered,
+            re.DOTALL,
+        )
+        assert report_tests is not None
+        assert "tests/test_auth_rotation.py" in report_tests.group(1)
+        assert "tests/test_auth_audit.py" not in report_tests.group(1)
     finally:
         _stop_server(server)

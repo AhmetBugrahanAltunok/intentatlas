@@ -10,8 +10,8 @@ source_path: "tests/test_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>42</code>
-- **Line:** <code>34</code>
+- **End Line:** <code>50</code>
+- **Line:** <code>47</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

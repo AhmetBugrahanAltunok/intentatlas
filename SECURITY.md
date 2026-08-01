@@ -3,8 +3,10 @@
 ## Reporting a vulnerability
 
 Please do not open a public issue for a suspected vulnerability. Use GitHub's private
-security advisory flow on the repository once it is published. Include affected versions,
-reproduction steps, impact, and any suggested mitigation.
+vulnerability-reporting flow once it has been enabled for the public repository. Include affected
+versions, reproduction steps, impact, and any suggested mitigation. Public launch is blocked until
+the repository owner has enabled and verified that private channel; no public fallback report is
+requested before then.
 
 ## Security model
 
@@ -69,31 +71,48 @@ reproduction steps, impact, and any suggested mitigation.
 - The query-scale benchmark creates only bounded synthetic in-memory nodes and edges. Boolean,
   negative, and excessive edge or iteration counts are rejected; it reads no repository files,
   executes no project code, persists no benchmark graph, and makes no network request.
-- The built-in demo graph is original static product data built with the production graph model.
-  It does not scan the current directory, execute project code, or access the network; its graph
-  exists only in an automatically cleaned temporary directory. Viewer evidence-path traversal is
-  limited to depth 6, 800 visited nodes, and 6 results, and all graph labels remain escaped.
-- Release verification builds under a fixed timestamp and requires byte-identical repeated wheel
-  and source archives. It validates wheel paths, CRCs, `RECORD` hashes and sizes, metadata, console
-  entry point, bundled web assets, and repository-matching MIT license bytes. Source archives reject
-  unsafe members, links, unexpected roots, and project-only vault, benchmark, workflow, and local
-  configuration data. Fixed-seed property/mutation tests exercise untrusted graph and JSON
+- The built-in demo graph is original, pre-authored static product data built with the production
+  graph model. It exercises production recommendation, Change Report, and viewer behavior after
+  evidence exists, not repository discovery, AST parsing, or Git diff extraction. It does not scan
+  the current directory, execute project code, or access the network; its graph exists only in an
+  automatically cleaned temporary directory. The interactive viewer receives its ranked report
+  from the same graph snapshot. Viewer evidence-path traversal is limited to depth 6, 800 visited
+  nodes, and 6 results, and all graph labels remain escaped. The loopback server rejects foreign
+  `Host` headers and applies no-store, anti-framing, MIME-sniffing, referrer, same-origin resource,
+  and content-security response policies.
+- Release verification uses fixed Hatchling/build/packaging versions, rejects custom build hooks
+  and unreviewed project metadata fields, builds under a fixed timestamp, and requires
+  byte-identical repeated wheel and source archives. It validates exact version-derived
+  artifact/dist-info names, bounded and collision-free member paths, CRCs, `RECORD` hashes and
+  sizes, wheel/source and dependency metadata, the canonical version source, pure-Python tags,
+  console entry point, bundled web assets, and repository-matching MIT license bytes. A positive
+  manifest requires every source-archive file, the exact wheel member set, and both runtime
+  payloads to match the reviewed checkout bytes; only generated `PKG-INFO` is exempt from byte
+  parity and is checked semantically.
+  Rebuilding the verified source archive under the same fixed epoch must reproduce the direct
+  wheel byte-for-byte before installation and extracted-source testing.
+  Source archives reject unsafe members, links, undeclared roots, vault, local state, real-world
+  benchmark, workflow, and local configuration data; only the small original corpus needed by
+  packaged tests is allowed. Fixed-seed property/mutation tests exercise untrusted graph and JSON
   boundaries, a real Chrome-family browser verifies bounded rendered state, and static typing is a
   maintained-source CI gate. External Actions are policy-checked for immutable full-SHA references.
   The verifier can emit deterministic provenance binding artifact names, sizes, and SHA-256 values
   to an exact source revision and build epoch; this record is descriptive evidence, not a signature.
   Default CI verifies artifacts but never publishes them. A separate manually dispatched workflow
   requires a fixed `pypi` environment, an explicit confirmation phrase, exact source/epoch/hashes,
-  immutable Actions, and short-lived trusted-publishing identity; it publishes only the same
-  `release-a` bytes that pass repeated-build and approved-hash verification. Repository environment
-  protection and package-index trust configuration remain external owner responsibilities.
+  an exact match between source and protected-`main` dispatch revisions, immutable Actions, and
+  short-lived trusted-publishing identity. Its unprivileged job builds and
+  verifies the bytes; only a separate protected job has OIDC permission, runs no project/build code,
+  rechecks the transferred hashes, and publishes those same bytes. Repository environment
+  protection, protected-release-ref deployment policy, and package-index trust configuration remain
+  external owner responsibilities.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during
   cleanup, and temporary files are removed on success or failure.
-- The local viewer validates loopback-only binding for both project and demo entry points and uses
-  `127.0.0.1` by default. Its server binding records the already validated numeric loopback address
-  directly and performs no reverse DNS lookup. Interactive change reports are served only from the
+- The local viewer validates IPv4 loopback-only binding for both project and demo entry points and
+  uses `127.0.0.1` by default. The accepted `localhost` alias is normalized to that numeric address
+  before binding, and no reverse DNS lookup is performed. Interactive change reports are served only from the
   same bounded in-memory graph/report snapshot, are not persisted by the viewer, and never include
   raw diff lines or source contents.
 

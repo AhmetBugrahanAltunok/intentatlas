@@ -28,16 +28,31 @@ permissions:
   contents: read
 
 jobs:
-  publish:
-    name: Verify and publish exact approved artifacts
+  build-approved-artifacts:
+    name: Reproduce exact approved artifacts without publishing identity
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment: pypi
     env:
       SOURCE_DATE_EPOCH: ${{ inputs.source_date_epoch }}
     permissions:
       contents: read
-      id-token: write
     steps:
+      - name: Validate the approval inputs
+        shell: bash
+        env:
+          APPROVAL: ${{ inputs.approval }}
+          DISPATCH_REVISION: ${{ github.sha }}
+          SOURCE_REVISION: ${{ inputs.source_revision }}
+          SOURCE_DATE_EPOCH: ${{ inputs.source_date_epoch }}
+          EXPECTED_WHEEL_SHA256: ${{ inputs.wheel_sha256 }}
+          EXPECTED_SDIST_SHA256: ${{ inputs.sdist_sha256 }}
+        run: |
+          test "$APPROVAL" = "publish approved IntentAtlas artifacts"
+          [[ "$SOURCE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          test "$SOURCE_REVISION" = "$DISPATCH_REVISION"
+          [[ "$SOURCE_DATE_EPOCH" =~ ^[0-9]+$ ]]
+          [[ "$EXPECTED_WHEEL_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_SDIST_SHA256" =~ ^[0-9a-f]{64}$ ]]
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ inputs.source_revision }}
@@ -49,17 +64,8 @@ jobs:
       - name: Validate the approved source and artifact identities
         shell: bash
         env:
-          APPROVAL: ${{ inputs.approval }}
           SOURCE_REVISION: ${{ inputs.source_revision }}
-          SOURCE_DATE_EPOCH: ${{ inputs.source_date_epoch }}
-          EXPECTED_WHEEL_SHA256: ${{ inputs.wheel_sha256 }}
-          EXPECTED_SDIST_SHA256: ${{ inputs.sdist_sha256 }}
         run: |
-          test "$APPROVAL" = "publish approved IntentAtlas artifacts"
-          [[ "$SOURCE_REVISION" =~ ^[0-9a-f]{40}$ ]]
-          [[ "$SOURCE_DATE_EPOCH" =~ ^[0-9]+$ ]]
-          [[ "$EXPECTED_WHEEL_SHA256" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$EXPECTED_SDIST_SHA256" =~ ^[0-9a-f]{64}$ ]]
           test "$(git rev-parse HEAD)" = "$SOURCE_REVISION"
       - run: python -m pip install -e ".[release]"
       - run: python -m build --sdist --wheel --outdir var/release-a
@@ -78,7 +84,50 @@ jobs:
           --source-date-epoch "$SOURCE_DATE_EPOCH"
           --expected-wheel-sha256 "$EXPECTED_WHEEL_SHA256"
           --expected-sdist-sha256 "$EXPECTED_SDIST_SHA256"
-      - name: Publish the already verified release-a bytes with trusted identity
+      - name: Transfer only the verified artifacts and provenance
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: intentatlas-release-${{ inputs.source_revision }}
+          path: |
+            var/release-a/*.whl
+            var/release-a/*.tar.gz
+            var/release-provenance.json
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+
+  publish:
+    name: Publish only the transferred approved bytes
+    needs: build-approved-artifacts
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      actions: read
+      id-token: write
+    steps:
+      - name: Download the verified artifact bundle
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: intentatlas-release-${{ inputs.source_revision }}
+          path: var/approved
+      - name: Recheck the transferred file set and approved hashes
+        shell: bash
+        env:
+          EXPECTED_WHEEL_SHA256: ${{ inputs.wheel_sha256 }}
+          EXPECTED_SDIST_SHA256: ${{ inputs.sdist_sha256 }}
+        run: |
+          test -z "$(find var/approved -type l -print -quit)"
+          mapfile -t files < <(find var/approved -type f -print | sort)
+          mapfile -t wheels < <(find var/approved/release-a -maxdepth 1 -type f -name '*.whl' -print)
+          mapfile -t sdists < <(find var/approved/release-a -maxdepth 1 -type f -name '*.tar.gz' -print)
+          test "${#files[@]}" -eq 3
+          test "${#wheels[@]}" -eq 1
+          test "${#sdists[@]}" -eq 1
+          test -f var/approved/release-provenance.json
+          test "$(sha256sum "${wheels[0]}" | cut -d' ' -f1)" = "$EXPECTED_WHEEL_SHA256"
+          test "$(sha256sum "${sdists[0]}" | cut -d' ' -f1)" = "$EXPECTED_SDIST_SHA256"
+      - name: Publish the already verified bytes with trusted identity
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # release/v1 verified 2026-08-01
         with:
-          packages-dir: var/release-a
+          packages-dir: var/approved/release-a

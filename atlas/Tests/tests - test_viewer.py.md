@@ -11,7 +11,7 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4545</code>
+- **Size Bytes:** <code>4895</code>
 
 ## Outgoing relationships
 
@@ -24,6 +24,7 @@ source_path: "tests/test_viewer.py"
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.__init__ - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.serve_forever - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.serve_forever]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.server_close - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.server_close]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.fake_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.fake_server]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/LoopbackHTTPServer - src - intentatlas - viewer.py|LoopbackHTTPServer]] _(verification; evidence: python-symbol-reference)_

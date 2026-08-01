@@ -11,21 +11,35 @@ source_path: "src/intentatlas/demo.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11521</code>
+- **Size Bytes:** <code>15267</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/DemoReport - src - intentatlas - demo.py|DemoReport]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/DemoReport.to_dict - src - intentatlas - demo.py|DemoReport.to_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_build_demo_report - src - intentatlas - demo.py|_build_demo_report]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_incoming_nodes - src - intentatlas - demo.py|_incoming_nodes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/build_demo_change_report - src - intentatlas - demo.py|build_demo_change_report]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/build_demo_graph - src - intentatlas - demo.py|build_demo_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/build_demo_report - src - intentatlas - demo.py|build_demo_report]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_demo_report - src - intentatlas - demo.py|render_demo_report]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ChangeAnalysis - src - intentatlas - change_analysis.py|ChangeAnalysis]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ChangeAnalysisFile - src - intentatlas - change_analysis.py|ChangeAnalysisFile]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ChangeReport - src - intentatlas - change_report.py|ChangeReport]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
@@ -35,6 +49,7 @@ source_path: "src/intentatlas/demo.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths|ISSUE-012 - Implement guided demo and viewer evidence paths]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

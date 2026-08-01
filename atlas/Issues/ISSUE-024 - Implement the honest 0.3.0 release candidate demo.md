@@ -6,7 +6,7 @@ phase: 11A
 ---
 # Implement the honest 0.3.0 release candidate demo
 
-Deliver the canonical candidate version, adversarial same-file demo, deterministic terminal/JSON
+Deliver the canonical candidate version, adversarial same-file regression demo, deterministic terminal/JSON
 report, installed-wheel verification, and documentation required by REQ-026.
 
 ## Acceptance checklist
@@ -14,10 +14,19 @@ report, installed-wheel verification, and documentation required by REQ-026.
 - [x] Canonical `0.3.0rc1` version configuration and drift regression.
 - [x] Same-file two-requirement/two-symbol/two-test demo graph.
 - [x] Production-derived deterministic text and JSON demo report.
-- [x] Default interactive demo parity and real-browser verification.
+- [x] Default interactive demo parity through a same-snapshot Change Report, visible full advisory,
+      and real-browser verification.
+- [x] Canonical symbol identities, graph-derived changed-symbol selection, and explicit file
+      fallback counterfactual regression.
+- [x] Exact artifact-name, cross-platform archive-safety, positive source manifest,
+      checkout-payload/dependency metadata, and source-archive test gates.
+- [x] OIDC-free build/verification job separated from the protected publishing identity, with
+      semantic workflow-policy regression checks.
 - [x] English/Turkish onboarding, guided demo, changelog, and release documentation.
-- [ ] Focused/full local gates, reproducible artifacts, exact-wheel E2E, vault closure, remote CI,
-      final Evidence, and Review.
+- [x] Focused/full local gates, reproducible working-tree artifacts, exact-wheel/sdist E2E, and
+      real-browser verification.
+- [ ] Exact committed provenance, deterministic vault closure, network audit, remote CI, final
+      Evidence, and Review.
 
 ## Links
 
