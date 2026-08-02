@@ -542,6 +542,27 @@ Status: complete on 2026-08-02; EVD-030 complete and Phase 14 Review passed
 - Strategy: [[Brain/Phase 14 Guided CLI Strategy]]
 - Handoff: [[Sessions/2026-08-02 - Phase 14 guided CLI handoff]]
 
+## Phase 15 - Frictionless source-to-atlas
+
+Status: in progress; Phase 14 entry verified on 2026-08-03
+
+- Verify the exact candidate wheel as an isolated global CLI tool without changing a user's real
+  PATH or pipx installation.
+- Accept one local directory or strict public GitHub repository URL in the guided source prompt.
+- Acquire explicitly approved public repositories into an atomic bounded managed cache with inert
+  Git settings, exact revision identity, honest shallow-history/freshness wording, and safe cleanup.
+- Reuse the production diagnostic, scanner, ChangeReport, graph, and immutable loopback viewer;
+  show missing intent layers instead of inventing them.
+- Keep public package publication and zero-prerequisite Windows distribution as open delivery
+  boundaries; do not begin Phase 11C.
+- Requirement: [[Requirements/REQ-031 - Open a trustworthy atlas from a local path or public GitHub URL]]
+- Decision: [[Decisions/ADR-031 - Acquire explicit public repositories into a managed local cache]]
+- Delivery issue: [[Issues/ISSUE-029 - Implement frictionless source-to-atlas onboarding]]
+- Planned evidence: [[Evidence/EVD-031 - Phase 15 source-to-atlas verification]]
+- Planned review: [[Reviews/Phase 15 Source-to-Atlas Review]]
+- Strategy: [[Brain/Phase 15 Source-to-Atlas Strategy]]
+- Handoff: [[Sessions/2026-08-03 - Phase 15 source-to-atlas handoff]]
+
 ## Completion rule
 
 Every phase must end with a linked Evidence note and Review note containing the full change
