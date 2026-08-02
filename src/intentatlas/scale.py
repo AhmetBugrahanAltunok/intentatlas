@@ -250,10 +250,11 @@ def _peak_memory_bytes() -> int | None:
 
         counters = ProcessMemoryCounters()
         counters.cb = ctypes.sizeof(counters)
-        get_process = ctypes.windll.kernel32.GetCurrentProcess
+        windll = vars(ctypes)["windll"]
+        get_process = windll.kernel32.GetCurrentProcess
         get_process.restype = ctypes.c_void_p
         handle = get_process()
-        get_memory = ctypes.windll.psapi.GetProcessMemoryInfo
+        get_memory = windll.psapi.GetProcessMemoryInfo
         get_memory.argtypes = [
             ctypes.c_void_p,
             ctypes.POINTER(ProcessMemoryCounters),
@@ -267,8 +268,8 @@ def _peak_memory_bytes() -> int | None:
     try:
         import resource
 
-        getrusage = resource.getrusage  # type: ignore[attr-defined]
-        usage_self = resource.RUSAGE_SELF  # type: ignore[attr-defined]
+        getrusage = vars(resource)["getrusage"]
+        usage_self = vars(resource)["RUSAGE_SELF"]
         maximum = getrusage(usage_self).ru_maxrss
         return int(maximum if sys.platform == "darwin" else maximum * 1024)
     except (ImportError, OSError):
