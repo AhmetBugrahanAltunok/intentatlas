@@ -36,12 +36,30 @@ Planned only after Phase 11A passes. Expand independently reviewed pilot histori
 and adapter compatibility guarantees, and publish measured limitations. Do not tune against hidden
 holdouts or turn advisory recommendations into blocking policy without evidence.
 
+Detailed delivery is governed by
+[[Brain/Phase 11B-13 Delivery Strategy]],
+[[Requirements/REQ-027 - Establish longitudinal recommendation evidence]],
+[[Decisions/ADR-027 - Freeze pilot evidence before recommendation tuning]], and
+[[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline]].
+
 ## Phase 11C — Public launch and feedback loop
 
-Planned only after separate owner approval. Prepare public repository/release presentation,
-contributor issue templates, signed or hosted attestations if justified, and a feedback loop that
-does not add telemetry to the local CLI. Repository visibility, tags, releases, and package-index
-publication are external actions and are not authorized by this strategy.
+This is a conditional owner-controlled publication checkpoint rather than an automatically started
+delivery phase. It is eligible only after Phase 11B passes; the recommended timing is after Phase 12
+delivers the trust-first first-run experience. Deferring publication does not block local Phase 12
+or Phase 13 engineering.
+
+If separately approved, prepare public repository/release presentation, contributor issue
+templates, signed or hosted attestations only if justified, and a feedback loop that does not add
+telemetry to the local CLI. Repository visibility, tags, releases, package-index publication, and
+hosted services are external actions and are not authorized by this strategy.
+
+## Beyond Phase 11
+
+Phase 12 makes the change report the primary no-write product surface. Phase 13 adds explicit
+workspace ownership, revision-bound imported semantic evidence, partitioned invalidation, and
+bounded viewer queries. Their complete contracts are in
+[[Brain/Phase 11B-13 Delivery Strategy]] and [[Brain/Product Roadmap]].
 
 ## Non-goals
 

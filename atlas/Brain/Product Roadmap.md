@@ -425,7 +425,7 @@ Status: complete (2026-08-01)
 
 ## Phase 11 — Release candidate and adoption evidence
 
-Status: active (Phase 11A active)
+Status: active (Phase 11A active; Phase 11B planned)
 
 - Turn the completed Phase 10 capability into an honest, immediately evaluable release candidate.
 - Demonstrate conservative same-file behavior rather than presenting only a perfect linear chain.
@@ -448,6 +448,68 @@ Status: active (2026-08-01)
 - Kickoff: [[Sessions/2026-08-01 - Phase 11A kickoff]]
 - Planned evidence: [[Evidence/EVD-026 - Phase 11A release candidate and demo verification]]
 - Planned review: [[Reviews/Phase 11A Release Candidate and Demo Review]]
+
+### Phase 11B - Sustained pilot evidence and compatibility policy
+
+Status: planned; blocked by Phase 11A Review
+
+- Freeze longitudinal calibration/evaluation histories before changing recommendation behavior.
+- Report recommendation quality, coverage, abstention, freshness, execution strategy, cohort size,
+  and uncertainty per project, language, threshold, and aggregate.
+- Classify graph, report, CLI JSON, evidence, adapter, and cache contracts as stable,
+  experimental, or internal with explicit migration/deprecation rules.
+- Keep recommendations advisory and the evaluator offline; do not add telemetry or blocking CI.
+- Requirement: [[Requirements/REQ-027 - Establish longitudinal recommendation evidence]]
+- Decision: [[Decisions/ADR-027 - Freeze pilot evidence before recommendation tuning]]
+- Delivery issue: [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline]]
+- Planned evidence: [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification]]
+- Planned review: [[Reviews/Phase 11B Longitudinal Pilot and Compatibility Review]]
+- Strategy: [[Brain/Phase 11B-13 Delivery Strategy]]
+- Handoff: [[Sessions/2026-08-02 - Phase 11B-13 roadmap handoff]]
+
+### Conditional Phase 11C - Public launch checkpoint
+
+Status: not authorized; owner-controlled after Phase 11B, recommended after Phase 12
+
+- Verify public security reporting, protected publishing environments, exact release provenance,
+  contributor intake, benchmark wording, and the no-telemetry contract.
+- Repository visibility, tag, release, package publication, deployment, hosted attestation, and
+  external announcement each require separate approval.
+- Deferral does not block local Phase 12 or Phase 13 delivery.
+- Strategy: [[Brain/Phase 11 Strategy]]
+
+## Phase 12 - Trust-first first-run value
+
+Status: planned; blocked by Phase 11B Review
+
+- Make an aligned, zero-footprint change report the first real-repository outcome.
+- Add a deterministic read-only diagnostic for support, ambiguity, freshness, and safe next steps.
+- Preserve revision, threshold, candidate counts, selected/omitted meaning, evidence paths,
+  fallback strategy, and advisory limits across terminal text, JSON, and the viewer.
+- Treat the graph as bounded evidence drill-down rather than the product's primary answer.
+- Requirement: [[Requirements/REQ-028 - Deliver trust-first first-run value]]
+- Decision: [[Decisions/ADR-028 - Make the change report the primary product surface]]
+- Delivery issue: [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]]
+- Planned evidence: [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification]]
+- Planned review: [[Reviews/Phase 12 Trust-First Onboarding Review]]
+- Strategy: [[Brain/Phase 11B-13 Delivery Strategy]]
+
+## Phase 13 - Semantic monorepo foundation
+
+Status: planned; blocked by Phase 12 Review and Phase 11B pilot scope
+
+- Model explicit project/package/source-root and workspace ownership without directory-name guesses.
+- Retain resolver candidate sets and abstain when one aligned owner cannot be proven.
+- Import strict revision-bound semantic evidence such as SCIP without executing indexers or project
+  tooling.
+- Partition cache invalidation and bound pre-work repository budgets.
+- Serve bounded viewer queries without transferring/indexing the complete graph initially.
+- Requirement: [[Requirements/REQ-029 - Scale precise evidence across monorepos]]
+- Decision: [[Decisions/ADR-029 - Model workspace boundaries and import semantic evidence]]
+- Delivery issue: [[Issues/ISSUE-027 - Implement semantic monorepo foundation]]
+- Planned evidence: [[Evidence/EVD-029 - Phase 13 semantic monorepo verification]]
+- Planned review: [[Reviews/Phase 13 Semantic Monorepo Foundation Review]]
+- Strategy: [[Brain/Phase 11B-13 Delivery Strategy]]
 
 ## Completion rule
 
