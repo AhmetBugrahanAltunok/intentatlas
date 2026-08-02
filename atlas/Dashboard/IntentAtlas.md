@@ -27,13 +27,13 @@ generated: true
 - **source-root:** 3
 - **symbol:** 1089
 - **test:** 73
-- **relationships:** 3162
+- **relationships:** 3152
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 191 relationships
-- [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 113 relationships
+- [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 110 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 104 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 94 relationships
 - [[Code/intentatlas|intentatlas]] — 90 relationships

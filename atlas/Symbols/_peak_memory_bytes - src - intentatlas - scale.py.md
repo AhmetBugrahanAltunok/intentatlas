@@ -10,7 +10,7 @@ source_path: "src/intentatlas/scale.py"
 
 ## Metadata
 
-- **End Line:** <code>275</code>
+- **End Line:** <code>276</code>
 - **Line:** <code>235</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "src/intentatlas/scale.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 6871d35 - Fix cross-platform scale typing|Fix cross-platform scale typing]] _(history; evidence: git-diff-hunk)_

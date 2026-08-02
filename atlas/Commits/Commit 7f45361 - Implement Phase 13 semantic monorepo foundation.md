@@ -79,9 +79,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/_symbols_at_range - src - intentatlas - open_evidence.py|_symbols_at_range]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_symbols_by_path - src - intentatlas - open_evidence.py|_symbols_by_path]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/scip_fragment - src - intentatlas - open_evidence.py|scip_fragment]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/LargeGraphBenchmarkResult.to_dict - src - intentatlas - scale.py|LargeGraphBenchmarkResult.to_dict]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_peak_memory_bytes.ProcessMemoryCounters - src - intentatlas - scale.py|_peak_memory_bytes.ProcessMemoryCounters]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/run_large_graph_benchmark - src - intentatlas - scale.py|run_large_graph_benchmark]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/AdapterFragmentCache._path - src - intentatlas - scan_cache.py|AdapterFragmentCache._path]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/AdapterFragmentCache.load - src - intentatlas - scan_cache.py|AdapterFragmentCache.load]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/AdapterFragmentCache.store - src - intentatlas - scan_cache.py|AdapterFragmentCache.store]] _(history; evidence: git-diff-hunk)_

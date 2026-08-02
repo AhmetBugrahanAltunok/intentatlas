@@ -21,7 +21,7 @@ abstains on ambiguity or staleness without executing repository-controlled tooli
 - Phase 13 starting revision: `e206787a27d60db0b75a544a51dbb372ec480a9c`.
 - Foundation commit: `7f45361005163a4951f9afaa18b20e892057fa6f`.
 - Exact locally verified implementation snapshot:
-  `17bbb8700885af11932ba3ee654283c2282a959b`.
+  `6871d35397c7e5d05b0ed793669fda7f9a7417d7`.
 - Handoff checkpoint: `d3e4e56ebdb3cdd8dc4ae1be7082584da3f78ab0`.
 - Phase 11B supplied the frozen workspace basis: reviewed `antfu-utils` and `zustand` histories and
   34 evaluation false-positive paths classified as resolver ambiguity. Phase 13 added no language
@@ -141,24 +141,34 @@ bounded work/payload are the portable regression contract.
 
 - `INTENTATLAS_REQUIRE_BROWSER=1 \.venv\Scripts\python.exe -m pytest
   --cov=intentatlas --cov-report=term-missing --cov-fail-under=80 -ra`: `441 passed, 2 skipped` in
-  83.01 seconds, branch-aware coverage `86.03%`. Windows-unavailable symlink and FIFO checks were
+  88.35 seconds, branch-aware coverage `86.03%`. Windows-unavailable symlink and FIFO checks were
   skipped; their simulated security tests remain present.
 - `\.venv\Scripts\python.exe -m ruff check .`, `\.venv\Scripts\python.exe -m mypy src`,
   `\.venv\Scripts\python.exe -m bandit -q -r src`, `node --check
   src/intentatlas/web/app.js`, `\.venv\Scripts\python.exe -m pip check`, and
   `git diff --check`: pass. Mypy checked 43 maintained source files.
 - Two fixed-epoch builds (`SOURCE_DATE_EPOCH=1704067200`) at exact source revision
-  `17bbb8700885af11932ba3ee654283c2282a959b` were byte-identical. Wheel
+  `6871d35397c7e5d05b0ed793669fda7f9a7417d7` were byte-identical. Wheel
   `intentatlas-0.3.0rc1-py3-none-any.whl` SHA-256
-  `30f07be36d8252ed6fdeeffdd26f5ed3a092e4de5eb5102dc4fb569f494acbe1` has 50 files; sdist
+  `c570fdfcd469f0abc18d085b3516829e2940c6a710543d8a19993df4af6a07f8` has 50 files; sdist
   `intentatlas-0.3.0rc1.tar.gz` SHA-256
-  `9c96e4fb0c909384ff707a12b9f5e4bbcb00dc617a013155fb97be5e6b9ef830` has 180 files.
+  `026e4572da4aa0d13a27ab182442af3cab568adca9d697128e2dc941fe63ec79` has 180 files.
   Deterministic provenance schema 1 records those hashes and exact revision.
 - A fresh venv installed that wheel with `--no-deps`; `IntentAtlas 0.3.0rc1` and installed-wheel
   `demo --report json` schema 1 passed. The already safety-validated sdist was extracted into a new
   local directory and its full test suite exited 0 with browser execution required.
 - Approved network audit `\.venv\Scripts\python.exe -m pip_audit --skip-editable` returned
   `No known vulnerabilities found`; `pip check` returned `No broken requirements found`.
+
+## Remote CI remediation in progress
+
+- Initial push run `30758376045` at `99767cc8c1ddeae2118367907d768d0907e3e0e3` passed 12 of
+  13 jobs; Ubuntu `static-types` exposed four platform-conditional typing errors in the peak-memory
+  helper. This run is retained as a failed diagnostic, not represented as a pass.
+- Commit `6871d35397c7e5d05b0ed793669fda7f9a7417d7` replaced platform-specific typed attribute access
+  with runtime-bounded module namespace lookup. Post-fix mypy, nine focused scale tests, Ruff,
+  Bandit, full browser-required coverage, repeated packages, clean wheel/demo, and extracted-sdist
+  full suite all pass. A replacement remote run is pending.
 
 ## Pending closure evidence
 
@@ -167,8 +177,9 @@ bounded work/payload are the portable regression contract.
 - [x] Status reports zero durable orphans and exact REQ -> ADR -> ISSUE -> Code/Test -> EVD ->
       Commit links pass without accessing or enumerating `atlas/Private/`.
 - [x] Generated Commit notes for foundation commit
-      `7f45361005163a4951f9afaa18b20e892057fa6f` and exact locally verified snapshot
-      `17bbb8700885af11932ba3ee654283c2282a959b` are present and linked.
+      `7f45361005163a4951f9afaa18b20e892057fa6f` and local verification snapshot
+      `17bbb8700885af11932ba3ee654283c2282a959b` are present and linked; post-fix exact snapshot
+      `6871d35397c7e5d05b0ed793669fda7f9a7417d7` is also present and linked.
 - [x] Current source-bound fixed-epoch builds, artifact hashes, installed-wheel, and extracted-sdist
       checks are recorded.
 - [ ] Closure records are committed and pushed; complete remote CI passes at the pushed head.
@@ -198,5 +209,6 @@ bounded work/payload are the portable regression contract.
 - proves:: [[file:tests/test_browser_e2e.py]]
 - recorded-in:: [[commit:7f45361005163a4951f9afaa18b20e892057fa6f]]
 - recorded-in:: [[commit:17bbb8700885af11932ba3ee654283c2282a959b]]
+- recorded-in:: [[commit:6871d35397c7e5d05b0ed793669fda7f9a7417d7]]
 - reviewed-by:: [[Reviews/Phase 13 Semantic Monorepo Foundation Review]]
 - strategy:: [[Brain/Phase 11B-13 Delivery Strategy]]
