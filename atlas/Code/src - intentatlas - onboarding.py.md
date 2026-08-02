@@ -11,7 +11,7 @@ source_path: "src/intentatlas/onboarding.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>33666</code>
+- **Size Bytes:** <code>40419</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -35,6 +35,7 @@ source_path: "src/intentatlas/onboarding.py"
 - <code>defines</code> → [[Symbols/_is_private_path - src - intentatlas - onboarding.py|_is_private_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_is_unc_path - src - intentatlas - onboarding.py|_is_unc_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_language - src - intentatlas - onboarding.py|_language]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_layer_counts - src - intentatlas - onboarding.py|_layer_counts]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_message - src - intentatlas - onboarding.py|_message]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_normalized_path - src - intentatlas - onboarding.py|_normalized_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_post_result - src - intentatlas - onboarding.py|_post_result]] _(structure; evidence: python-ast)_
@@ -46,20 +47,26 @@ source_path: "src/intentatlas/onboarding.py"
 - <code>defines</code> → [[Symbols/_render_reasons - src - intentatlas - onboarding.py|_render_reasons]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_summary - src - intentatlas - onboarding.py|_render_summary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_revision - src - intentatlas - onboarding.py|_resolve_revision]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_resolve_source - src - intentatlas - onboarding.py|_resolve_source]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_select_scope - src - intentatlas - onboarding.py|_select_scope]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_session_root - src - intentatlas - onboarding.py|_session_root]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_session_source - src - intentatlas - onboarding.py|_session_source]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_shell_display - src - intentatlas - onboarding.py|_shell_display]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_terminal_text - src - intentatlas - onboarding.py|_terminal_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_try_resolve_revision - src - intentatlas - onboarding.py|_try_resolve_revision]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/resolve_git_root - src - intentatlas - onboarding.py|resolve_git_root]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/select_default_scope - src - intentatlas - onboarding.py|select_default_scope]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/CacheEntry - src - intentatlas - acquisition.py|CacheEntry]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ManagedRepositoryCache - src - intentatlas - acquisition.py|ManagedRepositoryCache]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/is_github_url - src - intentatlas - acquisition.py|is_github_url]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/normalize_github_url - src - intentatlas - acquisition.py|normalize_github_url]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ChangeReport - src - intentatlas - change_report.py|ChangeReport]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/collect_change_report_context - src - intentatlas - change_report.py|collect_change_report_context]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(structure; evidence: python-symbol-reference)_
@@ -73,6 +80,7 @@ source_path: "src/intentatlas/onboarding.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding|ISSUE-028 - Implement one-command guided CLI onboarding]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

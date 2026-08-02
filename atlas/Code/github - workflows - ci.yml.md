@@ -11,7 +11,7 @@ source_path: ".github/workflows/ci.yml"
 ## Metadata
 
 - **Language:** <code>"YAML"</code>
-- **Size Bytes:** <code>4920</code>
+- **Size Bytes:** <code>5105</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -21,6 +21,7 @@ source_path: ".github/workflows/ci.yml"
 
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 87e7555 - ci- update pinned actions to node 24|ci: update pinned actions to node 24]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit bfd0f1e - ci- install release imports for typing|ci: install release imports for typing]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_

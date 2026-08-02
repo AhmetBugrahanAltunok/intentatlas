@@ -19,6 +19,7 @@ generated: true
 - <code>owns</code> → [[Code/pyproject.toml|pyproject.toml]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - adapters - conformance.py|src/intentatlas/adapters/conformance.py]] _(boundary; evidence: workspace-boundary)_
@@ -63,6 +64,7 @@ generated: true
 - <code>owns</code> → [[Tests/tests - fixtures - delivery_project - src - app.py|tests/fixtures/delivery_project/src/app.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - fixtures - evidence_project - src - app.py|tests/fixtures/evidence_project/src/app.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - fixtures - evidence_project - tests - app_check.py|tests/fixtures/evidence_project/tests/app_check.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - test_acquisition.py|tests/test_acquisition.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_action.py|tests/test_action.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_adapter_conformance.py|tests/test_adapter_conformance.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(boundary; evidence: workspace-boundary)_
@@ -99,12 +101,14 @@ generated: true
 - <code>owns</code> → [[Tests/tests - test_scan_cache.py|tests/test_scan_cache.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_security.py|tests/test_security.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - test_source_to_atlas.py|tests/test_source_to_atlas.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_test_outcomes.py|tests/test_test_outcomes.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_trust_first.py|tests/test_trust_first.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_vault.py|tests/test_vault.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_version.py|tests/test_version.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_workspace.py|tests/test_workspace.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Code/tools - verify_pipx_install.py|tools/verify_pipx_install.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/tools - verify_release.py|tools/verify_release.py]] _(boundary; evidence: workspace-boundary)_
 
 ## Incoming relationships

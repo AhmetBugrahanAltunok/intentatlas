@@ -47,7 +47,9 @@ generated: true
 - <code>owns</code> → [[Code/docs - guided-demo.md|docs/guided-demo.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - incremental-scanning.md|docs/incremental-scanning.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - index.md|docs/index.md]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Code/docs - installation.md|docs/installation.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - longitudinal-pilot.md|docs/longitudinal-pilot.md]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Code/docs - managed-repository-cache.md|docs/managed-repository-cache.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - onboarding-walkthroughs.md|docs/onboarding-walkthroughs.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - open-evidence.md|docs/open-evidence.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - query-scale-benchmark.md|docs/query-scale-benchmark.md]] _(boundary; evidence: workspace-boundary)_

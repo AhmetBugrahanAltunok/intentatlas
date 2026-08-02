@@ -10,8 +10,8 @@ source_path: "tools/verify_release.py"
 
 ## Metadata
 
-- **End Line:** <code>720</code>
-- **Line:** <code>631</code>
+- **End Line:** <code>724</code>
+- **Line:** <code>635</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

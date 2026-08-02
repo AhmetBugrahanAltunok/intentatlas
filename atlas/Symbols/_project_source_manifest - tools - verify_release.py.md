@@ -10,8 +10,8 @@ source_path: "tools/verify_release.py"
 
 ## Metadata
 
-- **End Line:** <code>443</code>
-- **Line:** <code>404</code>
+- **End Line:** <code>447</code>
+- **Line:** <code>407</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tools/verify_release.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/tools - verify_release.py|tools/verify_release.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-diff-hunk)_

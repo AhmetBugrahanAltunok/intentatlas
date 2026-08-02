@@ -544,7 +544,7 @@ Status: complete on 2026-08-02; EVD-030 complete and Phase 14 Review passed
 
 ## Phase 15 - Frictionless source-to-atlas
 
-Status: in progress; Phase 14 entry verified on 2026-08-03
+Status: in progress; local Phase 15 gates passed on 2026-08-03, final push/remote CI pending
 
 - Verify the exact candidate wheel as an isolated global CLI tool without changing a user's real
   PATH or pipx installation.

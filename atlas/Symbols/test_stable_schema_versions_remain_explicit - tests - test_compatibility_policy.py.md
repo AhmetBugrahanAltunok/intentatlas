@@ -10,8 +10,8 @@ source_path: "tests/test_compatibility_policy.py"
 
 ## Metadata
 
-- **End Line:** <code>53</code>
-- **Line:** <code>45</code>
+- **End Line:** <code>54</code>
+- **Line:** <code>46</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

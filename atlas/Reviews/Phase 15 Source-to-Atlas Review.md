@@ -8,25 +8,27 @@ phase: 15
 
 ## Acceptance review
 
-- [ ] Phase 14 passed at the exact clean entry revision.
-- [ ] Exact-wheel isolated global command lifecycle passes without mutating real user installation.
-- [ ] Local and strict public GitHub inputs reach the same production source-to-atlas contracts.
-- [ ] Remote consent, URL, Git, authentication, execution, Private, redirect, and bounded-resource
+- [x] Phase 14 passed at the exact clean entry revision.
+- [x] Exact-wheel isolated global command lifecycle passes without mutating real user installation.
+- [x] Local and strict public GitHub inputs reach the same production source-to-atlas contracts.
+- [x] Remote consent, URL, Git, authentication, execution, Private, redirect, and bounded-resource
       controls pass without weakening non-TTY or local-offline behavior.
-- [ ] Managed cache identity, atomicity, locking, recovery, freshness, metadata, and safe cleanup pass.
-- [ ] Terminal reports Atlas/layer/link/revision/scope/freshness/bounds truthfully and invents no
+- [x] Managed cache identity, atomicity, locking, recovery, freshness, metadata, and safe cleanup pass.
+- [x] Terminal reports Atlas/layer/link/revision/scope/freshness/bounds truthfully and invents no
       intent; browser uses the same immutable graph/report snapshot.
-- [ ] EN/TR, hostile/plain terminal, accessibility, Chrome, explicit CLI/JSON, and package contracts
+- [x] EN/TR, hostile/plain terminal, accessibility, Chrome, explicit CLI/JSON, and package contracts
       pass without a new runtime dependency or analysis engine.
-- [ ] Focused/full/static/security/package/provenance/network/vault and final remote CI gates pass.
+- [ ] Focused/full/static/security/package/provenance/network/vault pass locally; final pushed-head
+      remote CI remains open.
 - [ ] EVD-031 contains exact commands/results/commits/smoke provenance/limits and zero open gates.
-- [ ] No Phase 11C, human-time claim, tag, release, publication, installer publishing, deployment,
+- [x] No Phase 11C, human-time claim, tag, release, publication, installer publishing, deployment,
       telemetry, settings/visibility change, private auth, or announcement occurred.
 
 ## Decision
 
-Pending. Pass is forbidden until every applicable item and EVD-031 gate is complete at a pushed
-revision with fully successful remote CI.
+Pending remote CI. Local acceptance evidence passes at `e1f731385d1ae9e3217ca3b2acf9cf69a2b84f25`,
+but pass is forbidden until every applicable item and EVD-031 gate is complete at a pushed
+closure revision with fully successful final-head remote CI.
 
 ## Links
 

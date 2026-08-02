@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>31229</code>
+- **Size Bytes:** <code>33392</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -19,6 +19,7 @@ source_path: "src/intentatlas/cli.py"
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/_cache - src - intentatlas - cli.py|_cache]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_changes - src - intentatlas - cli.py|_changes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_diff - src - intentatlas - cli.py|_diff]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_corpus - src - intentatlas - cli.py|_evaluate_corpus]] _(structure; evidence: python-ast)_
@@ -41,6 +42,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>defines</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
@@ -61,6 +63,9 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Tests/src - intentatlas - test_outcomes.py|src/intentatlas/test_outcomes.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ManagedRepositoryCache - src - intentatlas - acquisition.py|ManagedRepositoryCache]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/is_github_url - src - intentatlas - acquisition.py|is_github_url]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_cache_entry - src - intentatlas - acquisition.py|render_cache_entry]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/analyze_change_set - src - intentatlas - change_analysis.py|analyze_change_set]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_change_analysis - src - intentatlas - change_analysis.py|render_change_analysis]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/collect_change_report - src - intentatlas - change_report.py|collect_change_report]] _(structure; evidence: python-symbol-reference)_
@@ -107,6 +112,7 @@ source_path: "src/intentatlas/cli.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_

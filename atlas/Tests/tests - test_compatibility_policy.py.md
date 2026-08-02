@@ -11,7 +11,7 @@ source_path: "tests/test_compatibility_policy.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2136</code>
+- **Size Bytes:** <code>2179</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -28,6 +28,7 @@ source_path: "tests/test_compatibility_policy.py"
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e1f7313 - Cover managed cache compatibility contract|Cover managed cache compatibility contract]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(reference; evidence: wikilink)_

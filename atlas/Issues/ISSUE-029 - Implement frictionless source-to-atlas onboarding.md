@@ -40,9 +40,9 @@ phase: 15
 
 ## Closure
 
-- [ ] Focused/full/coverage/lint/type/security/browser/package/provenance/network/vault gates pass.
-- [ ] Fixed public-repository smoke records exact revision and license without committing source.
-- [ ] Generated Code/Test/Commit notes and zero-orphan durable chain pass deterministically.
+- [x] Focused/full/coverage/lint/type/security/browser/package/provenance/network/vault gates pass.
+- [x] Fixed public-repository smoke records exact revision and license without committing source.
+- [x] Generated Code/Test/Commit notes and zero-orphan durable chain pass deterministically.
 - [ ] EVD-031 is complete, Review passes, commits are pushed, and final-head CI is fully green.
 - [ ] Phase 11C and every publication/deployment/settings/announcement boundary remain unchanged.
 
