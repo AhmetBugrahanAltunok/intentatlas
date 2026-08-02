@@ -12,6 +12,10 @@ source_path: "tests/test_trust_first.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>5445</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -20,12 +24,12 @@ source_path: "tests/test_trust_first.py"
 - <code>defines</code> → [[Symbols/_project_snapshot - tests - test_trust_first.py|_project_snapshot]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_diagnostic_and_real_repository_preview_are_no_write - tests - test_trust_first.py|test_diagnostic_and_real_repository_preview_are_no_write]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_trust_first_documentation_sequence_and_artifacts_are_frozen - tests - test_trust_first.py|test_trust_first_documentation_sequence_and_artifacts_are_frozen]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 922adfe - docs- record Phase 12 automated evidence|docs: record Phase 12 automated evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs|test: verify technical onboarding walkthroughs]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_

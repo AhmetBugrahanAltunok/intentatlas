@@ -13,6 +13,9 @@ source_path: "src/intentatlas/adapters/conformance.py"
 - **End Line:** <code>33</code>
 - **Line:** <code>26</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

@@ -13,6 +13,9 @@ source_path: "tools/verify_release.py"
 - **End Line:** <code>385</code>
 - **Line:** <code>296</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

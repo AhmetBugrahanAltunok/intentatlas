@@ -10,11 +10,13 @@ source_path: "src/intentatlas/evidence.py"
 
 ## Metadata
 
-- **End Line:** <code>160</code>
-- **Line:** <code>149</code>
+- **End Line:** <code>171</code>
+- **Line:** <code>160</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-diff-hunk)_

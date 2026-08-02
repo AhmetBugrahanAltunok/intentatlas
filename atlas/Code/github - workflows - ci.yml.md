@@ -12,6 +12,10 @@ source_path: ".github/workflows/ci.yml"
 
 - **Language:** <code>"YAML"</code>
 - **Size Bytes:** <code>4920</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
@@ -21,3 +25,4 @@ source_path: ".github/workflows/ci.yml"
 - <code>changed-by</code> ← [[Commits/Commit 87e7555 - ci- update pinned actions to node 24|ci: update pinned actions to node 24]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit bfd0f1e - ci- install release imports for typing|ci: install release imports for typing]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

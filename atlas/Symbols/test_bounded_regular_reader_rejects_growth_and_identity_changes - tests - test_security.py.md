@@ -13,6 +13,9 @@ source_path: "tests/test_security.py"
 - **End Line:** <code>48</code>
 - **Line:** <code>25</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

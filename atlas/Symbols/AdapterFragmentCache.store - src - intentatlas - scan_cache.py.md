@@ -10,10 +10,14 @@ source_path: "src/intentatlas/scan_cache.py"
 
 ## Metadata
 
-- **End Line:** <code>101</code>
-- **Line:** <code>72</code>
+- **End Line:** <code>104</code>
+- **Line:** <code>74</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_

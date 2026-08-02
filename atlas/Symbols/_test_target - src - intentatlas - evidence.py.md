@@ -10,9 +10,12 @@ source_path: "src/intentatlas/evidence.py"
 
 ## Metadata
 
-- **End Line:** <code>289</code>
-- **Line:** <code>282</code>
+- **End Line:** <code>300</code>
+- **Line:** <code>293</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

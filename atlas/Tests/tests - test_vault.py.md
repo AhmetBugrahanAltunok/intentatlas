@@ -12,6 +12,10 @@ source_path: "tests/test_vault.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>15899</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -53,16 +57,13 @@ source_path: "tests/test_vault.py"
 - <code>defines</code> → [[Symbols/test_vault_rejects_linked_generated_areas_before_sync - tests - test_vault.py|test_vault_rejects_linked_generated_areas_before_sync]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_vault_rejects_linked_generated_areas_before_sync.simulated_link - tests - test_vault.py|test_vault_rejects_linked_generated_areas_before_sync.simulated_link]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-008 - Implement resilient generated vault synchronization|ISSUE-008 - Implement resilient generated vault synchronization]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_

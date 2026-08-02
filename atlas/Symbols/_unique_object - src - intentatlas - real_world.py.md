@@ -13,6 +13,9 @@ source_path: "src/intentatlas/real_world.py"
 - **End Line:** <code>346</code>
 - **Line:** <code>340</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

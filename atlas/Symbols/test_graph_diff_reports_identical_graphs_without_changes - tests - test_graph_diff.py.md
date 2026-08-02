@@ -13,6 +13,9 @@ source_path: "tests/test_graph_diff.py"
 - **End Line:** <code>52</code>
 - **Line:** <code>45</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

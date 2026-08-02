@@ -10,9 +10,12 @@ source_path: "src/intentatlas/scanner.py"
 
 ## Metadata
 
-- **End Line:** <code>98</code>
-- **Line:** <code>95</code>
+- **End Line:** <code>109</code>
+- **Line:** <code>106</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

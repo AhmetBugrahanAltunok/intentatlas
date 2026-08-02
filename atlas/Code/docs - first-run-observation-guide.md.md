@@ -12,8 +12,13 @@ source_path: "docs/first-run-observation-guide.md"
 
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1669</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs|test: verify technical onboarding walkthroughs]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

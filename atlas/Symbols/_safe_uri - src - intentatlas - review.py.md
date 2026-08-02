@@ -13,6 +13,9 @@ source_path: "src/intentatlas/review.py"
 - **End Line:** <code>365</code>
 - **Line:** <code>354</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

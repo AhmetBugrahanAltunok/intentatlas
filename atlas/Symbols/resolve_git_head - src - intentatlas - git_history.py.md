@@ -13,6 +13,9 @@ source_path: "src/intentatlas/git_history.py"
 - **End Line:** <code>75</code>
 - **Line:** <code>49</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

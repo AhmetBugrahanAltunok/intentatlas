@@ -13,8 +13,10 @@ source_path: "src/intentatlas/longitudinal.py"
 - **End Line:** <code>108</code>
 - **Line:** <code>90</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
-- <code>tested-by</code> ← [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(verification; evidence: python-symbol-reference)_

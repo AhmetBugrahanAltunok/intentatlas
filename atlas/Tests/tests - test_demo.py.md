@@ -12,6 +12,10 @@ source_path: "tests/test_demo.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>7387</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -23,20 +27,10 @@ source_path: "tests/test_demo.py"
 - <code>defines</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it.fake_serve - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it.fake_serve]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/_build_demo_report - src - intentatlas - demo.py|_build_demo_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/build_demo_change_report - src - intentatlas - demo.py|build_demo_change_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/build_demo_graph - src - intentatlas - demo.py|build_demo_graph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/build_demo_report - src - intentatlas - demo.py|build_demo_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_demo_report - src - intentatlas - demo.py|render_demo_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths|ISSUE-012 - Implement guided demo and viewer evidence paths]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

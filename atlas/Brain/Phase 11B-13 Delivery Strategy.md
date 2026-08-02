@@ -148,6 +148,13 @@ code-intelligence service, implement a distributed cache, or add languages witho
 Its exit gate is ambiguity-safe behavior on real workspace structures, revision/freshness-bound
 semantic evidence, deterministic schema migration, and declared large-graph budgets.
 
+Delivery status on 2026-08-02: Phase 13A-13C implementation is recorded at
+`7f45361005163a4951f9afaa18b20e892057fa6f`, with the handoff checkpoint at
+`d3e4e56ebdb3cdd8dc4ae1be7082584da3f78ab0`. Focused, complete, coverage, browser, scale,
+package, installed-wheel, extracted-sdist, lint, type, security, and approved network-audit gates
+passed locally. Phase 13 remains open until deterministic vault/durable-chain verification,
+EVD-029 completion, push, complete remote CI, and the final Review decision pass.
+
 ## Work deliberately deferred
 
 1. Public tag, package publication, or broad production/monorepo claims before their gates pass.

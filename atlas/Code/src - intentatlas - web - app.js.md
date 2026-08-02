@@ -11,7 +11,11 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>31820</code>
+- **Size Bytes:** <code>32957</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -60,6 +64,7 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/seeded - src - intentatlas - web - app.js|seeded]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/selectNode - src - intentatlas - web - app.js|selectNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/selectionSummary - src - intentatlas - web - app.js|selectionSummary]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/setGraphWindow - src - intentatlas - web - app.js|setGraphWindow]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortLabel - src - intentatlas - web - app.js|shortLabel]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortRevision - src - intentatlas - web - app.js|shortRevision]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/showFocusedWindow - src - intentatlas - web - app.js|showFocusedWindow]] _(structure; evidence: javascript-structural)_
@@ -77,6 +82,7 @@ source_path: "src/intentatlas/web/app.js"
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
@@ -84,3 +90,4 @@ source_path: "src/intentatlas/web/app.js"
 - <code>implements</code> ← [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths|ISSUE-012 - Implement guided demo and viewer evidence paths]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

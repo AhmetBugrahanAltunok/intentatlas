@@ -12,6 +12,10 @@ source_path: "tests/test_change_analysis.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>4082</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -19,12 +23,9 @@ source_path: "tests/test_change_analysis.py"
 - <code>defines</code> → [[Symbols/test_change_analysis_distinguishes_exact_fallback_and_stale_files.git - tests - test_change_analysis.py|test_change_analysis_distinguishes_exact_fallback_and_stale_files.git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_worktree_analysis_marks_untracked_source_as_file_fallback - tests - test_change_analysis.py|test_worktree_analysis_marks_untracked_source_as_file_fallback]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/analyze_change_set - src - intentatlas - change_analysis.py|analyze_change_set]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_change_analysis - src - intentatlas - change_analysis.py|render_change_analysis]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_

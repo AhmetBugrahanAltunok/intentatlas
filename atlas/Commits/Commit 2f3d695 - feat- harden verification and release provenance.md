@@ -39,7 +39,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_property_fuzz.py|tests/test_property_fuzz.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_release.py|tests/test_release.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/tools - verify_release.py|tools/verify_release.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_valid_suffixes - src - intentatlas - adapters - conformance.py|_valid_suffixes]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_collect_import_declaration - src - intentatlas - adapters - go.py|_collect_import_declaration]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_add_recent_cochange_reasons - src - intentatlas - recommendations.py|_add_recent_cochange_reasons]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(history; evidence: git-diff-hunk)_

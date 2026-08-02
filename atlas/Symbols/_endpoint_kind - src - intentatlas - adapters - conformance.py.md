@@ -10,9 +10,12 @@ source_path: "src/intentatlas/adapters/conformance.py"
 
 ## Metadata
 
-- **End Line:** <code>231</code>
-- **Line:** <code>226</code>
+- **End Line:** <code>257</code>
+- **Line:** <code>252</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

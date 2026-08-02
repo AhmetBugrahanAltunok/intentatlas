@@ -153,6 +153,31 @@ def test_workspace_candidate_sets_and_diagnostics_are_deterministic(tmp_path) ->
     assert "duplicate-package-name" in result.statistics.workspace_diagnostics
 
 
+def test_declared_dependency_cycle_is_reported_deterministically(tmp_path) -> None:
+    _write(
+        tmp_path,
+        "packages/a/package.json",
+        '{"name":"a","dependencies":{"b":"workspace:*"}}\n',
+    )
+    _write(
+        tmp_path,
+        "packages/b/package.json",
+        '{"name":"b","dependencies":{"a":"workspace:*"}}\n',
+    )
+    _write(tmp_path, "packages/a/index.ts", "export const a = 1\n")
+    _write(tmp_path, "packages/b/index.ts", "export const b = 1\n")
+
+    first = discover_workspace(tmp_path, _files(tmp_path))
+    second = discover_workspace(tmp_path, _files(tmp_path))
+    cycles = [item for item in first.diagnostics if item.code == "cyclic-dependency"]
+    assert len(cycles) == 1
+    assert cycles == [item for item in second.diagnostics if item.code == "cyclic-dependency"]
+    assert cycles[0].candidates == (
+        "workspace:javascript-package:packages/a",
+        "workspace:javascript-package:packages/b",
+    )
+
+
 def test_workspace_discovery_never_executes_project_tooling(tmp_path, monkeypatch) -> None:
     _write(
         tmp_path,

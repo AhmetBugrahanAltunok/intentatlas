@@ -13,6 +13,9 @@ source_path: "src/intentatlas/change_report.py"
 - **End Line:** <code>61</code>
 - **Line:** <code>52</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

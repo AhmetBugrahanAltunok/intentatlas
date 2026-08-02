@@ -12,6 +12,10 @@ source_path: "tests/test_adapter_conformance.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>9782</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -30,24 +34,9 @@ source_path: "tests/test_adapter_conformance.py"
 - <code>defines</code> → [[Symbols/test_fresh_and_incremental_scans_reject_before_merge_or_cache - tests - test_adapter_conformance.py|test_fresh_and_incremental_scans_reject_before_merge_or_cache]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_fresh_and_incremental_scans_reject_before_merge_or_cache.DuplicateAdapter - tests - test_adapter_conformance.py|test_fresh_and_incremental_scans_reject_before_merge_or_cache.DuplicateAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_fresh_and_incremental_scans_reject_before_merge_or_cache.DuplicateAdapter.scan - tests - test_adapter_conformance.py|test_fresh_and_incremental_scans_reject_before_merge_or_cache.DuplicateAdapter.scan]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/canonical_graph_fragment - src - intentatlas - adapters - base.py|canonical_graph_fragment]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/AdapterConformanceError - src - intentatlas - adapters - conformance.py|AdapterConformanceError]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/assert_adapter_conforms - src - intentatlas - adapters - conformance.py|assert_adapter_conforms]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/validate_adapter_definition - src - intentatlas - adapters - conformance.py|validate_adapter_definition]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/validate_adapter_fragment - src - intentatlas - adapters - conformance.py|validate_adapter_fragment]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/GoAdapter - src - intentatlas - adapters - go.py|GoAdapter]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/JavaScriptAdapter - src - intentatlas - adapters - javascript.py|JavaScriptAdapter]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(reference; evidence: wikilink)_

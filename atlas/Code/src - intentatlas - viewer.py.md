@@ -11,26 +11,40 @@ source_path: "src/intentatlas/viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4322</code>
+- **Size Bytes:** <code>8119</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/LoopbackHTTPServer - src - intentatlas - viewer.py|LoopbackHTTPServer]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/LoopbackHTTPServer.server_bind - src - intentatlas - viewer.py|LoopbackHTTPServer.server_bind]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_query_int - src - intentatlas - viewer.py|_query_int]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_query_text - src - intentatlas - viewer.py|_query_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler - src - intentatlas - viewer.py|serve_graph.Handler]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/serve_graph.Handler._graph_query - src - intentatlas - viewer.py|serve_graph.Handler._graph_query]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler._send - src - intentatlas - viewer.py|serve_graph.Handler._send]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler.end_headers - src - intentatlas - viewer.py|serve_graph.Handler.end_headers]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/serve_graph.Handler.log_message - src - intentatlas - viewer.py|serve_graph.Handler.log_message]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - graph_query.py|src/intentatlas/graph_query.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/GraphQuerySnapshot - src - intentatlas - graph_query.py|GraphQuerySnapshot]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 28cf029 - fix- avoid reverse DNS in local viewer|fix: avoid reverse DNS in local viewer]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(verification; evidence: filename-convention)_

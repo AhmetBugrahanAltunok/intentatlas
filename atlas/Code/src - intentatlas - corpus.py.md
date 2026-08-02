@@ -12,6 +12,10 @@ source_path: "src/intentatlas/corpus.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>12474</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -49,4 +53,5 @@ source_path: "src/intentatlas/corpus.py"
 - <code>implements</code> ← [[Issues/ISSUE-010 - Implement cross-project recommendation benchmarks|ISSUE-010 - Implement cross-project recommendation benchmarks]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-ast)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: filename-convention)_

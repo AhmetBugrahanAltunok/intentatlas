@@ -12,7 +12,11 @@ source_path: "src/intentatlas/web/__init__.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>54</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

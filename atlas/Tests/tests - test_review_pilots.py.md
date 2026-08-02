@@ -12,14 +12,18 @@ source_path: "tests/test_review_pilots.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>3944</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/git - tests - test_review_pilots.py|git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_review_pilots_cover_aligned_stale_and_fallback_ranges - tests - test_review_pilots.py|test_review_pilots_cover_aligned_stale_and_fallback_ranges]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(reference; evidence: wikilink)_

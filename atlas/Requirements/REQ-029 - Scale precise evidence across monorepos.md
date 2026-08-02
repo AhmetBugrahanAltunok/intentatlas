@@ -1,7 +1,7 @@
 ---
 id: REQ-029
 type: requirement
-status: proposed
+status: accepted
 phase: 13
 ---
 # Scale precise evidence across monorepos

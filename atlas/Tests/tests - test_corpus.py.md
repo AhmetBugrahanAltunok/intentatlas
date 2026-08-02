@@ -12,6 +12,10 @@ source_path: "tests/test_corpus.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>9913</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -26,19 +30,9 @@ source_path: "tests/test_corpus.py"
 - <code>defines</code> → [[Symbols/test_original_corpus_compares_all_thresholds_deterministically - tests - test_corpus.py|test_original_corpus_compares_all_thresholds_deterministically]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/write_manifest - tests - test_corpus.py|write_manifest]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/CorpusManifestProject - src - intentatlas - corpus.py|CorpusManifestProject]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/CorpusProject - src - intentatlas - corpus.py|CorpusProject]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/evaluate_corpus - src - intentatlas - corpus.py|evaluate_corpus]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/load_corpus_manifest - src - intentatlas - corpus.py|load_corpus_manifest]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_corpus - src - intentatlas - corpus.py|render_corpus]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/validate_corpus_graph_size - src - intentatlas - corpus.py|validate_corpus_graph_size]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/EvaluationCase - src - intentatlas - evaluation.py|EvaluationCase]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/EvaluationLabels - src - intentatlas - evaluation.py|EvaluationLabels]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/load_evaluation_labels - src - intentatlas - evaluation.py|load_evaluation_labels]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-010 - Implement cross-project recommendation benchmarks|ISSUE-010 - Implement cross-project recommendation benchmarks]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

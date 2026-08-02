@@ -12,6 +12,9 @@ source_path: "tests/fixtures/go_project/internal/math/add.go"
 
 - **Line:** <code>16</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project"]</code>
+- **Workspace Owners:** <code>["workspace:go-module:tests/fixtures/go_project"]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

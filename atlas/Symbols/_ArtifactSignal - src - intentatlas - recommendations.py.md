@@ -13,6 +13,9 @@ source_path: "src/intentatlas/recommendations.py"
 - **End Line:** <code>126</code>
 - **Line:** <code>121</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

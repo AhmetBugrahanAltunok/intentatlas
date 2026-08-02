@@ -12,6 +12,10 @@ source_path: "tests/test_diagnostic.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>5495</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -22,12 +26,10 @@ source_path: "tests/test_diagnostic.py"
 - <code>defines</code> → [[Symbols/test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity - tests - test_diagnostic.py|test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_diagnostic_text_preserves_safe_next_action_and_advisory - tests - test_diagnostic.py|test_diagnostic_text_preserves_safe_next_action_and_advisory]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/diagnose_repository - src - intentatlas - diagnostic.py|diagnose_repository]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_diagnostic - src - intentatlas - diagnostic.py|render_diagnostic]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_

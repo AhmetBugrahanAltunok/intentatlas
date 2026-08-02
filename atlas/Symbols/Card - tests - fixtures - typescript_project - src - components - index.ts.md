@@ -12,6 +12,9 @@ source_path: "tests/fixtures/typescript_project/src/components/index.ts"
 
 - **Line:** <code>1</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

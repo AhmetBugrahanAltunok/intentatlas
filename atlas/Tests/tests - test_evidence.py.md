@@ -12,6 +12,10 @@ source_path: "tests/test_evidence.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>7280</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -24,13 +28,10 @@ source_path: "tests/test_evidence.py"
 - <code>defines</code> → [[Symbols/test_rejects_symbolic_link_report_before_reading.guarded_is_symlink - tests - test_evidence.py|test_rejects_symbolic_link_report_before_reading.guarded_is_symlink]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_unsafe_or_missing_report_paths - tests - test_evidence.py|test_rejects_unsafe_or_missing_report_paths]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(reference; evidence: wikilink)_

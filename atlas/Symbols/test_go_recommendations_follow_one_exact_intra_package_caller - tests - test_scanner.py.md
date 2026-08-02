@@ -10,9 +10,12 @@ source_path: "tests/test_scanner.py"
 
 ## Metadata
 
-- **End Line:** <code>511</code>
-- **Line:** <code>479</code>
+- **End Line:** <code>540</code>
+- **Line:** <code>508</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

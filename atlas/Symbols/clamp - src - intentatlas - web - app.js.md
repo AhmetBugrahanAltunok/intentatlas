@@ -10,8 +10,11 @@ source_path: "src/intentatlas/web/app.js"
 
 ## Metadata
 
-- **Line:** <code>613</code>
+- **Line:** <code>632</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

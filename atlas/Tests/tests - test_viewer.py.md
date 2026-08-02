@@ -11,10 +11,15 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5270</code>
+- **Size Bytes:** <code>5596</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/_graph_document - tests - test_viewer.py|_graph_document]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_rejects_missing_graph - tests - test_viewer.py|test_serve_graph_rejects_missing_graph]] _(structure; evidence: python-ast)_
@@ -27,8 +32,6 @@ source_path: "tests/test_viewer.py"
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.fake_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.fake_server]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/LoopbackHTTPServer - src - intentatlas - viewer.py|LoopbackHTTPServer]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -36,8 +39,10 @@ source_path: "tests/test_viewer.py"
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 28cf029 - fix- avoid reverse DNS in local viewer|fix: avoid reverse DNS in local viewer]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_

@@ -11,7 +11,11 @@ source_path: "tests/test_open_evidence.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12454</code>
+- **Size Bytes:** <code>17420</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -22,15 +26,17 @@ source_path: "tests/test_open_evidence.py"
 - <code>defines</code> → [[Symbols/test_open_evidence_uses_existing_safe_report_boundary - tests - test_open_evidence.py|test_open_evidence_uses_existing_safe_report_boundary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_invalid_execution_map_contract_and_sarif_version - tests - test_open_evidence.py|test_rejects_invalid_execution_map_contract_and_sarif_version]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_malformed_duplicate_binary_and_unbounded_open_evidence - tests - test_open_evidence.py|test_rejects_malformed_duplicate_binary_and_unbounded_open_evidence]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_revision_bound_scip_creates_exact_symbol_test_edge_only_when_aligned - tests - test_open_evidence.py|test_revision_bound_scip_creates_exact_symbol_test_edge_only_when_aligned]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scip_ambiguous_owner_and_unsupported_roles_remain_fallback - tests - test_open_evidence.py|test_scip_ambiguous_owner_and_unsupported_roles_remain_fallback]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scip_import_does_not_launch_repository_tooling - tests - test_open_evidence.py|test_scip_import_does_not_launch_repository_tooling]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scip_import_does_not_launch_repository_tooling.git_only - tests - test_open_evidence.py|test_scip_import_does_not_launch_repository_tooling.git_only]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_stale_and_unknown_execution_maps_withhold_runtime_test_edges - tests - test_open_evidence.py|test_stale_and_unknown_execution_maps_withhold_runtime_test_edges]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
+- <code>proven-by</code> ← [[Evidence/EVD-029 - Phase 13 semantic monorepo verification|EVD-029 - Phase 13 semantic monorepo verification]] _(evidence; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(reference; evidence: wikilink)_

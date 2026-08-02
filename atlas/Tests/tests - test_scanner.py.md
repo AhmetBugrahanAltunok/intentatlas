@@ -11,7 +11,11 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>29070</code>
+- **Size Bytes:** <code>30448</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -21,6 +25,8 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_python_adapter_abstains_when_root_and_src_modules_collide - tests - test_scanner.py|test_python_adapter_abstains_when_root_and_src_modules_collide]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_python_adapter_does_not_guess_nested_monorepo_source_roots - tests - test_scanner.py|test_python_adapter_does_not_guess_nested_monorepo_source_roots]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_python_adapter_resolves_unique_namespace_modules_across_root_and_src - tests - test_scanner.py|test_python_adapter_resolves_unique_namespace_modules_across_root_and_src]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one - tests - test_scanner.py|test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_repository_file_and_byte_budgets_fail_before_adapter_work - tests - test_scanner.py|test_repository_file_and_byte_budgets_fail_before_adapter_work]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_go_symbols_local_imports_and_tests - tests - test_scanner.py|test_scanner_connects_go_symbols_local_imports_and_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_typescript_javascript_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_typescript_javascript_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
@@ -38,23 +44,20 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_resolves_python_reexports_to_exact_symbols - tests - test_scanner.py|test_scanner_resolves_python_reexports_to_exact_symbols]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit db64192 - feat- improve Go test evidence|feat: improve Go test evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-015 - Expand and refine real-world validation|ISSUE-015 - Expand and refine real-world validation]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_

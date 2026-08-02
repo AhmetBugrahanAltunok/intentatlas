@@ -11,18 +11,22 @@ source_path: "tests/test_scale.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2574</code>
+- **Size Bytes:** <code>3347</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/test_large_graph_benchmark_has_exact_work_counts_and_bounded_queries - tests - test_scale.py|test_large_graph_benchmark_has_exact_work_counts_and_bounded_queries]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scale_benchmark_cli_and_format_errors - tests - test_scale.py|test_scale_benchmark_cli_and_format_errors]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scale_benchmark_has_stable_counts_and_local_lookup_work - tests - test_scale.py|test_scale_benchmark_has_stable_counts_and_local_lookup_work]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scale_benchmark_rejects_invalid_bounds - tests - test_scale.py|test_scale_benchmark_rejects_invalid_bounds]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_scale_benchmark - src - intentatlas - scale.py|render_scale_benchmark]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/run_scale_benchmark - src - intentatlas - scale.py|run_scale_benchmark]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

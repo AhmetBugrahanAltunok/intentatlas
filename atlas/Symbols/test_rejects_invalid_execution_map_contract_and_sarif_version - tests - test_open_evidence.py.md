@@ -10,11 +10,13 @@ source_path: "tests/test_open_evidence.py"
 
 ## Metadata
 
-- **End Line:** <code>327</code>
-- **Line:** <code>312</code>
+- **End Line:** <code>461</code>
+- **Line:** <code>446</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-diff-hunk)_

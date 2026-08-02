@@ -13,6 +13,9 @@ source_path: "src/intentatlas/corpus.py"
 - **End Line:** <code>110</code>
 - **Line:** <code>101</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

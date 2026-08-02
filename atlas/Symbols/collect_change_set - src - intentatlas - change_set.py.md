@@ -13,6 +13,9 @@ source_path: "src/intentatlas/change_set.py"
 - **End Line:** <code>237</code>
 - **Line:** <code>77</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
@@ -20,6 +23,3 @@ source_path: "src/intentatlas/change_set.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-symbol-reference)_
 - <code>modified-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-diff-hunk)_
-- <code>tested-by</code> ← [[Tests/tests - test_change_analysis.py|tests/test_change_analysis.py]] _(verification; evidence: python-symbol-reference)_
-- <code>tested-by</code> ← [[Tests/tests - test_change_report.py|tests/test_change_report.py]] _(verification; evidence: python-symbol-reference)_
-- <code>tested-by</code> ← [[Tests/tests - test_change_set.py|tests/test_change_set.py]] _(verification; evidence: python-symbol-reference)_

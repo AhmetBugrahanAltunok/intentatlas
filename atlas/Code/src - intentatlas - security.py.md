@@ -12,6 +12,10 @@ source_path: "src/intentatlas/security.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>1290</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -21,4 +25,5 @@ source_path: "src/intentatlas/security.py"
 ## Incoming relationships
 
 - <code>imported-by</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(verification; evidence: filename-convention)_

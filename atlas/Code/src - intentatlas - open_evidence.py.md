@@ -11,7 +11,11 @@ source_path: "src/intentatlas/open_evidence.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>16973</code>
+- **Size Bytes:** <code>24661</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -20,7 +24,12 @@ source_path: "src/intentatlas/open_evidence.py"
 - <code>defines</code> → [[Symbols/_invalid_constant - src - intentatlas - open_evidence.py|_invalid_constant]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_file - src - intentatlas - open_evidence.py|_resolve_file]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_sarif_target - src - intentatlas - open_evidence.py|_sarif_target]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_scip_freshness - src - intentatlas - open_evidence.py|_scip_freshness]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_scip_metadata - src - intentatlas - open_evidence.py|_scip_metadata]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_scip_metadata_string - src - intentatlas - open_evidence.py|_scip_metadata_string]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_scip_range - src - intentatlas - open_evidence.py|_scip_range]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_symbols_at_range - src - intentatlas - open_evidence.py|_symbols_at_range]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_symbols_by_path - src - intentatlas - open_evidence.py|_symbols_by_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_unique_object - src - intentatlas - open_evidence.py|_unique_object]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_validate_json_tree - src - intentatlas - open_evidence.py|_validate_json_tree]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/execution_map_fragment - src - intentatlas - open_evidence.py|execution_map_fragment]] _(structure; evidence: python-ast)_
@@ -39,8 +48,10 @@ source_path: "src/intentatlas/open_evidence.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(structure; evidence: python-ast)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(verification; evidence: filename-convention)_
-- <code>tested-by</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(verification; evidence: python-ast)_

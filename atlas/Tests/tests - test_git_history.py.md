@@ -12,6 +12,10 @@ source_path: "tests/test_git_history.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>6613</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -26,15 +30,10 @@ source_path: "tests/test_git_history.py"
 - <code>defines</code> → [[Symbols/test_parse_git_log_collects_paths_and_redacts_subjects - tests - test_git_history.py|test_parse_git_log_collects_paths_and_redacts_subjects]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_log_ignores_malformed_blocks - tests - test_git_history.py|test_parse_git_log_ignores_malformed_blocks]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/_aligned_git_diffs - src - intentatlas - git_history.py|_aligned_git_diffs]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/_run_git_bounded - src - intentatlas - git_history.py|_run_git_bounded]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/collect_git_history - src - intentatlas - git_history.py|collect_git_history]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/parse_git_diffs - src - intentatlas - git_history.py|parse_git_diffs]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

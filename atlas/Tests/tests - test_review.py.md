@@ -12,6 +12,10 @@ source_path: "tests/test_review.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>8487</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -22,20 +26,8 @@ source_path: "tests/test_review.py"
 - <code>defines</code> → [[Symbols/test_review_sarif_omits_unsafe_artifact_locations - tests - test_review.py|test_review_sarif_omits_unsafe_artifact_locations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_review_surfaces_only_aligned_commit_keyed_outcome_comparison - tests - test_review.py|test_review_surfaces_only_aligned_commit_keyed_outcome_comparison]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/ChangeAnalysis - src - intentatlas - change_analysis.py|ChangeAnalysis]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeAnalysisFile - src - intentatlas - change_analysis.py|ChangeAnalysisFile]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/build_review_report - src - intentatlas - review.py|build_review_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_review - src - intentatlas - review.py|render_review]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/TestOutcome - src - intentatlas - test_outcomes.py|TestOutcome]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/TestOutcomeSet - src - intentatlas - test_outcomes.py|TestOutcomeSet]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

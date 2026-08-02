@@ -13,6 +13,9 @@ source_path: "tests/test_vault.py"
 - **End Line:** <code>230</code>
 - **Line:** <code>208</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

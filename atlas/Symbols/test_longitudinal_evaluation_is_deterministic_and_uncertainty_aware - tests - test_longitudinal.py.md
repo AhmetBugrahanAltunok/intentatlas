@@ -13,6 +13,9 @@ source_path: "tests/test_longitudinal.py"
 - **End Line:** <code>196</code>
 - **Line:** <code>171</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

@@ -12,7 +12,12 @@ source_path: "docs/onboarding-walkthroughs.md"
 
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1832</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs|test: verify technical onboarding walkthroughs]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

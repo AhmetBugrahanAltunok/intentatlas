@@ -12,6 +12,10 @@ source_path: "tests/test_security.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>1706</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -21,10 +25,9 @@ source_path: "tests/test_security.py"
 - <code>defines</code> → [[Symbols/test_redact_nested_values_and_common_token_shapes - tests - test_security.py|test_redact_nested_values_and_common_token_shapes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

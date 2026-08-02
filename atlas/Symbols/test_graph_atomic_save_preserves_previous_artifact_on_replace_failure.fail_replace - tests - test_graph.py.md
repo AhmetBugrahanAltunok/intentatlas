@@ -13,8 +13,10 @@ source_path: "tests/test_graph.py"
 - **End Line:** <code>118</code>
 - **Line:** <code>117</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_graph.py|tests/test_graph.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-diff-hunk)_

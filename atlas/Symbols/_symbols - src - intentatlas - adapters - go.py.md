@@ -13,6 +13,9 @@ source_path: "src/intentatlas/adapters/go.py"
 - **End Line:** <code>164</code>
 - **Line:** <code>138</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

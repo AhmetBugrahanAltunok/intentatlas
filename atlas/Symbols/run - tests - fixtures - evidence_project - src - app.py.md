@@ -13,6 +13,9 @@ source_path: "tests/fixtures/evidence_project/src/app.py"
 - **End Line:** <code>2</code>
 - **Line:** <code>1</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

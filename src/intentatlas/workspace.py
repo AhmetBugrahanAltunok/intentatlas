@@ -221,6 +221,7 @@ def discover_workspace(root: Path, files: dict[str, Path]) -> WorkspaceModel:
         if len(owners) > 1
     ]
     diagnostics.extend(duplicate_names)
+    diagnostics.extend(_dependency_cycle_diagnostics(dependencies))
     return WorkspaceModel(
         tuple(sorted(_deduplicate_boundaries(boundaries), key=lambda item: item.id)),
         tuple(sorted(_deduplicate_boundaries(source_roots), key=lambda item: item.id)),
@@ -372,6 +373,49 @@ def _python_dependency_names(project: dict[str, Any]) -> tuple[str, ...]:
 
 def _python_distribution_name(value: str) -> str:
     return re.sub(r"[-_.]+", "-", value).casefold()
+
+
+def _dependency_cycle_diagnostics(
+    dependencies: set[tuple[str, str]],
+) -> tuple[WorkspaceDiagnostic, ...]:
+    adjacency: dict[str, set[str]] = defaultdict(set)
+    owners: set[str] = set()
+    for source, target in dependencies:
+        adjacency[source].add(target)
+        owners.update((source, target))
+    reachable: dict[str, set[str]] = {}
+    for owner in sorted(owners):
+        visited: set[str] = set()
+        pending = list(sorted(adjacency.get(owner, ()), reverse=True))
+        while pending:
+            current = pending.pop()
+            if current in visited:
+                continue
+            visited.add(current)
+            pending.extend(
+                    sorted(adjacency.get(current, set()) - visited, reverse=True)
+            )
+        reachable[owner] = visited
+    cycles = {
+        tuple(
+            sorted(
+                candidate
+                for candidate in owners
+                if candidate == owner
+                or (
+                    candidate in reachable.get(owner, set())
+                    and owner in reachable.get(candidate, set())
+                )
+            )
+        )
+        for owner in owners
+        if owner in reachable.get(owner, set())
+    }
+    return tuple(
+        WorkspaceDiagnostic("cyclic-dependency", " -> ".join(cycle), cycle)
+        for cycle in sorted(cycles)
+        if len(cycle) > 1
+    )
 
 
 def _go_module(path: Path, relative: str) -> str | None:

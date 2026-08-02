@@ -10,11 +10,13 @@ source_path: "src/intentatlas/scan_cache.py"
 
 ## Metadata
 
-- **End Line:** <code>154</code>
-- **Line:** <code>109</code>
+- **End Line:** <code>160</code>
+- **Line:** <code>115</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-diff-hunk)_

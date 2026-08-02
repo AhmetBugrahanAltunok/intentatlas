@@ -10,10 +10,14 @@ source_path: "tests/test_viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>117</code>
-- **Line:** <code>87</code>
+- **End Line:** <code>126</code>
+- **Line:** <code>96</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_

@@ -502,7 +502,7 @@ Status: complete (2026-08-02)
 
 ## Phase 13 - Semantic monorepo foundation
 
-Status: planned; Phase 12 Review passed; not started
+Status: in progress; implementation and local gates passed, remote closure pending
 
 - Model explicit project/package/source-root and workspace ownership without directory-name guesses.
 - Retain resolver candidate sets and abstain when one aligned owner cannot be proven.

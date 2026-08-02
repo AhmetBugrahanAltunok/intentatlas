@@ -13,6 +13,9 @@ source_path: "tests/test_release.py"
 - **End Line:** <code>403</code>
 - **Line:** <code>389</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

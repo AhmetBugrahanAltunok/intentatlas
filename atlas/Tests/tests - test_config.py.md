@@ -12,6 +12,10 @@ source_path: "tests/test_config.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>6647</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -26,11 +30,11 @@ source_path: "tests/test_config.py"
 - <code>defines</code> → [[Symbols/test_dangling_config_link_is_rejected_before_absence_or_write - tests - test_config.py|test_dangling_config_link_is_rejected_before_absence_or_write]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_dangling_config_link_is_rejected_before_absence_or_write.simulated_link - tests - test_config.py|test_dangling_config_link_is_rejected_before_absence_or_write.simulated_link]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(reference; evidence: wikilink)_

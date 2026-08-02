@@ -10,9 +10,12 @@ source_path: "tests/test_viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>103</code>
-- **Line:** <code>91</code>
+- **End Line:** <code>112</code>
+- **Line:** <code>100</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

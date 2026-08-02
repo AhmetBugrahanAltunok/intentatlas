@@ -10,9 +10,12 @@ source_path: "src/intentatlas/scan_cache.py"
 
 ## Metadata
 
-- **End Line:** <code>27</code>
-- **Line:** <code>24</code>
+- **End Line:** <code>28</code>
+- **Line:** <code>25</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

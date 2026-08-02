@@ -13,6 +13,9 @@ source_path: "tests/test_property_fuzz.py"
 - **End Line:** <code>121</code>
 - **Line:** <code>108</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

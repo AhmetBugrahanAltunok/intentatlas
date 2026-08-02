@@ -12,7 +12,15 @@ source_path: "tests/fixtures/go_project/submodule/worker/worker.go"
 
 - **Language:** <code>"Go"</code>
 - **Size Bytes:** <code>30</code>
+- **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project", "workspace:go-module:tests/fixtures/go_project/submodule"]</code>
+- **Workspace Owners:** <code>["workspace:go-module:tests/fixtures/go_project/submodule"]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/Run - tests - fixtures - go_project - submodule - worker - worker.go|Run]] _(structure; evidence: go-structural)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/tests - fixtures - go_project - submodule - ee3ea4fe|example.com/intentatlas/plugin]] _(boundary; evidence: workspace-boundary)_

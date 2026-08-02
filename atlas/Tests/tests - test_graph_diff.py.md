@@ -12,14 +12,17 @@ source_path: "tests/test_graph_diff.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>1581</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_graph_diff_is_complete_versioned_and_deterministic - tests - test_graph_diff.py|test_graph_diff_is_complete_versioned_and_deterministic]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_diff_reports_identical_graphs_without_changes - tests - test_graph_diff.py|test_graph_diff_reports_identical_graphs_without_changes]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/graph_diff - src - intentatlas - graph_diff.py|graph_diff]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_graph_diff - src - intentatlas - graph_diff.py|render_graph_diff]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

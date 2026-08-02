@@ -13,6 +13,9 @@ source_path: "tests/test_trust_first.py"
 - **End Line:** <code>25</code>
 - **Line:** <code>16</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

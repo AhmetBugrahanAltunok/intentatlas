@@ -10,9 +10,12 @@ source_path: "tests/test_scale.py"
 
 ## Metadata
 
-- **End Line:** <code>35</code>
-- **Line:** <code>14</code>
+- **End Line:** <code>36</code>
+- **Line:** <code>15</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

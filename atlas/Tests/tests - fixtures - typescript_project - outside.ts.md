@@ -12,7 +12,15 @@ source_path: "tests/fixtures/typescript_project/outside.ts"
 
 - **Language:** <code>"TypeScript"</code>
 - **Size Bytes:** <code>52</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/outside - tests - fixtures - typescript_project - outside.ts|outside]] _(structure; evidence: javascript-structural)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

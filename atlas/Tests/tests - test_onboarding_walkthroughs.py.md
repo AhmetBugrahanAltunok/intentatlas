@@ -12,6 +12,10 @@ source_path: "tests/test_onboarding_walkthroughs.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>6222</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -22,21 +26,10 @@ source_path: "tests/test_onboarding_walkthroughs.py"
 - <code>defines</code> → [[Symbols/test_walkthrough_03_interpret_an_omission_without_claiming_no_impact - tests - test_onboarding_walkthroughs.py|test_walkthrough_03_interpret_an_omission_without_claiming_no_impact]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_walkthrough_04_choose_the_safe_strategy_for_stale_analysis - tests - test_onboarding_walkthroughs.py|test_walkthrough_04_choose_the_safe_strategy_for_stale_analysis]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_walkthrough_05_recognize_ambiguity_and_unsupported_scope - tests - test_onboarding_walkthroughs.py|test_walkthrough_05_recognize_ambiguity_and_unsupported_scope]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/ChangeAnalysis - src - intentatlas - change_analysis.py|ChangeAnalysis]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeAnalysisFile - src - intentatlas - change_analysis.py|ChangeAnalysisFile]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/diagnose_repository - src - intentatlas - diagnostic.py|diagnose_repository]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_diagnostic - src - intentatlas - diagnostic.py|render_diagnostic]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs|test: verify technical onboarding walkthroughs]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_

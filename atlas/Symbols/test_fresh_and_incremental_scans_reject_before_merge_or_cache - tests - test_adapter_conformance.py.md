@@ -13,6 +13,9 @@ source_path: "tests/test_adapter_conformance.py"
 - **End Line:** <code>249</code>
 - **Line:** <code>230</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

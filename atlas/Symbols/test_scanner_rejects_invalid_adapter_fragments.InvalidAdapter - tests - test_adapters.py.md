@@ -13,6 +13,9 @@ source_path: "tests/test_adapters.py"
 - **End Line:** <code>52</code>
 - **Line:** <code>42</code>
 - **Symbol Kind:** <code>"class"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

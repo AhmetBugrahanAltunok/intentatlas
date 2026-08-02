@@ -10,11 +10,14 @@ source_path: "tests/test_open_evidence.py"
 
 ## Metadata
 
-- **End Line:** <code>225</code>
-- **Line:** <code>152</code>
+- **End Line:** <code>233</code>
+- **Line:** <code>153</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-diff-hunk)_
+- <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_

@@ -1,7 +1,7 @@
 ---
 id: ADR-029
 type: decision
-status: proposed
+status: accepted
 phase: 13
 ---
 # ADR-029 - Model workspace boundaries and import semantic evidence

@@ -13,6 +13,9 @@ source_path: "src/intentatlas/diagnostic.py"
 - **End Line:** <code>440</code>
 - **Line:** <code>426</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

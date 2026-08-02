@@ -12,7 +12,15 @@ source_path: "tests/fixtures/evidence_project/tests/app_check.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>67</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_run - tests - fixtures - evidence_project - tests - app_check.py|test_run]] _(structure; evidence: python-ast)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

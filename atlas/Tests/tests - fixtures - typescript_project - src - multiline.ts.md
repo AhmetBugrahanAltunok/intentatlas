@@ -12,9 +12,17 @@ source_path: "tests/fixtures/typescript_project/src/multiline.ts"
 
 - **Language:** <code>"TypeScript"</code>
 - **Size Bytes:** <code>119</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/createCard - tests - fixtures - typescript_project - src - multiline.ts|createCard]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - components - index.ts|tests/fixtures/typescript_project/src/components/index.ts]] _(verification; evidence: javascript-structural)_
 - <code>tests</code> → [[Symbols/Card - tests - fixtures - typescript_project - src - components - index.ts|Card]] _(verification; evidence: javascript-symbol-reference)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

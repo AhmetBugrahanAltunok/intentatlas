@@ -13,6 +13,9 @@ source_path: "src/intentatlas/longitudinal.py"
 - **End Line:** <code>927</code>
 - **Line:** <code>917</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

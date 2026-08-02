@@ -12,6 +12,9 @@ source_path: "tests/fixtures/typescript_project/src/legacy.js"
 
 - **Line:** <code>3</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

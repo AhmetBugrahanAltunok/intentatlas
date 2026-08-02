@@ -12,6 +12,9 @@ source_path: "tests/fixtures/typescript_project/src/comments.ts"
 
 - **Line:** <code>13</code>
 - **Symbol Kind:** <code>"interface"</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

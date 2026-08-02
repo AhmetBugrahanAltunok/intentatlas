@@ -12,6 +12,9 @@ source_path: "tests/fixtures/go_project/submodule/worker/worker.go"
 
 - **Line:** <code>3</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project", "workspace:go-module:tests/fixtures/go_project/submodule"]</code>
+- **Workspace Owners:** <code>["workspace:go-module:tests/fixtures/go_project/submodule"]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

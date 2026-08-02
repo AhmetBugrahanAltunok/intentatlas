@@ -12,6 +12,10 @@ source_path: "tests/test_browser_e2e.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>17571</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -32,9 +36,6 @@ source_path: "tests/test_browser_e2e.py"
 - <code>defines</code> → [[Symbols/_viewer_url.read_ready - tests - test_browser_e2e.py|_viewer_url.read_ready]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_browser_renders_bounded_large_graph_window - tests - test_browser_e2e.py|test_real_browser_renders_bounded_large_graph_window]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -43,5 +44,8 @@ source_path: "tests/test_browser_e2e.py"
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 5651c34 - test- verify viewer keyboard accessibility|test: verify viewer keyboard accessibility]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
+- <code>proven-by</code> ← [[Evidence/EVD-029 - Phase 13 semantic monorepo verification|EVD-029 - Phase 13 semantic monorepo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(reference; evidence: wikilink)_

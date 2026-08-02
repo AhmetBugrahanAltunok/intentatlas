@@ -12,7 +12,15 @@ source_path: "tests/fixtures/go_project/cmd/app/main.go"
 
 - **Language:** <code>"Go"</code>
 - **Size Bytes:** <code>166</code>
+- **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project"]</code>
+- **Workspace Owners:** <code>["workspace:go-module:tests/fixtures/go_project"]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/main - tests - fixtures - go_project - cmd - app - main.go|main]] _(structure; evidence: go-structural)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/tests - fixtures - go_project - 1b35d76f|example.com/intentatlas/fixture]] _(boundary; evidence: workspace-boundary)_

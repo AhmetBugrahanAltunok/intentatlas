@@ -12,12 +12,17 @@ source_path: "tests/test_relations.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>1104</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_edge_serialization_derives_and_validates_relation_metadata - tests - test_relations.py|test_edge_serialization_derives_and_validates_relation_metadata]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_relation_catalog_is_typed_deterministic_and_invertible - tests - test_relations.py|test_relation_catalog_is_typed_deterministic_and_invertible]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/relation_catalog - src - intentatlas - relations.py|relation_catalog]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/relation_type - src - intentatlas - relations.py|relation_type]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

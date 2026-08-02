@@ -12,6 +12,10 @@ source_path: "tests/fixtures/typescript_project/src/main.ts"
 
 - **Language:** <code>"TypeScript"</code>
 - **Size Bytes:** <code>226</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -23,5 +27,6 @@ source_path: "tests/fixtures/typescript_project/src/main.ts"
 
 ## Incoming relationships
 
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - fixtures - typescript_project - src - main.test.ts|tests/fixtures/typescript_project/src/main.test.ts]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - fixtures - typescript_project - src - main.test.ts|tests/fixtures/typescript_project/src/main.test.ts]] _(verification; evidence: javascript-structural)_

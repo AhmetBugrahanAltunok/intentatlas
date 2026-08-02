@@ -12,6 +12,10 @@ source_path: "tests/test_real_world.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>14676</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -31,13 +35,10 @@ source_path: "tests/test_real_world.py"
 - <code>defines</code> → [[Symbols/test_real_world_rejects_missing_root_checkout_license_and_git - tests - test_real_world.py|test_real_world_rejects_missing_root_checkout_license_and_git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_world_rejects_wrong_commit - tests - test_real_world.py|test_real_world_rejects_wrong_commit]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_real_world - src - intentatlas - real_world.py|render_real_world]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

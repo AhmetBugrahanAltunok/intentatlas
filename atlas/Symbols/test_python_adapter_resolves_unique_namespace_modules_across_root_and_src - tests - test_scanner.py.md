@@ -10,11 +10,13 @@ source_path: "tests/test_scanner.py"
 
 ## Metadata
 
-- **End Line:** <code>322</code>
-- **Line:** <code>288</code>
+- **End Line:** <code>351</code>
+- **Line:** <code>317</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-diff-hunk)_

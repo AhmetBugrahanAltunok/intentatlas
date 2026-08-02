@@ -12,6 +12,10 @@ source_path: "tests/test_test_outcomes.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>4882</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -23,9 +27,8 @@ source_path: "tests/test_test_outcomes.py"
 - <code>defines</code> → [[Symbols/test_stale_outcomes_never_create_prediction_comparison_claims - tests - test_test_outcomes.py|test_stale_outcomes_never_create_prediction_comparison_claims]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/valid_document - tests - test_test_outcomes.py|valid_document]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/write_outcomes - tests - test_test_outcomes.py|write_outcomes]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/compare_test_outcomes - src - intentatlas - test_outcomes.py|compare_test_outcomes]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/load_test_outcomes - src - intentatlas - test_outcomes.py|load_test_outcomes]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

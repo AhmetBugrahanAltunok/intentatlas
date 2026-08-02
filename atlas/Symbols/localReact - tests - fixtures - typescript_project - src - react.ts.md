@@ -12,6 +12,9 @@ source_path: "tests/fixtures/typescript_project/src/react.ts"
 
 - **Line:** <code>1</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

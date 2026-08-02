@@ -10,12 +10,14 @@ source_path: "src/intentatlas/scale.py"
 
 ## Metadata
 
-- **End Line:** <code>108</code>
-- **Line:** <code>40</code>
+- **End Line:** <code>138</code>
+- **Line:** <code>70</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
-- <code>tested-by</code> ← [[Tests/tests - test_scale.py|tests/test_scale.py]] _(verification; evidence: python-symbol-reference)_

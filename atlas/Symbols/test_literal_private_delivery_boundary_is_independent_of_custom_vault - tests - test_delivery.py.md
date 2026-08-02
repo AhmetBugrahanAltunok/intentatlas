@@ -13,6 +13,9 @@ source_path: "tests/test_delivery.py"
 - **End Line:** <code>125</code>
 - **Line:** <code>117</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

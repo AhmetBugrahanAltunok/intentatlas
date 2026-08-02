@@ -10,9 +10,12 @@ source_path: "src/intentatlas/scale.py"
 
 ## Metadata
 
-- **End Line:** <code>138</code>
-- **Line:** <code>136</code>
+- **End Line:** <code>232</code>
+- **Line:** <code>230</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

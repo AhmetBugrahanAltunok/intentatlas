@@ -12,7 +12,11 @@ source_path: "benchmarks/README.md"
 
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1920</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

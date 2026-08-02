@@ -64,14 +64,12 @@ generated: true
 - <code>modifies</code> → [[Symbols/render_diagnostic - src - intentatlas - diagnostic.py|render_diagnostic]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_change_report_distinguishes_result_limit_omissions - tests - test_change_report.py|test_change_report_distinguishes_result_limit_omissions]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_change_report_keeps_file_level_requirements_below_default_threshold - tests - test_change_report.py|test_change_report_keeps_file_level_requirements_below_default_threshold]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_compatibility_policy_covers_every_declared_contract - tests - test_compatibility_policy.py|test_compatibility_policy_covers_every_declared_contract]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_git - tests - test_diagnostic.py|_git]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_snapshot - tests - test_diagnostic.py|_snapshot]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_diagnostic_is_deterministic_and_no_write_without_config_or_vault - tests - test_diagnostic.py|test_diagnostic_is_deterministic_and_no_write_without_config_or_vault]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_diagnostic_rejects_private_config_without_reading_private - tests - test_diagnostic.py|test_diagnostic_rejects_private_config_without_reading_private]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity - tests - test_diagnostic.py|test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_diagnostic_text_preserves_safe_next_action_and_advisory - tests - test_diagnostic.py|test_diagnostic_text_preserves_safe_next_action_and_advisory]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

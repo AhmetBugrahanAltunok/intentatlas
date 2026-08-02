@@ -13,6 +13,9 @@ source_path: "tests/test_onboarding_walkthroughs.py"
 - **End Line:** <code>78</code>
 - **Line:** <code>53</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

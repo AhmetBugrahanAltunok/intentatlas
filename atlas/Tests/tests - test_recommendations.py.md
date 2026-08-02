@@ -12,6 +12,10 @@ source_path: "tests/test_recommendations.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>14329</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -24,13 +28,6 @@ source_path: "tests/test_recommendations.py"
 - <code>defines</code> → [[Symbols/test_recommendations_support_low_limit_file_symbol_and_no_results - tests - test_recommendations.py|test_recommendations_support_low_limit_file_symbol_and_no_results]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_recommendations_use_exact_direct_dependents_and_recent_cochange - tests - test_recommendations.py|test_recommendations_use_exact_direct_dependents_and_recent_cochange]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_recommendations - src - intentatlas - recommendations.py|render_recommendations]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
@@ -38,5 +35,6 @@ source_path: "tests/test_recommendations.py"
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(reference; evidence: wikilink)_

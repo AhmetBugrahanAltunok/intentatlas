@@ -12,13 +12,17 @@ source_path: "tests/test_version.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>591</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_release_candidate_uses_one_canonical_version_source - tests - test_version.py|test_release_candidate_uses_one_canonical_version_source]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

@@ -10,9 +10,12 @@ source_path: "src/intentatlas/adapters/base.py"
 
 ## Metadata
 
-- **End Line:** <code>28</code>
-- **Line:** <code>19</code>
+- **End Line:** <code>32</code>
+- **Line:** <code>23</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

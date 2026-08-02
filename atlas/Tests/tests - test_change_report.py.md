@@ -12,6 +12,10 @@ source_path: "tests/test_change_report.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>10758</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -24,24 +28,12 @@ source_path: "tests/test_change_report.py"
 - <code>defines</code> → [[Symbols/test_staged_same_file_requirement_holdout_preserves_symbol_precision - tests - test_change_report.py|test_staged_same_file_requirement_holdout_preserves_symbol_precision]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_staged_same_file_requirement_holdout_preserves_symbol_precision.git - tests - test_change_report.py|test_staged_same_file_requirement_holdout_preserves_symbol_precision.git]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/ChangeAnalysis - src - intentatlas - change_analysis.py|ChangeAnalysis]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeAnalysisFile - src - intentatlas - change_analysis.py|ChangeAnalysisFile]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/collect_change_report - src - intentatlas - change_report.py|collect_change_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_

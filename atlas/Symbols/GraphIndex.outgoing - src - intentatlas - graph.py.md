@@ -13,6 +13,9 @@ source_path: "src/intentatlas/graph.py"
 - **End Line:** <code>57</code>
 - **Line:** <code>54</code>
 - **Symbol Kind:** <code>"function"</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

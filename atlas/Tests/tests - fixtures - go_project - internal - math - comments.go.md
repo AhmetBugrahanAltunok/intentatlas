@@ -12,7 +12,11 @@ source_path: "tests/fixtures/go_project/internal/math/comments.go"
 
 - **Language:** <code>"Go"</code>
 - **Size Bytes:** <code>195</code>
+- **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project"]</code>
+- **Workspace Owners:** <code>["workspace:go-module:tests/fixtures/go_project"]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>owned-by</code> ← [[Code/tests - fixtures - go_project - 1b35d76f|example.com/intentatlas/fixture]] _(boundary; evidence: workspace-boundary)_

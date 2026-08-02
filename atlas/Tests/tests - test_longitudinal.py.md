@@ -12,6 +12,10 @@ source_path: "tests/test_longitudinal.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>11559</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -25,17 +29,11 @@ source_path: "tests/test_longitudinal.py"
 - <code>defines</code> → [[Symbols/test_longitudinal_manifest_rejects_duplicate_keys_and_unbounded_history - tests - test_longitudinal.py|test_longitudinal_manifest_rejects_duplicate_keys_and_unbounded_history]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_longitudinal_manifest_rejects_mutated_partition_hash - tests - test_longitudinal.py|test_longitudinal_manifest_rejects_mutated_partition_hash]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/PilotCase - src - intentatlas - longitudinal.py|PilotCase]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/evaluate_longitudinal - src - intentatlas - longitudinal.py|evaluate_longitudinal]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/load_pilot_labels - src - intentatlas - longitudinal.py|load_pilot_labels]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/load_pilot_manifest - src - intentatlas - longitudinal.py|load_pilot_manifest]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/partition_hashes - src - intentatlas - longitudinal.py|partition_hashes]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 9557cb1 - docs- publish longitudinal baseline card|docs: publish longitudinal baseline card]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(reference; evidence: wikilink)_

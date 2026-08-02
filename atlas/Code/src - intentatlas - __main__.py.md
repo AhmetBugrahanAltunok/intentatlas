@@ -12,8 +12,16 @@ source_path: "src/intentatlas/__main__.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>48</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>imports</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(structure; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

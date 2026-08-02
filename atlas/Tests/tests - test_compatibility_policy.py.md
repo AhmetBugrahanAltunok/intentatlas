@@ -11,21 +11,22 @@ source_path: "tests/test_compatibility_policy.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2093</code>
+- **Size Bytes:** <code>2096</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_compatibility_policy_covers_every_declared_contract - tests - test_compatibility_policy.py|test_compatibility_policy_covers_every_declared_contract]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_stable_schema_versions_remain_explicit - tests - test_compatibility_policy.py|test_stable_schema_versions_remain_explicit]] _(structure; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(verification; evidence: python-ast)_
-- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(reference; evidence: wikilink)_

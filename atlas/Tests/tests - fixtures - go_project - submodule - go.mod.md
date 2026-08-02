@@ -12,7 +12,11 @@ source_path: "tests/fixtures/go_project/submodule/go.mod"
 
 - **Language:** <code>"Go Modules"</code>
 - **Size Bytes:** <code>47</code>
+- **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project/submodule"]</code>
+- **Workspace Owners:** <code>["workspace:go-module:tests/fixtures/go_project/submodule"]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>owned-by</code> ← [[Code/tests - fixtures - go_project - submodule - ee3ea4fe|example.com/intentatlas/plugin]] _(boundary; evidence: workspace-boundary)_

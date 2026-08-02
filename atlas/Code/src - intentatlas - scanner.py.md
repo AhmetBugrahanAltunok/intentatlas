@@ -11,7 +11,11 @@ source_path: "src/intentatlas/scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>22386</code>
+- **Size Bytes:** <code>32409</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -19,6 +23,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/PendingLink - src - intentatlas - scanner.py|PendingLink]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner - src - intentatlas - scanner.py|RepositoryScanner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner.__init__ - src - intentatlas - scanner.py|RepositoryScanner.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._check_graph_budget - src - intentatlas - scanner.py|RepositoryScanner._check_graph_budget]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._discover_files - src - intentatlas - scanner.py|RepositoryScanner._discover_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._is_excluded - src - intentatlas - scanner.py|RepositoryScanner._is_excluded]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._resolve_pending_links - src - intentatlas - scanner.py|RepositoryScanner._resolve_pending_links]] _(structure; evidence: python-ast)_
@@ -28,6 +33,8 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/RepositoryScanner._scan_git_history - src - intentatlas - scanner.py|RepositoryScanner._scan_git_history]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._scan_language_adapters - src - intentatlas - scanner.py|RepositoryScanner._scan_language_adapters]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._scan_user_vault - src - intentatlas - scanner.py|RepositoryScanner._scan_user_vault]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._scan_workspace - src - intentatlas - scanner.py|RepositoryScanner._scan_workspace]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryScanner._scope_adapter_fragment - src - intentatlas - scanner.py|RepositoryScanner._scope_adapter_fragment]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner._walk_files - src - intentatlas - scanner.py|RepositoryScanner._walk_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner.scan - src - intentatlas - scanner.py|RepositoryScanner.scan]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryScanner.scan_incremental - src - intentatlas - scanner.py|RepositoryScanner.scan_incremental]] _(structure; evidence: python-ast)_
@@ -35,6 +42,8 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/_HashWriter - src - intentatlas - scanner.py|_HashWriter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_HashWriter.update - src - intentatlas - scanner.py|_HashWriter.update]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_adapter_fingerprint - src - intentatlas - scanner.py|_adapter_fingerprint]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_adapter_partitions - src - intentatlas - scanner.py|_adapter_partitions]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_endpoint_path - src - intentatlas - scanner.py|_endpoint_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_exclude_patterns - src - intentatlas - scanner.py|_exclude_patterns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_file_kind - src - intentatlas - scanner.py|_file_kind]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_frontmatter_id - src - intentatlas - scanner.py|_frontmatter_id]] _(structure; evidence: python-ast)_
@@ -45,6 +54,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defines</code> → [[Symbols/_symbols_by_path - src - intentatlas - scanner.py|_symbols_by_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_validate_user_id - src - intentatlas - scanner.py|_validate_user_id]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_wikilinks - src - intentatlas - scanner.py|_wikilinks]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_workspace_source_roots - src - intentatlas - scanner.py|_workspace_source_roots]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_
@@ -58,7 +68,9 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - workspace.py|src/intentatlas/workspace.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/LanguageAdapter - src - intentatlas - adapters - base.py|LanguageAdapter]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/validate_adapter_definition - src - intentatlas - adapters - conformance.py|validate_adapter_definition]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/validate_adapter_fragment - src - intentatlas - adapters - conformance.py|validate_adapter_fragment]] _(structure; evidence: python-symbol-reference)_
@@ -75,11 +87,15 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Symbols/safe_filename - src - intentatlas - naming.py|safe_filename]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/AdapterFragmentCache - src - intentatlas - scan_cache.py|AdapterFragmentCache]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/WorkspaceModel - src - intentatlas - workspace.py|WorkspaceModel]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/discover_workspace - src - intentatlas - workspace.py|discover_workspace]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/owner_id - src - intentatlas - workspace.py|owner_id]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
@@ -97,5 +113,6 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-ast)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Decisions/ADR-002 - Pruned trust-boundary traversal|ADR-002 - Pruned trust-boundary traversal]] _(reference; evidence: wikilink)_
 - <code>tested-by</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(verification; evidence: filename-convention)_

@@ -12,6 +12,9 @@ source_path: "tests/fixtures/typescript_project/src/math.ts"
 
 - **Line:** <code>7</code>
 - **Symbol Kind:** <code>"enum"</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 

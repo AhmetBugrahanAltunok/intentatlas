@@ -12,7 +12,15 @@ source_path: "tests/fixtures/typescript_project/src/view.jsx"
 
 - **Language:** <code>"JavaScript"</code>
 - **Size Bytes:** <code>73</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/View - tests - fixtures - typescript_project - src - view.jsx|View]] _(structure; evidence: javascript-structural)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

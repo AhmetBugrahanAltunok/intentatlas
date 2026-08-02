@@ -12,7 +12,12 @@ source_path: "docs/longitudinal-pilot.md"
 
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>6612</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 9557cb1 - docs- publish longitudinal baseline card|docs: publish longitudinal baseline card]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

@@ -12,8 +12,16 @@ source_path: "tests/fixtures/typescript_project/src/legacy.js"
 
 - **Language:** <code>"JavaScript"</code>
 - **Size Bytes:** <code>108</code>
+- **Workspace Candidates:** <code>["workspace:repository:."]</code>
+- **Workspace Owners:** <code>["workspace:repository:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/legacyAdd - tests - fixtures - typescript_project - src - legacy.js|legacyAdd]] _(structure; evidence: javascript-structural)_
 - <code>tests</code> → [[Tests/tests - fixtures - typescript_project - src - math.ts|tests/fixtures/typescript_project/src/math.ts]] _(verification; evidence: javascript-structural)_
+
+## Incoming relationships
+
+- <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

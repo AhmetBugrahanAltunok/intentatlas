@@ -12,6 +12,10 @@ source_path: "tests/test_change_set.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>4382</code>
+- **Workspace Candidates:** <code>["workspace:python-project:."]</code>
+- **Workspace Owners:** <code>["workspace:python-project:."]</code>
+- **Workspace Schema Version:** <code>1</code>
+- **Workspace State:** <code>"aligned"</code>
 
 ## Outgoing relationships
 
@@ -21,13 +25,10 @@ source_path: "tests/test_change_set.py"
 - <code>defines</code> → [[Symbols/test_parse_name_status_fails_closed_on_over_limit_output - tests - test_change_set.py|test_parse_name_status_fails_closed_on_over_limit_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_name_status_handles_bounded_paths_and_renames - tests - test_change_set.py|test_parse_name_status_handles_bounded_paths_and_renames]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(verification; evidence: filename-convention)_
-- <code>tests</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/parse_name_status - src - intentatlas - change_set.py|parse_name_status]] _(verification; evidence: python-symbol-reference)_
-- <code>tests</code> → [[Symbols/render_change_set - src - intentatlas - change_set.py|render_change_set]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_
