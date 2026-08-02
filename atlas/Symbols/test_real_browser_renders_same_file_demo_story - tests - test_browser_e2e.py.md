@@ -10,11 +10,11 @@ source_path: "tests/test_browser_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>226</code>
-- **Line:** <code>162</code>
+- **End Line:** <code>480</code>
+- **Line:** <code>403</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_browser_e2e.py|tests/test_browser_e2e.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-diff-hunk)_
+- <code>modified-by</code> ← [[Commits/Commit 5651c34 - test- verify viewer keyboard accessibility|test: verify viewer keyboard accessibility]] _(history; evidence: git-diff-hunk)_

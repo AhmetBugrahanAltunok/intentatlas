@@ -17,4 +17,3 @@ source_path: "tests/test_scale.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_scale.py|tests/test_scale.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-diff-hunk)_

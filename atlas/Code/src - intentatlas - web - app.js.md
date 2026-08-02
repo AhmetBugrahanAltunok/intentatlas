@@ -11,7 +11,7 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>28691</code>
+- **Size Bytes:** <code>31820</code>
 
 ## Outgoing relationships
 
@@ -41,6 +41,7 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/fitGraph - src - intentatlas - web - app.js|fitGraph]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/focusNode - src - intentatlas - web - app.js|focusNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/focusedNodes - src - intentatlas - web - app.js|focusedNodes]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/formatRecordedPath - src - intentatlas - web - app.js|formatRecordedPath]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/graphPoint - src - intentatlas - web - app.js|graphPoint]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/kindPriority - src - intentatlas - web - app.js|kindPriority]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/openChangeReport - src - intentatlas - web - app.js|openChangeReport]] _(structure; evidence: javascript-structural)_
@@ -51,12 +52,14 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/renderChangeReport - src - intentatlas - web - app.js|renderChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderEvidencePaths - src - intentatlas - web - app.js|renderEvidencePaths]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderFilters - src - intentatlas - web - app.js|renderFilters]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/renderOmittedItems - src - intentatlas - web - app.js|renderOmittedItems]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderOutcomeEvidence - src - intentatlas - web - app.js|renderOutcomeEvidence]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderReportItems - src - intentatlas - web - app.js|renderReportItems]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/renderStats - src - intentatlas - web - app.js|renderStats]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/reportDatum - src - intentatlas - web - app.js|reportDatum]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/seeded - src - intentatlas - web - app.js|seeded]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/selectNode - src - intentatlas - web - app.js|selectNode]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/selectionSummary - src - intentatlas - web - app.js|selectionSummary]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortLabel - src - intentatlas - web - app.js|shortLabel]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/shortRevision - src - intentatlas - web - app.js|shortRevision]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/showFocusedWindow - src - intentatlas - web - app.js|showFocusedWindow]] _(structure; evidence: javascript-structural)_
@@ -72,10 +75,13 @@ source_path: "src/intentatlas/web/app.js"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths|ISSUE-012 - Implement guided demo and viewer evidence paths]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(implementation; evidence: wikilink)_

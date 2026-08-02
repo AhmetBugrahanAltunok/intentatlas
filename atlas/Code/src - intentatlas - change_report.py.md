@@ -11,7 +11,7 @@ source_path: "src/intentatlas/change_report.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>15408</code>
+- **Size Bytes:** <code>22903</code>
 
 ## Outgoing relationships
 
@@ -19,13 +19,20 @@ source_path: "src/intentatlas/change_report.py"
 - <code>defines</code> → [[Symbols/ChangeReport.to_dict - src - intentatlas - change_report.py|ChangeReport.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ChangeReportTest - src - intentatlas - change_report.py|ChangeReportTest]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ChangeReportTest.to_dict - src - intentatlas - change_report.py|ChangeReportTest.to_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/OmittedCandidate - src - intentatlas - change_report.py|OmittedCandidate]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/OmittedCandidate.to_dict - src - intentatlas - change_report.py|OmittedCandidate.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RequirementImpact - src - intentatlas - change_report.py|RequirementImpact]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RequirementImpact.to_dict - src - intentatlas - change_report.py|RequirementImpact.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RequirementImpactPath - src - intentatlas - change_report.py|RequirementImpactPath]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RequirementImpactPath.__post_init__ - src - intentatlas - change_report.py|RequirementImpactPath.__post_init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RequirementImpactPath.to_dict - src - intentatlas - change_report.py|RequirementImpactPath.to_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_aggregate_freshness - src - intentatlas - change_report.py|_aggregate_freshness]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_confidence - src - intentatlas - change_report.py|_confidence]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_impact_sort_key - src - intentatlas - change_report.py|_impact_sort_key]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_omission_text - src - intentatlas - change_report.py|_omission_text]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_omitted_requirement - src - intentatlas - change_report.py|_omitted_requirement]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_omitted_test - src - intentatlas - change_report.py|_omitted_test]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_path_text - src - intentatlas - change_report.py|_path_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_requirement_impacts - src - intentatlas - change_report.py|_requirement_impacts]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_requirement_score - src - intentatlas - change_report.py|_requirement_score]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_test_recommendations - src - intentatlas - change_report.py|_test_recommendations]] _(structure; evidence: python-ast)_
@@ -51,10 +58,13 @@ source_path: "src/intentatlas/change_report.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_

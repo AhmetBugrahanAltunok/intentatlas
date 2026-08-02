@@ -10,7 +10,7 @@ source_path: "src/intentatlas/change_report.py"
 
 ## Metadata
 
-- **End Line:** <code>60</code>
+- **End Line:** <code>61</code>
 - **Line:** <code>43</code>
 - **Symbol Kind:** <code>"class"</code>
 

@@ -46,7 +46,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/serve_graph.Handler._send - src - intentatlas - viewer.py|serve_graph.Handler._send]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/serve_graph.Handler.end_headers - src - intentatlas - viewer.py|serve_graph.Handler.end_headers]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_demo_change_report_matches_the_terminal_recommendation - tests - test_demo.py|test_demo_change_report_matches_the_terminal_recommendation]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_demo_graph_is_deterministic_and_covers_intent_to_proof - tests - test_demo.py|test_demo_graph_is_deterministic_and_covers_intent_to_proof]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_demo_report_derives_the_changed_symbol_from_the_graph - tests - test_demo.py|test_demo_report_derives_the_changed_symbol_from_the_graph]] _(history; evidence: git-diff-hunk)_
@@ -57,9 +56,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/_http_response - tests - test_e2e.py|_http_response]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_installed_cli_scan_recommend_and_viewer_workflow - tests - test_e2e.py|test_installed_cli_scan_recommend_and_viewer_workflow]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_release_candidate_uses_one_canonical_version_source - tests - test_version.py|test_release_candidate_uses_one_canonical_version_source]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_serve_graph_rejects_non_loopback_and_invalid_ports - tests - test_viewer.py|test_serve_graph_rejects_non_loopback_and_invalid_ports]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_serve_graph_starts_and_closes_server.fake_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.fake_server]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

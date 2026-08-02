@@ -10,11 +10,10 @@ source_path: "tests/test_compatibility_policy.py"
 
 ## Metadata
 
-- **End Line:** <code>51</code>
-- **Line:** <code>43</code>
+- **End Line:** <code>52</code>
+- **Line:** <code>44</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-diff-hunk)_

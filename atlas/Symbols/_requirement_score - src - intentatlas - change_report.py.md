@@ -10,8 +10,8 @@ source_path: "src/intentatlas/change_report.py"
 
 ## Metadata
 
-- **End Line:** <code>334</code>
-- **Line:** <code>331</code>
+- **End Line:** <code>440</code>
+- **Line:** <code>437</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

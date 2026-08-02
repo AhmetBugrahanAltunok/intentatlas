@@ -19,9 +19,6 @@ generated: true
 - <code>changes</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_evaluate_longitudinal - src - intentatlas - cli.py|_evaluate_longitudinal]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/ClassificationObservation - src - intentatlas - longitudinal.py|ClassificationObservation]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/ClassifiedErrorSet - src - intentatlas - longitudinal.py|ClassifiedErrorSet]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/Estimate.to_dict - src - intentatlas - longitudinal.py|Estimate.to_dict]] _(history; evidence: git-diff-hunk)_
@@ -67,8 +64,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/load_pilot_manifest - src - intentatlas - longitudinal.py|load_pilot_manifest]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/partition_hashes - src - intentatlas - longitudinal.py|partition_hashes]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_compatibility_policy_covers_every_declared_contract - tests - test_compatibility_policy.py|test_compatibility_policy_covers_every_declared_contract]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_stable_schema_versions_remain_explicit - tests - test_compatibility_policy.py|test_stable_schema_versions_remain_explicit]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

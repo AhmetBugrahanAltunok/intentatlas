@@ -41,8 +41,6 @@ generated: true
 - <code>changes</code> → [[Code/tools - verify_release.py|tools/verify_release.py]] _(history; evidence: git-log)_
 - <code>modifies</code> → [[Symbols/_valid_suffixes - src - intentatlas - adapters - conformance.py|_valid_suffixes]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_collect_import_declaration - src - intentatlas - adapters - go.py|_collect_import_declaration]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_requirement_impacts - src - intentatlas - change_report.py|_requirement_impacts]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_add_recent_cochange_reasons - src - intentatlas - recommendations.py|_add_recent_cochange_reasons]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_markdown - src - intentatlas - review.py|_markdown]] _(history; evidence: git-diff-hunk)_

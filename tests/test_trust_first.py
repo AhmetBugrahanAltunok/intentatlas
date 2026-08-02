@@ -25,14 +25,18 @@ def _git(root: Path, *arguments: str) -> str:
     return completed.stdout
 
 
-def _project_snapshot(root: Path) -> dict[str, tuple[int, str]]:
-    snapshot: dict[str, tuple[int, str]] = {}
+def _project_snapshot(root: Path) -> dict[str, tuple[int, int, str]]:
+    snapshot: dict[str, tuple[int, int, str]] = {}
     for path in sorted(root.rglob("*")):
         relative = path.relative_to(root)
         if ".git" in relative.parts or not path.is_file():
             continue
         data = path.read_bytes()
-        snapshot[relative.as_posix()] = (len(data), hashlib.sha256(data).hexdigest())
+        snapshot[relative.as_posix()] = (
+            len(data),
+            path.stat().st_mtime_ns,
+            hashlib.sha256(data).hexdigest(),
+        )
     return snapshot
 
 

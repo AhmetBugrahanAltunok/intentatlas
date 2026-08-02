@@ -10,11 +10,10 @@ source_path: "tests/test_viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>76</code>
-- **Line:** <code>66</code>
+- **End Line:** <code>84</code>
+- **Line:** <code>74</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-diff-hunk)_

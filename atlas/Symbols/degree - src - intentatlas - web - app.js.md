@@ -10,7 +10,7 @@ source_path: "src/intentatlas/web/app.js"
 
 ## Metadata
 
-- **Line:** <code>556</code>
+- **Line:** <code>608</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

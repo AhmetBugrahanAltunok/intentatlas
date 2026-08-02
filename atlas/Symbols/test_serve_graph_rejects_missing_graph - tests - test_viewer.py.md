@@ -10,8 +10,8 @@ source_path: "tests/test_viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>63</code>
-- **Line:** <code>61</code>
+- **End Line:** <code>71</code>
+- **Line:** <code>69</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
