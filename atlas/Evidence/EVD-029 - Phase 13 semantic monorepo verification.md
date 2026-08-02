@@ -19,7 +19,9 @@ abstains on ambiguity or staleness without executing repository-controlled tooli
 ## Exact implementation provenance and scope basis
 
 - Phase 13 starting revision: `e206787a27d60db0b75a544a51dbb372ec480a9c`.
-- Implementation commit: `7f45361005163a4951f9afaa18b20e892057fa6f`.
+- Foundation commit: `7f45361005163a4951f9afaa18b20e892057fa6f`.
+- Exact locally verified implementation snapshot:
+  `17bbb8700885af11932ba3ee654283c2282a959b`.
 - Handoff checkpoint: `d3e4e56ebdb3cdd8dc4ae1be7082584da3f78ab0`.
 - Phase 11B supplied the frozen workspace basis: reviewed `antfu-utils` and `zustand` histories and
   34 evaluation false-positive paths classified as resolver ambiguity. Phase 13 added no language
@@ -145,10 +147,16 @@ bounded work/payload are the portable regression contract.
   `\.venv\Scripts\python.exe -m bandit -q -r src`, `node --check
   src/intentatlas/web/app.js`, `\.venv\Scripts\python.exe -m pip check`, and
   `git diff --check`: pass. Mypy checked 43 maintained source files.
-- The earlier fixed-epoch package check passed at checkpoint
-  `d3e4e56ebdb3cdd8dc4ae1be7082584da3f78ab0`; its hashes are intentionally not retained as final
-  evidence because the cycle-diagnostic regression changed the source afterward. Current
-  source-bound repeated builds, installed-wheel, and extracted-sdist results are pending below.
+- Two fixed-epoch builds (`SOURCE_DATE_EPOCH=1704067200`) at exact source revision
+  `17bbb8700885af11932ba3ee654283c2282a959b` were byte-identical. Wheel
+  `intentatlas-0.3.0rc1-py3-none-any.whl` SHA-256
+  `30f07be36d8252ed6fdeeffdd26f5ed3a092e4de5eb5102dc4fb569f494acbe1` has 50 files; sdist
+  `intentatlas-0.3.0rc1.tar.gz` SHA-256
+  `9c96e4fb0c909384ff707a12b9f5e4bbcb00dc617a013155fb97be5e6b9ef830` has 180 files.
+  Deterministic provenance schema 1 records those hashes and exact revision.
+- A fresh venv installed that wheel with `--no-deps`; `IntentAtlas 0.3.0rc1` and installed-wheel
+  `demo --report json` schema 1 passed. The already safety-validated sdist was extracted into a new
+  local directory and its full test suite exited 0 with browser execution required.
 - Approved network audit `\.venv\Scripts\python.exe -m pip_audit --skip-editable` returned
   `No known vulnerabilities found`; `pip check` returned `No broken requirements found`.
 
@@ -158,9 +166,10 @@ bounded work/payload are the portable regression contract.
       1,276 generated files and 160 explicitly allowlisted user-owned files.
 - [x] Status reports zero durable orphans and exact REQ -> ADR -> ISSUE -> Code/Test -> EVD ->
       Commit links pass without accessing or enumerating `atlas/Private/`.
-- [x] Generated Commit note for implementation commit
-      `7f45361005163a4951f9afaa18b20e892057fa6f` is present and linked.
-- [ ] Current source-bound fixed-epoch builds, artifact hashes, installed-wheel, and extracted-sdist
+- [x] Generated Commit notes for foundation commit
+      `7f45361005163a4951f9afaa18b20e892057fa6f` and exact locally verified snapshot
+      `17bbb8700885af11932ba3ee654283c2282a959b` are present and linked.
+- [x] Current source-bound fixed-epoch builds, artifact hashes, installed-wheel, and extracted-sdist
       checks are recorded.
 - [ ] Closure records are committed and pushed; complete remote CI passes at the pushed head.
 - [ ] Phase 13 Review records the final decision and this Evidence becomes complete.
@@ -188,5 +197,6 @@ bounded work/payload are the portable regression contract.
 - proves:: [[file:tests/test_graph_query.py]]
 - proves:: [[file:tests/test_browser_e2e.py]]
 - recorded-in:: [[commit:7f45361005163a4951f9afaa18b20e892057fa6f]]
+- recorded-in:: [[commit:17bbb8700885af11932ba3ee654283c2282a959b]]
 - reviewed-by:: [[Reviews/Phase 13 Semantic Monorepo Foundation Review]]
 - strategy:: [[Brain/Phase 11B-13 Delivery Strategy]]

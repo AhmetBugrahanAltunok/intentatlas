@@ -50,7 +50,6 @@ source_path: "tests/test_scanner.py"
 - <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_

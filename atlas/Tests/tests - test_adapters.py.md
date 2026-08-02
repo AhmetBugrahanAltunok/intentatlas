@@ -29,7 +29,6 @@ source_path: "tests/test_adapters.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-015 - Expand and refine real-world validation|ISSUE-015 - Expand and refine real-world validation]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

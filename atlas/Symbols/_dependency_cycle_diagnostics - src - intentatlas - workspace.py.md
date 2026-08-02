@@ -20,3 +20,4 @@ source_path: "src/intentatlas/workspace.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - workspace.py|src/intentatlas/workspace.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 17bbb87 - Record Phase 13 local verification|Record Phase 13 local verification]] _(history; evidence: git-diff-hunk)_

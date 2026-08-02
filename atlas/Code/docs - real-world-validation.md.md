@@ -19,5 +19,4 @@ source_path: "docs/real-world-validation.md"
 
 ## Incoming relationships
 
-- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_
