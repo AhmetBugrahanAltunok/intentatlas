@@ -1,7 +1,7 @@
 ---
 id: REQ-026
 type: requirement
-status: active
+status: accepted
 phase: 11A
 ---
 # Make the release candidate honest and immediately evaluable

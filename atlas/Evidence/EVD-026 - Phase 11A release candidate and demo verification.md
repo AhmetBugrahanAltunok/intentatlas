@@ -1,7 +1,7 @@
 ---
 id: EVD-026
 type: evidence
-status: partial
+status: verified
 phase: 11A
 ---
 # EVD-026 — Phase 11A release candidate and demo verification
@@ -305,10 +305,29 @@ phase: 11A
   `src/intentatlas/git_history.py`, EVD-026 -> `tests/test_git_history.py`, and EVD-026
   `recorded-in` -> exact implementation commit `7e8623a6e87154b18c92918d1e61dff307083c5c`.
 
-## Open gates
+## Remote closure verification
 
-- Push and remote CI remain pending by explicit instruction; Phase 11A cannot close before they
-  pass.
+- `main` was fetched before each push and advanced by ordinary fast-forward updates without force:
+  `58590e0..7f6fb4d` for the roadmap, implementation, and commit-bound evidence commits, followed
+  by `7f6fb4d..bfd0f1e` for the typing-environment correction.
+- Corrective push run `30742936215` for commit
+  `bfd0f1e775ba8637d0d4c4bb310ab81c181b0269` passed all 13 jobs: security, static typing,
+  required browser E2E, reproducible package/sdist verification, Python 3.11/3.12/3.13 source
+  suites, and six installed-wheel jobs across Linux, macOS, and Windows on Python 3.11 and 3.13.
+- The successful run is recorded at
+  `https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30742936215`.
+
+## Final post-correction vault verification
+
+- After the remote typing correction and final status updates, two immediate scans each reported
+  1,202 nodes, 2,857 relationships, 1,043 generated notes, all three adapter fragments reused,
+  zero rebuilt, and zero durable orphans.
+- Snapshots of 159 user-owned files and 1,044 generated files were byte- and UTC-mtime-identical
+  across the scans. The full REQ-026 -> ADR-026 -> ISSUE-024 -> Code/Test -> EVD-026 -> exact
+  implementation Commit chain was asserted again.
+
+## Remaining risks and later gates
+
 - Vault synchronization rejects linked components present during validation, but it does not claim
   cross-platform protection against a separate hostile process replacing a verified generated
   directory while synchronization is running. Scans assume repository/vault directories remain
@@ -318,9 +337,10 @@ phase: 11A
   Phase 11C/publication controls, not a substitute for the Phase 11A remote-CI gate.
 - No tag, release, publication, deployment, or repository-visibility change is authorized.
 
-## Interim decision
+## Final decision
 
-The follow-up implementation is bound to an exact commit, deterministic provenance, generated
-Commit note, passing local regression/package/browser gates, and current authorized network
-audits. Phase 11A remains active until push and remote CI pass. The external launch controls above
-remain a later Phase 11C gate and do not replace or extend Phase 11A acceptance.
+Verified. The follow-up implementation is bound to an exact commit, deterministic provenance,
+generated Commit note, passing local regression/package/browser gates, current authorized network
+audits, fast-forward push, and a fully passing 13-job remote CI run. Phase 11A acceptance is
+satisfied. Tagging, release creation, publication, deployment, visibility changes, hosted
+attestation, and the external Phase 11C launch controls remain unapproved and outside this closure.

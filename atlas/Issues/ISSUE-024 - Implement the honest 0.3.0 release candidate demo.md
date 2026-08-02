@@ -1,7 +1,7 @@
 ---
 id: ISSUE-024
 type: issue
-status: in-progress
+status: complete
 phase: 11A
 ---
 # Implement the honest 0.3.0 release candidate demo
@@ -29,7 +29,7 @@ report, installed-wheel verification, and documentation required by REQ-026.
       config validation, and no-touch Private initialization regressions.
 - [x] Follow-up focused/full local gates, reproducible working-tree packages, installed-wheel and
       extracted-sdist checks, deterministic vault closure, and durable Code/Test links.
-- [ ] Exact follow-up implementation commit/provenance link, network audit, remote CI, final
+- [x] Exact follow-up implementation commit/provenance link, network audit, remote CI, final
       Evidence, and Review.
 
 ## Links

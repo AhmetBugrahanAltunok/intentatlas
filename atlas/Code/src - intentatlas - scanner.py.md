@@ -80,7 +80,6 @@ source_path: "src/intentatlas/scanner.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_

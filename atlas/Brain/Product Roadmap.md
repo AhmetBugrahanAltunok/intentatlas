@@ -425,7 +425,7 @@ Status: complete (2026-08-01)
 
 ## Phase 11 — Release candidate and adoption evidence
 
-Status: active (Phase 11A active; Phase 11B planned)
+Status: active (Phase 11A complete; Phase 11B planned)
 
 - Turn the completed Phase 10 capability into an honest, immediately evaluable release candidate.
 - Demonstrate conservative same-file behavior rather than presenting only a perfect linear chain.
@@ -435,7 +435,7 @@ Status: active (Phase 11A active; Phase 11B planned)
 
 ### Phase 11A — Honest release candidate and evaluable demo
 
-Status: active (2026-08-01)
+Status: complete (2026-08-02)
 
 - Establish one canonical `0.3.0rc1` version source without tagging or publishing.
 - Add an original same-file two-requirement/two-test counterexample to the built-in demo.
@@ -451,7 +451,7 @@ Status: active (2026-08-01)
 
 ### Phase 11B - Sustained pilot evidence and compatibility policy
 
-Status: planned; blocked by Phase 11A Review
+Status: planned; Phase 11A entry gate passed
 
 - Freeze longitudinal calibration/evaluation histories before changing recommendation behavior.
 - Report recommendation quality, coverage, abstention, freshness, execution strategy, cohort size,

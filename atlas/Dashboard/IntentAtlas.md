@@ -24,7 +24,7 @@ generated: true
 - **session:** 9
 - **symbol:** 881
 - **test:** 66
-- **relationships:** 2868
+- **relationships:** 2857
 - **orphaned durable notes:** 0
 
 ## Most connected
@@ -33,14 +33,14 @@ generated: true
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 95 relationships
 - [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 94 relationships
 - [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] — 91 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 81 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 80 relationships
 - [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 72 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 61 relationships
 - [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 56 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 53 relationships
 - [[Tests/tests - test_vault.py|tests/test_vault.py]] — 49 relationships
 - [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] — 44 relationships
-- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 43 relationships
+- [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] — 42 relationships
 
 ## Workflow
 
