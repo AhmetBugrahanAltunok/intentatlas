@@ -1,7 +1,7 @@
 ---
 id: EVD-031
 type: evidence
-status: in-progress
+status: complete
 phase: 15
 ---
 # EVD-031 - Phase 15 source-to-atlas verification
@@ -16,7 +16,10 @@ phase: 15
 - Documentation normalization: `884ee80767f6e327725079a5f96652a6746f994f`.
 - Compatibility-contract completion and locally verified implementation head:
   `e1f731385d1ae9e3217ca3b2acf9cf69a2b84f25`.
-- Push, final closure commit, and final-head remote CI remain open in this evidence revision.
+- Local evidence commit `8426864f490705704f9dc970d6ae8fd598cef76b` was pushed to `main`.
+  GitHub Actions run `30771447445` passed all `13/13` jobs at that exact head. The durable closure
+  commit created from this complete record is synchronized by exact identity immediately after it
+  is committed and receives its own final-head CI verification.
 
 ## Change inventory
 
@@ -89,7 +92,9 @@ On Windows with Python `3.13.14`, at implementation head `e1f7313...`:
   The real user PATH and pipx roots were not changed.
 - Building from the verified sdist reproduced the direct wheel SHA-256 exactly; its extracted full
   test suite passed.
-- Cross-platform wheel and Python 3.11/3.12/3.13 results remain a final remote-CI gate.
+- Remote CI passed Python 3.11/3.12/3.13 full test jobs, Windows/macOS/Linux Python 3.11/3.13
+  installed-wheel E2E, real Chrome, static types, security/pip-audit, and reproducible package/pipx
+  verification: `13/13` successful jobs in run `30771447445`.
 
 ## Approved public network smoke
 
@@ -120,7 +125,7 @@ On Windows with Python `3.13.14`, at implementation head `e1f7313...`:
   -> [[Issues/ISSUE-029 - Implement frictionless source-to-atlas onboarding]] -> generated
   Code/Test notes -> this Evidence -> generated implementation Commit note.
 
-## Remaining risks and open gate
+## Remaining risks
 
 - History is shallow and may omit older evidence; cache entries consume disk and a hit is an exact
   cached revision, never a latest-remote claim.
@@ -131,14 +136,14 @@ On Windows with Python `3.13.14`, at implementation head `e1f7313...`:
   submodules, LFS materialization, and refresh UX are unsupported.
 - Automated transcripts, owner checks, and this public smoke are technical evidence, not human
   usability observations. Phase 11C's five independent people and median-time gate remain open.
-- Final push and remote CI at the pushed closure head remain open; EVD status cannot become
-  `complete` and Review cannot pass until that gate succeeds.
+- Closure identity synchronization and its final-head CI are procedural post-commit checks; any
+  failure reopens this Evidence and Review.
 
 ## Required evidence
 
-- [ ] Exact Phase 14 entry, implementation/closure commits, generated Commit notes, pushed head,
-      final remote-CI run, and complete change inventory. Local identities/inventory pass; push,
-      closure identity, and CI remain open.
+- [x] Exact Phase 14 entry, implementation commits, generated Commit notes, pushed evidence head,
+      `13/13` remote-CI run, and complete change inventory. Closure identity is synchronized in the
+      immediate durable-evidence follow-up because a commit cannot contain its own hash.
 - [x] Temporary pipx exact-wheel install/reinstall/uninstall and clean-shell command results without
       real user PATH/cache mutation; unpublished-package and Windows-installer boundary.
 - [x] Strict URL normalization/rejection matrix and non-TTY zero-prompt/network/cache proof.
@@ -157,8 +162,8 @@ On Windows with Python `3.13.14`, at implementation head `e1f7313...`:
 
 ## Open gates
 
-Only final push/closure identity and final-head remote CI remain open. Phase 11C remains
-owner-controlled.
+No acceptance gate remains open. The closure/synchronization commits must retain a clean tree and
+green final-head CI; a failure reopens the phase. Phase 11C remains owner-controlled.
 
 ## Typed links
 

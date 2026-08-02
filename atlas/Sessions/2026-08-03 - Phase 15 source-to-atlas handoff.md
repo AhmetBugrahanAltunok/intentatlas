@@ -1,7 +1,7 @@
 ---
 id: session-2026-08-03-phase-15-source-to-atlas
 type: session
-status: active
+status: complete
 phase: 15
 ---
 # Phase 15 source-to-atlas handoff
@@ -30,9 +30,10 @@ Never access `atlas/Private/`. Do not start Phase 11C or publish/deploy/change s
   determinism passed. Exact results are in [[Evidence/EVD-031 - Phase 15 source-to-atlas verification]].
 - Generated notes include acquisition code, source-to-atlas tests, pipx verifier, and implementation
   Commit provenance; durable orphans are zero.
-- Remaining closure sequence: commit local evidence/generated notes, push, verify every final-head
-  CI job, record the CI URL/result in Evidence and Review, then create/push a closure commit and
-  verify that final head. Review remains pending until this completes.
+- Evidence/generated commit `8426864` was pushed and GitHub Actions run `30771447445` passed all
+  `13/13` jobs. EVD-031 and the Phase 15 Review are complete/passed.
+- The closure commit and immediate generated-note identity synchronization must be pushed and their
+  final-head CI verified; any failure reopens the phase.
 
 ## Links
 

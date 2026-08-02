@@ -1,7 +1,7 @@
 ---
 id: ISSUE-029
 type: issue
-status: open
+status: closed
 phase: 15
 ---
 # Implement frictionless source-to-atlas onboarding
@@ -43,8 +43,8 @@ phase: 15
 - [x] Focused/full/coverage/lint/type/security/browser/package/provenance/network/vault gates pass.
 - [x] Fixed public-repository smoke records exact revision and license without committing source.
 - [x] Generated Code/Test/Commit notes and zero-orphan durable chain pass deterministically.
-- [ ] EVD-031 is complete, Review passes, commits are pushed, and final-head CI is fully green.
-- [ ] Phase 11C and every publication/deployment/settings/announcement boundary remain unchanged.
+- [x] EVD-031 is complete, Review passes, commits are pushed, and final-head CI is fully green.
+- [x] Phase 11C and every publication/deployment/settings/announcement boundary remain unchanged.
 
 ## Typed links
 
