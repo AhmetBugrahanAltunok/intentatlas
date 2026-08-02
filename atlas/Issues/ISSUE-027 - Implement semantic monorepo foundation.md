@@ -1,7 +1,7 @@
 ---
 id: ISSUE-027
 type: issue
-status: in-progress
+status: closed
 phase: 13
 ---
 # Implement semantic monorepo foundation
@@ -52,11 +52,11 @@ and bounded large-graph navigation without executing repository-controlled tooli
 
 - [x] Add exact Code and Test links after implementation artifacts exist.
 - [x] Run focused resolver/importer/migration/cache/scale/browser/security regressions.
-- [ ] Run complete test, coverage, lint, type, security, package, installed-wheel, extracted-sdist,
+- [x] Run complete test, coverage, lint, type, security, package, installed-wheel, extracted-sdist,
       CLI/UI, deterministic-vault, approved network, and remote-CI gates.
-- [ ] Complete EVD-029 with real-workspace licensing/provenance, exact artifact hashes, budget
+- [x] Complete EVD-029 with real-workspace licensing/provenance, exact artifact hashes, budget
       results, remaining limits, and full durable-chain assertions.
-- [ ] Bind Evidence to the exact implementation commit and obtain final Review.
+- [x] Bind Evidence to the exact implementation commit and obtain final Review.
 
 ## Non-goals
 

@@ -1,14 +1,13 @@
 ---
 id: EVD-029
 type: evidence
-status: verifying
+status: complete
 phase: 13
 ---
 # EVD-029 - Phase 13 semantic monorepo verification
 
-Phase 13A-13C implementation and the local code, browser, scale, vault, and approved network gates
-below passed. This Evidence remains verifying until the current source-bound package artifacts,
-push, complete remote CI, and final Review are recorded.
+Phase 13A-13C implementation and all required local code, browser, scale, vault, package, approved
+network, push, durable-chain, and remote CI gates below passed. The final Review records Pass.
 
 ## Claim under verification
 
@@ -160,7 +159,7 @@ bounded work/payload are the portable regression contract.
 - Approved network audit `\.venv\Scripts\python.exe -m pip_audit --skip-editable` returned
   `No known vulnerabilities found`; `pip check` returned `No broken requirements found`.
 
-## Remote CI remediation in progress
+## Remote CI remediation and final result
 
 - Initial push run `30758376045` at `99767cc8c1ddeae2118367907d768d0907e3e0e3` passed 12 of
   13 jobs; Ubuntu `static-types` exposed four platform-conditional typing errors in the peak-memory
@@ -168,9 +167,15 @@ bounded work/payload are the portable regression contract.
 - Commit `6871d35397c7e5d05b0ed793669fda7f9a7417d7` replaced platform-specific typed attribute access
   with runtime-bounded module namespace lookup. Post-fix mypy, nine focused scale tests, Ruff,
   Bandit, full browser-required coverage, repeated packages, clean wheel/demo, and extracted-sdist
-  full suite all pass. A replacement remote run is pending.
+  full suite all pass.
+- Replacement CI run `30758750027` at pushed head
+  `fba2c1d2250d58f4f78bfec87cfffc2b12899b67` completed successfully with 13/13 jobs and zero
+  non-success results. It passed static types, browser E2E, security/audit, Python 3.11/3.12/3.13
+  tests, reproducible-package with rebuilt-source verification, and Ubuntu/macOS/Windows E2E on
+  Python 3.11 and 3.13. Run URL:
+  `https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30758750027`.
 
-## Pending closure evidence
+## Closure evidence
 
 - [x] Two-pass generated-vault bytes/UTC-mtime and explicit user-owned snapshot remain identical:
       1,276 generated files and 160 explicitly allowlisted user-owned files.
@@ -182,8 +187,9 @@ bounded work/payload are the portable regression contract.
       `6871d35397c7e5d05b0ed793669fda7f9a7417d7` is also present and linked.
 - [x] Current source-bound fixed-epoch builds, artifact hashes, installed-wheel, and extracted-sdist
       checks are recorded.
-- [ ] Closure records are committed and pushed; complete remote CI passes at the pushed head.
-- [ ] Phase 13 Review records the final decision and this Evidence becomes complete.
+- [x] Closure records through `fba2c1d2250d58f4f78bfec87cfffc2b12899b67` are committed and
+      pushed; replacement remote CI run `30758750027` passes 13/13 jobs at that head.
+- [x] Phase 13 Review records Pass and this Evidence is complete.
 
 ## Remaining limits and risks
 

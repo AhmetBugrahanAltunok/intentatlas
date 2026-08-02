@@ -1,7 +1,7 @@
 ---
 id: review-phase-13-semantic-monorepo-foundation
 type: review
-status: pending
+status: passed
 phase: 13
 ---
 # Phase 13 Semantic Monorepo Foundation Review
@@ -27,8 +27,8 @@ phase: 13
       was introduced.
 - [x] Focused/full local quality, package, browser, deterministic-vault, and approved network gates
       pass.
-- [ ] Exact implementation provenance, durable-chain assertions, push, and full remote CI pass.
-- [ ] EVD-029 contains the complete inventory, exact commands/results, limitations, and risks.
+- [x] Exact implementation provenance, durable-chain assertions, push, and full remote CI pass.
+- [x] EVD-029 contains the complete inventory, exact commands/results, limitations, and risks.
 
 ## Evidence to examine
 
@@ -39,5 +39,12 @@ phase: 13
 
 ## Review decision
 
-Pending. Do not claim general monorepo or semantic-language completeness until every acceptance
-item passes; retain an explicit capability matrix after closure.
+Pass on 2026-08-02. EVD-029 records exact source and artifact provenance, deterministic vault and
+durable-chain results, approved network audit, the diagnosed initial CI failure, its focused fix,
+and replacement run `30758750027` passing 13/13 jobs at pushed head
+`fba2c1d2250d58f4f78bfec87cfffc2b12899b67`.
+
+This decision closes only Phase 13's declared Python/JavaScript/TypeScript/Go workspace metadata,
+revision-bound SCIP JSON, partitioned local cache, and bounded loopback query scope. It does not
+claim general monorepo or semantic-language completeness, execute external indexers, authorize
+publication, or begin Phase 11C.
