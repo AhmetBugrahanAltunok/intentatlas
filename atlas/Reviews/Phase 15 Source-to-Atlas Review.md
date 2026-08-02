@@ -30,8 +30,9 @@ Pass. Phase 15A isolated installation, 15B bounded public acquisition/cache, and
 source-to-atlas integration satisfy REQ-031 and ADR-031. Local implementation head
 `e1f731385d1ae9e3217ca3b2acf9cf69a2b84f25`, evidence head
 `8426864f490705704f9dc970d6ae8fd598cef76b`, and GitHub Actions run `30771447445` are green across
-all `13/13` jobs. Closure identity synchronization and final-head CI are mandatory post-commit
-checks; failure reopens this decision.
+all `13/13` jobs. Closure commit is `2a7b767142c7ed37eae41cca33b05bafc8d1cde6`.
+The immediate evidence synchronization and final-head CI are mandatory post-commit checks; failure
+reopens this decision.
 
 This pass is technical onboarding and public-install readiness only. It is not a package
 publication, zero-prerequisite installer, public launch, human usability observation, or user-time

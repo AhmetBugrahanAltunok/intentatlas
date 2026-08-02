@@ -34,6 +34,8 @@ Never access `atlas/Private/`. Do not start Phase 11C or publish/deploy/change s
   `13/13` jobs. EVD-031 and the Phase 15 Review are complete/passed.
 - The closure commit and immediate generated-note identity synchronization must be pushed and their
   final-head CI verified; any failure reopens the phase.
+- Closure commit: `2a7b767142c7ed37eae41cca33b05bafc8d1cde6`; its exact identity is synchronized
+  into EVD-031 and the Review by the final durable-evidence commit.
 
 ## Links
 

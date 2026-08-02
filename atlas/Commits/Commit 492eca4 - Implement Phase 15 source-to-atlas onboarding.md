@@ -117,3 +117,7 @@ generated: true
 - <code>modifies</code> → [[Symbols/main - tools - verify_pipx_install.py|main]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/verify_pipx_lifecycle - tools - verify_pipx_install.py|verify_pipx_lifecycle]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_project_source_manifest - tools - verify_release.py|_project_source_manifest]] _(history; evidence: git-diff-hunk)_
+
+## Incoming relationships
+
+- <code>referenced-by</code> ← [[Evidence/EVD-031 - Phase 15 source-to-atlas verification|EVD-031 - Phase 15 source-to-atlas verification]] _(reference; evidence: wikilink)_

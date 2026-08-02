@@ -16,10 +16,11 @@ phase: 15
 - Documentation normalization: `884ee80767f6e327725079a5f96652a6746f994f`.
 - Compatibility-contract completion and locally verified implementation head:
   `e1f731385d1ae9e3217ca3b2acf9cf69a2b84f25`.
+- Phase closure commit: `2a7b767142c7ed37eae41cca33b05bafc8d1cde6`.
 - Local evidence commit `8426864f490705704f9dc970d6ae8fd598cef76b` was pushed to `main`.
-  GitHub Actions run `30771447445` passed all `13/13` jobs at that exact head. The durable closure
-  commit created from this complete record is synchronized by exact identity immediately after it
-  is committed and receives its own final-head CI verification.
+  GitHub Actions run `30771447445` passed all `13/13` jobs at that exact head. Durable closure
+  commit `2a7b767142c7ed37eae41cca33b05bafc8d1cde6` is synchronized here by exact identity and this
+  synchronization head receives its own final-head CI verification.
 
 ## Change inventory
 
@@ -141,9 +142,8 @@ On Windows with Python `3.13.14`, at implementation head `e1f7313...`:
 
 ## Required evidence
 
-- [x] Exact Phase 14 entry, implementation commits, generated Commit notes, pushed evidence head,
-      `13/13` remote-CI run, and complete change inventory. Closure identity is synchronized in the
-      immediate durable-evidence follow-up because a commit cannot contain its own hash.
+- [x] Exact Phase 14 entry, implementation commits, generated implementation Commit note, pushed
+      evidence head, `13/13` remote-CI run, exact closure commit, and complete change inventory.
 - [x] Temporary pipx exact-wheel install/reinstall/uninstall and clean-shell command results without
       real user PATH/cache mutation; unpublished-package and Windows-installer boundary.
 - [x] Strict URL normalization/rejection matrix and non-TTY zero-prompt/network/cache proof.

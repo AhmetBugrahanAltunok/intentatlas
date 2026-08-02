@@ -27,3 +27,4 @@ source_path: "tools/verify_pipx_install.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
+- <code>referenced-by</code> ← [[Evidence/EVD-031 - Phase 15 source-to-atlas verification|EVD-031 - Phase 15 source-to-atlas verification]] _(reference; evidence: wikilink)_

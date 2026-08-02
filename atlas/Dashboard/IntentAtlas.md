@@ -27,7 +27,7 @@ generated: true
 - **source-root:** 3
 - **symbol:** 1261
 - **test:** 76
-- **relationships:** 3596
+- **relationships:** 3603
 - **orphaned durable notes:** 0
 
 ## Most connected
@@ -35,7 +35,7 @@ generated: true
 - [[Brain/Product Roadmap|Product Roadmap]] — 207 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 114 relationships
 - [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 107 relationships
-- [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 103 relationships
+- [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 104 relationships
 - [[Code/intentatlas|intentatlas]] — 96 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 94 relationships
 - [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 70 relationships
