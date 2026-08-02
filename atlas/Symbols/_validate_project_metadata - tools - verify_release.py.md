@@ -10,12 +10,11 @@ source_path: "tools/verify_release.py"
 
 ## Metadata
 
-- **End Line:** <code>369</code>
-- **Line:** <code>280</code>
+- **End Line:** <code>385</code>
+- **Line:** <code>296</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/tools - verify_release.py|tools/verify_release.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-diff-hunk)_
 - <code>tested-by</code> ← [[Tests/tests - test_release.py|tests/test_release.py]] _(verification; evidence: python-symbol-reference)_

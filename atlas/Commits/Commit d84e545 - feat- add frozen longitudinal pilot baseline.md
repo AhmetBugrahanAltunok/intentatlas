@@ -69,3 +69,7 @@ generated: true
 - <code>modifies</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_compatibility_policy_covers_every_declared_contract - tests - test_compatibility_policy.py|test_compatibility_policy_covers_every_declared_contract]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_stable_schema_versions_remain_explicit - tests - test_compatibility_policy.py|test_stable_schema_versions_remain_explicit]] _(history; evidence: git-diff-hunk)_
+
+## Incoming relationships
+
+- <code>records</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(history; evidence: wikilink)_

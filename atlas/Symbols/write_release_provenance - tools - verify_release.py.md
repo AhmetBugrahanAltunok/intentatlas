@@ -10,8 +10,8 @@ source_path: "tools/verify_release.py"
 
 ## Metadata
 
-- **End Line:** <code>845</code>
-- **Line:** <code>829</code>
+- **End Line:** <code>861</code>
+- **Line:** <code>845</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

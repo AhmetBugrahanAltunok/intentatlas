@@ -425,7 +425,7 @@ Status: complete (2026-08-01)
 
 ## Phase 11 — Release candidate and adoption evidence
 
-Status: active (Phase 11A complete; Phase 11B planned)
+Status: complete (Phase 11A and Phase 11B complete; Phase 11C remains owner-controlled)
 
 - Turn the completed Phase 10 capability into an honest, immediately evaluable release candidate.
 - Demonstrate conservative same-file behavior rather than presenting only a perfect linear chain.
@@ -451,7 +451,7 @@ Status: complete (2026-08-02)
 
 ### Phase 11B - Sustained pilot evidence and compatibility policy
 
-Status: planned; Phase 11A entry gate passed
+Status: complete (2026-08-02)
 
 - Freeze longitudinal calibration/evaluation histories before changing recommendation behavior.
 - Report recommendation quality, coverage, abstention, freshness, execution strategy, cohort size,
@@ -480,7 +480,7 @@ Status: not authorized; owner-controlled after Phase 11B, recommended after Phas
 
 ## Phase 12 - Trust-first first-run value
 
-Status: planned; blocked by Phase 11B Review
+Status: planned; Phase 11B entry gate passed; not started
 
 - Make an aligned, zero-footprint change report the first real-repository outcome.
 - Add a deterministic read-only diagnostic for support, ambiguity, freshness, and safe next steps.

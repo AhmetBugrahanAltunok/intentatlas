@@ -1,7 +1,7 @@
 ---
 id: ISSUE-025
 type: issue
-status: in-progress
+status: complete
 phase: 11B
 ---
 # Implement longitudinal pilot and compatibility baseline
@@ -42,9 +42,9 @@ SHA-256 values, in manifest project order, were `8be415e5257798b3ff837cd684f6d45
 - [x] Update the deterministic terminal demo/README benchmark card with cohort size, limitations,
       known misses, and no-generalization wording.
 - [x] Add exact Code and Test links after implementation artifacts exist.
-- [ ] Run focused regressions and the full test, lint, type, security, package, CLI, deterministic-
+- [x] Run focused regressions and the full test, lint, type, security, package, CLI, deterministic-
       vault, approved network, and remote-CI closure gates.
-- [ ] Complete EVD-027, bind it to the exact implementation commit, and obtain the final Review.
+- [x] Complete EVD-027, bind it to the exact implementation commit, and obtain the final Review.
 
 ## Frozen baseline
 

@@ -35,5 +35,7 @@ source_path: "tests/test_longitudinal.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 9557cb1 - docs- publish longitudinal baseline card|docs: publish longitudinal baseline card]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
+- <code>proven-by</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(reference; evidence: wikilink)_

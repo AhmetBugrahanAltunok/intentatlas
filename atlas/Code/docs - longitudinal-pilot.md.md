@@ -13,6 +13,6 @@ source_path: "docs/longitudinal-pilot.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>6612</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit 9557cb1 - docs- publish longitudinal baseline card|docs: publish longitudinal baseline card]] _(history; evidence: git-log)_
