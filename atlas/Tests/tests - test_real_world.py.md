@@ -11,7 +11,7 @@ source_path: "tests/test_real_world.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>14522</code>
+- **Size Bytes:** <code>14676</code>
 
 ## Outgoing relationships
 
@@ -40,3 +40,4 @@ source_path: "tests/test_real_world.py"
 
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
+- <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

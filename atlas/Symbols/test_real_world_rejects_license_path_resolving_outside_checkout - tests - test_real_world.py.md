@@ -10,8 +10,8 @@ source_path: "tests/test_real_world.py"
 
 ## Metadata
 
-- **End Line:** <code>347</code>
-- **Line:** <code>329</code>
+- **End Line:** <code>349</code>
+- **Line:** <code>331</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

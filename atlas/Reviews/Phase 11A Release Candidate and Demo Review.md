@@ -29,9 +29,14 @@ phase: 11A
       byte/mtime determinism pass.
 - [x] Exact committed source revision, commit-epoch repeated builds, deterministic provenance,
       sdist-to-wheel equality, and clean candidate installation pass.
+- [x] Git-history Private boundary, bounded Git output, Python ambiguous-module abstention,
+      strict configuration, no-touch vault initialization, stable bounded input reads, focused and
+      complete local regression, package/browser, and deterministic-vault gates pass.
+- [ ] The follow-up is bound to an exact implementation commit, generated Commit-note link, and
+      source-revision-bound deterministic provenance.
 - [ ] Push and remote CI pass.
-- [ ] GitHub private vulnerability reporting and protected `pypi` environment controls are
-      externally verified before public launch.
+- [ ] Before the later public-launch phase, GitHub private vulnerability reporting and protected
+      `pypi` environment controls are externally verified (not a Phase 11A closure gate).
 
 ## Evidence examined
 
@@ -45,6 +50,8 @@ phase: 11A
 
 Pending. The deep audit corrected material demo-evidence, artifact-integrity, metadata, build-hook,
 publishing-identity, workflow-policy, local-viewer security, stale-artifact, documentation, and
-environment-isolation problems. Every local and authorized network gate currently passes, but
-Phase 11A remains open until the unchecked push/remote-CI and external launch-control
-items pass. No release or publication action is approved by this review.
+environment-isolation problems. The follow-up local trust-boundary and resolution hardening passes
+its complete local gates but is not yet commit-bound. Phase 11A remains open until exact
+commit/provenance materialization, the authorized network audit, and push/remote CI pass. External
+launch controls remain a later publication gate. No release or publication action is approved by
+this review.

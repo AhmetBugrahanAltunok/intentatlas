@@ -46,6 +46,8 @@ def build_real_world_fixture(tmp_path: Path) -> tuple[Path, Path, str, str]:
     license_bytes = b"MIT fixture license\n"
     (checkout / "LICENSE").write_bytes(license_bytes)
     _git(checkout, "init")
+    # Extracted release tests can place this nested synthetic checkout beyond MAX_PATH on Windows.
+    _git(checkout, "config", "core.longpaths", "true")
     _git(checkout, "config", "user.name", "Fixture")
     _git(checkout, "config", "user.email", "fixture@example.invalid")
     _git(checkout, "remote", "add", "origin", "https://github.com/example/sample.git")

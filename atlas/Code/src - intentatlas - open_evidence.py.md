@@ -11,7 +11,7 @@ source_path: "src/intentatlas/open_evidence.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>16739</code>
+- **Size Bytes:** <code>16973</code>
 
 ## Outgoing relationships
 
@@ -29,14 +29,17 @@ source_path: "src/intentatlas/open_evidence.py"
 - <code>defines</code> → [[Symbols/scip_fragment - src - intentatlas - open_evidence.py|scip_fragment]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/git_paths_match_head - src - intentatlas - git_history.py|git_paths_match_head]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(verification; evidence: python-ast)_

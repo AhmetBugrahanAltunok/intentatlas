@@ -21,3 +21,7 @@ source_path: "tests/test_relations.py"
 - <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/relation_catalog - src - intentatlas - relations.py|relation_catalog]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/relation_type - src - intentatlas - relations.py|relation_type]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_

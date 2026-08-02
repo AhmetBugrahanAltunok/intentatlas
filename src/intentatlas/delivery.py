@@ -8,6 +8,7 @@ from typing import Any
 from urllib.parse import quote, urlsplit
 
 from .models import Edge, Node
+from .safe_io import read_bounded_regular_file
 
 MAX_REPORT_BYTES = 10_000_000
 MAX_RECORDS = 10_000
@@ -190,9 +191,15 @@ def _report_path(root: Path, vault: Path, configured: str) -> tuple[Path, str]:
     pure = PurePosixPath(source)
     if not source or pure.is_absolute() or WINDOWS_ABSOLUTE.match(source) or ".." in pure.parts:
         raise ValueError(f"Configured delivery report must be project-relative: {configured}")
-    private_relative = (vault.relative_to(root) / "Private").as_posix().casefold()
+    private_relatives = {
+        "atlas/private",
+        (vault.relative_to(root) / "Private").as_posix().casefold(),
+    }
     normalized = pure.as_posix().removeprefix("./").casefold()
-    if normalized == private_relative or normalized.startswith(f"{private_relative}/"):
+    if any(
+        normalized == private or normalized.startswith(f"{private}/")
+        for private in private_relatives
+    ):
         raise ValueError(
             f"Configured delivery report may not be inside atlas/Private: {configured}"
         )
@@ -201,10 +208,15 @@ def _report_path(root: Path, vault: Path, configured: str) -> tuple[Path, str]:
         raise ValueError(f"Configured delivery report may not be a symbolic link: {configured}")
     candidate = unresolved.resolve()
     base = root.resolve()
-    private = (vault / "Private").resolve()
+    private_roots = {
+        base / "atlas" / "Private",
+        vault / "Private",
+    }
     if base not in candidate.parents:
         raise ValueError(f"Configured delivery report escapes project root: {configured}")
-    if candidate == private or private in candidate.parents:
+    if any(
+        candidate == private or private in candidate.parents for private in private_roots
+    ):
         raise ValueError(
             f"Configured delivery report may not be inside atlas/Private: {configured}"
         )
@@ -223,9 +235,11 @@ def _report_path(root: Path, vault: Path, configured: str) -> tuple[Path, str]:
 
 def _read_json(path: Path, relative: str) -> dict[str, Any]:
     try:
-        data = path.read_bytes()
+        data = read_bounded_regular_file(path, MAX_REPORT_BYTES)
+        if data is None:
+            raise ValueError("report is not a stable bounded regular file")
         value = json.loads(data.decode("utf-8"), object_pairs_hook=_unique_object)
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
+    except (ValueError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
         raise ValueError(f"Cannot parse delivery report {relative}: {exc}") from exc
     if not isinstance(value, dict):
         raise ValueError(f"Delivery report must be a JSON object: {relative}")

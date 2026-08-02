@@ -11,12 +11,16 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>22814</code>
+- **Size Bytes:** <code>29070</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/build_python_project - tests - test_scanner.py|build_python_project]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_go_recommendations_follow_one_exact_intra_package_caller - tests - test_scanner.py|test_go_recommendations_follow_one_exact_intra_package_caller]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_python_adapter_abstains_on_direct_and_reexport_binding_collision - tests - test_scanner.py|test_python_adapter_abstains_on_direct_and_reexport_binding_collision]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_python_adapter_abstains_when_root_and_src_modules_collide - tests - test_scanner.py|test_python_adapter_abstains_when_root_and_src_modules_collide]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_python_adapter_does_not_guess_nested_monorepo_source_roots - tests - test_scanner.py|test_python_adapter_does_not_guess_nested_monorepo_source_roots]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_python_adapter_resolves_unique_namespace_modules_across_root_and_src - tests - test_scanner.py|test_python_adapter_resolves_unique_namespace_modules_across_root_and_src]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_go_symbols_local_imports_and_tests - tests - test_scanner.py|test_scanner_connects_go_symbols_local_imports_and_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_typescript_javascript_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_typescript_javascript_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
@@ -26,6 +30,8 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_scanner_preserves_explicit_typed_intent_links - tests - test_scanner.py|test_scanner_preserves_explicit_typed_intent_links]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_prunes_literal_private_boundary_with_custom_vault_and_excludes - tests - test_scanner.py|test_scanner_prunes_literal_private_boundary_with_custom_vault_and_excludes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_prunes_literal_private_boundary_with_custom_vault_and_excludes.guarded_scandir - tests - test_scanner.py|test_scanner_prunes_literal_private_boundary_with_custom_vault_and_excludes.guarded_scandir]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private.guarded_scandir]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_recognizes_root_test_javascript_file - tests - test_scanner.py|test_scanner_recognizes_root_test_javascript_file]] _(structure; evidence: python-ast)_
@@ -40,6 +46,7 @@ source_path: "tests/test_scanner.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
@@ -49,6 +56,7 @@ source_path: "tests/test_scanner.py"
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-015 - Expand and refine real-world validation|ISSUE-015 - Expand and refine real-world validation]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
+- <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(reference; evidence: wikilink)_

@@ -11,12 +11,16 @@ source_path: "tests/test_git_history.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2497</code>
+- **Size Bytes:** <code>6613</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans - tests - test_git_history.py|test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans.matches - tests - test_git_history.py|test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans.matches]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_bounded_runner_rejects_stdout_while_it_is_being_collected - tests - test_git_history.py|test_bounded_runner_rejects_stdout_while_it_is_being_collected]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_history_excludes_private_and_configured_paths_at_git_boundary - tests - test_git_history.py|test_history_excludes_private_and_configured_paths_at_git_boundary]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_history_excludes_private_and_configured_paths_at_git_boundary.git - tests - test_git_history.py|test_history_excludes_private_and_configured_paths_at_git_boundary.git]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_history_excludes_private_and_configured_paths_at_git_boundary.guarded_runner - tests - test_git_history.py|test_history_excludes_private_and_configured_paths_at_git_boundary.guarded_runner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_diffs_collects_only_safe_current_side_ranges - tests - test_git_history.py|test_parse_git_diffs_collects_only_safe_current_side_ranges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_diffs_rejects_malformed_paths_and_excessive_output - tests - test_git_history.py|test_parse_git_diffs_rejects_malformed_paths_and_excessive_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_log_collects_paths_and_redacts_subjects - tests - test_git_history.py|test_parse_git_log_collects_paths_and_redacts_subjects]] _(structure; evidence: python-ast)_
@@ -24,9 +28,13 @@ source_path: "tests/test_git_history.py"
 - <code>tests</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/_aligned_git_diffs - src - intentatlas - git_history.py|_aligned_git_diffs]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/_run_git_bounded - src - intentatlas - git_history.py|_run_git_bounded]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/collect_git_history - src - intentatlas - git_history.py|collect_git_history]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/parse_git_diffs - src - intentatlas - git_history.py|parse_git_diffs]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
+- <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>21908</code>
+- **Size Bytes:** <code>22386</code>
 
 ## Outgoing relationships
 
@@ -57,6 +57,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/LanguageAdapter - src - intentatlas - adapters - base.py|LanguageAdapter]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/validate_adapter_definition - src - intentatlas - adapters - conformance.py|validate_adapter_definition]] _(structure; evidence: python-symbol-reference)_
@@ -73,10 +74,13 @@ source_path: "src/intentatlas/scanner.py"
 - <code>imports</code> → [[Symbols/note_title - src - intentatlas - naming.py|note_title]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/safe_filename - src - intentatlas - naming.py|safe_filename]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/AdapterFragmentCache - src - intentatlas - scan_cache.py|AdapterFragmentCache]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
@@ -88,6 +92,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

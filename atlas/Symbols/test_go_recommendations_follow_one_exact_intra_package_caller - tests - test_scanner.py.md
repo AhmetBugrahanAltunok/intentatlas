@@ -10,11 +10,10 @@ source_path: "tests/test_scanner.py"
 
 ## Metadata
 
-- **End Line:** <code>367</code>
-- **Line:** <code>335</code>
+- **End Line:** <code>511</code>
+- **Line:** <code>479</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-diff-hunk)_

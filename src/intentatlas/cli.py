@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from collections.abc import Sequence
 from pathlib import Path
@@ -491,7 +492,7 @@ def _changes(
     open_browser: bool,
 ) -> int:
     config = ProjectConfig.load(root)
-    private_path = (config.vault_path(root) / "Private").relative_to(root).as_posix()
+    private_paths = _private_paths(root, config)
     range_selected = base is not None or head is not None
     selections = sum((commit is not None, range_selected, staged, worktree))
     if selections != 1:
@@ -507,7 +508,7 @@ def _changes(
         raise ValueError("--open requires --report")
     if commit is not None:
         result = collect_change_set(
-            root, scope="commit", revision=commit, excluded_paths=(private_path,)
+            root, scope="commit", revision=commit, excluded_paths=private_paths
         )
     elif range_selected:
         result = collect_change_set(
@@ -515,15 +516,15 @@ def _changes(
             scope="range",
             base=base,
             head=head,
-            excluded_paths=(private_path,),
+            excluded_paths=private_paths,
         )
     elif staged:
         result = collect_change_set(
-            root, scope="staged", excluded_paths=(private_path,)
+            root, scope="staged", excluded_paths=private_paths
         )
     else:
         result = collect_change_set(
-            root, scope="worktree", excluded_paths=(private_path,)
+            root, scope="worktree", excluded_paths=private_paths
         )
     if report:
         if open_report:
@@ -577,13 +578,12 @@ def _review(
     open_browser: bool,
 ) -> int:
     config = ProjectConfig.load(root)
-    private_path = (config.vault_path(root) / "Private").relative_to(root).as_posix()
     change_set = collect_change_set(
         root,
         scope="range",
         base=base,
         head=head,
-        excluded_paths=(private_path,),
+        excluded_paths=_private_paths(root, config),
     )
     test_outcomes = None
     if test_outcomes_path is not None:
@@ -773,13 +773,21 @@ def _project_path(
 ) -> Path:
     candidate = Path(configured)
     unresolved = candidate if candidate.is_absolute() else root / candidate
+    lexical_target = Path(os.path.abspath(unresolved))
+    if any(
+        lexical_target == private or private in lexical_target.parents
+        for private in _private_roots(root, config)
+    ):
+        raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
     if unresolved.is_symlink():
         raise ValueError(f"Configured {label} may not be a symbolic link: {configured}")
     target = unresolved.resolve()
     if target == root or root not in target.parents:
         raise ValueError(f"Configured {label} must be below the project root: {configured}")
-    private = (config.vault_path(root) / "Private").resolve()
-    if target == private or private in target.parents:
+    if any(
+        target == private or private in target.parents
+        for private in _private_roots(root, config)
+    ):
         raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
     if must_exist and not target.is_file():
         raise ValueError(f"Configured {label} does not exist: {configured}")
@@ -794,14 +802,38 @@ def _project_directory(
 ) -> Path:
     candidate = Path(configured)
     unresolved = candidate if candidate.is_absolute() else root / candidate
+    lexical_target = Path(os.path.abspath(unresolved))
+    if any(
+        lexical_target == private or private in lexical_target.parents
+        for private in _private_roots(root, config)
+    ):
+        raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
     if unresolved.is_symlink():
         raise ValueError(f"Configured {label} may not be a symbolic link: {configured}")
     target = unresolved.resolve()
     if target == root or root not in target.parents:
         raise ValueError(f"Configured {label} must be below the project root: {configured}")
-    private = (config.vault_path(root) / "Private").resolve()
-    if target == private or private in target.parents:
+    if any(
+        target == private or private in target.parents
+        for private in _private_roots(root, config)
+    ):
         raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
     if not target.is_dir():
         raise ValueError(f"Configured {label} does not exist: {configured}")
     return target
+
+
+def _private_roots(root: Path, config: ProjectConfig) -> tuple[Path, ...]:
+    return tuple(
+        sorted(
+            {
+                root.resolve() / "atlas" / "Private",
+                config.vault_path(root) / "Private",
+            },
+            key=lambda path: path.as_posix().casefold(),
+        )
+    )
+
+
+def _private_paths(root: Path, config: ProjectConfig) -> tuple[str, ...]:
+    return tuple(path.relative_to(root).as_posix() for path in _private_roots(root, config))

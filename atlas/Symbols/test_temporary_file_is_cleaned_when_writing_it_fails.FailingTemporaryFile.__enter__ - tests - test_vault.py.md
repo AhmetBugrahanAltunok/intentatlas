@@ -10,8 +10,8 @@ source_path: "tests/test_vault.py"
 
 ## Metadata
 
-- **End Line:** <code>235</code>
-- **Line:** <code>233</code>
+- **End Line:** <code>272</code>
+- **Line:** <code>270</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

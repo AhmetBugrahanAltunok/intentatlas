@@ -10,8 +10,8 @@ source_path: "src/intentatlas/config.py"
 
 ## Metadata
 
-- **End Line:** <code>82</code>
-- **Line:** <code>12</code>
+- **End Line:** <code>128</code>
+- **Line:** <code>32</code>
 - **Symbol Kind:** <code>"class"</code>
 
 ## Incoming relationships
@@ -22,7 +22,6 @@ source_path: "src/intentatlas/config.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-symbol-reference)_
-- <code>modified-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-diff-hunk)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapter_conformance.py|tests/test_adapter_conformance.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_change_analysis.py|tests/test_change_analysis.py]] _(verification; evidence: python-symbol-reference)_

@@ -29,5 +29,3 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_e2e.py|tests/test_e2e.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_release.py|tests/test_release.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_version.py|tests/test_version.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(history; evidence: git-diff-hunk)_

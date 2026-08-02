@@ -10,12 +10,11 @@ source_path: "src/intentatlas/open_evidence.py"
 
 ## Metadata
 
-- **End Line:** <code>313</code>
-- **Line:** <code>214</code>
+- **End Line:** <code>318</code>
+- **Line:** <code>219</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(structure; evidence: python-symbol-reference)_
-- <code>modified-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-diff-hunk)_

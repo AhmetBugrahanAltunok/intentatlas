@@ -48,20 +48,21 @@ ALL_AREAS = (
     "Commits",
     "Dashboard",
     "Templates",
-    "Private",
 )
 
 
 class ProjectVault:
-    """Owns the repository-local Obsidian vault without touching user notes on scans."""
+    """Own the repository-local vault without accessing its protected Private subtree."""
 
     def __init__(self, root: Path):
         self.root = root.resolve()
 
     def initialize(self) -> None:
         for area in ALL_AREAS:
-            (self.root / area).mkdir(parents=True, exist_ok=True)
-        (self.root / ".obsidian" / "snippets").mkdir(parents=True, exist_ok=True)
+            self._safe_target(Path(area)).mkdir(parents=True, exist_ok=True)
+        self._safe_target(Path(".obsidian") / "snippets").mkdir(
+            parents=True, exist_ok=True
+        )
 
         for relative, content in _OBSIDIAN_FILES.items():
             self._write_if_missing(relative, content)
@@ -70,7 +71,7 @@ class ProjectVault:
 
     def sync(self, graph: AtlasGraph) -> dict[str, int]:
         self.initialize()
-        locations = self._note_locations(graph)
+        locations = self.note_locations(graph)
 
         outgoing: dict[str, list[Edge]] = defaultdict(list)
         incoming: dict[str, list[Edge]] = defaultdict(list)
@@ -105,9 +106,28 @@ class ProjectVault:
         target.write_text(content.rstrip() + "\n", encoding="utf-8", newline="\n")
 
     def _safe_target(self, relative: Path) -> Path:
-        target = (self.root / relative).resolve()
+        if relative.is_absolute():
+            raise ValueError(f"Vault target escapes root: {relative}")
+        lexical = Path(os.path.abspath(self.root / relative))
+        private = self.root / "Private"
+        if lexical == private or private in lexical.parents:
+            raise ValueError(f"Vault target enters Private: {relative}")
+        current = self.root
+        for part in relative.parts:
+            if part in {"", "."}:
+                continue
+            current /= part
+            try:
+                is_junction = getattr(current, "is_junction", None)
+                if current.is_symlink() or bool(is_junction and is_junction()):
+                    raise ValueError(f"Vault target uses a linked path: {relative}")
+            except OSError as exc:
+                raise ValueError(f"Cannot inspect vault target {relative}: {exc}") from exc
+        target = lexical.resolve()
         if target != self.root and self.root not in target.parents:
             raise ValueError(f"Vault target escapes root: {relative}")
+        if target == private or private in target.parents:
+            raise ValueError(f"Vault target enters Private: {relative}")
         return target
 
     def _sync_generated_notes(self, desired: dict[Path, str]) -> None:
@@ -181,7 +201,8 @@ class ProjectVault:
                 time.sleep(delay)
         raise AssertionError("file retry schedule must not be empty")
 
-    def _note_locations(self, graph: AtlasGraph) -> dict[str, Path]:
+    @staticmethod
+    def note_locations(graph: AtlasGraph) -> dict[str, Path]:
         locations: dict[str, Path] = {}
         used: dict[str, str] = {}
         for node in sorted(graph.nodes.values(), key=lambda item: item.id):

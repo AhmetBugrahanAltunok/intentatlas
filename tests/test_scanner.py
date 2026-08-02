@@ -207,6 +207,150 @@ def test_scanner_resolves_python_reexports_to_exact_symbols(tmp_path) -> None:
     ) in relationships
 
 
+def test_python_adapter_abstains_when_root_and_src_modules_collide(tmp_path) -> None:
+    (tmp_path / "pkg").mkdir()
+    (tmp_path / "src" / "pkg").mkdir(parents=True)
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "pkg" / "a.py").write_text("class Target:\n    pass\n", encoding="utf-8")
+    (tmp_path / "src" / "pkg" / "a.py").write_text(
+        "class Target:\n    pass\n", encoding="utf-8"
+    )
+    (tmp_path / "pkg" / "__init__.py").write_text(
+        "from .a import Target as Target\n", encoding="utf-8"
+    )
+    (tmp_path / "src" / "pkg" / "__init__.py").write_text(
+        "from .a import Target as Target\n", encoding="utf-8"
+    )
+    (tmp_path / "tests" / "test_imports.py").write_text(
+        "from pkg import Target as Exported\nfrom pkg.a import Target\n\n"
+        "def test_target():\n    assert Target is Exported\n",
+        encoding="utf-8",
+    )
+
+    first = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+    second = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+    ambiguous_targets = {
+        "file:pkg/__init__.py",
+        "file:pkg/a.py",
+        "file:src/pkg/__init__.py",
+        "file:src/pkg/a.py",
+        "symbol:pkg/a.py::Target",
+        "symbol:src/pkg/a.py::Target",
+    }
+
+    assert not any(
+        edge.source == "file:tests/test_imports.py"
+        and edge.target in ambiguous_targets
+        and edge.evidence in {"python-ast", "python-symbol-reference"}
+        for edge in first.edges
+    )
+    assert first.to_dict()["nodes"] == second.to_dict()["nodes"]
+    assert first.to_dict()["edges"] == second.to_dict()["edges"]
+
+
+@pytest.mark.parametrize(
+    "package_source",
+    [
+        "class Target:\n    pass\nfrom .core import Target\n",
+        "from .core import Target\nclass Target:\n    pass\n",
+    ],
+)
+def test_python_adapter_abstains_on_direct_and_reexport_binding_collision(
+    tmp_path, package_source
+) -> None:
+    (tmp_path / "src" / "sample").mkdir(parents=True)
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "src" / "sample" / "__init__.py").write_text(
+        package_source, encoding="utf-8"
+    )
+    (tmp_path / "src" / "sample" / "core.py").write_text(
+        "class Target:\n    pass\n", encoding="utf-8"
+    )
+    (tmp_path / "tests" / "test_target.py").write_text(
+        "from sample import Target\n\ndef test_target():\n    assert Target\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    assert not any(
+        edge.source == "file:tests/test_target.py"
+        and edge.target
+        in {
+            "symbol:src/sample/__init__.py::Target",
+            "symbol:src/sample/core.py::Target",
+        }
+        and edge.evidence == "python-symbol-reference"
+        for edge in graph.edges
+    )
+
+
+def test_python_adapter_resolves_unique_namespace_modules_across_root_and_src(
+    tmp_path,
+) -> None:
+    (tmp_path / "ns").mkdir()
+    (tmp_path / "src" / "ns").mkdir(parents=True)
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "ns" / "alpha.py").write_text(
+        "class Alpha:\n    pass\n", encoding="utf-8"
+    )
+    (tmp_path / "src" / "ns" / "beta.py").write_text(
+        "class Beta:\n    pass\n", encoding="utf-8"
+    )
+    (tmp_path / "tests" / "test_namespace.py").write_text(
+        "from ns.alpha import Alpha\nfrom ns.beta import Beta\n\n"
+        "def test_namespace():\n    assert Alpha and Beta\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+    relationships = {
+        (edge.source, edge.target, edge.relation, edge.evidence) for edge in graph.edges
+    }
+
+    assert (
+        "file:tests/test_namespace.py",
+        "symbol:ns/alpha.py::Alpha",
+        "tests",
+        "python-symbol-reference",
+    ) in relationships
+    assert (
+        "file:tests/test_namespace.py",
+        "symbol:src/ns/beta.py::Beta",
+        "tests",
+        "python-symbol-reference",
+    ) in relationships
+
+
+def test_python_adapter_does_not_guess_nested_monorepo_source_roots(tmp_path) -> None:
+    first = tmp_path / "apps" / "one" / "src" / "shared" / "api.py"
+    second = tmp_path / "apps" / "two" / "src" / "shared" / "api.py"
+    test = tmp_path / "tests" / "test_api.py"
+    first.parent.mkdir(parents=True)
+    second.parent.mkdir(parents=True)
+    test.parent.mkdir()
+    first.write_text("class Target:\n    pass\n", encoding="utf-8")
+    second.write_text("class Target:\n    pass\n", encoding="utf-8")
+    test.write_text(
+        "from shared.api import Target\n\ndef test_target():\n    assert Target\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    assert not any(
+        edge.source == "file:tests/test_api.py"
+        and edge.target
+        in {
+            "file:apps/one/src/shared/api.py",
+            "file:apps/two/src/shared/api.py",
+            "symbol:apps/one/src/shared/api.py::Target",
+            "symbol:apps/two/src/shared/api.py::Target",
+        }
+        for edge in graph.edges
+    )
+
+
 def test_scanner_recognizes_root_test_javascript_file(tmp_path) -> None:
     (tmp_path / "index.js").write_text(
         "export default function value() { return 1; }\n",
@@ -512,6 +656,7 @@ def test_scanner_reads_user_vault_links_without_enumerating_private(
         encoding="utf-8",
     )
     private = config.vault_path(tmp_path) / "Private" / "secret.md"
+    private.parent.mkdir()
     private.write_text("password=hunter2", encoding="utf-8")
 
     original_scandir = os.scandir
@@ -533,6 +678,33 @@ def test_scanner_reads_user_vault_links_without_enumerating_private(
         edge.source == "REQ-001" and edge.target == "ADR-001" and edge.relation == "references"
         for edge in graph.edges
     )
+
+
+def test_scanner_prunes_literal_private_boundary_with_custom_vault_and_excludes(
+    tmp_path, monkeypatch
+) -> None:
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src" / "app.py").write_text("value = 1\n", encoding="utf-8")
+    private_root = tmp_path / "atlas" / "Private"
+    private_root.mkdir(parents=True)
+    (private_root / "secret.py").write_text("password = 'hidden'\n", encoding="utf-8")
+    original_scandir = os.scandir
+    blocked = private_root.resolve()
+
+    def guarded_scandir(path):
+        candidate = Path(path).resolve()
+        if candidate == blocked or blocked in candidate.parents:
+            raise AssertionError("scanner enumerated literal atlas/Private")
+        return original_scandir(path)
+
+    monkeypatch.setattr(scanner_module.os, "scandir", guarded_scandir)
+    graph = scan_repository(
+        tmp_path,
+        ProjectConfig(vault="project-vault", exclude=[], git_history_limit=0),
+    )
+
+    assert "file:src/app.py" in graph.nodes
+    assert "file:atlas/Private/secret.py" not in graph.nodes
 
 
 def test_scanner_prunes_configured_nested_excludes_before_descent(tmp_path, monkeypatch) -> None:
@@ -604,12 +776,13 @@ def test_scanner_preserves_explicit_typed_intent_links(tmp_path) -> None:
     )
     (vault.root / "Issues" / "ISSUE-Typed.md").write_text(
         "---\nid: ISSUE-TYPED\ntype: issue\n---\n"
-        "# Typed issue\n\n- implemented-by:: [[src - demo - core.py]]\n",
+        "# Typed issue\n\n- implemented-by:: [[Code/src - demo - core.py]]\n",
         encoding="utf-8",
     )
     (vault.root / "Evidence" / "EVD-Typed.md").write_text(
         "---\nid: EVD-TYPED\ntype: evidence\n---\n"
-        "# Typed evidence\n\n- proves:: [[Requirements/REQ-Typed]]\n",
+        "# Typed evidence\n\n- proves:: [[Requirements/REQ-Typed]]\n"
+        "- proves:: [[Tests/tests - test_core.py]]\n",
         encoding="utf-8",
     )
 
@@ -620,4 +793,5 @@ def test_scanner_preserves_explicit_typed_intent_links(tmp_path) -> None:
     assert ("ADR-TYPED", "ISSUE-TYPED", "tracked-by") in relationships
     assert ("ISSUE-TYPED", "file:src/demo/core.py", "implemented-by") in relationships
     assert ("EVD-TYPED", "REQ-TYPED", "proves") in relationships
+    assert ("EVD-TYPED", "file:tests/test_core.py", "proves") in relationships
     assert ("REQ-TYPED", "EVD-TYPED", "references") in relationships

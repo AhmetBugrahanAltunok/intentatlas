@@ -11,7 +11,7 @@ source_path: "src/intentatlas/git_history.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>10955</code>
+- **Size Bytes:** <code>16436</code>
 
 ## Outgoing relationships
 
@@ -19,22 +19,34 @@ source_path: "src/intentatlas/git_history.py"
 - <code>defines</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_aligned_git_diffs - src - intentatlas - git_history.py|_aligned_git_diffs]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_collect_git_diffs - src - intentatlas - git_history.py|_collect_git_diffs]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_escape_git_glob - src - intentatlas - git_history.py|_escape_git_glob]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_git_exclusion_pathspecs - src - intentatlas - git_history.py|_git_exclusion_pathspecs]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_is_excluded - src - intentatlas - git_history.py|_is_excluded]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_literal_pathspecs - src - intentatlas - git_history.py|_literal_pathspecs]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_matches_commit_blob - src - intentatlas - git_history.py|_matches_commit_blob]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_normalized_excludes - src - intentatlas - git_history.py|_normalized_excludes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_normalized_lines - src - intentatlas - git_history.py|_normalized_lines]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_patch_path - src - intentatlas - git_history.py|_patch_path]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_run_git_bounded - src - intentatlas - git_history.py|_run_git_bounded]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_run_git_bounded.drain - src - intentatlas - git_history.py|_run_git_bounded.drain]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_safe_git_path - src - intentatlas - git_history.py|_safe_git_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/collect_git_history - src - intentatlas - git_history.py|collect_git_history]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/git_paths_match_head - src - intentatlas - git_history.py|git_paths_match_head]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/parse_git_diffs - src - intentatlas - git_history.py|parse_git_diffs]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/parse_git_log - src - intentatlas - git_history.py|parse_git_log]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/resolve_git_head - src - intentatlas - git_history.py|resolve_git_head]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(structure; evidence: python-ast)_

@@ -10,7 +10,9 @@ from urllib.parse import unquote, urlsplit
 
 from .git_history import git_paths_match_head
 from .models import Edge, Node
+from .safe_io import read_bounded_regular_file
 
+MAX_REPORT_BYTES = 10_000_000
 MAX_RECORDS = 100_000
 MAX_JSON_VALUES = 500_000
 MAX_JSON_DEPTH = 16
@@ -25,12 +27,15 @@ WINDOWS_ABSOLUTE = re.compile(r"^[A-Za-z]:[/\\]")
 
 def load_json_report(path: Path, relative: str) -> Any:
     try:
+        data = read_bounded_regular_file(path, MAX_REPORT_BYTES)
+        if data is None:
+            raise ValueError("report is not a stable bounded regular file")
         value = json.loads(
-            path.read_text(encoding="utf-8"),
+            data.decode("utf-8"),
             object_pairs_hook=_unique_object,
             parse_constant=_invalid_constant,
         )
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
+    except (ValueError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
         raise ValueError(f"Cannot parse JSON evidence report {relative}: {exc}") from exc
     _validate_json_tree(value, relative)
     return value

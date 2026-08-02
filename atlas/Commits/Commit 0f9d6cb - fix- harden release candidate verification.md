@@ -116,3 +116,7 @@ generated: true
 - <code>modifies</code> → [[Symbols/main - tools - verify_release.py|main]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/release_provenance - tools - verify_release.py|release_provenance]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/verify_release - tools - verify_release.py|verify_release]] _(history; evidence: git-diff-hunk)_
+
+## Incoming relationships
+
+- <code>referenced-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(reference; evidence: wikilink)_

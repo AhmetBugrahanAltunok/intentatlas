@@ -122,6 +122,17 @@ def test_rejects_unsafe_or_missing_report_paths(tmp_path, configured, message) -
         scan_repository(tmp_path, config)
 
 
+def test_literal_private_report_boundary_is_independent_of_custom_vault(tmp_path) -> None:
+    config = ProjectConfig(
+        vault="project-vault",
+        git_history_limit=0,
+        coverage_reports=["atlas/Private/secret.xml"],
+    )
+
+    with pytest.raises(ValueError, match="atlas/Private"):
+        scan_repository(tmp_path, config)
+
+
 def test_rejects_entity_malformed_oversized_and_excessive_reports(tmp_path, monkeypatch) -> None:
     reports = tmp_path / "reports"
     reports.mkdir()

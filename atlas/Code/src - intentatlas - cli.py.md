@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>27170</code>
+- **Size Bytes:** <code>28151</code>
 
 ## Outgoing relationships
 
@@ -24,6 +24,8 @@ source_path: "src/intentatlas/cli.py"
 - <code>defines</code> → [[Symbols/_init - src - intentatlas - cli.py|_init]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_open - src - intentatlas - cli.py|_open]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_path_argument - src - intentatlas - cli.py|_path_argument]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_private_paths - src - intentatlas - cli.py|_private_paths]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_private_roots - src - intentatlas - cli.py|_private_roots]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_project_directory - src - intentatlas - cli.py|_project_directory]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_project_path - src - intentatlas - cli.py|_project_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_recommend_tests - src - intentatlas - cli.py|_recommend_tests]] _(structure; evidence: python-ast)_
@@ -91,11 +93,13 @@ source_path: "src/intentatlas/cli.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit d9cd557 - feat- measure test recommendation quality|feat: measure test recommendation quality]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
@@ -105,5 +109,6 @@ source_path: "src/intentatlas/cli.py"
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_

@@ -12,7 +12,8 @@ and durable vault material.
 ## Acceptance
 
 - Discovery prunes configured excluded directories before descending into them.
-- `atlas/Private/` is never read, enumerated, indexed, or modified.
+- `atlas/Private/` is never created, read, enumerated, indexed, or modified; users provision that
+  local-only boundary themselves when they need it.
 - Tests prove non-access to private and excluded directories, not only absence from the graph.
 - User note IDs cannot silently replace or merge with scanner-owned graph nodes.
 - Untrusted labels and metadata cannot alter the structure of generated Markdown notes.

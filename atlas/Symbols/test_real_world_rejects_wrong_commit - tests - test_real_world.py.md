@@ -10,11 +10,10 @@ source_path: "tests/test_real_world.py"
 
 ## Metadata
 
-- **End Line:** <code>326</code>
-- **Line:** <code>315</code>
+- **End Line:** <code>328</code>
+- **Line:** <code>317</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_real_world.py|tests/test_real_world.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-diff-hunk)_

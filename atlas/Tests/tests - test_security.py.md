@@ -11,11 +11,19 @@ source_path: "tests/test_security.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>519</code>
+- **Size Bytes:** <code>1706</code>
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/test_bounded_regular_reader_rejects_fifo_without_blocking - tests - test_security.py|test_bounded_regular_reader_rejects_fifo_without_blocking]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_bounded_regular_reader_rejects_growth_and_identity_changes - tests - test_security.py|test_bounded_regular_reader_rejects_growth_and_identity_changes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_bounded_regular_reader_rejects_growth_and_identity_changes.changing_stat - tests - test_security.py|test_bounded_regular_reader_rejects_growth_and_identity_changes.changing_stat]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_redact_nested_values_and_common_token_shapes - tests - test_security.py|test_redact_nested_values_and_common_token_shapes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(verification; evidence: python-symbol-reference)_
+
+## Incoming relationships
+
+- <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

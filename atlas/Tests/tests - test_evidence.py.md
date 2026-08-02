@@ -11,12 +11,13 @@ source_path: "tests/test_evidence.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6936</code>
+- **Size Bytes:** <code>7280</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_evidence_project - tests - test_evidence.py|_evidence_project]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_imports_bounded_coverage_and_test_evidence_deterministically - tests - test_evidence.py|test_imports_bounded_coverage_and_test_evidence_deterministically]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_literal_private_report_boundary_is_independent_of_custom_vault - tests - test_evidence.py|test_literal_private_report_boundary_is_independent_of_custom_vault]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_entity_malformed_oversized_and_excessive_reports - tests - test_evidence.py|test_rejects_entity_malformed_oversized_and_excessive_reports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_report_content_with_the_wrong_format - tests - test_evidence.py|test_rejects_report_content_with_the_wrong_format]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_symbolic_link_report_before_reading - tests - test_evidence.py|test_rejects_symbolic_link_report_before_reading]] _(structure; evidence: python-ast)_
@@ -30,4 +31,5 @@ source_path: "tests/test_evidence.py"
 
 ## Incoming relationships
 
+- <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(reference; evidence: wikilink)_

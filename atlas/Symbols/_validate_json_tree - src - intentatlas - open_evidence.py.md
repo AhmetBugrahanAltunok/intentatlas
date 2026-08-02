@@ -10,8 +10,8 @@ source_path: "src/intentatlas/open_evidence.py"
 
 ## Metadata
 
-- **End Line:** <code>398</code>
-- **Line:** <code>378</code>
+- **End Line:** <code>403</code>
+- **Line:** <code>383</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

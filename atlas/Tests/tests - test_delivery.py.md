@@ -11,13 +11,14 @@ source_path: "tests/test_delivery.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>7272</code>
+- **Size Bytes:** <code>7621</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_delivery_links_only_exact_known_commit_shas - tests - test_delivery.py|test_delivery_links_only_exact_known_commit_shas]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_delivery_nodes_sync_to_generated_commit_subfolders - tests - test_delivery.py|test_delivery_nodes_sync_to_generated_commit_subfolders]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_imports_local_delivery_context_deterministically - tests - test_delivery.py|test_imports_local_delivery_context_deterministically]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_literal_private_delivery_boundary_is_independent_of_custom_vault - tests - test_delivery.py|test_literal_private_delivery_boundary_is_independent_of_custom_vault]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_duplicate_keys_unsafe_urls_and_bounds - tests - test_delivery.py|test_rejects_duplicate_keys_unsafe_urls_and_bounds]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_invalid_delivery_schema - tests - test_delivery.py|test_rejects_invalid_delivery_schema]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_symbolic_link_delivery_report_before_reading - tests - test_delivery.py|test_rejects_symbolic_link_delivery_report_before_reading]] _(structure; evidence: python-ast)_
@@ -32,4 +33,6 @@ source_path: "tests/test_delivery.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
+- <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

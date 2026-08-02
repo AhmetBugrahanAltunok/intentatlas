@@ -11,7 +11,7 @@ source_path: "src/intentatlas/evidence.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11506</code>
+- **Size Bytes:** <code>11746</code>
 
 ## Outgoing relationships
 
@@ -31,18 +31,21 @@ source_path: "src/intentatlas/evidence.py"
 - <code>defines</code> → [[Symbols/import_evidence - src - intentatlas - evidence.py|import_evidence]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/execution_map_fragment - src - intentatlas - open_evidence.py|execution_map_fragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_json_report - src - intentatlas - open_evidence.py|load_json_report]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/sarif_fragment - src - intentatlas - open_evidence.py|sarif_fragment]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/scip_fragment - src - intentatlas - open_evidence.py|scip_fragment]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(verification; evidence: filename-convention)_
 - <code>tested-by</code> ← [[Tests/tests - test_evidence.py|tests/test_evidence.py]] _(verification; evidence: python-ast)_

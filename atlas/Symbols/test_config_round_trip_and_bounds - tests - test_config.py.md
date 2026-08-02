@@ -10,11 +10,10 @@ source_path: "tests/test_config.py"
 
 ## Metadata
 
-- **End Line:** <code>31</code>
-- **Line:** <code>10</code>
+- **End Line:** <code>32</code>
+- **Line:** <code>11</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-diff-hunk)_

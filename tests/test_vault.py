@@ -35,6 +35,8 @@ def test_vault_initializes_obsidian_and_preserves_user_owned_notes(tmp_path) -> 
     vault = ProjectVault(tmp_path / "atlas")
     vault.initialize()
     private = tmp_path / "atlas" / "Private" / "mine.md"
+    assert not private.parent.exists()
+    private.parent.mkdir()
     private.write_text("never touch", encoding="utf-8")
     requirement = tmp_path / "atlas" / "Requirements" / "Keep context.md"
     requirement.write_text("# My requirement\n", encoding="utf-8")
@@ -54,6 +56,41 @@ def test_vault_initializes_obsidian_and_preserves_user_owned_notes(tmp_path) -> 
     assert "implementation; evidence: wikilink" in content
     assert (tmp_path / "atlas" / "Issues").is_dir()
     assert (tmp_path / "atlas" / "Templates" / "Issue.md").exists()
+
+
+def test_vault_initialization_never_creates_the_private_boundary(
+    tmp_path, monkeypatch
+) -> None:
+    root = tmp_path / "atlas"
+    original_mkdir = Path.mkdir
+
+    def guarded_mkdir(path, *args, **kwargs):
+        if path.name.casefold() == "private" and path.parent == root:
+            raise AssertionError("vault initialization created atlas/Private")
+        return original_mkdir(path, *args, **kwargs)
+
+    with monkeypatch.context() as guard:
+        guard.setattr(Path, "mkdir", guarded_mkdir)
+        ProjectVault(root).initialize()
+
+    assert not (root / "Private").exists()
+
+
+def test_vault_rejects_linked_generated_areas_before_sync(tmp_path, monkeypatch) -> None:
+    root = tmp_path / "atlas"
+    vault = ProjectVault(root)
+    original_is_symlink = Path.is_symlink
+
+    def simulated_link(path) -> bool:
+        if path == root / "Code":
+            return True
+        return original_is_symlink(path)
+
+    monkeypatch.setattr(Path, "is_symlink", simulated_link)
+
+    with pytest.raises(ValueError, match="linked path"):
+        vault.sync(graph_fixture())
+    assert not (root / "Private").exists()
 
 
 def test_vault_initialization_is_generic_minimal_and_idempotent(tmp_path) -> None:

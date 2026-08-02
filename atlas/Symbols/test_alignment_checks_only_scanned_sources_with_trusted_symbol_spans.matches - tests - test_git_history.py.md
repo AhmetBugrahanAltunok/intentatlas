@@ -10,8 +10,8 @@ source_path: "tests/test_git_history.py"
 
 ## Metadata
 
-- **End Line:** <code>64</code>
-- **Line:** <code>62</code>
+- **End Line:** <code>75</code>
+- **Line:** <code>73</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

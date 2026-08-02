@@ -20,8 +20,12 @@ Adapters extract only structural metadata. Built-in language adapters receive a 
 and kind mapping, enforce the shared parse-size limit, and return deterministic graph fragments;
 they do not mutate the graph directly. The Python adapter uses the standard-library AST. It maps
 explicit `from` imports and qualified module attributes to exact local top-level symbols, following
-at most eight deterministic package re-export hops and rejecting cycles. A test with exact symbol
-evidence does not also inherit the broader file edge for that resolved module.
+at most eight deterministic package re-export hops and rejecting cycles. Module identities derive
+from repository-relative paths with only a leading `src/` stripped, and retain all physical
+candidates; imports, symbols, and re-exports resolve only for one candidate, while module or
+same-name direct/re-export binding collisions abstain. Nested custom source roots are not guessed. A
+test with exact symbol evidence does not also inherit the broader file edge for that resolved
+module.
 
 Adapter conformance contract version 1 validates stable names, complete suffix inputs, cache
 versions, declared evidence, canonical symbol nodes, structural endpoint shapes, bounded counts,
@@ -71,7 +75,10 @@ retain conservative package-level dependencies because they describe implementat
 not a test recommendation claim.
 
 The Git adapter reads commit metadata, changed paths, and a bounded recent window of zero-context
-diff hunks with fixed read-only commands. Changed new-side lines project to the most-specific
+diff hunks with fixed read-only commands. The literal Private boundary and configured exclusions
+are Git pathspec exclusions before metadata collection; patch commands additionally include only
+bounded literal scanned-symbol paths, and stdout is killed on byte overflow while being collected.
+Changed new-side lines project to the most-specific
 Python symbol only when the current file matches that commit's bounded raw Git blob after
 line-ending normalization and validated AST source spans intersect. Blob checks include only
 scanned paths with trusted spans, never excluded paths, and stop safely above 1,000 commit/path
@@ -304,12 +311,18 @@ Generated notes link to one another with standard wikilinks. Human notes can lin
 generated note and remain untouched by subsequent scans. Graph health flags orphans but
 does not silently invent meaning.
 
+Vault initialization creates the durable and generated areas but deliberately does not create,
+enumerate, or inspect `atlas/Private/`; that local-only directory is user-provisioned.
+
 Vault synchronization is failure-preserving. It renders the complete desired generated set in
 memory, skips byte-identical targets, writes each changed note to a dot-prefixed sibling temporary file,
 and atomically replaces the target with bounded retries for recognized sharing or permission
 locks. Only after all desired replacements succeed are marked stale notes pruned. A persistent
 replacement failure leaves the previous target and all not-yet-updated targets present and skips
 stale cleanup. This is per-file atomic replacement, not a cross-file transaction.
+Existing symbolic-link or junction components in generated output paths are rejected before use.
+Synchronization assumes another hostile process is not replacing verified vault directories while
+the scan is running; directory-handle-relative mutation is not currently a cross-platform contract.
 
 Human notes may preserve link meaning with `relation:: [[target]]`. Only the documented relation
 vocabulary is accepted as typed input; unknown labels fall back to generic references.
@@ -318,7 +331,10 @@ vocabulary is accepted as typed input; unknown labels fall back to generic refer
 
 Repository contents, Markdown, and commit subjects are untrusted data. IntentAtlas parses
 them without executing them, redacts common secret forms, skips private and ignored areas,
-rejects graph identity collisions, and serves the viewer only on loopback. See `SECURITY.md`.
+rejects graph identity collisions, and serves the viewer only on loopback. Configuration and
+imported report bytes are accepted only from a bounded, stable regular-file handle; non-blocking
+opens prevent special files such as FIFOs from stalling the reader on supporting platforms. See
+`SECURITY.md`.
 
 ## Inspiration boundary
 

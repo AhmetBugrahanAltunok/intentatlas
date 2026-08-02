@@ -16,31 +16,31 @@ generated: true
 - **decision:** 26
 - **document:** 24
 - **evidence:** 26
-- **file:** 38
+- **file:** 39
 - **issue:** 24
 - **memory:** 6
 - **requirement:** 26
 - **review:** 26
 - **session:** 8
-- **symbol:** 841
+- **symbol:** 880
 - **test:** 66
-- **relationships:** 2550
+- **relationships:** 2663
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 168 relationships
-- [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] — 102 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 89 relationships
-- [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 78 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 76 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 61 relationships
-- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 55 relationships
+- [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] — 103 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 94 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 81 relationships
+- [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 72 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 62 relationships
+- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 56 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 53 relationships
-- [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] — 48 relationships
+- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 48 relationships
 - [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] — 44 relationships
 - [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] — 42 relationships
-- [[Tests/tests - test_vault.py|tests/test_vault.py]] — 42 relationships
+- [[Tests/tests - test_scanner.py|tests/test_scanner.py]] — 42 relationships
 
 ## Workflow
 

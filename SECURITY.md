@@ -12,7 +12,12 @@ requested before then.
 
 - Scans are local and do not upload source code.
 - Generated notes contain relationships and symbol names, not raw source contents.
-- Excluded directories are pruned before descent; `atlas/Private/` is never enumerated or scanned.
+- Excluded directories are pruned before descent; `atlas/Private/` is never created, enumerated,
+  scanned, or used as a configured output location.
+- `intentatlas.json` must be a bounded regular file containing one JSON object with unique keys,
+  known fields, and strict field types; the shared reader uses non-blocking, no-follow opens where
+  the platform exposes them and verifies one stable regular-file identity. Malformed configuration
+  fails before traversal or writes.
 - Commit subjects are treated as untrusted and redacted before persistence.
 - User note IDs cannot replace scanner-owned graph identities, and generated Markdown escapes
   untrusted display text.
@@ -24,7 +29,8 @@ requested before then.
   names, dynamic imports, and paths escaping the scanned repository are not followed. Exact-symbol
   evidence is limited to unambiguous discovered named or default declarations.
 - Python exact-symbol references follow at most eight local package re-export hops, reject cycles,
-  and never import or execute a module.
+  abstain when repository-root and leading-`src/` module candidates collide, and never import or
+  execute a module.
 - Go resolution accepts only imports matching a discovered local `go.mod` module path, prefers the
   longest nested-module match, and does not invoke the Go toolchain or resolve external modules.
   Same-directory test links require a compatible package plus an exported identifier uniquely
@@ -43,6 +49,10 @@ requested before then.
   duplicate-key, field, type, identifier, and URL validation. They retain no body, comment, author,
   credential, query string, fragment, or raw provider payload.
 - IntentAtlas invokes Git only with fixed, read-only argument lists and never through a shell.
+  Git log and patch collection apply the literal Private boundary and configured exclusions as
+  pathspecs before output is produced; patch collection is further restricted to bounded literal
+  scanned-symbol paths. Stdout is byte-bounded while it is collected, and excessive output kills
+  the child process rather than retaining a truncated result.
   Symbol-impact parsing is limited to a bounded recent commit window, zero-context patches, a
   fixed byte/hunk budget, validated commit identifiers, and safe current-side project paths;
   raw blobs are read with `git cat-file` and must match the bounded worktree file after line-ending
@@ -109,7 +119,10 @@ requested before then.
 - Generated-vault synchronization never purges desired output before replacement. Changed notes
   use dot-prefixed same-directory temporary files and atomic replacement; recognized transient sharing
   failures retry within a fixed bound, stale cleanup runs last, symlinks are not followed during
-  cleanup, and temporary files are removed on success or failure.
+  cleanup, and temporary files are removed on success or failure. Existing linked generated-area
+  components are rejected before synchronization. This does not claim protection against a separate
+  hostile process replacing a previously verified vault directory while synchronization is running;
+  run scans only while the repository and vault are under the invoking user's control.
 - The local viewer validates IPv4 loopback-only binding for both project and demo entry points and
   uses `127.0.0.1` by default. The accepted `localhost` alias is normalized to that numeric address
   before binding, and no reverse DNS lookup is performed. Interactive change reports are served only from the

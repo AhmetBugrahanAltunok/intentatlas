@@ -10,11 +10,10 @@ source_path: "tests/test_vault.py"
 
 ## Metadata
 
-- **End Line:** <code>82</code>
-- **Line:** <code>59</code>
+- **End Line:** <code>119</code>
+- **Line:** <code>96</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-diff-hunk)_

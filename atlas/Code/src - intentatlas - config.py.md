@@ -11,7 +11,7 @@ source_path: "src/intentatlas/config.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4001</code>
+- **Size Bytes:** <code>7996</code>
 
 ## Outgoing relationships
 
@@ -20,15 +20,22 @@ source_path: "src/intentatlas/config.py"
 - <code>defines</code> → [[Symbols/ProjectConfig.load - src - intentatlas - config.py|ProjectConfig.load]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectConfig.save_if_missing - src - intentatlas - config.py|ProjectConfig.save_if_missing]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectConfig.vault_path - src - intentatlas - config.py|ProjectConfig.vault_path]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_exclude_sources - src - intentatlas - config.py|_exclude_sources]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_inside - src - intentatlas - config.py|_inside]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_reject_duplicate_keys - src - intentatlas - config.py|_reject_duplicate_keys]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_report_sources - src - intentatlas - config.py|_report_sources]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_string_field - src - intentatlas - config.py|_string_field]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

@@ -17,12 +17,23 @@ Repository discovery will use a deterministic directory walk that removes exclud
 before descent. The scanner will never follow directory symlinks and will enforce the vault's
 `Private` area independently of user configuration.
 
+The literal project boundary `atlas/Private/` is invariant even when a custom vault or exclude
+list is configured. Vault initialization does not create it, configuration cannot place vault or
+graph outputs inside it, and Git history commands exclude it before collecting path or patch
+metadata. Configured scanner exclusions are also projected to Git pathspec exclusions. Users may
+create and manage Private themselves; IntentAtlas does not inspect whether it exists.
+
+Repository configuration is a bounded, regular, non-linked JSON object with unique keys and
+strict field types. Invalid documents fail closed before any output path or traversal is used.
+
 Graph identity collisions across user- and scanner-owned nodes will fail explicitly instead of
 silently changing ownership or meaning.
 
 ## Consequences
 
 - Excluded directory contents and metadata are not visited.
+- Empty Private-area provisioning is an explicit user action rather than an initializer side
+  effect.
 - Misconfigured or colliding identities stop the scan with an actionable error.
 - Regression tests must observe traversal behavior as well as final graph contents.
 

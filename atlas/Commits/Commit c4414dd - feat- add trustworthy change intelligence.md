@@ -86,9 +86,3 @@ generated: true
 - <code>modifies</code> → [[Symbols/recommendation_graph - tests - test_recommendations.py|recommendation_graph]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_recommendation_json_and_cli_are_deterministic - tests - test_recommendations.py|test_recommendation_json_and_cli_are_deterministic]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_recommendations_rank_deduplicate_filter_and_explain - tests - test_recommendations.py|test_recommendations_rank_deduplicate_filter_and_explain]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_go_recommendations_follow_one_exact_intra_package_caller - tests - test_scanner.py|test_go_recommendations_follow_one_exact_intra_package_caller]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scanner_connects_go_symbols_local_imports_and_tests - tests - test_scanner.py|test_scanner_connects_go_symbols_local_imports_and_tests]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scanner_connects_typescript_javascript_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_typescript_javascript_symbols_imports_and_tests]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scanner_reads_user_vault_links_without_enumerating_private - tests - test_scanner.py|test_scanner_reads_user_vault_links_without_enumerating_private]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_dashboard_does_not_seed_project_specific_intent_links - tests - test_vault.py|test_dashboard_does_not_seed_project_specific_intent_links]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_vault_initialization_is_generic_minimal_and_idempotent - tests - test_vault.py|test_vault_initialization_is_generic_minimal_and_idempotent]] _(history; evidence: git-diff-hunk)_

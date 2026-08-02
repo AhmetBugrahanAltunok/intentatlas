@@ -63,6 +63,12 @@ For Go, retain exact test-to-symbol edges as well as separate file navigation ed
 same package. Recommendation traversal may follow one such caller hop only when the test has exact
 evidence for that caller; ambiguous declarations and broader transitive calls remain unlinked.
 
+For Python, module identity is a module-to-candidate-set mapping. The existing repository-root and
+leading-`src/` interpretations remain supported, but a module, symbol, or re-export relationship is
+emitted only when the applicable module has one physical candidate. A collision such as
+`pkg/a.py` with `src/pkg/a.py` abstains instead of selecting one by traversal order. Nested custom
+source roots are not guessed without an explicit future source-root contract.
+
 ## Consequences
 
 - Precision is favored over recall at the default confidence threshold.

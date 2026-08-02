@@ -10,7 +10,7 @@ source_path: "tests/test_vault.py"
 
 ## Metadata
 
-- **End Line:** <code>56</code>
+- **End Line:** <code>58</code>
 - **Line:** <code>34</code>
 - **Symbol Kind:** <code>"function"</code>
 

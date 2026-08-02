@@ -26,6 +26,7 @@ from .models import Edge, Node
 from .naming import note_title, safe_filename
 from .relations import USER_RELATIONS
 from .scan_cache import AdapterFragmentCache
+from .vault import ProjectVault
 
 SUPPORTED_SUFFIXES = {
     ".c",
@@ -69,6 +70,7 @@ TYPED_RELATION_PREFIX = re.compile(r"\s*(?:[-*+]\s+)?([a-z][a-z0-9-]*)::\s*")
 FRONTMATTER_ID_LINE = re.compile(r"^id:\s*(.+?)\s*$")
 UNSAFE_USER_ID = re.compile(r"[\x00-\x20\x7f\[\]|]")
 RESERVED_USER_ID_PREFIXES = ("commit:", "file:", "symbol:")
+PRIVATE_PARTS = ("atlas", "private")
 
 
 @dataclass(slots=True)
@@ -127,9 +129,9 @@ class RepositoryScanner:
         self.rebuilt_adapters: list[str] = []
         self.skipped_cache_writes: list[str] = []
         self.exclude_patterns = _exclude_patterns(config.exclude)
+        self.vault_relative = config.vault_path(self.root).relative_to(self.root).as_posix()
         self.vault_parts = tuple(
-            part.casefold()
-            for part in config.vault_path(self.root).relative_to(self.root).parts
+            part.casefold() for part in PurePosixPath(self.vault_relative).parts
         )
 
     def scan(self) -> AtlasGraph:
@@ -219,6 +221,8 @@ class RepositoryScanner:
 
     def _is_excluded(self, relative: Path) -> bool:
         parts = tuple(part.casefold() for part in relative.parts)
+        if parts[: len(PRIVATE_PARTS)] == PRIVATE_PARTS:
+            return True
         if self.vault_parts and parts[: len(self.vault_parts)] == self.vault_parts:
             return True
         for pattern in self.exclude_patterns:
@@ -291,6 +295,7 @@ class RepositoryScanner:
             self.root,
             self.config.git_history_limit,
             symbol_paths=symbols_by_path,
+            excluded_paths=(*self.config.exclude, self.vault_relative),
         ):
             node_id = f"commit:{commit.sha}"
             self.graph.add_node(
@@ -389,12 +394,16 @@ class RepositoryScanner:
 
     def _resolve_pending_links(self) -> None:
         aliases: dict[str, set[str]] = defaultdict(set)
+        locations = ProjectVault.note_locations(self.graph)
         for node in self.graph.nodes.values():
+            location = locations[node.id]
             candidates = {
                 node.id,
                 node.label,
                 note_title(node),
                 Path(safe_filename(note_title(node))).stem,
+                location.as_posix(),
+                location.with_suffix("").as_posix(),
             }
             if node.path:
                 candidates.update(

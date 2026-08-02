@@ -11,13 +11,12 @@ source_path: "src/intentatlas/vault.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>17622</code>
+- **Size Bytes:** <code>18649</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault.__init__ - src - intentatlas - vault.py|ProjectVault.__init__]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/ProjectVault._note_locations - src - intentatlas - vault.py|ProjectVault._note_locations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._prune_stale_generated_notes - src - intentatlas - vault.py|ProjectVault._prune_stale_generated_notes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._render_dashboard - src - intentatlas - vault.py|ProjectVault._render_dashboard]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._render_edges - src - intentatlas - vault.py|ProjectVault._render_edges]] _(structure; evidence: python-ast)_
@@ -28,6 +27,7 @@ source_path: "src/intentatlas/vault.py"
 - <code>defines</code> → [[Symbols/ProjectVault._sync_generated_notes - src - intentatlas - vault.py|ProjectVault._sync_generated_notes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault._write_if_missing - src - intentatlas - vault.py|ProjectVault._write_if_missing]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault.initialize - src - intentatlas - vault.py|ProjectVault.initialize]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ProjectVault.note_locations - src - intentatlas - vault.py|ProjectVault.note_locations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ProjectVault.sync - src - intentatlas - vault.py|ProjectVault.sync]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_is_transient_file_error - src - intentatlas - vault.py|_is_transient_file_error]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_markdown_text - src - intentatlas - vault.py|_markdown_text]] _(structure; evidence: python-ast)_
@@ -43,11 +43,15 @@ source_path: "src/intentatlas/vault.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 658cbad - fix- preserve generated vault during sync failures|fix: preserve generated vault during sync failures]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-008 - Implement resilient generated vault synchronization|ISSUE-008 - Implement resilient generated vault synchronization]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: filename-convention)_

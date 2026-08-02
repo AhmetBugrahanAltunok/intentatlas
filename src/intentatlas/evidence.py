@@ -15,6 +15,7 @@ from .open_evidence import (
     sarif_fragment,
     scip_fragment,
 )
+from .safe_io import read_bounded_regular_file
 
 MAX_REPORT_BYTES = 10_000_000
 MAX_REPORT_RECORDS = 100_000
@@ -105,10 +106,16 @@ def _report_path(root: Path, vault: Path, configured: str, label: str) -> tuple[
     if not source or pure.is_absolute() or WINDOWS_ABSOLUTE.match(source) or ".." in pure.parts:
         raise ValueError(f"Configured {label} must be a project-relative path: {configured}")
 
-    private_relative = (vault.relative_to(root) / "Private").as_posix().casefold()
+    private_relatives = {
+        "atlas/private",
+        (vault.relative_to(root) / "Private").as_posix().casefold(),
+    }
     normalized = pure.as_posix().removeprefix("./")
     folded = normalized.casefold()
-    if folded == private_relative or folded.startswith(f"{private_relative}/"):
+    if any(
+        folded == private or folded.startswith(f"{private}/")
+        for private in private_relatives
+    ):
         raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
 
     unresolved = root / Path(*pure.parts)
@@ -118,8 +125,13 @@ def _report_path(root: Path, vault: Path, configured: str, label: str) -> tuple[
     base = root.resolve()
     if base not in candidate.parents:
         raise ValueError(f"Configured {label} escapes project root: {configured}")
-    private = (vault / "Private").resolve()
-    if candidate == private or private in candidate.parents:
+    private_roots = {
+        base / "atlas" / "Private",
+        vault / "Private",
+    }
+    if any(
+        candidate == private or private in candidate.parents for private in private_roots
+    ):
         raise ValueError(f"Configured {label} may not be inside atlas/Private: {configured}")
     if not candidate.is_file():
         raise ValueError(f"Configured {label} does not exist: {configured}")
@@ -136,10 +148,9 @@ def _report_path(root: Path, vault: Path, configured: str, label: str) -> tuple[
 
 def _read_xml(path: Path, relative: str) -> ET.Element:
     # XML input is size-bounded and DTD/entity declarations are rejected before parsing.
-    try:
-        data = path.read_bytes()
-    except OSError as exc:
-        raise ValueError(f"Cannot read evidence report {relative}: {exc}") from exc
+    data = read_bounded_regular_file(path, MAX_REPORT_BYTES)
+    if data is None:
+        raise ValueError(f"Cannot read bounded regular evidence report {relative}")
     if UNSAFE_XML.search(data):
         raise ValueError(f"Evidence report contains a forbidden XML declaration: {relative}")
     try:

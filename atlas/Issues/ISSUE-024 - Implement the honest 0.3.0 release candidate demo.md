@@ -25,7 +25,11 @@ report, installed-wheel verification, and documentation required by REQ-026.
 - [x] English/Turkish onboarding, guided demo, changelog, and release documentation.
 - [x] Focused/full local gates, reproducible working-tree artifacts, exact-wheel/sdist E2E, and
       real-browser verification.
-- [ ] Exact committed provenance, deterministic vault closure, network audit, remote CI, final
+- [x] Git-history Private pathspec/streaming bounds, Python ambiguous-module abstention, strict
+      config validation, and no-touch Private initialization regressions.
+- [x] Follow-up focused/full local gates, reproducible working-tree packages, installed-wheel and
+      extracted-sdist checks, deterministic vault closure, and durable Code/Test links.
+- [ ] Exact follow-up implementation commit/provenance link, network audit, remote CI, final
       Evidence, and Review.
 
 ## Links
@@ -34,3 +38,13 @@ report, installed-wheel verification, and documentation required by REQ-026.
 - decided-by:: [[Decisions/ADR-026 - Separate scriptable demo evidence from interactive viewing and publication]]
 - planned-evidence:: [[Evidence/EVD-026 - Phase 11A release candidate and demo verification]]
 - kickoff:: [[Sessions/2026-08-01 - Phase 11A kickoff]]
+- implemented-by:: [[Code/src - intentatlas - git_history.py]]
+- implemented-by:: [[Code/src - intentatlas - scanner.py]]
+- implemented-by:: [[Code/src - intentatlas - adapters - python.py]]
+- implemented-by:: [[Code/src - intentatlas - config.py]]
+- implemented-by:: [[Code/src - intentatlas - vault.py]]
+- implemented-by:: [[Code/src - intentatlas - cli.py]]
+- implemented-by:: [[Code/src - intentatlas - delivery.py]]
+- implemented-by:: [[Code/src - intentatlas - evidence.py]]
+- implemented-by:: [[Code/src - intentatlas - open_evidence.py]]
+- implemented-by:: [[Code/src - intentatlas - safe_io.py]]

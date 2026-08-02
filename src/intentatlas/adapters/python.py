@@ -13,13 +13,13 @@ class PythonAdapter:
     name = "python"
     suffixes = frozenset({".py"})
     cache_input_suffixes = suffixes
-    cache_version = 1
+    cache_version = 2
     evidence_kinds = frozenset(
         {"filename-convention", "python-ast", "python-symbol-reference"}
     )
 
     def scan(self, context: AdapterContext) -> GraphFragment:
-        module_to_node, path_to_module = _build_module_maps(context.files)
+        module_to_nodes, path_to_module = _build_module_maps(context.files)
         nodes: list[Node] = []
         edges: list[Edge] = []
         trees: dict[str, ast.AST] = {}
@@ -47,7 +47,7 @@ class PythonAdapter:
         symbol_resolver = _PythonSymbolResolver(
             trees,
             nodes,
-            module_to_node,
+            module_to_nodes,
             path_to_module,
         )
         for relative in sorted(trees):
@@ -64,7 +64,7 @@ class PythonAdapter:
                 precise_files.add(f"file:{symbol_path}")
 
             for imported_module in sorted(_python_imports(tree, relative, path_to_module)):
-                target = _resolve_module(imported_module, module_to_node)
+                target = _resolve_module(imported_module, module_to_nodes)
                 if (
                     target is not None
                     and target != file_node
@@ -116,8 +116,10 @@ class _SymbolVisitor(ast.NodeVisitor):
         self._visit_symbol(node)
 
 
-def _build_module_maps(files: Iterable[str]) -> tuple[dict[str, str], dict[str, str]]:
-    module_to_node: dict[str, str] = {}
+def _build_module_maps(
+    files: Iterable[str],
+) -> tuple[dict[str, tuple[str, ...]], dict[str, str]]:
+    module_candidates: defaultdict[str, set[str]] = defaultdict(set)
     path_to_module: dict[str, str] = {}
     for relative in sorted(files):
         path = Path(relative)
@@ -131,17 +133,23 @@ def _build_module_maps(files: Iterable[str]) -> tuple[dict[str, str], dict[str, 
         if not parts:
             continue
         module = ".".join(parts)
-        module_to_node[module] = f"file:{relative}"
+        module_candidates[module].add(f"file:{relative}")
         path_to_module[relative] = module
-    return module_to_node, path_to_module
+    module_to_nodes = {
+        module: tuple(sorted(candidates))
+        for module, candidates in sorted(module_candidates.items())
+    }
+    return module_to_nodes, path_to_module
 
 
-def _resolve_module(module: str, module_to_node: dict[str, str]) -> str | None:
+def _resolve_module(
+    module: str, module_to_nodes: dict[str, tuple[str, ...]]
+) -> str | None:
     candidate = module
     while candidate:
-        target = module_to_node.get(candidate)
-        if target is not None:
-            return target
+        targets = module_to_nodes.get(candidate)
+        if targets is not None:
+            return targets[0] if len(targets) == 1 else None
         candidate = candidate.rpartition(".")[0]
     return None
 
@@ -175,18 +183,21 @@ class _PythonSymbolResolver:
         self,
         trees: dict[str, ast.AST],
         nodes: Iterable[Node],
-        module_to_node: dict[str, str],
+        module_to_nodes: dict[str, tuple[str, ...]],
         path_to_module: dict[str, str],
     ) -> None:
+        self.module_to_nodes = module_to_nodes
         self.path_to_module = path_to_module
-        self.direct: dict[tuple[str, str], str] = {}
-        self.reexports: dict[tuple[str, str], tuple[str, str]] = {}
+        self.direct: defaultdict[tuple[str, str], set[str]] = defaultdict(set)
+        self.reexports: defaultdict[
+            tuple[str, str], set[tuple[str, str]]
+        ] = defaultdict(set)
         for node in nodes:
             if node.path is None or "." in node.label:
                 continue
             module = path_to_module.get(node.path)
             if module:
-                self.direct[(module, node.label)] = node.id
+                self.direct[(module, node.label)].add(node.id)
         for relative, tree in trees.items():
             module = path_to_module.get(relative)
             if not module:
@@ -201,7 +212,7 @@ class _PythonSymbolResolver:
                     if alias.name == "*":
                         continue
                     exported_name = alias.asname or alias.name
-                    self.reexports[(module, exported_name)] = (base, alias.name)
+                    self.reexports[(module, exported_name)].add((base, alias.name))
 
     def resolve(self, module: str, name: str) -> str | None:
         current = (module, name)
@@ -210,13 +221,18 @@ class _PythonSymbolResolver:
             if current in seen:
                 return None
             seen.add(current)
-            direct = self.direct.get(current)
-            if direct is not None:
-                return direct
-            forwarded = self.reexports.get(current)
-            if forwarded is None:
+            owners = self.module_to_nodes.get(current[0])
+            if owners is not None and len(owners) != 1:
                 return None
-            current = forwarded
+            direct = self.direct.get(current, set())
+            forwarded = self.reexports.get(current, set())
+            if direct and forwarded:
+                return None
+            if direct:
+                return next(iter(direct)) if len(direct) == 1 else None
+            if len(forwarded) != 1:
+                return None
+            current = next(iter(forwarded))
         return None
 
     def references(self, relative: str, tree: ast.AST) -> set[str]:

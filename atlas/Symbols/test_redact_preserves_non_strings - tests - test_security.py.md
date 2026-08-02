@@ -10,8 +10,8 @@ source_path: "tests/test_security.py"
 
 ## Metadata
 
-- **End Line:** <code>17</code>
-- **Line:** <code>15</code>
+- **End Line:** <code>22</code>
+- **Line:** <code>20</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships

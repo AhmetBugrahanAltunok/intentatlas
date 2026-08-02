@@ -114,6 +114,17 @@ def test_rejects_unsafe_or_missing_delivery_paths(tmp_path, configured, message)
         scan_repository(tmp_path, config)
 
 
+def test_literal_private_delivery_boundary_is_independent_of_custom_vault(tmp_path) -> None:
+    config = ProjectConfig(
+        vault="project-vault",
+        git_history_limit=0,
+        delivery_reports=["atlas/Private/delivery.json"],
+    )
+
+    with pytest.raises(ValueError, match="atlas/Private"):
+        scan_repository(tmp_path, config)
+
+
 @pytest.mark.parametrize(
     ("mutation", "message"),
     [
