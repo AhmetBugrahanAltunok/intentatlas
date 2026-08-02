@@ -1,7 +1,7 @@
 ---
 id: session-2026-08-02-phase-14-guided-cli-handoff
 type: session
-status: active
+status: closing
 phase: 14
 ---
 # Phase 14 guided CLI handoff
@@ -64,3 +64,13 @@ future separately approved public package may use an isolated CLI-tool installer
 - plans:: [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding]]
 - strategy:: [[Brain/Phase 14 Guided CLI Strategy]]
 - entry-review:: [[Reviews/Phase 13 Semantic Monorepo Foundation Review]]
+
+## Implementation checkpoint
+
+- Phase 14A, 14B, and 14C implementation is committed at
+  `644d8b9003857a3cb95abfd16dd182b093471376`.
+- Focused, full coverage, static/security, real Chrome, dependency audit, reproducible package,
+  clean-wheel E2E, and extracted-sdist gates pass locally.
+- Generated-vault determinism, evidence closure, push, and final remote CI remain in progress.
+- Phase 11C remains unopened; no tag, release, publication, deployment, settings change, or
+  announcement occurred.

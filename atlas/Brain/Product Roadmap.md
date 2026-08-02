@@ -519,7 +519,8 @@ Status: complete on 2026-08-02; EVD-029 complete and Phase 13 Review passed
 
 ## Phase 14 - One-command guided CLI
 
-Status: planned; implementation not started
+Status: in progress; implementation complete at `644d8b9003857a3cb95abfd16dd182b093471376`,
+local closure and remote CI evidence pending
 
 - Make interactive `intentatlas` the shortest trustworthy path to the existing ChangeReport while
   retaining explicit commands and versioned JSON for automation.
