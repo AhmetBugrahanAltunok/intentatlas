@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "project_id": "axios",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "axios-data-url-size-guard",
+      "sequence": 1,
+      "revision": "05acca21c888e44e2125d4813be3311d32f72483",
+      "committed_at": "2026-07-14T14:46:14+02:00",
+      "partition": "calibration",
+      "expected_tests": [
+        "tests/unit/adapters/fetch.test.js",
+        "tests/unit/adapters/http.test.js",
+        "tests/unit/estimateDataURLDecodedBytes.test.js"
+      ]
+    },
+    {
+      "id": "axios-typed-params",
+      "sequence": 2,
+      "revision": "3077e62097726d22ba30f1cb847d7a07050e339a",
+      "committed_at": "2026-07-15T11:58:53+02:00",
+      "partition": "calibration",
+      "expected_tests": [
+        "tests/module/cjs/tests/helpers/cjs-added-types.ts",
+        "tests/module/cjs/tests/helpers/cjs-is-cancel-typing.ts",
+        "tests/module/esm/tests/helpers/esm-added-types.ts"
+      ]
+    },
+    {
+      "id": "axios-shared-form-data-headers",
+      "sequence": 3,
+      "revision": "58b16c88f0bddf1fadb321aed58ba3f49a90481b",
+      "committed_at": "2026-07-15T19:59:35+02:00",
+      "partition": "calibration",
+      "expected_tests": ["tests/unit/adapters/http.test.js"]
+    },
+    {
+      "id": "axios-http-status-520",
+      "sequence": 4,
+      "revision": "3041b8fd1daf17404d1bad1f9d94026ea5ab400b",
+      "committed_at": "2026-07-15T20:32:20+02:00",
+      "partition": "calibration",
+      "expected_tests": [
+        "tests/module/cjs/tests/helpers/cjs-added-types.ts",
+        "tests/module/esm/tests/helpers/esm-added-types.ts",
+        "tests/unit/helpers/HttpStatusCode.test.js"
+      ]
+    },
+    {
+      "id": "axios-synchronous-interceptor-errors",
+      "sequence": 5,
+      "revision": "a092bae50d1884782151b2fcea12974d6da6e376",
+      "committed_at": "2026-07-16T20:16:54+02:00",
+      "partition": "evaluation",
+      "expected_tests": ["tests/browser/interceptors.browser.test.js"]
+    },
+    {
+      "id": "axios-ejected-interceptor-trimming",
+      "sequence": 6,
+      "revision": "712e02373f1c5ac72fdf5da16f04838338ba817e",
+      "committed_at": "2026-07-29T19:39:19+02:00",
+      "partition": "evaluation",
+      "expected_tests": [
+        "tests/browser/adapter.browser.test.js",
+        "tests/browser/interceptors.browser.test.js",
+        "tests/unit/core/InterceptorManager.test.js"
+      ]
+    },
+    {
+      "id": "axios-non-string-stack",
+      "sequence": 7,
+      "revision": "a75bf44647e5132e39b778730394b0a2b983265c",
+      "committed_at": "2026-07-29T19:58:27+02:00",
+      "partition": "evaluation",
+      "expected_tests": ["tests/unit/core/Axios.test.js"]
+    },
+    {
+      "id": "axios-navigation-cancel",
+      "sequence": 8,
+      "revision": "c3f553c740ebf3dff5e22dae24e9caaafafddd2d",
+      "committed_at": "2026-07-30T08:24:04+02:00",
+      "partition": "evaluation",
+      "expected_tests": [
+        "tests/browser/requests.browser.test.js",
+        "tests/unit/adapters/xhr.test.js",
+        "tests/unit/core/buildFullPath.test.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "project_id": "yocto-queue",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "yocto-queue-initial",
+      "sequence": 1,
+      "revision": "fec94a0f643e79ab3931dc283454e8cefa1272fd",
+      "committed_at": "2020-11-24T13:02:54+07:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "yocto-queue-esm-migration",
+      "sequence": 2,
+      "revision": "0228034ae4a44c8ffbd23da3ed025a07a119e520",
+      "committed_at": "2021-08-13T01:47:12+02:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "yocto-queue-peek",
+      "sequence": 3,
+      "revision": "5bf850c3e430cc192a9f7f3f2e9038b35608a490",
+      "committed_at": "2024-06-28T22:48:12+02:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "yocto-queue-node-12-compatibility",
+      "sequence": 4,
+      "revision": "90ab9355283b28c54f95d14a8fba3db0a6a8d07e",
+      "committed_at": "2024-06-30T00:11:17+02:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "yocto-queue-drain",
+      "sequence": 5,
+      "revision": "d631ea87f49443c4c8dbf84fd79bf600d11a5fac",
+      "committed_at": "2025-03-06T19:27:36+07:00",
+      "partition": "evaluation",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "yocto-queue-undefined-values",
+      "sequence": 6,
+      "revision": "ee91589f82f7682902c848927a4d1f64558f2bcd",
+      "committed_at": "2025-03-22T11:49:05+07:00",
+      "partition": "evaluation",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "yocto-queue-tail-cleanup",
+      "sequence": 7,
+      "revision": "8aead279a9f96e02d35e27be266ba0d56490307f",
+      "committed_at": "2025-11-11T03:56:37+07:00",
+      "partition": "evaluation",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "yocto-queue-release-metadata",
+      "sequence": 8,
+      "revision": "b07eac099753833b29d06c614149904445739776",
+      "committed_at": "2025-11-11T13:30:03+07:00",
+      "partition": "evaluation",
+      "expected_tests": []
+    }
+  ]
+}

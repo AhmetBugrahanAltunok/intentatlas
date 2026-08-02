@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "project_id": "axios",
+  "observations": [
+    {
+      "case_id": "axios-shared-form-data-headers",
+      "minimum_confidence": "low",
+      "false_positives": {
+        "category": "resolver-ambiguity",
+        "paths_sha256": "e1ed2bc8c485987c47e1b7352bdbfc990747a743f5aae8d83d5e77669dc14522"
+      },
+      "false_negatives": null
+    },
+    {
+      "case_id": "axios-shared-form-data-headers",
+      "minimum_confidence": "medium",
+      "false_positives": {
+        "category": "resolver-ambiguity",
+        "paths_sha256": "e1ed2bc8c485987c47e1b7352bdbfc990747a743f5aae8d83d5e77669dc14522"
+      },
+      "false_negatives": null
+    },
+    {
+      "case_id": "axios-synchronous-interceptor-errors",
+      "minimum_confidence": "low",
+      "false_positives": {
+        "category": "resolver-ambiguity",
+        "paths_sha256": "e4d378abfe3ccd9a3edd39e0f71576ef4f031f628b0897b1e49da2305219b6ad"
+      },
+      "false_negatives": null
+    },
+    {
+      "case_id": "axios-synchronous-interceptor-errors",
+      "minimum_confidence": "medium",
+      "false_positives": {
+        "category": "resolver-ambiguity",
+        "paths_sha256": "e4d378abfe3ccd9a3edd39e0f71576ef4f031f628b0897b1e49da2305219b6ad"
+      },
+      "false_negatives": null
+    },
+    {
+      "case_id": "axios-non-string-stack",
+      "minimum_confidence": "low",
+      "false_positives": {
+        "category": "resolver-ambiguity",
+        "paths_sha256": "e4d378abfe3ccd9a3edd39e0f71576ef4f031f628b0897b1e49da2305219b6ad"
+      },
+      "false_negatives": null
+    },
+    {
+      "case_id": "axios-non-string-stack",
+      "minimum_confidence": "medium",
+      "false_positives": {
+        "category": "resolver-ambiguity",
+        "paths_sha256": "e4d378abfe3ccd9a3edd39e0f71576ef4f031f628b0897b1e49da2305219b6ad"
+      },
+      "false_negatives": null
+    },
+    {
+      "case_id": "axios-navigation-cancel",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {
+        "category": "recommendation-policy-gap",
+        "paths_sha256": "da93e695070e978cc5c244c9348cdbadc2ef2041519be561fbb8a104a37ae101"
+      }
+    }
+  ]
+}

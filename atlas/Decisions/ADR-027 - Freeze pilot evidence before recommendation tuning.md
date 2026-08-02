@@ -1,7 +1,7 @@
 ---
 id: ADR-027
 type: decision
-status: proposed
+status: accepted
 phase: 11B
 ---
 # ADR-027 - Freeze pilot evidence before recommendation tuning

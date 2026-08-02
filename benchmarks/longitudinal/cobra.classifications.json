@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "project_id": "cobra",
+  "observations": [
+    {
+      "case_id": "cobra-command-update",
+      "minimum_confidence": "low",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-command-update",
+      "minimum_confidence": "medium",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-command-update",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {"category": "recommendation-policy-gap", "paths_sha256": "bd3e27594c11230e2e61d020992ff0b68257a4d39edc3a6b959f0d7f4b41c205"}
+    },
+    {
+      "case_id": "cobra-linter-refactor",
+      "minimum_confidence": "low",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "356586972f21f7fa1f0742c723ac25bd90027955616c552e21e54abcd3191a4e"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-linter-refactor",
+      "minimum_confidence": "medium",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "356586972f21f7fa1f0742c723ac25bd90027955616c552e21e54abcd3191a4e"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-custom-shell-directive",
+      "minimum_confidence": "low",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "16eccf2ba0e73bbe9d800ecd6d9afca3d90ab0d948ad6c52d3268e26d007de1c"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-custom-shell-directive",
+      "minimum_confidence": "medium",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "16eccf2ba0e73bbe9d800ecd6d9afca3d90ab0d948ad6c52d3268e26d007de1c"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-pflag-update",
+      "minimum_confidence": "low",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-pflag-update",
+      "minimum_confidence": "medium",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-pflag-update",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {"category": "recommendation-policy-gap", "paths_sha256": "bd3e27594c11230e2e61d020992ff0b68257a4d39edc3a6b959f0d7f4b41c205"}
+    },
+    {
+      "case_id": "cobra-command-constants",
+      "minimum_confidence": "low",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-command-constants",
+      "minimum_confidence": "medium",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-command-constants",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {"category": "recommendation-policy-gap", "paths_sha256": "bd3e27594c11230e2e61d020992ff0b68257a4d39edc3a6b959f0d7f4b41c205"}
+    },
+    {
+      "case_id": "cobra-usage-padding-constant",
+      "minimum_confidence": "low",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-usage-padding-constant",
+      "minimum_confidence": "medium",
+      "false_positives": {"category": "resolver-ambiguity", "paths_sha256": "b184a5e56bf6618dc86f40e64bf2889dd6a927527bd6fdaacf6cd066f81b6d79"},
+      "false_negatives": null
+    },
+    {
+      "case_id": "cobra-usage-padding-constant",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {"category": "recommendation-policy-gap", "paths_sha256": "bd3e27594c11230e2e61d020992ff0b68257a4d39edc3a6b959f0d7f4b41c205"}
+    },
+    {
+      "case_id": "cobra-bash-loop",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {"category": "recommendation-policy-gap", "paths_sha256": "4d8cf20fc6cabcbbb3e9123733174fcdf8bbdafc5f9e50afc0b4960a27e257e5"}
+    },
+    {
+      "case_id": "cobra-fish-argument-quoting",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {"category": "recommendation-policy-gap", "paths_sha256": "9f4c950852e0f00d064a911dacbc3f23f8c0c58198dcb14ad5402210c0456c07"}
+    }
+  ]
+}

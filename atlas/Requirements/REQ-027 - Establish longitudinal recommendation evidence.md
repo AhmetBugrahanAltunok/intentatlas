@@ -1,7 +1,7 @@
 ---
 id: REQ-027
 type: requirement
-status: proposed
+status: accepted
 phase: 11B
 ---
 # Establish longitudinal recommendation evidence

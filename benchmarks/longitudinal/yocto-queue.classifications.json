@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "project_id": "yocto-queue",
+  "observations": [
+    {
+      "case_id": "yocto-queue-node-12-compatibility",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {
+        "category": "recommendation-policy-gap",
+        "paths_sha256": "d5fc9f1a3ab8fdcfcbb30a4fae190f8863446786152abe17f6dbbefee6c9b4f5"
+      }
+    },
+    {
+      "case_id": "yocto-queue-tail-cleanup",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {
+        "category": "recommendation-policy-gap",
+        "paths_sha256": "d5fc9f1a3ab8fdcfcbb30a4fae190f8863446786152abe17f6dbbefee6c9b4f5"
+      }
+    }
+  ]
+}

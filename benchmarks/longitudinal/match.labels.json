@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "project_id": "match",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "match-initial-patterns",
+      "sequence": 1,
+      "revision": "970f69b4db26230bc219b165529026ca71b6ba95",
+      "committed_at": "2016-08-30T07:19:45-07:00",
+      "partition": "calibration",
+      "expected_tests": ["match_test.go"]
+    },
+    {
+      "id": "match-allowable-ranges",
+      "sequence": 2,
+      "revision": "173748da739a410c5b0b813b956f89ff94730b4c",
+      "committed_at": "2016-08-30T10:39:30-07:00",
+      "partition": "calibration",
+      "expected_tests": ["match_test.go"]
+    },
+    {
+      "id": "match-is-pattern",
+      "sequence": 3,
+      "revision": "33827db735fff6510490d69a8622612558a557ed",
+      "committed_at": "2018-12-10T03:08:38-07:00",
+      "partition": "calibration",
+      "expected_tests": ["match_test.go"]
+    },
+    {
+      "id": "match-rune-regression",
+      "sequence": 4,
+      "revision": "1f62957036bbc3870401f671c7c86a264469262a",
+      "committed_at": "2020-11-03T10:50:25-07:00",
+      "partition": "calibration",
+      "expected_tests": ["match_test.go"]
+    },
+    {
+      "id": "match-repetitive-stars",
+      "sequence": 5,
+      "revision": "c2f534168b739a7ec1821a33839fb2f029f26bbc",
+      "committed_at": "2020-12-23T04:58:28-07:00",
+      "partition": "evaluation",
+      "expected_tests": ["match_test.go"]
+    },
+    {
+      "id": "match-recursion-cost",
+      "sequence": 6,
+      "revision": "84b6aacbb9b34cf59900d47c7209e251dcd020b2",
+      "committed_at": "2021-10-04T11:40:34-07:00",
+      "partition": "evaluation",
+      "expected_tests": ["match_test.go"]
+    },
+    {
+      "id": "match-complexity-limit",
+      "sequence": 7,
+      "revision": "4c9fc61b493b7aa0a3d347e9190aa78c5bec09cf",
+      "committed_at": "2021-10-08T07:36:13-07:00",
+      "partition": "evaluation",
+      "expected_tests": ["match_test.go"]
+    },
+    {
+      "id": "match-case-insensitive",
+      "sequence": 8,
+      "revision": "9eab4b2d580b9e1c5ef6399492a09f5a2bdd286b",
+      "committed_at": "2025-09-04T17:08:48-07:00",
+      "partition": "evaluation",
+      "expected_tests": ["match_test.go"]
+    }
+  ]
+}

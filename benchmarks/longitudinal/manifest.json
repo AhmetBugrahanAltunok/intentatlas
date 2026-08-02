@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "name": "IntentAtlas frozen longitudinal recommendation pilot",
+  "generated_output_policy": "ephemeral-only",
+  "thresholds": ["low", "medium", "high"],
+  "partitions": {
+    "calibration": {
+      "sha256": "3a1a903f37ca7e2432007b0210494ea659c64fb3aa2d93f2490de92f09041320"
+    },
+    "evaluation": {
+      "sha256": "edafea2e4225a271664c43b54e90b2987d4c1cf70f67e1ecc5a832d06efb72d5"
+    }
+  },
+  "projects": [
+    {
+      "id": "antfu-utils",
+      "name": "antfu/utils workspace history",
+      "language": "javascript-typescript",
+      "workspace_shape": "workspace",
+      "repository": "https://github.com/antfu/utils",
+      "revision": "91f8cf73bebddae8f7ebcac82e47c9bcba9805e2",
+      "history_limit": 40,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "157381f8592cbf45b6a1f7e8aa2ec9c676fafaed849726692eedf95adfac43e9",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/antfu-utils.labels.json",
+      "classifications": "benchmarks/longitudinal/antfu-utils.classifications.json"
+    },
+    {
+      "id": "axios",
+      "name": "axios/axios history",
+      "language": "javascript-typescript",
+      "workspace_shape": "single-package",
+      "repository": "https://github.com/axios/axios",
+      "revision": "c3f553c740ebf3dff5e22dae24e9caaafafddd2d",
+      "history_limit": 25,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "e8b48767d34116869c34cf31af9e77a37fdd6225f55a27166019dcf9bf439465",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/axios.labels.json",
+      "classifications": "benchmarks/longitudinal/axios.classifications.json"
+    },
+    {
+      "id": "yocto-queue",
+      "name": "sindresorhus/yocto-queue history",
+      "language": "javascript-typescript",
+      "workspace_shape": "single-package",
+      "repository": "https://github.com/sindresorhus/yocto-queue",
+      "revision": "b07eac099753833b29d06c614149904445739776",
+      "history_limit": 25,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "MIT",
+        "path": "license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/yocto-queue.labels.json",
+      "classifications": "benchmarks/longitudinal/yocto-queue.classifications.json"
+    },
+    {
+      "id": "cobra",
+      "name": "spf13/cobra history",
+      "language": "go",
+      "workspace_shape": "single-package",
+      "repository": "https://github.com/spf13/cobra",
+      "revision": "61968e893eee2f27696c2fbc8e34fa5c4afaf7c4",
+      "history_limit": 25,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "Apache-2.0",
+        "path": "LICENSE.txt",
+        "sha256": "d7a18303ada5be476e66d11ed8c87149664c9fd15f5e7397829f059820d565e6",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/cobra.labels.json",
+      "classifications": "benchmarks/longitudinal/cobra.classifications.json"
+    },
+    {
+      "id": "match",
+      "name": "tidwall/match history",
+      "language": "go",
+      "workspace_shape": "single-package",
+      "repository": "https://github.com/tidwall/match",
+      "revision": "9eab4b2d580b9e1c5ef6399492a09f5a2bdd286b",
+      "history_limit": 25,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "677524ffb56d765c88cd841ce04b8f2144e1e65816b084ecbc464463ef87a117",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/match.labels.json",
+      "classifications": "benchmarks/longitudinal/match.classifications.json"
+    },
+    {
+      "id": "p-limit",
+      "name": "sindresorhus/p-limit history",
+      "language": "javascript-typescript",
+      "workspace_shape": "single-package",
+      "repository": "https://github.com/sindresorhus/p-limit",
+      "revision": "ef37eb2f372d385883d113803c98ba0bf3828ad1",
+      "history_limit": 25,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "MIT",
+        "path": "license",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/p-limit.labels.json",
+      "classifications": "benchmarks/longitudinal/p-limit.classifications.json"
+    },
+    {
+      "id": "schedule",
+      "name": "dbader/schedule history",
+      "language": "python",
+      "workspace_shape": "single-package",
+      "repository": "https://github.com/dbader/schedule",
+      "revision": "2dcb5833cdf2b7d7a1bda90c19e2fb7e373e66df",
+      "history_limit": 25,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE.txt",
+        "sha256": "49469f2d42facf357213ad2cda29da188fa418a16fccfe7c6bbb3e3fc07bf4ff",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/schedule.labels.json",
+      "classifications": "benchmarks/longitudinal/schedule.classifications.json"
+    },
+    {
+      "id": "zustand",
+      "name": "pmndrs/zustand workspace history",
+      "language": "javascript-typescript",
+      "workspace_shape": "workspace",
+      "repository": "https://github.com/pmndrs/zustand",
+      "revision": "beca84e600e4e250f6b244d22878e72948f331c7",
+      "history_limit": 200,
+      "excluded_paths": [],
+      "license": {
+        "spdx": "MIT",
+        "path": "LICENSE",
+        "sha256": "f0dcbb086850a46d51446679126b274b0752801d85ca1f6ddb067ed046ccc2e2",
+        "reviewed_at": "2026-08-02"
+      },
+      "labels": "benchmarks/longitudinal/zustand.labels.json",
+      "classifications": "benchmarks/longitudinal/zustand.classifications.json"
+    }
+  ]
+}

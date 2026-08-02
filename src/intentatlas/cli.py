@@ -28,6 +28,11 @@ from .demo import build_demo_report, render_demo_report, serve_demo
 from .evaluation import evaluate_recommendations, load_evaluation_labels, render_evaluation
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
+from .longitudinal import (
+    evaluate_longitudinal,
+    load_pilot_manifest,
+    render_longitudinal,
+)
 from .real_world import (
     evaluate_real_world,
     load_real_world_manifest,
@@ -223,6 +228,27 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
     )
 
+    longitudinal_parser = commands.add_parser(
+        "evaluate-longitudinal",
+        help="Evaluate a frozen, partitioned longitudinal pilot offline",
+    )
+    longitudinal_parser.add_argument(
+        "manifest",
+        help="Longitudinal pilot manifest JSON path below the project root",
+    )
+    longitudinal_parser.add_argument(
+        "checkouts",
+        help="Directory of pinned pilot checkouts below the project root",
+    )
+    _path_argument(longitudinal_parser)
+    longitudinal_parser.add_argument("--limit", type=int, default=20)
+    longitudinal_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
+    )
+
     scale_parser = commands.add_parser(
         "benchmark-scale",
         help="Measure indexed queries on a bounded synthetic graph",
@@ -345,6 +371,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         if args.command == "evaluate-real-world":
             return _evaluate_real_world(
+                root,
+                args.manifest,
+                args.checkouts,
+                args.limit,
+                args.output_format,
+            )
+        if args.command == "evaluate-longitudinal":
+            return _evaluate_longitudinal(
                 root,
                 args.manifest,
                 args.checkouts,
@@ -731,6 +765,39 @@ def _evaluate_real_world(
     parsed = load_real_world_manifest(manifest_path)
     result = evaluate_real_world(root, checkouts_path, parsed, limit=limit)
     print(render_real_world(result, output_format), end="")
+    return 0
+
+
+def _evaluate_longitudinal(
+    root: Path,
+    manifest: str,
+    checkouts: str,
+    limit: int,
+    output_format: str,
+) -> int:
+    config = ProjectConfig.load(root)
+    manifest_path = _project_path(
+        root,
+        config,
+        manifest,
+        "longitudinal pilot manifest",
+        must_exist=True,
+    )
+    checkouts_path = _project_directory(
+        root,
+        config,
+        checkouts,
+        "longitudinal pilot checkout root",
+    )
+    parsed = load_pilot_manifest(manifest_path)
+    result = evaluate_longitudinal(
+        root,
+        checkouts_path,
+        manifest_path,
+        parsed,
+        limit=limit,
+    )
+    print(render_longitudinal(result, output_format), end="")
     return 0
 
 

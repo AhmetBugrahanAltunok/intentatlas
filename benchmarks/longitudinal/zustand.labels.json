@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "project_id": "zustand",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "zustand-shallow-iterables",
+      "sequence": 1,
+      "revision": "a56a3e4bde86b5fbc9c785e94ee63f81363c9aa5",
+      "committed_at": "2025-05-21T09:46:37+09:00",
+      "partition": "calibration",
+      "expected_tests": ["tests/vanilla/shallow.test.tsx"]
+    },
+    {
+      "id": "zustand-devtools-cleanup",
+      "sequence": 2,
+      "revision": "b4177b3172ac48ee63b65c2708757c4ad27cccb9",
+      "committed_at": "2025-05-21T09:49:59+09:00",
+      "partition": "calibration",
+      "expected_tests": ["tests/devtools.test.tsx"]
+    },
+    {
+      "id": "zustand-devtools-action-inference",
+      "sequence": 3,
+      "revision": "670b60e19ab44789f41cdb60c476a5eeb647e3bb",
+      "committed_at": "2025-05-21T20:12:14+09:00",
+      "partition": "calibration",
+      "expected_tests": ["tests/devtools.test.tsx"]
+    },
+    {
+      "id": "zustand-shallow-undefined",
+      "sequence": 4,
+      "revision": "2cc19881fad6defaabe4a2628609ab79fce6068f",
+      "committed_at": "2025-08-20T07:52:06+09:00",
+      "partition": "calibration",
+      "expected_tests": ["tests/vanilla/shallow.test.tsx"]
+    },
+    {
+      "id": "zustand-persist-storage-promise",
+      "sequence": 5,
+      "revision": "feddc0c210c555fc58d9c9a7100545603f568cf5",
+      "committed_at": "2025-08-20T08:08:35+09:00",
+      "partition": "evaluation",
+      "expected_tests": ["tests/persistAsync.test.tsx"]
+    },
+    {
+      "id": "zustand-concurrent-rehydrate",
+      "sequence": 6,
+      "revision": "d0cb549ff67ab2ecc62202a5d261f4cffcedb9f4",
+      "committed_at": "2026-01-12T14:52:32+09:00",
+      "partition": "evaluation",
+      "expected_tests": ["tests/persistAsync.test.tsx"]
+    },
+    {
+      "id": "zustand-devtools-initializer-type",
+      "sequence": 7,
+      "revision": "ad77bd3bb6f7bbd12fea8b458ed5c0673df0793a",
+      "committed_at": "2026-05-28T18:46:09+09:00",
+      "partition": "evaluation",
+      "expected_tests": ["tests/middlewareTypes.test.tsx"]
+    },
+    {
+      "id": "zustand-doc-link-maintenance",
+      "sequence": 8,
+      "revision": "beca84e600e4e250f6b244d22878e72948f331c7",
+      "committed_at": "2026-07-10T21:35:09+09:00",
+      "partition": "evaluation",
+      "expected_tests": []
+    }
+  ]
+}

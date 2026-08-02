@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "project_id": "p-limit",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "p-limit-map-method",
+      "sequence": 1,
+      "revision": "86a5d73681cef8cd5d2dc3b59255f32da9962c34",
+      "committed_at": "2025-08-14T22:34:46+07:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "p-limit-node-20",
+      "sequence": 2,
+      "revision": "78b81a536a2547777cbe2bf9e70eb541e5426a07",
+      "committed_at": "2025-08-14T22:53:25+07:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "p-limit-map-index",
+      "sequence": 3,
+      "revision": "2aeffd477ba007be1b74b9ad8425ef112cb97f9f",
+      "committed_at": "2025-08-19T22:02:32+07:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "p-limit-map-iterable",
+      "sequence": 4,
+      "revision": "d76231b44ec6693212bcf245e57b7b95cfc93297",
+      "committed_at": "2025-10-19T22:16:26+07:00",
+      "partition": "calibration",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "p-limit-options-object",
+      "sequence": 5,
+      "revision": "870db0f54785cc6ae6444be421df98cc48932e58",
+      "committed_at": "2026-02-03T01:32:45+07:00",
+      "partition": "evaluation",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "p-limit-shared-context",
+      "sequence": 6,
+      "revision": "ce9d71cf1391edf2897cbb9e00b8bc4f091df8b1",
+      "committed_at": "2026-02-03T20:32:11+07:00",
+      "partition": "evaluation",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "p-limit-reject-on-clear",
+      "sequence": 7,
+      "revision": "8907801ffa0252b51490a2c9efbb388d0c83391f",
+      "committed_at": "2026-02-03T21:16:05+07:00",
+      "partition": "evaluation",
+      "expected_tests": ["test.js"]
+    },
+    {
+      "id": "p-limit-detached-map",
+      "sequence": 8,
+      "revision": "ef37eb2f372d385883d113803c98ba0bf3828ad1",
+      "committed_at": "2026-07-20T22:12:34+02:00",
+      "partition": "evaluation",
+      "expected_tests": ["test.js"]
+    }
+  ]
+}

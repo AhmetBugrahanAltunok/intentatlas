@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "project_id": "antfu-utils",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "antfu-utils-unindent",
+      "sequence": 1,
+      "revision": "c2c5d7726ced85bc4d38e0bdec686b941f365036",
+      "committed_at": "2024-05-08T02:42:57+02:00",
+      "partition": "calibration",
+      "expected_tests": ["src/string.test.ts"]
+    },
+    {
+      "id": "antfu-utils-object-map-type",
+      "sequence": 2,
+      "revision": "e751695d154037ec6b03f1ee733fced4b95c7bb0",
+      "committed_at": "2024-06-25T12:01:49+02:00",
+      "partition": "calibration",
+      "expected_tests": ["src/object.test.ts"]
+    },
+    {
+      "id": "antfu-utils-filter-in-place",
+      "sequence": 3,
+      "revision": "a47b8ae7294fda9b8202e3254c169b284226e73c",
+      "committed_at": "2025-01-14T14:31:25+08:00",
+      "partition": "calibration",
+      "expected_tests": ["src/array.test.ts"]
+    },
+    {
+      "id": "antfu-utils-invoke-result-type",
+      "sequence": 4,
+      "revision": "7f410a953b96a15e1e722752030b2dc25c3cd5f8",
+      "committed_at": "2025-02-15T13:51:09+08:00",
+      "partition": "calibration",
+      "expected_tests": ["src/function.test.ts"]
+    },
+    {
+      "id": "antfu-utils-primitives-and-object-id",
+      "sequence": 5,
+      "revision": "ab8b322dc57d9461002d665ea47a8794851050ad",
+      "committed_at": "2025-02-17T14:32:40+08:00",
+      "partition": "evaluation",
+      "expected_tests": ["src/is.test.ts", "src/object.test.ts"]
+    },
+    {
+      "id": "antfu-utils-then-signature",
+      "sequence": 6,
+      "revision": "e279526d55f40f602d0b9c521d6b9e45d71db984",
+      "committed_at": "2025-04-02T21:33:09+08:00",
+      "partition": "evaluation",
+      "expected_tests": ["src/p.test.ts"]
+    },
+    {
+      "id": "antfu-utils-object-omit",
+      "sequence": 7,
+      "revision": "12f3cb29da446f1880d7a4fb4f9551d29b8094a3",
+      "committed_at": "2025-10-06T10:48:23+09:00",
+      "partition": "evaluation",
+      "expected_tests": ["src/object.test.ts"]
+    },
+    {
+      "id": "antfu-utils-release-metadata",
+      "sequence": 8,
+      "revision": "91f8cf73bebddae8f7ebcac82e47c9bcba9805e2",
+      "committed_at": "2025-10-06T10:48:56+09:00",
+      "partition": "evaluation",
+      "expected_tests": []
+    }
+  ]
+}

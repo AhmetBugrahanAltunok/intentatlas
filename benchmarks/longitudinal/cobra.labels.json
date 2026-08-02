@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "project_id": "cobra",
+  "label_policy": "complete-test-set",
+  "cases": [
+    {
+      "id": "cobra-command-update",
+      "sequence": 1,
+      "revision": "4f9ef8cdbbc88c5302be95e0e67fd78ebbfa9dd2",
+      "committed_at": "2025-03-07T09:53:22-05:00",
+      "partition": "calibration",
+      "expected_tests": ["command_test.go"]
+    },
+    {
+      "id": "cobra-linter-refactor",
+      "sequence": 2,
+      "revision": "4af7b64d31989e78e86d65304f693a6d9c77c932",
+      "committed_at": "2025-05-31T08:20:04-04:00",
+      "partition": "calibration",
+      "expected_tests": ["completions_test.go"]
+    },
+    {
+      "id": "cobra-custom-shell-directive",
+      "sequence": 3,
+      "revision": "6dec1ae26659a130bdb4c985768d1853b0e1bc06",
+      "committed_at": "2025-05-31T08:36:04-04:00",
+      "partition": "calibration",
+      "expected_tests": ["completions_test.go"]
+    },
+    {
+      "id": "cobra-pflag-update",
+      "sequence": 4,
+      "revision": "51d675196729be769ce235b710ab7058b3aad03a",
+      "committed_at": "2025-08-31T16:15:08-07:00",
+      "partition": "calibration",
+      "expected_tests": ["command_test.go"]
+    },
+    {
+      "id": "cobra-command-constants",
+      "sequence": 5,
+      "revision": "117698a604b65e80a1ad5b76df67b604bcd992e0",
+      "committed_at": "2025-11-17T06:48:10-08:00",
+      "partition": "evaluation",
+      "expected_tests": ["command_test.go"]
+    },
+    {
+      "id": "cobra-usage-padding-constant",
+      "sequence": 6,
+      "revision": "fc81d2003469e2a5c440306d04a6d82a54065979",
+      "committed_at": "2025-11-17T22:33:27-05:00",
+      "partition": "evaluation",
+      "expected_tests": ["command_test.go"]
+    },
+    {
+      "id": "cobra-bash-loop",
+      "sequence": 7,
+      "revision": "10d4b48a79be3d4e89e6c45cb59f4d32a3d2ae19",
+      "committed_at": "2025-12-06T09:14:39-05:00",
+      "partition": "evaluation",
+      "expected_tests": ["bash_completionsV2_test.go"]
+    },
+    {
+      "id": "cobra-fish-argument-quoting",
+      "sequence": 8,
+      "revision": "61968e893eee2f27696c2fbc8e34fa5c4afaf7c4",
+      "committed_at": "2025-12-09T21:18:50-05:00",
+      "partition": "evaluation",
+      "expected_tests": ["fish_completions_test.go"]
+    }
+  ]
+}

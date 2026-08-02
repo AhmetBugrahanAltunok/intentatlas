@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project_id": "antfu-utils",
+  "observations": [
+    {
+      "case_id": "antfu-utils-object-map-type",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {
+        "category": "recommendation-policy-gap",
+        "paths_sha256": "fd52b8b522efd53c3e38c91eb81c0a0455a5cd6071fe3b5cd46962e6f53c7250"
+      }
+    },
+    {
+      "case_id": "antfu-utils-invoke-result-type",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {
+        "category": "recommendation-policy-gap",
+        "paths_sha256": "d5a28b90d79a4a81faa80140e75b3d515f75a658dde3306ed8139b7ebb781e00"
+      }
+    },
+    {
+      "case_id": "antfu-utils-object-omit",
+      "minimum_confidence": "high",
+      "false_positives": null,
+      "false_negatives": {
+        "category": "recommendation-policy-gap",
+        "paths_sha256": "fd52b8b522efd53c3e38c91eb81c0a0455a5cd6071fe3b5cd46962e6f53c7250"
+      }
+    }
+  ]
+}
