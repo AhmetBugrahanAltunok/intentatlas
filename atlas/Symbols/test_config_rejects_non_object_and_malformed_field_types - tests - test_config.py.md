@@ -17,3 +17,4 @@ source_path: "tests/test_config.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-diff-hunk)_

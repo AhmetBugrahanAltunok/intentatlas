@@ -22,9 +22,10 @@ phase: 11A
 - proves:: [[Tests/tests - test_security.py]]
 - proves:: [[Tests/tests - test_real_world.py]]
 - Prior release-candidate audit commit: [[Commits/Commit 0f9d6cb - fix- harden release candidate verification]]
-- Follow-up hardening commit: pending. After commit approval and the next deterministic scan, add
-  `recorded-in:: [[Commits/Commit <new-short-sha> - <new-subject>]]` using the generated note for
-  that exact implementation commit; do not bind these new tests to the older audit commit.
+- recorded-in:: [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries]]
+- The exact follow-up implementation commit is
+  `7e8623a6e87154b18c92918d1e61dff307083c5c`; the prior audit commit remains historical context
+  and is not used as provenance for the follow-up tests.
 
 ## Deep-audit change inventory
 
@@ -162,6 +163,47 @@ phase: 11A
 - These hashes describe the current uncommitted working tree and are not source-revision-bound
   provenance.
 
+## Follow-up implementation commit verification
+
+- The roadmap handoff records were preserved separately in commit
+  `14aaa0be2b43e9c24dbebdf31c453245d4265fdf` (`docs: add phase 11b-13 delivery roadmap`). The
+  Phase 11A hardening source, tests, records, and generated vault outputs were committed as
+  `7e8623a6e87154b18c92918d1e61dff307083c5c`
+  (`fix: enforce private-safe analysis boundaries`) with commit epoch `1785664054`.
+- Focused command:
+  `.venv\Scripts\python.exe -m pytest tests/test_git_history.py tests/test_scanner.py
+  tests/test_config.py tests/test_vault.py tests/test_evidence.py tests/test_delivery.py
+  tests/test_security.py tests/test_real_world.py -ra` - `107 passed, 2 skipped`. The Windows
+  skips are the unavailable real symlink and FIFO cases; their simulated fail-closed regressions
+  pass.
+- Complete source command with `INTENTATLAS_REQUIRE_BROWSER=1`:
+  `.venv\Scripts\python.exe -m pytest --cov=intentatlas --cov-report=term-missing
+  --cov-fail-under=80` - `399 passed, 2 skipped`; branch-aware coverage `87.46%`.
+- `.venv\Scripts\python.exe -m ruff check .`, `.venv\Scripts\python.exe -m mypy`,
+  `.venv\Scripts\python.exe -m bandit -q -r src tools`,
+  `.venv\Scripts\python.exe -m pip check`, `node --check src/intentatlas/web/app.js`, and
+  `git diff --check` passed. Mypy checked 39 maintained source files.
+- Two offline, non-isolated builds under `SOURCE_DATE_EPOCH=1785664054` were byte-identical and
+  `tools/verify_release.py` bound deterministic schema-1 provenance to the exact 40-character
+  implementation revision. The verifier accepted 46 wheel files and 144 sdist files:
+  - `intentatlas-0.3.0rc1-py3-none-any.whl`: 129,778 bytes,
+    SHA-256 `73b97aee824b0fb59f99d3358e87d22d9b7e95b8fc937564892b1a6f6c97fb32`.
+  - `intentatlas-0.3.0rc1.tar.gz`: 218,094 bytes,
+    SHA-256 `8c0c916104ada128321b5da52c64a7562da1b835ca9d7b59193b0b12b0ed4c3c`.
+- Rebuilding the verified sdist wheel with `--no-index --no-deps --no-build-isolation` reproduced
+  the direct wheel SHA-256 exactly. A fresh environment installed that exact wheel with
+  `--no-index --no-deps`, reported `IntentAtlas 0.3.0rc1`, and returned deterministic schema-1
+  JSON plus byte-identical repeated text demo reports. Extracted-sdist tests with a required
+  Chrome-family browser passed: `393 passed, 8 skipped`; six skips are repository-only workflow
+  tests and two are the Windows platform skips above.
+- `pip-audit 2.10.1` with `--skip-editable` reported no known vulnerabilities; only the expected
+  unpublished editable IntentAtlas distribution was skipped. GitHub's official Commit API
+  returned the exact configured SHA with `verification.verified=true` and reason `valid` for
+  `actions/checkout`, `actions/setup-python`, `actions/upload-artifact`,
+  `actions/download-artifact`, and `pypa/gh-action-pypi-publish` on 2026-08-02.
+- The deterministic provenance JSON is a local ignored audit artifact under `var/`; it is not a
+  signature, hosted attestation, release, or publication approval.
+
 ## Exact committed candidate provenance
 
 - Local audit commit `0f9d6cbc722c814d49abc26949b4be38c30a75b1`
@@ -233,16 +275,25 @@ phase: 11A
   `src/intentatlas/git_history.py`, and EVD-026 -> `tests/test_git_history.py`; the pending new
   implementation-commit edge is absent as required before commit approval.
 
+## Commit-bound closure vault verification
+
+- After materializing the exact implementation Commit note and `recorded-in` edge, two immediate
+  source-directed scans each reported 1,201 nodes, 2,879 relationships, 1,042 generated notes,
+  three adapter fragments reused, and zero rebuilt.
+- Explicit snapshots covered 159 files in `Brain/`, `Requirements/`, `Decisions/`, `Issues/`,
+  `Evidence/`, `Reviews/`, and `Sessions/`, never `Private/`. Path, length, SHA-256, and UTC mtime
+  were unchanged by both scans.
+- The 1,043-file generated snapshot across `Code/`, `Symbols/`, `Tests/`, `Commits/`, and
+  `Dashboard/` was byte- and mtime-identical across the two scans.
+- Final `intentatlas status` reported 2,879 relationships and zero durable orphans. Graph
+  assertions passed for REQ-026 -> ADR-026, ADR-026 -> ISSUE-024, ISSUE-024 ->
+  `src/intentatlas/git_history.py`, EVD-026 -> `tests/test_git_history.py`, and EVD-026
+  `recorded-in` -> exact implementation commit `7e8623a6e87154b18c92918d1e61dff307083c5c`.
+
 ## Open gates
 
 - Push and remote CI remain pending by explicit instruction; Phase 11A cannot close before they
   pass.
-- A clean follow-up implementation commit, exact generated Commit-note link, and
-  source-revision-bound deterministic provenance remain pending because commit creation was not
-  authorized. Current package hashes describe the working tree only.
-- Network-dependent dependency and immutable-Action audits were not repeated by instruction; the
-  earlier committed-candidate results above remain historical evidence, not verification of this
-  follow-up environment.
 - Vault synchronization rejects linked components present during validation, but it does not claim
   cross-platform protection against a separate hostile process replacing a verified generated
   directory while synchronization is running. Scans assume repository/vault directories remain
@@ -254,8 +305,7 @@ phase: 11A
 
 ## Interim decision
 
-The follow-up local implementation, regression, package, browser, and deterministic-vault gates
-pass, but the hardening is not yet bound to a new implementation commit. Phase 11A remains active
-until the exact new commit/provenance link, authorized network audit, push, and remote CI pass. The
-external launch controls above remain a later Phase 11C gate and do not replace or extend Phase 11A
-acceptance.
+The follow-up implementation is bound to an exact commit, deterministic provenance, generated
+Commit note, passing local regression/package/browser gates, and current authorized network
+audits. Phase 11A remains active until push and remote CI pass. The external launch controls above
+remain a later Phase 11C gate and do not replace or extend Phase 11A acceptance.

@@ -32,7 +32,7 @@ phase: 11A
 - [x] Git-history Private boundary, bounded Git output, Python ambiguous-module abstention,
       strict configuration, no-touch vault initialization, stable bounded input reads, focused and
       complete local regression, package/browser, and deterministic-vault gates pass.
-- [ ] The follow-up is bound to an exact implementation commit, generated Commit-note link, and
+- [x] The follow-up is bound to an exact implementation commit, generated Commit-note link, and
       source-revision-bound deterministic provenance.
 - [ ] Push and remote CI pass.
 - [ ] Before the later public-launch phase, GitHub private vulnerability reporting and protected
@@ -50,8 +50,8 @@ phase: 11A
 
 Pending. The deep audit corrected material demo-evidence, artifact-integrity, metadata, build-hook,
 publishing-identity, workflow-policy, local-viewer security, stale-artifact, documentation, and
-environment-isolation problems. The follow-up local trust-boundary and resolution hardening passes
-its complete local gates but is not yet commit-bound. Phase 11A remains open until exact
-commit/provenance materialization, the authorized network audit, and push/remote CI pass. External
-launch controls remain a later publication gate. No release or publication action is approved by
-this review.
+environment-isolation problems. The follow-up trust-boundary and resolution hardening is now bound
+to exact implementation commit `7e8623a6e87154b18c92918d1e61dff307083c5c`, deterministic local
+provenance, a generated Commit note, passing complete local gates, and passing authorized network
+audits. Phase 11A remains open until push and remote CI pass. External launch controls remain a
+later publication gate. No release or publication action is approved by this review.
