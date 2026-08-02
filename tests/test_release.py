@@ -41,7 +41,8 @@ PROJECT_METADATA = (
     b"[tool.hatch.build.targets.wheel]\npackages = [\"src/intentatlas\"]\n\n"
     b"[tool.hatch.build.targets.sdist]\ninclude = [\n"
     b'  "/src",\n  "/tests",\n  "/benchmarks/recommendation-corpus.json",\n'
-    b'  "/benchmarks/corpus/*.json",\n  "/tools/verify_release.py",\n  "/docs",\n'
+    b'  "/benchmarks/corpus/*.json",\n  "/benchmarks/longitudinal/*.json",\n'
+    b'  "/tools/verify_release.py",\n  "/docs",\n'
     b'  "/CHANGELOG.md",\n  "/CODE_OF_CONDUCT.md",\n  "/CONTRIBUTING.md",\n'
     b'  "/LICENSE",\n  "/README.md",\n  "/README.tr.md",\n  "/RELEASING.md",\n'
     b'  "/SECURITY.md",\n  "/pyproject.toml",\n]\n'

@@ -50,6 +50,16 @@ FORBIDDEN_SDIST_ROOTS = {
     "var",
 }
 FORBIDDEN_SDIST_ROOTS_CASEFOLDED = {root.casefold() for root in FORBIDDEN_SDIST_ROOTS}
+LONGITUDINAL_PILOT_PROJECTS = (
+    "antfu-utils",
+    "axios",
+    "cobra",
+    "match",
+    "p-limit",
+    "schedule",
+    "yocto-queue",
+    "zustand",
+)
 ALLOWED_SDIST_BENCHMARKS = {
     "benchmarks/recommendation-corpus.json",
     "benchmarks/corpus/go-package.graph.json",
@@ -58,6 +68,11 @@ ALLOWED_SDIST_BENCHMARKS = {
     "benchmarks/corpus/python-auth.labels.json",
     "benchmarks/corpus/typescript-checkout.graph.json",
     "benchmarks/corpus/typescript-checkout.labels.json",
+    "benchmarks/longitudinal/manifest.json",
+} | {
+    f"benchmarks/longitudinal/{project}.{kind}.json"
+    for project in LONGITUDINAL_PILOT_PROJECTS
+    for kind in ("labels", "classifications")
 }
 SDIST_TREE_ROOTS = ("src", "tests", "docs")
 SDIST_ROOT_FILES = {
@@ -102,6 +117,7 @@ EXPECTED_SDIST_INCLUDES = (
     "/tests",
     "/benchmarks/recommendation-corpus.json",
     "/benchmarks/corpus/*.json",
+    "/benchmarks/longitudinal/*.json",
     "/tools/verify_release.py",
     "/docs",
     "/CHANGELOG.md",

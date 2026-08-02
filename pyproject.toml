@@ -68,6 +68,7 @@ include = [
   "/tests",
   "/benchmarks/recommendation-corpus.json",
   "/benchmarks/corpus/*.json",
+  "/benchmarks/longitudinal/*.json",
   "/tools/verify_release.py",
   "/docs",
   "/CHANGELOG.md",
