@@ -120,6 +120,49 @@ def test_change_report_keeps_file_level_requirements_below_default_threshold() -
     payload = json.loads(rendered)
     assert payload["schema_version"] == 1
     assert payload["lower_confidence_requirement_count"] == 1
+    assert payload["scope"] == "worktree"
+    assert payload["freshness"] == "aligned"
+    assert payload["requirement_selection"] == {
+        "selected_count": 1,
+        "total_candidate_count": 2,
+        "filtered_count": 1,
+        "limit_omitted_count": 0,
+        "omitted_shown_count": 1,
+    }
+    assert payload["requirements"][0]["reason"] == "confidence-meets-minimum-threshold"
+    assert payload["requirements"][0]["path"]["relations"] == [
+        "drives",
+        "tracked-by",
+        "implemented-by",
+    ]
+    assert payload["tests"][0]["reasons"]
+    assert payload["tests"][0]["paths"][0]["nodes"][-1] == "file:test_auth.py"
+    assert payload["omitted_requirements"][0]["node"]["id"] == "REQ-18"
+    assert payload["omitted_requirements"][0]["reason"] == "below-minimum-confidence"
+
+
+def test_change_report_distinguishes_result_limit_omissions() -> None:
+    graph = report_graph()
+    graph.extend(
+        [Node("file:test_auth_alt.py", "test", "test_auth_alt.py", path="test_auth_alt.py")],
+        [
+            Edge(
+                "file:test_auth_alt.py",
+                "symbol:auth.py::login",
+                "tests",
+                "python-symbol-reference",
+            )
+        ],
+    )
+
+    report = build_change_report(graph, exact_analysis(), limit=1)
+    payload = report.to_dict()
+
+    assert payload["test_selection"]["selected_count"] == 1
+    assert payload["test_selection"]["total_candidate_count"] == 2
+    assert payload["test_selection"]["limit_omitted_count"] == 1
+    assert payload["omitted_tests"][0]["reason"] == "result-limit"
+    assert payload["omitted_tests"][0]["paths"]
 
 
 def test_change_report_requires_full_suite_for_fallback_or_unknown_analysis() -> None:

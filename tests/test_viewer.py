@@ -27,6 +27,10 @@ def test_viewer_assets_are_packaged() -> None:
     assert '"delivery-issue": "#fb923c"' in app
     assert '"pull-request": "#facc15"' in app
     assert "findEvidencePaths(node.id)" in app
+    assert "formatRecordedPath" in app
+    assert "Recorded ranking path:" in app
+    assert "renderOmittedItems" in app
+    assert "if (state.report) openChangeReport(false);" in app
     assert 'const pathLimits = { depth: 6, visited: 800, results: 6 };' in app
     assert "edge.inverse || edge.relation" in app
     assert "No bounded evidence path found." in app
@@ -53,6 +57,10 @@ def test_viewer_assets_are_packaged() -> None:
     assert 'id="change-report"' in index
     assert 'id="report-outcomes"' in index
     assert 'id="report-title"' in index
+    assert 'id="report-omitted-requirements"' in index
+    assert 'id="report-omitted-tests"' in index
+    assert 'role="dialog"' in index
+    assert 'aria-controls="change-report"' in index
     assert 'id="overview"' in index
     assert 'id="window-status"' in index
     assert 'id="focus-neighborhood"' in index

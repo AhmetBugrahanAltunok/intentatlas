@@ -47,6 +47,7 @@ async function boot() {
   state.pathAdjacency = buildPathAdjacency();
   for (const node of state.data.nodes) state.enabled.add(node.kind);
   renderFilters(); renderChangeReport(); rebuild(); bindEvents(); fitGraph();
+  if (state.report) openChangeReport(false);
 }
 
 function buildGraphIndexes() {
@@ -79,13 +80,18 @@ function renderChangeReport() {
   }
   const summary = [
     reportDatum("strategy", report.test_strategy.replaceAll("-", " ")),
+    reportDatum("scope", report.scope || report.analysis?.change_set?.scope || "unknown"),
+    reportDatum("base", shortRevision(report.base_revision) || "n/a"),
+    reportDatum("head", shortRevision(report.head_revision) || "worktree"),
     reportDatum("analysis", report.analysis_state),
-    reportDatum("coverage", report.analysis_coverage_complete ? "complete" : "fallback required")
+    reportDatum("freshness", report.freshness || "unknown"),
+    reportDatum("threshold", report.minimum_confidence),
+    reportDatum("coverage", report.analysis_coverage_complete ? "complete" : "fallback required"),
+    reportDatum("requirements", selectionSummary(report.requirement_selection, report.requirements)),
+    reportDatum("tests", selectionSummary(report.test_selection, report.tests))
   ];
   if (state.review) {
     summary.push(reportDatum("mode", state.review.mode));
-    summary.push(reportDatum("base", shortRevision(state.review.base_revision)));
-    summary.push(reportDatum("head", shortRevision(state.review.head_revision)));
   }
   document.querySelector("#report-summary").innerHTML = summary.join("");
   document.querySelector("#report-advisory").textContent = String(report.advisory || "");
@@ -93,15 +99,29 @@ function renderChangeReport() {
     id: item.requirement.id,
     label: item.requirement.label,
     score: item.score,
-    confidence: item.confidence
+    confidence: item.confidence,
+    reason: item.reason || "confidence-meets-minimum-threshold",
+    evidence: item.evidence,
+    paths: [item.path]
   }));
+  renderOmittedItems("#report-omitted-requirements", report.omitted_requirements || []);
   renderReportItems("#report-tests", report.tests, item => ({
     id: item.test.id,
     label: item.test.path || item.test.label,
     score: item.score,
-    confidence: item.confidence
+    confidence: item.confidence,
+    reason: (item.reasons || []).join("; ") || "ranked recorded evidence",
+    evidence: item.evidence,
+    paths: item.paths
   }));
+  renderOmittedItems("#report-omitted-tests", report.omitted_tests || []);
   renderOutcomeEvidence();
+}
+
+function selectionSummary(selection, items) {
+  if (!selection) return `${items.length} selected`;
+  return `${selection.selected_count}/${selection.total_candidate_count} selected · `
+    + `${selection.filtered_count} filtered · ${selection.limit_omitted_count} limit-omitted`;
 }
 
 function renderOutcomeEvidence() {
@@ -144,9 +164,30 @@ function renderReportItems(selector, items, valueOf) {
   const container = document.querySelector(selector);
   container.innerHTML = items.length ? items.map(item => {
     const value = valueOf(item);
-    return `<button class="report-item" data-node="${escapeAttr(value.id)}"><strong>${escapeHTML(value.label)}</strong><small>${escapeHTML(value.confidence)} · ${value.score}/100</small></button>`;
+    const evidence = (value.evidence || []).join(", ") || "none recorded";
+    const paths = (value.paths || []).map(formatRecordedPath).join(" | ") || "none recorded";
+    return `<button class="report-item" data-node="${escapeAttr(value.id)}"><strong>${escapeHTML(value.label)}</strong><small>${escapeHTML(value.confidence)} · ${value.score}/100</small><small class="report-reason">Reason: ${escapeHTML(value.reason)}</small><small>Evidence: ${escapeHTML(evidence)}</small><small class="report-path">Recorded ranking path: ${escapeHTML(paths)}</small></button>`;
   }).join("") : "<p class='hint'>No ranked items at this confidence threshold.</p>";
   for (const button of container.querySelectorAll(".report-item")) bindFocusButton(button);
+}
+
+function renderOmittedItems(selector, items) {
+  const container = document.querySelector(selector);
+  container.innerHTML = items.length ? items.map(item => {
+    const node = item.node || {};
+    const evidence = (item.evidence || []).join(", ") || "none recorded";
+    const paths = (item.paths || []).map(formatRecordedPath).join(" | ") || "none recorded";
+    return `<div class="report-item report-omitted"><strong>${escapeHTML(node.path || node.label || node.id || "candidate")}</strong><small>${escapeHTML(item.confidence)} · ${item.score}/100 · ${escapeHTML(item.reason)}</small><small>Evidence: ${escapeHTML(evidence)}</small><small class="report-path">Recorded ranking path: ${escapeHTML(paths)}</small></div>`;
+  }).join("") : "<p class='hint'>No bounded omitted candidates to show.</p>";
+}
+
+function formatRecordedPath(path) {
+  if (!path || !Array.isArray(path.nodes) || !path.nodes.length) return "none recorded";
+  const parts = [String(path.nodes[0])];
+  for (let index = 0; index < (path.relations || []).length; index += 1) {
+    parts.push(`-[${path.relations[index]}]->`, String(path.nodes[index + 1]));
+  }
+  return parts.join(" ");
 }
 
 function renderStats() {
@@ -382,7 +423,7 @@ function bindEvents() {
   });
   document.querySelector("#close-detail").addEventListener("click", closeDetail);
   document.querySelector("#report-toggle").addEventListener("click", openChangeReport);
-  document.querySelector("#close-report").addEventListener("click", closeChangeReport);
+  document.querySelector("#close-report").addEventListener("click", () => closeChangeReport(true));
   let pan = null;
   svg.addEventListener("pointerdown", event => {
     if (event.target.closest(".node")) return;
@@ -540,8 +581,19 @@ function syncFilter(kind) {
   label.querySelector("input").checked = true; label.classList.remove("off");
 }
 function closeDetail() { document.querySelector("#detail").classList.remove("open"); state.selected = null; for (const item of document.querySelectorAll(".selected,.active")) item.classList.remove("selected", "active"); }
-function openChangeReport() { closeDetail(); document.querySelector("#change-report").classList.add("open"); }
-function closeChangeReport() { document.querySelector("#change-report").classList.remove("open"); }
+function openChangeReport(moveFocus = true) {
+  closeDetail();
+  const panel = document.querySelector("#change-report");
+  panel.classList.add("open"); panel.setAttribute("aria-hidden", "false");
+  document.querySelector("#report-toggle").setAttribute("aria-expanded", "true");
+  if (moveFocus) document.querySelector("#close-report").focus();
+}
+function closeChangeReport(restoreFocus = false) {
+  const panel = document.querySelector("#change-report");
+  panel.classList.remove("open"); panel.setAttribute("aria-hidden", "true");
+  document.querySelector("#report-toggle").setAttribute("aria-expanded", "false");
+  if (restoreFocus) document.querySelector("#report-toggle").focus();
+}
 
 function fitGraph() {
   if (!state.nodes.length) return;

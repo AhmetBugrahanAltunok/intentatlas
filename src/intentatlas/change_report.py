@@ -54,6 +54,7 @@ class RequirementImpact:
             "requirement": self.requirement.to_dict(),
             "score": self.score,
             "confidence": self.confidence,
+            "reason": "confidence-meets-minimum-threshold",
             "source_artifact_id": self.source_artifact_id,
             "path": self.path.to_dict(),
             "evidence": list(self.evidence),
@@ -67,6 +68,8 @@ class ChangeReportTest:
     confidence: str
     artifact_ids: tuple[str, ...]
     evidence: tuple[str, ...]
+    reasons: tuple[str, ...]
+    paths: tuple[RequirementImpactPath, ...]
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -75,17 +78,48 @@ class ChangeReportTest:
             "confidence": self.confidence,
             "artifact_ids": list(self.artifact_ids),
             "evidence": list(self.evidence),
+            "reasons": list(self.reasons),
+            "paths": [path.to_dict() for path in self.paths],
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class OmittedCandidate:
+    candidate_type: str
+    node: Node
+    score: int
+    confidence: str
+    reason: str
+    evidence: tuple[str, ...]
+    paths: tuple[RequirementImpactPath, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "candidate_type": self.candidate_type,
+            "node": self.node.to_dict(),
+            "score": self.score,
+            "confidence": self.confidence,
+            "reason": self.reason,
+            "evidence": list(self.evidence),
+            "paths": [path.to_dict() for path in self.paths],
         }
 
 
 @dataclass(frozen=True, slots=True)
 class ChangeReport:
     analysis: ChangeAnalysis
+    freshness: str
     minimum_confidence: str
     requirement_candidate_count: int
     requirements: tuple[RequirementImpact, ...]
+    requirement_filtered_count: int
+    requirement_limit_omitted_count: int
+    omitted_requirements: tuple[OmittedCandidate, ...]
     test_candidate_count: int
     tests: tuple[ChangeReportTest, ...]
+    test_filtered_count: int
+    test_limit_omitted_count: int
+    omitted_tests: tuple[OmittedCandidate, ...]
     test_strategy: str
     analysis_coverage_complete: bool
 
@@ -93,17 +127,39 @@ class ChangeReport:
         return {
             "schema_version": CHANGE_REPORT_SCHEMA_VERSION,
             "advisory": _ADVISORY,
+            "scope": self.analysis.change_set.scope,
+            "base_revision": self.analysis.change_set.base_revision,
+            "head_revision": self.analysis.change_set.head_revision,
             "minimum_confidence": self.minimum_confidence,
             "analysis_state": self.analysis.state,
+            "freshness": self.freshness,
             "analysis_coverage_complete": self.analysis_coverage_complete,
             "test_strategy": self.test_strategy,
             "requirement_candidate_count": self.requirement_candidate_count,
             "lower_confidence_requirement_count": (
                 self.requirement_candidate_count - len(self.requirements)
             ),
+            "requirement_selection": {
+                "selected_count": len(self.requirements),
+                "total_candidate_count": self.requirement_candidate_count,
+                "filtered_count": self.requirement_filtered_count,
+                "limit_omitted_count": self.requirement_limit_omitted_count,
+                "omitted_shown_count": len(self.omitted_requirements),
+            },
             "requirements": [item.to_dict() for item in self.requirements],
+            "omitted_requirements": [
+                item.to_dict() for item in self.omitted_requirements
+            ],
             "test_candidate_count": self.test_candidate_count,
+            "test_selection": {
+                "selected_count": len(self.tests),
+                "total_candidate_count": self.test_candidate_count,
+                "filtered_count": self.test_filtered_count,
+                "limit_omitted_count": self.test_limit_omitted_count,
+                "omitted_shown_count": len(self.omitted_tests),
+            },
             "tests": [item.to_dict() for item in self.tests],
+            "omitted_tests": [item.to_dict() for item in self.omitted_tests],
             "analysis": self.analysis.to_dict(),
         }
 
@@ -185,13 +241,21 @@ def build_change_report(
 
     requirement_candidates = _requirement_impacts(graph, analysis, artifact_ids)
     minimum_rank = CONFIDENCE_RANK[minimum_confidence]
-    requirements = tuple(
+    eligible_requirements = tuple(
         item
         for item in requirement_candidates
         if CONFIDENCE_RANK[item.confidence] >= minimum_rank
-    )[:limit]
+    )
+    filtered_requirements = tuple(
+        item
+        for item in requirement_candidates
+        if CONFIDENCE_RANK[item.confidence] < minimum_rank
+    )
+    requirements = eligible_requirements[:limit]
+    limit_omitted_requirements = eligible_requirements[limit:]
     test_candidates = _test_recommendations(graph, artifact_ids)
     tests = test_candidates[:limit]
+    limit_omitted_tests = test_candidates[limit:]
 
     coverage_complete = analysis.state == "analyzed" or not analysis.files
     if not analysis.files:
@@ -209,11 +273,29 @@ def build_change_report(
 
     return ChangeReport(
         analysis,
+        _aggregate_freshness(analysis),
         minimum_confidence,
         len(requirement_candidates),
         requirements,
+        len(filtered_requirements),
+        len(limit_omitted_requirements),
+        tuple(
+            [
+                _omitted_requirement(item, "below-minimum-confidence")
+                for item in filtered_requirements
+            ]
+            + [
+                _omitted_requirement(item, "result-limit")
+                for item in limit_omitted_requirements
+            ]
+        )[:limit],
         len(test_candidates),
         tests,
+        0,
+        len(limit_omitted_tests),
+        tuple(_omitted_test(item, "result-limit") for item in limit_omitted_tests)[
+            :limit
+        ],
         strategy,
         coverage_complete,
     )
@@ -227,23 +309,47 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
 
     lines = [
         f"Change report: {report.analysis.change_set.scope}",
-        f"Analysis state: {report.analysis.state}",
+        (
+            "Revision: "
+            f"base {report.analysis.change_set.base_revision or 'n/a'}; "
+            f"head {report.analysis.change_set.head_revision or 'worktree'}"
+        ),
+        f"Analysis state: {report.analysis.state}; freshness {report.freshness}",
+        f"Minimum confidence: {report.minimum_confidence}",
         f"Test strategy: {report.test_strategy}",
         (
             "Requirement impacts: "
-            f"{len(report.requirements)} shown / {report.requirement_candidate_count} candidates"
+            f"{len(report.requirements)} selected / "
+            f"{report.requirement_candidate_count} candidates; "
+            f"{report.requirement_filtered_count} filtered; "
+            f"{report.requirement_limit_omitted_count} omitted by limit"
         ),
     ]
     for requirement_item in report.requirements:
         lines.append(
             f"- {requirement_item.requirement.id}: {requirement_item.score}/100 "
-            f"({requirement_item.confidence})"
+            f"({requirement_item.confidence}); selected because confidence meets "
+            f"{report.minimum_confidence}; path {_path_text(requirement_item.path)}; "
+            f"evidence {', '.join(requirement_item.evidence) or 'none'}"
         )
-    lines.append(f"Recommended tests: {len(report.tests)}")
+    if report.omitted_requirements:
+        lines.append("Omitted requirement candidates:")
+        lines.extend(_omission_text(item) for item in report.omitted_requirements)
+    lines.append(
+        f"Recommended tests: {len(report.tests)} selected / "
+        f"{report.test_candidate_count} candidates; {report.test_filtered_count} filtered; "
+        f"{report.test_limit_omitted_count} omitted by limit"
+    )
     for test_item in report.tests:
         lines.append(
-            f"- {test_item.test.id}: {test_item.score}/100 ({test_item.confidence})"
+            f"- {test_item.test.id}: {test_item.score}/100 ({test_item.confidence}); "
+            f"selected from {len(test_item.artifact_ids)} changed artifacts; "
+            f"path {_path_text(test_item.paths[0]) if test_item.paths else 'none'}; "
+            f"evidence {', '.join(test_item.evidence) or 'none'}"
         )
+    if report.omitted_tests:
+        lines.append("Omitted test candidates:")
+        lines.extend(_omission_text(item) for item in report.omitted_tests)
     lines.append(f"Advisory: {_ADVISORY}")
     return "\n".join(lines) + "\n"
 
@@ -341,7 +447,18 @@ def _impact_sort_key(item: RequirementImpact) -> tuple[object, ...]:
 def _test_recommendations(
     graph: AtlasGraph, artifact_ids: tuple[str, ...]
 ) -> tuple[ChangeReportTest, ...]:
-    aggregated: dict[str, tuple[Node, int, str, set[str], set[str]]] = {}
+    aggregated: dict[
+        str,
+        tuple[
+            Node,
+            int,
+            str,
+            set[str],
+            set[str],
+            set[str],
+            dict[tuple[tuple[str, ...], tuple[str, ...]], RequirementImpactPath],
+        ],
+    ] = {}
     signal_count = 0
     for artifact_id in artifact_ids:
         target = graph.nodes[artifact_id]
@@ -375,8 +492,20 @@ def _test_recommendations(
                     for reason in recommendation.reasons
                     for value in reason.evidence
                 }
+                reasons = {reason.summary for reason in recommendation.reasons}
+                paths = {
+                    (reason.path.nodes, reason.path.relations): RequirementImpactPath(
+                        reason.path.nodes,
+                        reason.path.relations,
+                    )
+                    for reason in recommendation.reasons
+                }
                 if file_fallback:
                     evidence.add("file-level-fallback")
+                    reasons.add(
+                        "The candidate is retained as file-level fallback; "
+                        "it is not exact-symbol proof."
+                    )
                 current = aggregated.get(recommendation.test.id)
                 if current is None:
                     aggregated[recommendation.test.id] = (
@@ -385,15 +514,27 @@ def _test_recommendations(
                         confidence,
                         {artifact_id},
                         evidence,
+                        reasons,
+                        paths,
                     )
                     if len(aggregated) > MAX_REPORT_TEST_CANDIDATES:
                         raise ValueError(
                             "Change report exceeds the bounded test-candidate limit"
                         )
                     continue
-                node, current_score, current_confidence, sources, combined_evidence = current
+                (
+                    node,
+                    current_score,
+                    current_confidence,
+                    sources,
+                    combined_evidence,
+                    combined_reasons,
+                    combined_paths,
+                ) = current
                 sources.add(artifact_id)
                 combined_evidence.update(evidence)
+                combined_reasons.update(reasons)
+                combined_paths.update(paths)
                 if score > current_score:
                     current_score = score
                     current_confidence = confidence
@@ -403,6 +544,8 @@ def _test_recommendations(
                     current_confidence,
                     sources,
                     combined_evidence,
+                    combined_reasons,
+                    combined_paths,
                 )
                 if len(aggregated) > MAX_REPORT_TEST_CANDIDATES:
                     raise ValueError(
@@ -417,8 +560,21 @@ def _test_recommendations(
                     confidence,
                     tuple(sorted(sources)),
                     tuple(sorted(evidence)),
+                    tuple(sorted(reasons)),
+                    tuple(
+                        paths[key]
+                        for key in sorted(paths)
+                    ),
                 )
-                for node, score, confidence, sources, evidence in aggregated.values()
+                for (
+                    node,
+                    score,
+                    confidence,
+                    sources,
+                    evidence,
+                    reasons,
+                    paths,
+                ) in aggregated.values()
             ),
             key=lambda item: (-item.score, item.test.id),
         )
@@ -431,3 +587,53 @@ def _confidence(score: int) -> str:
     if score >= 70:
         return "medium"
     return "low"
+
+
+def _aggregate_freshness(analysis: ChangeAnalysis) -> str:
+    values = {item.freshness for item in analysis.files}
+    if not values:
+        return "not-applicable"
+    if "stale" in values:
+        return "stale"
+    if "unknown" in values:
+        return "unknown"
+    return "aligned"
+
+
+def _omitted_requirement(item: RequirementImpact, reason: str) -> OmittedCandidate:
+    return OmittedCandidate(
+        "requirement",
+        item.requirement,
+        item.score,
+        item.confidence,
+        reason,
+        item.evidence,
+        (item.path,),
+    )
+
+
+def _omitted_test(item: ChangeReportTest, reason: str) -> OmittedCandidate:
+    return OmittedCandidate(
+        "test",
+        item.test,
+        item.score,
+        item.confidence,
+        reason,
+        item.evidence,
+        item.paths,
+    )
+
+
+def _path_text(path: RequirementImpactPath) -> str:
+    parts = [path.nodes[0]]
+    for relation, node in zip(path.relations, path.nodes[1:], strict=True):
+        parts.extend((f"-[{relation}]->", node))
+    return " ".join(parts)
+
+
+def _omission_text(item: OmittedCandidate) -> str:
+    path = _path_text(item.paths[0]) if item.paths else "none"
+    return (
+        f"- {item.node.id}: {item.score}/100 ({item.confidence}); {item.reason}; "
+        f"path {path}; evidence {', '.join(item.evidence) or 'none'}"
+    )

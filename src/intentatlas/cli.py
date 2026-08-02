@@ -25,6 +25,7 @@ from .corpus import (
     validate_corpus_graph_size,
 )
 from .demo import build_demo_report, render_demo_report, serve_demo
+from .diagnostic import diagnose_repository, render_diagnostic
 from .evaluation import evaluate_recommendations, load_evaluation_labels, render_evaluation
 from .graph import AtlasGraph
 from .graph_diff import graph_diff, render_graph_diff
@@ -57,6 +58,18 @@ def build_parser() -> argparse.ArgumentParser:
 
     init_parser = commands.add_parser("init", help="Create the project brain and config")
     _path_argument(init_parser)
+
+    diagnose_parser = commands.add_parser(
+        "diagnose",
+        help="Inspect repository readiness without writing project state",
+    )
+    _path_argument(diagnose_parser)
+    diagnose_parser.add_argument(
+        "--format",
+        dest="output_format",
+        choices=("text", "json"),
+        default="text",
+    )
 
     scan_parser = commands.add_parser("scan", help="Scan the repository and rebuild outputs")
     _path_argument(scan_parser)
@@ -308,6 +321,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         root = Path(getattr(args, "path", ".")).resolve()
         if args.command == "init":
             return _init(root)
+        if args.command == "diagnose":
+            print(render_diagnostic(diagnose_repository(root), args.output_format), end="")
+            return 0
         if args.command == "scan":
             return _scan(root)
         if args.command == "status":

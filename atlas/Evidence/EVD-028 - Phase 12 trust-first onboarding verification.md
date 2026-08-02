@@ -48,6 +48,15 @@ result is missing.
 ## Links
 
 - proves:: [[Requirements/REQ-028 - Deliver trust-first first-run value]]
+- implemented-by:: [[Code/src - intentatlas - diagnostic.py]]
+- implemented-by:: [[Code/src - intentatlas - change_report.py]]
+- implemented-by:: [[Code/src - intentatlas - cli.py]]
+- implemented-by:: [[Code/src - intentatlas - web - app.js]]
+- proves:: [[Tests/tests - test_diagnostic.py]]
+- proves:: [[Tests/tests - test_trust_first.py]]
+- proves:: [[Tests/tests - test_change_report.py]]
+- proves:: [[Tests/tests - test_browser_e2e.py]]
+- proves:: [[Tests/tests - test_viewer.py]]
 - Decision: [[Decisions/ADR-028 - Make the change report the primary product surface]]
 - Delivery issue: [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]]
 - Review: [[Reviews/Phase 12 Trust-First Onboarding Review]]

@@ -1,7 +1,7 @@
 ---
 id: REQ-028
 type: requirement
-status: proposed
+status: accepted
 phase: 12
 ---
 # Deliver trust-first first-run value

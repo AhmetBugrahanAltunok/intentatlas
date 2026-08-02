@@ -24,7 +24,8 @@
       <kbd>/</kbd>
     </label>
     <div class="actions">
-      <button id="report-toggle" class="ghost report-toggle" type="button" hidden>Change report</button>
+      <button id="report-toggle" class="ghost report-toggle" type="button"
+        aria-controls="change-report" aria-expanded="false" hidden>Change report</button>
       <button id="overview" class="ghost" type="button" disabled>Overview</button>
       <button id="fit" class="ghost" type="button">Fit graph</button>
     </div>
@@ -78,7 +79,8 @@
       <div id="detail-links" class="relationships"></div>
     </aside>
 
-    <aside id="change-report" class="detail report-detail" aria-live="polite">
+    <aside id="change-report" class="detail report-detail" role="dialog"
+      aria-labelledby="report-title" aria-hidden="true" tabindex="-1">
       <button id="close-report" class="close" type="button" aria-label="Close change report">×</button>
       <p class="eyebrow">Change intelligence</p>
       <h2 id="report-title">Change report</h2>
@@ -87,9 +89,15 @@
       <h3>Possible requirement impacts</h3>
       <p class="path-note">Confidence-ranked structural evidence; omitted intent is not proven unaffected.</p>
       <div id="report-requirements" class="report-items"></div>
+      <h3>Omitted requirement candidates</h3>
+      <p class="path-note">Shown omissions are bounded. Omission never means unaffected.</p>
+      <div id="report-omitted-requirements" class="report-items"></div>
       <h3>Candidate tests</h3>
       <p class="path-note">Follow the displayed strategy; targeted tests may not replace the full suite.</p>
       <div id="report-tests" class="report-items"></div>
+      <h3>Omitted test candidates</h3>
+      <p class="path-note">Shown omissions explain filtering or result limits, not test necessity.</p>
+      <div id="report-omitted-tests" class="report-items"></div>
       <section id="report-outcomes" hidden>
         <h3>Commit-keyed test outcomes</h3>
         <p class="path-note">One execution observation; not proof of test necessity, sufficiency, or accuracy.</p>

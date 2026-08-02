@@ -46,12 +46,12 @@ diğer gereksinimin etkilenmediği veya testinin gereksiz olduğu iddiası deği
 
 ## Hızlı başlangıç
 
-Kurulumdan sonra niyet-kanıt öneri ve sunum yolunu deneyin:
+Önce hiçbir depoya dokunmadan paketlenmiş sentetik sözleşmeyi değerlendirin:
 
 ```powershell
-intentatlas demo
 intentatlas demo --report text
 intentatlas demo --report json
+intentatlas demo
 ```
 
 Yerleşik örnek özgün, çevrimdışı ve geçicidir. Sentetik grafiği ve ilişkileri önceden hazırlanır;
@@ -59,8 +59,26 @@ Yerleşik örnek özgün, çevrimdışı ve geçicidir. Sentetik grafiği ve ili
 veya Git diff çıkarımını sınamaz. İnteraktif görünümde **Change report** düğmesini açarak seçilen
 `tests/test_auth_rotation.py` testini, gösterilen uyarı sınırını ve grafikte bulunmasına rağmen
 sıralanmayan `tests/test_auth_audit.py` testini karşılaştırın. Ayrıntılı tur için
-[yönlendirmeli demo belgesine](docs/guided-demo.md) bakın. Geçerli klasörü taramaz. IntentAtlas
-kaynak checkout'unu yanlışlıkla başlatmamak için kendi deponuzun yolunu açıkça verin:
+[yönlendirmeli demo belgesine](docs/guided-demo.md) bakın. Geçerli klasörü taramaz.
+
+Sonra güvenilen gerçek bir repo checkout'unda yapılandırma, vault, grafik veya üretilmiş not
+oluşturmadan sıfır-izli önizleme isteyin:
+
+```powershell
+intentatlas diagnose C:\projenizin\yolu
+intentatlas changes C:\projenizin\yolu --commit HEAD --report
+intentatlas changes C:\projenizin\yolu --commit HEAD --report --format json
+```
+
+Bu komutlar çevrimdışı ve salt okunurdur. Tanı; sınırlı yetenekleri, belirsizliği, kanıt
+hazırlığını ve sonraki güvenli komutu bildirir. Rapor kesin revision/kapsamı, güncelliği, güven
+eşiğini, seçilen ve atlanan adayları, kaydedilmiş sıralama yollarını ve yedek test stratejisini
+gösterir. Atlanmak, niyetin etkilenmediğini veya testin gereksiz olduğunu kanıtlamaz. Yalnız açıkça
+verilen `--open`, aynı bellek içi rapor anlık görüntüsü için loopback görüntüleyicisini başlatır.
+[Güven-öncelikli önizleme](docs/trust-first-preview.md) ve [belge dizini](docs/index.md) ayrıntıları
+açıklar.
+
+Önizlemeyi yorumladıktan sonra kalıcı vault akışını bilinçli olarak benimseyin:
 
 ```powershell
 .\.venv\Scripts\intentatlas.exe init C:\projenizin\yolu

@@ -1,7 +1,7 @@
 ---
 id: ADR-028
 type: decision
-status: proposed
+status: accepted
 phase: 12
 ---
 # ADR-028 - Make the change report the primary product surface

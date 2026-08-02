@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">IntentAtlas trust-first change report example</title>
+  <desc id="desc">An original static rendering of an aligned report with one selected requirement, one omitted requirement, one selected test, and a targeted strategy.</desc>
+  <rect width="1200" height="720" fill="#090b14"/>
+  <rect x="34" y="32" width="1132" height="656" rx="18" fill="#111522" stroke="#2dd4bf" stroke-opacity=".35"/>
+  <text x="72" y="82" fill="#8bdfd2" font-family="system-ui, sans-serif" font-size="17" letter-spacing="2">CHANGE INTELLIGENCE</text>
+  <text x="72" y="124" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="30" font-weight="700">Trust-first change report</text>
+  <g font-family="system-ui, sans-serif" font-size="16">
+    <rect x="72" y="158" width="330" height="80" rx="10" fill="#171c2c"/><text x="92" y="188" fill="#7f91a1">SCOPE / FRESHNESS</text><text x="92" y="218" fill="#d8fff8">range · aligned</text>
+    <rect x="420" y="158" width="330" height="80" rx="10" fill="#171c2c"/><text x="440" y="188" fill="#7f91a1">THRESHOLD</text><text x="440" y="218" fill="#d8fff8">medium</text>
+    <rect x="768" y="158" width="330" height="80" rx="10" fill="#171c2c"/><text x="788" y="188" fill="#7f91a1">TEST STRATEGY</text><text x="788" y="218" fill="#d8fff8">targeted</text>
+    <text x="72" y="286" fill="#aeb2ca" letter-spacing="1">SELECTED REQUIREMENT · 1/2</text>
+    <rect x="72" y="306" width="1026" height="105" rx="10" fill="#102522" stroke="#2dd4bf" stroke-opacity=".3"/>
+    <text x="94" y="340" fill="#d8fff8" font-weight="700">REQ-EXAMPLE-001 · Keep sessions secure · medium · 80/100</text>
+    <text x="94" y="372" fill="#86d9cd">REQ-EXAMPLE-001 -[drives]-&gt; ADR-EXAMPLE-001 -[tracked-by]-&gt; ISSUE-EXAMPLE-001</text>
+    <text x="94" y="397" fill="#86d9cd">-[implemented-by]-&gt; symbol:src/auth.py::rotate_session</text>
+    <text x="72" y="459" fill="#aeb2ca" letter-spacing="1">OMITTED REQUIREMENT · BELOW MINIMUM CONFIDENCE</text>
+    <rect x="72" y="479" width="1026" height="66" rx="10" fill="#191d27" stroke="#94a3b8" stroke-opacity=".25"/>
+    <text x="94" y="519" fill="#cbd5e1">REQ-EXAMPLE-002 · Preserve audit history · low · 60/100</text>
+    <text x="72" y="593" fill="#aeb2ca" letter-spacing="1">SELECTED TEST · 1/1</text>
+    <rect x="72" y="613" width="1026" height="48" rx="10" fill="#102522" stroke="#2dd4bf" stroke-opacity=".3"/>
+    <text x="94" y="644" fill="#d8fff8">tests/test_auth_rotation.py · medium · 80/100</text>
+  </g>
+</svg>

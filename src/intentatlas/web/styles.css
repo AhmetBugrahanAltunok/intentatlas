@@ -162,6 +162,10 @@ main { height: calc(100% - 72px); display: grid; grid-template-columns: 236px 1f
 .report-item:hover { border-color: rgba(45,212,191,.5); }
 .report-item strong { display: block; color: #d8fff8; font-size: 11px; overflow-wrap: anywhere; }
 .report-item small { display: block; color: #7f91a1; margin-top: 4px; }
+.report-item .report-reason { color: #aeb2ca; line-height: 1.45; }
+.report-item .report-path { color: #86d9cd; line-height: 1.45; overflow-wrap: anywhere; }
+.report-omitted { border-color: rgba(148,163,184,.16); background: rgba(148,163,184,.035); cursor: default; }
+.report-omitted strong { color: #cbd5e1; }
 .report-observation { cursor: default; }
 .outcome-comparison { display: grid; gap: 7px; margin-top: 10px; }
 .outcome-paths { padding: 9px 10px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.02); }

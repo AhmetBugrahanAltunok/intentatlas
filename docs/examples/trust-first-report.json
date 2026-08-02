@@ -1,0 +1,65 @@
+{
+  "advisory": "Impact and test recommendations are bounded structural evidence, not proof that an omitted requirement is unaffected or that a suggested test is sufficient.",
+  "analysis": {
+    "change_set": {
+      "base_revision": "1111111111111111111111111111111111111111",
+      "file_count": 1,
+      "files": [{"hunks": [{"count": 2, "start": 10}], "path": "src/auth.py", "status": "modified"}],
+      "head_revision": "2222222222222222222222222222222222222222",
+      "hunk_count": 1,
+      "schema_version": 1,
+      "scope": "range"
+    },
+    "files": [{"artifact_ids": ["symbol:src/auth.py::rotate_session"], "confidence": "high", "evidence": ["change-set-schema-1", "fresh-worktree-scan", "validated-symbol-span"], "freshness": "aligned", "path": "src/auth.py", "state": "analyzed", "status": "modified"}],
+    "schema_version": 1,
+    "state": "analyzed"
+  },
+  "analysis_coverage_complete": true,
+  "analysis_state": "analyzed",
+  "base_revision": "1111111111111111111111111111111111111111",
+  "freshness": "aligned",
+  "head_revision": "2222222222222222222222222222222222222222",
+  "minimum_confidence": "medium",
+  "lower_confidence_requirement_count": 1,
+  "omitted_requirements": [
+    {
+      "candidate_type": "requirement",
+      "confidence": "low",
+      "evidence": ["file-level-fallback"],
+      "node": {"id": "REQ-EXAMPLE-002", "kind": "requirement", "label": "Preserve audit history", "metadata": {}},
+      "paths": [{"nodes": ["REQ-EXAMPLE-002", "file:src/auth.py"], "relations": ["implemented-by"]}],
+      "reason": "below-minimum-confidence",
+      "score": 60
+    }
+  ],
+  "omitted_tests": [],
+  "requirement_candidate_count": 2,
+  "requirement_selection": {"filtered_count": 1, "limit_omitted_count": 0, "omitted_shown_count": 1, "selected_count": 1, "total_candidate_count": 2},
+  "requirements": [
+    {
+      "confidence": "medium",
+      "evidence": ["validated-symbol-span", "wikilink"],
+      "path": {"nodes": ["REQ-EXAMPLE-001", "ADR-EXAMPLE-001", "ISSUE-EXAMPLE-001", "symbol:src/auth.py::rotate_session"], "relations": ["drives", "tracked-by", "implemented-by"]},
+      "reason": "confidence-meets-minimum-threshold",
+      "requirement": {"id": "REQ-EXAMPLE-001", "kind": "requirement", "label": "Keep sessions secure", "metadata": {}},
+      "score": 80,
+      "source_artifact_id": "symbol:src/auth.py::rotate_session"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "range",
+  "test_candidate_count": 1,
+  "test_selection": {"filtered_count": 0, "limit_omitted_count": 0, "omitted_shown_count": 0, "selected_count": 1, "total_candidate_count": 1},
+  "test_strategy": "targeted",
+  "tests": [
+    {
+      "artifact_ids": ["symbol:src/auth.py::rotate_session"],
+      "confidence": "medium",
+      "evidence": ["python-symbol-reference", "validated-symbol-span"],
+      "paths": [{"nodes": ["symbol:src/auth.py::rotate_session", "file:tests/test_auth_rotation.py"], "relations": ["tested-by"]}],
+      "reasons": ["The test directly references an exactly modified symbol."],
+      "score": 80,
+      "test": {"id": "file:tests/test_auth_rotation.py", "kind": "test", "label": "tests/test_auth_rotation.py", "metadata": {}, "path": "tests/test_auth_rotation.py"}
+    }
+  ]
+}

@@ -79,19 +79,36 @@ its test is unnecessary.
 
 ## Quick start
 
-Try the downstream intent-to-proof recommendation and presentation path after installation:
+First, evaluate the packaged synthetic contract without touching a repository:
 
 ```powershell
-intentatlas demo
 intentatlas demo --report text
 intentatlas demo --report json
+intentatlas demo
 ```
 
 The built-in showcase is original, offline, and temporary. Its synthetic graph and relationships
 are prebuilt, so it exercises the production graph, recommendation, report, and viewer layers but
 does not exercise repository discovery, AST parsing, or Git diff extraction. It does not scan the
-current directory. See the [guided demo](docs/guided-demo.md). For your own repository, pass the
-target explicitly so the IntentAtlas source checkout is never initialized by accident:
+current directory. See the [guided demo](docs/guided-demo.md).
+
+Next, from a trusted real-repository checkout, request a zero-footprint preview before creating
+configuration, a vault, a graph, or generated notes:
+
+```powershell
+intentatlas diagnose C:\path\to\your-project
+intentatlas changes C:\path\to\your-project --commit HEAD --report
+intentatlas changes C:\path\to\your-project --commit HEAD --report --format json
+```
+
+These commands are offline and no-write. The diagnostic reports bounded capability, ambiguity,
+evidence readiness, and the safe next command. The report states its exact revision and scope,
+freshness, confidence threshold, selected and omitted candidates, recorded ranking paths, and
+fallback test strategy. An omission is not proof that intent is unaffected or a test unnecessary.
+Only `--open` explicitly starts the loopback-only viewer for that same in-memory report snapshot.
+See the [trust-first preview](docs/trust-first-preview.md) and [documentation index](docs/index.md).
+
+After interpreting the preview, deliberately adopt the persistent vault workflow:
 
 ```powershell
 .\.venv\Scripts\intentatlas.exe init C:\path\to\your-project
@@ -123,6 +140,7 @@ source typing, immutable Action-reference policy, and real-browser rendering gat
 
 ```text
 intentatlas init [PATH]                  Create the project brain and local config
+intentatlas diagnose [PATH]              Inspect readiness without writing project state
 intentatlas scan [PATH]                  Rebuild the graph and generated vault notes
 intentatlas status [PATH]                Show graph and orphan-note health
 intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships

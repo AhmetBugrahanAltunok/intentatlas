@@ -7,7 +7,12 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ## [Unreleased]
 
-No changes yet.
+### Added
+
+- A deterministic schema-1 `diagnose` command for bounded, offline, read-only repository readiness
+  and safe-next-action reporting.
+- Trust-first real-repository onboarding, cross-surface change-report reasons and recorded paths,
+  explicit omission semantics, and an accessible report-first loopback viewer panel.
 
 ## [0.3.0rc1] - 2026-08-01
 
