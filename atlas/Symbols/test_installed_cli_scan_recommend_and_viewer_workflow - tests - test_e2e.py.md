@@ -10,7 +10,7 @@ source_path: "tests/test_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>221</code>
+- **End Line:** <code>230</code>
 - **Line:** <code>53</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_e2e.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_e2e.py|tests/test_e2e.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-diff-hunk)_

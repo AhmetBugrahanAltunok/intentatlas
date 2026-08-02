@@ -26,7 +26,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/test_walkthrough_03_interpret_an_omission_without_claiming_no_impact - tests - test_onboarding_walkthroughs.py|test_walkthrough_03_interpret_an_omission_without_claiming_no_impact]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_walkthrough_04_choose_the_safe_strategy_for_stale_analysis - tests - test_onboarding_walkthroughs.py|test_walkthrough_04_choose_the_safe_strategy_for_stale_analysis]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_walkthrough_05_recognize_ambiguity_and_unsupported_scope - tests - test_onboarding_walkthroughs.py|test_walkthrough_05_recognize_ambiguity_and_unsupported_scope]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_trust_first_documentation_sequence_and_artifacts_are_frozen - tests - test_trust_first.py|test_trust_first_documentation_sequence_and_artifacts_are_frozen]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

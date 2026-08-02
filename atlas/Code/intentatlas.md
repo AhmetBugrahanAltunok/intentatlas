@@ -43,6 +43,7 @@ generated: true
 - <code>owns</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - naming.py|src/intentatlas/naming.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(boundary; evidence: workspace-boundary)_
@@ -83,6 +84,7 @@ generated: true
 - <code>owns</code> → [[Tests/tests - test_graph.py|tests/test_graph.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_graph_diff.py|tests/test_graph_diff.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_graph_query.py|tests/test_graph_query.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_onboarding_walkthroughs.py|tests/test_onboarding_walkthroughs.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(boundary; evidence: workspace-boundary)_

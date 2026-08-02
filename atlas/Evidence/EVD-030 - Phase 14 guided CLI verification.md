@@ -53,7 +53,7 @@ privacy, fallback, omission, packaging, and automation contract.
       extracted-sdist full suite, and deterministic fixed-epoch package/provenance verification.
 - [x] Focused guided/CLI/diagnostic/report/security/browser tests and complete browser-required
       coverage, Ruff, Mypy, Bandit, Node syntax, pip-check, and diff-check results.
-- [ ] Two-pass vault bytes/mtime determinism, explicit user-owned snapshot, zero-orphan result, and
+- [x] Two-pass vault bytes/mtime determinism, explicit user-owned snapshot, zero-orphan result, and
       complete REQ-030 -> ADR-030 -> ISSUE-028 -> Code/Test -> EVD-030 -> Commit assertions.
 - [ ] Approved dependency network audit and complete remote CI, or an explicit open gate.
 - [x] Final limitations and risks, including that technical transcripts and any owner walkthrough
@@ -164,11 +164,33 @@ wrapper error, is the closure evidence.
 
 ## Limitations and remaining gates
 
-- Generated vault/Commit-note determinism and final durable-chain assertions are not yet recorded.
 - Final push and remote CI are not yet recorded; Phase 14 remains open until both pass at one exact
   pushed head.
 - No public tag, release, package publication, deployment, settings/visibility change, announcement,
   telemetry, or Phase 11C action occurred.
+
+## Vault and durable-chain results
+
+- Two successive stabilized scans each reported `1531 nodes`, `3392 relationships`, and `1364`
+  generated notes; the final scan reused all three adapter partitions and rebuilt none.
+- Explicit snapshots covered 167 files only in `Brain`, `Requirements`, `Decisions`, `Issues`,
+  `Evidence`, `Reviews`, and `Sessions`; bytes, sizes, and mtimes were unchanged.
+- The repeat snapshot covered all 1364 generated notes in `Code`, `Symbols`, `Tests`, and `Commits`;
+  bytes, sizes, and mtimes were identical. The graph's explicit generation timestamp was not
+  misrepresented as a generated-vault byte-stability contract.
+- `intentatlas status` reported `durable orphans 0`.
+- Generated artifacts now include [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]],
+  [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]], and
+  [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding]]. The generated commit note
+  links the implementation to CLI/onboarding code, guided tests, docs, and package verification.
+- Durable chain assertion: [[Requirements/REQ-030 - Make trustworthy analysis effortless from the CLI]]
+  -> [[Decisions/ADR-030 - Layer a TTY-guided flow over deterministic contracts]]
+  -> [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding]]
+  -> generated Code/Test notes -> this EVD -> generated implementation Commit note.
+- The initial snapshot wrapper used an unavailable PowerShell/.NET `GetRelativePath` API and
+  produced no valid comparison; the corrected explicit-root substring calculation passed. This
+  tooling correction did not alter project or user-owned records. No `atlas/Private/` path was
+  read, listed, indexed, or modified.
 
 ## Open risk carried to Phase 11C
 
@@ -184,3 +206,4 @@ before public launch or any real user-time claim.
 - references:: [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding]]
 - reviewed-by:: [[Reviews/Phase 14 One-Command Guided CLI Review]]
 - strategy:: [[Brain/Phase 14 Guided CLI Strategy]]
+- implementation-commit:: [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding]]

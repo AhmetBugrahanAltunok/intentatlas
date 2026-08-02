@@ -102,9 +102,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/serve_graph.Handler._graph_query - src - intentatlas - viewer.py|serve_graph.Handler._graph_query]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_compatibility_policy_covers_every_declared_contract - tests - test_compatibility_policy.py|test_compatibility_policy_covers_every_declared_contract]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_stable_schema_versions_remain_explicit - tests - test_compatibility_policy.py|test_stable_schema_versions_remain_explicit]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_installed_revision_review_viewer_serves_commit_keyed_outcomes - tests - test_e2e.py|test_installed_revision_review_viewer_serves_commit_keyed_outcomes]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_graph_round_trip_and_summary - tests - test_graph.py|test_graph_round_trip_and_summary]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_load_migrates_schema_one_and_rejects_invalid_typed_relations - tests - test_graph.py|test_load_migrates_schema_one_and_rejects_invalid_typed_relations]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_snapshot - tests - test_graph_query.py|_snapshot]] _(history; evidence: git-diff-hunk)_

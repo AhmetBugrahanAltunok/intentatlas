@@ -11,7 +11,7 @@ source_path: "tests/test_trust_first.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5445</code>
+- **Size Bytes:** <code>5882</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -28,6 +28,7 @@ source_path: "tests/test_trust_first.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 922adfe - docs- record Phase 12 automated evidence|docs: record Phase 12 automated evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs|test: verify technical onboarding walkthroughs]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

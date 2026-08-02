@@ -45,8 +45,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/_test_recommendations - src - intentatlas - change_report.py|_test_recommendations]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/DiagnosticCapability.to_dict - src - intentatlas - diagnostic.py|DiagnosticCapability.to_dict]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/RepositoryDiagnostic.to_dict - src - intentatlas - diagnostic.py|RepositoryDiagnostic.to_dict]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_DiscoveredMetadata - src - intentatlas - diagnostic.py|_DiscoveredMetadata]] _(history; evidence: git-diff-hunk)_

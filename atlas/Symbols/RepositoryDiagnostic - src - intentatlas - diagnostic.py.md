@@ -20,3 +20,4 @@ source_path: "src/intentatlas/diagnostic.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-symbol-reference)_

@@ -43,6 +43,7 @@ generated: true
 - <code>owns</code> → [[Code/docs - compatibility-policy.md|docs/compatibility-policy.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - delivery-schema.md|docs/delivery-schema.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - first-run-observation-guide.md|docs/first-run-observation-guide.md]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Code/docs - guided-cli.md|docs/guided-cli.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - guided-demo.md|docs/guided-demo.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - incremental-scanning.md|docs/incremental-scanning.md]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/docs - index.md|docs/index.md]] _(boundary; evidence: workspace-boundary)_

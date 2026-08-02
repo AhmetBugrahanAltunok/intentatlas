@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>30493</code>
+- **Size Bytes:** <code>31229</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -52,6 +52,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-ast)_
@@ -87,6 +88,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Symbols/evaluate_longitudinal - src - intentatlas - longitudinal.py|evaluate_longitudinal]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_pilot_manifest - src - intentatlas - longitudinal.py|load_pilot_manifest]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_real_world - src - intentatlas - real_world.py|render_real_world]] _(structure; evidence: python-symbol-reference)_
@@ -105,6 +107,7 @@ source_path: "src/intentatlas/cli.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
@@ -123,6 +126,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding|ISSUE-028 - Implement one-command guided CLI onboarding]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_
