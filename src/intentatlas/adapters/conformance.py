@@ -169,7 +169,15 @@ def _validate_symbol_node(
         or not any(node.path.casefold().endswith(suffix) for suffix in suffixes)
         or not isinstance(metadata, dict)
         or not {"symbol_kind", "line", "owner"} <= set(metadata)
-        or set(metadata) - {"symbol_kind", "line", "end_line", "owner"}
+        or set(metadata) - {
+            "symbol_kind",
+            "line",
+            "end_line",
+            "owner",
+            "workspace_candidates",
+            "workspace_owners",
+            "workspace_state",
+        }
         or metadata["owner"] != "scanner"
         or not isinstance(metadata["symbol_kind"], str)
         or not metadata["symbol_kind"]
@@ -185,6 +193,24 @@ def _validate_symbol_node(
         raise AdapterConformanceError(
             f"adapter {adapter_name!r} emitted an invalid symbol span: {node.id!r}"
         )
+    workspace_fields = {"workspace_candidates", "workspace_owners", "workspace_state"}
+    if workspace_fields & set(metadata):
+        if not workspace_fields <= set(metadata):
+            raise AdapterConformanceError(
+                f"adapter {adapter_name!r} emitted incomplete workspace metadata: {node.id!r}"
+            )
+        if metadata["workspace_state"] not in {"aligned", "ambiguous"}:
+            raise AdapterConformanceError(
+                f"adapter {adapter_name!r} emitted invalid workspace state: {node.id!r}"
+            )
+        if any(
+            not isinstance(metadata[key], list)
+            or any(not isinstance(item, str) or not item for item in metadata[key])
+            for key in ("workspace_candidates", "workspace_owners")
+        ):
+            raise AdapterConformanceError(
+                f"adapter {adapter_name!r} emitted invalid workspace candidates: {node.id!r}"
+            )
 
 
 def _validate_edge(

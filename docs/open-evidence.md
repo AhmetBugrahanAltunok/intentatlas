@@ -29,9 +29,16 @@ retains only these counts:
 - references;
 - attached diagnostics.
 
-SCIP symbol strings, external symbols, documentation, diagnostic messages, source ranges, and
-project-root metadata are not stored. The summary references its file as an observation. It does
-not create call, import, impact, proof, or test relationships.
+SCIP symbol strings, external symbols, documentation, diagnostic messages, source text, and
+project-root metadata are not stored. Persisted semantic observations retain only normalized path,
+range, role, producer/schema/revision provenance, confidence, workspace owner, and a one-way symbol
+fingerprint.
+
+An exact `scip-exact` relationship is possible only for compatibility-matrix schema `0.3.0` and an
+allowlisted producer when the full revision equals HEAD, the artifact matches Git, ownership is
+unique, the range is valid, and the role is supported. Stale, unavailable, unsafe, ambiguous, or
+unsupported input remains fallback and creates no exact relationship. IntentAtlas imports the
+provided JSON; it never runs or downloads an indexer, compiler, package manager, hook, or plugin.
 
 ## SARIF 2.1.0
 

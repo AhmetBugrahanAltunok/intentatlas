@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Protocol
 
@@ -15,6 +15,10 @@ class AdapterContext:
     files: Mapping[str, Path]
     kinds: Mapping[str, str]
     max_parse_bytes: int
+    workspace_owners: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
+    source_roots: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
+    module_aliases: tuple[tuple[str, str, tuple[str, ...]], ...] = ()
+    workspace_dependencies: frozenset[tuple[str, str]] = frozenset()
 
     def read_text(self, relative: str) -> str | None:
         path = self.files.get(relative)

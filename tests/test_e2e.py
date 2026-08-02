@@ -333,7 +333,7 @@ def test_installed_revision_review_viewer_serves_commit_keyed_outcomes(tmp_path)
         assert outcomes["freshness"] == "aligned"
         assert outcomes["tests"] == [{"path": "test_app.py", "status": "failed"}]
         assert "report-outcomes" in _http_get(port, "/").decode("utf-8")
-        assert 'fetch("/review.json"' in _http_get(port, "/app.js").decode("utf-8")
+        assert 'fetch("/api/report/review"' in _http_get(port, "/app.js").decode("utf-8")
     finally:
         if server.poll() is None:
             server.terminate()

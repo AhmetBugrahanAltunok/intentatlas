@@ -10,7 +10,7 @@ deprecation window, but the release notes must identify the correction and safe 
 | Contract | Class | Current boundary | Compatibility promise |
 | --- | --- | --- | --- |
 | Vault Markdown, supported frontmatter, and typed wikilinks | stable | documented fields and link meanings | Existing accepted notes remain readable; additions are optional; removals or meaning changes require deprecation and migration guidance. |
-| Saved graph JSON | stable | graph `schema_version` and documented node/edge fields | Readers accept the current version through its deprecation window; breaking shapes use a new schema version and a documented regeneration or conversion path. |
+| Saved graph JSON | stable | graph schema 4, relation schema 5, and documented node/edge fields | Readers deterministically migrate schemas 1-3; unsupported versions fail with an actionable error. Breaking shapes use a new schema version and a documented regeneration or conversion path. |
 | Supported CLI text | stable | documented commands, exit semantics, safety wording, and named metrics | Human-readable layout may gain sections, but commands, meanings, safeguards, and undefined-value wording do not silently change. |
 | Supported CLI JSON | stable | each command's `schema_version`, documented fields, null semantics, and enum meanings | Additive fields are allowed; removal, type change, or semantic change requires a schema boundary and migration notes. |
 | Change set, change analysis, change report, and review output | stable | their versioned schemas and fallback/full-suite meanings | `fallback` and `unknown` never become targeted-sufficiency claims; breaking changes require a version bump and migration notes. |
@@ -18,8 +18,18 @@ deprecation window, but the release notes must identify the correction and safe 
 | Longitudinal pilot manifest, labels, classifications, and result JSON | stable | schema 1, frozen partition hashes, canonical error-set hashes | Existing frozen inputs remain verifiable; breaking changes use a new version and retain a documented way to reproduce the prior baseline. |
 | Evidence import formats and external report adapters | experimental | explicitly supported schema versions and bounded parsers | Changes require a version boundary and release-note migration guidance, but may omit a full deprecation cycle before `1.0`. |
 | Language adapters and adapter conformance protocol | experimental | documented adapter protocol and current structural evidence | New evidence or parser corrections may change graphs; incompatible protocol changes are versioned and documented. |
-| Incremental scan cache | internal | rebuildable `.intentatlas` implementation data | No compatibility promise; any release may invalidate and rebuild it without migration. |
-| Viewer bundles, in-memory indexes, and implementation helpers | internal | rebuildable or process-local implementation details | No compatibility promise; they may change without notice when public output remains within its contract. |
+| Workspace ownership projection | experimental | workspace schema 1; repository/project/package/source-root nodes and `contains`/`declares`/`owns` relations | Only supported bounded metadata is interpreted. Ambiguous or unsupported ownership abstains; incompatible projection changes require a graph-schema boundary. |
+| Loopback viewer query JSON | experimental | query schema 1; snapshot, total/returned/omitted counts, and bounded overview/search/neighborhood/path responses | Additive fields are allowed; incompatible response meanings require a query schema change. The initial window never depends on the complete graph payload. |
+| Incremental scan cache | internal | rebuildable adapter-and-workspace partitions under `.intentatlas` | No compatibility promise; any release may invalidate and rebuild it without migration. |
+| Viewer bundles, in-memory indexes, and implementation helpers | internal | rebuildable implementation details behind the bounded query contract | No compatibility promise; they may change without notice when query output remains within its contract. |
+
+## SCIP exact-evidence capability matrix
+
+SCIP protobuf-JSON remains experimental. Source-free fallback observations accept bounded documents,
+but exact semantic edges require schema `0.3.0`, a full 40-character revision equal to repository
+HEAD, Git-aligned artifact bytes, one workspace owner, a valid range, and role `0` (reference) or
+`1` (definition). The exact producer allowlist is `scip-python`, `scip-typescript`, and `scip-go`;
+other producer/schema pairs remain fallback. IntentAtlas never invokes or downloads an indexer.
 
 ## Migration and deprecation rules
 

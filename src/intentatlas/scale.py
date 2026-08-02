@@ -1,16 +1,22 @@
 from __future__ import annotations
 
+import ctypes
 import json
+import platform
+import sys
 from dataclasses import asdict, dataclass
 from time import perf_counter
 from typing import Any
 
 from .graph import AtlasGraph
+from .graph_query import GraphQuerySnapshot
 from .models import Edge, Node
 from .recommendations import recommend_tests
 
 MAX_UNRELATED_EDGES = 100_000
 MAX_BENCHMARK_ITERATIONS = 10_000
+MAX_LARGE_NODES = 200_000
+MAX_LARGE_EDGES = 1_000_000
 ADVISORY = (
     "Timing is environment-specific and is not a portable latency guarantee; stable counts and "
     "result identities are the regression contract."
@@ -32,6 +38,30 @@ class ScaleBenchmarkResult:
     index_build_seconds: float
     warm_queries_seconds: float
     mean_combined_query_ms: float
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(frozen=True, slots=True)
+class LargeGraphBenchmarkResult:
+    node_count: int
+    edge_count: int
+    constructed_nodes: int
+    constructed_edges: int
+    overview_nodes: int
+    overview_edges: int
+    overview_omitted_nodes: int
+    overview_omitted_edges: int
+    overview_payload_bytes: int
+    search_result_count: int
+    neighborhood_node_count: int
+    graph_build_seconds: float
+    index_build_seconds: float
+    overview_query_seconds: float
+    search_query_seconds: float
+    neighborhood_query_seconds: float
+    peak_memory_bytes: int | None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -108,6 +138,70 @@ def run_scale_benchmark(
     )
 
 
+def run_large_graph_benchmark(
+    *, node_count: int = 100_000, edge_count: int = 500_000
+) -> LargeGraphBenchmarkResult:
+    _bounded_int(node_count, "large graph node count", 2, MAX_LARGE_NODES)
+    _bounded_int(edge_count, "large graph edge count", 1, MAX_LARGE_EDGES)
+    if edge_count > node_count * (node_count - 1):
+        raise ValueError("Large graph edge count exceeds deterministic unique-edge capacity")
+
+    graph_start = perf_counter()
+    graph = AtlasGraph()
+    for number in range(node_count):
+        node_id = f"file:scale/node-{number:06d}.txt"
+        graph.add_node(Node(node_id, "file", node_id.removeprefix("file:")))
+    for number in range(edge_count):
+        source_number = number % node_count
+        layer = number // node_count
+        target_number = (source_number + layer + 1) % node_count
+        source = f"file:scale/node-{source_number:06d}.txt"
+        target = f"file:scale/node-{target_number:06d}.txt"
+        graph.add_edge(Edge(source, target, "imports", f"scale-layer-{layer}"))
+    graph_build_seconds = perf_counter() - graph_start
+
+    index_start = perf_counter()
+    index = graph.index
+    index_build_seconds = perf_counter() - index_start
+    if index.edge_count != edge_count:
+        raise ValueError("Large graph construction did not produce the requested unique edges")
+
+    snapshot = GraphQuerySnapshot(graph, "scale-benchmark")
+    overview_start = perf_counter()
+    overview = snapshot.overview(node_limit=240, edge_limit=900)
+    overview_query_seconds = perf_counter() - overview_start
+    payload_bytes = len(
+        json.dumps(overview, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    )
+    search_start = perf_counter()
+    search = snapshot.search(f"node-{node_count - 1:06d}", limit=20)
+    search_query_seconds = perf_counter() - search_start
+    neighborhood_start = perf_counter()
+    neighborhood = snapshot.neighborhood(
+        "file:scale/node-000000.txt", depth=2, node_limit=240, edge_limit=900
+    )
+    neighborhood_query_seconds = perf_counter() - neighborhood_start
+    return LargeGraphBenchmarkResult(
+        node_count=node_count,
+        edge_count=edge_count,
+        constructed_nodes=len(graph.nodes),
+        constructed_edges=graph.edge_count,
+        overview_nodes=overview["returned_counts"]["nodes"],
+        overview_edges=overview["returned_counts"]["edges"],
+        overview_omitted_nodes=overview["omitted_counts"]["nodes"],
+        overview_omitted_edges=overview["omitted_counts"]["edges"],
+        overview_payload_bytes=payload_bytes,
+        search_result_count=search["returned_counts"]["nodes"],
+        neighborhood_node_count=neighborhood["returned_counts"]["nodes"],
+        graph_build_seconds=round(graph_build_seconds, 6),
+        index_build_seconds=round(index_build_seconds, 6),
+        overview_query_seconds=round(overview_query_seconds, 6),
+        search_query_seconds=round(search_query_seconds, 6),
+        neighborhood_query_seconds=round(neighborhood_query_seconds, 6),
+        peak_memory_bytes=_peak_memory_bytes(),
+    )
+
+
 def render_scale_benchmark(result: ScaleBenchmarkResult, output_format: str = "text") -> str:
     value = {"schema_version": 1, "advisory": ADVISORY, **result.to_dict()}
     if output_format == "json":
@@ -136,3 +230,46 @@ def render_scale_benchmark(result: ScaleBenchmarkResult, output_format: str = "t
 def _bounded_int(value: int, label: str, minimum: int, maximum: int) -> None:
     if isinstance(value, bool) or not isinstance(value, int) or value < minimum or value > maximum:
         raise ValueError(f"{label.capitalize()} must be between {minimum} and {maximum}")
+
+
+def _peak_memory_bytes() -> int | None:
+    if platform.system() == "Windows":
+        class ProcessMemoryCounters(ctypes.Structure):
+            _fields_ = [
+                ("cb", ctypes.c_ulong),
+                ("PageFaultCount", ctypes.c_ulong),
+                ("PeakWorkingSetSize", ctypes.c_size_t),
+                ("WorkingSetSize", ctypes.c_size_t),
+                ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                ("PagefileUsage", ctypes.c_size_t),
+                ("PeakPagefileUsage", ctypes.c_size_t),
+            ]
+
+        counters = ProcessMemoryCounters()
+        counters.cb = ctypes.sizeof(counters)
+        get_process = ctypes.windll.kernel32.GetCurrentProcess
+        get_process.restype = ctypes.c_void_p
+        handle = get_process()
+        get_memory = ctypes.windll.psapi.GetProcessMemoryInfo
+        get_memory.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ProcessMemoryCounters),
+            ctypes.c_ulong,
+        ]
+        get_memory.restype = ctypes.c_int
+        success = get_memory(
+            handle, ctypes.byref(counters), counters.cb
+        )
+        return int(counters.PeakWorkingSetSize) if success else None
+    try:
+        import resource
+
+        getrusage = resource.getrusage  # type: ignore[attr-defined]
+        usage_self = resource.RUSAGE_SELF  # type: ignore[attr-defined]
+        maximum = getrusage(usage_self).ru_maxrss
+        return int(maximum if sys.platform == "darwin" else maximum * 1024)
+    except (ImportError, OSError):
+        return None

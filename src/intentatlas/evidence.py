@@ -42,6 +42,8 @@ def import_evidence(
     sarif_reports: list[str],
     test_execution_reports: list[str],
     head_revision: str | None,
+    workspace_owners: dict[str, tuple[str, ...]] | None = None,
+    graph_nodes: dict[str, Node] | None = None,
 ) -> EvidenceFragment:
     nodes: list[Node] = []
     edges: list[Edge] = []
@@ -64,7 +66,16 @@ def import_evidence(
     for configured in scip_reports:
         report, relative = _report_path(root, vault, configured, "SCIP report")
         document = load_json_report(report, relative)
-        report_nodes, report_edges = scip_fragment(document, relative, aliases)
+        report_nodes, report_edges = scip_fragment(
+            document,
+            relative,
+            aliases,
+            root=root,
+            kinds=kinds,
+            head_revision=head_revision,
+            workspace_owners=workspace_owners or {},
+            graph_nodes=graph_nodes or {},
+        )
         nodes.extend(report_nodes)
         edges.extend(report_edges)
 

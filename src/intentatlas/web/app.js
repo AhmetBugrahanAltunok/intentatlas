@@ -32,22 +32,27 @@ boot().catch(error => {
 
 async function boot() {
   const [response, reviewResponse, reportResponse] = await Promise.all([
-    fetch("/graph.json", { cache: "no-store" }),
-    fetch("/review.json", { cache: "no-store" }),
-    fetch("/change-report.json", { cache: "no-store" })
+    fetch("/api/graph/overview?node_limit=240&edge_limit=900", { cache: "no-store" }),
+    fetch("/api/report/review", { cache: "no-store" }),
+    fetch("/api/report/change", { cache: "no-store" })
   ]);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  state.data = await response.json();
+  setGraphWindow(await response.json());
   if (reviewResponse.ok) {
     state.review = await reviewResponse.json();
     state.report = state.review.change_report;
   } else if (reportResponse.ok) state.report = await reportResponse.json();
-  state.nodeById = new Map(state.data.nodes.map(node => [node.id, node]));
-  buildGraphIndexes();
-  state.pathAdjacency = buildPathAdjacency();
-  for (const node of state.data.nodes) state.enabled.add(node.kind);
   renderFilters(); renderChangeReport(); rebuild(); bindEvents(); fitGraph();
   if (state.report) openChangeReport(false);
+}
+
+function setGraphWindow(data) {
+  if (state.data?.snapshot && data.snapshot !== state.data.snapshot) throw new Error("Graph snapshot changed; reload the viewer.");
+  state.data = data;
+  state.nodeById = new Map(data.nodes.map(node => [node.id, node]));
+  buildGraphIndexes();
+  state.pathAdjacency = buildPathAdjacency();
+  for (const node of data.nodes) state.enabled.add(node.kind);
 }
 
 function buildGraphIndexes() {
@@ -192,11 +197,12 @@ function formatRecordedPath(path) {
 
 function renderStats() {
   const stats = document.querySelector("#stats");
-  stats.innerHTML = stat(state.data.nodes.length, "total nodes")
-    + stat(state.data.edges.length, "total links")
+  const totals = state.data.total_counts || { nodes: state.data.nodes.length, edges: state.data.edges.length };
+  stats.innerHTML = stat(totals.nodes, "total nodes")
+    + stat(totals.edges, "total links")
     + stat(state.nodes.length, "shown nodes")
     + stat(state.edges.length, "shown links");
-  const hiddenNodes = Math.max(0, state.data.nodes.length - state.nodes.length);
+  const hiddenNodes = Math.max(0, totals.nodes - state.nodes.length);
   const mode = state.viewMode === "focus" ? "Focused neighborhood" : "Ranked overview";
   document.querySelector("#window-status").textContent = hiddenNodes
     ? `${mode}; ${hiddenNodes} nodes remain available through global search and linked navigation.`
@@ -407,9 +413,9 @@ function bindNode(group, node) {
 
 function bindEvents() {
   search.addEventListener("input", applySearch);
-  search.addEventListener("keydown", event => {
+  search.addEventListener("keydown", async event => {
     if (event.key !== "Enter") return;
-    const match = bestSearchMatch(search.value);
+    const match = await bestSearchMatch(search.value);
     if (match) { event.preventDefault(); focusNode(match.id); }
   });
   document.addEventListener("keydown", event => {
@@ -452,7 +458,7 @@ function applySearch() {
   }
 }
 
-function bestSearchMatch(value) {
+async function bestSearchMatch(value) {
   const query = value.trim().toLowerCase();
   if (!query) return null;
   let partial = null;
@@ -465,7 +471,11 @@ function bestSearchMatch(value) {
     ) return node;
     if (!partial && entry.text.includes(query)) partial = node;
   }
-  return partial;
+  if (partial) return partial;
+  const response = await fetch(`/api/graph/search?q=${encodeURIComponent(value)}&limit=1`, { cache: "no-store" });
+  if (!response.ok) return null;
+  const result = await response.json();
+  return result.nodes[0] || null;
 }
 
 function selectNode(id) {
@@ -553,9 +563,10 @@ function buildPathAdjacency() {
   return adjacency;
 }
 
-function focusNode(id) {
+async function focusNode(id) {
   closeChangeReport();
-  const globalNode = state.nodeById.get(id); if (!globalNode) return;
+  const globalNode = state.nodeById.get(id);
+  if (!globalNode) { await showFocusedWindow(id); return; }
   if (!state.enabled.has(globalNode.kind)) {
     state.enabled.add(globalNode.kind); syncFilter(globalNode.kind);
   }
@@ -564,14 +575,22 @@ function focusNode(id) {
   state.scale = Math.max(state.scale, 1.2); state.tx = stage.clientWidth * .54 - node.x * state.scale; state.ty = stage.clientHeight * .5 - node.y * state.scale; transform(); selectNode(id);
 }
 
-function showFocusedWindow(id) {
+async function showFocusedWindow(id) {
+  const response = await fetch(`/api/graph/neighborhood?id=${encodeURIComponent(id)}&depth=${renderLimits.focusDepth}&node_limit=${renderLimits.nodes}&edge_limit=${renderLimits.edges}`, { cache: "no-store" });
+  if (!response.ok) return;
+  setGraphWindow(await response.json());
+  renderFilters();
   if (!state.nodeById.has(id)) return;
   state.viewMode = "focus"; state.focus = id; rebuild(); fitGraph();
   const node = state.visibleNodeById.get(id);
   if (node) selectNode(id);
 }
 
-function showOverview() {
+async function showOverview() {
+  const response = await fetch(`/api/graph/overview?node_limit=${renderLimits.nodes}&edge_limit=${renderLimits.edges}`, { cache: "no-store" });
+  if (!response.ok) return;
+  setGraphWindow(await response.json());
+  renderFilters();
   closeDetail(); search.value = ""; state.viewMode = "overview"; state.focus = null; rebuild(); fitGraph();
 }
 

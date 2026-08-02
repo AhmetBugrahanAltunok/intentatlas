@@ -13,6 +13,7 @@ from typing import Protocol
 from .adapters import (
     BUILTIN_ADAPTERS,
     AdapterContext,
+    GraphFragment,
     LanguageAdapter,
     validate_adapter_definition,
     validate_adapter_fragment,
@@ -27,6 +28,7 @@ from .naming import note_title, safe_filename
 from .relations import USER_RELATIONS
 from .scan_cache import AdapterFragmentCache
 from .vault import ProjectVault
+from .workspace import WorkspaceModel, discover_workspace, owner_id
 
 SUPPORTED_SUFFIXES = {
     ".c",
@@ -55,7 +57,12 @@ SUPPORTED_SUFFIXES = {
 }
 CONFIG_SUFFIXES = {".mod", ".toml", ".yaml", ".yml"}
 DOCUMENT_SUFFIXES = {".md", ".rst"}
+WORKSPACE_METADATA_NAMES = {"go.work", "jsconfig.json", "package.json", "tsconfig.json"}
 MAX_PARSE_BYTES = 1_000_000
+MAX_REPOSITORY_FILES = 250_000
+MAX_REPOSITORY_BYTES = 8 * 1024 * 1024 * 1024
+MAX_GRAPH_NODES = 1_000_000
+MAX_GRAPH_EDGES = 4_000_000
 USER_VAULT_AREAS = {
     "Brain": "memory",
     "Requirements": "requirement",
@@ -90,6 +97,10 @@ class ScanStatistics:
     reused_adapters: tuple[str, ...] = ()
     rebuilt_adapters: tuple[str, ...] = ()
     skipped_cache_writes: tuple[str, ...] = ()
+    workspace_partitions: tuple[str, ...] = ()
+    workspace_diagnostics: tuple[str, ...] = ()
+    reused_partitions: tuple[str, ...] = ()
+    rebuilt_partitions: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -128,6 +139,10 @@ class RepositoryScanner:
         self.reused_adapters: list[str] = []
         self.rebuilt_adapters: list[str] = []
         self.skipped_cache_writes: list[str] = []
+        self.workspace: WorkspaceModel | None = None
+        self.discovered_bytes = 0
+        self.reused_partitions: list[str] = []
+        self.rebuilt_partitions: list[str] = []
         self.exclude_patterns = _exclude_patterns(config.exclude)
         self.vault_relative = config.vault_path(self.root).relative_to(self.root).as_posix()
         self.vault_parts = tuple(
@@ -145,23 +160,42 @@ class RepositoryScanner:
                 reused_adapters=tuple(self.reused_adapters),
                 rebuilt_adapters=tuple(self.rebuilt_adapters),
                 skipped_cache_writes=tuple(self.skipped_cache_writes),
+                workspace_partitions=tuple(
+                    item.id for item in self.workspace.boundaries
+                    if item.kind in {"project", "package"}
+                ) if self.workspace is not None else (),
+                workspace_diagnostics=tuple(
+                    item.code for item in self.workspace.diagnostics
+                ) if self.workspace is not None else (),
+                reused_partitions=tuple(self.reused_partitions),
+                rebuilt_partitions=tuple(self.rebuilt_partitions),
             ),
         )
 
     def _scan(self, cache: AdapterFragmentCache | None) -> AtlasGraph:
         self._discover_files()
+        self._check_graph_budget()
+        self._scan_workspace()
+        self._check_graph_budget()
         self._scan_language_adapters(cache)
+        self._check_graph_budget()
         self._scan_evidence_reports()
+        self._check_graph_budget()
         self._scan_git_history()
+        self._check_graph_budget()
         self._scan_user_vault()
         self._scan_delivery_reports()
         self._resolve_pending_links()
+        self._check_graph_budget()
         return self.graph
 
     def _discover_files(self) -> None:
         for path in self._walk_files():
             relative_path = path.relative_to(self.root)
-            if path.suffix.casefold() not in SUPPORTED_SUFFIXES:
+            if (
+                path.suffix.casefold() not in SUPPORTED_SUFFIXES
+                and path.name.casefold() not in WORKSPACE_METADATA_NAMES
+            ):
                 continue
             relative = relative_path.as_posix()
             kind = _file_kind(relative_path)
@@ -169,6 +203,15 @@ class RepositoryScanner:
                 size = path.stat().st_size
             except OSError:
                 continue
+            if len(self.files) + 1 > MAX_REPOSITORY_FILES:
+                raise ValueError(
+                    f"Repository exceeds the {MAX_REPOSITORY_FILES}-file scan budget"
+                )
+            self.discovered_bytes += size
+            if self.discovered_bytes > MAX_REPOSITORY_BYTES:
+                raise ValueError(
+                    f"Repository exceeds the {MAX_REPOSITORY_BYTES}-byte scan budget"
+                )
             node_id = f"file:{relative}"
             self.files[relative] = path
             self.graph.add_node(
@@ -184,6 +227,30 @@ class RepositoryScanner:
                     },
                 )
             )
+
+    def _scan_workspace(self) -> None:
+        self.workspace = discover_workspace(self.root, self.files)
+        nodes, edges = self.workspace.graph_fragment(self.files)
+        for relative in sorted(self.files):
+            node = self.graph.nodes[f"file:{relative}"]
+            candidates = self.workspace.candidates(relative)
+            owners = self.workspace.owners(relative)
+            self.graph.add_node(
+                Node(
+                    node.id,
+                    node.kind,
+                    node.label,
+                    node.path,
+                    {
+                        **node.metadata,
+                        "workspace_schema_version": self.workspace.schema_version,
+                        "workspace_candidates": list(candidates),
+                        "workspace_owners": list(owners),
+                        "workspace_state": "aligned" if len(owners) == 1 else "ambiguous",
+                    },
+                )
+            )
+        self.graph.extend(nodes, edges)
 
     def _walk_files(self) -> Iterable[Path]:
         """Yield files without descending into excluded or linked directories."""
@@ -240,55 +307,109 @@ class RepositoryScanner:
             files=MappingProxyType(dict(self.files)),
             kinds=MappingProxyType(kinds),
             max_parse_bytes=MAX_PARSE_BYTES,
+            workspace_owners=self.workspace.aligned_owners if self.workspace is not None else {},
+            source_roots=MappingProxyType(_workspace_source_roots(self.workspace)),
+            module_aliases=tuple(
+                (item.owner, item.pattern, item.targets)
+                for item in self.workspace.aliases
+            ) if self.workspace is not None else (),
+            workspace_dependencies=frozenset(
+                self.workspace.dependencies if self.workspace is not None else ()
+            ),
         )
         for adapter in sorted(BUILTIN_ADAPTERS, key=lambda item: item.name):
             validate_adapter_definition(adapter)
-            cache_miss = False
-            if cache is None:
-                fragment = adapter.scan(context)
-            else:
-                fingerprint = _adapter_fingerprint(adapter, context)
-                cached = cache.load(
-                    adapter,
-                    fingerprint,
-                    frozenset(self.graph.nodes),
-                )
-                cached_fragment = cached.fragment
-                if cached_fragment is None:
-                    fragment = adapter.scan(context)
-                    self.rebuilt_adapters.append(adapter.name)
-                    cache_miss = True
+            adapter_rebuilt = False
+            adapter_reused = True
+            for partition, partition_context in _adapter_partitions(adapter, context):
+                cache_miss = False
+                fingerprint = _adapter_fingerprint(adapter, partition_context)
+                if cache is None:
+                    fragment = adapter.scan(partition_context)
                 else:
-                    fragment = cached_fragment
-                    self.reused_adapters.append(adapter.name)
+                    cached = cache.load(
+                        adapter,
+                        fingerprint,
+                        frozenset(self.graph.nodes),
+                        partition,
+                    )
+                    if cached.fragment is None:
+                        fragment = adapter.scan(partition_context)
+                        cache_miss = True
+                        adapter_rebuilt = True
+                        adapter_reused = False
+                        self.rebuilt_partitions.append(f"{adapter.name}:{partition}")
+                    else:
+                        fragment = cached.fragment
+                        self.reused_partitions.append(f"{adapter.name}:{partition}")
 
-                if _adapter_fingerprint(adapter, context) != fingerprint:
-                    raise ValueError(
-                        f"{adapter.name} inputs changed during scan; retry with a stable worktree"
-                    )
-            validate_adapter_fragment(adapter, fragment, frozenset(self.graph.nodes))
-            if (
-                cache is not None
-                and cache_miss
-                and not cache.store(adapter, fingerprint, fragment)
-            ):
-                self.skipped_cache_writes.append(adapter.name)
-            for node in sorted(fragment.nodes, key=lambda item: item.id):
-                self.graph.add_node(node)
-            for edge in sorted(
-                fragment.edges,
-                key=lambda item: (
-                    item.source,
-                    item.target,
-                    item.relation,
-                    item.evidence,
-                ),
-            ):
-                if not self.graph.add_edge(edge):
-                    raise ValueError(
-                        f"Adapter {adapter.name!r} emitted invalid edge: "
-                        f"{edge.source} -> {edge.target}"
-                    )
+                    if _adapter_fingerprint(adapter, partition_context) != fingerprint:
+                        raise ValueError(
+                            f"{adapter.name} inputs changed during scan; "
+                            "retry with a stable worktree"
+                        )
+                fragment = self._scope_adapter_fragment(fragment)
+                validate_adapter_fragment(adapter, fragment, frozenset(self.graph.nodes))
+                if (
+                    cache is not None
+                    and cache_miss
+                    and not cache.store(adapter, fingerprint, fragment, partition)
+                ):
+                    self.skipped_cache_writes.append(adapter.name)
+                for node in sorted(fragment.nodes, key=lambda item: item.id):
+                    self.graph.add_node(node)
+                for edge in sorted(
+                    fragment.edges,
+                    key=lambda item: (
+                        item.source,
+                        item.target,
+                        item.relation,
+                        item.evidence,
+                    ),
+                ):
+                    if not self.graph.add_edge(edge):
+                        raise ValueError(
+                            f"Adapter {adapter.name!r} emitted invalid edge: "
+                            f"{edge.source} -> {edge.target}"
+                        )
+            if cache is not None and adapter_rebuilt:
+                self.rebuilt_adapters.append(adapter.name)
+            elif cache is not None and adapter_reused:
+                self.reused_adapters.append(adapter.name)
+
+    def _scope_adapter_fragment(self, fragment: GraphFragment) -> GraphFragment:
+        if self.workspace is None:
+            return fragment
+        nodes = []
+        node_paths: dict[str, str] = {}
+        for node in fragment.nodes:
+            if node.path is None:
+                nodes.append(node)
+                continue
+            node_paths[node.id] = node.path
+            owners = self.workspace.owners(node.path)
+            nodes.append(
+                Node(
+                    node.id,
+                    node.kind,
+                    node.label,
+                    node.path,
+                    {
+                        **node.metadata,
+                        "workspace_candidates": list(self.workspace.candidates(node.path)),
+                        "workspace_owners": list(owners),
+                        "workspace_state": "aligned" if len(owners) == 1 else "ambiguous",
+                    },
+                )
+            )
+        edges = []
+        for edge in fragment.edges:
+            source = _endpoint_path(edge.source, node_paths, self.graph)
+            target = _endpoint_path(edge.target, node_paths, self.graph)
+            if source is None or target is None or self.workspace.allows(source, target):
+                edges.append(edge)
+        return GraphFragment(nodes=tuple(nodes), edges=tuple(edges))
+
     def _scan_git_history(self) -> None:
         symbols_by_path = _symbols_by_path(self.graph.nodes.values())
         for commit in collect_git_history(
@@ -317,6 +438,12 @@ class RepositoryScanner:
             for symbol_id in _modified_symbols(commit.hunks, symbols_by_path):
                 self.graph.add_edge(Edge(node_id, symbol_id, "modifies", "git-diff-hunk"))
 
+    def _check_graph_budget(self) -> None:
+        if len(self.graph.nodes) > MAX_GRAPH_NODES:
+            raise ValueError(f"Graph exceeds the {MAX_GRAPH_NODES}-node scan budget")
+        if self.graph.edge_count > MAX_GRAPH_EDGES:
+            raise ValueError(f"Graph exceeds the {MAX_GRAPH_EDGES}-edge scan budget")
+
     def _scan_evidence_reports(self) -> None:
         kinds = {
             relative: self.graph.nodes[f"file:{relative}"].kind for relative in self.files
@@ -332,6 +459,10 @@ class RepositoryScanner:
             sarif_reports=self.config.sarif_reports,
             test_execution_reports=self.config.test_execution_reports,
             head_revision=resolve_git_head(self.root),
+            workspace_owners=dict(
+                self.workspace.aligned_owners if self.workspace is not None else {}
+            ),
+            graph_nodes=dict(self.graph.nodes),
         )
         for node in fragment.nodes:
             self.graph.add_node(node)
@@ -435,12 +566,26 @@ def _adapter_fingerprint(adapter: LanguageAdapter, context: AdapterContext) -> s
     _hash_part(digest, adapter.name.encode("utf-8"))
     _hash_part(digest, str(adapter.cache_version).encode("ascii"))
     _hash_part(digest, str(context.max_parse_bytes).encode("ascii"))
+    for owner, roots in sorted(context.source_roots.items()):
+        _hash_part(digest, owner.encode("utf-8"))
+        for root in roots:
+            _hash_part(digest, root.encode("utf-8"))
+    for owner, pattern, targets in context.module_aliases:
+        _hash_part(digest, owner.encode("utf-8"))
+        _hash_part(digest, pattern.encode("utf-8"))
+        for target in targets:
+            _hash_part(digest, target.encode("utf-8"))
+    for source, target in sorted(context.workspace_dependencies):
+        _hash_part(digest, source.encode("utf-8"))
+        _hash_part(digest, target.encode("utf-8"))
     for relative in sorted(context.files):
         suffix = PurePosixPath(relative).suffix.casefold()
         if suffix not in adapter.cache_input_suffixes:
             continue
         _hash_part(digest, relative.encode("utf-8"))
         _hash_part(digest, context.kinds[relative].encode("utf-8"))
+        for owner in context.workspace_owners.get(relative, ()):
+            _hash_part(digest, owner.encode("utf-8"))
         path = context.files[relative]
         try:
             size = path.stat().st_size
@@ -453,6 +598,94 @@ def _adapter_fingerprint(adapter: LanguageAdapter, context: AdapterContext) -> s
         except OSError:
             _hash_part(digest, b"unreadable")
     return digest.hexdigest()
+
+
+def _adapter_partitions(
+    adapter: LanguageAdapter, context: AdapterContext
+) -> tuple[tuple[str, AdapterContext], ...]:
+    owners = {
+        owner
+        for relative in context.files
+        if PurePosixPath(relative).suffix.casefold() in adapter.cache_input_suffixes
+        for owner in context.workspace_owners.get(relative, ())
+    }
+    if not owners:
+        owners = {"workspace:repository:."}
+    partitions: list[tuple[str, AdapterContext]] = []
+    for owner in sorted(owners):
+        closure = {owner}
+        while True:
+            additions = {
+                target
+                for source, target in context.workspace_dependencies
+                if source in closure
+            }
+            if additions <= closure:
+                break
+            closure.update(additions)
+        selected = {
+            relative: path
+            for relative, path in context.files.items()
+            if set(context.workspace_owners.get(relative, ())) & closure
+        }
+        partitions.append(
+            (
+                owner,
+                AdapterContext(
+                    files=MappingProxyType(selected),
+                    kinds=MappingProxyType(
+                        {relative: context.kinds[relative] for relative in selected}
+                    ),
+                    max_parse_bytes=context.max_parse_bytes,
+                    workspace_owners=MappingProxyType(
+                        {
+                            relative: context.workspace_owners.get(relative, ())
+                            for relative in selected
+                        }
+                    ),
+                    source_roots=MappingProxyType(
+                        {
+                            key: value
+                            for key, value in context.source_roots.items()
+                            if key in closure
+                        }
+                    ),
+                    module_aliases=tuple(
+                        value for value in context.module_aliases if value[0] in closure
+                    ),
+                    workspace_dependencies=frozenset(
+                        (source, target)
+                        for source, target in context.workspace_dependencies
+                        if source in closure and target in closure
+                    ),
+                ),
+            )
+        )
+    return tuple(partitions)
+
+
+def _workspace_source_roots(model: WorkspaceModel | None) -> dict[str, tuple[str, ...]]:
+    if model is None:
+        return {}
+    grouped: dict[str, list[str]] = defaultdict(list)
+    for source_root in model.source_roots:
+        grouped[owner_id(source_root)].append(source_root.path)
+    return {
+        owner: tuple(sorted(set(roots)))
+        for owner, roots in sorted(grouped.items())
+    }
+
+
+def _endpoint_path(
+    node_id: str,
+    fragment_paths: dict[str, str],
+    graph: AtlasGraph,
+) -> str | None:
+    path = fragment_paths.get(node_id)
+    if path is not None:
+        return path
+    node = graph.nodes.get(node_id)
+    return node.path if node is not None else None
 
 
 def _hash_part(digest: _HashWriter, value: bytes) -> None:

@@ -7,6 +7,7 @@ import pytest
 from intentatlas.cli import main
 from intentatlas.scale import (
     render_scale_benchmark,
+    run_large_graph_benchmark,
     run_scale_benchmark,
 )
 
@@ -76,3 +77,19 @@ def test_scale_benchmark_cli_and_format_errors(capsys) -> None:
     result = run_scale_benchmark(unrelated_edges=0, iterations=1)
     with pytest.raises(ValueError, match="Unknown scale benchmark output format"):
         render_scale_benchmark(result, "yaml")
+
+
+def test_large_graph_benchmark_has_exact_work_counts_and_bounded_queries() -> None:
+    result = run_large_graph_benchmark(node_count=100, edge_count=500)
+    assert result.node_count == result.constructed_nodes == 100
+    assert result.edge_count == result.constructed_edges == 500
+    assert result.overview_nodes == 100
+    assert result.overview_edges == 500
+    assert result.overview_omitted_nodes == 0
+    assert result.overview_omitted_edges == 0
+    assert 0 < result.overview_payload_bytes < 1_000_000
+    assert result.search_result_count == 1
+    assert 0 < result.neighborhood_node_count <= 240
+    assert result.graph_build_seconds >= 0
+    assert result.index_build_seconds >= 0
+    assert result.overview_query_seconds >= 0

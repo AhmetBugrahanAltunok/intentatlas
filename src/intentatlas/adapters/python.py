@@ -3,7 +3,7 @@ from __future__ import annotations
 import ast
 from collections import defaultdict
 from collections.abc import Iterable
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from ..models import Edge, Node
 from .base import AdapterContext, GraphFragment, canonical_graph_fragment
@@ -19,7 +19,7 @@ class PythonAdapter:
     )
 
     def scan(self, context: AdapterContext) -> GraphFragment:
-        module_to_nodes, path_to_module = _build_module_maps(context.files)
+        module_to_nodes, path_to_module = _build_module_maps(context)
         nodes: list[Node] = []
         edges: list[Edge] = []
         trees: dict[str, ast.AST] = {}
@@ -39,9 +39,10 @@ class PythonAdapter:
             file_node = f"file:{relative}"
             visitor = _SymbolVisitor(relative)
             visitor.visit(parsed_tree)
-            nodes.extend(visitor.nodes)
+            file_symbols = _unique_symbol_nodes(visitor.nodes)
+            nodes.extend(file_symbols)
             edges.extend(
-                Edge(file_node, node.id, "defines", "python-ast") for node in visitor.nodes
+                Edge(file_node, node.id, "defines", "python-ast") for node in file_symbols
             )
 
         symbol_resolver = _PythonSymbolResolver(
@@ -49,6 +50,7 @@ class PythonAdapter:
             nodes,
             module_to_nodes,
             path_to_module,
+            context,
         )
         for relative in sorted(trees):
             tree = trees[relative]
@@ -64,7 +66,11 @@ class PythonAdapter:
                 precise_files.add(f"file:{symbol_path}")
 
             for imported_module in sorted(_python_imports(tree, relative, path_to_module)):
-                target = _resolve_module(imported_module, module_to_nodes)
+                target = _resolve_module(
+                    imported_module,
+                    module_to_nodes,
+                    _allowed_owners(context, relative),
+                )
                 if (
                     target is not None
                     and target != file_node
@@ -117,23 +123,39 @@ class _SymbolVisitor(ast.NodeVisitor):
 
 
 def _build_module_maps(
-    files: Iterable[str],
-) -> tuple[dict[str, tuple[str, ...]], dict[str, str]]:
-    module_candidates: defaultdict[str, set[str]] = defaultdict(set)
+    context: AdapterContext,
+) -> tuple[dict[tuple[str, str], tuple[str, ...]], dict[str, str]]:
+    module_candidates: defaultdict[tuple[str, str], set[str]] = defaultdict(set)
     path_to_module: dict[str, str] = {}
-    for relative in sorted(files):
+    for relative in sorted(context.files):
         path = Path(relative)
         if path.suffix.casefold() != ".py":
             continue
-        parts = list(path.with_suffix("").parts)
-        if parts and parts[0] == "src":
+        module_path = PurePosixPath(relative).with_suffix("")
+        owners = context.workspace_owners.get(relative, ())
+        if len(owners) == 1:
+            matching_roots = [
+                root
+                for root in context.source_roots.get(owners[0], ())
+                if not root or relative == root or relative.startswith(f"{root}/")
+            ]
+            if matching_roots:
+                source_root = max(
+                    matching_roots,
+                    key=lambda value: (len(PurePosixPath(value).parts), value),
+                )
+                if source_root:
+                    module_path = PurePosixPath(relative).relative_to(source_root).with_suffix("")
+        parts = list(module_path.parts)
+        if not context.source_roots and parts and parts[0] == "src":
             parts = parts[1:]
         if parts and parts[-1] == "__init__":
             parts = parts[:-1]
         if not parts:
             continue
         module = ".".join(parts)
-        module_candidates[module].add(f"file:{relative}")
+        owner = owners[0] if len(owners) == 1 else ""
+        module_candidates[(owner, module)].add(f"file:{relative}")
         path_to_module[relative] = module
     module_to_nodes = {
         module: tuple(sorted(candidates))
@@ -143,15 +165,32 @@ def _build_module_maps(
 
 
 def _resolve_module(
-    module: str, module_to_nodes: dict[str, tuple[str, ...]]
+    module: str,
+    module_to_nodes: dict[tuple[str, str], tuple[str, ...]],
+    owners: tuple[str, ...],
 ) -> str | None:
     candidate = module
     while candidate:
-        targets = module_to_nodes.get(candidate)
-        if targets is not None:
-            return targets[0] if len(targets) == 1 else None
+        targets = {
+            target
+            for owner in owners
+            for target in module_to_nodes.get((owner, candidate), ())
+        }
+        if targets:
+            return next(iter(targets)) if len(targets) == 1 else None
         candidate = candidate.rpartition(".")[0]
     return None
+
+
+def _allowed_owners(context: AdapterContext, relative: str) -> tuple[str, ...]:
+    owners = context.workspace_owners.get(relative, ())
+    if len(owners) != 1:
+        return ()
+    owner = owners[0]
+    dependencies = sorted(
+        target for source, target in context.workspace_dependencies if source == owner
+    )
+    return (owner, *dependencies)
 
 
 def _python_imports(tree: ast.AST, relative: str, path_to_module: dict[str, str]) -> Iterable[str]:
@@ -183,24 +222,28 @@ class _PythonSymbolResolver:
         self,
         trees: dict[str, ast.AST],
         nodes: Iterable[Node],
-        module_to_nodes: dict[str, tuple[str, ...]],
+        module_to_nodes: dict[tuple[str, str], tuple[str, ...]],
         path_to_module: dict[str, str],
+        context: AdapterContext,
     ) -> None:
         self.module_to_nodes = module_to_nodes
         self.path_to_module = path_to_module
-        self.direct: defaultdict[tuple[str, str], set[str]] = defaultdict(set)
+        self.context = context
+        self.direct: defaultdict[tuple[str, str, str], set[str]] = defaultdict(set)
         self.reexports: defaultdict[
-            tuple[str, str], set[tuple[str, str]]
+            tuple[str, str, str], set[tuple[str, str]]
         ] = defaultdict(set)
         for node in nodes:
             if node.path is None or "." in node.label:
                 continue
             module = path_to_module.get(node.path)
-            if module:
-                self.direct[(module, node.label)].add(node.id)
+            owners = context.workspace_owners.get(node.path, ())
+            if module and len(owners) == 1:
+                self.direct[(owners[0], module, node.label)].add(node.id)
         for relative, tree in trees.items():
             module = path_to_module.get(relative)
-            if not module:
+            owners = context.workspace_owners.get(relative, ())
+            if not module or len(owners) != 1:
                 continue
             for statement in getattr(tree, "body", ()):
                 if not isinstance(statement, ast.ImportFrom):
@@ -212,20 +255,27 @@ class _PythonSymbolResolver:
                     if alias.name == "*":
                         continue
                     exported_name = alias.asname or alias.name
-                    self.reexports[(module, exported_name)].add((base, alias.name))
+                    self.reexports[(owners[0], module, exported_name)].add(
+                        (base, alias.name)
+                    )
 
-    def resolve(self, module: str, name: str) -> str | None:
+    def resolve(self, owners: tuple[str, ...], module: str, name: str) -> str | None:
         current = (module, name)
         seen: set[tuple[str, str]] = set()
         for _depth in range(8):
             if current in seen:
                 return None
             seen.add(current)
-            owners = self.module_to_nodes.get(current[0])
-            if owners is not None and len(owners) != 1:
+            module_owners = [
+                owner
+                for owner in owners
+                if self.module_to_nodes.get((owner, current[0]))
+            ]
+            if len(module_owners) != 1:
                 return None
-            direct = self.direct.get(current, set())
-            forwarded = self.reexports.get(current, set())
+            module_owner = module_owners[0]
+            direct = self.direct.get((module_owner, *current), set())
+            forwarded = self.reexports.get((module_owner, *current), set())
             if direct and forwarded:
                 return None
             if direct:
@@ -237,6 +287,9 @@ class _PythonSymbolResolver:
 
     def references(self, relative: str, tree: ast.AST) -> set[str]:
         references: set[str] = set()
+        owners = _allowed_owners(self.context, relative)
+        if not owners:
+            return references
         module_bindings: dict[str, tuple[str, tuple[str, ...]]] = {}
         for node in ast.walk(tree):
             if isinstance(node, ast.ImportFrom):
@@ -246,7 +299,7 @@ class _PythonSymbolResolver:
                 for alias in node.names:
                     if alias.name == "*":
                         continue
-                    target = self.resolve(base, alias.name)
+                    target = self.resolve(owners, base, alias.name)
                     if target is not None:
                         references.add(target)
             elif isinstance(node, ast.Import):
@@ -270,7 +323,7 @@ class _PythonSymbolResolver:
             symbol_parts = attributes[len(module_suffix) :]
             if not symbol_parts:
                 continue
-            target = self.resolve(module, symbol_parts[0])
+            target = self.resolve(owners, module, symbol_parts[0])
             if target is not None:
                 references.add(target)
         return references
@@ -326,3 +379,14 @@ def _filename_test_edges(context: AdapterContext) -> Iterable[Edge]:
                 "tests",
                 "filename-convention",
             )
+
+
+def _unique_symbol_nodes(nodes: list[Node]) -> tuple[Node, ...]:
+    candidates: defaultdict[str, list[Node]] = defaultdict(list)
+    for node in nodes:
+        candidates[node.id].append(node)
+    return tuple(
+        values[0]
+        for node_id, values in sorted(candidates.items())
+        if len(values) == 1 and values[0].id == node_id
+    )

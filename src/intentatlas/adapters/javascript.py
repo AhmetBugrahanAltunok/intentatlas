@@ -96,11 +96,11 @@ class JavaScriptAdapter:
             file_node = f"file:{relative}"
             relation = "tests" if context.kinds[relative] == "test" else "imports"
             for specifier in _module_specifiers(structural):
-                target = _resolve_local_module(relative, specifier, aliases)
+                target = _resolve_local_module(relative, specifier, aliases, context)
                 if target is not None and target != file_node:
                     edges.append(Edge(file_node, target, relation, "javascript-structural"))
             for specifier, imported_names in _javascript_imports(structural):
-                target = _resolve_local_module(relative, specifier, aliases)
+                target = _resolve_local_module(relative, specifier, aliases, context)
                 if target is None or target == file_node:
                     continue
                 for imported_name in imported_names:
@@ -165,8 +165,6 @@ def _javascript_imports(source: str) -> list[tuple[str, tuple[str, ...]]]:
         if match is None:
             continue
         clause, specifier = match.groups()
-        if not specifier.startswith("."):
-            continue
         imported: set[str] = set()
         leading = clause.split(",", 1)[0].strip()
         if leading and not leading.startswith(("{", "*")):
@@ -194,7 +192,7 @@ def _module_specifiers(source: str) -> list[str]:
             match = pattern.search(flattened)
             if match is not None:
                 values.add(match.group(1))
-    return sorted(value for value in values if value.startswith("."))
+    return sorted(values)
 
 
 def _module_statements(source: str) -> list[str]:
@@ -251,24 +249,51 @@ def _resolve_local_module(
     relative: str,
     specifier: str,
     aliases: dict[str, set[str]],
+    context: AdapterContext,
 ) -> str | None:
-    if not specifier.startswith(".") or "?" in specifier or "#" in specifier:
+    if "?" in specifier or "#" in specifier:
         return None
-    candidate = posixpath.normpath(
-        posixpath.join(PurePosixPath(relative).parent.as_posix(), specifier)
-    )
-    if candidate == ".." or candidate.startswith("../") or candidate.startswith("/"):
-        return None
+    candidates: set[str] = set()
+    if specifier.startswith("."):
+        candidate = posixpath.normpath(
+            posixpath.join(PurePosixPath(relative).parent.as_posix(), specifier)
+        )
+        candidates.update(_alias_targets(candidate, aliases))
+    else:
+        owners = context.workspace_owners.get(relative, ())
+        if len(owners) != 1:
+            return None
+        for owner, pattern, targets in context.module_aliases:
+            if owner != owners[0]:
+                continue
+            wildcard = _alias_wildcard(pattern, specifier)
+            if wildcard is None:
+                continue
+            for target in targets:
+                candidates.update(_alias_targets(target.replace("*", wildcard), aliases))
+    return next(iter(candidates)) if len(candidates) == 1 else None
 
-    direct = aliases.get(candidate, set())
-    if len(direct) == 1:
-        return next(iter(direct))
+
+def _alias_targets(candidate: str, aliases: dict[str, set[str]]) -> set[str]:
+    if candidate == ".." or candidate.startswith("../") or candidate.startswith("/"):
+        return set()
+    targets = set(aliases.get(candidate, set()))
     suffix = PurePosixPath(candidate).suffix.casefold()
     if suffix in JAVASCRIPT_SUFFIXES:
-        without_suffix = aliases.get(PurePosixPath(candidate).with_suffix("").as_posix(), set())
-        if len(without_suffix) == 1:
-            return next(iter(without_suffix))
-    return None
+        targets.update(aliases.get(PurePosixPath(candidate).with_suffix("").as_posix(), set()))
+    return targets
+
+
+def _alias_wildcard(pattern: str, specifier: str) -> str | None:
+    if pattern.count("*") > 1:
+        return None
+    if "*" not in pattern:
+        return "" if pattern == specifier else None
+    prefix, suffix = pattern.split("*", maxsplit=1)
+    if not specifier.startswith(prefix) or not specifier.endswith(suffix):
+        return None
+    end = len(specifier) - len(suffix) if suffix else None
+    return specifier[len(prefix) : end]
 
 
 def _filename_test_edges(

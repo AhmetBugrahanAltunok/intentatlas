@@ -34,3 +34,10 @@ bounded local edge work are the regression contract.
 
 The benchmark is offline and synthetic. It reads no repository, runs no project code, writes no
 graph, and makes no network request.
+
+Phase 13 additionally exercises an exact 100,000-node/500,000-edge deterministic graph. Evidence
+records construction counters, peak process working set, 240-node/900-edge overview payload bytes,
+global search latency, and bounded two-hop neighborhood latency on declared reference hardware.
+The local viewer obtains its initial bounded window from `/api/graph/overview`; search,
+neighborhood, paths, and report details use separate bounded loopback endpoints. Every graph query
+returns one snapshot identity plus explicit total, returned, and omitted counts.

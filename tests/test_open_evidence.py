@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+from pathlib import Path
 
 import pytest
 
@@ -166,6 +167,13 @@ def test_imports_open_evidence_without_retaining_raw_content(tmp_path) -> None:
         "definitions": 1,
         "references": 1,
         "diagnostics": 1,
+        "producer": "unknown",
+        "producer_version": "unknown",
+        "schema": "unknown",
+        "revision": "unavailable",
+        "freshness": "unknown",
+        "exact_occurrences": 0,
+        "fallback_occurrences": 2,
         "owner": "scanner",
     }
     assert first.nodes[sarif_id].metadata == {
@@ -248,6 +256,132 @@ def test_stale_and_unknown_execution_maps_withhold_runtime_test_edges(tmp_path) 
         edge.evidence == "test-execution-map" and edge.relation == "tests"
         for edge in unknown.edges
     )
+
+
+def test_revision_bound_scip_creates_exact_symbol_test_edge_only_when_aligned(tmp_path) -> None:
+    config, head = build_open_evidence_project(tmp_path)
+    config.sarif_reports = []
+    config.test_execution_reports = []
+    report = tmp_path / "reports" / "index.scip.json"
+    report.write_text(
+        json.dumps(
+            {
+                "metadata": {
+                    "version": "0.3.0",
+                    "revision": head,
+                    "toolInfo": {"name": "scip-python", "version": "1.0.0"},
+                },
+                "documents": [
+                    {
+                        "relativePath": "src/app.py",
+                        "occurrences": [
+                            {
+                                "range": [0, 4, 7],
+                                "symbol": "scip-python python demo run().",
+                                "symbolRoles": 1,
+                            }
+                        ],
+                    },
+                    {
+                        "relativePath": "tests/test_app.py",
+                        "occurrences": [
+                            {
+                                "range": [0, 0, 3],
+                                "symbol": "scip-python python demo run().",
+                                "symbolRoles": 0,
+                            }
+                        ],
+                    },
+                ],
+                "externalSymbols": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, config)
+    assert any(
+        edge.source == "file:tests/test_app.py"
+        and edge.target == "symbol:src/app.py::run"
+        and edge.relation == "tests"
+        and edge.evidence == "scip-exact"
+        for edge in graph.edges
+    )
+    observations = [
+        node for node in graph.nodes.values() if node.kind == "semantic-observation"
+    ]
+    assert len(observations) == 2
+    assert {node.metadata["confidence"] for node in observations} == {"exact"}
+    persisted = json.dumps(graph.to_dict(), sort_keys=True)
+    assert "scip-python python demo run()." not in persisted
+
+    document = json.loads(report.read_text(encoding="utf-8"))
+    document["metadata"]["revision"] = "0" * 40
+    report.write_text(json.dumps(document), encoding="utf-8")
+    stale = scan_repository(tmp_path, config)
+    assert not any(edge.evidence == "scip-exact" for edge in stale.edges)
+    assert {
+        node.metadata["confidence"]
+        for node in stale.nodes.values()
+        if node.kind == "semantic-observation"
+    } == {"fallback"}
+
+
+def test_scip_ambiguous_owner_and_unsupported_roles_remain_fallback(tmp_path) -> None:
+    config, head = build_open_evidence_project(tmp_path)
+    config.sarif_reports = []
+    config.test_execution_reports = []
+    document = {
+        "metadata": {
+            "version": "0.3.0",
+            "revision": head,
+            "toolInfo": {"name": "scip-python", "version": "1.0.0"},
+        },
+        "documents": [
+            {
+                "relativePath": "src/app.py",
+                "occurrences": [
+                    {
+                        "range": [0, 4, 7],
+                        "symbol": "symbol",
+                        "symbolRoles": 2,
+                    }
+                ],
+            }
+        ],
+        "externalSymbols": [],
+    }
+    nodes, edges = open_evidence_module.scip_fragment(
+        document,
+        "reports/index.scip.json",
+        {"src/app.py": ("src/app.py",)},
+        root=tmp_path,
+        kinds={"src/app.py": "file"},
+        head_revision=head,
+        workspace_owners={"src/app.py": ("owner:a", "owner:b")},
+        graph_nodes={},
+    )
+    observation = next(node for node in nodes if node.kind == "semantic-observation")
+    assert observation.metadata["confidence"] == "fallback"
+    assert observation.metadata["workspace_owner"] == "ambiguous"
+    assert not any(edge.evidence == "scip-exact" for edge in edges)
+
+
+def test_scip_import_does_not_launch_repository_tooling(tmp_path, monkeypatch) -> None:
+    config, _head = build_open_evidence_project(tmp_path)
+    config.sarif_reports = []
+    config.test_execution_reports = []
+    original_run = subprocess.run
+
+    def git_only(command, *args, **kwargs):
+        executable = command[0] if isinstance(command, (list, tuple)) else command
+        if Path(executable).stem.casefold() != "git":
+            raise AssertionError(f"unexpected project tool execution: {executable}")
+        return original_run(command, *args, **kwargs)
+
+    monkeypatch.setattr(subprocess, "run", git_only)
+    graph = scan_repository(tmp_path, config)
+    assert any(node.kind == "code-index" for node in graph.nodes.values())
 
 
 def test_dirty_mapped_paths_make_matching_commit_execution_stale(tmp_path) -> None:

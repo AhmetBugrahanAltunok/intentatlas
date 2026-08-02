@@ -42,6 +42,32 @@ def build_python_project(tmp_path) -> None:
     (tmp_path / ".obsidian" / "ignored.md").write_text("# Wrong vault\n", encoding="utf-8")
 
 
+def test_repository_file_and_byte_budgets_fail_before_adapter_work(tmp_path, monkeypatch) -> None:
+    (tmp_path / "one.py").write_text("value = 1\n", encoding="utf-8")
+    (tmp_path / "two.py").write_text("value = 2\n", encoding="utf-8")
+    monkeypatch.setattr(scanner_module, "MAX_REPOSITORY_FILES", 1)
+    with pytest.raises(ValueError, match="file scan budget"):
+        scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    monkeypatch.setattr(scanner_module, "MAX_REPOSITORY_FILES", 10)
+    monkeypatch.setattr(scanner_module, "MAX_REPOSITORY_BYTES", 1)
+    with pytest.raises(ValueError, match="byte scan budget"):
+        scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+
+def test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one(tmp_path) -> None:
+    (tmp_path / "app.py").write_text(
+        "class Config:\n"
+        "    if True:\n"
+        "        def value(self): return 1\n"
+        "    else:\n"
+        "        def value(self): return 2\n",
+        encoding="utf-8",
+    )
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+    assert "symbol:app.py::Config" in graph.nodes
+    assert "symbol:app.py::Config.value" not in graph.nodes
+
 def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
     build_python_project(tmp_path)
     graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
@@ -54,6 +80,9 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
         "line": 2,
         "end_line": 3,
         "owner": "scanner",
+        "workspace_candidates": ["workspace:repository:."],
+        "workspace_owners": ["workspace:repository:."],
+        "workspace_state": "aligned",
     }
     assert "file:.venv/ignored.py" not in graph.nodes
     assert "file:.obsidian/ignored.md" not in graph.nodes

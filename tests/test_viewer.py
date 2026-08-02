@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+import json
 import socket
 from importlib.resources import files
 
 import pytest
 
 import intentatlas.viewer as viewer
+from intentatlas.graph import AtlasGraph
+
+
+def _graph_document() -> str:
+    return json.dumps(AtlasGraph().to_dict())
 
 
 def test_viewer_assets_are_packaged() -> None:
@@ -13,9 +19,12 @@ def test_viewer_assets_are_packaged() -> None:
     assert "IntentAtlas" in web.joinpath("index.html").read_text(encoding="utf-8")
     assert "--accent" in web.joinpath("styles.css").read_text(encoding="utf-8")
     app = web.joinpath("app.js").read_text(encoding="utf-8")
-    assert 'fetch("/graph.json"' in app
-    assert 'fetch("/review.json"' in app
-    assert 'fetch("/change-report.json"' in app
+    assert 'fetch("/api/graph/overview?node_limit=240&edge_limit=900"' in app
+    assert 'fetch("/api/report/review"' in app
+    assert 'fetch("/api/report/change"' in app
+    assert 'fetch("/graph.json"' not in app
+    assert "/api/graph/search" in app
+    assert "/api/graph/neighborhood" in app
     assert "renderChangeReport" in app
     pointerup = app.split('group.addEventListener("pointerup"', maxsplit=1)[1].split(
         'group.addEventListener("pointercancel"', maxsplit=1
@@ -73,7 +82,7 @@ def test_serve_graph_rejects_missing_graph(tmp_path) -> None:
 
 def test_serve_graph_rejects_non_loopback_and_invalid_ports(tmp_path) -> None:
     graph = tmp_path / "graph.json"
-    graph.write_text("{}", encoding="utf-8")
+    graph.write_text(_graph_document(), encoding="utf-8")
     with pytest.raises(ValueError, match="loopback"):
         viewer.serve_graph(graph, host="0.0.0.0", open_browser=False)
     with pytest.raises(ValueError, match="IPv4 loopback"):
@@ -86,7 +95,7 @@ def test_serve_graph_rejects_non_loopback_and_invalid_ports(tmp_path) -> None:
 
 def test_serve_graph_starts_and_closes_server(tmp_path, monkeypatch, capsys) -> None:
     graph = tmp_path / "graph.json"
-    graph.write_text("{}", encoding="utf-8")
+    graph.write_text(_graph_document(), encoding="utf-8")
 
     class FakeServer:
         server_address = ("127.0.0.1", 1234)

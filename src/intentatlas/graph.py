@@ -65,8 +65,8 @@ class GraphIndex:
 class AtlasGraph:
     """Language-neutral, deterministic graph of project intent and implementation."""
 
-    schema_version = 3
-    supported_schema_versions = {1, 2, schema_version}
+    schema_version = 4
+    supported_schema_versions = {1, 2, 3, schema_version}
 
     def __init__(self) -> None:
         self.nodes: dict[str, Node] = {}
@@ -79,6 +79,10 @@ class AtlasGraph:
             self._edges.values(),
             key=lambda edge: (edge.source, edge.target, edge.relation, edge.evidence),
         )
+
+    @property
+    def edge_count(self) -> int:
+        return len(self._edges)
 
     @property
     def index(self) -> GraphIndex:
@@ -250,8 +254,12 @@ class AtlasGraph:
             )
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
             raise ValueError(f"Cannot read graph at {path}: {exc}") from exc
+        return cls.from_dict(value, source=str(path))
+
+    @classmethod
+    def from_dict(cls, value: Any, *, source: str = "graph document") -> AtlasGraph:
         if not isinstance(value, dict):
-            raise ValueError(f"Invalid graph document at {path}: expected a JSON object")
+            raise ValueError(f"Invalid graph document at {source}: expected a JSON object")
         schema_version = value.get("schema_version")
         if type(schema_version) is not int or schema_version not in cls.supported_schema_versions:
             raise ValueError(f"Unsupported graph schema: {schema_version}")
@@ -270,8 +278,8 @@ class AtlasGraph:
         nodes = value.get("nodes", [])
         edges = value.get("edges", [])
         if not isinstance(nodes, list) or not isinstance(edges, list):
-            raise ValueError(f"Invalid graph document at {path}: nodes and edges must be lists")
-        if schema_version == 2:
+            raise ValueError(f"Invalid graph document at {source}: nodes and edges must be lists")
+        if schema_version in {2, 3}:
             relation_schema_version = value.get("relation_schema_version")
             if (
                 type(relation_schema_version) is not int

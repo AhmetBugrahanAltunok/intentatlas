@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import threading
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 from pathlib import Path
 from socketserver import TCPServer
+from urllib.parse import parse_qs, urlsplit
+
+from .graph import AtlasGraph
+from .graph_query import GraphQuerySnapshot
 
 CONTENT_TYPES = {
     "/": ("index.html", "text/html; charset=utf-8"),
@@ -44,13 +50,32 @@ def serve_graph(
         served_graph_document = graph_path.read_bytes()
     else:
         served_graph_document = graph_document
+    try:
+        graph_value = json.loads(served_graph_document.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(f"Cannot parse viewer graph: {exc}") from exc
+    graph = AtlasGraph.from_dict(graph_value, source="viewer graph")
+    snapshot = GraphQuerySnapshot(
+        graph,
+        hashlib.sha256(served_graph_document).hexdigest(),
+    )
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:  # noqa: N802
             if self.headers.get("Host") not in allowed_hosts:
                 self.send_error(421, "Unexpected Host header")
                 return
-            route = self.path.split("?", maxsplit=1)[0]
+            parsed = urlsplit(self.path)
+            route = parsed.path
+            if route.startswith("/api/graph/"):
+                self._graph_query(route, parse_qs(parsed.query, keep_blank_values=True))
+                return
+            if route == "/api/report/change" and change_report_document is not None:
+                self._send(change_report_document, "application/json; charset=utf-8")
+                return
+            if route == "/api/report/review" and review_document is not None:
+                self._send(review_document, "application/json; charset=utf-8")
+                return
             if route == "/graph.json":
                 self._send(served_graph_document, "application/json; charset=utf-8")
                 return
@@ -67,6 +92,50 @@ def serve_graph(
             name, content_type = asset
             body = files("intentatlas.web").joinpath(name).read_bytes()
             self._send(body, content_type)
+
+        def _graph_query(self, route: str, query: dict[str, list[str]]) -> None:
+            try:
+                if route == "/api/graph/overview":
+                    value = snapshot.overview(
+                        node_limit=_query_int(query, "node_limit", 240),
+                        edge_limit=_query_int(query, "edge_limit", 900),
+                    )
+                elif route == "/api/graph/search":
+                    value = snapshot.search(
+                        _query_text(query, "q"),
+                        limit=_query_int(query, "limit", 20),
+                    )
+                elif route == "/api/graph/neighborhood":
+                    value = snapshot.neighborhood(
+                        _query_text(query, "id"),
+                        depth=_query_int(query, "depth", 2),
+                        node_limit=_query_int(query, "node_limit", 240),
+                        edge_limit=_query_int(query, "edge_limit", 900),
+                    )
+                elif route == "/api/graph/paths":
+                    target = query.get("target", [None])[0]
+                    value = snapshot.paths(
+                        _query_text(query, "start"),
+                        target=target,
+                        depth=_query_int(query, "depth", 6),
+                        visited_limit=_query_int(query, "visited_limit", 800),
+                        result_limit=_query_int(query, "result_limit", 6),
+                    )
+                else:
+                    self.send_error(404)
+                    return
+            except ValueError as exc:
+                body = json.dumps(
+                    {"schema_version": 1, "error": str(exc)}, sort_keys=True
+                ).encode("utf-8")
+                self.send_response(400)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+                return
+            body = json.dumps(value, separators=(",", ":"), sort_keys=True).encode("utf-8")
+            self._send(body, "application/json; charset=utf-8")
 
         def _send(self, body: bytes, content_type: str) -> None:
             self.send_response(200)
@@ -107,3 +176,19 @@ def serve_graph(
         pass
     finally:
         server.server_close()
+
+
+def _query_text(query: dict[str, list[str]], name: str) -> str:
+    values = query.get(name, [])
+    if len(values) != 1:
+        raise ValueError(f"{name} must appear exactly once")
+    return values[0]
+
+
+def _query_int(query: dict[str, list[str]], name: str, default: int) -> int:
+    values = query.get(name)
+    if values is None:
+        return default
+    if len(values) != 1 or not values[0].isascii() or not values[0].isdigit():
+        raise ValueError(f"{name} must be an integer")
+    return int(values[0])

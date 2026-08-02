@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from dataclasses import dataclass
@@ -42,8 +43,9 @@ class AdapterFragmentCache:
         adapter: LanguageAdapter,
         fingerprint: str,
         known_file_nodes: frozenset[str],
+        partition: str = "workspace:repository:.",
     ) -> CacheLoad:
-        path = self._path(adapter.name)
+        path = self._path(adapter.name, partition)
         if path is None or not path.is_file() or path.is_symlink():
             return CacheLoad(None, "missing-or-unsafe")
         try:
@@ -74,8 +76,9 @@ class AdapterFragmentCache:
         adapter: LanguageAdapter,
         fingerprint: str,
         fragment: GraphFragment,
+        partition: str = "workspace:repository:.",
     ) -> bool:
-        path = self._path(adapter.name)
+        path = self._path(adapter.name, partition)
         if path is None or path.is_symlink():
             return False
         canonical = _canonical_fragment(fragment)
@@ -100,10 +103,13 @@ class AdapterFragmentCache:
             return False
         return True
 
-    def _path(self, adapter_name: str) -> Path | None:
+    def _path(self, adapter_name: str, partition: str) -> Path | None:
         if not self.enabled or SAFE_ADAPTER_NAME.fullmatch(adapter_name) is None:
             return None
-        return self.root / f"{adapter_name}.json"
+        if partition == "workspace:repository:.":
+            return self.root / f"{adapter_name}.json"
+        digest = hashlib.sha256(partition.encode("utf-8")).hexdigest()[:16]
+        return self.root / f"{adapter_name}--{digest}.json"
 
 
 def _fragment_from_document(
@@ -173,7 +179,15 @@ def _strict_node(value: Any) -> Node:
         or value["id"] != f"symbol:{path}::{value['label']}"
         or not isinstance(metadata, dict)
         or not {"symbol_kind", "line", "owner"} <= set(metadata)
-        or set(metadata) - {"symbol_kind", "line", "end_line", "owner"}
+        or set(metadata) - {
+            "symbol_kind",
+            "line",
+            "end_line",
+            "owner",
+            "workspace_candidates",
+            "workspace_owners",
+            "workspace_state",
+        }
         or metadata["owner"] != "scanner"
         or not isinstance(metadata["symbol_kind"], str)
         or not metadata["symbol_kind"]
@@ -187,6 +201,19 @@ def _strict_node(value: Any) -> Node:
         type(end_line) is not int or end_line < metadata["line"]
     ):
         raise ValueError("Invalid cached node span")
+    workspace_fields = {"workspace_candidates", "workspace_owners", "workspace_state"}
+    if workspace_fields & set(metadata):
+        if not workspace_fields <= set(metadata):
+            raise ValueError("Incomplete cached workspace ownership")
+        for key in ("workspace_candidates", "workspace_owners"):
+            values = metadata[key]
+            if not isinstance(values, list) or any(
+                not isinstance(item, str) or not item or len(item) > MAX_CACHE_STRING
+                for item in values
+            ):
+                raise ValueError("Invalid cached workspace ownership")
+        if metadata["workspace_state"] not in {"aligned", "ambiguous"}:
+            raise ValueError("Invalid cached workspace state")
     return Node.from_dict(value)
 
 

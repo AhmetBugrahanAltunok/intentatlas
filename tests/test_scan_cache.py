@@ -179,3 +179,49 @@ def test_scan_fails_closed_when_adapter_inputs_change_during_analysis(
 
     cache = AdapterFragmentCache(tmp_path)
     assert cache.root.joinpath("python.json").exists() is False
+
+
+def test_workspace_partitions_reuse_unrelated_projects_and_invalidate_dependents(
+    tmp_path,
+) -> None:
+    for name in ("alpha", "beta", "gamma"):
+        root = tmp_path / "packages" / name
+        (root / "src").mkdir(parents=True)
+        dependencies = '["beta"]' if name == "alpha" else "[]"
+        (root / "pyproject.toml").write_text(
+            f'[project]\nname = "{name}"\ndependencies = {dependencies}\n'
+            '[tool.setuptools.package-dir]\n"" = "src"\n',
+            encoding="utf-8",
+        )
+        (root / "src" / f"{name}.py").write_text(
+            f"def value():\n    return {name!r}\n", encoding="utf-8"
+        )
+    config = ProjectConfig(git_history_limit=0)
+    scan_repository_incremental(tmp_path, config)
+    warm = scan_repository_incremental(tmp_path, config)
+    assert {
+        value.rsplit(":", maxsplit=1)[-1]
+        for value in warm.statistics.reused_partitions
+        if value.startswith("python:")
+    } == {
+        "packages/alpha",
+        "packages/beta",
+        "packages/gamma",
+    }
+
+    beta = tmp_path / "packages" / "beta" / "src" / "beta.py"
+    beta.write_text("def value():\n    return 'changed'\n", encoding="utf-8")
+    changed = scan_repository_incremental(tmp_path, config)
+    rebuilt = {
+        value.removeprefix("python:")
+        for value in changed.statistics.rebuilt_partitions
+        if value.startswith("python:")
+    }
+    assert rebuilt == {
+        "workspace:python-project:packages/alpha",
+        "workspace:python-project:packages/beta",
+    }
+    assert (
+        "python:workspace:python-project:packages/gamma"
+        in changed.statistics.reused_partitions
+    )

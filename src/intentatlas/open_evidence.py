@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import re
@@ -45,6 +46,12 @@ def scip_fragment(
     document: Any,
     report: str,
     aliases: dict[str, tuple[str, ...]],
+    *,
+    root: Path | None = None,
+    kinds: dict[str, str] | None = None,
+    head_revision: str | None = None,
+    workspace_owners: dict[str, tuple[str, ...]] | None = None,
+    graph_nodes: dict[str, Node] | None = None,
 ) -> tuple[list[Node], list[Edge]]:
     if not isinstance(document, dict) or not isinstance(document.get("documents"), list):
         raise ValueError(f"SCIP report is not protobuf JSON: {report}")
@@ -55,7 +62,15 @@ def scip_fragment(
     external_symbols = document.get("externalSymbols", [])
     if not isinstance(external_symbols, list):
         raise ValueError(f"SCIP externalSymbols must be a list: {report}")
-    totals: dict[str, list[int]] = defaultdict(lambda: [0, 0, 0, 0])
+    metadata = document.get("metadata", {})
+    producer, producer_version, schema, revision, compatible = _scip_metadata(
+        metadata, report
+    )
+    owners_by_path = workspace_owners or {}
+    file_kinds = kinds or {}
+    symbols_by_path = _symbols_by_path(graph_nodes or {})
+    totals: dict[str, list[int]] = defaultdict(lambda: [0, 0, 0, 0, 0, 0])
+    observations: list[dict[str, Any]] = []
     records = len(document["documents"]) + len(external_symbols)
     _check_records(records, report)
     for item in document["documents"]:
@@ -76,7 +91,13 @@ def scip_fragment(
         records += len(symbols)
         _check_records(records, report)
         target = _resolve_file(relative_path, aliases)
-        counts = [0, 0, 0, 0]
+        counts = [0, 0, 0, 0, 0, 0]
+        unique_owner = (
+            owners_by_path.get(target, ())[0]
+            if target is not None and len(owners_by_path.get(target, ())) == 1
+            else None
+        )
+        freshness = _scip_freshness(root, target, revision, head_revision)
         for occurrence in occurrences:
             records += 1
             _check_records(records, report)
@@ -89,7 +110,7 @@ def scip_fragment(
                 "overrideDocumentation",
             }:
                 raise ValueError(f"SCIP report contains an invalid occurrence: {report}")
-            _scip_range(occurrence.get("range"), report)
+            normalized_range = _scip_range(occurrence.get("range"), report)
             symbol = occurrence.get("symbol", "")
             if not isinstance(symbol, str) or len(symbol) > MAX_STRING:
                 raise ValueError(f"SCIP occurrence has an invalid symbol: {report}")
@@ -106,6 +127,33 @@ def scip_fragment(
             counts[0] += 1
             counts[1 if roles & 1 else 2] += 1
             counts[3] += len(diagnostics)
+            supported_role = roles in {0, 1}
+            confidence = (
+                "exact"
+                if target is not None
+                and unique_owner is not None
+                and compatible
+                and freshness == "aligned"
+                and supported_role
+                and symbol
+                else "fallback"
+            )
+            if confidence == "exact":
+                counts[4] += 1
+            else:
+                counts[5] += 1
+            if target is not None and symbol:
+                observations.append(
+                    {
+                        "path": target,
+                        "range": normalized_range,
+                        "symbol": symbol,
+                        "role": "definition" if roles & 1 else "reference",
+                        "confidence": confidence,
+                        "freshness": freshness,
+                        "owner": unique_owner,
+                    }
+                )
         if target is not None:
             for index, value in enumerate(counts):
                 totals[target][index] += value
@@ -113,7 +161,7 @@ def scip_fragment(
     nodes: list[Node] = []
     edges: list[Edge] = []
     for target in sorted(totals):
-        occurrences, definitions, references, diagnostics = totals[target]
+        occurrences, definitions, references, diagnostics, exact, rejected = totals[target]
         node_id = f"code-index:{report}:{target}"
         nodes.append(
             Node(
@@ -127,11 +175,72 @@ def scip_fragment(
                     "definitions": definitions,
                     "references": references,
                     "diagnostics": diagnostics,
+                    "producer": producer,
+                    "producer_version": producer_version,
+                    "schema": schema,
+                    "revision": revision or "unavailable",
+                    "freshness": _scip_freshness(root, target, revision, head_revision),
+                    "exact_occurrences": exact,
+                    "fallback_occurrences": rejected,
                     "owner": "scanner",
                 },
             )
         )
         edges.append(Edge(node_id, f"file:{target}", "references", "scip-json"))
+    definitions_by_symbol: dict[str, set[str]] = defaultdict(set)
+    for observation in observations:
+        if observation["confidence"] != "exact" or observation["role"] != "definition":
+            continue
+        candidates = _symbols_at_range(
+            symbols_by_path.get(observation["path"], ()), observation["range"]
+        )
+        if len(candidates) == 1:
+            definitions_by_symbol[observation["symbol"]].add(candidates[0])
+
+    for observation in observations:
+        fingerprint = hashlib.sha256(observation["symbol"].encode("utf-8")).hexdigest()
+        identity = json.dumps(
+            [report, observation["path"], observation["range"], fingerprint, observation["role"]],
+            separators=(",", ":"),
+        )
+        node_id = f"semantic-observation:{hashlib.sha256(identity.encode('utf-8')).hexdigest()}"
+        nodes.append(
+            Node(
+                node_id,
+                "semantic-observation",
+                f"SCIP {observation['role']} {observation['path']}",
+                observation["path"],
+                {
+                    "format": "scip-protobuf-json",
+                    "report": report,
+                    "producer": producer,
+                    "producer_version": producer_version,
+                    "schema": schema,
+                    "revision": revision or "unavailable",
+                    "freshness": observation["freshness"],
+                    "confidence": observation["confidence"],
+                    "range": observation["range"],
+                    "role": observation["role"],
+                    "workspace_owner": observation["owner"] or "ambiguous",
+                    "symbol_fingerprint": fingerprint,
+                    "owner": "scanner",
+                },
+            )
+        )
+        edges.append(Edge(node_id, f"file:{observation['path']}", "references", "scip-json"))
+        if observation["confidence"] != "exact":
+            continue
+        targets = definitions_by_symbol.get(observation["symbol"], set())
+        if len(targets) != 1:
+            continue
+        target = next(iter(targets))
+        if observation["role"] == "definition":
+            edges.append(Edge(node_id, target, "proves", "scip-exact"))
+        else:
+            relation = "tests" if file_kinds.get(observation["path"]) == "test" else "references"
+            edges.append(
+                Edge(f"file:{observation['path']}", target, relation, "scip-exact")
+            )
     return nodes, edges
 
 
@@ -360,13 +469,95 @@ def _resolve_file(value: str, aliases: dict[str, tuple[str, ...]]) -> str | None
     return matches[0] if len(matches) == 1 else None
 
 
-def _scip_range(value: Any, report: str) -> None:
+def _scip_range(value: Any, report: str) -> list[int]:
     if (
         not isinstance(value, list)
         or len(value) not in {3, 4}
         or any(type(item) is not int or item < 0 or item > MAX_LINE for item in value)
     ):
         raise ValueError(f"SCIP occurrence has an invalid range: {report}")
+    if len(value) == 3 and value[2] < value[1]:
+        raise ValueError(f"SCIP occurrence has an invalid range: {report}")
+    if len(value) == 4 and (value[2], value[3]) < (value[0], value[1]):
+        raise ValueError(f"SCIP occurrence has an invalid range: {report}")
+    return list(value)
+
+
+def _scip_metadata(
+    metadata: dict[str, Any], report: str
+) -> tuple[str, str, str, str | None, bool]:
+    if not isinstance(metadata, dict):
+        raise ValueError(f"SCIP report metadata must be an object: {report}")
+    tool = metadata.get("toolInfo", {})
+    if not isinstance(tool, dict):
+        raise ValueError(f"SCIP toolInfo must be an object: {report}")
+    producer = _scip_metadata_string(tool.get("name", "unknown"), "producer", report)
+    producer_version = _scip_metadata_string(
+        tool.get("version", "unknown"), "producer version", report
+    )
+    schema = _scip_metadata_string(
+        metadata.get("version", metadata.get("protocolVersion", "unknown")),
+        "schema",
+        report,
+    )
+    revision = metadata.get("revision")
+    if revision is not None and (
+        not isinstance(revision, str) or FULL_SHA.fullmatch(revision) is None
+    ):
+        raise ValueError(f"SCIP revision is invalid: {report}")
+    compatible = schema == "0.3.0" and producer in {
+        "scip-go",
+        "scip-python",
+        "scip-typescript",
+    }
+    return producer, producer_version, schema, revision, compatible
+
+
+def _scip_metadata_string(value: Any, label: str, report: str) -> str:
+    if not isinstance(value, str) or not value or len(value) > MAX_STRING:
+        raise ValueError(f"SCIP {label} is invalid: {report}")
+    return value
+
+
+def _scip_freshness(
+    root: Path | None,
+    target: str | None,
+    revision: str | None,
+    head_revision: str | None,
+) -> str:
+    if root is None or target is None or revision is None or head_revision is None:
+        return "unknown"
+    if revision != head_revision:
+        return "stale"
+    alignment = git_paths_match_head(root, (target,))
+    if alignment is True:
+        return "aligned"
+    return "stale" if alignment is False else "unknown"
+
+
+def _symbols_by_path(nodes: dict[str, Node]) -> dict[str, tuple[Node, ...]]:
+    grouped: dict[str, list[Node]] = defaultdict(list)
+    for node in nodes.values():
+        if node.kind == "symbol" and node.path is not None:
+            grouped[node.path].append(node)
+    return {
+        path: tuple(sorted(values, key=lambda item: item.id))
+        for path, values in sorted(grouped.items())
+    }
+
+
+def _symbols_at_range(nodes: tuple[Node, ...], value: list[int]) -> tuple[str, ...]:
+    line = value[0] + 1
+    candidates = [
+        node.id
+        for node in nodes
+        if node.metadata.get("line") == line
+        and (
+            "end_line" not in node.metadata
+            or int(node.metadata["end_line"]) >= (value[2] + 1 if len(value) == 4 else line)
+        )
+    ]
+    return tuple(sorted(candidates))
 
 
 def _bounded_string(value: Any, label: str, report: str) -> str:

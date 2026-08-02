@@ -1,7 +1,7 @@
 # Incremental scanning
 
-`intentatlas scan` avoids repeated language parsing by caching one complete graph fragment per
-built-in adapter. The cache is an optimization, never a source of project truth. Markdown and
+`intentatlas scan` avoids repeated language parsing by caching graph fragments per built-in adapter
+and explicit workspace owner. The cache is an optimization, never a source of project truth. Markdown and
 wikilinks in `atlas/` remain portable source material, and a clean scan can rebuild every derived
 artifact without network access or an API key.
 
@@ -11,13 +11,14 @@ An adapter fragment is reused only when all of these values match:
 
 - cache schema, adapter name, and adapter cache version;
 - shared maximum parse size;
+- workspace owner, declared source roots, aliases, and dependency closure;
 - every declared input's sorted project-relative path and derived file kind;
 - the bytes of every declared input at or below the parse-size limit.
 
 Python inputs are `.py`. JavaScript/TypeScript inputs are `.js`, `.jsx`, `.ts`, and `.tsx`. Go
 inputs are `.go` and `.mod`; a module declaration can change local import resolution even when Go
-source is unchanged. A Python-only edit therefore rebuilds Python analysis while exact Go and
-JavaScript/TypeScript fragments remain reusable.
+source is unchanged. A local edit rebuilds its workspace and declared dependents while unrelated
+workspace partitions remain reusable.
 
 IntentAtlas fingerprints inputs again after each adapter completes. If an input changes during
 analysis, scanning stops before publishing a graph rather than mixing observations from different

@@ -30,12 +30,24 @@ _RELATION_TYPES = (
         "A version-control delivery record changes an artifact.",
     ),
     RelationType(
+        "contains",
+        "contained-by",
+        "boundary",
+        "A repository contains an explicitly declared project or package boundary.",
+    ),
+    RelationType(
         "calls",
         "called-by",
         "structure",
         "A code symbol directly calls another code symbol.",
     ),
     RelationType("defines", "defined-in", "structure", "A file defines a symbol."),
+    RelationType(
+        "declares",
+        "declared-by",
+        "boundary",
+        "A project or package declares a source-root or module boundary.",
+    ),
     RelationType("drives", "driven-by", "intent", "A requirement drives a decision."),
     RelationType(
         "implemented-by",
@@ -50,6 +62,12 @@ _RELATION_TYPES = (
         "history",
         "A commit directly modifies a symbol through validated diff evidence.",
     ),
+    RelationType(
+        "owns",
+        "owned-by",
+        "boundary",
+        "One unambiguous declared workspace boundary owns an artifact.",
+    ),
     RelationType("proves", "proven-by", "evidence", "Evidence proves a linked claim."),
     RelationType("recorded-in", "records", "history", "Evidence is recorded in a commit."),
     RelationType("references", "referenced-by", "reference", "A note references another node."),
@@ -61,7 +79,7 @@ RELATION_TYPES = {relation.name: relation for relation in _RELATION_TYPES}
 USER_RELATIONS = frozenset(
     {"drives", "implemented-by", "proves", "recorded-in", "references", "tracked-by"}
 )
-RELATION_SCHEMA_VERSION = 4
+RELATION_SCHEMA_VERSION = 5
 
 
 def relation_type(name: str) -> RelationType:
