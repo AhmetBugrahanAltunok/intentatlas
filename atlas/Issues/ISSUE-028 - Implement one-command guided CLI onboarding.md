@@ -1,7 +1,7 @@
 ---
 id: ISSUE-028
 type: issue
-status: in-progress
+status: closed
 phase: 14
 ---
 # Implement one-command guided CLI onboarding
@@ -53,18 +53,18 @@ and ChangeReport without changing recommendation semantics or automation contrac
       compatibility policy, changelog, and release/package inclusion checks.
 - [x] Add focused transcripts, real PTY/non-TTY checks where available, clean-installed-wheel E2E,
       extracted-sdist, Windows/Linux/macOS, Python 3.11-3.13, real-browser, and hostile-input gates.
-- [ ] Complete full test/coverage/lint/type/security/package/vault/provenance/approved-network/remote-
+- [x] Complete full test/coverage/lint/type/security/package/vault/provenance/approved-network/remote-
       CI evidence without publishing or claiming human usability.
 
 ## Closure
 
 - [x] Add exact Code and Test links only after implementation artifacts exist.
-- [ ] Record the complete behavior/document/config/test inventory and exact commands/results in
+- [x] Record the complete behavior/document/config/test inventory and exact commands/results in
       EVD-030.
-- [ ] Prove two-pass generated-vault determinism, unchanged user-owned material, zero orphans, and
+- [x] Prove two-pass generated-vault determinism, unchanged user-owned material, zero orphans, and
       REQ -> ADR -> ISSUE -> Code/Test -> EVD -> Commit links without Private access.
-- [ ] Bind evidence to exact implementation and closure commits and obtain a final Review decision.
-- [ ] Keep Phase 11C pending unless its independent human evidence is separately supplied.
+- [x] Bind evidence to exact implementation and closure commits and obtain a final Review decision.
+- [x] Keep Phase 11C pending unless its independent human evidence is separately supplied.
 
 ## Non-goals
 

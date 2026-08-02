@@ -1,7 +1,7 @@
 ---
 id: phase-14-guided-cli-strategy
 type: memory
-status: active
+status: complete
 phase: 14
 ---
 # Phase 14 Guided CLI Strategy

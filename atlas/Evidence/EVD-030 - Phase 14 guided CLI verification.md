@@ -1,7 +1,7 @@
 ---
 id: EVD-030
 type: evidence
-status: in-progress
+status: complete
 phase: 14
 ---
 # EVD-030 - Phase 14 guided CLI verification
@@ -16,7 +16,7 @@ privacy, fallback, omission, packaging, and automation contract.
 
 ## Required evidence
 
-- [ ] Exact clean starting revision, Phase 13 entry Review, implementation revisions, closure head,
+- [x] Exact clean starting revision, Phase 13 entry Review, implementation revisions, closure head,
       generated Commit notes, and pushed remote-CI head.
 - [x] Complete inventory of CLI/parser, onboarding, localization, terminal-safety, documentation,
       package, workflow, vault, and test changes.
@@ -55,7 +55,7 @@ privacy, fallback, omission, packaging, and automation contract.
       coverage, Ruff, Mypy, Bandit, Node syntax, pip-check, and diff-check results.
 - [x] Two-pass vault bytes/mtime determinism, explicit user-owned snapshot, zero-orphan result, and
       complete REQ-030 -> ADR-030 -> ISSUE-028 -> Code/Test -> EVD-030 -> Commit assertions.
-- [ ] Approved dependency network audit and complete remote CI, or an explicit open gate.
+- [x] Approved dependency network audit and complete remote CI, or an explicit open gate.
 - [x] Final limitations and risks, including that technical transcripts and any owner walkthrough
       are not independent human usability evidence and cannot supply a time median.
 
@@ -77,8 +77,8 @@ run and may not replace full closure gates with this focused set.
 - Clean accepted planning HEAD: `99aafce7748db44ded2a99791ba0cb245c04f49f`.
 - Pre-plan synchronized `origin/main`: `6679150554a513b7ab11f59e2fd1074bd9282f24`.
 - Implementation commit: `644d8b9003857a3cb95abfd16dd182b093471376`.
-- Closure commit, generated Commit-note link, pushed head, and remote CI remain pending at this
-  checkpoint; Phase 14 is not yet closed.
+- Durable-evidence closure head and pushed CI head:
+  `87180199fe78f5292475e5465a7c2d96030cb279`.
 
 ## Change inventory
 
@@ -162,16 +162,14 @@ wrapper error, is the closure evidence.
   exercise the state machine locally; real console/OS/Python combinations remain covered by remote
   installed-wheel CI. Non-TTY behavior was verified in real subprocesses and a clean wheel.
 
-## Limitations and remaining gates
+## Limitations
 
-- Final push and remote CI are not yet recorded; Phase 14 remains open until both pass at one exact
-  pushed head.
 - No public tag, release, package publication, deployment, settings/visibility change, announcement,
   telemetry, or Phase 11C action occurred.
 
 ## Vault and durable-chain results
 
-- Two successive stabilized scans each reported `1531 nodes`, `3392 relationships`, and `1364`
+- Final two successive closure scans each reported `1531 nodes`, `3396 relationships`, and `1364`
   generated notes; the final scan reused all three adapter partitions and rebuilt none.
 - Explicit snapshots covered 167 files only in `Brain`, `Requirements`, `Decisions`, `Issues`,
   `Evidence`, `Reviews`, and `Sessions`; bytes, sizes, and mtimes were unchanged.
@@ -191,6 +189,19 @@ wrapper error, is the closure evidence.
   produced no valid comparison; the corrected explicit-root substring calculation passed. This
   tooling correction did not alter project or user-owned records. No `atlas/Private/` path was
   read, listed, indexed, or modified.
+
+## Remote CI and closure
+
+- `main` push advanced `origin/main` from Phase 13 head
+  `6679150554a513b7ab11f59e2fd1074bd9282f24` through the accepted Phase 14 planning commit and all
+  implementation/evidence commits to `87180199fe78f5292475e5465a7c2d96030cb279`.
+- GitHub Actions run `30767062262` completed successfully at that exact pushed head with 13/13 jobs:
+  Python 3.11/3.12/3.13 full tests; installed-wheel E2E on Windows, Ubuntu, and macOS with Python
+  3.11 and 3.13; real-browser E2E; static types; security plus dependency audit; and reproducible
+  wheel/sdist verification including the source-archive rebuild.
+- Run URL: `https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30767062262`.
+- [[Reviews/Phase 14 One-Command Guided CLI Review]] records `pass`. Phase 11C remains pending and
+  no synthetic transcript or owner verification was counted as human evidence.
 
 ## Open risk carried to Phase 11C
 

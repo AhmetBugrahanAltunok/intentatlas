@@ -1,7 +1,7 @@
 ---
 id: session-2026-08-02-phase-14-guided-cli-handoff
 type: session
-status: closing
+status: complete
 phase: 14
 ---
 # Phase 14 guided CLI handoff
@@ -71,6 +71,7 @@ future separately approved public package may use an isolated CLI-tool installer
   `644d8b9003857a3cb95abfd16dd182b093471376`.
 - Focused, full coverage, static/security, real Chrome, dependency audit, reproducible package,
   clean-wheel E2E, and extracted-sdist gates pass locally.
-- Generated-vault determinism, evidence closure, push, and final remote CI remain in progress.
+- Generated-vault determinism and zero-orphan durable-chain checks pass. Push and GitHub Actions run
+  `30767062262` pass at exact head `87180199fe78f5292475e5465a7c2d96030cb279`.
 - Phase 11C remains unopened; no tag, release, publication, deployment, settings change, or
   announcement occurred.
