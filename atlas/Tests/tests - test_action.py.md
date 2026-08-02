@@ -11,7 +11,7 @@ source_path: "tests/test_action.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>13540</code>
+- **Size Bytes:** <code>13994</code>
 
 ## Outgoing relationships
 
@@ -27,6 +27,7 @@ source_path: "tests/test_action.py"
 - <code>defines</code> → [[Symbols/test_publish_identity_is_isolated_from_build_and_project_execution - tests - test_action.py|test_publish_identity_is_isolated_from_build_and_project_execution]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_security_job_audits_release_tools_and_third_party_environment - tests - test_action.py|test_security_job_audits_release_tools_and_third_party_environment]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_shadow_review_action_is_opt_in_local_and_credential_free - tests - test_action.py|test_shadow_review_action_is_opt_in_local_and_credential_free]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_static_type_job_installs_release_tool_imports - tests - test_action.py|test_static_type_job_installs_release_tool_imports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_trusted_publish_workflow_is_manual_protected_and_hash_bound - tests - test_action.py|test_trusted_publish_workflow_is_manual_protected_and_hash_bound]] _(structure; evidence: python-ast)_
 
 ## Incoming relationships

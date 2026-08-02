@@ -22,17 +22,17 @@ generated: true
 - **requirement:** 29
 - **review:** 29
 - **session:** 9
-- **symbol:** 880
+- **symbol:** 881
 - **test:** 66
-- **relationships:** 2879
+- **relationships:** 2868
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 191 relationships
-- [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] — 103 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 95 relationships
 - [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 94 relationships
+- [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] — 91 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 81 relationships
 - [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 72 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 61 relationships

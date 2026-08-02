@@ -10,11 +10,10 @@ source_path: "tests/test_action.py"
 
 ## Metadata
 
-- **End Line:** <code>367</code>
-- **Line:** <code>360</code>
+- **End Line:** <code>381</code>
+- **Line:** <code>374</code>
 - **Symbol Kind:** <code>"function"</code>
 
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_action.py|tests/test_action.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-diff-hunk)_

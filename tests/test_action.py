@@ -357,6 +357,20 @@ def test_security_job_audits_release_tools_and_third_party_environment() -> None
     ]
 
 
+def test_static_type_job_installs_release_tool_imports() -> None:
+    workflow = _load_yaml(CI_WORKFLOW)
+    jobs = workflow.get("jobs")
+    assert isinstance(jobs, dict)
+    static_job = jobs.get("static-types")
+    assert isinstance(static_job, dict)
+    commands = [step.get("run") for step in _job_steps(static_job) if "run" in step]
+
+    assert commands == [
+        'python -m pip install -e ".[release,typing]"',
+        "python -m mypy",
+    ]
+
+
 def test_action_policy_parser_observes_semantically_spaced_yaml_keys() -> None:
     document = yaml.safe_load(
         "jobs:\n  injected:\n    permissions:\n      id-token : write\n"

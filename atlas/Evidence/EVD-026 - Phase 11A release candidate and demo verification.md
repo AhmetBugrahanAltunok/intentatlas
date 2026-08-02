@@ -204,6 +204,21 @@ phase: 11A
 - The deterministic provenance JSON is a local ignored audit artifact under `var/`; it is not a
   signature, hosted attestation, release, or publication approval.
 
+## First remote CI run and correction
+
+- Push run `30742803481` for evidence commit
+  `7f6fb4d9999be457f2a62e90826c9b088c3f840b` completed with 12 passing jobs and one failed
+  `static-types` job. Security, Python 3.11/3.12/3.13 source tests, required browser E2E,
+  reproducible package verification, and all six Linux/macOS/Windows installed-wheel jobs passed.
+- The clean typing job installed only `.[typing]`, while the maintained
+  `tools/verify_release.py` imports `packaging.metadata` and `packaging.requirements` from the
+  release toolchain. Mypy therefore reported two `import-not-found` errors. This was an environment
+  contract gap, not a suppression candidate.
+- The workflow now installs `.[release,typing]` for the typing job, and
+  `tests/test_action.py::test_static_type_job_installs_release_tool_imports` locks that semantic
+  dependency contract. Focused verification reported `7 passed`; Ruff, mypy across 39 maintained
+  source files, and `git diff --check` passed locally. The corrective remote run remains required.
+
 ## Exact committed candidate provenance
 
 - Local audit commit `0f9d6cbc722c814d49abc26949b4be38c30a75b1`
