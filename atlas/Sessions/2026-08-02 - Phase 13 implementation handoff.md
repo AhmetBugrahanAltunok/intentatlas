@@ -25,6 +25,8 @@ start Phase 11C, tag, release, publish, deploy, or add telemetry/hosted behavior
 
 ## Implemented state
 
+Implementation checkpoint: `7f45361005163a4951f9afaa18b20e892057fa6f`.
+
 ### 13A
 
 - Workspace schema 1 models repository, Python project, JavaScript package, Go module, and declared
@@ -84,8 +86,8 @@ is committed.
 
 ## Remaining work before pass
 
-1. Create the implementation commit and insert its exact SHA below and into EVD-029.
-2. Run complete pytest+coverage, Ruff, mypy, Bandit, package build/check, installed-wheel,
+1. Bind the implementation checkpoint and final verification commit into EVD-029.
+2. Complete package build/check, installed-wheel,
    extracted-sdist, CLI/UI/browser, deterministic vault/user-owned snapshot/orphan/durable-chain,
    and approved network dependency-audit gates.
 3. Update REQ-029/ADR-029/ISSUE-027, EVD-029, Phase 13 Review, Product Roadmap, and strategy with
