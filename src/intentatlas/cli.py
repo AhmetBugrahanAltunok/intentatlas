@@ -8,6 +8,7 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from . import __version__
+from .acquisition import ManagedRepositoryCache, is_github_url, render_cache_entry
 from .change_analysis import analyze_change_set, render_change_analysis
 from .change_report import (
     collect_change_report,
@@ -61,8 +62,25 @@ def build_parser() -> argparse.ArgumentParser:
         "guide",
         help="Interactively analyze one safe Git scope without writing project state",
     )
-    guide_parser.add_argument("path", nargs="?", help="Repository or nested directory")
+    guide_parser.add_argument(
+        "path",
+        nargs="?",
+        help="Repository, nested directory, or strict public GitHub URL",
+    )
     guide_parser.add_argument("--language", choices=("en", "tr"))
+
+    cache_parser = commands.add_parser(
+        "cache",
+        help="Inspect or clear managed public-repository cache entries without network access",
+    )
+    cache_commands = cache_parser.add_subparsers(dest="cache_command", required=True)
+    cache_list = cache_commands.add_parser("list", help="List valid managed cache entries")
+    cache_list.add_argument("--format", choices=("text", "json"), default="text")
+    cache_info = cache_commands.add_parser("info", help="Show one managed cache entry")
+    cache_info.add_argument("cache_id")
+    cache_info.add_argument("--format", choices=("text", "json"), default="text")
+    cache_clear = cache_commands.add_parser("clear", help="Remove one exact managed cache entry")
+    cache_clear.add_argument("cache_id")
 
     init_parser = commands.add_parser("init", help="Create the project brain and config")
     _path_argument(init_parser)
@@ -325,8 +343,11 @@ def _viewer_arguments(parser: argparse.ArgumentParser) -> None:
 
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = list(sys.argv[1:] if argv is None else argv)
-    if not arguments and sys.stdin.isatty() and sys.stdout.isatty():
+    direct_source = len(arguments) == 1 and is_github_url(arguments[0])
+    if (not arguments or direct_source) and sys.stdin.isatty() and sys.stdout.isatty():
         try:
+            if direct_source:
+                return run_guide(arguments[0])
             return run_guide()
         except (OSError, ValueError) as exc:
             print(f"error: {exc}", file=sys.stderr)
@@ -335,6 +356,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if args.command == "guide":
             return run_guide(args.path, language=args.language)
+        if args.command == "cache":
+            return _cache(args.cache_command, args)
         root = Path(getattr(args, "path", ".")).resolve()
         if args.command == "init":
             return _init(root)
@@ -439,6 +462,34 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return 2
     return 2
+
+
+def _cache(command: str, args: argparse.Namespace) -> int:
+    cache = ManagedRepositoryCache()
+    if command == "list":
+        entries = cache.list()
+        if args.format == "json":
+            payload = {
+                "schema_version": 1,
+                "entries": [entry.public_dict() for entry in entries],
+            }
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        elif entries:
+            for index, entry in enumerate(entries):
+                if index:
+                    print()
+                print(render_cache_entry(entry), end="")
+        else:
+            print("Managed repository cache is empty.")
+        return 0
+    if command == "info":
+        print(render_cache_entry(cache.info(args.cache_id), args.format), end="")
+        return 0
+    if command == "clear":
+        cache.clear(args.cache_id)
+        print(f"Cleared managed cache entry: {args.cache_id}")
+        return 0
+    raise ValueError(f"unknown cache command: {command}")
 
 
 def _init(root: Path) -> int:

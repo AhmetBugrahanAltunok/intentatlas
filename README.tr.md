@@ -59,6 +59,25 @@ kullanır ve hiçbir şey yazmaz. Pipe, redirect, CI veya başka non-TTY çağr�
 stderr/exit-2 davranışını korur; prompt açmaz ve tarama yapmaz. Açık bir yol için aynı akışı
 `intentatlas guide [PATH]` ile başlatın. Ayrıntılar [rehberli CLI sözleşmesindedir](docs/guided-cli.md).
 
+Public bir GitHub repository'yi elle clone etmeden analiz etmek için gerçek bir etkileşimli
+terminal kullanın:
+
+```text
+intentatlas https://github.com/OWNER/REPOSITORY
+# veya: intentatlas guide https://github.com/OWNER/REPOSITORY
+```
+
+IntentAtlas ağ veya cache etkisinden önce normalize URL'yi, yönetilen cache yazmasını,
+shallow/resource sınırlarını ve devre dışı çalıştırma davranışını gösterir. Yalnız boş Enter onay
+verir. Sonuç exact cache revision'ını gösterir ve aynı production no-write Change Report ile
+immutable viewer snapshot'ını kullanır. Private/authenticated repository, redirect, repository
+sayfası URL'si, hook, filter, LFS, submodule ve proje kodu çalıştırma desteklenmez. Ayrıntılar
+[yönetilen repository cache belgesindedir](docs/managed-repository-cache.md).
+
+Exact aday wheel'i geçici pipx köklerinde install/reinstall/uninstall kapısından geçer; ancak paket
+yayımlanmamıştır ve sıfır-önkoşullu Windows installer yoktur. Bkz.
+[kurulum durumu](docs/installation.md).
+
 Hiçbir depoya dokunmadan paketlenmiş sentetik sözleşmeyi değerlendirmek için:
 
 ```powershell

@@ -93,6 +93,21 @@ Pipes, redirects, CI, or any other non-TTY invocation keep argparse's existing s
 behavior and never prompt or scan. Use `intentatlas guide [PATH]` for the same flow at an explicit
 path. See the [guided CLI contract](docs/guided-cli.md).
 
+To analyze a public GitHub repository without cloning it manually, use a real interactive
+terminal:
+
+```text
+intentatlas https://github.com/OWNER/REPOSITORY
+# or: intentatlas guide https://github.com/OWNER/REPOSITORY
+```
+
+Before any network or cache effect, IntentAtlas shows the normalized URL, managed-cache write,
+shallow/resource bounds, and disabled execution behavior. Enter is the only approval. The result
+shows the exact cached revision and uses the same production, no-write Change Report and immutable
+viewer snapshot. Private/authenticated repositories, redirects, repository page URLs, hooks,
+filters, LFS, submodules, and project execution are unsupported. See the
+[managed repository cache](docs/managed-repository-cache.md).
+
 To evaluate the packaged synthetic contract without touching a repository:
 
 ```powershell
@@ -148,12 +163,16 @@ wheel smoke test covers the CLI, scan, recommendation, and loopback viewer workf
 Windows, and macOS for the oldest and newest supported Python versions. CI also runs maintained
 source typing, immutable Action-reference policy, and real-browser rendering gates. See
 [the release process](RELEASING.md) for the local reproducibility and artifact checks.
+The candidate's exact wheel also passes an isolated pipx install/reinstall/uninstall lifecycle,
+but no package has been published and no zero-prerequisite Windows installer exists. See
+[installation status](docs/installation.md).
 
 ## Core commands
 
 ```text
 intentatlas init [PATH]                  Create the project brain and local config
-intentatlas guide [PATH]                 Guide one no-write production Change Report
+intentatlas guide [SOURCE]               Guide a local path or approved public GitHub URL
+intentatlas cache list|info|clear         Inspect or clear exact managed cache entries offline
 intentatlas diagnose [PATH]              Inspect readiness without writing project state
 intentatlas scan [PATH]                  Rebuild the graph and generated vault notes
 intentatlas status [PATH]                Show graph and orphan-note health

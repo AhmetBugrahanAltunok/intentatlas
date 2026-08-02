@@ -30,6 +30,7 @@ MAX_ARCHIVE_UNCOMPRESSED_BYTES = 100 * 1024 * 1024
 REQUIRED_PACKAGE_FILES = {
     "intentatlas/__init__.py",
     "intentatlas/__main__.py",
+    "intentatlas/acquisition.py",
     "intentatlas/cli.py",
     "intentatlas/onboarding.py",
     "intentatlas/web/app.js",
@@ -88,6 +89,7 @@ SDIST_ROOT_FILES = {
     "SECURITY.md",
     "pyproject.toml",
     "tools/verify_release.py",
+    "tools/verify_pipx_install.py",
 }
 WINDOWS_RESERVED_STEMS = {
     "con",
@@ -120,6 +122,7 @@ EXPECTED_SDIST_INCLUDES = (
     "/benchmarks/corpus/*.json",
     "/benchmarks/longitudinal/*.json",
     "/tools/verify_release.py",
+    "/tools/verify_pipx_install.py",
     "/docs",
     "/CHANGELOG.md",
     "/CODE_OF_CONDUCT.md",
@@ -436,6 +439,7 @@ def _project_source_manifest(project_root: Path) -> dict[str, bytes]:
         "src/intentatlas/__init__.py",
         "src/intentatlas/web/index.html",
         "tools/verify_release.py",
+        "tools/verify_pipx_install.py",
     }
     missing = sorted(required - sources.keys())
     if missing:

@@ -11,6 +11,15 @@ requested before then.
 ## Security model
 
 - Scans are local and do not upload source code.
+- Public GitHub acquisition occurs only after explicit TTY approval of the normalized URL,
+  network request, and managed-cache write. Only repository-root HTTPS URLs are accepted; embedded
+  credentials, authentication, alternate schemes/hosts/ports, queries, fragments, page paths,
+  localhost/IP targets, and redirects are rejected. Git runs with fixed arguments, isolated
+  configuration, no shell/prompts/credentials/hooks/filters/LFS/submodules/project execution, a
+  shallow history, and time/output/file/byte/disk bounds. `atlas/Private/` is excluded before
+  checkout. Cache staging is atomic and locked; metadata contains no source, logs, environment, or
+  secrets; exact-target cleanup rejects traversal and links. Cache hits identify an exact cached
+  revision and make no remote-freshness claim.
 - Generated notes contain relationships and symbol names, not raw source contents.
 - Excluded directories are pruned before descent; `atlas/Private/` is never created, enumerated,
   scanned, or used as a configured output location.

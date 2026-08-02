@@ -42,7 +42,7 @@ PROJECT_METADATA = (
     b"[tool.hatch.build.targets.sdist]\ninclude = [\n"
     b'  "/src",\n  "/tests",\n  "/benchmarks/recommendation-corpus.json",\n'
     b'  "/benchmarks/corpus/*.json",\n  "/benchmarks/longitudinal/*.json",\n'
-    b'  "/tools/verify_release.py",\n  "/docs",\n'
+    b'  "/tools/verify_release.py",\n  "/tools/verify_pipx_install.py",\n  "/docs",\n'
     b'  "/CHANGELOG.md",\n  "/CODE_OF_CONDUCT.md",\n  "/CONTRIBUTING.md",\n'
     b'  "/LICENSE",\n  "/README.md",\n  "/README.tr.md",\n  "/RELEASING.md",\n'
     b'  "/SECURITY.md",\n  "/pyproject.toml",\n]\n'
@@ -79,6 +79,7 @@ def _package_values(
     return {
         "intentatlas/__init__.py": package_value,
         "intentatlas/__main__.py": b"main",
+        "intentatlas/acquisition.py": b"acquisition",
         "intentatlas/cli.py": cli_value,
         "intentatlas/onboarding.py": b"onboarding",
         "intentatlas/web/app.js": b"app",
@@ -102,6 +103,7 @@ def _write_project(
         "RELEASING.md": b"releasing",
         "pyproject.toml": project_metadata,
         "tools/verify_release.py": b"verify",
+        "tools/verify_pipx_install.py": b"pipx verify",
         **{
             f"src/{name}": value
             for name, value in _package_values(
@@ -193,6 +195,7 @@ def _write_sdist(
         ("pyproject.toml", (project_root / "pyproject.toml").read_bytes()),
         *((f"src/{name}", value) for name, value in package_values.items()),
         ("tools/verify_release.py", b"verify"),
+        ("tools/verify_pipx_install.py", b"pipx verify"),
     ]
     if duplicate_readme:
         values.append(("README.md", b"different readme"))
@@ -227,8 +230,8 @@ def test_release_verifier_accepts_repeated_project_archives(tmp_path) -> None:
     assert result.wheel == first_wheel.name
     assert result.version == FIXTURE_VERSION
     assert result.wheel_size == first_wheel.stat().st_size
-    assert result.wheel_files == 12
-    assert result.sdist_files == 13
+    assert result.wheel_files == 13
+    assert result.sdist_files == 15
     assert result.wheel_generator == "hatchling 1.31.0"
 
 

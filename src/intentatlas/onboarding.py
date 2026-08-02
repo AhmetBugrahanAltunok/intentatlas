@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import IO, Any
 
+from .acquisition import CacheEntry, ManagedRepositoryCache, is_github_url, normalize_github_url
 from .change_report import ChangeReport, collect_change_report_context, render_change_report
 from .change_set import ChangeSet, collect_change_set
 from .config import ProjectConfig
@@ -42,7 +43,23 @@ _REVISION = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/@{}^~+\-]{0,199}$")
 MESSAGES: dict[str, dict[str, str]] = {
     "en": {
         "title": "IntentAtlas guided change analysis",
-        "path_prompt": "Project directory: ",
+        "path_prompt": "Local project directory or public GitHub repository URL: ",
+        "remote_source": "Public source: {value}",
+        "remote_consent": (
+            "Enter  Approve bounded HTTPS acquisition into the managed local cache and analyze | "
+            "Q  Exit: "
+        ),
+        "remote_trust": (
+            "This may contact github.com and write only the managed OS cache. It uses a shallow "
+            "history bound of {history}, rejects credentials/private repositories, disables "
+            "hooks, filters, submodules, LFS smudging, plugins, and project code, and excludes "
+            "atlas/Private. Limits: {files} files, {bytes} checkout bytes, {seconds} seconds."
+        ),
+        "acquiring": "Stage: acquiring approved public repository",
+        "cache": (
+            "Managed cache: {state}; ID {id}; exact revision {revision}; history "
+            "{commits}/{depth} commits"
+        ),
         "root": "Repository root: {value}",
         "scope": "Recommended scope: {value}",
         "trust": (
@@ -96,8 +113,13 @@ MESSAGES: dict[str, dict[str, str]] = {
         "strategy": "Test strategy: {strategy} - {meaning}",
         "tests_executed": "Tests executed: 0",
         "advisory": "Advisory: {value}",
+        "atlas_ready": "Atlas ready: {nodes} nodes; {relations} relations; {orphans} disconnected",
+        "layers": (
+            "Layers: requirements {requirements}; decisions {decisions}; issues {issues}; "
+            "code {code}; tests {tests}; evidence {evidence}; missing {missing}"
+        ),
         "actions": (
-            "1 reasons | 2 omissions | 3 complete details | 4 open exact local viewer | "
+            "1 reasons | 2 omissions | 3 complete details | 4 open exact interactive Atlas | "
             "5 another scope | 6 commands | L Language/Dil | Enter or Q exit: "
         ),
         "reasons_title": "Selection reasons from this snapshot:",
@@ -110,7 +132,24 @@ MESSAGES: dict[str, dict[str, str]] = {
     },
     "tr": {
         "title": "IntentAtlas rehberli değişiklik analizi",
-        "path_prompt": "Proje dizini: ",
+        "path_prompt": "Yerel proje dizini veya public GitHub repository URL: ",
+        "remote_source": "Public kaynak: {value}",
+        "remote_consent": (
+            "Enter  Sınırlı HTTPS edinimini yönetilen yerel cache'e ve analizi onayla | "
+            "Q  Çık: "
+        ),
+        "remote_trust": (
+            "Bu işlem github.com ile iletişim kurabilir ve yalnız yönetilen OS cache'ine yazar. "
+            "History sınırı {history}; credentials/private repositories reddedilir; hooks, "
+            "filters, submodules, LFS smudging, plugins ve proje kodu devre dışıdır; "
+            "atlas/Private hariçtir. Sınırlar: {files} dosya, {bytes} checkout byte, "
+            "{seconds} saniye."
+        ),
+        "acquiring": "Aşama: onaylanan public repository ediniliyor",
+        "cache": (
+            "Yönetilen cache: {state}; ID {id}; exact revision {revision}; history "
+            "{commits}/{depth} commit"
+        ),
         "root": "Depo kökü: {value}",
         "scope": "Önerilen kapsam: {value}",
         "trust": (
@@ -164,8 +203,13 @@ MESSAGES: dict[str, dict[str, str]] = {
         "strategy": "Test strategy: {strategy} - {meaning}",
         "tests_executed": "Tests executed: 0",
         "advisory": "Advisory: {value}",
+        "atlas_ready": "Atlas hazır: {nodes} node; {relations} relation; {orphans} disconnected",
+        "layers": (
+            "Katmanlar: requirements {requirements}; decisions {decisions}; issues {issues}; "
+            "code {code}; tests {tests}; evidence {evidence}; eksik {missing}"
+        ),
         "actions": (
-            "1 nedenler | 2 omissions | 3 tüm ayrıntılar | 4 exact yerel viewer aç | "
+            "1 nedenler | 2 omissions | 3 tüm ayrıntılar | 4 exact interactive Atlas aç | "
             "5 başka kapsam | 6 komutlar | L Language/Dil | Enter veya Q çık: "
         ),
         "reasons_title": "Bu snapshot içindeki seçim nedenleri:",
@@ -268,6 +312,7 @@ class GuideSnapshot:
     report: ChangeReport
     graph_document: bytes
     report_document: bytes
+    source: CacheEntry | None = None
 
 
 def run_guide(
@@ -275,6 +320,7 @@ def run_guide(
     *,
     language: str | None = None,
     terminal: TerminalIO | None = None,
+    cache: ManagedRepositoryCache | None = None,
 ) -> int:
     """Run one no-write guided session on an explicitly interactive terminal."""
 
@@ -285,7 +331,12 @@ def run_guide(
     try:
         active_terminal.write(_message(active_language, "title"))
         active_terminal.write(_message(active_language, "checking"))
-        root = _session_root(path, active_terminal, active_language)
+        root, source = _session_source(
+            path,
+            active_terminal,
+            active_language,
+            cache or ManagedRepositoryCache(),
+        )
         diagnostic = diagnose_repository(root)
         if diagnostic.git_state not in {"ready", "empty"}:
             raise ValueError(f"repository is not ready for guided analysis: {diagnostic.git_state}")
@@ -293,6 +344,26 @@ def run_guide(
         _reject_private_target(root, root, config)
         active_terminal.write(_message(active_language, "selecting"))
         scope = select_default_scope(root)
+        if source is not None:
+            _render_confirmation(active_terminal, active_language, root, scope, diagnostic)
+            snapshot = _collect_snapshot(
+                root,
+                diagnostic,
+                config,
+                scope,
+                active_terminal,
+                active_language,
+                source,
+            )
+            _render_summary(snapshot, active_terminal, active_language)
+            action = _post_result(snapshot, active_terminal, active_language)
+            while isinstance(action, str):
+                active_language = action
+                _render_summary(snapshot, active_terminal, active_language)
+                action = _post_result(snapshot, active_terminal, active_language)
+            if action is None:
+                return 0
+            scope = action
         while True:
             _render_confirmation(active_terminal, active_language, root, scope, diagnostic)
             choice = active_terminal.read(_message(active_language, "confirm"))
@@ -422,20 +493,63 @@ def resolve_git_root(value: str | Path, *, cwd: Path | None = None) -> Path:
     raise ValueError(f"no enclosing Git repository was found for: {raw}")
 
 
-def _session_root(
+def _session_source(
     path: str | Path | None,
     terminal: TerminalIO,
     language: str,
-) -> Path:
+    cache: ManagedRepositoryCache,
+) -> tuple[Path, CacheEntry | None]:
     if path is not None:
-        return resolve_git_root(path)
+        return _resolve_source(path, terminal, language, cache)
     try:
-        return resolve_git_root(Path.cwd())
+        return resolve_git_root(Path.cwd()), None
     except ValueError:
         supplied = terminal.read(_message(language, "path_prompt"))
         if supplied is None or supplied.strip().casefold() == "q":
             raise ValueError("no Git repository was selected") from None
-        return resolve_git_root(supplied)
+        return _resolve_source(supplied, terminal, language, cache)
+
+
+def _resolve_source(
+    source: str | Path,
+    terminal: TerminalIO,
+    language: str,
+    cache: ManagedRepositoryCache,
+) -> tuple[Path, CacheEntry | None]:
+    if not is_github_url(source):
+        return resolve_git_root(source), None
+    url = normalize_github_url(str(source))
+    limits = cache.limits
+    terminal.write(_message(language, "remote_source", value=url))
+    terminal.write(
+        _message(
+            language,
+            "remote_trust",
+            history=limits.history_depth,
+            files=limits.max_checkout_files,
+            bytes=limits.max_checkout_bytes,
+            seconds=limits.timeout_seconds,
+        )
+    )
+    choice = terminal.read(_message(language, "remote_consent"))
+    if choice is None or choice.strip().casefold() == "q":
+        raise ValueError("public repository acquisition was not approved")
+    if choice.strip():
+        raise ValueError("public repository acquisition requires Enter approval")
+    terminal.write(_message(language, "acquiring"))
+    entry = cache.acquire(url)
+    terminal.write(
+        _message(
+            language,
+            "cache",
+            state=entry.cache_state,
+            id=entry.cache_id,
+            revision=entry.revision,
+            commits=entry.history_commit_count,
+            depth=entry.history_depth,
+        )
+    )
+    return resolve_git_root(entry.repository_root), entry
 
 
 def _collect_snapshot(
@@ -445,6 +559,7 @@ def _collect_snapshot(
     scope: GuideScope,
     terminal: TerminalIO,
     language: str,
+    source: CacheEntry | None = None,
 ) -> GuideSnapshot:
     terminal.write(_message(language, "building"))
     private_paths = _private_paths(root, config)
@@ -479,6 +594,7 @@ def _collect_snapshot(
         report,
         graph_document,
         report_document,
+        source,
     )
 
 
@@ -516,6 +632,20 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
     payload = report.to_dict()
     change_set = report.analysis.change_set
     terminal.write("")
+    if snapshot.source is not None:
+        source = snapshot.source
+        terminal.write(_message(language, "remote_source", value=source.url))
+        terminal.write(
+            _message(
+                language,
+                "cache",
+                state=source.cache_state,
+                id=source.cache_id,
+                revision=source.revision,
+                commits=source.history_commit_count,
+                depth=source.history_depth,
+            )
+        )
     terminal.write(_message(language, "project", value=str(snapshot.root)))
     terminal.write(_message(language, "scope", value=change_set.scope))
     terminal.write(
@@ -599,6 +729,47 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
     )
     terminal.write(_message(language, "tests_executed"))
     terminal.write(_message(language, "advisory", value=payload["advisory"]))
+    layer_counts = _layer_counts(snapshot.graph)
+    missing = [
+        name
+        for name in ("requirements", "decisions", "issues", "evidence")
+        if not layer_counts[name]
+    ]
+    disconnected = sum(
+        snapshot.graph.degree(node_id) == 0 for node_id in snapshot.graph.nodes
+    )
+    terminal.write(
+        _message(
+            language,
+            "atlas_ready",
+            nodes=len(snapshot.graph.nodes),
+            relations=snapshot.graph.edge_count,
+            orphans=disconnected,
+        )
+    )
+    terminal.write(
+        _message(
+            language,
+            "layers",
+            **layer_counts,
+            missing=", ".join(missing) or "none",
+        )
+    )
+
+
+def _layer_counts(graph: AtlasGraph) -> dict[str, int]:
+    kinds = {
+        "requirements": {"requirement"},
+        "decisions": {"decision"},
+        "issues": {"issue"},
+        "code": {"file", "symbol"},
+        "tests": {"test"},
+        "evidence": {"evidence", "commit"},
+    }
+    return {
+        layer: sum(node.kind in accepted for node in graph.nodes.values())
+        for layer, accepted in kinds.items()
+    }
 
 
 def _post_result(

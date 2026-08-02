@@ -308,6 +308,20 @@ The loopback viewer uses a narrow IPv4 `ThreadingHTTPServer` subclass that binds
 the emitted URL uses that validated address. This avoids the standard HTTP server's reverse DNS
 lookup, which is unnecessary for local serving and can delay startup on constrained macOS runners.
 
+## Source acquisition and guided projection
+
+The Phase 15 acquisition layer converts only an explicitly approved canonical public GitHub HTTPS
+URL into a validated local checkout. It is not a scanner or analysis engine. Fixed-argument Git
+runs with isolated configuration and bounded history, time, output, checkout size, cache size, and
+file count. A sparse checkout excludes `atlas/Private/`; hooks, credentials, prompts, redirects,
+filters, LFS smudging, submodules, and project execution are disabled.
+
+The URL-derived managed cache uses validated atomic staging and promotion, one bounded lock per
+identity, and prior-good preservation. Cache metadata contains provenance and counts only. Local
+and acquired roots then converge on the existing diagnostic, ChangeSet, in-memory scanner,
+ChangeReport, terminal projection, and immutable viewer bytes. Missing intent layers are reported
+as missing rather than synthesized from code or history.
+
 ## 3. Project brain
 
 The `atlas/` folder is an Obsidian vault and the durable human-readable layer.

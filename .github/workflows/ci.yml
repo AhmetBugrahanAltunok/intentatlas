@@ -57,6 +57,7 @@ jobs:
           python-version: "3.13"
           cache: pip
       - run: python -m pip install -e ".[dev,release]"
+      - run: python -m pip install pipx==1.8.0
       - run: python -m build --sdist --wheel --outdir var/release-a
       - run: python -m build --sdist --wheel --outdir var/release-b
       - name: Verify artifacts and record provenance
@@ -67,6 +68,8 @@ jobs:
           --write-provenance var/release-provenance.json
           --source-revision "$SOURCE_REVISION"
           --source-date-epoch "$SOURCE_DATE_EPOCH"
+      - name: Verify isolated pipx install, reinstall, and uninstall
+        run: python tools/verify_pipx_install.py var/release-a/*.whl
       - name: Rebuild, install, and test the verified source archive
         shell: bash
         run: |

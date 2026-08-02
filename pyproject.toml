@@ -70,6 +70,7 @@ include = [
   "/benchmarks/corpus/*.json",
   "/benchmarks/longitudinal/*.json",
   "/tools/verify_release.py",
+  "/tools/verify_pipx_install.py",
   "/docs",
   "/CHANGELOG.md",
   "/CODE_OF_CONDUCT.md",
@@ -108,7 +109,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 
 [tool.mypy]
 python_version = "3.11"
-files = ["src/intentatlas", "tools/verify_release.py"]
+files = ["src/intentatlas", "tools/verify_release.py", "tools/verify_pipx_install.py"]
 mypy_path = "src"
 strict = true
 warn_unreachable = true

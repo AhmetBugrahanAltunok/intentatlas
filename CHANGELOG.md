@@ -9,6 +9,14 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ### Added
 
+- Strict, explicitly approved public GitHub source onboarding through a bounded inert Git
+  acquisition and atomic OS-managed local cache, with exact revision/history disclosure and
+  offline `cache list`, `cache info`, and exact-target `cache clear` commands.
+- One-source guided integration that sends local and acquired repositories through the existing
+  diagnostic, scanner, Change Report, terminal sanitizer, and immutable viewer snapshot while
+  reporting absent intent layers without inventing them.
+- An isolated exact-wheel pipx install/reinstall/uninstall verification gate. The candidate remains
+  unpublished and no zero-prerequisite Windows installer is claimed.
 - A line-oriented English/Turkish guided CLI: interactive empty argv or `guide [PATH]` confirms the
   nearest safe Git root and conservative scope, then renders the production Change Report without
   writing state; non-TTY empty argv preserves the established argparse exit-2 contract.

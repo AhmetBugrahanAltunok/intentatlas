@@ -14,28 +14,28 @@ phase: 15
 
 ## 15A - isolated global installation readiness
 
-- [ ] Verify exact-wheel install, clean-shell command discovery, version/help/guide, reinstall, and
+- [x] Verify exact-wheel install, clean-shell command discovery, version/help/guide, reinstall, and
       uninstall with temporary pipx home/bin roots and no real PATH mutation.
-- [ ] Freeze honest public-install wording and the open zero-prerequisite Windows boundary.
-- [ ] Add only the missing global-command gates; retain existing package/provenance tests.
+- [x] Freeze honest public-install wording and the open zero-prerequisite Windows boundary.
+- [x] Add only the missing global-command gates; retain existing package/provenance tests.
 
 ## 15B - safe public GitHub acquisition
 
-- [ ] Add strict GitHub URL normalization and TTY-only guided URL dispatch.
-- [ ] Implement inert bounded Git acquisition, exact revision, Private exclusion, atomic managed
+- [x] Add strict GitHub URL normalization and TTY-only guided URL dispatch.
+- [x] Implement inert bounded Git acquisition, exact revision, Private exclusion, atomic managed
       cache, cache hit/corruption/concurrency handling, and injected cache roots.
-- [ ] Add safe `cache list`, `cache info`, and exact-target `cache clear` commands.
-- [ ] Prove scheme/host/credential/path/redirect rejection, no auth/tool execution, bounded failure,
+- [x] Add safe `cache list`, `cache info`, and exact-target `cache clear` commands.
+- [x] Prove scheme/host/credential/path/redirect rejection, no auth/tool execution, bounded failure,
       source no-write, cleanup safety, and deterministic offline tests.
 
 ## 15C - production source-to-atlas integration
 
-- [ ] Connect acquired and local sources to one diagnostic/scan/ChangeReport snapshot.
-- [ ] Add truthful Atlas/layer/link/revision/scope/freshness/bound summaries and prominent explicit
+- [x] Connect acquired and local sources to one diagnostic/scan/ChangeReport snapshot.
+- [x] Add truthful Atlas/layer/link/revision/scope/freshness/bound summaries and prominent explicit
       existing-viewer action without inventing intent.
-- [ ] Preserve EN/TR, terminal safety/accessibility, browser controls, explicit CLI/JSON behavior,
+- [x] Preserve EN/TR, terminal safety/accessibility, browser controls, explicit CLI/JSON behavior,
       packaging, and no-runtime-dependency boundaries.
-- [ ] Update installation, guided, cache, security, architecture, compatibility, README/README.tr,
+- [x] Update installation, guided, cache, security, architecture, compatibility, README/README.tr,
       changelog, roadmap, Evidence, and Review records.
 
 ## Closure

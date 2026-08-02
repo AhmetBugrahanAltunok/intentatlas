@@ -3,10 +3,12 @@
 Run `intentatlas` inside a trusted Git repository in a real interactive terminal. IntentAtlas
 finds only the nearest enclosing safe Git root, displays that root and a conservative default
 scope, and waits for confirmation. Press Enter once to analyze; use `S` to choose another bounded
-scope or `Q` to leave without persistent output. An explicit starting path is also supported:
+scope or `Q` to leave without persistent output. An explicit path or strict public GitHub URL is
+also supported:
 
 ```text
-intentatlas guide [PATH]
+intentatlas guide [PATH_OR_PUBLIC_GITHUB_URL]
+intentatlas https://github.com/OWNER/REPOSITORY
 ```
 
 Empty arguments open the guide only when both stdin and stdout are TTYs. A pipe, redirected stream,
@@ -27,8 +29,15 @@ unsafe Git markers, missing repositories, and literal or configured `atlas/Priva
 ascends only through parents; it does not scan siblings or the wider filesystem. A UNC path does
 not receive a claim that operating-system filesystem access is network-free.
 
-The guide is offline at the application boundary and creates no project, vault, cache, graph,
-report, test, or Git output. It does not run `init`, `scan`, persistent `open`, tests, hooks,
+Local paths are offline at the application boundary and create no project, vault, cache, graph,
+report, test, or Git output. A public GitHub URL requires an explicit Enter after a summary naming
+the HTTPS request and managed-cache write. Acquisition is shallow and bounded, rejects private or
+authenticated repositories, and disables prompts, redirects, hooks, filters, submodules, LFS,
+user Git configuration, and project execution. After acquisition, the exact cached revision and
+scope are shown and the same no-write analysis runs. See the
+[managed-cache contract](managed-repository-cache.md).
+
+The guide does not run `init`, `scan`, persistent `open`, tests, hooks,
 project code, shell commands, package managers, compilers, plugins, or indexers. Commands shown in
 the help action are text only. Ctrl+C, EOF, and `Q` leave safely.
 
