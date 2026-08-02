@@ -12,6 +12,11 @@ alignment. The steps below are the separate real-repository path.
 Use this path on a trusted local checkout before IntentAtlas creates configuration, a vault, a
 cache, a graph, or generated notes. Neither command requires an API key or network access.
 
+For the shortest interactive path, run `intentatlas` inside the repository and press Enter after
+checking the displayed root and scope. `intentatlas guide [PATH]` selects an explicit starting
+path. Both routes produce the same production Change Report described below and write no project
+state. The explicit commands remain available for automation and advanced use:
+
 ```powershell
 intentatlas diagnose C:\path\to\project
 intentatlas changes C:\path\to\project --commit HEAD --report

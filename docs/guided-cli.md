@@ -1,0 +1,61 @@
+# One-command guided CLI
+
+Run `intentatlas` inside a trusted Git repository in a real interactive terminal. IntentAtlas
+finds only the nearest enclosing safe Git root, displays that root and a conservative default
+scope, and waits for confirmation. Press Enter once to analyze; use `S` to choose another bounded
+scope or `Q` to leave without persistent output. An explicit starting path is also supported:
+
+```text
+intentatlas guide [PATH]
+```
+
+Empty arguments open the guide only when both stdin and stdout are TTYs. A pipe, redirected stream,
+CI process, or other non-TTY context retains the existing argparse diagnostic on stderr and exit
+code 2. It never prompts, scans, or waits. The explicit `guide` command also refuses non-TTY use.
+
+## Scope and trust contract
+
+The default is selected from bounded Git metadata in this order:
+
+1. conflicts or unstaged/untracked files: `worktree`;
+2. staged changes only: `staged`;
+3. clean repository: the full resolved `HEAD` commit;
+4. unborn repository: `worktree`.
+
+The root and scope appear before analysis. The guide rejects files, symbolic-link/junction roots,
+unsafe Git markers, missing repositories, and literal or configured `atlas/Private` targets. It
+ascends only through parents; it does not scan siblings or the wider filesystem. A UNC path does
+not receive a claim that operating-system filesystem access is network-free.
+
+The guide is offline at the application boundary and creates no project, vault, cache, graph,
+report, test, or Git output. It does not run `init`, `scan`, persistent `open`, tests, hooks,
+project code, shell commands, package managers, compilers, plugins, or indexers. Commands shown in
+the help action are text only. Ctrl+C, EOF, and `Q` leave safely.
+
+## Result semantics
+
+The guide calls the production diagnostic, ChangeSet, structural scan, and Change Report paths.
+It does not contain a separate analysis or scoring engine. The summary preserves exact scope and
+resolved revisions, analysis state and freshness, confidence threshold, selected/candidate/
+filtered/limit-omitted counts, reasons and evidence, omission causes, test strategy, advisory, and
+`Tests executed: 0`.
+
+`fallback` and `unknown` retain their production full-suite meanings. A candidate that is not
+selected is only below the displayed threshold or beyond the displayed result limit; it is never
+claimed to be unaffected or unnecessary. Complete details are the unchanged schema-1 Change
+Report JSON. Human copy can be switched between English and Turkish without rescanning; enum
+values, IDs, commands, flags, and JSON remain canonical.
+
+The browser is optional and starts only after the explicit viewer menu choice. It binds to numeric
+IPv4 loopback on an ephemeral port and receives the exact immutable graph/report bytes already
+used by the terminal result. There is no second scan. If the browser or listener is unavailable,
+the terminal result remains valid and the guide reports the failure.
+
+Output is line-oriented, color-independent, keyboard-only, and screen-reader compatible. Control
+characters, ANSI escape sequences, bidirectional controls, and embedded newlines from untrusted
+repository labels or paths are escaped before terminal rendering. No full-screen TUI, cursor
+animation, or runtime dependency is introduced.
+
+This technical onboarding path is not human usability evidence. Phase 11C still requires five independent
+consented observations and a median time below ten minutes before public launch or any
+real user-time claim.

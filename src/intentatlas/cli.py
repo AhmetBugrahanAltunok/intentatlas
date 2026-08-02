@@ -34,6 +34,7 @@ from .longitudinal import (
     load_pilot_manifest,
     render_longitudinal,
 )
+from .onboarding import run_guide
 from .real_world import (
     evaluate_real_world,
     load_real_world_manifest,
@@ -55,6 +56,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--version", action="version", version=f"IntentAtlas {__version__}")
     commands = parser.add_subparsers(dest="command", required=True)
+
+    guide_parser = commands.add_parser(
+        "guide",
+        help="Interactively analyze one safe Git scope without writing project state",
+    )
+    guide_parser.add_argument("path", nargs="?", help="Repository or nested directory")
+    guide_parser.add_argument("--language", choices=("en", "tr"))
 
     init_parser = commands.add_parser("init", help="Create the project brain and config")
     _path_argument(init_parser)
@@ -316,8 +324,17 @@ def _viewer_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    args = build_parser().parse_args(argv)
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if not arguments and sys.stdin.isatty() and sys.stdout.isatty():
+        try:
+            return run_guide()
+        except (OSError, ValueError) as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 2
+    args = build_parser().parse_args(arguments)
     try:
+        if args.command == "guide":
+            return run_guide(args.path, language=args.language)
         root = Path(getattr(args, "path", ".")).resolve()
         if args.command == "init":
             return _init(root)

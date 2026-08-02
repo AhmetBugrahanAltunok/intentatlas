@@ -210,6 +210,15 @@ The loopback viewer fetches the optional report endpoint, renders strategy/cover
 requirements and tests, and focuses the corresponding graph node when a report item is selected.
 The normal viewer receives a 404 for that optional endpoint and continues with graph-only mode.
 
+The Phase 14 guided CLI is a line-oriented orchestration layer over the same contracts. Empty argv
+dispatches to it only when both standard input and output are TTYs; all non-TTY empty-argv calls
+remain with argparse's stderr/exit-2 behavior. `guide [PATH]` provides the explicit equivalent.
+The guide performs bounded readiness diagnostics, selects a conservative Git scope, and delegates
+to `collect_change_set` and `collect_change_report_context`. It serializes the resulting graph and
+report once; terminal projection, language switching, complete JSON details, and the optional
+ephemeral IPv4-loopback viewer all consume that immutable snapshot. The guide never invokes the
+persistent init/scan/open paths or executes project tooling.
+
 `review --open` uses the same serving boundary with a separate optional `/review.json` endpoint.
 The client prefers that envelope when present, unwraps its nested Change Report for existing ranked
 items, and adds revision scope plus commit-keyed outcome freshness and observational comparison.

@@ -79,7 +79,21 @@ its test is unnecessary.
 
 ## Quick start
 
-First, evaluate the packaged synthetic contract without touching a repository:
+From a real repository in an interactive terminal, run one command:
+
+```powershell
+intentatlas
+```
+
+IntentAtlas shows the nearest safe Git root and a conservative scope before doing the analysis.
+Press Enter once to accept it. Conflict, unstaged, or untracked state selects `worktree`; a
+staged-only repository selects `staged`; a clean repository selects the exact `HEAD`; an unborn
+repository selects `worktree`. The result uses the production Change Report and writes nothing.
+Pipes, redirects, CI, or any other non-TTY invocation keep argparse's existing stderr/exit-2
+behavior and never prompt or scan. Use `intentatlas guide [PATH]` for the same flow at an explicit
+path. See the [guided CLI contract](docs/guided-cli.md).
+
+To evaluate the packaged synthetic contract without touching a repository:
 
 ```powershell
 intentatlas demo --report text
@@ -92,8 +106,7 @@ are prebuilt, so it exercises the production graph, recommendation, report, and 
 does not exercise repository discovery, AST parsing, or Git diff extraction. It does not scan the
 current directory. See the [guided demo](docs/guided-demo.md).
 
-Next, from a trusted real-repository checkout, request a zero-footprint preview before creating
-configuration, a vault, a graph, or generated notes:
+The explicit expert commands remain available for a zero-footprint preview:
 
 ```powershell
 intentatlas diagnose C:\path\to\your-project
@@ -140,6 +153,7 @@ source typing, immutable Action-reference policy, and real-browser rendering gat
 
 ```text
 intentatlas init [PATH]                  Create the project brain and local config
+intentatlas guide [PATH]                 Guide one no-write production Change Report
 intentatlas diagnose [PATH]              Inspect readiness without writing project state
 intentatlas scan [PATH]                  Rebuild the graph and generated vault notes
 intentatlas status [PATH]                Show graph and orphan-note health

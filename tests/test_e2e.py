@@ -55,6 +55,15 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
     assert version.returncode == 0, version.stderr
     assert version.stdout.strip() == "IntentAtlas 0.3.0rc1"
 
+    empty_non_tty = _cli(cwd=tmp_path)
+    assert empty_non_tty.returncode == 2
+    assert "the following arguments are required: command" in empty_non_tty.stderr
+    assert "guided" not in empty_non_tty.stdout.casefold()
+
+    explicit_non_tty = _cli("guide", cwd=tmp_path)
+    assert explicit_non_tty.returncode == 2
+    assert "requires interactive stdin and stdout" in explicit_non_tty.stderr
+
     demo_report = _cli("demo", "--report", "json", cwd=tmp_path)
     assert demo_report.returncode == 0, demo_report.stderr
     demo_payload = json.loads(demo_report.stdout)

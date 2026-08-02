@@ -1,0 +1,889 @@
+from __future__ import annotations
+
+import json
+import locale
+import os
+import re
+import shutil
+import subprocess  # nosec B404
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import IO, Any
+
+from .change_report import ChangeReport, collect_change_report_context, render_change_report
+from .change_set import ChangeSet, collect_change_set
+from .config import ProjectConfig
+from .diagnostic import RepositoryDiagnostic, diagnose_repository
+from .graph import AtlasGraph
+from .viewer import serve_graph
+
+MAX_GIT_OUTPUT_BYTES = 1_000_000
+MAX_TERMINAL_VALUE = 4_096
+_BIDI_CONTROLS = frozenset(
+    {
+        "\u061c",
+        "\u200e",
+        "\u200f",
+        "\u202a",
+        "\u202b",
+        "\u202c",
+        "\u202d",
+        "\u202e",
+        "\u2066",
+        "\u2067",
+        "\u2068",
+        "\u2069",
+    }
+)
+_REVISION = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/@{}^~+\-]{0,199}$")
+
+
+MESSAGES: dict[str, dict[str, str]] = {
+    "en": {
+        "title": "IntentAtlas guided change analysis",
+        "path_prompt": "Project directory: ",
+        "root": "Repository root: {value}",
+        "scope": "Recommended scope: {value}",
+        "trust": (
+            "Local and no external request; no writes, tests, hooks, project code, plugins, "
+            "indexers, compilers, or package managers; atlas/Private excluded."
+        ),
+        "trust_network_path": (
+            "No external request is made by IntentAtlas; operating-system access to this path may "
+            "be network-backed. No writes, tests, hooks, project code, plugins, indexers, "
+            "compilers, or package managers; atlas/Private excluded."
+        ),
+        "cancel": "Ctrl+C cancels safely without persistent output.",
+        "readiness": (
+            "Readiness limits: unsupported languages {unsupported}; oversized supported files "
+            "{oversized}; discovery truncated {truncated}; workspace ambiguity {ambiguity}."
+        ),
+        "confirm": "Enter  Analyze the recommended scope | S  Select scope | Q  Exit: ",
+        "scope_menu": (
+            "W worktree | S staged | H exact HEAD | C explicit commit | R explicit range | Q exit: "
+        ),
+        "commit_prompt": "Commit revision: ",
+        "base_prompt": "Base revision: ",
+        "head_prompt": "Head revision: ",
+        "checking": "Stage: checking repository",
+        "selecting": "Stage: selecting scope",
+        "building": "Stage: building local evidence",
+        "ranking": "Stage: ranking requirements and tests",
+        "project": "Project: {value}",
+        "revision": "Revision: base {base}; head {head}",
+        "state": "Analysis state: {state} ({meaning}); freshness: {freshness}",
+        "threshold": "Minimum confidence: {value}",
+        "changed": "Changed files: {value}",
+        "requirements": (
+            "Requirements: {selected} selected / {total} candidates; {filtered} below threshold; "
+            "{limited} omitted by result limit"
+        ),
+        "tests": (
+            "Tests: {selected} selected / {total} candidates; {filtered} below threshold; "
+            "{limited} omitted by result limit"
+        ),
+        "selected_requirement": (
+            "- requirement {id}: {score}/100 ({confidence}); reason {reason}; evidence {evidence}"
+        ),
+        "selected_test": (
+            "- test {id}: {score}/100 ({confidence}); reasons {reason}; evidence {evidence}"
+        ),
+        "omissions": (
+            "Omissions shown: requirements {requirements}; tests {tests}. Not selected never means "
+            "unaffected or unnecessary."
+        ),
+        "strategy": "Test strategy: {strategy} - {meaning}",
+        "tests_executed": "Tests executed: 0",
+        "advisory": "Advisory: {value}",
+        "actions": (
+            "1 reasons | 2 omissions | 3 complete details | 4 open exact local viewer | "
+            "5 another scope | 6 commands | L Language/Dil | Enter or Q exit: "
+        ),
+        "reasons_title": "Selection reasons from this snapshot:",
+        "omissions_title": "Omitted candidates from this snapshot:",
+        "none": "none",
+        "commands_title": "Commands shown only; none were executed:",
+        "viewer_error": "Browser/viewer unavailable; the terminal result remains valid: {value}",
+        "bye": "Exited without persistent output.",
+        "interrupted": "Cancelled safely; no persistent output was created.",
+    },
+    "tr": {
+        "title": "IntentAtlas rehberli değişiklik analizi",
+        "path_prompt": "Proje dizini: ",
+        "root": "Depo kökü: {value}",
+        "scope": "Önerilen kapsam: {value}",
+        "trust": (
+            "Yerel ve harici istek yok; yazma, test, hook, proje kodu, eklenti, indexer, "
+            "derleyici veya paket yöneticisi çalıştırılmaz; atlas/Private hariç tutulur."
+        ),
+        "trust_network_path": (
+            "IntentAtlas harici istek yapmaz; bu yola işletim sistemi erişimi ağ destekli "
+            "olabilir. Yazma, test, hook, proje kodu, eklenti, indexer, derleyici veya paket "
+            "yöneticisi çalıştırılmaz; atlas/Private hariç tutulur."
+        ),
+        "cancel": "Ctrl+C kalıcı çıktı oluşturmadan güvenle iptal eder.",
+        "readiness": (
+            "Hazırlık sınırları: unsupported languages {unsupported}; oversized supported files "
+            "{oversized}; discovery truncated {truncated}; workspace ambiguity {ambiguity}."
+        ),
+        "confirm": "Enter  Önerilen kapsamı analiz et | S  Kapsam seç | Q  Çık: ",
+        "scope_menu": (
+            "W worktree | S staged | H exact HEAD | C açık commit | R açık range | Q çık: "
+        ),
+        "commit_prompt": "Commit revision: ",
+        "base_prompt": "Base revision: ",
+        "head_prompt": "Head revision: ",
+        "checking": "Aşama: depo denetleniyor",
+        "selecting": "Aşama: kapsam seçiliyor",
+        "building": "Aşama: yerel kanıt oluşturuluyor",
+        "ranking": "Aşama: gereksinimler ve testler sıralanıyor",
+        "project": "Proje: {value}",
+        "revision": "Revision: base {base}; head {head}",
+        "state": "Analysis state: {state} ({meaning}); freshness: {freshness}",
+        "threshold": "Minimum confidence: {value}",
+        "changed": "Değişen dosyalar: {value}",
+        "requirements": (
+            "Gereksinimler: {selected} seçildi / {total} aday; {filtered} threshold altında; "
+            "{limited} result limit nedeniyle atlandı"
+        ),
+        "tests": (
+            "Testler: {selected} seçildi / {total} aday; {filtered} threshold altında; "
+            "{limited} result limit nedeniyle atlandı"
+        ),
+        "selected_requirement": (
+            "- requirement {id}: {score}/100 ({confidence}); neden {reason}; evidence {evidence}"
+        ),
+        "selected_test": (
+            "- test {id}: {score}/100 ({confidence}); nedenler {reason}; evidence {evidence}"
+        ),
+        "omissions": (
+            "Gösterilen omissions: requirements {requirements}; tests {tests}. Seçilmemek hiçbir "
+            "zaman etkilenmemek veya gereksiz olmak anlamına gelmez."
+        ),
+        "strategy": "Test strategy: {strategy} - {meaning}",
+        "tests_executed": "Tests executed: 0",
+        "advisory": "Advisory: {value}",
+        "actions": (
+            "1 nedenler | 2 omissions | 3 tüm ayrıntılar | 4 exact yerel viewer aç | "
+            "5 başka kapsam | 6 komutlar | L Language/Dil | Enter veya Q çık: "
+        ),
+        "reasons_title": "Bu snapshot içindeki seçim nedenleri:",
+        "omissions_title": "Bu snapshot içindeki atlanan adaylar:",
+        "none": "yok",
+        "commands_title": "Komutlar yalnız gösterildi; hiçbiri çalıştırılmadı:",
+        "viewer_error": "Browser/viewer kullanılamadı; terminal sonucu geçerlidir: {value}",
+        "bye": "Kalıcı çıktı oluşturmadan çıkıldı.",
+        "interrupted": "Güvenle iptal edildi; kalıcı çıktı oluşturulmadı.",
+    },
+}
+
+
+STATE_MEANINGS = {
+    "en": {
+        "analyzed": "the selected changes were structurally analyzed",
+        "fallback": "some evidence is not exact; conservative fallback applies",
+        "unknown": "targeted ranking is withheld because evidence is insufficient",
+    },
+    "tr": {
+        "analyzed": "seçilen değişiklikler yapısal olarak analiz edildi",
+        "fallback": "bazı kanıtlar exact değil; ihtiyatlı fallback uygulanır",
+        "unknown": "kanıt yetersiz olduğundan targeted sıralama sunulmaz",
+    },
+}
+
+
+STRATEGY_MEANINGS = {
+    "en": {
+        "targeted": "start with listed tests; the subset is not proof of sufficiency",
+        "targeted-plus-full-suite": "start with listed tests, then run the full suite",
+        "full-suite-fallback": "no safe targeted set was proven; run the full suite",
+        "abstain-and-full-suite": "targeted ranking is withheld; run the full suite",
+        "no-targets-found": "no linked test was proven; follow the normal/full test policy",
+        "no-changes": "the selected scope has no changes; choose another scope or exit",
+    },
+    "tr": {
+        "targeted": "listelenen testlerle başla; bu küme yeterlilik kanıtı değildir",
+        "targeted-plus-full-suite": "listelenen testlerle başla, sonra tüm suite'i çalıştır",
+        "full-suite-fallback": "güvenli targeted küme kanıtlanmadı; tüm suite'i çalıştır",
+        "abstain-and-full-suite": "targeted sıralama sunulmaz; tüm suite'i çalıştır",
+        "no-targets-found": "bağlı test kanıtlanmadı; normal/tam test politikasını uygula",
+        "no-changes": "seçilen kapsamda değişiklik yok; başka kapsam seç veya çık",
+    },
+}
+
+
+@dataclass(slots=True)
+class TerminalIO:
+    input: IO[str]
+    output: IO[str]
+
+    @classmethod
+    def system(cls) -> TerminalIO:
+        return cls(sys.stdin, sys.stdout)
+
+    @property
+    def interactive(self) -> bool:
+        return bool(self.input.isatty() and self.output.isatty())
+
+    def write(self, value: str = "") -> None:
+        rendered = _terminal_text(value)
+        encoding = getattr(self.output, "encoding", None) or "utf-8"
+        rendered = rendered.encode(encoding, errors="backslashreplace").decode(
+            encoding, errors="replace"
+        )
+        self.output.write(rendered + "\n")
+        self.output.flush()
+
+    def read(self, prompt: str) -> str | None:
+        self.output.write(_terminal_text(prompt))
+        self.output.flush()
+        value = self.input.readline()
+        if value == "":
+            return None
+        return value.rstrip("\r\n")
+
+
+@dataclass(frozen=True, slots=True)
+class GuideScope:
+    scope: str
+    revision: str | None = None
+    base: str | None = None
+    head: str | None = None
+
+    def display(self) -> str:
+        if self.scope == "commit":
+            return f"commit {self.revision}"
+        if self.scope == "range":
+            return f"range {self.base}..{self.head}"
+        return self.scope
+
+
+@dataclass(frozen=True, slots=True)
+class GuideSnapshot:
+    root: Path
+    diagnostic: RepositoryDiagnostic
+    change_set: ChangeSet
+    graph: AtlasGraph
+    report: ChangeReport
+    graph_document: bytes
+    report_document: bytes
+
+
+def run_guide(
+    path: str | Path | None = None,
+    *,
+    language: str | None = None,
+    terminal: TerminalIO | None = None,
+) -> int:
+    """Run one no-write guided session on an explicitly interactive terminal."""
+
+    active_terminal = terminal or TerminalIO.system()
+    if not active_terminal.interactive:
+        raise ValueError("guided mode requires interactive stdin and stdout")
+    active_language = _language(language)
+    try:
+        active_terminal.write(_message(active_language, "title"))
+        active_terminal.write(_message(active_language, "checking"))
+        root = _session_root(path, active_terminal, active_language)
+        diagnostic = diagnose_repository(root)
+        if diagnostic.git_state not in {"ready", "empty"}:
+            raise ValueError(f"repository is not ready for guided analysis: {diagnostic.git_state}")
+        config = ProjectConfig.load(root)
+        _reject_private_target(root, root, config)
+        active_terminal.write(_message(active_language, "selecting"))
+        scope = select_default_scope(root)
+        while True:
+            _render_confirmation(active_terminal, active_language, root, scope, diagnostic)
+            choice = active_terminal.read(_message(active_language, "confirm"))
+            if choice is None or choice.strip().casefold() == "q":
+                active_terminal.write(_message(active_language, "bye"))
+                return 0
+            if choice.strip().casefold() == "s":
+                selected = _select_scope(root, active_terminal, active_language)
+                if selected is None:
+                    active_terminal.write(_message(active_language, "bye"))
+                    return 0
+                scope = selected
+                continue
+            if choice.strip():
+                continue
+            snapshot = _collect_snapshot(
+                root,
+                diagnostic,
+                config,
+                scope,
+                active_terminal,
+                active_language,
+            )
+            _render_summary(snapshot, active_terminal, active_language)
+            action = _post_result(snapshot, active_terminal, active_language)
+            while isinstance(action, str):
+                active_language = action
+                _render_summary(snapshot, active_terminal, active_language)
+                action = _post_result(snapshot, active_terminal, active_language)
+            if action is None:
+                return 0
+            scope = action
+    except KeyboardInterrupt:
+        active_terminal.write(_message(active_language, "interrupted"))
+        return 130
+
+
+def select_default_scope(root: Path) -> GuideScope:
+    """Select the conservative default from bounded Git metadata."""
+
+    executable = shutil.which("git")
+    if executable is None:
+        raise ValueError("Git is required for guided analysis")
+    head = _try_resolve_revision(root, executable, "HEAD")
+    conflict = bool(
+        _git_output(
+            root,
+            executable,
+            "diff",
+            "--name-only",
+            "--diff-filter=U",
+            "-z",
+            "--no-ext-diff",
+            "--ignore-submodules=all",
+        )
+    )
+    unstaged = _git_changed(
+        root,
+        executable,
+        "diff",
+        "--quiet",
+        "--no-ext-diff",
+        "--ignore-submodules=all",
+    )
+    untracked = bool(
+        _git_output(root, executable, "ls-files", "--others", "--exclude-standard", "-z")
+    )
+    staged = _git_changed(
+        root,
+        executable,
+        "diff",
+        "--cached",
+        "--quiet",
+        "--no-ext-diff",
+        "--ignore-submodules=all",
+    )
+    if conflict or unstaged or untracked:
+        return GuideScope("worktree")
+    if staged:
+        return GuideScope("staged")
+    if head is not None:
+        return GuideScope("commit", revision=head)
+    return GuideScope("worktree")
+
+
+def resolve_git_root(value: str | Path, *, cwd: Path | None = None) -> Path:
+    """Resolve one explicit/nearest root without scanning sibling filesystem locations."""
+
+    raw = _normalized_path(value)
+    candidate = Path(raw)
+    if not candidate.is_absolute():
+        candidate = (cwd or Path.cwd()) / candidate
+    lexical = Path(os.path.abspath(candidate))
+    if _is_private_path(lexical):
+        raise ValueError("atlas/Private paths are excluded from guided analysis")
+    try:
+        if candidate.is_symlink() or not candidate.exists():
+            raise ValueError(f"project directory does not exist or is unsafe: {raw}")
+        if not candidate.is_dir():
+            raise ValueError(f"project path is not a directory: {raw}")
+        resolved = candidate.resolve(strict=True)
+    except OSError as exc:
+        raise ValueError(f"cannot resolve project directory: {raw}") from exc
+    if resolved != lexical:
+        raise ValueError(f"project directory crosses a symbolic-link or junction boundary: {raw}")
+    for current in (resolved, *resolved.parents):
+        if _is_private_path(current):
+            raise ValueError("atlas/Private paths are excluded from guided analysis")
+        marker = current / ".git"
+        try:
+            exists = marker.exists()
+        except OSError as exc:
+            raise ValueError("cannot inspect Git repository boundary") from exc
+        if not exists:
+            continue
+        if marker.is_symlink() or (marker.is_dir() and marker.resolve() != marker.absolute()):
+            raise ValueError("Git repository marker is an unsafe link")
+        executable = shutil.which("git")
+        if executable is None:
+            raise ValueError("Git is required for guided analysis")
+        top = _git_output(current, executable, "rev-parse", "--show-toplevel").strip()
+        if not top or Path(top).resolve() != current:
+            raise ValueError("nearest Git repository boundary is invalid")
+        config = ProjectConfig.load(current)
+        _reject_private_target(current, resolved, config)
+        return current
+    raise ValueError(f"no enclosing Git repository was found for: {raw}")
+
+
+def _session_root(
+    path: str | Path | None,
+    terminal: TerminalIO,
+    language: str,
+) -> Path:
+    if path is not None:
+        return resolve_git_root(path)
+    try:
+        return resolve_git_root(Path.cwd())
+    except ValueError:
+        supplied = terminal.read(_message(language, "path_prompt"))
+        if supplied is None or supplied.strip().casefold() == "q":
+            raise ValueError("no Git repository was selected") from None
+        return resolve_git_root(supplied)
+
+
+def _collect_snapshot(
+    root: Path,
+    diagnostic: RepositoryDiagnostic,
+    config: ProjectConfig,
+    scope: GuideScope,
+    terminal: TerminalIO,
+    language: str,
+) -> GuideSnapshot:
+    terminal.write(_message(language, "building"))
+    private_paths = _private_paths(root, config)
+    if scope.scope == "commit":
+        change_set = collect_change_set(
+            root,
+            scope="commit",
+            revision=scope.revision,
+            excluded_paths=private_paths,
+        )
+    elif scope.scope == "range":
+        change_set = collect_change_set(
+            root,
+            scope="range",
+            base=scope.base,
+            head=scope.head,
+            excluded_paths=private_paths,
+        )
+    else:
+        change_set = collect_change_set(root, scope=scope.scope, excluded_paths=private_paths)
+    terminal.write(_message(language, "ranking"))
+    graph, report = collect_change_report_context(root, change_set, config)
+    graph_document = (
+        json.dumps(graph.to_dict(), ensure_ascii=False, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    report_document = render_change_report(report, "json").encode("utf-8")
+    return GuideSnapshot(
+        root,
+        diagnostic,
+        change_set,
+        graph,
+        report,
+        graph_document,
+        report_document,
+    )
+
+
+def _render_confirmation(
+    terminal: TerminalIO,
+    language: str,
+    root: Path,
+    scope: GuideScope,
+    diagnostic: RepositoryDiagnostic | None = None,
+) -> None:
+    terminal.write(_message(language, "root", value=str(root)))
+    terminal.write(_message(language, "scope", value=scope.display()))
+    trust_key = "trust_network_path" if _is_unc_path(root) else "trust"
+    terminal.write(_message(language, trust_key))
+    if diagnostic is not None:
+        terminal.write(
+            _message(
+                language,
+                "readiness",
+                unsupported=", ".join(diagnostic.unsupported_languages) or "none",
+                oversized=diagnostic.oversized_supported_file_count,
+                truncated="yes" if diagnostic.discovery_truncated else "no",
+                ambiguity=(
+                    ", ".join(diagnostic.ambiguity_reasons)
+                    if diagnostic.ambiguity_reasons
+                    else "none"
+                ),
+            )
+        )
+    terminal.write(_message(language, "cancel"))
+
+
+def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str) -> None:
+    report = snapshot.report
+    payload = report.to_dict()
+    change_set = report.analysis.change_set
+    terminal.write("")
+    terminal.write(_message(language, "project", value=str(snapshot.root)))
+    terminal.write(_message(language, "scope", value=change_set.scope))
+    terminal.write(
+        _message(
+            language,
+            "revision",
+            base=change_set.base_revision or "n/a",
+            head=change_set.head_revision or "worktree",
+        )
+    )
+    terminal.write(
+        _message(
+            language,
+            "state",
+            state=report.analysis.state,
+            meaning=STATE_MEANINGS[language].get(report.analysis.state, report.analysis.state),
+            freshness=report.freshness,
+        )
+    )
+    terminal.write(_message(language, "threshold", value=report.minimum_confidence))
+    terminal.write(_message(language, "changed", value=len(change_set.files)))
+    terminal.write(
+        _message(
+            language,
+            "requirements",
+            selected=len(report.requirements),
+            total=report.requirement_candidate_count,
+            filtered=report.requirement_filtered_count,
+            limited=report.requirement_limit_omitted_count,
+        )
+    )
+    for requirement_item in report.requirements[:5]:
+        terminal.write(
+            _message(
+                language,
+                "selected_requirement",
+                id=requirement_item.requirement.id,
+                score=requirement_item.score,
+                confidence=requirement_item.confidence,
+                reason="confidence-meets-minimum-threshold",
+                evidence=", ".join(requirement_item.evidence) or "none",
+            )
+        )
+    terminal.write(
+        _message(
+            language,
+            "tests",
+            selected=len(report.tests),
+            total=report.test_candidate_count,
+            filtered=report.test_filtered_count,
+            limited=report.test_limit_omitted_count,
+        )
+    )
+    for test_item in report.tests[:5]:
+        terminal.write(
+            _message(
+                language,
+                "selected_test",
+                id=test_item.test.id,
+                score=test_item.score,
+                confidence=test_item.confidence,
+                reason=", ".join(test_item.reasons) or "none",
+                evidence=", ".join(test_item.evidence) or "none",
+            )
+        )
+    terminal.write(
+        _message(
+            language,
+            "omissions",
+            requirements=len(report.omitted_requirements),
+            tests=len(report.omitted_tests),
+        )
+    )
+    terminal.write(
+        _message(
+            language,
+            "strategy",
+            strategy=report.test_strategy,
+            meaning=STRATEGY_MEANINGS[language].get(report.test_strategy, report.test_strategy),
+        )
+    )
+    terminal.write(_message(language, "tests_executed"))
+    terminal.write(_message(language, "advisory", value=payload["advisory"]))
+
+
+def _post_result(
+    snapshot: GuideSnapshot,
+    terminal: TerminalIO,
+    language: str,
+) -> GuideScope | str | None:
+    while True:
+        choice = terminal.read(_message(language, "actions"))
+        folded = "" if choice is None else choice.strip().casefold()
+        if choice is None or folded in {"", "q"}:
+            terminal.write(_message(language, "bye"))
+            return None
+        if folded == "1":
+            terminal.write(_message(language, "reasons_title"))
+            _render_reasons(snapshot.report, terminal, language)
+        elif folded == "2":
+            terminal.write(_message(language, "omissions_title"))
+            _render_omissions(snapshot.report, terminal, language)
+        elif folded == "3":
+            for line in render_change_report(snapshot.report, "json").splitlines():
+                terminal.write(line)
+            terminal.write(_message(language, "tests_executed"))
+        elif folded == "4":
+            try:
+                serve_graph(
+                    None,
+                    host="127.0.0.1",
+                    port=0,
+                    open_browser=True,
+                    graph_document=snapshot.graph_document,
+                    change_report_document=snapshot.report_document,
+                )
+            except (OSError, ValueError) as exc:
+                terminal.write(_message(language, "viewer_error", value=str(exc)))
+        elif folded == "5":
+            return _select_scope(snapshot.root, terminal, language)
+        elif folded == "6":
+            _render_commands(snapshot, terminal, language)
+        elif folded == "l":
+            return "tr" if language == "en" else "en"
+
+
+def _render_reasons(report: ChangeReport, terminal: TerminalIO, language: str) -> None:
+    if not report.requirements and not report.tests:
+        terminal.write(_message(language, "none"))
+        return
+    for requirement_item in report.requirements:
+        terminal.write(
+            f"requirement {requirement_item.requirement.id}: score={requirement_item.score}; "
+            f"confidence={requirement_item.confidence}; "
+            f"evidence={','.join(requirement_item.evidence) or 'none'}"
+        )
+    for test_item in report.tests:
+        terminal.write(
+            f"test {test_item.test.id}: score={test_item.score}; "
+            f"confidence={test_item.confidence}; "
+            f"reasons={','.join(test_item.reasons) or 'none'}; "
+            f"evidence={','.join(test_item.evidence) or 'none'}"
+        )
+
+
+def _render_omissions(report: ChangeReport, terminal: TerminalIO, language: str) -> None:
+    omitted = (*report.omitted_requirements, *report.omitted_tests)
+    if not omitted:
+        terminal.write(_message(language, "none"))
+    for item in omitted:
+        terminal.write(
+            f"{item.candidate_type} {item.node.id}: reason={item.reason}; score={item.score}; "
+            f"confidence={item.confidence}; evidence={','.join(item.evidence) or 'none'}"
+        )
+    terminal.write(
+        _message(
+            language,
+            "omissions",
+            requirements=len(report.omitted_requirements),
+            tests=len(report.omitted_tests),
+        )
+    )
+
+
+def _render_commands(snapshot: GuideSnapshot, terminal: TerminalIO, language: str) -> None:
+    scope = snapshot.change_set
+    root = _shell_display(snapshot.root)
+    if scope.scope == "commit":
+        selector = f"--commit {scope.head_revision}"
+    elif scope.scope == "range":
+        selector = f"--base {scope.base_revision} --head {scope.head_revision}"
+    elif scope.scope == "staged":
+        selector = "--staged"
+    else:
+        selector = "--worktree"
+    terminal.write(_message(language, "commands_title"))
+    terminal.write(f"intentatlas changes {root} {selector} --report --format text")
+    terminal.write(f"intentatlas changes {root} {selector} --report --format json")
+    terminal.write(f"intentatlas init {root}")
+    terminal.write(f"intentatlas scan {root}")
+
+
+def _select_scope(
+    root: Path,
+    terminal: TerminalIO,
+    language: str,
+) -> GuideScope | None:
+    choice = terminal.read(_message(language, "scope_menu"))
+    if choice is None or choice.strip().casefold() == "q":
+        return None
+    folded = choice.strip().casefold()
+    if folded == "w":
+        return GuideScope("worktree")
+    if folded == "s":
+        return GuideScope("staged")
+    executable = shutil.which("git")
+    if executable is None:
+        raise ValueError("Git is required for guided analysis")
+    if folded == "h":
+        head = _try_resolve_revision(root, executable, "HEAD")
+        if head is None:
+            raise ValueError("HEAD does not exist in this repository")
+        return GuideScope("commit", revision=head)
+    if folded == "c":
+        revision = terminal.read(_message(language, "commit_prompt"))
+        if revision is None:
+            return None
+        return GuideScope("commit", revision=_resolve_revision(root, executable, revision))
+    if folded == "r":
+        base = terminal.read(_message(language, "base_prompt"))
+        head = terminal.read(_message(language, "head_prompt"))
+        if base is None or head is None:
+            return None
+        return GuideScope(
+            "range",
+            base=_resolve_revision(root, executable, base),
+            head=_resolve_revision(root, executable, head),
+        )
+    return select_default_scope(root)
+
+
+def _language(value: str | None) -> str:
+    if value in MESSAGES:
+        return value
+    if value is not None:
+        raise ValueError(f"unsupported guide language: {value}")
+    current = locale.getlocale()[0] or ""
+    return "tr" if current.casefold().startswith("tr") else "en"
+
+
+def _message(language: str, key: str, **values: Any) -> str:
+    return MESSAGES[language][key].format(**values)
+
+
+def _terminal_text(value: object) -> str:
+    text = str(value)[:MAX_TERMINAL_VALUE]
+    rendered: list[str] = []
+    for character in text:
+        code = ord(character)
+        if character in _BIDI_CONTROLS:
+            rendered.append(f"\\u{code:04x}")
+        elif character == "\n":
+            rendered.append("\\n")
+        elif character == "\r":
+            rendered.append("\\r")
+        elif character == "\t":
+            rendered.append(" ")
+        elif code < 32 or code == 127:
+            rendered.append(f"\\x{code:02x}")
+        else:
+            rendered.append(character)
+    return "".join(rendered)
+
+
+def _normalized_path(value: str | Path) -> str:
+    rendered = str(value).strip()
+    if len(rendered) > MAX_TERMINAL_VALUE or "\x00" in rendered:
+        raise ValueError("project path is invalid")
+    if len(rendered) >= 2 and rendered[0] == rendered[-1] and rendered[0] in {'"', "'"}:
+        rendered = rendered[1:-1]
+    if not rendered:
+        raise ValueError("project path is empty")
+    return rendered
+
+
+def _is_unc_path(path: Path) -> bool:
+    return str(path).startswith("\\\\")
+
+
+def _is_private_path(path: Path) -> bool:
+    folded = tuple(part.casefold() for part in path.parts)
+    return any(
+        folded[index : index + 2] == ("atlas", "private")
+        for index in range(len(folded) - 1)
+    )
+
+
+def _reject_private_target(root: Path, target: Path, config: ProjectConfig) -> None:
+    canonical_root = root.resolve()
+    private_roots = {
+        canonical_root / "atlas" / "Private",
+        config.vault_path(canonical_root) / "Private",
+    }
+    if any(target == private or private in target.parents for private in private_roots):
+        raise ValueError("atlas/Private paths are excluded from guided analysis")
+
+
+def _private_paths(root: Path, config: ProjectConfig) -> tuple[str, ...]:
+    canonical = root.resolve()
+    return tuple(
+        path.relative_to(canonical).as_posix()
+        for path in sorted(
+            {canonical / "atlas" / "Private", config.vault_path(canonical) / "Private"},
+            key=lambda item: item.as_posix().casefold(),
+        )
+    )
+
+
+def _git_command(root: Path, executable: str, *arguments: str) -> list[str]:
+    return [
+        executable,
+        "-c",
+        f"safe.directory={root.as_posix()}",
+        "-c",
+        "core.quotePath=false",
+        "-C",
+        str(root),
+        *arguments,
+    ]
+
+
+def _git_run(root: Path, executable: str, *arguments: str) -> subprocess.CompletedProcess[str]:
+    try:
+        result = subprocess.run(  # noqa: S603  # nosec B603
+            _git_command(root, executable, *arguments),
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=10,
+            shell=False,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise ValueError("cannot inspect Git repository") from exc
+    if len(result.stdout.encode("utf-8")) > MAX_GIT_OUTPUT_BYTES:
+        raise ValueError("Git metadata exceeds the guided analysis limit")
+    return result
+
+
+def _git_output(root: Path, executable: str, *arguments: str) -> str:
+    result = _git_run(root, executable, *arguments)
+    if result.returncode != 0:
+        raise ValueError("cannot inspect Git repository")
+    return result.stdout
+
+
+def _git_changed(root: Path, executable: str, *arguments: str) -> bool:
+    result = _git_run(root, executable, *arguments)
+    if result.returncode not in {0, 1}:
+        raise ValueError("cannot inspect Git repository")
+    return result.returncode == 1
+
+
+def _resolve_revision(root: Path, executable: str, revision: str) -> str:
+    normalized = revision.strip()
+    if not _REVISION.fullmatch(normalized) or ".." in normalized:
+        raise ValueError(f"unsafe Git revision: {revision!r}")
+    value = _git_output(
+        root,
+        executable,
+        "rev-parse",
+        "--verify",
+        "--end-of-options",
+        f"{normalized}^{{commit}}",
+    ).strip()
+    if not re.fullmatch(r"[0-9a-f]{40,64}", value):
+        raise ValueError(f"Git revision did not resolve to a commit: {revision}")
+    return value
+
+
+def _try_resolve_revision(root: Path, executable: str, revision: str) -> str | None:
+    try:
+        return _resolve_revision(root, executable, revision)
+    except ValueError:
+        return None
+
+
+def _shell_display(path: Path) -> str:
+    rendered = _terminal_text(path)
+    return f'"{rendered}"' if any(character.isspace() for character in rendered) else rendered

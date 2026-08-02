@@ -2,15 +2,18 @@
 
 Start with the product contract that matches your goal:
 
-1. [Guided synthetic demo](guided-demo.md) — evaluate the packaged, original scenario without
+1. [One-command guided CLI](guided-cli.md) — press Enter once for a production, no-write Change
+   Report on the nearest safe Git repository.
+2. [Guided synthetic demo](guided-demo.md) — evaluate the packaged, original scenario without
    reading a repository.
-2. [Trust-first real-repository preview](trust-first-preview.md) — diagnose a trusted checkout and
-   obtain a revision-scoped, no-write report before initialization.
-3. Persistent adoption — after interpreting the preview, run `intentatlas init`, author durable
+3. [Trust-first real-repository preview](trust-first-preview.md) — use explicit expert commands to
+   diagnose a trusted checkout and obtain a revision-scoped, no-write report before initialization.
+4. Persistent adoption — after interpreting the preview, run `intentatlas init`, author durable
    intent links, then run `intentatlas scan` and `intentatlas open`.
 
-The first two paths are offline. Only commands with an explicit `--open` option start the
-loopback-only viewer. Initialization and scanning are deliberate persistent actions.
+The first three paths are offline. The guide starts a browser only after the explicit viewer
+choice; expert commands require `--open`. Initialization and scanning are deliberate persistent
+actions.
 
 ## Concepts and operations
 

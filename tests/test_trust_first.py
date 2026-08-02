@@ -107,6 +107,10 @@ def test_trust_first_documentation_sequence_and_artifacts_are_frozen() -> None:
     readme_tr = (PROJECT_ROOT / "README.tr.md").read_text(encoding="utf-8")
     docs_index = (PROJECT_ROOT / "docs" / "index.md").read_text(encoding="utf-8")
     preview = (PROJECT_ROOT / "docs" / "trust-first-preview.md").read_text(encoding="utf-8")
+    guided = (PROJECT_ROOT / "docs" / "guided-cli.md").read_text(encoding="utf-8")
+    observations = (PROJECT_ROOT / "docs" / "first-run-observation-guide.md").read_text(
+        encoding="utf-8"
+    )
 
     quick_starts = (
         readme.split("## Quick start", maxsplit=1)[1],
@@ -118,9 +122,14 @@ def test_trust_first_documentation_sequence_and_artifacts_are_frozen() -> None:
         assert document.index("diagnose") < document.index("changes")
         assert document.index("changes") < document.index(" init ")
     assert "guided-demo.md" in docs_index
+    assert "guided-cli.md" in docs_index
     assert "trust-first-preview.md" in docs_index
     assert "onboarding-walkthroughs.md" in docs_index
     assert "first-run-observation-guide.md" in docs_index
+    assert "both stdin and stdout are TTYs" in guided
+    assert "Tests executed: 0" in guided
+    assert "five independent" in guided
+    assert "not independent observations" in observations
 
     report_path = PROJECT_ROOT / "docs" / "examples" / "trust-first-report.json"
     image_path = PROJECT_ROOT / "docs" / "assets" / "trust-first-preview.svg"

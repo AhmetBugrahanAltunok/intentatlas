@@ -46,7 +46,20 @@ diğer gereksinimin etkilenmediği veya testinin gereksiz olduğu iddiası deği
 
 ## Hızlı başlangıç
 
-Önce hiçbir depoya dokunmadan paketlenmiş sentetik sözleşmeyi değerlendirin:
+Etkileşimli terminalde gerçek bir repo içinden tek komut çalıştırın:
+
+```powershell
+intentatlas
+```
+
+IntentAtlas analizden önce en yakın güvenli Git kökünü ve ihtiyatlı kapsamı gösterir. Kabul etmek
+için bir kez Enter'a basın. Conflict, unstaged veya untracked durum `worktree`; yalnız staged durum
+`staged`; temiz repo exact `HEAD`; unborn repo `worktree` seçer. Sonuç production Change Report'u
+kullanır ve hiçbir şey yazmaz. Pipe, redirect, CI veya başka non-TTY çağrılar mevcut argparse
+stderr/exit-2 davranışını korur; prompt açmaz ve tarama yapmaz. Açık bir yol için aynı akışı
+`intentatlas guide [PATH]` ile başlatın. Ayrıntılar [rehberli CLI sözleşmesindedir](docs/guided-cli.md).
+
+Hiçbir depoya dokunmadan paketlenmiş sentetik sözleşmeyi değerlendirmek için:
 
 ```powershell
 intentatlas demo --report text
@@ -61,8 +74,7 @@ veya Git diff çıkarımını sınamaz. İnteraktif görünümde **Change report
 sıralanmayan `tests/test_auth_audit.py` testini karşılaştırın. Ayrıntılı tur için
 [yönlendirmeli demo belgesine](docs/guided-demo.md) bakın. Geçerli klasörü taramaz.
 
-Sonra güvenilen gerçek bir repo checkout'unda yapılandırma, vault, grafik veya üretilmiş not
-oluşturmadan sıfır-izli önizleme isteyin:
+Açık uzman komutları sıfır-izli önizleme için kullanılmaya devam eder:
 
 ```powershell
 intentatlas diagnose C:\projenizin\yolu

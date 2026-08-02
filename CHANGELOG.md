@@ -9,6 +9,9 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ### Added
 
+- A line-oriented English/Turkish guided CLI: interactive empty argv or `guide [PATH]` confirms the
+  nearest safe Git root and conservative scope, then renders the production Change Report without
+  writing state; non-TTY empty argv preserves the established argparse exit-2 contract.
 - A deterministic schema-1 `diagnose` command for bounded, offline, read-only repository readiness
   and safe-next-action reporting.
 - Trust-first real-repository onboarding, cross-surface change-report reasons and recorded paths,

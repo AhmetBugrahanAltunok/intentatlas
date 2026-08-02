@@ -7,7 +7,9 @@ repository names, source content, secrets, credentials, personal data, or screen
 separate explicit consent covers it.
 
 Use a trusted checkout and start the timer immediately before the participant begins the
-documentation path. Stop it when they can correctly state the report's revision/scope, whether the
+documentation path. The Phase 14 guided CLI and any owner/synthetic transcript validate only
+technical onboarding behavior; they are not independent observations and do not satisfy this
+gate. Stop the timer when the participant can correctly state the report's revision/scope, whether the
 analysis is aligned or degraded, why one candidate was selected or omitted, and what test strategy
 is required. Retain failed commands and confusion instead of smoothing the record.
 

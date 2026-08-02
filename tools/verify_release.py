@@ -31,6 +31,7 @@ REQUIRED_PACKAGE_FILES = {
     "intentatlas/__init__.py",
     "intentatlas/__main__.py",
     "intentatlas/cli.py",
+    "intentatlas/onboarding.py",
     "intentatlas/web/app.js",
     "intentatlas/web/index.html",
     "intentatlas/web/styles.css",

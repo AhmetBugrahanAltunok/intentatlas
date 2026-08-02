@@ -25,6 +25,7 @@ def test_compatibility_policy_covers_every_declared_contract() -> None:
         "Supported CLI JSON",
         "Change set, change analysis, change report, and review output",
         "Repository diagnostic output",
+        "Guided CLI human interaction",
         "Longitudinal pilot manifest, labels, classifications, and result JSON",
         "Evidence import formats and external report adapters",
         "Language adapters and adapter conformance protocol",
@@ -33,7 +34,7 @@ def test_compatibility_policy_covers_every_declared_contract() -> None:
     ):
         assert contract in normalized
 
-    assert policy.count("| stable |") == 7
+    assert policy.count("| stable |") == 8
     assert policy.count("| experimental |") == 4
     assert policy.count("| internal |") == 2
     assert "at least one minor release" in normalized

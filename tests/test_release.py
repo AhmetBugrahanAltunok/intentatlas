@@ -80,6 +80,7 @@ def _package_values(
         "intentatlas/__init__.py": package_value,
         "intentatlas/__main__.py": b"main",
         "intentatlas/cli.py": cli_value,
+        "intentatlas/onboarding.py": b"onboarding",
         "intentatlas/web/app.js": b"app",
         "intentatlas/web/index.html": b"html",
         "intentatlas/web/styles.css": b"css",
@@ -226,8 +227,8 @@ def test_release_verifier_accepts_repeated_project_archives(tmp_path) -> None:
     assert result.wheel == first_wheel.name
     assert result.version == FIXTURE_VERSION
     assert result.wheel_size == first_wheel.stat().st_size
-    assert result.wheel_files == 11
-    assert result.sdist_files == 12
+    assert result.wheel_files == 12
+    assert result.sdist_files == 13
     assert result.wheel_generator == "hatchling 1.31.0"
 
 
