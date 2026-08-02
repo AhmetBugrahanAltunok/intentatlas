@@ -471,6 +471,9 @@ Status: complete (2026-08-02)
 
 Status: not authorized; owner-controlled after Phase 11B, recommended after Phase 12
 
+- Complete at least five independent human first-run observations and demonstrate a below-ten-
+  minute median before public launch or any real user-time claim. Phase 12 synthetic/cognitive
+  walkthroughs are technical evidence and cannot satisfy this human-validation gate.
 - Verify public security reporting, protected publishing environments, exact release provenance,
   contributor intake, benchmark wording, and the no-telemetry contract.
 - Repository visibility, tag, release, package publication, deployment, hosted attestation, and
@@ -480,13 +483,16 @@ Status: not authorized; owner-controlled after Phase 11B, recommended after Phas
 
 ## Phase 12 - Trust-first first-run value
 
-Status: planned; Phase 11B entry gate passed; not started
+Status: in progress; Phase 11B entry gate passed
 
 - Make an aligned, zero-footprint change report the first real-repository outcome.
 - Add a deterministic read-only diagnostic for support, ambiguity, freshness, and safe next steps.
 - Preserve revision, threshold, candidate counts, selected/omitted meaning, evidence paths,
   fallback strategy, and advisory limits across terminal text, JSON, and the viewer.
 - Treat the graph as bounded evidence drill-down rather than the product's primary answer.
+- Establish technical onboarding readiness through at least five task-based synthetic/cognitive
+  walkthroughs plus clean-install, no-write, cross-surface, browser, keyboard, and accessibility
+  gates; do not claim human usability or median user time from those checks.
 - Requirement: [[Requirements/REQ-028 - Deliver trust-first first-run value]]
 - Decision: [[Decisions/ADR-028 - Make the change report the primary product surface]]
 - Delivery issue: [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]]

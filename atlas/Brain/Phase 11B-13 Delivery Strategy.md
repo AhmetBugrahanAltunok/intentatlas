@@ -7,7 +7,7 @@ status: active
 
 This strategy converts the release-candidate audit into a sequenced product plan. It keeps the
 vault-first and offline contracts intact while moving the product from a locally credible release
-candidate to measured recommendation trust, a useful first ten minutes, and a bounded monorepo
+candidate to measured recommendation trust, technically ready onboarding, and a bounded monorepo
 foundation.
 
 ## Product thesis
@@ -111,7 +111,9 @@ Delivery records:
 
 Phase 12 does not add hosted accounts, telemetry, automatic edits to user notes, an editor plugin,
 or graph cosmetics without a measured usability need. Its exit gate is a no-write first-run path,
-complete trust information in text/JSON/UI, and independently observed time-to-first-value.
+complete trust information in text/JSON/UI, real-browser keyboard/accessibility verification,
+clean-install verification, and at least five distinct task-based synthetic/cognitive walkthroughs.
+These walkthroughs are technical checks, not human observations, and produce no user-time median.
 
 ## Conditional Phase 11C - public launch checkpoint
 
@@ -120,6 +122,10 @@ so the public repository presents a trustworthy first-run experience. The checkp
 repository security reporting, protected publishing environments, exact release provenance,
 public benchmark wording, contributor intake, and the absence of telemetry. It is not permission
 embedded in this roadmap and it does not alter local CLI behavior.
+
+Before public launch or any real user-time claim, Phase 11C also requires at least five independent
+human first-run observations and a below-ten-minute median. Automated or synthetic Phase 12
+walkthroughs cannot satisfy that external usability gate.
 
 ## Phase 13 - semantic monorepo foundation
 

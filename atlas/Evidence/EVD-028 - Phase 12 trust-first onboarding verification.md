@@ -6,16 +6,16 @@ phase: 12
 ---
 # EVD-028 - Phase 12 trust-first onboarding verification
 
-This is a verification plan, not evidence that Phase 12 has passed.
-
-Automated implementation and verification are complete. The required independent human first-run
-observations have not been supplied, so this note does not claim Phase 12 pass.
+The owner re-scoped Phase 12 on 2026-08-02 to technical onboarding readiness. External human
+usability validation remains a Phase 11C prerequisite for public launch or any real user-time
+claim; it is not inferred from the technical checks recorded here.
 
 ## Claim to verify
 
-A new maintainer can obtain and correctly interpret an aligned, explainable real-repository result
-within ten minutes through a deterministic no-write path, while text, JSON, and UI preserve the same
-trust, omission, and fallback semantics.
+A maintainer-facing workflow provides an aligned, explainable real-repository result through a
+deterministic no-write path, while text, JSON, and UI preserve the same trust, omission, and
+fallback semantics. Technical task walkthroughs verify the available decisions without claiming
+human usability or elapsed user time.
 
 ## Required evidence
 
@@ -31,8 +31,9 @@ trust, omission, and fallback semantics.
 - [x] Exact synthetic-demo and real-repository onboarding commands from a clean installed wheel.
 - [x] English/Turkish documentation-command checks and hashes for deterministic example/report/
       screenshot inputs.
-- [ ] At least five anonymized, consented first-run observations with timing method, median time,
-      task success, confusion points, and resulting changes; no secrets or repository contents.
+- [x] At least five distinct task-based synthetic/cognitive walkthroughs with exact commands and
+      results for safe first action, aligned explanation, omission interpretation, stale-analysis
+      fallback, and ambiguous or unsupported scope.
 - [x] Focused regression commands and exact results.
 - [x] Complete test, coverage, lint, type, security, package, installed-wheel, extracted-sdist, and
       documentation command results.
@@ -66,9 +67,10 @@ trust, omission, and fallback semantics.
 - The viewer report is the initial panel when the user explicitly opens the report viewer. It keeps
   IPv4 loopback binding, Host validation, security headers, escaping, bounded graph windows,
   keyboard activation, Escape close, focus transfer, and accessible dialog naming.
-- English/Turkish README entry points, `docs/index.md`, `docs/trust-first-preview.md`, and the
-  observation guide separate synthetic demo, no-write real-repository preview, and persistent
-  adoption. The original artifacts are `docs/examples/trust-first-report.json` and
+- English/Turkish README entry points, `docs/index.md`, `docs/trust-first-preview.md`, the technical
+  walkthrough guide, and the Phase 11C observation guide separate synthetic demo, no-write real-
+  repository preview, persistent adoption, technical verification, and later human validation.
+  The original artifacts are `docs/examples/trust-first-report.json` and
   `docs/assets/trust-first-preview.svg`.
 - Focused tests cover diagnostic safety/capability, no-write CLI snapshots, cross-surface report
   semantics, documentation ordering/hashes, loopback policy, bounded rendering, and real Chrome
@@ -93,6 +95,24 @@ trust, omission, and fallback semantics.
 - Real Chrome uses DevTools Protocol input events: the accessibility tree contains the named
   `dialog`, Escape closes it, Enter on the report toggle reopens it, and focus moves to the close
   button. Both the 320-node bounded window and same-file report scenarios pass.
+
+## Task-based synthetic/cognitive walkthrough results
+
+Command `.venv\Scripts\python.exe -m pytest tests/test_onboarding_walkthroughs.py
+tests/test_trust_first.py tests/test_diagnostic.py tests/test_change_report.py -q` reported
+`16 passed`. The five named scenarios in `tests/test_onboarding_walkthroughs.py` verified:
+
+1. an unconfigured checkout yields the deterministic safe next command without a write or network
+   requirement;
+2. an aligned symbol change exposes the selected requirement, test, exact recorded paths, and
+   targeted strategy;
+3. a below-threshold requirement remains visible as omitted and is never described as unaffected;
+4. stale analysis abstains from recommendations and requires the full suite; and
+5. multiple roots, unsupported Rust, and an oversized supported file remain explicit diagnostic
+   limits without writes or network use.
+
+These are automated synthetic/cognitive walkthroughs, not participant observations. No human
+task-success result, elapsed user time, or median was produced.
 
 ## Commands and exact automated results
 
@@ -130,17 +150,18 @@ trust, omission, and fallback semantics.
   with 13/13 jobs, including Python 3.11/3.12/3.13 tests, six Windows/macOS/Linux installed-wheel
   E2E jobs, real Chrome, static types, security/network audit, and reproducible package/sdist.
 
-## Human observation gate
+## External validation boundary
 
-No participant observation has been supplied or inferred. Count: `0/5`; median time: not
-calculated; task-success and recurring-confusion results: unavailable. Follow
-`docs/first-run-observation-guide.md` and retain consent, anonymized elapsed times, failed steps,
-interpretations, and confusion. Phase 12 remains open until this evidence is real and reviewed.
+Risk: **external human usability validation not yet performed**. No participant observation,
+human task-success result, or elapsed user time is supplied or inferred here. Phase 11C must follow
+`docs/first-run-observation-guide.md`, record at least five independent consented observations, and
+demonstrate the required below-ten-minute median before public launch or any real user-time claim.
+This open launch risk does not satisfy, replace, or block the re-scoped Phase 12 technical gate.
 
 ## Remaining risks and launch status
 
-- Independent first-run usability and the below-ten-minute median are unverified. Documentation or
-  implementation may still change when observations reveal repeated confusion.
+- External human usability and the below-ten-minute median remain unverified; the Phase 11C gate
+  may require documentation or implementation changes when real observations reveal confusion.
 - The diagnostic is bounded metadata/readiness evidence, not completeness; language adapters remain
   experimental, and fallback/unknown reports still require the displayed full-suite strategy.
 - No telemetry, hosted dependency, account, model/API key, automatic user-note edit, tag, release,
@@ -150,8 +171,9 @@ interpretations, and confusion. Phase 12 remains open until this evidence is rea
 
 Keep the phase open if preview writes state, any surface omits material trust information, the UI
 changes ranking semantics, omission is presented as no impact, a listener/network action happens
-without explicit user choice, the median observation gate is unmet, or a required verification
-result is missing.
+without explicit user choice, fewer than five distinct technical walkthroughs pass, or a required
+Phase 12 verification result is missing. Keep public launch and real user-time claims blocked until
+the separate Phase 11C human-validation gate passes.
 
 ## Links
 
@@ -164,6 +186,7 @@ result is missing.
 - implemented-by:: [[Code/src - intentatlas - web - app.js]]
 - proves:: [[Tests/tests - test_diagnostic.py]]
 - proves:: [[Tests/tests - test_trust_first.py]]
+- proves:: [[Tests/tests - test_onboarding_walkthroughs.py]]
 - proves:: [[Tests/tests - test_change_report.py]]
 - proves:: [[Tests/tests - test_browser_e2e.py]]
 - proves:: [[Tests/tests - test_viewer.py]]

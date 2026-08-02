@@ -11,7 +11,7 @@ source_path: "docs/first-run-observation-guide.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>1520</code>
+- **Size Bytes:** <code>1669</code>
 
 ## Incoming relationships
 

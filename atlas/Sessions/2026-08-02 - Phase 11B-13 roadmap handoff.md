@@ -44,6 +44,17 @@ provenance/link, authorized network audit, push, and remote CI.
 5. Treat Phase 11C as a separately approved publication checkpoint. The recommended timing is after
    Phase 12; deferral does not block local Phase 12 or 13 engineering.
 
+## Owner scope amendment (2026-08-02)
+
+The owner re-scoped Phase 12 to technical onboarding readiness. Its gates are no-write behavior,
+text/JSON/UI semantic equivalence, real-browser keyboard/accessibility behavior, clean installation,
+and at least five distinct task-based synthetic/cognitive walkthroughs. These walkthroughs are not
+human observations and do not support a median user-time claim.
+
+Five independent human first-run observations and a below-ten-minute median moved to Phase 11C.
+They remain mandatory before public launch or any real user-time claim, but their absence does not
+block Phase 12 technical closure or local Phase 13 engineering after the Phase 12 Review passes.
+
 ## Coding-conversation contract
 
 At the start of each phase, the implementation conversation should:

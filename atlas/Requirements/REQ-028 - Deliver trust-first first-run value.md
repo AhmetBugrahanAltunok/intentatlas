@@ -6,9 +6,9 @@ phase: 12
 ---
 # Deliver trust-first first-run value
 
-A maintainer can obtain an honest, explainable result from a real repository in the first ten
-minutes without initializing a vault, modifying the repository, starting a hosted service, or
-mistaking a generic graph for proof of impact.
+A maintainer can obtain an honest, explainable result from a real repository without initializing
+a vault, modifying the repository, starting a hosted service, or mistaking a generic graph for
+proof of impact.
 
 ## User outcome
 
@@ -39,9 +39,13 @@ The graph is available for bounded evidence navigation after the report establis
   that discovery, Git alignment, or user-authored intent was exercised.
 - English and Turkish onboarding, an indexed documentation landing page, one original example, and
   one deterministic trust-first screenshot/report artifact follow the same command sequence.
-- At least five independent first-run observations are recorded; median time from a trusted
-  checkout to the first correctly interpreted explainable result is below ten minutes, with
-  confusion and failed steps retained in Evidence.
+- At least five distinct task-based synthetic/cognitive walkthrough scenarios exercise safe first
+  action, aligned explanation, omission interpretation, stale-analysis fallback, and ambiguous or
+  unsupported scope. Their commands and results are retained in Evidence and are not represented
+  as human observations or user timing.
+- External human usability validation, including five independent observations and a below-ten-
+  minute median, is deferred to the Phase 11C gate and must pass before any public launch or real
+  user-time claim; it is not a Phase 12 completion criterion.
 - No telemetry, hosted account, model/API key, automatic user-note edits, or network requirement is
   added to the CLI.
 - Focused/no-write/browser/accessibility/docs regressions and the complete local, package,

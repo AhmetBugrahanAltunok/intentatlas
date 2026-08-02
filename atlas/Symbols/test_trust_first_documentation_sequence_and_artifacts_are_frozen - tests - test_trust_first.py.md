@@ -10,7 +10,7 @@ source_path: "tests/test_trust_first.py"
 
 ## Metadata
 
-- **End Line:** <code>142</code>
+- **End Line:** <code>143</code>
 - **Line:** <code>105</code>
 - **Symbol Kind:** <code>"function"</code>
 

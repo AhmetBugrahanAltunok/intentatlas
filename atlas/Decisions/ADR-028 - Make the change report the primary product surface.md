@@ -48,6 +48,11 @@ Documentation offers two distinct promises: evaluate the deterministic synthetic
 without touching a repository, then preview a real repository without initialization. Persistent
 `init`/`scan` adoption follows only after the user understands the no-write result.
 
+Phase 12 validates technical onboarding readiness through deterministic task-based synthetic and
+cognitive walkthroughs. External human usability validation cannot be inferred from automated
+execution: five independent observations and the below-ten-minute median are moved to the Phase
+11C gate and remain mandatory before public launch or any real user-time claim.
+
 ## Consequences
 
 - The first-run path becomes useful even before the user authors durable intent notes.
@@ -57,8 +62,10 @@ without touching a repository, then preview a real repository without initializa
   detail.
 - The viewer requires more explicit report state and omission UX but less emphasis on graph
   cosmetics.
-- Human usability observations become a phase gate and may expose documentation work that cannot
-  be solved by code alone.
+- At least five named synthetic/cognitive walkthroughs become the Phase 12 interpretation gate;
+  they verify technical semantics but do not establish human usability or elapsed user time.
+- Human usability observations may expose documentation work that cannot be solved by code alone;
+  that uncertainty remains visible and is resolved at Phase 11C before public launch claims.
 - Persistent adoption still requires deliberate user-authored links; IntentAtlas will explain that
   step instead of silently manufacturing project intent.
 

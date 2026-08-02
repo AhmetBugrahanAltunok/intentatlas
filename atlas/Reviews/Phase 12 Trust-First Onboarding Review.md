@@ -17,8 +17,9 @@ phase: 12
 - [x] Synthetic-demo, zero-footprint-preview, and persistent-adoption documentation are distinct and
       executable from a clean installation.
 - [x] Loopback/Host/header/escaping/keyboard/accessibility/bounded-window browser gates pass.
-- [ ] At least five independent observations produce a median time-to-correct-first-value below ten
-      minutes and all recurring confusion is resolved or explicitly accepted.
+- [x] At least five named task-based synthetic/cognitive walkthroughs cover safe first action,
+      aligned explanation, omission interpretation, stale fallback, and ambiguous or unsupported
+      scope without being represented as human observations or user timing.
 - [x] No telemetry, hosted dependency, automatic user-note edit, copied asset, or unapproved network
       action was added.
 - [x] Focused/full local quality, package, documentation, deterministic-vault, and approved network
@@ -35,8 +36,8 @@ phase: 12
 
 ## Review decision
 
-Pending. Automated acceptance evidence passes at exact implementation/test head
-`5651c34ab2f1d5755fe319a07313e7c7ba7c4063`, including 13/13 remote CI jobs. The independent
-human observation count is `0/5`, so median time and correct-interpretation success are unavailable.
-Do not claim a trustworthy first-ten-minute experience and do not start Phase 13 until real,
-consented observations are recorded and every acceptance item above passes.
+Pending closure re-verification. The owner re-scoped this Review to technical onboarding readiness
+on 2026-08-02. External human usability validation, five independent observations, and a below-ten-
+minute median moved to Phase 11C and remain required before public launch or any real user-time
+claim. Phase 12 may pass only after the revised technical criteria, exact provenance, push, remote
+CI, complete Evidence, and durable-chain checks all pass. Do not start Phase 13 before that pass.

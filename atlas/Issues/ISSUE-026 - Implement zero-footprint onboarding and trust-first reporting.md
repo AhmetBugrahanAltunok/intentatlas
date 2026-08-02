@@ -38,8 +38,9 @@ diagnostic starts at schema version 1 and will be added to that stable boundary.
       zero-footprint preview, and persistent adoption flows.
 - [x] Add one original example and deterministic trust-first report/screenshot artifact without
       copied third-party branding or assets.
-- [ ] Record at least five independent first-run observations and resolve or explicitly accept every
-      repeated source of confusion.
+- [x] Execute at least five distinct task-based synthetic/cognitive walkthroughs for safe first
+      action, aligned explanation, omission interpretation, stale-analysis fallback, and ambiguous
+      or unsupported scope; retain exact commands/results without presenting them as human studies.
 - [x] Add exact Code and Test links after implementation artifacts exist.
 - [ ] Run focused CLI/no-write/browser/accessibility/docs regressions and the complete local,
       package, deterministic-vault, approved network, and remote-CI closure gates.
@@ -52,6 +53,12 @@ diagnostic starts at schema version 1 and will be added to that stable boundary.
 - No change to recommendation scores unless separately driven by Phase 11B evidence.
 - No public release, tag, or package publication without the conditional owner launch approval.
 
+## Owner scope amendment
+
+On 2026-08-02 the owner moved five independent human observations and the below-ten-minute median
+from Phase 12 closure to Phase 11C. Phase 12 now establishes technical onboarding readiness; the
+deferred observations remain mandatory before public launch or any real user-time claim.
+
 ## Typed links
 
 - implements:: [[Requirements/REQ-028 - Deliver trust-first first-run value]]
@@ -62,6 +69,7 @@ diagnostic starts at schema version 1 and will be added to that stable boundary.
 - implemented-by:: [[Code/src - intentatlas - web - app.js]]
 - verified-by:: [[Tests/tests - test_diagnostic.py]]
 - verified-by:: [[Tests/tests - test_trust_first.py]]
+- verified-by:: [[Tests/tests - test_onboarding_walkthroughs.py]]
 - verified-by:: [[Tests/tests - test_change_report.py]]
 - verified-by:: [[Tests/tests - test_browser_e2e.py]]
 - verified-by:: [[Tests/tests - test_viewer.py]]

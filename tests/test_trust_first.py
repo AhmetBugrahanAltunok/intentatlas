@@ -119,6 +119,7 @@ def test_trust_first_documentation_sequence_and_artifacts_are_frozen() -> None:
         assert document.index("changes") < document.index(" init ")
     assert "guided-demo.md" in docs_index
     assert "trust-first-preview.md" in docs_index
+    assert "onboarding-walkthroughs.md" in docs_index
     assert "first-run-observation-guide.md" in docs_index
 
     report_path = PROJECT_ROOT / "docs" / "examples" / "trust-first-report.json"

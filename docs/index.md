@@ -22,4 +22,5 @@ loopback-only viewer. Initialization and scanning are deliberate persistent acti
 - [Recommendation evaluation](recommendation-evaluation.md)
 - [Real-world validation](real-world-validation.md)
 - [Longitudinal pilot](longitudinal-pilot.md)
-- [First-run observation guide](first-run-observation-guide.md)
+- [Technical onboarding walkthroughs](onboarding-walkthroughs.md)
+- [Phase 11C first-run observation guide](first-run-observation-guide.md)

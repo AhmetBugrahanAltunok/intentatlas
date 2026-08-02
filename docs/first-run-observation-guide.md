@@ -1,6 +1,7 @@
 # First-run observation guide
 
-Phase 12 requires real observations; automated runs and invented participants do not count. Ask an
+Phase 11C requires real observations before any public launch or real user-time claim; automated
+runs, Phase 12 synthetic/cognitive walkthroughs, and invented participants do not count. Ask an
 independent participant for consent before recording only anonymized task metadata. Do not record
 repository names, source content, secrets, credentials, personal data, or screen/audio unless a
 separate explicit consent covers it.
@@ -22,4 +23,4 @@ For each observation record:
 At least five independent observations are required. Compute the median from the raw elapsed
 times. A passing median must be below ten minutes, every participant must reach a correctly
 interpreted explainable result, and repeated confusion must be resolved or explicitly accepted in
-Phase 12 Evidence and Review.
+Phase 11C Evidence and Review. These requirements are not Phase 12 closure criteria.
