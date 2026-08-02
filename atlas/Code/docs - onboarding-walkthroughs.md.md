@@ -13,6 +13,6 @@ source_path: "docs/onboarding-walkthroughs.md"
 - **Language:** <code>"Markdown"</code>
 - **Size Bytes:** <code>1832</code>
 
-## Graph health
+## Incoming relationships
 
-- Orphaned generated node
+- <code>changed-by</code> ← [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs|test: verify technical onboarding walkthroughs]] _(history; evidence: git-log)_

@@ -24,15 +24,15 @@ generated: true
 - **session:** 9
 - **symbol:** 999
 - **test:** 71
-- **relationships:** 3034
+- **relationships:** 3021
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 191 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 104 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 103 relationships
 - [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 88 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 82 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 81 relationships
 - [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 70 relationships
 - [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 66 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 66 relationships

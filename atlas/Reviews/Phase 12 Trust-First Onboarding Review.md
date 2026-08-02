@@ -1,7 +1,7 @@
 ---
 id: review-phase-12-trust-first-onboarding
 type: review
-status: pending
+status: pass
 phase: 12
 ---
 # Phase 12 Trust-First Onboarding Review
@@ -25,7 +25,7 @@ phase: 12
 - [x] Focused/full local quality, package, documentation, deterministic-vault, and approved network
       gates pass.
 - [x] Exact implementation provenance, durable-chain assertions, push, and full remote CI pass.
-- [ ] EVD-028 contains the complete inventory, exact commands/results, limitations, and risks.
+- [x] EVD-028 contains the complete inventory, exact commands/results, limitations, and risks.
 
 ## Evidence to examine
 
@@ -36,8 +36,11 @@ phase: 12
 
 ## Review decision
 
-Pending closure re-verification. The owner re-scoped this Review to technical onboarding readiness
-on 2026-08-02. External human usability validation, five independent observations, and a below-ten-
-minute median moved to Phase 11C and remain required before public launch or any real user-time
-claim. Phase 12 may pass only after the revised technical criteria, exact provenance, push, remote
-CI, complete Evidence, and durable-chain checks all pass. Do not start Phase 13 before that pass.
+Pass. The owner re-scoped this Review to technical onboarding readiness on 2026-08-02. All revised
+criteria pass at implementation commit `e039183f369928e36e7eeeaaf4935ab76f716ec7`, including
+five named walkthroughs, `423 passed, 2 skipped`, 86.45% coverage, no-write and real-browser gates,
+clean installed-wheel and extracted-sdist verification, deterministic vault checks, approved
+network audit, exact package provenance, push, and GitHub Actions run `30754042429` with 13/13
+jobs. External human usability validation, five independent observations, and a below-ten-minute
+median remain an open Phase 11C prerequisite before public launch or any real user-time claim; this
+Review makes neither claim. Phase 13 was not started by this Review.

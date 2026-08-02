@@ -1,7 +1,7 @@
 ---
 id: ISSUE-026
 type: issue
-status: in-progress
+status: complete
 phase: 12
 ---
 # Implement zero-footprint onboarding and trust-first reporting
@@ -42,9 +42,9 @@ diagnostic starts at schema version 1 and will be added to that stable boundary.
       action, aligned explanation, omission interpretation, stale-analysis fallback, and ambiguous
       or unsupported scope; retain exact commands/results without presenting them as human studies.
 - [x] Add exact Code and Test links after implementation artifacts exist.
-- [ ] Run focused CLI/no-write/browser/accessibility/docs regressions and the complete local,
+- [x] Run focused CLI/no-write/browser/accessibility/docs regressions and the complete local,
       package, deterministic-vault, approved network, and remote-CI closure gates.
-- [ ] Complete EVD-028, bind it to the exact implementation commit, and obtain final Review.
+- [x] Complete EVD-028, bind it to the exact implementation commit, and obtain final Review.
 
 ## Non-goals
 

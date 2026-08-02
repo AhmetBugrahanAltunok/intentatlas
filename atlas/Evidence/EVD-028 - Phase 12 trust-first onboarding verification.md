@@ -1,7 +1,7 @@
 ---
 id: EVD-028
 type: evidence
-status: in-progress
+status: complete
 phase: 12
 ---
 # EVD-028 - Phase 12 trust-first onboarding verification
@@ -52,6 +52,9 @@ human usability or elapsed user time.
   `1db98472a04b24aa6c05b8e8befb84f96a5f3c34` (`feat: add trust-first repository onboarding`).
 - Real-browser keyboard/accessibility gate commit:
   `5651c34ab2f1d5755fe319a07313e7c7ba7c4063` (`test: verify viewer keyboard accessibility`).
+- Re-scoped technical-walkthrough commit:
+  `e039183f369928e36e7eeeaaf4935ab76f716ec7`
+  (`test: verify technical onboarding walkthroughs`).
 - Diagnostic JSON starts at schema 1. Change Report remains schema 1 with additive scope,
   revision, freshness, selection-count, reason, evidence, recorded-path, and omission fields.
   Recommendation scores and production ordering rules did not change.
@@ -116,39 +119,40 @@ task-success result, elapsed user time, or median was produced.
 
 ## Commands and exact automated results
 
-- Focused trust-first command:
-  `.venv\Scripts\python.exe -m pytest tests/test_diagnostic.py tests/test_change_report.py
-  tests/test_trust_first.py tests/test_viewer.py tests/test_browser_e2e.py tests/test_cli.py
-  tests/test_e2e.py -q` passed after the documented compatibility-count correction. The final
-  browser/viewer/trust subset reported `9 passed`.
-- Exact-HEAD complete command with `INTENTATLAS_REQUIRE_BROWSER=1`:
+- Re-scoped focused command `.venv\Scripts\python.exe -m pytest tests/test_diagnostic.py
+  tests/test_change_report.py tests/test_trust_first.py tests/test_onboarding_walkthroughs.py
+  tests/test_viewer.py tests/test_browser_e2e.py tests/test_cli.py tests/test_e2e.py -q` reported
+  `31 passed`, including the five named walkthroughs and real-browser gate.
+- Complete command at identical tracked content with `INTENTATLAS_REQUIRE_BROWSER=1`:
   `.venv\Scripts\python.exe -m pytest --cov=intentatlas --cov-report=term-missing
-  --cov-fail-under=80 -ra` reported `418 passed, 2 skipped` in 102.53 seconds and branch-aware
-  coverage `86.38%`. The skips are Windows-unavailable symlink and FIFO cases; simulated coverage
+  --cov-fail-under=80 -ra` reported `423 passed, 2 skipped` in 76.43 seconds and branch-aware
+  coverage `86.45%`. The skips are Windows-unavailable symlink and FIFO cases; simulated coverage
   remains present.
 - `.venv\Scripts\python.exe -m ruff check .`, `.venv\Scripts\python.exe -m mypy`,
   `.venv\Scripts\python.exe -m bandit -q -r src tools`, `node --check
   src/intentatlas/web/app.js`, `.venv\Scripts\python.exe -m pip check`, and `git diff --check`
   passed. Mypy checked 41 maintained source files.
 - Fixed `SOURCE_DATE_EPOCH=1704067200` repeated builds were byte-identical. Provenance bound to
-  `5651c34ab2f1d5755fe319a07313e7c7ba7c4063` records wheel SHA-256
+  `e039183f369928e36e7eeeaaf4935ab76f716ec7` records wheel SHA-256
   `f7d3b5c5d551a0d06396278ade657f874db251103e76594934223e0982782183` (48 files) and sdist
-  SHA-256 `4055e6f134455f92638cba7f59a27c6c60c079fe0ce196483b3a5f2bf73ae8c2` (174 files).
+  SHA-256 `04db249ee0c1da99bba32873a394c45da0b33237d6b1bcad5759721221779e9d` (176 files).
   The fixed-epoch sdist rebuild matched the wheel; installed-wheel version, demo JSON, diagnostic
-  JSON, real-repository report JSON, clean Git state, and extracted-sdist tests passed. An initial
-  sdist-wheel comparison without the fixed epoch correctly differed and was rerun with the required
-  epoch rather than recorded as pass.
+  JSON, real-repository report JSON, clean Git state, and extracted-sdist tests passed. During the
+  re-scope rerun, the verifier correctly rejected the non-revision label `worktree`; it was rerun
+  after commit with the exact 40-character revision above and wrote deterministic provenance.
 - Approved `.venv\Scripts\python.exe -m pip_audit --skip-editable` returned `No known
   vulnerabilities found`.
-- Two exact-head scans reported 1,324 nodes, 3,025 relationships, and 1,165 generated notes; all
-  three adapter fragments were reused on pass two. Snapshots of 159 explicitly enumerated
-  user-owned files and 1,166 generated files were byte/UTC-mtime identical across the second pass.
+- The final two-pass closure scan reported 1,333 nodes, 3,021 relationships, and 1,174 generated
+  notes; all three adapter fragments were reused on pass two. Snapshots of 159 explicitly
+  enumerated user-owned files and 1,175 generated files were byte/UTC-mtime identical across the
+  second pass.
   Status reported zero durable orphans. Exact assertions passed for REQ-028 `drives` ADR-028,
   ADR-028 `tracked-by` ISSUE-026, ISSUE-026 `implemented-by` diagnostic code, EVD-028 `proves`
   REQ-028, and EVD-028 `proves` the no-write test. `atlas/Private/` was not enumerated or accessed.
-- Fast-forward pushes succeeded. Exact-head GitHub Actions run `30752781634` completed successfully
-  with 13/13 jobs, including Python 3.11/3.12/3.13 tests, six Windows/macOS/Linux installed-wheel
-  E2E jobs, real Chrome, static types, security/network audit, and reproducible package/sdist.
+- Fast-forward pushes succeeded. Re-scoped implementation GitHub Actions run `30754042429` at
+  exact commit `e039183f369928e36e7eeeaaf4935ab76f716ec7` completed successfully with 13/13
+  jobs, including Python 3.11/3.12/3.13 tests, six Windows/macOS/Linux installed-wheel E2E jobs,
+  real Chrome, static types, security/network audit, and reproducible package/sdist.
 
 ## External validation boundary
 
@@ -180,6 +184,7 @@ the separate Phase 11C human-validation gate passes.
 - proves:: [[Requirements/REQ-028 - Deliver trust-first first-run value]]
 - recorded-in:: [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding]]
 - recorded-in:: [[Commits/Commit 5651c34 - test- verify viewer keyboard accessibility]]
+- recorded-in:: [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs]]
 - implemented-by:: [[Code/src - intentatlas - diagnostic.py]]
 - implemented-by:: [[Code/src - intentatlas - change_report.py]]
 - implemented-by:: [[Code/src - intentatlas - cli.py]]

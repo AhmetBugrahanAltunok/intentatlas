@@ -483,7 +483,7 @@ Status: not authorized; owner-controlled after Phase 11B, recommended after Phas
 
 ## Phase 12 - Trust-first first-run value
 
-Status: in progress; Phase 11B entry gate passed
+Status: complete (2026-08-02)
 
 - Make an aligned, zero-footprint change report the first real-repository outcome.
 - Add a deterministic read-only diagnostic for support, ambiguity, freshness, and safe next steps.
@@ -502,7 +502,7 @@ Status: in progress; Phase 11B entry gate passed
 
 ## Phase 13 - Semantic monorepo foundation
 
-Status: planned; blocked by Phase 12 Review and Phase 11B pilot scope
+Status: planned; Phase 12 Review passed; not started
 
 - Model explicit project/package/source-root and workspace ownership without directory-name guesses.
 - Retain resolver candidate sets and abstain when one aligned owner cannot be proven.
