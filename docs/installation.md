@@ -18,4 +18,3 @@ After a separately approved package publication, `pipx install intentatlas` can 
 canonical public command. Phase 15 does not publish a package, tag a release, or provide a
 zero-prerequisite Windows installer; Git is also required for repository acquisition and guided
 Git analysis.
-

@@ -28,4 +28,3 @@ intentatlas cache clear CACHE_ID
 
 Traversal identities and link, junction, or reparse-point roots/targets are rejected. `clear`
 removes only the validated ID beneath the canonical managed cache root.
-
