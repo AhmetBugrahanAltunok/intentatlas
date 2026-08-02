@@ -517,6 +517,31 @@ Status: complete on 2026-08-02; EVD-029 complete and Phase 13 Review passed
 - Planned review: [[Reviews/Phase 13 Semantic Monorepo Foundation Review]]
 - Strategy: [[Brain/Phase 11B-13 Delivery Strategy]]
 
+## Phase 14 - One-command guided CLI
+
+Status: planned; implementation not started
+
+- Make interactive `intentatlas` the shortest trustworthy path to the existing ChangeReport while
+  retaining explicit commands and versioned JSON for automation.
+- Resolve one safe Git root, deterministically recommend worktree/staged/HEAD scope, and require no
+  Git or IntentAtlas terminology on the common path.
+- Keep default guidance offline, no-write, Private-safe, execution-free, and browser-off; expose
+  uncertainty, omission, fallback, and zero executed tests rather than simplifying them away.
+- Use a dependency-free, line-oriented English/Turkish flow with at most one Enter before the
+  report, progressive evidence detail, safe cancellation, and non-TTY/CI fail-fast behavior.
+- Reuse one immutable production graph/report snapshot for terminal and explicit loopback viewer
+  output; do not add a second recommendation engine or automatic persistent setup.
+- Close the phase through technical transcript, TTY/non-TTY, no-write, parity, hostile-input,
+  browser, package, cross-platform, deterministic-vault, approved-network, and remote-CI evidence.
+  This does not replace the Phase 11C five-person human-validation gate.
+- Requirement: [[Requirements/REQ-030 - Make trustworthy analysis effortless from the CLI]]
+- Decision: [[Decisions/ADR-030 - Layer a TTY-guided flow over deterministic contracts]]
+- Delivery issue: [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding]]
+- Planned evidence: [[Evidence/EVD-030 - Phase 14 guided CLI verification]]
+- Planned review: [[Reviews/Phase 14 One-Command Guided CLI Review]]
+- Strategy: [[Brain/Phase 14 Guided CLI Strategy]]
+- Handoff: [[Sessions/2026-08-02 - Phase 14 guided CLI handoff]]
+
 ## Completion rule
 
 Every phase must end with a linked Evidence note and Review note containing the full change
