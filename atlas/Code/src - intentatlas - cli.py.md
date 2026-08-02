@@ -11,13 +11,14 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>28151</code>
+- **Size Bytes:** <code>29949</code>
 
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_changes - src - intentatlas - cli.py|_changes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_diff - src - intentatlas - cli.py|_diff]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_corpus - src - intentatlas - cli.py|_evaluate_corpus]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_evaluate_longitudinal - src - intentatlas - cli.py|_evaluate_longitudinal]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_real_world - src - intentatlas - cli.py|_evaluate_real_world]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_recommendations - src - intentatlas - cli.py|_evaluate_recommendations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_impact - src - intentatlas - cli.py|_impact]] _(structure; evidence: python-ast)_
@@ -45,6 +46,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-ast)_
@@ -75,6 +77,9 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/graph_diff - src - intentatlas - graph_diff.py|graph_diff]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_graph_diff - src - intentatlas - graph_diff.py|render_graph_diff]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/evaluate_longitudinal - src - intentatlas - longitudinal.py|evaluate_longitudinal]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/load_pilot_manifest - src - intentatlas - longitudinal.py|load_pilot_manifest]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_real_world - src - intentatlas - real_world.py|render_real_world]] _(structure; evidence: python-symbol-reference)_
@@ -93,13 +98,13 @@ source_path: "src/intentatlas/cli.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d9cd557 - feat- measure test recommendation quality|feat: measure test recommendation quality]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_
@@ -111,5 +116,6 @@ source_path: "src/intentatlas/cli.py"
 - <code>implements</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_

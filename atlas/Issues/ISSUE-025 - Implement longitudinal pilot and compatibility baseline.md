@@ -36,12 +36,12 @@ SHA-256 values, in manifest project order, were `8be415e5257798b3ff837cd684f6d45
 - [x] Keep savings/duration undefined unless aligned execution evidence supports the claim.
 - [x] Add reviewed FP/FN classifications without storing raw source or patch content.
 - [x] Publish the stable/experimental/internal compatibility matrix and migration/deprecation rules.
-- [ ] Commit the unchanged baseline before any optional recommendation refinement.
-- [ ] If a refinement is justified, evaluate it once against untouched evaluation data and retain
+- [x] Commit the unchanged baseline before any optional recommendation refinement.
+- [x] If a refinement is justified, evaluate it once against untouched evaluation data and retain
       the original baseline for comparison.
-- [ ] Update the deterministic terminal demo/README benchmark card with cohort size, limitations,
+- [x] Update the deterministic terminal demo/README benchmark card with cohort size, limitations,
       known misses, and no-generalization wording.
-- [ ] Add exact Code and Test links after implementation artifacts exist.
+- [x] Add exact Code and Test links after implementation artifacts exist.
 - [ ] Run focused regressions and the full test, lint, type, security, package, CLI, deterministic-
       vault, approved network, and remote-CI closure gates.
 - [ ] Complete EVD-027, bind it to the exact implementation commit, and obtain the final Review.
@@ -60,6 +60,10 @@ SHA-256 values, in manifest project order, were `8be415e5257798b3ff837cd684f6d45
   unclassified FP/FN observations.
 - No production recommendation score, traversal, resolver, threshold, fallback, or full-suite
   behavior changed. The baseline did not justify an optional refinement.
+- The unchanged baseline was committed as
+  `d84e54588d56f2b0ec2c3f1768c12de00c1d138e` at `2026-08-02T14:42:45+03:00`. Because the
+  reviewed baseline did not justify refinement, the conditional refinement package completed with
+  no production change and the original evaluation partition remained untouched.
 
 ## Non-goals
 
@@ -74,6 +78,10 @@ SHA-256 values, in manifest project order, were `8be415e5257798b3ff837cd684f6d45
 - decided-by:: [[Decisions/ADR-027 - Freeze pilot evidence before recommendation tuning]]
 - planned-evidence:: [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification]]
 - reviewed-by:: [[Reviews/Phase 11B Longitudinal Pilot and Compatibility Review]]
+- implemented-by:: [[Code/src - intentatlas - longitudinal.py]]
+- implemented-by:: [[Code/src - intentatlas - cli.py]]
+- verified-by:: [[Tests/tests - test_longitudinal.py]]
+- verified-by:: [[Tests/tests - test_compatibility_policy.py]]
 
 ## Planning links
 

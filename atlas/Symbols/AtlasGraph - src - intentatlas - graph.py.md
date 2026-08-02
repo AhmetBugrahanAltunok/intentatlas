@@ -25,12 +25,14 @@ source_path: "src/intentatlas/graph.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-symbol-reference)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_browser_e2e.py|tests/test_browser_e2e.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_change_report.py|tests/test_change_report.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-symbol-reference)_

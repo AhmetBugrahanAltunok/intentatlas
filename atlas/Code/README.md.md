@@ -11,7 +11,7 @@ source_path: "README.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>21914</code>
+- **Size Bytes:** <code>22923</code>
 
 ## Incoming relationships
 
@@ -22,7 +22,6 @@ source_path: "README.md"
 - <code>changed-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 658cbad - fix- preserve generated vault during sync failures|fix: preserve generated vault during sync failures]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_

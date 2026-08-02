@@ -132,6 +132,7 @@ intentatlas review --base REV --head REV Review a range in non-blocking CI shado
 intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
 intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
 intentatlas evaluate-real-world MANIFEST CHECKOUTS  Validate pinned public checkouts offline
+intentatlas evaluate-longitudinal MANIFEST CHECKOUTS  Measure a frozen pilot offline
 intentatlas benchmark-scale              Measure indexed queries on a synthetic large graph
 intentatlas demo [--report text|json]    Open the showcase or print its bounded evidence report
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
@@ -275,6 +276,21 @@ The command verifies origin, commit, clean state, and reviewed license hash befo
 memory. It does not clone, install, execute tests, run project code, or retain third-party source,
 history, logos, or generated graphs. See the
 [real-world validation protocol](docs/real-world-validation.md).
+
+The frozen longitudinal pilot expands that evidence to eight repositories and 64 chronological
+cases with explicit calibration/evaluation partitions, three language cohorts, and two workspace
+histories. Its evaluation partition records low/medium precision 50.00% with recall 100.00% and
+coverage 90.625%; high precision 100.00% with recall 79.4118% and coverage 71.875%. Wilson
+intervals, cohort sizes, abstention, analysis/freshness, execution strategy, and reviewed FP/FN
+classifications are reported beside the point estimates. These bounded results are not general
+accuracy or targeted-sufficiency claims, and duration/savings remain unknown.
+
+```text
+intentatlas evaluate-longitudinal benchmarks/longitudinal/manifest.json .intentatlas/real-world/checkouts
+```
+
+See the [longitudinal pilot protocol and benchmark card](docs/longitudinal-pilot.md) and the
+[pre-1.0 compatibility policy](docs/compatibility-policy.md).
 
 To run the offline query-scale probe without reading or executing a project:
 

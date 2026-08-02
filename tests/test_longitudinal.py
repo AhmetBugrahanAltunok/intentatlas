@@ -269,3 +269,41 @@ def test_longitudinal_manifest_rejects_duplicate_keys_and_unbounded_history(tmp_
     manifest_path.write_text('{"schema_version":1,"schema_version":1}', encoding="utf-8")
     with pytest.raises(ValueError, match="Duplicate JSON key"):
         load_pilot_manifest(manifest_path)
+
+
+def test_frozen_pilot_metadata_and_benchmark_card_match() -> None:
+    project_root = Path(__file__).resolve().parents[1]
+    manifest_path = project_root / "benchmarks" / "longitudinal" / "manifest.json"
+    manifest = load_pilot_manifest(manifest_path)
+    labels = [
+        load_pilot_labels(project_root / project.labels, project.id)
+        for project in manifest.projects
+    ]
+
+    assert len(manifest.projects) == 8
+    assert sum(len(item.cases) for item in labels) == 64
+    assert {project.language for project in manifest.projects} == {
+        "python",
+        "javascript-typescript",
+        "go",
+    }
+    assert sum(project.workspace_shape == "workspace" for project in manifest.projects) == 2
+    assert all(
+        sum(case.partition == partition for case in item.cases) == 4
+        for item in labels
+        for partition in ("calibration", "evaluation")
+    )
+
+    protocol = (project_root / "docs" / "longitudinal-pilot.md").read_text(encoding="utf-8")
+    readme = (project_root / "README.md").read_text(encoding="utf-8")
+    normalized_readme = " ".join(readme.split())
+    for value in (
+        manifest.partition_hashes["calibration"],
+        manifest.partition_hashes["evaluation"],
+        "dd90bd22ceefba5321e1a0fb2a762adee15f8f943807718b1bcf0117923d3cdd",
+        "0a0b9c530dcd57c9e6ca208e665c408da4d7376c0cc05c4463db8ccbf4aa887d",
+    ):
+        assert value in protocol
+    assert "not general accuracy" in normalized_readme
+    assert "duration/savings remain unknown" in normalized_readme
+    assert "intentatlas evaluate-longitudinal" in normalized_readme

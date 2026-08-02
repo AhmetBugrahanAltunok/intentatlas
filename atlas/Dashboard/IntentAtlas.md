@@ -14,33 +14,33 @@ generated: true
 - **commit:** 25
 - **config:** 8
 - **decision:** 29
-- **document:** 24
+- **document:** 26
 - **evidence:** 29
-- **file:** 39
+- **file:** 40
 - **issue:** 27
 - **memory:** 7
 - **requirement:** 29
 - **review:** 29
 - **session:** 9
-- **symbol:** 881
-- **test:** 66
-- **relationships:** 2857
+- **symbol:** 943
+- **test:** 68
+- **relationships:** 2995
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 191 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 95 relationships
-- [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 94 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 101 relationships
 - [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] — 91 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 80 relationships
+- [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 88 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 81 relationships
 - [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 72 relationships
+- [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 69 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 61 relationships
 - [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 56 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 53 relationships
+- [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] — 55 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 54 relationships
 - [[Tests/tests - test_vault.py|tests/test_vault.py]] — 49 relationships
-- [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] — 44 relationships
-- [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] — 42 relationships
 
 ## Workflow
 

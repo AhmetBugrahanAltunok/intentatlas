@@ -19,6 +19,7 @@ source_path: "src/intentatlas/scanner.py"
 - <code>defined-in</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-symbol-reference)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapter_conformance.py|tests/test_adapter_conformance.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_adapters.py|tests/test_adapters.py]] _(verification; evidence: python-symbol-reference)_

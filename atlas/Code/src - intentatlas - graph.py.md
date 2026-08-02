@@ -65,6 +65,7 @@ source_path: "src/intentatlas/graph.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
