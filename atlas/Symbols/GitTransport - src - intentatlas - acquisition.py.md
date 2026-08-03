@@ -20,3 +20,4 @@ source_path: "src/intentatlas/acquisition.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_acquisition.py|tests/test_acquisition.py]] _(verification; evidence: python-symbol-reference)_

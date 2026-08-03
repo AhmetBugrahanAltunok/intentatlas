@@ -33,6 +33,12 @@ source_path: "tests/test_source_to_atlas.py"
 - <code>defines</code> → [[Symbols/test_remote_terminal_and_viewer_reuse_one_immutable_snapshot - tests - test_source_to_atlas.py|test_remote_terminal_and_viewer_reuse_one_immutable_snapshot]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.collect - tests - test_source_to_atlas.py|test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.collect]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.serve - tests - test_source_to_atlas.py|test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.serve]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AcquisitionLimits - src - intentatlas - acquisition.py|AcquisitionLimits]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ManagedRepositoryCache - src - intentatlas - acquisition.py|ManagedRepositoryCache]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/TerminalIO - src - intentatlas - onboarding.py|TerminalIO]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

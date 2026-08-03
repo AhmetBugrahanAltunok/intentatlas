@@ -15,7 +15,7 @@ generated: true
 
 ## Outgoing relationships
 
-- <code>declares</code> → [[Code/Untitled|.]] _(boundary; evidence: pyproject.toml)_
+- <code>declares</code> → [[Code/src|src]] _(boundary; evidence: pyproject.toml)_
 - <code>owns</code> → [[Code/pyproject.toml|pyproject.toml]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(boundary; evidence: workspace-boundary)_
@@ -30,6 +30,7 @@ generated: true
 - <code>owns</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Code/src - intentatlas - confidence.py|src/intentatlas/confidence.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(boundary; evidence: workspace-boundary)_
@@ -90,6 +91,7 @@ generated: true
 - <code>owns</code> → [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_onboarding_walkthroughs.py|tests/test_onboarding_walkthroughs.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - test_phase17_recommendation_integrity.py|tests/test_phase17_recommendation_integrity.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_property_fuzz.py|tests/test_property_fuzz.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_real_world.py|tests/test_real_world.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(boundary; evidence: workspace-boundary)_

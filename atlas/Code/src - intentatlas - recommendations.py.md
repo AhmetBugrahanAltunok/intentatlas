@@ -11,7 +11,7 @@ source_path: "src/intentatlas/recommendations.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>30005</code>
+- **Size Bytes:** <code>31797</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -37,7 +37,7 @@ source_path: "src/intentatlas/recommendations.py"
 - <code>defines</code> → [[Symbols/_add_reason - src - intentatlas - recommendations.py|_add_reason]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_add_recent_cochange_reasons - src - intentatlas - recommendations.py|_add_recent_cochange_reasons]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_artifact_signals - src - intentatlas - recommendations.py|_artifact_signals]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_confidence - src - intentatlas - recommendations.py|_confidence]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_is_executable_test_candidate - src - intentatlas - recommendations.py|_is_executable_test_candidate]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_latest_file_commits - src - intentatlas - recommendations.py|_latest_file_commits]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_latest_file_symbol_signals - src - intentatlas - recommendations.py|_latest_file_symbol_signals]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_owner_named_tests - src - intentatlas - recommendations.py|_owner_named_tests]] _(structure; evidence: python-ast)_
@@ -53,8 +53,10 @@ source_path: "src/intentatlas/recommendations.py"
 - <code>defines</code> → [[Symbols/_unique_values - src - intentatlas - recommendations.py|_unique_values]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_recommendations - src - intentatlas - recommendations.py|render_recommendations]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - confidence.py|src/intentatlas/confidence.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/confidence_for_score - src - intentatlas - confidence.py|confidence_for_score]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/GraphIndex - src - intentatlas - graph.py|GraphIndex]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
@@ -63,6 +65,7 @@ source_path: "src/intentatlas/recommendations.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_

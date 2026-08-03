@@ -10,8 +10,8 @@ source_path: "src/intentatlas/diagnostic.py"
 
 ## Metadata
 
-- **End Line:** <code>123</code>
-- **Line:** <code>119</code>
+- **End Line:** <code>132</code>
+- **Line:** <code>128</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/diagnostic.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-diff-hunk)_

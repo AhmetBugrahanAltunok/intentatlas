@@ -53,3 +53,4 @@ source_path: "src/intentatlas/change_analysis.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_change_analysis.py|tests/test_change_analysis.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(verification; evidence: python-ast)_

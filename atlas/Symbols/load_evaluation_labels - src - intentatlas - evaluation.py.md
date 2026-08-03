@@ -10,8 +10,8 @@ source_path: "src/intentatlas/evaluation.py"
 
 ## Metadata
 
-- **End Line:** <code>156</code>
-- **Line:** <code>92</code>
+- **End Line:** <code>157</code>
+- **Line:** <code>93</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -22,3 +22,5 @@ source_path: "src/intentatlas/evaluation.py"
 - <code>defined-in</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-symbol-reference)_

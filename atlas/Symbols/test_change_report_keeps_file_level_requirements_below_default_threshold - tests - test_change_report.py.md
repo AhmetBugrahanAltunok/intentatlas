@@ -20,4 +20,3 @@ source_path: "tests/test_change_report.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_change_report.py|tests/test_change_report.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-diff-hunk)_

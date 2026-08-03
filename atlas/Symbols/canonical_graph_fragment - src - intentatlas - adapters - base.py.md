@@ -24,3 +24,4 @@ source_path: "src/intentatlas/adapters/base.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - javascript.py|src/intentatlas/adapters/javascript.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] _(structure; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_adapter_conformance.py|tests/test_adapter_conformance.py]] _(verification; evidence: python-symbol-reference)_

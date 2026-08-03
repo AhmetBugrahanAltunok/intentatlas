@@ -10,8 +10,8 @@ source_path: "src/intentatlas/onboarding.py"
 
 ## Metadata
 
-- **End Line:** <code>974</code>
-- **Line:** <code>958</code>
+- **End Line:** <code>998</code>
+- **Line:** <code>982</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

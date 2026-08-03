@@ -23,6 +23,10 @@ source_path: "tests/test_graph_query.py"
 - <code>defines</code> → [[Symbols/test_bounded_query_windows_carry_snapshot_totals_and_omissions - tests - test_graph_query.py|test_bounded_query_windows_carry_snapshot_totals_and_omissions]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_query_contract_rejects_unbounded_or_unknown_requests - tests - test_graph_query.py|test_query_contract_rejects_unbounded_or_unknown_requests]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - graph_query.py|src/intentatlas/graph_query.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/GraphQuerySnapshot - src - intentatlas - graph_query.py|GraphQuerySnapshot]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

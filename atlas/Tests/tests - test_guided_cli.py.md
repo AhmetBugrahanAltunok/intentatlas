@@ -11,7 +11,7 @@ source_path: "tests/test_guided_cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>27750</code>
+- **Size Bytes:** <code>28175</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -70,10 +70,27 @@ source_path: "tests/test_guided_cli.py"
 - <code>defines</code> → [[Symbols/test_terminal_output_has_ascii_fallback_and_never_depends_on_color - tests - test_guided_cli.py|test_terminal_output_has_ascii_fallback_and_never_depends_on_color]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_terminal_sanitizer_escapes_control_ansi_bidi_and_newlines - tests - test_guided_cli.py|test_terminal_sanitizer_escapes_control_ansi_bidi_and_newlines]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_unc_confirmation_does_not_claim_operating_system_access_is_network_free - tests - test_guided_cli.py|test_unc_confirmation_does_not_claim_operating_system_access_is_network_free]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/ChangeAnalysis - src - intentatlas - change_analysis.py|ChangeAnalysis]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ChangeAnalysisFile - src - intentatlas - change_analysis.py|ChangeAnalysisFile]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/GuideSnapshot - src - intentatlas - onboarding.py|GuideSnapshot]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/TerminalIO - src - intentatlas - onboarding.py|TerminalIO]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/resolve_git_root - src - intentatlas - onboarding.py|resolve_git_root]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/select_default_scope - src - intentatlas - onboarding.py|select_default_scope]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Evidence/EVD-030 - Phase 14 guided CLI verification|EVD-030 - Phase 14 guided CLI verification]] _(reference; evidence: wikilink)_

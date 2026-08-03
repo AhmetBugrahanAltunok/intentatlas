@@ -25,6 +25,10 @@ source_path: "tests/test_change_set.py"
 - <code>defines</code> → [[Symbols/test_parse_name_status_fails_closed_on_over_limit_output - tests - test_change_set.py|test_parse_name_status_fails_closed_on_over_limit_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_name_status_handles_bounded_paths_and_renames - tests - test_change_set.py|test_parse_name_status_handles_bounded_paths_and_renames]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/parse_name_status - src - intentatlas - change_set.py|parse_name_status]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_change_set - src - intentatlas - change_set.py|render_change_set]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

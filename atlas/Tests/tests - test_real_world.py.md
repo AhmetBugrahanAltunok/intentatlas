@@ -35,6 +35,10 @@ source_path: "tests/test_real_world.py"
 - <code>defines</code> → [[Symbols/test_real_world_rejects_missing_root_checkout_license_and_git - tests - test_real_world.py|test_real_world_rejects_missing_root_checkout_license_and_git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_world_rejects_wrong_commit - tests - test_real_world.py|test_real_world_rejects_wrong_commit]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_real_world - src - intentatlas - real_world.py|render_real_world]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

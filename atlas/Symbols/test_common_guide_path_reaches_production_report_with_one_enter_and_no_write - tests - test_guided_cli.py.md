@@ -20,4 +20,3 @@ source_path: "tests/test_guided_cli.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-diff-hunk)_

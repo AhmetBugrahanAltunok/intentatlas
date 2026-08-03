@@ -23,3 +23,4 @@ source_path: "src/intentatlas/adapters/conformance.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_adapter_conformance.py|tests/test_adapter_conformance.py]] _(verification; evidence: python-symbol-reference)_

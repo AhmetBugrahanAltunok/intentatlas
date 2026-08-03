@@ -23,6 +23,10 @@ source_path: "tests/test_change_analysis.py"
 - <code>defines</code> → [[Symbols/test_change_analysis_distinguishes_exact_fallback_and_stale_files.git - tests - test_change_analysis.py|test_change_analysis_distinguishes_exact_fallback_and_stale_files.git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_worktree_analysis_marks_untracked_source_as_file_fallback - tests - test_change_analysis.py|test_worktree_analysis_marks_untracked_source_as_file_fallback]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/analyze_change_set - src - intentatlas - change_analysis.py|analyze_change_set]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_change_analysis - src - intentatlas - change_analysis.py|render_change_analysis]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -11,7 +11,7 @@ source_path: "README.tr.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>22531</code>
+- **Size Bytes:** <code>22727</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -25,7 +25,7 @@ source_path: "README.tr.md"
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_

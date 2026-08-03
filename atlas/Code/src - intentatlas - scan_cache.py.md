@@ -45,7 +45,6 @@ source_path: "src/intentatlas/scan_cache.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_

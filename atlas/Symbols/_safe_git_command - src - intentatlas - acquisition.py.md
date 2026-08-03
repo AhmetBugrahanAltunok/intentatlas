@@ -21,3 +21,4 @@ source_path: "src/intentatlas/acquisition.py"
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(structure; evidence: python-ast)_
 - <code>modified-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-diff-hunk)_
+- <code>tested-by</code> ← [[Tests/tests - test_acquisition.py|tests/test_acquisition.py]] _(verification; evidence: python-symbol-reference)_

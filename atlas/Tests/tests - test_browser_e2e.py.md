@@ -41,6 +41,9 @@ source_path: "tests/test_browser_e2e.py"
 - <code>defines</code> → [[Symbols/_wait_for_graph_layout - tests - test_browser_e2e.py|_wait_for_graph_layout]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_browser_renders_bounded_large_graph_window - tests - test_browser_e2e.py|test_real_browser_renders_bounded_large_graph_window]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

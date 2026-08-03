@@ -29,6 +29,13 @@ source_path: "tests/test_longitudinal.py"
 - <code>defines</code> → [[Symbols/test_longitudinal_manifest_rejects_duplicate_keys_and_unbounded_history - tests - test_longitudinal.py|test_longitudinal_manifest_rejects_duplicate_keys_and_unbounded_history]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_longitudinal_manifest_rejects_mutated_partition_hash - tests - test_longitudinal.py|test_longitudinal_manifest_rejects_mutated_partition_hash]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/PilotCase - src - intentatlas - longitudinal.py|PilotCase]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/evaluate_longitudinal - src - intentatlas - longitudinal.py|evaluate_longitudinal]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/load_pilot_labels - src - intentatlas - longitudinal.py|load_pilot_labels]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/load_pilot_manifest - src - intentatlas - longitudinal.py|load_pilot_manifest]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/partition_hashes - src - intentatlas - longitudinal.py|partition_hashes]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/onboarding.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>45694</code>
+- **Size Bytes:** <code>47003</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -86,6 +86,7 @@ source_path: "src/intentatlas/onboarding.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding|ISSUE-028 - Implement one-command guided CLI onboarding]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

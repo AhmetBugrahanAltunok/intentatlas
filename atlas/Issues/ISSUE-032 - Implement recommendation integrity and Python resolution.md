@@ -15,27 +15,27 @@ phase: 17
 
 ## 17B - confidence and filtering
 
-- [ ] Share canonical confidence bands across recommendation and ChangeReport paths.
-- [ ] Apply test threshold before limits and strategy; preserve exact counters/omissions.
-- [ ] Regress CLI/JSON/guided/viewer projection parity.
+- [x] Share canonical confidence bands across recommendation and ChangeReport paths.
+- [x] Apply test threshold before limits and strategy; preserve exact counters/omissions.
+- [x] Regress CLI/JSON/guided/viewer projection parity.
 
 ## 17C - conservative Python resolution
 
-- [ ] Add bounded Flit, Hatchling, setuptools, and unique conventional src-root projection.
-- [ ] Resolve unique qualified module-symbol chains and preserve re-export abstention boundaries.
-- [ ] Prove Click and self-scan real-caller edges.
+- [x] Add bounded Flit, Hatchling, setuptools, and unique conventional src-root projection.
+- [x] Resolve unique qualified module-symbol chains and preserve re-export abstention boundaries.
+- [x] Prove Click and self-scan real-caller edges.
 
 ## 17D - eligibility and ranking
 
-- [ ] Exclude zero-byte runnable candidates while retaining graph nodes.
-- [ ] Cap dependent path scores by the weakest hop and correct bounded reason wording.
-- [ ] Exclude broad-commit co-change and keep narrow co-change below direct evidence.
+- [x] Exclude zero-byte runnable candidates while retaining graph nodes.
+- [x] Cap dependent path scores by the weakest hop and correct bounded reason wording.
+- [x] Exclude broad-commit co-change and keep narrow co-change below direct evidence.
 
 ## 17E - truth and closure
 
-- [ ] Correct architecture schema wording and link the compatibility policy.
-- [ ] Add stale-revision action and truthful diagnostic ambiguity scope.
-- [ ] Verify Windows pipe/code-page behavior and record the outcome without inventing a defect.
+- [x] Correct architecture schema wording and link the compatibility policy.
+- [x] Add stale-revision action and truthful diagnostic ambiguity scope.
+- [x] Verify Windows pipe/code-page behavior and record the independently reproduced correction.
 - [ ] Pass focused/full/security/package/network/E2E/vault/CI gates and close Evidence/Review.
 
 ## Links

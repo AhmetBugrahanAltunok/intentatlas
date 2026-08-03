@@ -30,6 +30,7 @@ source_path: "tests/test_config.py"
 - <code>defines</code> → [[Symbols/test_dangling_config_link_is_rejected_before_absence_or_write - tests - test_config.py|test_dangling_config_link_is_rejected_before_absence_or_write]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_dangling_config_link_is_rejected_before_absence_or_write.simulated_link - tests - test_config.py|test_dangling_config_link_is_rejected_before_absence_or_write.simulated_link]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

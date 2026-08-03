@@ -20,3 +20,4 @@ source_path: "src/intentatlas/viewer.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(verification; evidence: python-symbol-reference)_

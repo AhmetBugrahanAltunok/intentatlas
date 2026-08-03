@@ -44,6 +44,10 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_resolves_python_reexports_to_exact_symbols - tests - test_scanner.py|test_scanner_resolves_python_reexports_to_exact_symbols]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

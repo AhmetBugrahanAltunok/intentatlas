@@ -24,6 +24,7 @@ source_path: "tests/test_trust_first.py"
 - <code>defines</code> → [[Symbols/_project_snapshot - tests - test_trust_first.py|_project_snapshot]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_diagnostic_and_real_repository_preview_are_no_write - tests - test_trust_first.py|test_diagnostic_and_real_repository_preview_are_no_write]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_trust_first_documentation_sequence_and_artifacts_are_frozen - tests - test_trust_first.py|test_trust_first_documentation_sequence_and_artifacts_are_frozen]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

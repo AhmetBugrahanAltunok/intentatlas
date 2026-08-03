@@ -13,37 +13,37 @@ generated: true
 
 - **commit:** 25
 - **config:** 8
-- **decision:** 32
+- **decision:** 34
 - **document:** 33
-- **evidence:** 32
-- **file:** 46
-- **issue:** 31
-- **memory:** 10
+- **evidence:** 33
+- **file:** 47
+- **issue:** 32
+- **memory:** 11
 - **project:** 3
 - **repository:** 1
-- **requirement:** 32
-- **review:** 32
-- **session:** 14
+- **requirement:** 33
+- **review:** 33
+- **session:** 15
 - **source-root:** 3
-- **symbol:** 1270
-- **test:** 76
-- **relationships:** 3538
+- **symbol:** 1285
+- **test:** 77
+- **relationships:** 3837
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 215 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 112 relationships
-- [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 107 relationships
-- [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 97 relationships
-- [[Code/intentatlas|intentatlas]] — 96 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 94 relationships
-- [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 70 relationships
-- [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 69 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 224 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 114 relationships
+- [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 99 relationships
+- [[Code/intentatlas|intentatlas]] — 98 relationships
+- [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 94 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 93 relationships
+- [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 73 relationships
+- [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 71 relationships
+- [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 70 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 69 relationships
 - [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 68 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 68 relationships
-- [[Code/IntentAtlas - c1f62610|IntentAtlas]] — 62 relationships
-- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 58 relationships
+- [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] — 64 relationships
 
 ## Workflow
 

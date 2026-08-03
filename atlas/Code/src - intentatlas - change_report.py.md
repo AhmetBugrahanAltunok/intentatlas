@@ -11,7 +11,7 @@ source_path: "src/intentatlas/change_report.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>22903</code>
+- **Size Bytes:** <code>23915</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -20,6 +20,7 @@ source_path: "src/intentatlas/change_report.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/ChangeReport - src - intentatlas - change_report.py|ChangeReport]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/ChangeReport.revision_action - src - intentatlas - change_report.py|ChangeReport.revision_action]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ChangeReport.to_dict - src - intentatlas - change_report.py|ChangeReport.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ChangeReportTest - src - intentatlas - change_report.py|ChangeReportTest]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ChangeReportTest.to_dict - src - intentatlas - change_report.py|ChangeReportTest.to_dict]] _(structure; evidence: python-ast)_
@@ -31,7 +32,6 @@ source_path: "src/intentatlas/change_report.py"
 - <code>defines</code> → [[Symbols/RequirementImpactPath.__post_init__ - src - intentatlas - change_report.py|RequirementImpactPath.__post_init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RequirementImpactPath.to_dict - src - intentatlas - change_report.py|RequirementImpactPath.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_aggregate_freshness - src - intentatlas - change_report.py|_aggregate_freshness]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_confidence - src - intentatlas - change_report.py|_confidence]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_impact_sort_key - src - intentatlas - change_report.py|_impact_sort_key]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_omission_text - src - intentatlas - change_report.py|_omission_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_omitted_requirement - src - intentatlas - change_report.py|_omitted_requirement]] _(structure; evidence: python-ast)_
@@ -46,6 +46,7 @@ source_path: "src/intentatlas/change_report.py"
 - <code>defines</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - confidence.py|src/intentatlas/confidence.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
@@ -54,6 +55,7 @@ source_path: "src/intentatlas/change_report.py"
 - <code>imports</code> → [[Symbols/ChangeAnalysis - src - intentatlas - change_analysis.py|ChangeAnalysis]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/_analyze_change_set_with_graph - src - intentatlas - change_analysis.py|_analyze_change_set_with_graph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/confidence_for_score - src - intentatlas - confidence.py|confidence_for_score]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
@@ -64,6 +66,7 @@ source_path: "src/intentatlas/change_report.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(implementation; evidence: wikilink)_
@@ -75,3 +78,4 @@ source_path: "src/intentatlas/change_report.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_change_report.py|tests/test_change_report.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(verification; evidence: python-ast)_

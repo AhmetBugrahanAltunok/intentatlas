@@ -55,3 +55,4 @@ source_path: "src/intentatlas/change_set.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_change_set.py|tests/test_change_set.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(verification; evidence: python-ast)_

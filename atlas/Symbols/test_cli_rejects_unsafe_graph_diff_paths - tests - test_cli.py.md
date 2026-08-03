@@ -10,8 +10,8 @@ source_path: "tests/test_cli.py"
 
 ## Metadata
 
-- **End Line:** <code>100</code>
-- **Line:** <code>83</code>
+- **End Line:** <code>101</code>
+- **Line:** <code>84</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

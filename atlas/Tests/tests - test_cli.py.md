@@ -11,7 +11,7 @@ source_path: "tests/test_cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>10683</code>
+- **Size Bytes:** <code>10726</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -27,10 +27,11 @@ source_path: "tests/test_cli.py"
 - <code>defines</code> → [[Symbols/test_cli_reviews_revision_range_in_non_blocking_shadow_mode.fake_serve - tests - test_cli.py|test_cli_reviews_revision_range_in_non_blocking_shadow_mode.fake_serve]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cli_writes_deterministic_graph_diff_and_supports_ci_check - tests - test_cli.py|test_cli_writes_deterministic_graph_diff_and_supports_ci_check]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_

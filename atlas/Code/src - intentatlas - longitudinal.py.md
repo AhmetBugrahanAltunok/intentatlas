@@ -91,4 +91,5 @@ source_path: "src/intentatlas/longitudinal.py"
 - <code>implements</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
+- <code>tested-by</code> ← [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(verification; evidence: python-ast)_
 - <code>tested-by</code> ← [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(verification; evidence: filename-convention)_

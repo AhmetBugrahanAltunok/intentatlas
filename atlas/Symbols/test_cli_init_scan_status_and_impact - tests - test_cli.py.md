@@ -10,7 +10,7 @@ source_path: "tests/test_cli.py"
 
 ## Metadata
 
-- **End Line:** <code>34</code>
+- **End Line:** <code>35</code>
 - **Line:** <code>12</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,4 @@ source_path: "tests/test_cli.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-diff-hunk)_
+- <code>modified-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-diff-hunk)_

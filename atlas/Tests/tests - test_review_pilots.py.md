@@ -21,6 +21,7 @@ source_path: "tests/test_review_pilots.py"
 
 - <code>defines</code> → [[Symbols/git - tests - test_review_pilots.py|git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_review_pilots_cover_aligned_stale_and_fallback_ranges - tests - test_review_pilots.py|test_review_pilots_cover_aligned_stale_and_fallback_ranges]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -22,3 +22,4 @@ source_path: "src/intentatlas/open_evidence.py"
 - <code>defined-in</code> ← [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evidence.py|src/intentatlas/evidence.py]] _(structure; evidence: python-symbol-reference)_
 - <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_
+- <code>tested-by</code> ← [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(verification; evidence: python-symbol-reference)_

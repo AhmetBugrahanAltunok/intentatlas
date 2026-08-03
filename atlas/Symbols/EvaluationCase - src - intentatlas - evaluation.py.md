@@ -10,8 +10,8 @@ source_path: "src/intentatlas/evaluation.py"
 
 ## Metadata
 
-- **End Line:** <code>29</code>
-- **Line:** <code>25</code>
+- **End Line:** <code>30</code>
+- **Line:** <code>26</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,5 @@ source_path: "src/intentatlas/evaluation.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_evaluation.py|tests/test_evaluation.py]] _(verification; evidence: python-symbol-reference)_

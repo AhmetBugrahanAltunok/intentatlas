@@ -10,8 +10,8 @@ source_path: "src/intentatlas/onboarding.py"
 
 ## Metadata
 
-- **End Line:** <code>509</code>
-- **Line:** <code>420</code>
+- **End Line:** <code>525</code>
+- **Line:** <code>436</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -21,4 +21,5 @@ source_path: "src/intentatlas/onboarding.py"
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
-- <code>modified-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-diff-hunk)_
+- <code>tested-by</code> ← [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_source_to_atlas.py|tests/test_source_to_atlas.py]] _(verification; evidence: python-symbol-reference)_

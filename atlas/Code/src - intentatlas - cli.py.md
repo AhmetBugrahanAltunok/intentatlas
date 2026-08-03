@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>33392</code>
+- **Size Bytes:** <code>33387</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -115,7 +115,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
@@ -134,3 +134,5 @@ source_path: "src/intentatlas/cli.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - __main__.py|src/intentatlas/__main__.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_cli.py|tests/test_cli.py]] _(verification; evidence: filename-convention)_
+- <code>tested-by</code> ← [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(verification; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_source_to_atlas.py|tests/test_source_to_atlas.py]] _(verification; evidence: python-ast)_

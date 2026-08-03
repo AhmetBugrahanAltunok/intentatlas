@@ -10,8 +10,8 @@ source_path: "src/intentatlas/diagnostic.py"
 
 ## Metadata
 
-- **End Line:** <code>212</code>
-- **Line:** <code>126</code>
+- **End Line:** <code>221</code>
+- **Line:** <code>135</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -22,4 +22,5 @@ source_path: "src/intentatlas/diagnostic.py"
 - <code>defined-in</code> ← [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-symbol-reference)_
-- <code>modified-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-diff-hunk)_
+- <code>tested-by</code> ← [[Tests/tests - test_diagnostic.py|tests/test_diagnostic.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_onboarding_walkthroughs.py|tests/test_onboarding_walkthroughs.py]] _(verification; evidence: python-symbol-reference)_

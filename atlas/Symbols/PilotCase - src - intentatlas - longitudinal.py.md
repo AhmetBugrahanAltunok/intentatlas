@@ -20,3 +20,4 @@ source_path: "src/intentatlas/longitudinal.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(verification; evidence: python-symbol-reference)_

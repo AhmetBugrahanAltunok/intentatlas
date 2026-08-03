@@ -10,8 +10,8 @@ source_path: "src/intentatlas/evaluation.py"
 
 ## Metadata
 
-- **End Line:** <code>293</code>
-- **Line:** <code>287</code>
+- **End Line:** <code>294</code>
+- **Line:** <code>288</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

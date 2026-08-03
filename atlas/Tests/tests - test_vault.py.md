@@ -57,6 +57,10 @@ source_path: "tests/test_vault.py"
 - <code>defines</code> → [[Symbols/test_vault_rejects_linked_generated_areas_before_sync - tests - test_vault.py|test_vault_rejects_linked_generated_areas_before_sync]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_vault_rejects_linked_generated_areas_before_sync.simulated_link - tests - test_vault.py|test_vault_rejects_linked_generated_areas_before_sync.simulated_link]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

@@ -54,7 +54,6 @@ source_path: "src/intentatlas/adapters/go.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_

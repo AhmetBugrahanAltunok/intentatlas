@@ -24,3 +24,5 @@ source_path: "src/intentatlas/viewer.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-symbol-reference)_
 - <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_
+- <code>tested-by</code> ← [[Tests/tests - test_demo.py|tests/test_demo.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(verification; evidence: python-symbol-reference)_

@@ -20,3 +20,4 @@ source_path: "src/intentatlas/scale.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_scale.py|tests/test_scale.py]] _(verification; evidence: python-symbol-reference)_

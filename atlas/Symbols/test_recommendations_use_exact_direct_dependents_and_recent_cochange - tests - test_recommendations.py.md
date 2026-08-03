@@ -10,7 +10,7 @@ source_path: "tests/test_recommendations.py"
 
 ## Metadata
 
-- **End Line:** <code>320</code>
+- **End Line:** <code>329</code>
 - **Line:** <code>253</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_recommendations.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-diff-hunk)_

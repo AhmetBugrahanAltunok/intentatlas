@@ -11,7 +11,7 @@ source_path: "src/intentatlas/diagnostic.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>16139</code>
+- **Size Bytes:** <code>16575</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -22,6 +22,7 @@ source_path: "src/intentatlas/diagnostic.py"
 - <code>defines</code> → [[Symbols/DiagnosticCapability - src - intentatlas - diagnostic.py|DiagnosticCapability]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/DiagnosticCapability.to_dict - src - intentatlas - diagnostic.py|DiagnosticCapability.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryDiagnostic - src - intentatlas - diagnostic.py|RepositoryDiagnostic]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/RepositoryDiagnostic.ambiguity_detail - src - intentatlas - diagnostic.py|RepositoryDiagnostic.ambiguity_detail]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/RepositoryDiagnostic.to_dict - src - intentatlas - diagnostic.py|RepositoryDiagnostic.to_dict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_DiscoveredMetadata - src - intentatlas - diagnostic.py|_DiscoveredMetadata]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_capabilities - src - intentatlas - diagnostic.py|_capabilities]] _(structure; evidence: python-ast)_
@@ -44,6 +45,7 @@ source_path: "src/intentatlas/diagnostic.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

@@ -20,3 +20,4 @@ source_path: "src/intentatlas/corpus.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_corpus.py|tests/test_corpus.py]] _(verification; evidence: python-symbol-reference)_

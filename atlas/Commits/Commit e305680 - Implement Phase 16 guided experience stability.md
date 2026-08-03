@@ -23,18 +23,6 @@ generated: true
 - <code>changes</code> → [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_browser_e2e.py|tests/test_browser_e2e.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_post_result - src - intentatlas - onboarding.py|_post_result]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_read_menu - src - intentatlas - onboarding.py|_read_menu]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_render_banner - src - intentatlas - onboarding.py|_render_banner]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_render_confirmation - src - intentatlas - onboarding.py|_render_confirmation]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_render_section - src - intentatlas - onboarding.py|_render_section]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_render_summary - src - intentatlas - onboarding.py|_render_summary]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_resolve_source - src - intentatlas - onboarding.py|_resolve_source]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_select_scope - src - intentatlas - onboarding.py|_select_scope]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_write_wrapped - src - intentatlas - onboarding.py|_write_wrapped]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_common_guide_path_reaches_production_report_with_one_enter_and_no_write - tests - test_guided_cli.py|test_common_guide_path_reaches_production_report_with_one_enter_and_no_write]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_language_catalogs_preserve_canonical_values_and_safety_meaning - tests - test_guided_cli.py|test_language_catalogs_preserve_canonical_values_and_safety_meaning]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

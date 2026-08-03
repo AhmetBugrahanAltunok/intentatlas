@@ -27,6 +27,8 @@ source_path: "tests/test_test_outcomes.py"
 - <code>defines</code> → [[Symbols/test_stale_outcomes_never_create_prediction_comparison_claims - tests - test_test_outcomes.py|test_stale_outcomes_never_create_prediction_comparison_claims]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/valid_document - tests - test_test_outcomes.py|valid_document]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/write_outcomes - tests - test_test_outcomes.py|write_outcomes]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/compare_test_outcomes - src - intentatlas - test_outcomes.py|compare_test_outcomes]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/load_test_outcomes - src - intentatlas - test_outcomes.py|load_test_outcomes]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

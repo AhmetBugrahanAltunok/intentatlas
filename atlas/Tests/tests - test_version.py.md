@@ -20,6 +20,7 @@ source_path: "tests/test_version.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_release_candidate_uses_one_canonical_version_source - tests - test_version.py|test_release_candidate_uses_one_canonical_version_source]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(verification; evidence: python-ast)_
 
 ## Incoming relationships
 

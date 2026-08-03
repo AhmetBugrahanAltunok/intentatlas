@@ -11,7 +11,7 @@ source_path: "src/intentatlas/evaluation.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12810</code>
+- **Size Bytes:** <code>12833</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -36,6 +36,7 @@ source_path: "src/intentatlas/evaluation.py"
 - <code>defines</code> → [[Symbols/evaluate_recommendations - src - intentatlas - evaluation.py|evaluate_recommendations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/load_evaluation_labels - src - intentatlas - evaluation.py|load_evaluation_labels]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_evaluation - src - intentatlas - evaluation.py|render_evaluation]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - confidence.py|src/intentatlas/confidence.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
@@ -43,6 +44,7 @@ source_path: "src/intentatlas/evaluation.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-009 - Implement labeled recommendation evaluation|ISSUE-009 - Implement labeled recommendation evaluation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_

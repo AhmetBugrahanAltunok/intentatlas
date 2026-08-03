@@ -10,8 +10,8 @@ source_path: "src/intentatlas/workspace.py"
 
 ## Metadata
 
-- **End Line:** <code>418</code>
-- **Line:** <code>378</code>
+- **End Line:** <code>488</code>
+- **Line:** <code>448</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/workspace.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - workspace.py|src/intentatlas/workspace.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 17bbb87 - Record Phase 13 local verification|Record Phase 13 local verification]] _(history; evidence: git-diff-hunk)_

@@ -21,3 +21,4 @@ source_path: "src/intentatlas/delivery.py"
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(verification; evidence: python-symbol-reference)_

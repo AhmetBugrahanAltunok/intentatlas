@@ -24,6 +24,10 @@ source_path: "tests/test_property_fuzz.py"
 - <code>defines</code> → [[Symbols/test_generated_json_evidence_round_trips_without_parser_side_effects - tests - test_property_fuzz.py|test_generated_json_evidence_round_trips_without_parser_side_effects]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_graph_document_mutations_fail_closed_or_preserve_invariants - tests - test_property_fuzz.py|test_graph_document_mutations_fail_closed_or_preserve_invariants]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_hostile_json_corpus_is_rejected_as_a_bounded_value_error - tests - test_property_fuzz.py|test_hostile_json_corpus_is_rejected_as_a_bounded_value_error]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/load_json_report - src - intentatlas - open_evidence.py|load_json_report]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

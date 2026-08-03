@@ -10,8 +10,8 @@ source_path: "src/intentatlas/adapters/python.py"
 
 ## Metadata
 
-- **End Line:** <code>392</code>
-- **Line:** <code>384</code>
+- **End Line:** <code>410</code>
+- **Line:** <code>402</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/adapters/python.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - adapters - python.py|src/intentatlas/adapters/python.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_

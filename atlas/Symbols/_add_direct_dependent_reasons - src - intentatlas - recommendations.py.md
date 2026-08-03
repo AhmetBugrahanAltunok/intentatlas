@@ -10,8 +10,8 @@ source_path: "src/intentatlas/recommendations.py"
 
 ## Metadata
 
-- **End Line:** <code>589</code>
-- **Line:** <code>505</code>
+- **End Line:** <code>619</code>
+- **Line:** <code>508</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "src/intentatlas/recommendations.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-diff-hunk)_

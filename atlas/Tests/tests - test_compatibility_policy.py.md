@@ -21,6 +21,11 @@ source_path: "tests/test_compatibility_policy.py"
 
 - <code>defines</code> → [[Symbols/test_compatibility_policy_covers_every_declared_contract - tests - test_compatibility_policy.py|test_compatibility_policy_covers_every_declared_contract]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_stable_schema_versions_remain_explicit - tests - test_compatibility_policy.py|test_stable_schema_versions_remain_explicit]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

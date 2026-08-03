@@ -11,7 +11,7 @@ source_path: "src/intentatlas/workspace.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>21526</code>
+- **Size Bytes:** <code>24648</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -32,6 +32,7 @@ source_path: "src/intentatlas/workspace.py"
 - <code>defines</code> → [[Symbols/WorkspaceModel.schema_version - src - intentatlas - workspace.py|WorkspaceModel.schema_version]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/WorkspaceModel.unique_owner - src - intentatlas - workspace.py|WorkspaceModel.unique_owner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_boundary - src - intentatlas - workspace.py|_boundary]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_conventional_python_src_roots - src - intentatlas - workspace.py|_conventional_python_src_roots]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_deduplicate_boundaries - src - intentatlas - workspace.py|_deduplicate_boundaries]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_dependency_cycle_diagnostics - src - intentatlas - workspace.py|_dependency_cycle_diagnostics]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_dependency_names - src - intentatlas - workspace.py|_dependency_names]] _(structure; evidence: python-ast)_
@@ -62,6 +63,7 @@ source_path: "src/intentatlas/workspace.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 17bbb87 - Record Phase 13 local verification|Record Phase 13 local verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

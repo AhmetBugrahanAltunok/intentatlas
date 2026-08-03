@@ -14,6 +14,9 @@ phase: 17
 - The 17B-17D implementation is focused/full green: canonical confidence and thresholding,
   conservative src-layout resolution, exact callers, runnable eligibility, weakest-hop scoring,
   and bounded co-change are in place. Phase 17E closure verification is active.
+- Full/coverage/static/security/browser/package/pipx/sdist/network and two-pass vault gates are
+  green at implementation commit `85a639fb91c3cce0e0ce9bee4c3242d46caa2935`; only pushed-head
+  remote CI and final clean synchronization remain.
 - Public Click checkout is ignored under `var/phase17-click/`; no third-party code was executed or
   committed.
 

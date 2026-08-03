@@ -32,6 +32,12 @@ source_path: "tests/test_open_evidence.py"
 - <code>defines</code> → [[Symbols/test_scip_import_does_not_launch_repository_tooling.git_only - tests - test_open_evidence.py|test_scip_import_does_not_launch_repository_tooling.git_only]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_stale_and_unknown_execution_maps_withhold_runtime_test_edges - tests - test_open_evidence.py|test_stale_and_unknown_execution_maps_withhold_runtime_test_edges]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - open_evidence.py|src/intentatlas/open_evidence.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scip_fragment - src - intentatlas - open_evidence.py|scip_fragment]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

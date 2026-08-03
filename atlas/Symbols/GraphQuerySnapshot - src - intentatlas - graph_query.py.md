@@ -22,3 +22,4 @@ source_path: "src/intentatlas/graph_query.py"
 - <code>defined-in</code> ← [[Code/src - intentatlas - graph_query.py|src/intentatlas/graph_query.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_graph_query.py|tests/test_graph_query.py]] _(verification; evidence: python-symbol-reference)_

@@ -32,7 +32,6 @@ source_path: "src/intentatlas/adapters/base.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_

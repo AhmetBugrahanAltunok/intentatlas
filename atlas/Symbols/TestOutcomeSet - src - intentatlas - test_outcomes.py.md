@@ -21,3 +21,4 @@ source_path: "src/intentatlas/test_outcomes.py"
 
 - <code>defined-in</code> ← [[Tests/src - intentatlas - test_outcomes.py|src/intentatlas/test_outcomes.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_review.py|tests/test_review.py]] _(verification; evidence: python-symbol-reference)_

@@ -25,6 +25,15 @@ source_path: "tests/test_adapters.py"
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(verification; evidence: python-ast)_
+- <code>tests</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/GoAdapter - src - intentatlas - adapters - go.py|GoAdapter]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/JavaScriptAdapter - src - intentatlas - adapters - javascript.py|JavaScriptAdapter]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

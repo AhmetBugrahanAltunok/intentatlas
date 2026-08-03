@@ -70,9 +70,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/is_github_url - src - intentatlas - acquisition.py|is_github_url]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/normalize_github_url - src - intentatlas - acquisition.py|normalize_github_url]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/render_cache_entry - src - intentatlas - acquisition.py|render_cache_entry]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_cache - src - intentatlas - cli.py|_cache]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/build_parser - src - intentatlas - cli.py|build_parser]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/HangingProcess.__init__ - tests - test_acquisition.py|HangingProcess.__init__]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/HangingProcess.kill - tests - test_acquisition.py|HangingProcess.kill]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/HangingProcess.poll - tests - test_acquisition.py|HangingProcess.poll]] _(history; evidence: git-diff-hunk)_

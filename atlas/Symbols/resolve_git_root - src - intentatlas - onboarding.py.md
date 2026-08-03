@@ -10,8 +10,8 @@ source_path: "src/intentatlas/onboarding.py"
 
 ## Metadata
 
-- **End Line:** <code>601</code>
-- **Line:** <code>560</code>
+- **End Line:** <code>617</code>
+- **Line:** <code>576</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "src/intentatlas/onboarding.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-ast)_
+- <code>tested-by</code> ← [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(verification; evidence: python-symbol-reference)_

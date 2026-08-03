@@ -10,18 +10,19 @@ phase: 17
 
 - [x] Exact clean Phase 16 entry and frozen before-change evaluation are recorded.
 - [x] External findings were independently reproduced and classified before production changes.
-- [ ] Canonical confidence, filtering, counters, omissions, strategy, and surface parity pass.
-- [ ] Conservative Python src-layout and qualified-symbol resolution pass Click and self-scan.
-- [ ] Runnable eligibility, weakest-hop, co-change width/frequency, and bounded reason copy pass.
-- [ ] Documentation, diagnostics, Windows encoding, governance, full/package/network/vault gates pass.
+- [x] Canonical confidence, filtering, counters, omissions, strategy, and surface parity pass.
+- [x] Conservative Python src-layout and qualified-symbol resolution pass Click and self-scan.
+- [x] Runnable eligibility, weakest-hop, co-change width/frequency, and bounded reason copy pass.
+- [x] Documentation, diagnostics, Windows encoding, governance, full/package/network/vault gates pass.
 - [ ] EVD-033 is complete, ISSUE-032 closed, commits pushed, and final-head CI fully green.
 - [x] No Phase 11C, tag, release, publication, deployment, external code execution, or Private
       access occurred.
 
 ## Decision
 
-Open. The pre-fix baseline and seven red regressions prove the reported correctness defects, but no
-implementation or closure gate is yet accepted.
+Open only for remote closure. The revised technical criteria and every local, package, browser,
+network, deterministic-vault, and durable-chain gate pass. Final pushed-head CI and synchronized
+clean state remain mandatory before the review can become `pass`.
 
 ## Links
 

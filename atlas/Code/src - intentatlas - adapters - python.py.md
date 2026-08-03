@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/python.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>15048</code>
+- **Size Bytes:** <code>15703</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -25,6 +25,7 @@ source_path: "src/intentatlas/adapters/python.py"
 - <code>defines</code> → [[Symbols/_PythonSymbolResolver.__init__ - src - intentatlas - adapters - python.py|_PythonSymbolResolver.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_PythonSymbolResolver.references - src - intentatlas - adapters - python.py|_PythonSymbolResolver.references]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_PythonSymbolResolver.resolve - src - intentatlas - adapters - python.py|_PythonSymbolResolver.resolve]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_PythonSymbolResolver.resolve_qualified - src - intentatlas - adapters - python.py|_PythonSymbolResolver.resolve_qualified]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor - src - intentatlas - adapters - python.py|_SymbolVisitor]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor.__init__ - src - intentatlas - adapters - python.py|_SymbolVisitor.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor._visit_symbol - src - intentatlas - adapters - python.py|_SymbolVisitor._visit_symbol]] _(structure; evidence: python-ast)_
@@ -52,7 +53,7 @@ source_path: "src/intentatlas/adapters/python.py"
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_

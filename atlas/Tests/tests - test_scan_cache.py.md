@@ -31,11 +31,18 @@ source_path: "tests/test_scan_cache.py"
 - <code>defines</code> → [[Symbols/test_unsafe_cache_entry_is_not_followed_or_required - tests - test_scan_cache.py|test_unsafe_cache_entry_is_not_followed_or_required]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_workspace_partitions_reuse_unrelated_projects_and_invalidate_dependents - tests - test_scan_cache.py|test_workspace_partitions_reuse_unrelated_projects_and_invalidate_dependents]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/AdapterFragmentCache - src - intentatlas - scan_cache.py|AdapterFragmentCache]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-029 - Phase 13 semantic monorepo verification|EVD-029 - Phase 13 semantic monorepo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(reference; evidence: wikilink)_

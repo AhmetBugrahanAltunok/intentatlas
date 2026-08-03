@@ -21,4 +21,5 @@ source_path: "src/intentatlas/workspace.py"
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - workspace.py|src/intentatlas/workspace.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-symbol-reference)_
-- <code>modified-by</code> ← [[Commits/Commit 17bbb87 - Record Phase 13 local verification|Record Phase 13 local verification]] _(history; evidence: git-diff-hunk)_
+- <code>modified-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-diff-hunk)_
+- <code>tested-by</code> ← [[Tests/tests - test_workspace.py|tests/test_workspace.py]] _(verification; evidence: python-symbol-reference)_

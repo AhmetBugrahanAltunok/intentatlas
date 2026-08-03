@@ -10,8 +10,8 @@ source_path: "tests/test_recommendations.py"
 
 ## Metadata
 
-- **End Line:** <code>355</code>
-- **Line:** <code>333</code>
+- **End Line:** <code>364</code>
+- **Line:** <code>342</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

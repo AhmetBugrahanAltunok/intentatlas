@@ -29,6 +29,10 @@ source_path: "tests/test_workspace.py"
 - <code>defines</code> → [[Symbols/test_workspace_discovery_never_executes_project_tooling - tests - test_workspace.py|test_workspace_discovery_never_executes_project_tooling]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_workspace_discovery_never_executes_project_tooling.forbidden - tests - test_workspace.py|test_workspace_discovery_never_executes_project_tooling.forbidden]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - workspace.py|src/intentatlas/workspace.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/discover_workspace - src - intentatlas - workspace.py|discover_workspace]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

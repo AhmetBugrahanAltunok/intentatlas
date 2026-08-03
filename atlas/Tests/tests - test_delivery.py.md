@@ -29,6 +29,11 @@ source_path: "tests/test_delivery.py"
 - <code>defines</code> → [[Symbols/test_rejects_symbolic_link_delivery_report_before_reading.guarded_is_symlink - tests - test_delivery.py|test_rejects_symbolic_link_delivery_report_before_reading.guarded_is_symlink]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_unsafe_or_missing_delivery_paths - tests - test_delivery.py|test_rejects_unsafe_or_missing_delivery_paths]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/import_delivery - src - intentatlas - delivery.py|import_delivery]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 

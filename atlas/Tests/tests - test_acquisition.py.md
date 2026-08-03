@@ -43,7 +43,17 @@ source_path: "tests/test_acquisition.py"
 - <code>defines</code> → [[Symbols/test_strict_github_url_normalization - tests - test_acquisition.py|test_strict_github_url_normalization]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_strict_github_url_rejection - tests - test_acquisition.py|test_strict_github_url_rejection]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_url_detection_keeps_quoted_windows_paths_local - tests - test_acquisition.py|test_url_detection_keeps_quoted_windows_paths_local]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(verification; evidence: filename-convention)_
+- <code>tests</code> → [[Symbols/AcquisitionLimits - src - intentatlas - acquisition.py|AcquisitionLimits]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/GitTransport - src - intentatlas - acquisition.py|GitTransport]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/ManagedRepositoryCache - src - intentatlas - acquisition.py|ManagedRepositoryCache]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/_safe_git_command - src - intentatlas - acquisition.py|_safe_git_command]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/_safe_git_environment - src - intentatlas - acquisition.py|_safe_git_environment]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/cache_identity - src - intentatlas - acquisition.py|cache_identity]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/is_github_url - src - intentatlas - acquisition.py|is_github_url]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/normalize_github_url - src - intentatlas - acquisition.py|normalize_github_url]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/render_cache_entry - src - intentatlas - acquisition.py|render_cache_entry]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
