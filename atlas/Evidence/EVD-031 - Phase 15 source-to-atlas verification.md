@@ -140,6 +140,18 @@ On Windows with Python `3.13.14`, at implementation head `e1f7313...`:
 - Closure identity synchronization and its final-head CI are procedural post-commit checks; any
   failure reopens this Evidence and Review.
 
+## Post-closure owner observation
+
+On 2026-08-03, the owner completed the real public source-to-atlas path and reported cumulative
+viewer layout/graph displacement after repeated **Change report** and **Fit graph** actions. The
+observation is recorded in [[Sessions/2026-08-03 - Owner viewer layout observation]] and remains
+open for controlled reproduction under
+[[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]].
+
+This post-closure observation does not satisfy Phase 11C and does not by itself establish a root
+cause. If reproduction confirms that the supported viewer violates the Phase 15 acceptance
+contract, this Evidence and its Review must be reopened until the regression is fixed and verified.
+
 ## Required evidence
 
 - [x] Exact Phase 14 entry, implementation commits, generated implementation Commit note, pushed

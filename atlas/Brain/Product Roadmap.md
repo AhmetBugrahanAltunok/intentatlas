@@ -563,6 +563,26 @@ Status: complete; Phase 15 Review passed on 2026-08-03
 - Strategy: [[Brain/Phase 15 Source-to-Atlas Strategy]]
 - Handoff: [[Sessions/2026-08-03 - Phase 15 source-to-atlas handoff]]
 
+## Phase 16 - Guided experience stability
+
+Status: in progress (2026-08-03)
+
+- Remove focus-driven cumulative viewer displacement while preserving the existing report overlay,
+  graph simulation, fit semantics, keyboard dialog behavior, and immutable snapshot.
+- Make the PowerShell guide easy to scan through a prominent IntentAtlas heading, semantic EN/TR
+  sections, wrapped sanitized evidence, and one option per line.
+- Regress wide/narrow, mouse/keyboard, report/report-free, large-graph, no-write, non-TTY,
+  package, vault, approved-network, and remote-CI contracts before closure.
+- Keep the owner first-use observation distinct from the unopened Phase 11C human-validation gate.
+- Requirement: [[Requirements/REQ-032 - Keep guided analysis visually stable and readable]]
+- Decision: [[Decisions/ADR-032 - Prevent focus-driven viewport drift and structure terminal presentation]]
+- Viewer issue: [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]]
+- Terminal issue: [[Issues/ISSUE-031 - Improve guided PowerShell readability]]
+- Planned evidence: [[Evidence/EVD-032 - Phase 16 guided experience stability verification]]
+- Planned review: [[Reviews/Phase 16 Guided Experience Stability Review]]
+- Strategy: [[Brain/Phase 16 Guided Experience Stability Strategy]]
+- Handoff: [[Sessions/2026-08-03 - Phase 16 guided experience handoff]]
+
 ## Completion rule
 
 Every phase must end with a linked Evidence note and Review note containing the full change

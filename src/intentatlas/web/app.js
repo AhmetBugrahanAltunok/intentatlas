@@ -605,13 +605,13 @@ function openChangeReport(moveFocus = true) {
   const panel = document.querySelector("#change-report");
   panel.classList.add("open"); panel.setAttribute("aria-hidden", "false");
   document.querySelector("#report-toggle").setAttribute("aria-expanded", "true");
-  if (moveFocus) document.querySelector("#close-report").focus();
+  if (moveFocus) document.querySelector("#close-report").focus({ preventScroll: true });
 }
 function closeChangeReport(restoreFocus = false) {
   const panel = document.querySelector("#change-report");
   panel.classList.remove("open"); panel.setAttribute("aria-hidden", "true");
   document.querySelector("#report-toggle").setAttribute("aria-expanded", "false");
-  if (restoreFocus) document.querySelector("#report-toggle").focus();
+  if (restoreFocus) document.querySelector("#report-toggle").focus({ preventScroll: true });
 }
 
 function fitGraph() {

@@ -59,6 +59,10 @@ kullanır ve hiçbir şey yazmaz. Pipe, redirect, CI veya başka non-TTY çağr�
 stderr/exit-2 davranışını korur; prompt açmaz ve tarama yapmaz. Açık bir yol için aynı akışı
 `intentatlas guide [PATH]` ile başlatın. Ayrıntılar [rehberli CLI sözleşmesindedir](docs/guided-cli.md).
 
+Etkileşimli çıktı büyük bir IntentAtlas başlığı; açık kaynak/güvenlik/analiz/öneri/Atlas bölümleri;
+satıra sığdırılmış kanıt ve her satırda tek seçenek kullanır. Browser viewer'da **Change report** ve
+**Fit graph** tekrarlandığında sayfa ile graph geometrisi sabit kalır.
+
 Public bir GitHub repository'yi elle clone etmeden analiz etmek için gerçek bir etkileşimli
 terminal kullanın:
 

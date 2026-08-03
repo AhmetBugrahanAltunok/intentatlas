@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess  # nosec B404
 import sys
+import textwrap
 from dataclasses import dataclass
 from pathlib import Path
 from typing import IO, Any
@@ -223,6 +224,70 @@ MESSAGES: dict[str, dict[str, str]] = {
 }
 
 
+LAYOUT_TEXT: dict[str, dict[str, str]] = {
+    "en": {
+        "subtitle": "Guided source-to-atlas analysis",
+        "source": "SOURCE AND SCOPE",
+        "safety": "SAFETY BOUNDARY",
+        "analysis": "ANALYSIS RESULT",
+        "recommendations": "RECOMMENDATIONS",
+        "atlas": "ATLAS SNAPSHOT",
+        "actions": "NEXT ACTION",
+        "scope_options": "SCOPE OPTIONS",
+        "choice": "Choice: ",
+        "confirm_enter": "[Enter] Analyze the recommended scope",
+        "confirm_scope": "[S] Select a different scope",
+        "remote_enter": "[Enter] Approve bounded HTTPS acquisition and analyze",
+        "scope_worktree": "[W] worktree",
+        "scope_staged": "[S] staged",
+        "scope_head": "[H] exact HEAD",
+        "scope_commit": "[C] explicit commit",
+        "scope_range": "[R] explicit range",
+        "exit": "[Q] Exit",
+        "action_reasons": "[1] Show selection reasons",
+        "action_omissions": "[2] Show bounded omissions",
+        "action_details": "[3] Show complete JSON details",
+        "action_viewer": "[4] Open this exact snapshot in the interactive Atlas",
+        "action_scope": "[5] Analyze another scope",
+        "action_commands": "[6] Show commands without executing them",
+        "action_language": "[L] Language / Dil",
+        "action_exit": "[Enter/Q] Exit",
+        "reason": "reason",
+        "evidence": "evidence",
+    },
+    "tr": {
+        "subtitle": "Rehberli source-to-atlas analizi",
+        "source": "KAYNAK VE KAPSAM",
+        "safety": "GÜVENLİK SINIRI",
+        "analysis": "ANALİZ SONUCU",
+        "recommendations": "ÖNERİLER",
+        "atlas": "ATLAS SNAPSHOT",
+        "actions": "SONRAKİ EYLEM",
+        "scope_options": "KAPSAM SEÇENEKLERİ",
+        "choice": "Seçim: ",
+        "confirm_enter": "[Enter] Önerilen kapsamı analiz et",
+        "confirm_scope": "[S] Farklı kapsam seç",
+        "remote_enter": "[Enter] Sınırlı HTTPS edinimini onayla ve analiz et",
+        "scope_worktree": "[W] worktree",
+        "scope_staged": "[S] staged",
+        "scope_head": "[H] exact HEAD",
+        "scope_commit": "[C] açık commit",
+        "scope_range": "[R] açık range",
+        "exit": "[Q] Çık",
+        "action_reasons": "[1] Seçim nedenlerini göster",
+        "action_omissions": "[2] Sınırlı omissions listesini göster",
+        "action_details": "[3] Tüm JSON ayrıntılarını göster",
+        "action_viewer": "[4] Bu exact snapshot'ı interaktif Atlas'ta aç",
+        "action_scope": "[5] Başka bir kapsamı analiz et",
+        "action_commands": "[6] Komutları çalıştırmadan göster",
+        "action_language": "[L] Language / Dil",
+        "action_exit": "[Enter/Q] Çık",
+        "reason": "neden",
+        "evidence": "kanıt",
+    },
+}
+
+
 STATE_MEANINGS = {
     "en": {
         "analyzed": "the selected changes were structurally analyzed",
@@ -288,6 +353,43 @@ class TerminalIO:
         return value.rstrip("\r\n")
 
 
+def _render_banner(terminal: TerminalIO, language: str) -> None:
+    terminal.write("=" * 68)
+    terminal.write("  I N T E N T A T L A S")
+    terminal.write(f"  {LAYOUT_TEXT[language]['subtitle']}")
+    terminal.write("=" * 68)
+
+
+def _render_section(terminal: TerminalIO, language: str, key: str) -> None:
+    terminal.write("")
+    terminal.write(f"--- {LAYOUT_TEXT[language][key]} ---")
+
+
+def _read_menu(terminal: TerminalIO, language: str, *keys: str) -> str | None:
+    for key in keys:
+        terminal.write(f"  {LAYOUT_TEXT[language][key]}")
+    return terminal.read(LAYOUT_TEXT[language]["choice"])
+
+
+def _write_wrapped(
+    terminal: TerminalIO,
+    value: str,
+    *,
+    subsequent_indent: str = "",
+    width: int = 120,
+) -> None:
+    safe = _terminal_text(value)
+    lines = textwrap.wrap(
+        safe,
+        width=width,
+        subsequent_indent=subsequent_indent,
+        break_long_words=False,
+        break_on_hyphens=False,
+    )
+    for line in lines or [""]:
+        terminal.write(line)
+
+
 @dataclass(frozen=True, slots=True)
 class GuideScope:
     scope: str
@@ -329,7 +431,7 @@ def run_guide(
         raise ValueError("guided mode requires interactive stdin and stdout")
     active_language = _language(language)
     try:
-        active_terminal.write(_message(active_language, "title"))
+        _render_banner(active_terminal, active_language)
         active_terminal.write(_message(active_language, "checking"))
         root, source = _session_source(
             path,
@@ -366,7 +468,13 @@ def run_guide(
             scope = action
         while True:
             _render_confirmation(active_terminal, active_language, root, scope, diagnostic)
-            choice = active_terminal.read(_message(active_language, "confirm"))
+            choice = _read_menu(
+                active_terminal,
+                active_language,
+                "confirm_enter",
+                "confirm_scope",
+                "exit",
+            )
             if choice is None or choice.strip().casefold() == "q":
                 active_terminal.write(_message(active_language, "bye"))
                 return 0
@@ -520,8 +628,11 @@ def _resolve_source(
         return resolve_git_root(source), None
     url = normalize_github_url(str(source))
     limits = cache.limits
+    _render_section(terminal, language, "source")
     terminal.write(_message(language, "remote_source", value=url))
-    terminal.write(
+    _render_section(terminal, language, "safety")
+    _write_wrapped(
+        terminal,
         _message(
             language,
             "remote_trust",
@@ -531,7 +642,7 @@ def _resolve_source(
             seconds=limits.timeout_seconds,
         )
     )
-    choice = terminal.read(_message(language, "remote_consent"))
+    choice = _read_menu(terminal, language, "remote_enter", "exit")
     if choice is None or choice.strip().casefold() == "q":
         raise ValueError("public repository acquisition was not approved")
     if choice.strip():
@@ -605,12 +716,15 @@ def _render_confirmation(
     scope: GuideScope,
     diagnostic: RepositoryDiagnostic | None = None,
 ) -> None:
+    _render_section(terminal, language, "source")
     terminal.write(_message(language, "root", value=str(root)))
     terminal.write(_message(language, "scope", value=scope.display()))
+    _render_section(terminal, language, "safety")
     trust_key = "trust_network_path" if _is_unc_path(root) else "trust"
-    terminal.write(_message(language, trust_key))
+    _write_wrapped(terminal, _message(language, trust_key))
     if diagnostic is not None:
-        terminal.write(
+        _write_wrapped(
+            terminal,
             _message(
                 language,
                 "readiness",
@@ -631,7 +745,7 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
     report = snapshot.report
     payload = report.to_dict()
     change_set = report.analysis.change_set
-    terminal.write("")
+    _render_section(terminal, language, "source")
     if snapshot.source is not None:
         source = snapshot.source
         terminal.write(_message(language, "remote_source", value=source.url))
@@ -656,6 +770,7 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
             head=change_set.head_revision or "worktree",
         )
     )
+    _render_section(terminal, language, "analysis")
     terminal.write(
         _message(
             language,
@@ -667,6 +782,7 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
     )
     terminal.write(_message(language, "threshold", value=report.minimum_confidence))
     terminal.write(_message(language, "changed", value=len(change_set.files)))
+    _render_section(terminal, language, "recommendations")
     terminal.write(
         _message(
             language,
@@ -679,15 +795,19 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
     )
     for requirement_item in report.requirements[:5]:
         terminal.write(
-            _message(
-                language,
-                "selected_requirement",
-                id=requirement_item.requirement.id,
-                score=requirement_item.score,
-                confidence=requirement_item.confidence,
-                reason="confidence-meets-minimum-threshold",
-                evidence=", ".join(requirement_item.evidence) or "none",
-            )
+            f"  - requirement {requirement_item.requirement.id} | "
+            f"{requirement_item.score}/100 | {requirement_item.confidence}"
+        )
+        _write_wrapped(
+            terminal,
+            f"    {LAYOUT_TEXT[language]['reason']}: confidence-meets-minimum-threshold",
+            subsequent_indent="      ",
+        )
+        _write_wrapped(
+            terminal,
+            f"    {LAYOUT_TEXT[language]['evidence']}: "
+            f"{', '.join(requirement_item.evidence) or 'none'}",
+            subsequent_indent="      ",
         )
     terminal.write(
         _message(
@@ -701,15 +821,20 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
     )
     for test_item in report.tests[:5]:
         terminal.write(
-            _message(
-                language,
-                "selected_test",
-                id=test_item.test.id,
-                score=test_item.score,
-                confidence=test_item.confidence,
-                reason=", ".join(test_item.reasons) or "none",
-                evidence=", ".join(test_item.evidence) or "none",
-            )
+            f"  - test {test_item.test.id} | {test_item.score}/100 | "
+            f"{test_item.confidence}"
+        )
+        _write_wrapped(
+            terminal,
+            f"    {LAYOUT_TEXT[language]['reason']}: "
+            f"{', '.join(test_item.reasons) or 'none'}",
+            subsequent_indent="      ",
+        )
+        _write_wrapped(
+            terminal,
+            f"    {LAYOUT_TEXT[language]['evidence']}: "
+            f"{', '.join(test_item.evidence) or 'none'}",
+            subsequent_indent="      ",
         )
     terminal.write(
         _message(
@@ -728,7 +853,12 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
         )
     )
     terminal.write(_message(language, "tests_executed"))
-    terminal.write(_message(language, "advisory", value=payload["advisory"]))
+    _write_wrapped(
+        terminal,
+        _message(language, "advisory", value=payload["advisory"]),
+        subsequent_indent="  ",
+    )
+    _render_section(terminal, language, "atlas")
     layer_counts = _layer_counts(snapshot.graph)
     missing = [
         name
@@ -778,7 +908,19 @@ def _post_result(
     language: str,
 ) -> GuideScope | str | None:
     while True:
-        choice = terminal.read(_message(language, "actions"))
+        _render_section(terminal, language, "actions")
+        choice = _read_menu(
+            terminal,
+            language,
+            "action_reasons",
+            "action_omissions",
+            "action_details",
+            "action_viewer",
+            "action_scope",
+            "action_commands",
+            "action_language",
+            "action_exit",
+        )
         folded = "" if choice is None else choice.strip().casefold()
         if choice is None or folded in {"", "q"}:
             terminal.write(_message(language, "bye"))
@@ -874,7 +1016,17 @@ def _select_scope(
     terminal: TerminalIO,
     language: str,
 ) -> GuideScope | None:
-    choice = terminal.read(_message(language, "scope_menu"))
+    _render_section(terminal, language, "scope_options")
+    choice = _read_menu(
+        terminal,
+        language,
+        "scope_worktree",
+        "scope_staged",
+        "scope_head",
+        "scope_commit",
+        "scope_range",
+        "exit",
+    )
     if choice is None or choice.strip().casefold() == "q":
         return None
     folded = choice.strip().casefold()

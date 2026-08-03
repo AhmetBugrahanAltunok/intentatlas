@@ -7,6 +7,15 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ## [Unreleased]
 
+### Changed
+
+- Prevent guided viewer focus transfer from horizontally displacing the page during repeated
+  Change Report and Fit Graph use; real-browser regressions cover wide/narrow, keyboard/mouse,
+  report, and graph-only states.
+- Restructure the English/Turkish guided PowerShell transcript with an ASCII-safe IntentAtlas
+  banner, semantic sections, wrapped sanitized evidence, and one option per line without changing
+  production ChangeReport or immutable-snapshot semantics.
+
 ### Added
 
 - Strict, explicitly approved public GitHub source onboarding through a bounded inert Git

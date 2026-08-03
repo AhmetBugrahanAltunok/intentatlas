@@ -333,6 +333,134 @@ def _keyboard_accessibility_probe(browser: str, url: str, profile: Path) -> None
             "active: document.activeElement?.id})"
         )
         assert keyboard_state == {"hidden": "false", "active": "close-report"}
+        assert evaluate("window.scrollX") == 0
+    finally:
+        chrome.close()
+
+
+def _layout_stability_probe(browser: str, url: str, profile: Path) -> None:
+    chrome = _CdpChrome(browser, url, profile)
+    try:
+        def evaluate(expression: str) -> Any:
+            result = chrome.command(
+                "Runtime.evaluate",
+                {"expression": expression, "returnByValue": True},
+            )
+            return result["result"].get("value")
+
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            if evaluate(
+                "document.readyState === 'complete' && "
+                "document.querySelector('#change-report')?.classList.contains('open')"
+            ):
+                break
+            time.sleep(0.05)
+        else:
+            raise AssertionError("Change report did not auto-open in Chrome")
+
+        # Let the bounded force layout settle so this probe distinguishes viewport
+        # drift from intentional node motion during initial graph placement.
+        time.sleep(4.5)
+
+        metrics = (
+            "JSON.stringify((() => { "
+            "const main = document.querySelector('main').getBoundingClientRect(); "
+            "const stage = document.querySelector('#stage').getBoundingClientRect(); "
+            "return {scrollX: window.scrollX, mainX: main.x, mainRight: main.right, "
+            "stageX: stage.x, stageRight: stage.right, transform: "
+            "document.querySelector('#viewport').getAttribute('transform')}; })())"
+        )
+
+        for width, height in ((1280, 800), (640, 760)):
+            chrome.command(
+                "Emulation.setDeviceMetricsOverride",
+                {
+                    "width": width,
+                    "height": height,
+                    "deviceScaleFactor": 1,
+                    "mobile": False,
+                },
+            )
+            time.sleep(0.1)
+            evaluate("document.querySelector('#fit').click(); true")
+            baseline = json.loads(evaluate(metrics))
+            for _ in range(5):
+                evaluate("document.querySelector('#close-report').click(); true")
+                evaluate("document.querySelector('#report-toggle').click(); true")
+                evaluate("document.querySelector('#fit').click(); true")
+                current = json.loads(evaluate(metrics))
+                assert current == baseline
+            assert baseline["scrollX"] == 0
+            assert baseline["mainX"] == 0
+            assert baseline["mainRight"] == width
+            assert baseline["stageRight"] == width
+            assert baseline["stageX"] == (236 if width > 780 else 0)
+    finally:
+        chrome.close()
+
+
+def _graph_only_layout_probe(browser: str, url: str, profile: Path) -> None:
+    chrome = _CdpChrome(browser, url, profile)
+    try:
+        def evaluate(expression: str) -> Any:
+            result = chrome.command(
+                "Runtime.evaluate",
+                {"expression": expression, "returnByValue": True},
+            )
+            return result["result"].get("value")
+
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            if evaluate("document.querySelectorAll('#nodes .node').length > 0"):
+                break
+            time.sleep(0.05)
+        else:
+            raise AssertionError("Graph-only viewer did not render in Chrome")
+        assert evaluate("document.querySelector('#report-toggle').hidden") is True
+        time.sleep(4.5)
+
+        for width, height in ((1280, 800), (640, 760)):
+            chrome.command(
+                "Emulation.setDeviceMetricsOverride",
+                {
+                    "width": width,
+                    "height": height,
+                    "deviceScaleFactor": 1,
+                    "mobile": False,
+                },
+            )
+            time.sleep(0.1)
+            evaluate("document.querySelector('#fit').click(); true")
+            baseline = evaluate(
+                "JSON.stringify({scrollX: window.scrollX, transform: "
+                "document.querySelector('#viewport').getAttribute('transform'), "
+                "stageRight: document.querySelector('#stage').getBoundingClientRect().right})"
+            )
+            assert evaluate("document.querySelector('#fit').focus(); true") is True
+            for _ in range(5):
+                for event_type in ("rawKeyDown", "char", "keyUp"):
+                    key_text = "\r" if event_type in {"rawKeyDown", "char"} else ""
+                    chrome.command(
+                        "Input.dispatchKeyEvent",
+                        {
+                            "type": event_type,
+                            "key": "Enter",
+                            "code": "Enter",
+                            "text": key_text,
+                            "unmodifiedText": key_text,
+                            "windowsVirtualKeyCode": 13,
+                            "nativeVirtualKeyCode": 13,
+                        },
+                    )
+                assert evaluate(
+                    "JSON.stringify({scrollX: window.scrollX, transform: "
+                    "document.querySelector('#viewport').getAttribute('transform'), "
+                    "stageRight: document.querySelector('#stage').getBoundingClientRect().right})"
+                ) == baseline
+            payload = json.loads(baseline)
+            assert payload["scrollX"] == 0
+            assert payload["stageRight"] == width
     finally:
         chrome.close()
 
@@ -396,6 +524,11 @@ def test_real_browser_renders_bounded_large_graph_window(tmp_path: Path) -> None
         assert "Ranked overview; 80 nodes remain available" in rendered
         assert rendered.count('class="node"') == 240
         assert json.loads(graph_path.read_text(encoding="utf-8"))["summary"] == {"file": 320}
+        _graph_only_layout_probe(
+            browser,
+            url,
+            tmp_path / "graph-only-layout-browser-profile",
+        )
     finally:
         _stop_server(server)
 
@@ -475,6 +608,11 @@ def test_real_browser_renders_same_file_demo_story(tmp_path: Path) -> None:
             browser,
             url,
             tmp_path / "demo-keyboard-browser-profile",
+        )
+        _layout_stability_probe(
+            browser,
+            url,
+            tmp_path / "demo-layout-browser-profile",
         )
     finally:
         _stop_server(server)

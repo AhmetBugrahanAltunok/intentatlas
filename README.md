@@ -93,6 +93,11 @@ Pipes, redirects, CI, or any other non-TTY invocation keep argparse's existing s
 behavior and never prompt or scan. Use `intentatlas guide [PATH]` for the same flow at an explicit
 path. See the [guided CLI contract](docs/guided-cli.md).
 
+The interactive transcript uses a prominent IntentAtlas heading, clearly named source/safety/
+analysis/recommendation/Atlas sections, wrapped evidence, and one option per line. The browser
+viewer keeps page and graph geometry stable when **Change report** and **Fit graph** are used
+repeatedly.
+
 To analyze a public GitHub repository without cloning it manually, use a real interactive
 terminal:
 

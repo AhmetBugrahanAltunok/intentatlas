@@ -38,6 +38,15 @@ This pass is technical onboarding and public-install readiness only. It is not a
 publication, zero-prerequisite installer, public launch, human usability observation, or user-time
 claim. Phase 11C remains open and owner-controlled.
 
+## Post-closure observation
+
+The owner subsequently reported cumulative viewer layout/graph displacement while repeatedly
+using **Change report** and **Fit graph** in the real public-repository flow. The observation is
+recorded in [[Sessions/2026-08-03 - Owner viewer layout observation]] and tracked by
+[[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]]. The
+original automated pass remains recorded, but a confirmed supported-browser reproduction reopens
+the affected viewer acceptance decision until the regression and remote CI are resolved.
+
 ## Links
 
 - [[Evidence/EVD-031 - Phase 15 source-to-atlas verification]]

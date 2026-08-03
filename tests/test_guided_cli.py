@@ -307,6 +307,16 @@ def test_common_guide_path_reaches_production_report_with_one_enter_and_no_write
     terminal, output = terminal_input("\n\n")
     assert run_guide(root, language="en", terminal=terminal) == 0
     transcript = output.getvalue()
+    assert transcript.startswith("=" * 68 + "\n  I N T E N T A T L A S\n")
+    assert "--- SOURCE AND SCOPE ---" in transcript
+    assert "--- SAFETY BOUNDARY ---" in transcript
+    assert "--- ANALYSIS RESULT ---" in transcript
+    assert "--- RECOMMENDATIONS ---" in transcript
+    assert "--- ATLAS SNAPSHOT ---" in transcript
+    assert "--- NEXT ACTION ---" in transcript
+    assert "\n  [1] Show selection reasons\n" in transcript
+    assert "\n  [4] Open this exact snapshot in the interactive Atlas\n" in transcript
+    assert "1 reasons | 2 omissions" not in transcript
     assert f"Recommended scope: commit {head}" in transcript
     assert "Analysis state:" in transcript
     assert "Minimum confidence: medium" in transcript
@@ -510,6 +520,10 @@ def test_language_catalogs_preserve_canonical_values_and_safety_meaning(tmp_path
     terminal, output = terminal_input("\n\n")
     assert run_guide(root, language="tr", terminal=terminal) == 0
     transcript = output.getvalue()
+    assert "I N T E N T A T L A S" in transcript
+    assert "--- ANALİZ SONUCU ---" in transcript
+    assert "--- SONRAKİ EYLEM ---" in transcript
+    assert "[4] Bu exact snapshot'ı interaktif Atlas'ta aç" in transcript
     assert "Analysis state:" in transcript
     assert "freshness:" in transcript
     assert "Minimum confidence: medium" in transcript

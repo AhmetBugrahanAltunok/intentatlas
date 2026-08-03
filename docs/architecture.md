@@ -219,6 +219,13 @@ report once; terminal projection, language switching, complete JSON details, and
 ephemeral IPv4-loopback viewer all consume that immutable snapshot. The guide never invokes the
 persistent init/scan/open paths or executes project tooling.
 
+The guided presentation is a semantic grouping layer only. An ASCII-safe heading, named EN/TR
+sections, sanitized bounded wrapping, and one-option-per-line menus operate on the existing
+terminal projection; no alternate result model or terminal state is introduced. The viewer's
+animated Change Report overlay transfers keyboard focus with document scrolling disabled. This
+prevents a still-offscreen close control from horizontally scrolling the page while preserving the
+same dialog, graph simulation, fit transform, and immutable snapshot.
+
 `review --open` uses the same serving boundary with a separate optional `/review.json` endpoint.
 The client prefers that envelope when present, unwraps its nested Change Report for existing ranked
 items, and adds revision scope plus commit-keyed outcome freshness and observational comparison.

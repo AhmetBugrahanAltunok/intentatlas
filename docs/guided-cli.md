@@ -65,6 +65,16 @@ characters, ANSI escape sequences, bidirectional controls, and embedded newlines
 repository labels or paths are escaped before terminal rendering. No full-screen TUI, cursor
 animation, or runtime dependency is introduced.
 
+The PowerShell-friendly presentation begins with a prominent ASCII-safe IntentAtlas banner and
+groups output under Source and Scope, Safety Boundary, Analysis Result, Recommendations, Atlas
+Snapshot, and Next Action. Long sanitized evidence is wrapped, and every choice is printed on its
+own line. These sections are presentation only: they do not alter the report, consent, no-write,
+scope, revision, omission, or fallback contracts described above.
+
+In the interactive viewer, opening or closing Change Report preserves document scroll while moving
+keyboard focus. Repeating Change Report and Fit Graph therefore keeps the same settled graph
+transform and viewport geometry; initial bounded force-layout motion remains intentional.
+
 This technical onboarding path is not human usability evidence. Phase 11C still requires five independent
 consented observations and a median time below ten minutes before public launch or any
 real user-time claim.
