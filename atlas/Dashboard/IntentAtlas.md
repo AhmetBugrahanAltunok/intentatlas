@@ -25,23 +25,23 @@ generated: true
 - **review:** 32
 - **session:** 14
 - **source-root:** 3
-- **symbol:** 1269
+- **symbol:** 1270
 - **test:** 76
-- **relationships:** 3578
+- **relationships:** 3534
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 215 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 113 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 112 relationships
 - [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 107 relationships
 - [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 97 relationships
 - [[Code/intentatlas|intentatlas]] — 96 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 94 relationships
 - [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 70 relationships
 - [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 69 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 69 relationships
 - [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 68 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 68 relationships
 - [[Code/IntentAtlas - c1f62610|IntentAtlas]] — 62 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 58 relationships
 

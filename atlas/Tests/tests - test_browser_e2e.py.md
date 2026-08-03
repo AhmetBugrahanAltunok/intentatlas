@@ -11,7 +11,7 @@ source_path: "tests/test_browser_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>23321</code>
+- **Size Bytes:** <code>23989</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -38,6 +38,7 @@ source_path: "tests/test_browser_e2e.py"
 - <code>defines</code> → [[Symbols/_stop_server - tests - test_browser_e2e.py|_stop_server]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_viewer_url - tests - test_browser_e2e.py|_viewer_url]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_viewer_url.read_ready - tests - test_browser_e2e.py|_viewer_url.read_ready]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_wait_for_graph_layout - tests - test_browser_e2e.py|_wait_for_graph_layout]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_browser_renders_bounded_large_graph_window - tests - test_browser_e2e.py|test_real_browser_renders_bounded_large_graph_window]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(structure; evidence: python-ast)_
 
@@ -47,6 +48,7 @@ source_path: "tests/test_browser_e2e.py"
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 3245396 - Stabilize Phase 16 browser settlement gate|Stabilize Phase 16 browser settlement gate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 5651c34 - test- verify viewer keyboard accessibility|test: verify viewer keyboard accessibility]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

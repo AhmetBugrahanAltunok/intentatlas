@@ -33,11 +33,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/_select_scope - src - intentatlas - onboarding.py|_select_scope]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_write_wrapped - src - intentatlas - onboarding.py|_write_wrapped]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_graph_only_layout_probe.evaluate - tests - test_browser_e2e.py|_graph_only_layout_probe.evaluate]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_keyboard_accessibility_probe - tests - test_browser_e2e.py|_keyboard_accessibility_probe]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_layout_stability_probe.evaluate - tests - test_browser_e2e.py|_layout_stability_probe.evaluate]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_real_browser_renders_bounded_large_graph_window - tests - test_browser_e2e.py|test_real_browser_renders_bounded_large_graph_window]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_common_guide_path_reaches_production_report_with_one_enter_and_no_write - tests - test_guided_cli.py|test_common_guide_path_reaches_production_report_with_one_enter_and_no_write]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_language_catalogs_preserve_canonical_values_and_safety_meaning - tests - test_guided_cli.py|test_language_catalogs_preserve_canonical_values_and_safety_meaning]] _(history; evidence: git-diff-hunk)_
 

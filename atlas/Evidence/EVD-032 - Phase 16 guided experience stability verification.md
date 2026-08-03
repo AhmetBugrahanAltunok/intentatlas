@@ -64,6 +64,8 @@ phase: 16
   editable IntentAtlas distribution was explicitly skipped.
 - Implementation commit: `e3056809b957d0c2124a301a198fdcbda2dab990`; generated note
   [[Commits/Commit e305680 - Implement Phase 16 guided experience stability]].
+- Browser-settlement CI correction: `3245396421a8b96d5e718fb667a186e486077cc8`; generated note
+  [[Commits/Commit 3245396 - Stabilize Phase 16 browser settlement gate]].
 - Two `SOURCE_DATE_EPOCH=1704067200 python -m build --sdist --wheel` runs were byte-identical.
   `tools/verify_release.py` validated wheel `52` files and sdist `189` files with exact source
   provenance:
@@ -81,7 +83,8 @@ phase: 16
   `621e4974ca25ce531773def586ba3ed8e736b3fc`; cached origin and clean checkout matched. MIT
   `LICENSE.txt` SHA-256 remained
   `71e0bd649395f47e82b500dc6261ce4b8e8d03774727f583e09f5b947e75de97`.
-- Final two scans each produced `1,647 nodes`, `3,578 relationships`, and `1,464` generated notes. The
+- Post-correction final two scans each produced `1,648 nodes`, `3,534 relationships`, and `1,465`
+  generated notes. The
   second reused all `3` adapter partitions and rebuilt none. All `183` files in the explicitly
   allowed user-owned folders retained identical bytes, sizes, and mtimes; all generated files were
   identical across the second pass. `intentatlas status` reported `durable orphans 0`.

@@ -10,8 +10,8 @@ source_path: "tests/test_browser_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>465</code>
-- **Line:** <code>403</code>
+- **End Line:** <code>485</code>
+- **Line:** <code>423</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_browser_e2e.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_browser_e2e.py|tests/test_browser_e2e.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 3245396 - Stabilize Phase 16 browser settlement gate|Stabilize Phase 16 browser settlement gate]] _(history; evidence: git-diff-hunk)_
