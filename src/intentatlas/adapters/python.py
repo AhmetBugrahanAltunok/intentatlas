@@ -13,7 +13,7 @@ class PythonAdapter:
     name = "python"
     suffixes = frozenset({".py"})
     cache_input_suffixes = suffixes
-    cache_version = 2
+    cache_version = 3
     evidence_kinds = frozenset(
         {"filename-convention", "python-ast", "python-symbol-reference"}
     )
@@ -285,6 +285,24 @@ class _PythonSymbolResolver:
             current = next(iter(forwarded))
         return None
 
+    def resolve_qualified(
+        self,
+        owners: tuple[str, ...],
+        module: str,
+        symbol_parts: tuple[str, ...],
+    ) -> str | None:
+        candidates: set[str] = set()
+        for module_part_count in range(len(symbol_parts)):
+            candidate_module = ".".join((module, *symbol_parts[:module_part_count]))
+            candidate = self.resolve(
+                owners,
+                candidate_module,
+                symbol_parts[module_part_count],
+            )
+            if candidate is not None:
+                candidates.add(candidate)
+        return next(iter(candidates)) if len(candidates) == 1 else None
+
     def references(self, relative: str, tree: ast.AST) -> set[str]:
         references: set[str] = set()
         owners = _allowed_owners(self.context, relative)
@@ -323,7 +341,7 @@ class _PythonSymbolResolver:
             symbol_parts = attributes[len(module_suffix) :]
             if not symbol_parts:
                 continue
-            target = self.resolve(owners, module, symbol_parts[0])
+            target = self.resolve_qualified(owners, module, symbol_parts)
             if target is not None:
                 references.add(target)
         return references

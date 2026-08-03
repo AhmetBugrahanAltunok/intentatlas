@@ -63,3 +63,9 @@ Evaluation is offline and does not acquire repositories, execute third-party cod
 third-party source. Duration and savings stay unknown unless separate aligned execution evidence
 is supplied. Confidence intervals are descriptive uncertainty for the reviewed cohort, not a
 population or general-accuracy claim.
+
+Phase 17 corrects recommendation schema-1 values to the already documented ADR-009 confidence
+bands: high `85+`, medium `65-84`, low `0-64`. Threshold filtering and omission counters apply to
+requirements and tests before result limiting or strategy selection. This is a semantic bug fix,
+not a schema change. Experimental Python workspace projection recognizes bounded setuptools,
+Hatchling, Flit, and unique conventional src layouts; ambiguous root/src identities abstain.

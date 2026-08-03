@@ -6,8 +6,9 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from .confidence import CONFIDENCE_RANK
 from .graph import AtlasGraph
-from .recommendations import CONFIDENCE_RANK, MAX_RECOMMENDATIONS, recommend_tests
+from .recommendations import MAX_RECOMMENDATIONS, recommend_tests
 
 EVALUATION_SCHEMA_VERSION = 1
 LABEL_POLICY = "complete-test-set"

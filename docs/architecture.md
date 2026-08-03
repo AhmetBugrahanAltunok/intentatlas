@@ -117,11 +117,12 @@ Raw provider payloads, bodies, comments, authors, credentials, and unknown field
 
 `AtlasGraph` is the language-neutral contract. Nodes have a stable ID, kind, label, path,
 and small metadata object. Directed edges have a source, target, typed relation, inverse label,
-category, and provenance. The graph schema is versioned; schema 3 loads schema-1 and schema-2
-caches and rebuilds them with the current relation catalog. Current-schema caches are accepted
-only when their embedded catalog, edge categories, and inverse labels match the runtime registry.
-Relation schema 4 retains direct `modifies`/`modified-by` change evidence and adds invertible
-`calls`/`called-by` structure for bounded exact symbol calls. The graph is serialized to
+category, and provenance. The current graph schema is 4 and deterministically migrates schemas
+1-3. Current-schema caches are accepted only when their embedded catalog, edge categories, and
+inverse labels match the runtime registry. Relation schema 5 retains direct
+`modifies`/`modified-by` change evidence and invertible `calls`/`called-by` structure for bounded
+exact symbol calls. The canonical compatibility boundary is documented in
+[`compatibility-policy.md`](compatibility-policy.md). The graph is serialized to
 `.intentatlas/graph.json`; it is a rebuildable cache, not the source of truth.
 
 `GraphIndex` is a lazy in-memory view over canonical edges. It stores immutable incoming and
@@ -243,12 +244,15 @@ tests changed in that same most recent change as explicit historical evidence.
 
 Dependency propagation is deliberately narrow: only production files that directly import the
 exact target symbol are inspected, and only tests directly linked to that dependent file qualify.
-There is no unrestricted file-level transitive or barrel traversal. Recent co-change commits are
-limited to five latest-date records, exact-symbol dependents to 1,000, and the existing artifact,
-candidate, reason, observation, and result bounds still apply. The default medium threshold hides
-weak file and filename-only symbol fallback. JUnit aggregates remain unscored observations because
-freshness is unknown. No test is executed, and missing output is never treated as proof of no
-impact.
+The dependent path is scored by its weakest hop, so a filename-only second hop remains low.
+Zero-byte package markers stay in the graph but are not runnable candidates. There is no
+unrestricted file-level transitive or barrel traversal. Recent co-change commits are limited to
+five latest-date records, commits wider than 20 changed artifacts abstain, and remaining co-change
+stays low confidence below direct structural evidence. Exact-symbol dependents remain bounded to
+1,000, and the existing artifact, candidate, reason, observation, and result bounds still apply.
+The default medium threshold hides weak file, filename-only, and co-change evidence. JUnit
+aggregates remain unscored observations because freshness is unknown. No test is executed, and
+missing output is never treated as proof of no impact.
 
 Recommendation evaluation is a second pure layer around the unchanged production query. Schema-1
 label files declare a closed-world `complete-test-set` policy, exact graph target IDs, and complete

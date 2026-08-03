@@ -417,9 +417,10 @@ high, medium, or low confidence. Python tests can target exact imported symbols 
 package re-exports; nested changes can use a focused owning-symbol test when its test name agrees.
 JavaScript/TypeScript records exact named and default static imports, and follows at most one exact
 symbol-dependent source file to a directly linked test. For a selected file or symbol, tests from
-the artifact's most recent analyzed co-change provide separate medium-confidence evidence. The
-query never performs unrestricted transitive traversal and defaults to medium confidence to reduce
-false positives.
+the artifact's most recent analyzed narrow co-change provide separate low-confidence evidence;
+commits wider than 20 artifacts abstain. A filename-only second hop remains low, and zero-byte
+package markers are not runnable candidates. The query never performs unrestricted transitive
+traversal and defaults to medium confidence to reduce false positives.
 
 `evaluate-recommendations` reuses that production query unchanged and compares it with strict,
 closed-world local labels. Its timestamp-free schema-1 output makes threshold tradeoffs and

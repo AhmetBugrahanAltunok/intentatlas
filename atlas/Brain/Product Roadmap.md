@@ -583,6 +583,30 @@ Status: complete (2026-08-03)
 - Strategy: [[Brain/Phase 16 Guided Experience Stability Strategy]]
 - Handoff: [[Sessions/2026-08-03 - Phase 16 guided experience handoff]]
 
+## Phase 17 - Recommendation integrity and Python resolution
+
+Status: in progress (2026-08-03)
+
+- Canonicalize ADR-009 confidence bands and apply the selected threshold consistently to tests,
+  counters, omissions, and execution strategy across every ChangeReport projection.
+- Resolve uniquely evidenced setuptools, Hatchling, Flit, and conventional Python src layouts plus
+  qualified module-symbol chains without executing repository tooling or guessing through
+  ambiguity.
+- Separate graph test nodes from runnable candidates, cap path strength by the weakest hop, and
+  keep bounded co-change below direct structural evidence.
+- Correct stale schema documentation, historical-analysis action, ambiguity scope, Windows
+  encoding evidence, and generated-vault governance before complete closure gates.
+- Keep frozen longitudinal labels/partitions unchanged and record deterministic before/after
+  results without a general-accuracy claim.
+- Requirement: [[Requirements/REQ-033 - Preserve recommendation integrity across supported surfaces]]
+- Decision: [[Decisions/ADR-033 - Canonicalize confidence and conservative Python resolution]]
+- Governance: [[Decisions/ADR-034 - Retain generated vault outputs under single-writer governance]]
+- Delivery issue: [[Issues/ISSUE-032 - Implement recommendation integrity and Python resolution]]
+- Evidence: [[Evidence/EVD-033 - Phase 17 recommendation integrity verification]]
+- Review: [[Reviews/Phase 17 Recommendation Integrity and Python Resolution Review]]
+- Strategy: [[Brain/Phase 17 Recommendation Integrity Strategy]]
+- Handoff: [[Sessions/2026-08-03 - Phase 17 recommendation integrity handoff]]
+
 ## Completion rule
 
 Every phase must end with a linked Evidence note and Review note containing the full change

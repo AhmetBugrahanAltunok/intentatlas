@@ -77,6 +77,10 @@ MESSAGES: dict[str, dict[str, str]] = {
             "Readiness limits: unsupported languages {unsupported}; oversized supported files "
             "{oversized}; discovery truncated {truncated}; workspace ambiguity {ambiguity}."
         ),
+        "ambiguity_scope": (
+            "Workspace ambiguity is a readiness heuristic, not proof that symbol resolution "
+            "abstained; exact edges still require unique workspace, module, and symbol identity."
+        ),
         "confirm": "Enter  Analyze the recommended scope | S  Select scope | Q  Exit: ",
         "scope_menu": (
             "W worktree | S staged | H exact HEAD | C explicit commit | R explicit range | Q exit: "
@@ -93,6 +97,10 @@ MESSAGES: dict[str, dict[str, str]] = {
         "state": "Analysis state: {state} ({meaning}); freshness: {freshness}",
         "threshold": "Minimum confidence: {value}",
         "changed": "Changed files: {value}",
+        "revision_action": (
+            "Revision action: use a clean checkout whose HEAD exactly matches {revision}, then "
+            "run intentatlas changes --commit HEAD --report there."
+        ),
         "requirements": (
             "Requirements: {selected} selected / {total} candidates; {filtered} below threshold; "
             "{limited} omitted by result limit"
@@ -167,6 +175,10 @@ MESSAGES: dict[str, dict[str, str]] = {
             "Hazırlık sınırları: unsupported languages {unsupported}; oversized supported files "
             "{oversized}; discovery truncated {truncated}; workspace ambiguity {ambiguity}."
         ),
+        "ambiguity_scope": (
+            "Workspace ambiguity bir hazırlık sezgisidir; symbol resolution'ın abstain ettiğini "
+            "kanıtlamaz. Exact edge için workspace, module ve symbol kimliği unique olmalıdır."
+        ),
         "confirm": "Enter  Önerilen kapsamı analiz et | S  Kapsam seç | Q  Çık: ",
         "scope_menu": (
             "W worktree | S staged | H exact HEAD | C açık commit | R açık range | Q çık: "
@@ -183,6 +195,10 @@ MESSAGES: dict[str, dict[str, str]] = {
         "state": "Analysis state: {state} ({meaning}); freshness: {freshness}",
         "threshold": "Minimum confidence: {value}",
         "changed": "Değişen dosyalar: {value}",
+        "revision_action": (
+            "Revision eylemi: HEAD'i tam olarak {revision} ile eşleşen temiz bir checkout kullan, "
+            "ardından orada intentatlas changes --commit HEAD --report çalıştır."
+        ),
         "requirements": (
             "Gereksinimler: {selected} seçildi / {total} aday; {filtered} threshold altında; "
             "{limited} result limit nedeniyle atlandı"
@@ -738,6 +754,8 @@ def _render_confirmation(
                 ),
             )
         )
+        if diagnostic.ambiguity_reasons:
+            _write_wrapped(terminal, _message(language, "ambiguity_scope"))
     terminal.write(_message(language, "cancel"))
 
 
@@ -782,6 +800,12 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
     )
     terminal.write(_message(language, "threshold", value=report.minimum_confidence))
     terminal.write(_message(language, "changed", value=len(change_set.files)))
+    action_revision = change_set.head_revision or change_set.base_revision
+    if report.revision_action is not None and action_revision is not None:
+        _write_wrapped(
+            terminal,
+            _message(language, "revision_action", revision=action_revision),
+        )
     _render_section(terminal, language, "recommendations")
     terminal.write(
         _message(

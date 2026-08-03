@@ -95,6 +95,9 @@ function renderChangeReport() {
     reportDatum("requirements", selectionSummary(report.requirement_selection, report.requirements)),
     reportDatum("tests", selectionSummary(report.test_selection, report.tests))
   ];
+  if (report.revision_action) {
+    summary.push(reportDatum("revision action", report.revision_action));
+  }
   if (state.review) {
     summary.push(reportDatum("mode", state.review.mode));
   }

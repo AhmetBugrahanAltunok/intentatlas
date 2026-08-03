@@ -340,9 +340,11 @@ güvenle sıralar ve her sonucun neden yolunu gösterir. Python testleri, sını
 dışa-aktarımları üzerinden tam içe aktarılan sembole bağlanabilir; iç içe bir değişiklikte test adı
 uyuşuyorsa sahibi olan sembolün odaklı testi kullanılabilir. JavaScript/TypeScript için adlandırılmış
 ve varsayılan statik içe aktarımlar kaydedilir; yalnızca tam sembolü içe aktaran tek bir bağımlı
-kaynaktan doğrudan bağlı teste gidilir. Seçilen dosya veya sembolün en son incelenen eş-değişimindeki
-testler ayrı bir orta-güven kanıtıdır. Sorgu sınırsız geçişli dolaşım yapmaz ve yanlış pozitifleri
-azaltmak için varsayılan olarak `medium` eşiğini kullanır.
+kaynaktan doğrudan bağlı teste gidilir. Seçilen dosya veya sembolün en son incelenen dar
+eş-değişimindeki testler ayrı bir düşük-güven kanıtıdır; 20 artifact'tan geniş commitler abstain
+eder. Yalnız filename eşleşmesine dayanan ikinci hop düşük kalır ve sıfır-byte package marker'ları
+çalıştırılabilir aday değildir. Sorgu sınırsız geçişli dolaşım yapmaz ve yanlış pozitifleri azaltmak
+için varsayılan olarak `medium` eşiğini kullanır.
 
 `evaluate-recommendations`, aynı üretim sorgusunu değiştirmeden katı ve kapalı-dünya yerel
 etiketleriyle karşılaştırır. Zaman damgasız şema-1 çıktısı eşik farklarını ve regresyonları görünür

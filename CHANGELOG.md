@@ -9,6 +9,15 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ### Changed
 
+- Unify recommendation confidence at high 85+, medium 65-84, and low below 65 across
+  recommend-tests, ChangeReport, guided CLI, JSON, and viewer projections; ChangeReport now
+  applies the requested test threshold before limits and strategy selection.
+- Resolve unique Python symbols for declared Flit, Hatchling, setuptools, and conventional
+  src-layouts, including qualified module attributes, while abstaining on root/src collisions.
+- Keep empty package markers out of executable test recommendations, cap package re-export and
+  filename-only paths at low confidence, and suppress co-change from commits wider than 20 files.
+- Render `status` and `impact` separators as ASCII so redirected Windows output remains stable
+  under CP437, CP857, CP1252, and UTF-8 consumers.
 - Prevent guided viewer focus transfer from horizontally displacing the page during repeated
   Change Report and Fit Graph use; real-browser regressions cover wide/narrow, keyboard/mouse,
   report, and graph-only states.

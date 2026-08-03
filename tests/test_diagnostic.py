@@ -102,6 +102,11 @@ def test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity(
     assert payload["ambiguity"] == {
         "state": "detected",
         "reasons": ["multiple-project-roots", "multiple-source-roots"],
+        "detail": (
+            "Detected roots are bounded readiness heuristics, not proof that symbol resolution "
+            "abstained; the scanner independently requires unique declared workspace ownership, "
+            "module identity, and symbol identity."
+        ),
     }
     assert payload["project_roots"] == [".", "packages/client"]
     assert payload["source_roots"] == ["packages/client", "packages/server", "src"]
@@ -138,3 +143,4 @@ def test_diagnostic_text_preserves_safe_next_action_and_advisory(tmp_path: Path)
     assert "Evidence: not-configured; freshness not-assessed" in rendered
     assert "Next safe command: intentatlas demo --report text" in rendered
     assert "absence is not proof of no impact" in rendered
+    assert "not proof that symbol resolution abstained" in rendered

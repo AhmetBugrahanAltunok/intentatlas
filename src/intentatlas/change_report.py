@@ -8,10 +8,11 @@ from typing import Any
 
 from .change_analysis import ChangeAnalysis, _analyze_change_set_with_graph
 from .change_set import ChangeSet
+from .confidence import CONFIDENCE_RANK, confidence_for_score
 from .config import ProjectConfig
 from .graph import AtlasGraph
 from .models import Node
-from .recommendations import CONFIDENCE_RANK, recommend_tests
+from .recommendations import recommend_tests
 from .scanner import scan_repository
 
 CHANGE_REPORT_SCHEMA_VERSION = 1
@@ -123,6 +124,21 @@ class ChangeReport:
     test_strategy: str
     analysis_coverage_complete: bool
 
+    @property
+    def revision_action(self) -> str | None:
+        if self.freshness != "stale":
+            return None
+        revision = (
+            self.analysis.change_set.head_revision
+            or self.analysis.change_set.base_revision
+        )
+        if revision is None:
+            return None
+        return (
+            "Use a clean checkout whose HEAD exactly matches "
+            f"{revision}, then run intentatlas changes --commit HEAD --report there."
+        )
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": CHANGE_REPORT_SCHEMA_VERSION,
@@ -135,6 +151,7 @@ class ChangeReport:
             "freshness": self.freshness,
             "analysis_coverage_complete": self.analysis_coverage_complete,
             "test_strategy": self.test_strategy,
+            "revision_action": self.revision_action,
             "requirement_candidate_count": self.requirement_candidate_count,
             "lower_confidence_requirement_count": (
                 self.requirement_candidate_count - len(self.requirements)
@@ -254,8 +271,18 @@ def build_change_report(
     requirements = eligible_requirements[:limit]
     limit_omitted_requirements = eligible_requirements[limit:]
     test_candidates = _test_recommendations(graph, artifact_ids)
-    tests = test_candidates[:limit]
-    limit_omitted_tests = test_candidates[limit:]
+    eligible_tests = tuple(
+        item
+        for item in test_candidates
+        if CONFIDENCE_RANK[item.confidence] >= minimum_rank
+    )
+    filtered_tests = tuple(
+        item
+        for item in test_candidates
+        if CONFIDENCE_RANK[item.confidence] < minimum_rank
+    )
+    tests = eligible_tests[:limit]
+    limit_omitted_tests = eligible_tests[limit:]
 
     coverage_complete = analysis.state == "analyzed" or not analysis.files
     if not analysis.files:
@@ -291,11 +318,15 @@ def build_change_report(
         )[:limit],
         len(test_candidates),
         tests,
-        0,
+        len(filtered_tests),
         len(limit_omitted_tests),
-        tuple(_omitted_test(item, "result-limit") for item in limit_omitted_tests)[
-            :limit
-        ],
+        tuple(
+            [
+                _omitted_test(item, "below-minimum-confidence")
+                for item in filtered_tests
+            ]
+            + [_omitted_test(item, "result-limit") for item in limit_omitted_tests]
+        )[:limit],
         strategy,
         coverage_complete,
     )
@@ -325,6 +356,8 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
             f"{report.requirement_limit_omitted_count} omitted by limit"
         ),
     ]
+    if report.revision_action is not None:
+        lines.append(f"Revision action: {report.revision_action}")
     for requirement_item in report.requirements:
         lines.append(
             f"- {requirement_item.requirement.id}: {requirement_item.score}/100 "
@@ -391,7 +424,7 @@ def _requirement_impacts(
                 impact = RequirementImpact(
                     node,
                     score,
-                    _confidence(score),
+                    confidence_for_score(score),
                     artifact_id,
                     RequirementImpactPath(
                         tuple(reversed(reverse_nodes)),
@@ -486,7 +519,7 @@ def _test_recommendations(
             )
             for recommendation in result.recommendations:
                 score = min(recommendation.score, 65) if file_fallback else recommendation.score
-                confidence = _confidence(score)
+                confidence = confidence_for_score(score)
                 evidence = {
                     value
                     for reason in recommendation.reasons
@@ -579,14 +612,6 @@ def _test_recommendations(
             key=lambda item: (-item.score, item.test.id),
         )
     )
-
-
-def _confidence(score: int) -> str:
-    if score >= 90:
-        return "high"
-    if score >= 70:
-        return "medium"
-    return "low"
 
 
 def _aggregate_freshness(analysis: ChangeAnalysis) -> str:

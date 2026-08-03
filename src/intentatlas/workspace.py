@@ -136,7 +136,7 @@ def discover_workspace(root: Path, files: dict[str, Path]) -> WorkspaceModel:
             names[("python", _python_distribution_name(name))].add(owner.id)
             for dependency in _python_dependency_names(project):
                 dependency_names.append((owner.id, "python", dependency))
-            where = _python_source_roots(parsed)
+            where = _python_source_roots(parsed, path.parent, files)
             for source in where or (".",):
                 source_roots.append(_source_root(owner, path.parent, source, relative))
         elif path.name == "package.json":
@@ -272,27 +272,97 @@ def _source_root(
     )
 
 
-def _python_source_roots(document: dict[str, Any]) -> tuple[str, ...]:
+def _python_source_roots(
+    document: dict[str, Any],
+    project_root: PurePosixPath,
+    files: dict[str, Path],
+) -> tuple[str, ...]:
     tool = document.get("tool", {})
     if not isinstance(tool, dict):
-        return ()
+        tool = {}
     setuptools = tool.get("setuptools", {})
-    if not isinstance(setuptools, dict):
-        return ()
     roots: list[str] = []
-    package_dir = setuptools.get("package-dir", {})
-    if isinstance(package_dir, dict):
-        value = package_dir.get("")
-        if isinstance(value, str):
-            roots.append(value)
-    packages = setuptools.get("packages", {})
-    if isinstance(packages, dict):
-        find = packages.get("find", {})
-        if isinstance(find, dict):
-            where = find.get("where", [])
-            if isinstance(where, list):
-                roots.extend(item for item in where if isinstance(item, str))
+    if isinstance(setuptools, dict):
+        package_dir = setuptools.get("package-dir", {})
+        if isinstance(package_dir, dict):
+            value = package_dir.get("")
+            if isinstance(value, str):
+                roots.append(value)
+        packages = setuptools.get("packages", {})
+        if isinstance(packages, dict):
+            find = packages.get("find", {})
+            if isinstance(find, dict):
+                where = find.get("where", [])
+                if isinstance(where, list):
+                    roots.extend(item for item in where if isinstance(item, str))
+
+    hatch = tool.get("hatch", {})
+    if isinstance(hatch, dict):
+        build = hatch.get("build", {})
+        targets = build.get("targets", {}) if isinstance(build, dict) else {}
+        wheel = targets.get("wheel", {}) if isinstance(targets, dict) else {}
+        packages = wheel.get("packages", []) if isinstance(wheel, dict) else []
+        if isinstance(packages, list):
+            for package in packages:
+                if not isinstance(package, str):
+                    continue
+                package_path = PurePosixPath(package.strip())
+                if (
+                    package_path.parts
+                    and not package_path.is_absolute()
+                    and ".." not in package_path.parts
+                ):
+                    parent = package_path.parent.as_posix()
+                    roots.append("." if parent == "." else parent)
+
+    flit = tool.get("flit", {})
+    module = flit.get("module", {}) if isinstance(flit, dict) else {}
+    module_name = module.get("name") if isinstance(module, dict) else None
+    if not roots and isinstance(module_name, str):
+        module_parts = tuple(part for part in module_name.split(".") if part)
+        if module_parts:
+            src_candidates = (
+                PurePosixPath(project_root, "src", *module_parts, "__init__.py"),
+                PurePosixPath(project_root, "src", *module_parts).with_suffix(".py"),
+            )
+            root_candidates = (
+                PurePosixPath(project_root, *module_parts, "__init__.py"),
+                PurePosixPath(project_root, *module_parts).with_suffix(".py"),
+            )
+            src_present = any(path.as_posix() in files for path in src_candidates)
+            root_present = any(path.as_posix() in files for path in root_candidates)
+            if src_present and not root_present:
+                roots.append("src")
+
+    if not roots:
+        roots.extend(_conventional_python_src_roots(project_root, files))
     return tuple(dict.fromkeys(root.strip() for root in roots if root.strip()))
+
+
+def _conventional_python_src_roots(
+    project_root: PurePosixPath, files: dict[str, Path]
+) -> tuple[str, ...]:
+    src_root = PurePosixPath(project_root, "src")
+    src_prefix = f"{src_root.as_posix().rstrip('/')}/"
+    src_modules = {
+        PurePosixPath(relative).relative_to(src_root).parts[0]
+        for relative in files
+        if relative.startswith(src_prefix)
+        and PurePosixPath(relative).suffix.casefold() == ".py"
+        and PurePosixPath(relative).relative_to(src_root).parts
+    }
+    if not src_modules:
+        return ()
+    root_prefix = "" if project_root.as_posix() == "." else f"{project_root.as_posix()}/"
+    root_modules = {
+        PurePosixPath(relative.removeprefix(root_prefix)).parts[0]
+        for relative in files
+        if relative.startswith(root_prefix)
+        and not relative.startswith(src_prefix)
+        and "/" in relative.removeprefix(root_prefix)
+        and PurePosixPath(relative).suffix.casefold() == ".py"
+    }
+    return (".", "src") if src_modules & root_modules else ("src",)
 
 
 def _javascript_aliases(

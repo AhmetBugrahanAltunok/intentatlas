@@ -74,6 +74,14 @@ class RepositoryDiagnostic:
     report_state: str
     next_safe_command: str
 
+    @property
+    def ambiguity_detail(self) -> str:
+        return (
+            "Detected roots are bounded readiness heuristics, not proof that symbol resolution "
+            "abstained; the scanner independently requires unique declared workspace ownership, "
+            "module identity, and symbol identity."
+        )
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": DIAGNOSTIC_SCHEMA_VERSION,
@@ -98,6 +106,7 @@ class RepositoryDiagnostic:
             "ambiguity": {
                 "state": self.ambiguity_state,
                 "reasons": list(self.ambiguity_reasons),
+                "detail": self.ambiguity_detail,
             },
             "evidence": {
                 "state": self.evidence_state,
@@ -250,6 +259,7 @@ def render_diagnostic(result: RepositoryDiagnostic, output_format: str = "text")
                     else ""
                 )
             ),
+            f"Ambiguity scope: {result.ambiguity_detail}",
             (
                 f"Evidence: {result.evidence_state}; freshness not-assessed; "
                 f"configured sources {result.configured_evidence_source_count}"

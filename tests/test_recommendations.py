@@ -308,12 +308,21 @@ def test_recommendations_use_exact_direct_dependents_and_recent_cochange(monkeyp
     result = recommend_tests(graph, "symbol:src/helper.js::normalize")
 
     assert [(item.test.id, item.score) for item in result.recommendations] == [
-        ("file:tests/integration.test.js", 70),
         ("file:tests/core.test.js", 65),
     ]
-    dependent = result.recommendations[1].reasons[0]
+    dependent = result.recommendations[0].reasons[0]
     assert dependent.signal == "direct-symbol-dependent-test"
     assert dependent.path.relations[-2:] == ("imported-by", "tested-by")
+
+    low = recommend_tests(
+        graph,
+        "symbol:src/helper.js::normalize",
+        minimum_confidence="low",
+    )
+    assert [(item.test.id, item.score, item.confidence) for item in low.recommendations] == [
+        ("file:tests/core.test.js", 65, "medium"),
+        ("file:tests/integration.test.js", 60, "low"),
+    ]
 
     monkeypatch.setattr(recommendations_module, "MAX_DIRECT_SYMBOL_DEPENDENTS", 0)
     with pytest.raises(ValueError, match="0-direct-dependent limit"):

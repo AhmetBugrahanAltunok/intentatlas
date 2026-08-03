@@ -537,7 +537,7 @@ def _scan(root: Path) -> int:
 def _status(root: Path) -> int:
     config = ProjectConfig.load(root)
     graph = AtlasGraph.load(config.graph_path(root))
-    print(f"IntentAtlas status — {root.name}")
+    print(f"IntentAtlas status - {root.name}")
     for kind, count in graph.summary().items():
         print(f"  {kind:12} {count}")
     print(f"  {'relationships':12} {len(graph.edges)}")
@@ -556,7 +556,7 @@ def _impact(root: Path, target: str, depth: int, direction: str) -> int:
     graph = AtlasGraph.load(config.graph_path(root))
     origin = graph.find(target)
     records = graph.impact(origin.id, depth=depth, direction=direction)
-    print(f"{origin.label} [{origin.kind}] — {origin.id}")
+    print(f"{origin.label} [{origin.kind}] - {origin.id}")
     if not records:
         print("  No relationships in the selected direction.")
         return 0
@@ -566,7 +566,7 @@ def _impact(root: Path, target: str, depth: int, direction: str) -> int:
             record.edge.relation if record.direction == "downstream" else record.edge.inverse
         )
         print(
-            f"{'  ' * record.depth}{marker} [{relation} · {record.edge.category}] "
+            f"{'  ' * record.depth}{marker} [{relation} / {record.edge.category}] "
             f"{record.node.label} ({record.node.kind}) via {record.edge.evidence}"
         )
     return 0

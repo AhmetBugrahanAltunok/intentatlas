@@ -25,9 +25,10 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
     output = capsys.readouterr().out
     assert "Scanned" in output
     assert "Adapter cache: 0 reused, 3 rebuilt" in output
+    assert "IntentAtlas status -" in output
     assert "relationships" in output
     assert "app.py" in output
-    assert "tested-by · verification" in output
+    assert "tested-by / verification" in output
     assert "via python-ast" in output
 
     assert main(["scan", str(tmp_path)]) == 0

@@ -631,6 +631,12 @@ def test_guided_projection_preserves_production_report_semantics_for_all_strateg
         assert f"Changed files: {len(report.analysis.change_set.files)}" in transcript
         assert "Tests executed: 0" in transcript
         assert "unaffected or unnecessary" in transcript
+        if payload["revision_action"] is not None:
+            assert "Revision action: use a clean checkout" in transcript
+            turkish_terminal, turkish_output = terminal_input("")
+            onboarding._render_summary(snapshot, turkish_terminal, "tr")
+            assert "temiz bir checkout" in turkish_output.getvalue()
+            assert "intentatlas changes --commit HEAD --report" in turkish_output.getvalue()
 
 
 def test_guided_projection_distinguishes_threshold_and_limit_omissions() -> None:

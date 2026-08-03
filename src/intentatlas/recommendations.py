@@ -4,6 +4,7 @@ import json
 from dataclasses import asdict, dataclass
 from typing import Any
 
+from .confidence import CONFIDENCE_RANK, confidence_for_score
 from .graph import AtlasGraph, GraphIndex
 from .models import Edge, Node
 
@@ -14,8 +15,8 @@ MAX_CANDIDATE_TESTS = 10_000
 MAX_REASONS_PER_TEST = 25
 MAX_OBSERVATIONS_PER_TEST = 25
 MAX_RECENT_COCHANGE_COMMITS = 5
+MAX_COCHANGE_COMMIT_WIDTH = 20
 MAX_DIRECT_SYMBOL_DEPENDENTS = 1_000
-CONFIDENCE_RANK = {"low": 0, "medium": 1, "high": 2}
 ADVISORY = (
     "Recommendations are advisory structural evidence, not proof that a test is required or "
     "that omitted behavior is unaffected."
@@ -198,10 +199,12 @@ def recommend_tests(
                     )
                     summary = (
                         "The filename convention weakly associates this test with the file "
-                        "containing an exactly modified symbol; no exact symbol evidence exists."
+                        "containing an exactly modified symbol; no resolved exact-symbol graph "
+                        "edge connects this candidate to that symbol."
                         if convention
                         else "The test targets the file containing an exactly modified symbol, "
-                        "but no exact symbol evidence connects this test to that symbol."
+                        "but no resolved exact-symbol graph edge connects this candidate to that "
+                        "symbol."
                     )
                     path = RecommendationPath(
                         (*signal.path.nodes, test.id),
@@ -530,21 +533,48 @@ def _add_direct_dependent_reasons(
             if nodes and nodes[-1] == signal.file.id and len(nodes) > 1:
                 nodes.pop()
                 relations.pop()
+            weakest_is_filename = match.edge.evidence == "filename-convention"
+            package_reexport = bool(
+                dependent.path and dependent.path.replace("\\", "/").endswith("/__init__.py")
+            )
+            weakest_is_fallback = weakest_is_filename or package_reexport
             _add_reason(
                 reasons_by_test,
                 test.id,
                 RecommendationReason(
-                    signal="direct-symbol-dependent-test",
-                    score=65,
+                    signal=(
+                        "direct-symbol-dependent-filename-fallback"
+                        if weakest_is_filename
+                        else (
+                            "direct-symbol-dependent-package-fallback"
+                            if package_reexport
+                            else "direct-symbol-dependent-test"
+                        )
+                    ),
+                    score=45 if weakest_is_fallback else 65,
                     summary=(
-                        "The test directly targets a file that imports the exact changed symbol."
+                        "The dependent file imports the exact changed symbol, but this test is "
+                        "associated with that file only by filename convention."
+                        if weakest_is_filename
+                        else (
+                            "The package initializer re-exports the exact changed symbol, but "
+                            "this test does not reference that symbol directly."
+                            if package_reexport
+                            else "The test directly targets a file that imports the exact "
+                            "changed symbol."
+                        )
                     ),
                     path=RecommendationPath(
                         (*nodes, dependent.id, test.id),
                         (*relations, "imported-by", "tested-by"),
                     ),
                     evidence=_unique_values(
-                        (*signal.evidence, dependency_edge.evidence, match.edge.evidence)
+                        (
+                            *signal.evidence,
+                            dependency_edge.evidence,
+                            match.edge.evidence,
+                            *(("package-reexport-fallback",) if package_reexport else ()),
+                        )
                     ),
                 ),
             )
@@ -671,16 +701,19 @@ def _add_recent_cochange_reasons(
         prefix_nodes = (target.id, file.id)
         prefix_relations = ("defined-in",)
         prefix_evidence = (defines_evidence,)
-        score = 70
+        score = 60
     else:
         file = target
         prefix_nodes = (target.id,)
         prefix_relations = ()
         prefix_evidence = ("selected-target",)
-        score = 65
+        score = 60
 
     for commit, change_evidence in _latest_file_commits(graph, file.id, index):
-        for edge in index.outgoing(commit.id, "changes"):
+        changed_edges = index.outgoing(commit.id, "changes")
+        if len(changed_edges) > MAX_COCHANGE_COMMIT_WIDTH:
+            continue
+        for edge in changed_edges:
             test = graph.nodes.get(edge.target)
             if test is None or test.kind != "test":
                 continue
@@ -741,7 +774,7 @@ def _recommendations(
     values: list[TestRecommendation] = []
     for test_id in sorted(reasons_by_test):
         test = graph.nodes.get(test_id)
-        if test is None or test.kind != "test":
+        if test is None or test.kind != "test" or not _is_executable_test_candidate(test):
             continue
         all_reasons = tuple(
             sorted(
@@ -763,7 +796,7 @@ def _recommendations(
             TestRecommendation(
                 test=test,
                 score=score,
-                confidence=_confidence(score),
+                confidence=confidence_for_score(score),
                 reason_count=len(all_reasons),
                 reasons_truncated=len(all_reasons) > len(reasons),
                 reasons=reasons,
@@ -773,6 +806,11 @@ def _recommendations(
             )
         )
     return tuple(sorted(values, key=lambda item: (-item.score, item.test.id)))
+
+
+def _is_executable_test_candidate(test: Node) -> bool:
+    size = test.metadata.get("size_bytes")
+    return not (isinstance(size, int) and not isinstance(size, bool) and size == 0)
 
 
 def _test_observations(
@@ -809,14 +847,6 @@ def _safe_duration(value: object) -> float:
         if 0 <= parsed <= 31_536_000:
             return parsed
     return 0.0
-
-
-def _confidence(score: int) -> str:
-    if score >= 85:
-        return "high"
-    if score >= 65:
-        return "medium"
-    return "low"
 
 
 def _unique_values(values: tuple[str, ...]) -> tuple[str, ...]:

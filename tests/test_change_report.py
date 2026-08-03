@@ -208,6 +208,12 @@ def test_change_report_requires_full_suite_for_fallback_or_unknown_analysis() ->
     assert unknown_report.tests == ()
     assert unknown_report.test_strategy == "abstain-and-full-suite"
     assert unknown_report.analysis_coverage_complete is False
+    assert unknown_report.revision_action == (
+        "Use a clean checkout whose HEAD exactly matches "
+        f"{change_set.base_revision}, then run intentatlas changes --commit HEAD --report there."
+    )
+    assert unknown_report.to_dict()["revision_action"] == unknown_report.revision_action
+    assert "Revision action: Use a clean checkout" in render_change_report(unknown_report)
 
 
 def test_change_report_abstains_if_any_changed_artifact_is_unknown() -> None:
