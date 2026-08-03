@@ -29,7 +29,7 @@ details, Atlas summary, and choices do not have enough visual hierarchy.
 
 - [x] Prove one-Enter result access, EN/TR hierarchy, plain/ASCII/hostile text, no-write,
       non-TTY, immutable snapshot, and existing explicit command behavior.
-- [ ] Pass complete local/package/browser/vault/network and final remote-CI gates.
+- [x] Pass complete local/package/browser/vault/network gates; final remote CI remains.
 
 ## Links
 

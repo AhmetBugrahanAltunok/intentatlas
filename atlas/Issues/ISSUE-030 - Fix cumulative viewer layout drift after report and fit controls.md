@@ -55,7 +55,7 @@ Fit Graph transform arithmetic.
 - [x] Add a real-browser regression that repeats the sequence and asserts stable viewport,
       transform, controls, and interaction responsiveness.
 - [x] Cover wide, narrow, mouse, keyboard, ChangeReport-present, and no-ChangeReport states.
-- [ ] Run focused browser tests and the complete quality/security/package/viewer suite before
+- [x] Run focused browser tests and the complete quality/security/package/viewer suite before
       closure.
 - [ ] If reproduction confirms a Phase 15 viewer acceptance regression, reopen the affected
       Evidence/Review decision until the fix and remote CI pass.

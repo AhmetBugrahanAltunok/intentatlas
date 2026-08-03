@@ -13,37 +13,37 @@ generated: true
 
 - **commit:** 25
 - **config:** 8
-- **decision:** 31
+- **decision:** 32
 - **document:** 33
-- **evidence:** 31
+- **evidence:** 32
 - **file:** 46
-- **issue:** 29
-- **memory:** 9
+- **issue:** 31
+- **memory:** 10
 - **project:** 3
 - **repository:** 1
-- **requirement:** 31
-- **review:** 31
-- **session:** 12
+- **requirement:** 32
+- **review:** 32
+- **session:** 14
 - **source-root:** 3
-- **symbol:** 1261
+- **symbol:** 1269
 - **test:** 76
-- **relationships:** 3603
+- **relationships:** 3578
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 207 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 114 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 215 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 113 relationships
 - [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 107 relationships
-- [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 104 relationships
+- [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 97 relationships
 - [[Code/intentatlas|intentatlas]] — 96 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 94 relationships
 - [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 70 relationships
+- [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 69 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 69 relationships
 - [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 68 relationships
-- [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] — 66 relationships
-- [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 64 relationships
 - [[Code/IntentAtlas - c1f62610|IntentAtlas]] — 62 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 58 relationships
 
 ## Workflow
 

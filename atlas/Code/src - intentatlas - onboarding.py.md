@@ -11,7 +11,7 @@ source_path: "src/intentatlas/onboarding.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>40419</code>
+- **Size Bytes:** <code>45694</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -40,11 +40,14 @@ source_path: "src/intentatlas/onboarding.py"
 - <code>defines</code> → [[Symbols/_normalized_path - src - intentatlas - onboarding.py|_normalized_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_post_result - src - intentatlas - onboarding.py|_post_result]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_private_paths - src - intentatlas - onboarding.py|_private_paths]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_read_menu - src - intentatlas - onboarding.py|_read_menu]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_reject_private_target - src - intentatlas - onboarding.py|_reject_private_target]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_render_banner - src - intentatlas - onboarding.py|_render_banner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_commands - src - intentatlas - onboarding.py|_render_commands]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_confirmation - src - intentatlas - onboarding.py|_render_confirmation]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_omissions - src - intentatlas - onboarding.py|_render_omissions]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_reasons - src - intentatlas - onboarding.py|_render_reasons]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_render_section - src - intentatlas - onboarding.py|_render_section]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_summary - src - intentatlas - onboarding.py|_render_summary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_revision - src - intentatlas - onboarding.py|_resolve_revision]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_source - src - intentatlas - onboarding.py|_resolve_source]] _(structure; evidence: python-ast)_
@@ -53,6 +56,7 @@ source_path: "src/intentatlas/onboarding.py"
 - <code>defines</code> → [[Symbols/_shell_display - src - intentatlas - onboarding.py|_shell_display]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_terminal_text - src - intentatlas - onboarding.py|_terminal_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_try_resolve_revision - src - intentatlas - onboarding.py|_try_resolve_revision]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_write_wrapped - src - intentatlas - onboarding.py|_write_wrapped]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/resolve_git_root - src - intentatlas - onboarding.py|resolve_git_root]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/select_default_scope - src - intentatlas - onboarding.py|select_default_scope]] _(structure; evidence: python-ast)_
@@ -82,6 +86,7 @@ source_path: "src/intentatlas/onboarding.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding|ISSUE-028 - Implement one-command guided CLI onboarding]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

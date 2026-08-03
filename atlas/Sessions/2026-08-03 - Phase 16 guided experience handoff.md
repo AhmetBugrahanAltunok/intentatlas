@@ -25,8 +25,9 @@ Focus transfer with `preventScroll` removed the shift while keeping keyboard/dia
 
 - 16A implementation and focused real-browser checks pass.
 - 16B structured EN/TR terminal implementation and focused checks pass.
-- 16C full gates, evidence completion, commits, push, generated durable notes, and remote CI remain
-  mandatory before closure.
+- 16C full local, security, package, approved-network, deterministic-vault, and zero-orphan gates
+  pass. Implementation commit `e3056809b957d0c2124a301a198fdcbda2dab990` has a generated Commit
+  note; evidence commit, push, and final remote CI remain mandatory before closure.
 
 ## Links
 

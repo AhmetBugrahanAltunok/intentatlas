@@ -10,7 +10,7 @@ source_path: "tests/test_guided_cli.py"
 
 ## Metadata
 
-- **End Line:** <code>320</code>
+- **End Line:** <code>330</code>
 - **Line:** <code>289</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_guided_cli.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-diff-hunk)_

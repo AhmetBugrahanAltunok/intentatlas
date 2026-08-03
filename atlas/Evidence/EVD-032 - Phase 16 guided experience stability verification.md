@@ -42,8 +42,56 @@ phase: 16
 
 ## Verification results
 
-Final exact commands, counts, coverage, package provenance, network audit, vault determinism,
-commit identities, pushed HEAD, and remote CI will be recorded after all closure gates pass.
+### Focused and complete behavior
+
+- `INTENTATLAS_REQUIRE_BROWSER=1 python -m pytest tests/test_browser_e2e.py
+  tests/test_guided_cli.py tests/test_onboarding_walkthroughs.py tests/test_source_to_atlas.py
+  tests/test_viewer.py tests/test_compatibility_policy.py -q` passed. One Windows link-capability
+  case remained an expected skip.
+- `INTENTATLAS_REQUIRE_BROWSER=1 python -m pytest --cov=intentatlas --cov-report=term
+  --cov-report=json:var/phase16-coverage.json --cov-fail-under=80` passed `500` tests with `4`
+  platform-capability skips and `85.52%` branch coverage.
+- The structured Turkish owner-style transcript against this repository retained no-write
+  worktree analysis, exact base `5bb46ed...`, fallback/freshness/threshold/omission/strategy/
+  advisory truth, `Tests executed: 0`, Atlas counts, and explicit action `4` under the new layout.
+
+### Static, security, and package gates
+
+- `python -m ruff check .`, strict `python -m mypy` (`46` source files),
+  `python -m bandit -q -r src tools`, `node --check src/intentatlas/web/app.js`,
+  `python -m pip check`, and `git diff --check` passed.
+- Approved `python -m pip_audit --skip-editable` reported no known vulnerabilities; only the local
+  editable IntentAtlas distribution was explicitly skipped.
+- Implementation commit: `e3056809b957d0c2124a301a198fdcbda2dab990`; generated note
+  [[Commits/Commit e305680 - Implement Phase 16 guided experience stability]].
+- Two `SOURCE_DATE_EPOCH=1704067200 python -m build --sdist --wheel` runs were byte-identical.
+  `tools/verify_release.py` validated wheel `52` files and sdist `189` files with exact source
+  provenance:
+  - wheel `intentatlas-0.3.0rc1-py3-none-any.whl`, SHA-256
+    `5075e08eb339de3421f4babcca34fac73db6d6d98ae7cedaf4bf9789233d4153`;
+  - sdist `intentatlas-0.3.0rc1.tar.gz`, SHA-256
+    `7dc39187a2af1713706039297ae3635d51226d0d48a2fc7b690d4dc200cd5655`.
+- `tools/verify_pipx_install.py` passed isolated install, command discovery, reinstall, and
+  uninstall. The sdist rebuilt the exact wheel hash, its clean venv passed version and JSON demo
+  smoke checks, and its extracted source suite passed with only platform/browser capability skips.
+
+### Network and vault gates
+
+- Approved inert `git ls-remote` resolved public source HEAD to the pinned
+  `621e4974ca25ce531773def586ba3ed8e736b3fc`; cached origin and clean checkout matched. MIT
+  `LICENSE.txt` SHA-256 remained
+  `71e0bd649395f47e82b500dc6261ce4b8e8d03774727f583e09f5b947e75de97`.
+- Final two scans each produced `1,647 nodes`, `3,578 relationships`, and `1,464` generated notes. The
+  second reused all `3` adapter partitions and rebuilt none. All `183` files in the explicitly
+  allowed user-owned folders retained identical bytes, sizes, and mtimes; all generated files were
+  identical across the second pass. `intentatlas status` reported `durable orphans 0`.
+- The public cache and all verification artifacts remain under ignored `var/`; no third-party
+  source, graph, cache, license, package artifact, or coverage report is committed.
+
+### Remote closure
+
+The local verification head is ready for push. Exact pushed commits, Actions run, successful job
+count, final synchronized HEAD, and remote-CI status remain the only open evidence.
 
 ## Remaining risks
 
@@ -61,7 +109,7 @@ commit identities, pushed HEAD, and remote CI will be recorded after all closure
       accessibility focused regressions.
 - [x] Structured EN/TR terminal, wrapping, option layout, one-Enter, hostile/plain/ASCII, no-write,
       non-TTY, semantic-parity, and immutable-snapshot focused regressions.
-- [ ] Full pytest/coverage, Ruff, mypy, Bandit, Node syntax, pip-check/audit, diff-check, real Chrome,
+- [x] Full pytest/coverage, Ruff, mypy, Bandit, Node syntax, pip-check/audit, diff-check, real Chrome,
       wheel/sdist/install/provenance, cross-platform E2E, deterministic vault, zero orphan, and
       approved network gates.
 - [ ] Exact implementation/closure commits, generated Commit notes, push, final-HEAD remote CI,

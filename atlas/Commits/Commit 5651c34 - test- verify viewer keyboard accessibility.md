@@ -15,15 +15,6 @@ generated: true
 ## Outgoing relationships
 
 - <code>changes</code> → [[Tests/tests - test_browser_e2e.py|tests/test_browser_e2e.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_CdpChrome.__init__ - tests - test_browser_e2e.py|_CdpChrome.__init__]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_CdpChrome._page_websocket - tests - test_browser_e2e.py|_CdpChrome._page_websocket]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_CdpChrome._receive_exact - tests - test_browser_e2e.py|_CdpChrome._receive_exact]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_CdpChrome._receive_message - tests - test_browser_e2e.py|_CdpChrome._receive_message]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_CdpChrome._send_frame - tests - test_browser_e2e.py|_CdpChrome._send_frame]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_CdpChrome.close - tests - test_browser_e2e.py|_CdpChrome.close]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_CdpChrome.command - tests - test_browser_e2e.py|_CdpChrome.command]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_keyboard_accessibility_probe.evaluate - tests - test_browser_e2e.py|_keyboard_accessibility_probe.evaluate]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

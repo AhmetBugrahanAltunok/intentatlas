@@ -10,8 +10,8 @@ source_path: "tests/test_guided_cli.py"
 
 ## Metadata
 
-- **End Line:** <code>557</code>
-- **Line:** <code>554</code>
+- **End Line:** <code>571</code>
+- **Line:** <code>568</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_guided_cli.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-diff-hunk)_

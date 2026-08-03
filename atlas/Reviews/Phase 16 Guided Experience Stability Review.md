@@ -15,7 +15,7 @@ phase: 16
       accessibility focused coverage passes.
 - [x] The EN/TR guided transcript has a prominent heading, semantic sections, bounded wrapping,
       and one option per line while protected trust and machine meanings remain unchanged.
-- [ ] Complete local quality/security/browser/package/network/vault gates pass.
+- [x] Complete local quality/security/browser/package/network/vault gates pass.
 - [ ] EVD-032 is complete, both issues are closed, final commits are pushed, and final-HEAD remote
       CI is fully green.
 - [x] No Phase 11C, human-usability/time claim, tag, release, publication, deployment, telemetry,
@@ -23,7 +23,8 @@ phase: 16
 
 ## Decision
 
-Open pending complete closure gates and final pushed-HEAD CI.
+All local acceptance criteria pass. The decision remains open only until generated durable outputs,
+Evidence, and Review are committed and the pushed verification head passes all remote-CI jobs.
 
 ## Links
 
