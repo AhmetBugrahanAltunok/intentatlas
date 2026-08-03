@@ -26,6 +26,11 @@ phase: 16
 All local acceptance criteria pass. The decision remains open only until generated durable outputs,
 Evidence, and Review are committed and the pushed verification head passes all remote-CI jobs.
 
+The first pushed run `30780041529` passed `12/13`; only the extracted-sdist invocation exposed a
+fixed-delay test flake while product, browser, matrix, static, and security jobs passed. The focused
+bounded-settlement correction and complete local regression are green. Review remains open pending
+the corrected pushed run.
+
 ## Links
 
 - [[Evidence/EVD-032 - Phase 16 guided experience stability verification]]

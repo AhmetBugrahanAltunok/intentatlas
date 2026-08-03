@@ -338,6 +338,27 @@ def _keyboard_accessibility_probe(browser: str, url: str, profile: Path) -> None
         chrome.close()
 
 
+def _wait_for_graph_layout(evaluate) -> None:  # noqa: ANN001
+    deadline = time.monotonic() + 12
+    previous: str | None = None
+    stable_samples = 0
+    expression = (
+        "JSON.stringify(Array.from(document.querySelectorAll('#nodes .node'), "
+        "node => node.getAttribute('transform')))"
+    )
+    while time.monotonic() < deadline:
+        current = evaluate(expression)
+        if current == previous:
+            stable_samples += 1
+            if stable_samples >= 2:
+                return
+        else:
+            previous = current
+            stable_samples = 0
+        time.sleep(0.1)
+    raise AssertionError("Graph layout did not settle within the bounded browser probe")
+
+
 def _layout_stability_probe(browser: str, url: str, profile: Path) -> None:
     chrome = _CdpChrome(browser, url, profile)
     try:
@@ -359,9 +380,8 @@ def _layout_stability_probe(browser: str, url: str, profile: Path) -> None:
         else:
             raise AssertionError("Change report did not auto-open in Chrome")
 
-        # Let the bounded force layout settle so this probe distinguishes viewport
-        # drift from intentional node motion during initial graph placement.
-        time.sleep(4.5)
+        # Distinguish viewport drift from intentional node motion during initial placement.
+        _wait_for_graph_layout(evaluate)
 
         metrics = (
             "JSON.stringify((() => { "
@@ -418,7 +438,7 @@ def _graph_only_layout_probe(browser: str, url: str, profile: Path) -> None:
         else:
             raise AssertionError("Graph-only viewer did not render in Chrome")
         assert evaluate("document.querySelector('#report-toggle').hidden") is True
-        time.sleep(4.5)
+        _wait_for_graph_layout(evaluate)
 
         for width, height in ((1280, 800), (640, 760)):
             chrome.command(

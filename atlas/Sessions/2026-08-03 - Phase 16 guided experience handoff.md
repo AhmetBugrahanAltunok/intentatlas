@@ -28,6 +28,9 @@ Focus transfer with `preventScroll` removed the shift while keeping keyboard/dia
 - 16C full local, security, package, approved-network, deterministic-vault, and zero-orphan gates
   pass. Implementation commit `e3056809b957d0c2124a301a198fdcbda2dab990` has a generated Commit
   note; evidence commit, push, and final remote CI remain mandatory before closure.
+- Pushed verification run `30780041529` passed `12/13`; a slow Linux extracted-sdist run exposed a
+  fixed 4.5-second browser-test wait, not product drift. The probe now waits boundedly for actual
+  node-layout settlement and passed three repeated Chrome runs plus the complete suite.
 
 ## Links
 

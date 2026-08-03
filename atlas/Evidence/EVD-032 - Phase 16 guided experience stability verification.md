@@ -90,8 +90,18 @@ phase: 16
 
 ### Remote closure
 
-The local verification head is ready for push. Exact pushed commits, Actions run, successful job
-count, final synchronized HEAD, and remote-CI status remain the only open evidence.
+Local verification head `c59eb36c788622e3e514377fb1ce9d4de185efbd` was pushed. GitHub Actions
+run `30780041529` passed `12/13` jobs, including all three Python test matrices, six installed-wheel
+cross-platform E2E jobs, real Chrome, static typing, and security. Its reproducible-package job
+failed only in the extracted-sdist suite: the new browser regression used a fixed 4.5-second
+force-layout wait, and a slower Linux runner retained a tiny intentional node movement
+(`scale` delta about `0.00022`) before the exact transform assertion.
+
+The test now waits boundedly for two stable node-transform samples instead of assuming wall-clock
+speed. Page geometry, exact settled fit transform, interaction-count, and timeout assertions remain
+unchanged. The real-Chrome test passed three consecutive local runs, then the complete suite passed
+again at `500 passed, 4 skipped`, `85.52%`. A pushed rerun and final synchronized-HEAD CI remain the
+only open evidence.
 
 ## Remaining risks
 
