@@ -1,7 +1,7 @@
 ---
 id: ISSUE-032
 type: issue
-status: in-progress
+status: closed
 phase: 17
 ---
 # Implement recommendation integrity and Python resolution
@@ -36,7 +36,7 @@ phase: 17
 - [x] Correct architecture schema wording and link the compatibility policy.
 - [x] Add stale-revision action and truthful diagnostic ambiguity scope.
 - [x] Verify Windows pipe/code-page behavior and record the independently reproduced correction.
-- [ ] Pass focused/full/security/package/network/E2E/vault/CI gates and close Evidence/Review.
+- [x] Pass focused/full/security/package/network/E2E/vault/CI gates and close Evidence/Review.
 
 ## Links
 

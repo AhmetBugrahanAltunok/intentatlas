@@ -1,7 +1,7 @@
 ---
 id: EVD-033
 type: evidence
-status: in-progress
+status: complete
 phase: 17
 ---
 # EVD-033 - Phase 17 recommendation integrity verification
@@ -114,8 +114,19 @@ phase: 17
 - [x] 17C source-root/qualified-symbol/re-export precision.
 - [x] 17D candidate eligibility and calibrated ranking.
 - [x] 17E documentation, diagnostics, Windows encoding, local/package/network/vault gates.
-- [ ] Local-verification/generated-note commit, push, final-head remote CI, and clean synchronized
-      worktree.
+- [x] Local-verification/generated-note commit, push, verification-head remote CI, and clean
+      synchronized worktree. Final documentation head remains subject to the mandatory CI check.
+
+## Remote closure
+
+- Local verification and generated snapshot commit:
+  `e6aa7c52773912447694ca4e70141ee173f277a8`.
+- GitHub Actions run
+  `https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30856167453` passed all `13/13`
+  jobs at that exact head: three Python test matrices, six cross-platform installed-wheel E2E jobs,
+  real Chrome, static typing, security/pip-audit, and reproducible package/pipx/extracted-sdist.
+- The immediate documentation closure commit must remain clean and receive green final-head CI;
+  any failure reopens this Evidence and Review.
 
 ## Remaining risks
 
