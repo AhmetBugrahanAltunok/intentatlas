@@ -18,3 +18,7 @@ generated: true
 - <code>modifies</code> → [[Symbols/_graph_only_layout_probe - tests - test_browser_e2e.py|_graph_only_layout_probe]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_layout_stability_probe - tests - test_browser_e2e.py|_layout_stability_probe]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_wait_for_graph_layout - tests - test_browser_e2e.py|_wait_for_graph_layout]] _(history; evidence: git-diff-hunk)_
+
+## Incoming relationships
+
+- <code>referenced-by</code> ← [[Evidence/EVD-032 - Phase 16 guided experience stability verification|EVD-032 - Phase 16 guided experience stability verification]] _(reference; evidence: wikilink)_

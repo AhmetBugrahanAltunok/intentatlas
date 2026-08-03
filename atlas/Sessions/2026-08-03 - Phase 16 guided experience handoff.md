@@ -35,8 +35,8 @@ Focus transfer with `preventScroll` removed the shift while keeping keyboard/dia
   `b74a46f3d4c0b1beeb4674a8a2fb3e5299f06632` were pushed. Corrected GitHub Actions run
   `30780378384` passed all `13/13` jobs, including reproducible-package and extracted-sdist.
 - EVD-032 is complete, both issues are closed, and the Phase 16 Review passes. Only the mandatory
-  post-commit final-head CI check for the documentation closure/synchronization remains procedural;
-  any failure reopens the phase.
+  generated-evidence synchronization and final-head CI check after closure commit
+  `ecc7dcbd799d4efdb85bcbd61fa568d4fca29dcb` remain procedural; any failure reopens the phase.
 
 ## Links
 

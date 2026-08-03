@@ -83,7 +83,7 @@ phase: 16
   `621e4974ca25ce531773def586ba3ed8e736b3fc`; cached origin and clean checkout matched. MIT
   `LICENSE.txt` SHA-256 remained
   `71e0bd649395f47e82b500dc6261ce4b8e8d03774727f583e09f5b947e75de97`.
-- Post-correction final two scans each produced `1,648 nodes`, `3,534 relationships`, and `1,465`
+- Post-closure final two scans each produced `1,648 nodes`, `3,538 relationships`, and `1,465`
   generated notes. The
   second reused all `3` adapter partitions and rebuilt none. All `183` files in the explicitly
   allowed user-owned folders retained identical bytes, sizes, and mtimes; all generated files were
@@ -110,7 +110,8 @@ Correction and durable-evidence commits `3245396a1cd9ce4645af34015e4f56d13b762db
 `30780378384` passed all `13/13` jobs at exact head
 `b74a46f3d4c0b1beeb4674a8a2fb3e5299f06632`, including the previously failing
 reproducible-package extracted-sdist suite. The immediate documentation closure/synchronization
-commit must retain a clean tree and receive its own green final-head CI; failure reopens this
+commit is `ecc7dcbd799d4efdb85bcbd61fa568d4fca29dcb`. Its immediate generated-evidence
+synchronization must retain a clean tree and receive green final-head CI; failure reopens this
 Evidence and Review.
 
 ## Remaining risks
@@ -132,7 +133,8 @@ Evidence and Review.
 - [x] Full pytest/coverage, Ruff, mypy, Bandit, Node syntax, pip-check/audit, diff-check, real Chrome,
       wheel/sdist/install/provenance, cross-platform E2E, deterministic vault, zero orphan, and
       approved network gates.
-- [x] Exact implementation/correction commits, generated Commit notes, push, green `13/13`
+- [x] Exact implementation/correction/closure commits, generated implementation and correction
+      Commit notes, push, green `13/13`
       verification-head remote CI, and synchronized `main == origin/main`; the immediate
       documentation closure commit remains subject to the mandatory post-commit final-head check.
 

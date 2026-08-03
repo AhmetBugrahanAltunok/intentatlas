@@ -32,8 +32,8 @@ fixed-delay test flake while product, browser, matrix, static, and security jobs
 settlement correction retained exact geometry/transform assertions. Corrected run `30780378384`
 then passed all `13/13` jobs at exact pushed head
 `b74a46f3d4c0b1beeb4674a8a2fb3e5299f06632`, including reproducible-package. The immediate
-documentation closure/synchronization commit requires its own final-head CI; failure reopens this
-decision.
+documentation closure commit is `ecc7dcbd799d4efdb85bcbd61fa568d4fca29dcb`; its immediate
+generated-evidence synchronization requires its own final-head CI. Failure reopens this decision.
 
 ## Links
 
