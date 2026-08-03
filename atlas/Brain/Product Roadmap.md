@@ -565,7 +565,7 @@ Status: complete; Phase 15 Review passed on 2026-08-03
 
 ## Phase 16 - Guided experience stability
 
-Status: in progress (2026-08-03)
+Status: complete (2026-08-03)
 
 - Remove focus-driven cumulative viewer displacement while preserving the existing report overlay,
   graph simulation, fit semantics, keyboard dialog behavior, and immutable snapshot.
@@ -578,8 +578,8 @@ Status: in progress (2026-08-03)
 - Decision: [[Decisions/ADR-032 - Prevent focus-driven viewport drift and structure terminal presentation]]
 - Viewer issue: [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]]
 - Terminal issue: [[Issues/ISSUE-031 - Improve guided PowerShell readability]]
-- Planned evidence: [[Evidence/EVD-032 - Phase 16 guided experience stability verification]]
-- Planned review: [[Reviews/Phase 16 Guided Experience Stability Review]]
+- Evidence: [[Evidence/EVD-032 - Phase 16 guided experience stability verification]]
+- Review: [[Reviews/Phase 16 Guided Experience Stability Review]]
 - Strategy: [[Brain/Phase 16 Guided Experience Stability Strategy]]
 - Handoff: [[Sessions/2026-08-03 - Phase 16 guided experience handoff]]
 

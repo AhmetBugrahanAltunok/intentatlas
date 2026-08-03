@@ -1,7 +1,7 @@
 ---
 id: review-phase-16-guided-experience-stability
 type: review
-status: in-progress
+status: passed
 phase: 16
 ---
 # Phase 16 Guided Experience Stability Review
@@ -16,20 +16,24 @@ phase: 16
 - [x] The EN/TR guided transcript has a prominent heading, semantic sections, bounded wrapping,
       and one option per line while protected trust and machine meanings remain unchanged.
 - [x] Complete local quality/security/browser/package/network/vault gates pass.
-- [ ] EVD-032 is complete, both issues are closed, final commits are pushed, and final-HEAD remote
-      CI is fully green.
+- [x] EVD-032 is complete, both issues are closed, commits are pushed, and verification-head remote
+      CI is fully green (`13/13`, run `30780378384`).
 - [x] No Phase 11C, human-usability/time claim, tag, release, publication, deployment, telemetry,
       settings/visibility change, or announcement occurred.
 
 ## Decision
 
-All local acceptance criteria pass. The decision remains open only until generated durable outputs,
-Evidence, and Review are committed and the pushed verification head passes all remote-CI jobs.
+Pass. Phase 16A reproduces and removes focus-driven viewer displacement, Phase 16B provides the
+structured EN/TR terminal projection without changing trust semantics, and Phase 16C satisfies the
+local, browser, package, security, vault, network, and durable-chain gates.
 
 The first pushed run `30780041529` passed `12/13`; only the extracted-sdist invocation exposed a
-fixed-delay test flake while product, browser, matrix, static, and security jobs passed. The focused
-bounded-settlement correction and complete local regression are green. Review remains open pending
-the corrected pushed run.
+fixed-delay test flake while product, browser, matrix, static, and security jobs passed. The bounded
+settlement correction retained exact geometry/transform assertions. Corrected run `30780378384`
+then passed all `13/13` jobs at exact pushed head
+`b74a46f3d4c0b1beeb4674a8a2fb3e5299f06632`, including reproducible-package. The immediate
+documentation closure/synchronization commit requires its own final-head CI; failure reopens this
+decision.
 
 ## Links
 

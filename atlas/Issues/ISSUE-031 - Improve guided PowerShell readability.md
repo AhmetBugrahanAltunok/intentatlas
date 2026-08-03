@@ -1,7 +1,7 @@
 ---
 id: ISSUE-031
 type: issue
-status: in-progress
+status: closed
 phase: 16
 ---
 # Improve guided PowerShell readability
@@ -29,7 +29,8 @@ details, Atlas summary, and choices do not have enough visual hierarchy.
 
 - [x] Prove one-Enter result access, EN/TR hierarchy, plain/ASCII/hostile text, no-write,
       non-TTY, immutable snapshot, and existing explicit command behavior.
-- [x] Pass complete local/package/browser/vault/network gates; final remote CI remains.
+- [x] Pass complete local/package/browser/vault/network gates and all `13/13` jobs in GitHub
+      Actions run `30780378384`.
 
 ## Links
 

@@ -148,9 +148,12 @@ observation is recorded in [[Sessions/2026-08-03 - Owner viewer layout observati
 open for controlled reproduction under
 [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]].
 
-This post-closure observation does not satisfy Phase 11C and does not by itself establish a root
-cause. If reproduction confirms that the supported viewer violates the Phase 15 acceptance
-contract, this Evidence and its Review must be reopened until the regression is fixed and verified.
+This post-closure observation does not satisfy Phase 11C. Phase 16 reproduced the supported-browser
+regression, measured focus-driven document scrolling as its cause, and fixed it without changing
+the immutable graph/report contract. [[Evidence/EVD-032 - Phase 16 guided experience stability verification]]
+records the real-browser proof and GitHub Actions run `30780378384`, which passed all `13/13` jobs.
+The affected acceptance decision is therefore restored; the historical observation remains here
+without becoming independent human-usability evidence.
 
 ## Required evidence
 

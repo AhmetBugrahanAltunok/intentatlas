@@ -44,8 +44,10 @@ The owner subsequently reported cumulative viewer layout/graph displacement whil
 using **Change report** and **Fit graph** in the real public-repository flow. The observation is
 recorded in [[Sessions/2026-08-03 - Owner viewer layout observation]] and tracked by
 [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]]. The
-original automated pass remains recorded, but a confirmed supported-browser reproduction reopens
-the affected viewer acceptance decision until the regression and remote CI are resolved.
+original automated pass remains recorded. Phase 16 confirmed and corrected the supported-browser
+regression; [[Evidence/EVD-032 - Phase 16 guided experience stability verification]] and run
+`30780378384` (`13/13`) restore the affected viewer acceptance decision. This remediation remains
+owner technical evidence and does not count toward Phase 11C.
 
 ## Links
 

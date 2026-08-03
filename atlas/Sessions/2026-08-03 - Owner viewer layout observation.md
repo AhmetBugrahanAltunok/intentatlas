@@ -28,6 +28,14 @@ No diagnosis or performance claim is derived from the screenshot alone. The obse
 to [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]] for
 controlled reproduction and a real-browser regression.
 
+## Resolution
+
+Phase 16 reproduced the displacement at the exact revision, measured focus-driven horizontal
+document scrolling as the cause, and corrected focus transfer without changing graph fit state.
+[[Evidence/EVD-032 - Phase 16 guided experience stability verification]] records repeated wide and
+narrow real-browser proof plus GitHub Actions run `30780378384` (`13/13`). The observation is
+resolved as owner technical feedback and remains excluded from Phase 11C counts and timing.
+
 ## Validation classification
 
 This is useful owner first-use evidence, but it is not an independent participant observation and
@@ -39,4 +47,3 @@ elapsed completion time.
 - reports:: [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]]
 - follows:: [[Sessions/2026-08-03 - Phase 15 source-to-atlas handoff]]
 - evidence-context:: [[Evidence/EVD-031 - Phase 15 source-to-atlas verification]]
-

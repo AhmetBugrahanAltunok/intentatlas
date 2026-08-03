@@ -1,7 +1,7 @@
 ---
 id: ISSUE-030
 type: issue
-status: in-progress
+status: closed
 phase: 16
 ---
 # Fix cumulative viewer layout drift after report and fit controls
@@ -57,8 +57,13 @@ Fit Graph transform arithmetic.
 - [x] Cover wide, narrow, mouse, keyboard, ChangeReport-present, and no-ChangeReport states.
 - [x] Run focused browser tests and the complete quality/security/package/viewer suite before
       closure.
-- [ ] If reproduction confirms a Phase 15 viewer acceptance regression, reopen the affected
+- [x] If reproduction confirms a Phase 15 viewer acceptance regression, reopen the affected
       Evidence/Review decision until the fix and remote CI pass.
+
+The confirmed regression was tracked as open in the Phase 15 Evidence and Review, corrected by
+`e3056809b957d0c2124a301a198fdcbda2dab990`, and hardened against runner timing by
+`3245396a1cd9ce4645af34015e4f56d13b762db7`. GitHub Actions run `30780378384` passed all `13/13`
+jobs at pushed verification head `b74a46f3d4c0b1beeb4674a8a2fb3e5299f06632`.
 
 ## Links
 

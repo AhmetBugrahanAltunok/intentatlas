@@ -1,7 +1,7 @@
 ---
 id: EVD-032
 type: evidence
-status: in-progress
+status: complete
 phase: 16
 ---
 # EVD-032 - Phase 16 guided experience stability verification
@@ -64,7 +64,7 @@ phase: 16
   editable IntentAtlas distribution was explicitly skipped.
 - Implementation commit: `e3056809b957d0c2124a301a198fdcbda2dab990`; generated note
   [[Commits/Commit e305680 - Implement Phase 16 guided experience stability]].
-- Browser-settlement CI correction: `3245396421a8b96d5e718fb667a186e486077cc8`; generated note
+- Browser-settlement CI correction: `3245396a1cd9ce4645af34015e4f56d13b762db7`; generated note
   [[Commits/Commit 3245396 - Stabilize Phase 16 browser settlement gate]].
 - Two `SOURCE_DATE_EPOCH=1704067200 python -m build --sdist --wheel` runs were byte-identical.
   `tools/verify_release.py` validated wheel `52` files and sdist `189` files with exact source
@@ -103,8 +103,15 @@ force-layout wait, and a slower Linux runner retained a tiny intentional node mo
 The test now waits boundedly for two stable node-transform samples instead of assuming wall-clock
 speed. Page geometry, exact settled fit transform, interaction-count, and timeout assertions remain
 unchanged. The real-Chrome test passed three consecutive local runs, then the complete suite passed
-again at `500 passed, 4 skipped`, `85.52%`. A pushed rerun and final synchronized-HEAD CI remain the
-only open evidence.
+again at `500 passed, 4 skipped`, `85.52%`.
+
+Correction and durable-evidence commits `3245396a1cd9ce4645af34015e4f56d13b762db7` and
+`b74a46f3d4c0b1beeb4674a8a2fb3e5299f06632` were pushed to `main`. GitHub Actions run
+`30780378384` passed all `13/13` jobs at exact head
+`b74a46f3d4c0b1beeb4674a8a2fb3e5299f06632`, including the previously failing
+reproducible-package extracted-sdist suite. The immediate documentation closure/synchronization
+commit must retain a clean tree and receive its own green final-head CI; failure reopens this
+Evidence and Review.
 
 ## Remaining risks
 
@@ -125,8 +132,9 @@ only open evidence.
 - [x] Full pytest/coverage, Ruff, mypy, Bandit, Node syntax, pip-check/audit, diff-check, real Chrome,
       wheel/sdist/install/provenance, cross-platform E2E, deterministic vault, zero orphan, and
       approved network gates.
-- [ ] Exact implementation/closure commits, generated Commit notes, push, final-HEAD remote CI,
-      clean worktree, and synchronized `main == origin/main`.
+- [x] Exact implementation/correction commits, generated Commit notes, push, green `13/13`
+      verification-head remote CI, and synchronized `main == origin/main`; the immediate
+      documentation closure commit remains subject to the mandatory post-commit final-head check.
 
 ## Typed links
 
