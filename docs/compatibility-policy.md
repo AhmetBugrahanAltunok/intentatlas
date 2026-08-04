@@ -69,3 +69,13 @@ bands: high `85+`, medium `65-84`, low `0-64`. Threshold filtering and omission 
 requirements and tests before result limiting or strategy selection. This is a semantic bug fix,
 not a schema change. Experimental Python workspace projection recognizes bounded setuptools,
 Hatchling, Flit, and unique conventional src layouts; ambiguous root/src identities abstain.
+
+Phase 17F keeps Change Report schema 1 and graph schema 4. Change Report items add optional
+`primary_reason` and `reason_details` fields that bind each score to one signal, path, and evidence
+set; omission records additionally expose `selection_reason`. Existing `reasons`, `paths`,
+`evidence`, and omission `reason` fields remain readable aggregate or selection fields and are
+deprecated for consumers that need a linked ranking explanation. Python test nodes may add
+`test_role`, `test_runner`, and discovery-evidence metadata. Those fields refine runnable-target
+eligibility without removing the node or its graph edges. Graphs without role metadata, and
+non-Python adapters, retain their prior recommendation behavior. These are additive fields under
+the existing schema boundaries and require no stored-data migration.

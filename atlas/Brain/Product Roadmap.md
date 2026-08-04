@@ -585,7 +585,7 @@ Status: complete (2026-08-03)
 
 ## Phase 17 - Recommendation integrity and Python resolution
 
-Status: completed (2026-08-04)
+Status: reopened for 17F correction (2026-08-04)
 
 - Canonicalize ADR-009 confidence bands and apply the selected threshold consistently to tests,
   counters, omissions, and execution strategy across every ChangeReport projection.

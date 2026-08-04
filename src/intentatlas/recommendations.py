@@ -4,7 +4,7 @@ import json
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from .confidence import CONFIDENCE_RANK, confidence_for_score
+from .confidence import CONFIDENCE_RANK, LOW_CONFIDENCE_GUIDANCE, confidence_for_score
 from .graph import AtlasGraph, GraphIndex
 from .models import Edge, Node
 
@@ -114,6 +114,9 @@ class RecommendationResult:
             "advisory": ADVISORY,
             "target": self.target.to_dict(),
             "minimum_confidence": self.minimum_confidence,
+            "threshold_advisory": (
+                LOW_CONFIDENCE_GUIDANCE if self.minimum_confidence == "low" else None
+            ),
             "candidate_count": self.candidate_count,
             "recommendations": [item.to_dict() for item in self.recommendations],
         }
@@ -284,6 +287,8 @@ def render_recommendations(result: RecommendationResult, output_format: str = "t
         f"Minimum confidence: {result.minimum_confidence}",
         f"Advisory: {ADVISORY}",
     ]
+    if result.minimum_confidence == "low":
+        lines.append(f"Threshold note: {LOW_CONFIDENCE_GUIDANCE}")
     if not result.recommendations:
         lines.append("No test recommendations meet the selected confidence threshold.")
         if result.candidate_count:
@@ -810,7 +815,9 @@ def _recommendations(
 
 def _is_executable_test_candidate(test: Node) -> bool:
     size = test.metadata.get("size_bytes")
-    return not (isinstance(size, int) and not isinstance(size, bool) and size == 0)
+    if isinstance(size, int) and not isinstance(size, bool) and size == 0:
+        return False
+    return test.metadata.get("test_role") not in {"fixture", "package", "support"}
 
 
 def _test_observations(

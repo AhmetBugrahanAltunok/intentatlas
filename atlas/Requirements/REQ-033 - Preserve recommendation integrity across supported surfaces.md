@@ -26,6 +26,13 @@ Python src-layout imports resolve real callers without promoting weak or non-run
   commit produces no co-change recommendation, and bounded co-change never outranks direct
   structural evidence.
 - Reasons describe only resolved graph evidence and never claim source-level absence as fact.
+- Every ranked test carries linked `{signal, score, summary, path, evidence}` reason records; the
+  primary reason produces the final score and is projected consistently on every surface.
+- Omission selection reasons remain separate from ranking reasons, and human surfaces show both
+  total omitted counts and the bounded number of omission details displayed.
+- Python test artifacts are runnable recommendations only when bounded runner filename patterns or
+  safely read project configuration prove that role; support, fixture, and package files remain in
+  the graph but are not direct execution targets.
 - Historical stale analysis recommends a clean revision-matched checkout; diagnostic ambiguity is
   explicitly a heuristic warning rather than proof that the resolver abstained.
 - Frozen before/after evaluation, focused/full/static/security/package/network/browser/CLI/vault

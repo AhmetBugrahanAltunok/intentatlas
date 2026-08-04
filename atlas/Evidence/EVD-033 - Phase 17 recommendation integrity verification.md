@@ -1,10 +1,16 @@
 ---
 id: EVD-033
 type: evidence
-status: complete
+status: in-progress
 phase: 17
 ---
 # EVD-033 - Phase 17 recommendation integrity verification
+
+## 17F reopen
+
+External retest evidence at final head `6e187143a9362cdd24d3985b11d3089a05fbc839` reopened
+Phase 17 for evidence-presentation and runnable-test integrity. The prior implementation and CI
+results remain historical evidence, not proof that the new 17F gates pass.
 
 ## Entry and frozen baseline
 

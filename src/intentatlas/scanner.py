@@ -27,6 +27,7 @@ from .models import Edge, Node
 from .naming import note_title, safe_filename
 from .relations import USER_RELATIONS
 from .scan_cache import AdapterFragmentCache
+from .test_roles import classify_python_test, load_python_test_policy
 from .vault import ProjectVault
 from .workspace import WorkspaceModel, discover_workspace, owner_id
 
@@ -148,6 +149,7 @@ class RepositoryScanner:
         self.vault_parts = tuple(
             part.casefold() for part in PurePosixPath(self.vault_relative).parts
         )
+        self.python_test_policy = load_python_test_policy(self.root)
 
     def scan(self) -> AtlasGraph:
         return self._scan(cache=None)
@@ -214,17 +216,22 @@ class RepositoryScanner:
                 )
             node_id = f"file:{relative}"
             self.files[relative] = path
+            metadata: dict[str, object] = {
+                "language": _language(path.suffix.casefold()),
+                "size_bytes": size,
+                "owner": "scanner",
+            }
+            if kind == "test" and path.suffix.casefold() == ".py":
+                metadata.update(
+                    classify_python_test(relative_path, self.python_test_policy).metadata()
+                )
             self.graph.add_node(
                 Node(
                     id=node_id,
                     kind=kind,
                     label=relative,
                     path=relative,
-                    metadata={
-                        "language": _language(path.suffix.casefold()),
-                        "size_bytes": size,
-                        "owner": "scanner",
-                    },
+                    metadata=metadata,
                 )
             )
 

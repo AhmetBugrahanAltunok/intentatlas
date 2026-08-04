@@ -37,7 +37,10 @@ def test_viewer_assets_are_packaged() -> None:
     assert '"pull-request": "#facc15"' in app
     assert "findEvidencePaths(node.id)" in app
     assert "formatRecordedPath" in app
-    assert "Recorded ranking path:" in app
+    assert "Primary ranking path:" in app
+    assert "Primary reason:" in app
+    assert "Primary evidence:" in app
+    assert "omission details shown" in app
     assert "renderOmittedItems" in app
     assert "if (state.report) openChangeReport(false);" in app
     assert 'const pathLimits = { depth: 6, visited: 800, results: 6 };' in app

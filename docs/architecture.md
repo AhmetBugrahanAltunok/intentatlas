@@ -189,6 +189,13 @@ still requires the full suite. `unknown` analysis abstains completely; `fallback
 targeted-plus-full-suite or full-suite-fallback. The report is deterministic, advisory, and never
 claims behavioral completeness.
 
+Each ranked Change Report item carries a linked primary reason whose signal, score, evidence, and
+recorded path come from the same recommendation reason. Additional reasons remain ordered details;
+legacy aggregate reason, path, and evidence arrays stay present for schema-1 readers. Omission
+records keep selection policy (`below-minimum-confidence` or `result-limit`) separate from the
+candidate's linked ranking reason. Human projections show both the total omitted population and
+the bounded number of omission details rendered.
+
 Review Report schema 1 is a presentation envelope over an explicit range Change Report, not a
 second inference engine. It preserves the resolved base/head identities, analysis state,
 confidence, evidence, and test strategy while adding a fixed `shadow` mode contract. Markdown and
@@ -253,6 +260,16 @@ stays low confidence below direct structural evidence. Exact-symbol dependents r
 The default medium threshold hides weak file, filename-only, and co-change evidence. JUnit
 aggregates remain unscored observations because freshness is unknown. No test is executed, and
 missing output is never treated as proof of no impact.
+
+Python scanning separately classifies graph-visible test artifacts as runnable tests, support
+modules, fixtures, or package markers. Classification uses only bounded static filenames and safe
+pytest `python_files` configuration; it never imports project modules or invokes pytest. Support,
+fixture, and package nodes retain their structural edges but are excluded from executable command
+targets. Unknown legacy role metadata and existing JavaScript/TypeScript and Go behavior remain
+unchanged. Low confidence is exploratory discovery with potentially high fan-out and low
+precision; automated CI selection should use medium or higher. A static direct symbol reference
+scores `80/medium`; high confidence is reserved for stronger evidence such as the test itself
+being in the changed set.
 
 Recommendation evaluation is a second pure layer around the unchanged production query. Schema-1
 label files declare a closed-world `complete-test-set` policy, exact graph target IDs, and complete

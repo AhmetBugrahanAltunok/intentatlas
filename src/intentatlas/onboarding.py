@@ -103,11 +103,11 @@ MESSAGES: dict[str, dict[str, str]] = {
         ),
         "requirements": (
             "Requirements: {selected} selected / {total} candidates; {filtered} below threshold; "
-            "{limited} omitted by result limit"
+            "{limited} omitted by result limit; {shown}/{omitted} omission details shown"
         ),
         "tests": (
             "Tests: {selected} selected / {total} candidates; {filtered} below threshold; "
-            "{limited} omitted by result limit"
+            "{limited} omitted by result limit; {shown}/{omitted} omission details shown"
         ),
         "selected_requirement": (
             "- requirement {id}: {score}/100 ({confidence}); reason {reason}; evidence {evidence}"
@@ -201,11 +201,13 @@ MESSAGES: dict[str, dict[str, str]] = {
         ),
         "requirements": (
             "Gereksinimler: {selected} seçildi / {total} aday; {filtered} threshold altında; "
-            "{limited} result limit nedeniyle atlandı"
+            "{limited} result limit nedeniyle atlandı; {shown}/{omitted} omission ayrıntısı "
+            "gösteriliyor"
         ),
         "tests": (
             "Testler: {selected} seçildi / {total} aday; {filtered} threshold altında; "
-            "{limited} result limit nedeniyle atlandı"
+            "{limited} result limit nedeniyle atlandı; {shown}/{omitted} omission ayrıntısı "
+            "gösteriliyor"
         ),
         "selected_requirement": (
             "- requirement {id}: {score}/100 ({confidence}); neden {reason}; evidence {evidence}"
@@ -815,6 +817,11 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
             total=report.requirement_candidate_count,
             filtered=report.requirement_filtered_count,
             limited=report.requirement_limit_omitted_count,
+            shown=len(report.omitted_requirements),
+            omitted=(
+                report.requirement_filtered_count
+                + report.requirement_limit_omitted_count
+            ),
         )
     )
     for requirement_item in report.requirements[:5]:
@@ -841,9 +848,12 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
             total=report.test_candidate_count,
             filtered=report.test_filtered_count,
             limited=report.test_limit_omitted_count,
+            shown=len(report.omitted_tests),
+            omitted=report.test_filtered_count + report.test_limit_omitted_count,
         )
     )
     for test_item in report.tests[:5]:
+        primary = test_item.primary_reason
         terminal.write(
             f"  - test {test_item.test.id} | {test_item.score}/100 | "
             f"{test_item.confidence}"
@@ -851,15 +861,21 @@ def _render_summary(snapshot: GuideSnapshot, terminal: TerminalIO, language: str
         _write_wrapped(
             terminal,
             f"    {LAYOUT_TEXT[language]['reason']}: "
-            f"{', '.join(test_item.reasons) or 'none'}",
+            f"{primary.signal} ({primary.score}/100): {primary.summary}",
+            subsequent_indent="      ",
+        )
+        _write_wrapped(
+            terminal,
+            f"    path: {_recorded_path(primary.path)}",
             subsequent_indent="      ",
         )
         _write_wrapped(
             terminal,
             f"    {LAYOUT_TEXT[language]['evidence']}: "
-            f"{', '.join(test_item.evidence) or 'none'}",
+            f"{', '.join(primary.evidence) or 'none'}",
             subsequent_indent="      ",
         )
+        terminal.write(f"    additional signals: {len(test_item.reason_details) - 1}")
     terminal.write(
         _message(
             language,
@@ -990,11 +1006,14 @@ def _render_reasons(report: ChangeReport, terminal: TerminalIO, language: str) -
             f"evidence={','.join(requirement_item.evidence) or 'none'}"
         )
     for test_item in report.tests:
+        primary = test_item.primary_reason
         terminal.write(
             f"test {test_item.test.id}: score={test_item.score}; "
             f"confidence={test_item.confidence}; "
-            f"reasons={','.join(test_item.reasons) or 'none'}; "
-            f"evidence={','.join(test_item.evidence) or 'none'}"
+            f"primary={primary.signal}; primary_score={primary.score}; "
+            f"summary={primary.summary}; path={_recorded_path(primary.path)}; "
+            f"evidence={','.join(primary.evidence) or 'none'}; "
+            f"additional_signals={len(test_item.reason_details) - 1}"
         )
 
 
@@ -1003,9 +1022,13 @@ def _render_omissions(report: ChangeReport, terminal: TerminalIO, language: str)
     if not omitted:
         terminal.write(_message(language, "none"))
     for item in omitted:
+        primary = item.primary_reason
         terminal.write(
-            f"{item.candidate_type} {item.node.id}: reason={item.reason}; score={item.score}; "
-            f"confidence={item.confidence}; evidence={','.join(item.evidence) or 'none'}"
+            f"{item.candidate_type} {item.node.id}: selection_reason={item.selection_reason}; "
+            f"score={item.score}; confidence={item.confidence}; "
+            f"ranking_reason={primary.signal}; ranking_score={primary.score}; "
+            f"path={_recorded_path(primary.path)}; "
+            f"evidence={','.join(primary.evidence) or 'none'}"
         )
     terminal.write(
         _message(
@@ -1015,6 +1038,17 @@ def _render_omissions(report: ChangeReport, terminal: TerminalIO, language: str)
             tests=len(report.omitted_tests),
         )
     )
+
+
+def _recorded_path(path: object) -> str:
+    nodes = tuple(getattr(path, "nodes", ()))
+    relations = tuple(getattr(path, "relations", ()))
+    if not nodes or len(relations) != len(nodes) - 1:
+        return "none"
+    parts = [str(nodes[0])]
+    for relation, node in zip(relations, nodes[1:], strict=True):
+        parts.extend((f"-[{relation}]->", str(node)))
+    return " ".join(parts)
 
 
 def _render_commands(snapshot: GuideSnapshot, terminal: TerminalIO, language: str) -> None:

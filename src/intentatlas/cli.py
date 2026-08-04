@@ -16,6 +16,7 @@ from .change_report import (
     render_change_report,
 )
 from .change_set import collect_change_set, render_change_set
+from .confidence import LOW_CONFIDENCE_GUIDANCE
 from .config import ProjectConfig
 from .corpus import (
     MAX_CORPUS_GRAPH_BYTES_TOTAL,
@@ -123,6 +124,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--minimum-confidence",
         choices=("low", "medium", "high"),
         default="medium",
+        help=LOW_CONFIDENCE_GUIDANCE,
     )
     recommend_parser.add_argument("--limit", type=int, default=20)
     recommend_parser.add_argument(
@@ -166,6 +168,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--minimum-confidence",
         choices=("low", "medium", "high"),
         default="medium",
+        help=LOW_CONFIDENCE_GUIDANCE,
     )
     changes_parser.add_argument("--limit", type=int, default=20)
     changes_parser.add_argument(
@@ -187,6 +190,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--minimum-confidence",
         choices=("low", "medium", "high"),
         default="medium",
+        help=LOW_CONFIDENCE_GUIDANCE,
     )
     review_parser.add_argument("--limit", type=int, default=20)
     review_parser.add_argument(

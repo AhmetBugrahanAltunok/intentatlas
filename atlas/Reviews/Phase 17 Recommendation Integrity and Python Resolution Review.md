@@ -1,10 +1,15 @@
 ---
 id: review-phase-17-recommendation-integrity
 type: review
-status: passed
+status: in-progress
 phase: 17
 ---
 # Phase 17 Recommendation Integrity and Python Resolution Review
+
+## 17F reopen
+
+The previous pass is suspended while ISSUE-033 verifies linked primary reasons, complete omission
+presentation, Python runnable-target eligibility, and low-mode risk copy. Phase 11C remains closed.
 
 ## Acceptance review
 

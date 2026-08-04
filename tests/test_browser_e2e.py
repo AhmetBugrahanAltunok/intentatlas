@@ -605,6 +605,7 @@ def test_real_browser_renders_same_file_demo_story(tmp_path: Path) -> None:
         assert "<strong>analyzed</strong>" in summary.group(1)
         assert "<span>freshness</span><strong>aligned</strong>" in summary.group(1)
         assert "<span>threshold</span><strong>medium</strong>" in summary.group(1)
+        assert summary.group(1).count("0/0 omission details shown") == 2
         assert 'id="change-report" class="detail report-detail open"' in rendered
         assert 'role="dialog"' in rendered
         assert 'aria-hidden="false"' in rendered
@@ -621,7 +622,9 @@ def test_real_browser_renders_same_file_demo_story(tmp_path: Path) -> None:
         assert report_tests is not None
         assert "tests/test_auth_rotation.py" in report_tests.group(1)
         assert "tests/test_auth_audit.py" not in report_tests.group(1)
-        assert "Recorded ranking path:" in report_tests.group(1)
+        assert "Primary ranking path:" in report_tests.group(1)
+        assert "Primary reason:" in report_tests.group(1)
+        assert "Primary evidence:" in report_tests.group(1)
         assert "symbol:src/auth.py::rotate_session" in report_tests.group(1)
         assert "file:tests/test_auth_rotation.py" in report_tests.group(1)
         _keyboard_accessibility_probe(

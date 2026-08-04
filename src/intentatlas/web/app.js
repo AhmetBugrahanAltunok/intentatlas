@@ -108,9 +108,13 @@ function renderChangeReport() {
     label: item.requirement.label,
     score: item.score,
     confidence: item.confidence,
-    reason: item.reason || "confidence-meets-minimum-threshold",
-    evidence: item.evidence,
-    paths: [item.path]
+    primary: linkedReason(
+      item,
+      item.reason || "confidence-meets-minimum-threshold",
+      [item.path],
+      item.evidence
+    ),
+    additionalSignals: Math.max(0, (item.reason_details || []).length - 1)
   }));
   renderOmittedItems("#report-omitted-requirements", report.omitted_requirements || []);
   renderReportItems("#report-tests", report.tests, item => ({
@@ -118,9 +122,13 @@ function renderChangeReport() {
     label: item.test.path || item.test.label,
     score: item.score,
     confidence: item.confidence,
-    reason: (item.reasons || []).join("; ") || "ranked recorded evidence",
-    evidence: item.evidence,
-    paths: item.paths
+    primary: linkedReason(
+      item,
+      (item.reasons || []).join("; ") || "ranked recorded evidence",
+      item.paths,
+      item.evidence
+    ),
+    additionalSignals: Math.max(0, (item.reason_details || []).length - 1)
   }));
   renderOmittedItems("#report-omitted-tests", report.omitted_tests || []);
   renderOutcomeEvidence();
@@ -128,8 +136,10 @@ function renderChangeReport() {
 
 function selectionSummary(selection, items) {
   if (!selection) return `${items.length} selected`;
+  const omitted = selection.filtered_count + selection.limit_omitted_count;
   return `${selection.selected_count}/${selection.total_candidate_count} selected · `
-    + `${selection.filtered_count} filtered · ${selection.limit_omitted_count} limit-omitted`;
+    + `${selection.filtered_count} filtered · ${selection.limit_omitted_count} limit-omitted · `
+    + `${selection.omitted_shown_count}/${omitted} omission details shown`;
 }
 
 function renderOutcomeEvidence() {
@@ -172,9 +182,11 @@ function renderReportItems(selector, items, valueOf) {
   const container = document.querySelector(selector);
   container.innerHTML = items.length ? items.map(item => {
     const value = valueOf(item);
-    const evidence = (value.evidence || []).join(", ") || "none recorded";
-    const paths = (value.paths || []).map(formatRecordedPath).join(" | ") || "none recorded";
-    return `<button class="report-item" data-node="${escapeAttr(value.id)}"><strong>${escapeHTML(value.label)}</strong><small>${escapeHTML(value.confidence)} · ${value.score}/100</small><small class="report-reason">Reason: ${escapeHTML(value.reason)}</small><small>Evidence: ${escapeHTML(evidence)}</small><small class="report-path">Recorded ranking path: ${escapeHTML(paths)}</small></button>`;
+    const primary = value.primary;
+    const evidence = (primary.evidence || []).join(", ") || "none recorded";
+    const path = formatRecordedPath(primary.path);
+    const reason = `${primary.signal} (${primary.score}/100): ${primary.summary}`;
+    return `<button class="report-item" data-node="${escapeAttr(value.id)}"><strong>${escapeHTML(value.label)}</strong><small>${escapeHTML(value.confidence)} · ${value.score}/100</small><small class="report-reason">Primary reason: ${escapeHTML(reason)}</small><small>Primary evidence: ${escapeHTML(evidence)}</small><small class="report-path">Primary ranking path: ${escapeHTML(path)}</small><small>Additional signals: ${escapeHTML(String(value.additionalSignals || 0))}</small></button>`;
   }).join("") : "<p class='hint'>No ranked items at this confidence threshold.</p>";
   for (const button of container.querySelectorAll(".report-item")) bindFocusButton(button);
 }
@@ -183,10 +195,23 @@ function renderOmittedItems(selector, items) {
   const container = document.querySelector(selector);
   container.innerHTML = items.length ? items.map(item => {
     const node = item.node || {};
-    const evidence = (item.evidence || []).join(", ") || "none recorded";
-    const paths = (item.paths || []).map(formatRecordedPath).join(" | ") || "none recorded";
-    return `<div class="report-item report-omitted"><strong>${escapeHTML(node.path || node.label || node.id || "candidate")}</strong><small>${escapeHTML(item.confidence)} · ${item.score}/100 · ${escapeHTML(item.reason)}</small><small>Evidence: ${escapeHTML(evidence)}</small><small class="report-path">Recorded ranking path: ${escapeHTML(paths)}</small></div>`;
+    const primary = linkedReason(item, "ranked recorded evidence", item.paths, item.evidence);
+    const evidence = (primary.evidence || []).join(", ") || "none recorded";
+    const ranking = `${primary.signal} (${primary.score}/100): ${primary.summary}`;
+    return `<div class="report-item report-omitted"><strong>${escapeHTML(node.path || node.label || node.id || "candidate")}</strong><small>${escapeHTML(item.confidence)} · ${item.score}/100 · selection: ${escapeHTML(item.selection_reason || item.reason)}</small><small>Ranking reason: ${escapeHTML(ranking)}</small><small>Ranking evidence: ${escapeHTML(evidence)}</small><small class="report-path">Ranking path: ${escapeHTML(formatRecordedPath(primary.path))}</small></div>`;
   }).join("") : "<p class='hint'>No bounded omitted candidates to show.</p>";
+}
+
+function linkedReason(item, fallbackSummary, fallbackPaths, fallbackEvidence) {
+  if (item && item.primary_reason) return item.primary_reason;
+  const paths = fallbackPaths || [];
+  return {
+    signal: "legacy-aggregate",
+    score: Number(item && item.score || 0),
+    summary: String(fallbackSummary || "ranked recorded evidence"),
+    path: paths[0] || null,
+    evidence: fallbackEvidence || []
+  };
 }
 
 function formatRecordedPath(path) {

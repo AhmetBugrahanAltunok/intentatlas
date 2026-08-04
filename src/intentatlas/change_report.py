@@ -8,7 +8,7 @@ from typing import Any
 
 from .change_analysis import ChangeAnalysis, _analyze_change_set_with_graph
 from .change_set import ChangeSet
-from .confidence import CONFIDENCE_RANK, confidence_for_score
+from .confidence import CONFIDENCE_RANK, LOW_CONFIDENCE_GUIDANCE, confidence_for_score
 from .config import ProjectConfig
 from .graph import AtlasGraph
 from .models import Node
@@ -42,6 +42,24 @@ class RequirementImpactPath:
 
 
 @dataclass(frozen=True, slots=True)
+class ReportReason:
+    signal: str
+    score: int
+    summary: str
+    path: RequirementImpactPath
+    evidence: tuple[str, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "signal": self.signal,
+            "score": self.score,
+            "summary": self.summary,
+            "path": self.path.to_dict(),
+            "evidence": list(self.evidence),
+        }
+
+
+@dataclass(frozen=True, slots=True)
 class RequirementImpact:
     requirement: Node
     score: int
@@ -49,6 +67,16 @@ class RequirementImpact:
     source_artifact_id: str
     path: RequirementImpactPath
     evidence: tuple[str, ...]
+
+    @property
+    def primary_reason(self) -> ReportReason:
+        return ReportReason(
+            "requirement-impact",
+            self.score,
+            "The requirement is connected to an analyzed changed artifact.",
+            self.path,
+            self.evidence,
+        )
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -59,6 +87,8 @@ class RequirementImpact:
             "source_artifact_id": self.source_artifact_id,
             "path": self.path.to_dict(),
             "evidence": list(self.evidence),
+            "primary_reason": self.primary_reason.to_dict(),
+            "reason_details": [self.primary_reason.to_dict()],
         }
 
 
@@ -68,9 +98,34 @@ class ChangeReportTest:
     score: int
     confidence: str
     artifact_ids: tuple[str, ...]
-    evidence: tuple[str, ...]
-    reasons: tuple[str, ...]
-    paths: tuple[RequirementImpactPath, ...]
+    reason_details: tuple[ReportReason, ...]
+
+    def __post_init__(self) -> None:
+        if not self.reason_details or self.reason_details[0].score != self.score:
+            raise ValueError("Primary test reason must produce the final score")
+
+    @property
+    def primary_reason(self) -> ReportReason:
+        return self.reason_details[0]
+
+    @property
+    def evidence(self) -> tuple[str, ...]:
+        return tuple(
+            sorted({value for reason in self.reason_details for value in reason.evidence})
+        )
+
+    @property
+    def reasons(self) -> tuple[str, ...]:
+        return tuple(sorted({reason.summary for reason in self.reason_details}))
+
+    @property
+    def paths(self) -> tuple[RequirementImpactPath, ...]:
+        return tuple(
+            sorted(
+                {reason.path for reason in self.reason_details},
+                key=lambda path: (path.nodes, path.relations),
+            )
+        )
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -81,6 +136,8 @@ class ChangeReportTest:
             "evidence": list(self.evidence),
             "reasons": list(self.reasons),
             "paths": [path.to_dict() for path in self.paths],
+            "primary_reason": self.primary_reason.to_dict(),
+            "reason_details": [reason.to_dict() for reason in self.reason_details],
         }
 
 
@@ -90,9 +147,31 @@ class OmittedCandidate:
     node: Node
     score: int
     confidence: str
-    reason: str
-    evidence: tuple[str, ...]
-    paths: tuple[RequirementImpactPath, ...]
+    selection_reason: str
+    reason_details: tuple[ReportReason, ...]
+
+    @property
+    def reason(self) -> str:
+        return self.selection_reason
+
+    @property
+    def primary_reason(self) -> ReportReason:
+        return self.reason_details[0]
+
+    @property
+    def evidence(self) -> tuple[str, ...]:
+        return tuple(
+            sorted({value for reason in self.reason_details for value in reason.evidence})
+        )
+
+    @property
+    def paths(self) -> tuple[RequirementImpactPath, ...]:
+        return tuple(
+            sorted(
+                {reason.path for reason in self.reason_details},
+                key=lambda path: (path.nodes, path.relations),
+            )
+        )
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -100,9 +179,12 @@ class OmittedCandidate:
             "node": self.node.to_dict(),
             "score": self.score,
             "confidence": self.confidence,
-            "reason": self.reason,
+            "reason": self.selection_reason,
+            "selection_reason": self.selection_reason,
             "evidence": list(self.evidence),
             "paths": [path.to_dict() for path in self.paths],
+            "primary_reason": self.primary_reason.to_dict(),
+            "reason_details": [reason.to_dict() for reason in self.reason_details],
         }
 
 
@@ -353,9 +435,14 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
             f"{len(report.requirements)} selected / "
             f"{report.requirement_candidate_count} candidates; "
             f"{report.requirement_filtered_count} filtered; "
-            f"{report.requirement_limit_omitted_count} omitted by limit"
+            f"{report.requirement_limit_omitted_count} omitted by limit; "
+            f"{len(report.omitted_requirements)}/"
+            f"{report.requirement_filtered_count + report.requirement_limit_omitted_count} "
+            "omission details shown"
         ),
     ]
+    if report.minimum_confidence == "low":
+        lines.append(f"Threshold note: {LOW_CONFIDENCE_GUIDANCE}")
     if report.revision_action is not None:
         lines.append(f"Revision action: {report.revision_action}")
     for requirement_item in report.requirements:
@@ -371,14 +458,20 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
     lines.append(
         f"Recommended tests: {len(report.tests)} selected / "
         f"{report.test_candidate_count} candidates; {report.test_filtered_count} filtered; "
-        f"{report.test_limit_omitted_count} omitted by limit"
+        f"{report.test_limit_omitted_count} omitted by limit; "
+        f"{len(report.omitted_tests)}/"
+        f"{report.test_filtered_count + report.test_limit_omitted_count} "
+        "omission details shown"
     )
     for test_item in report.tests:
+        primary = test_item.primary_reason
         lines.append(
             f"- {test_item.test.id}: {test_item.score}/100 ({test_item.confidence}); "
             f"selected from {len(test_item.artifact_ids)} changed artifacts; "
-            f"path {_path_text(test_item.paths[0]) if test_item.paths else 'none'}; "
-            f"evidence {', '.join(test_item.evidence) or 'none'}"
+            f"primary reason {primary.signal} ({primary.score}/100): {primary.summary}; "
+            f"path {_path_text(primary.path)}; "
+            f"evidence {', '.join(primary.evidence) or 'none'}; "
+            f"additional signals: {len(test_item.reason_details) - 1}"
         )
     if report.omitted_tests:
         lines.append("Omitted test candidates:")
@@ -484,12 +577,8 @@ def _test_recommendations(
         str,
         tuple[
             Node,
-            int,
-            str,
             set[str],
-            set[str],
-            set[str],
-            dict[tuple[tuple[str, ...], tuple[str, ...]], RequirementImpactPath],
+            set[ReportReason],
         ],
     ] = {}
     signal_count = 0
@@ -518,37 +607,38 @@ def _test_recommendations(
                 limit=MAX_REPORT_RESULTS,
             )
             for recommendation in result.recommendations:
-                score = min(recommendation.score, 65) if file_fallback else recommendation.score
-                confidence = confidence_for_score(score)
-                evidence = {
-                    value
-                    for reason in recommendation.reasons
-                    for value in reason.evidence
-                }
-                reasons = {reason.summary for reason in recommendation.reasons}
-                paths = {
-                    (reason.path.nodes, reason.path.relations): RequirementImpactPath(
-                        reason.path.nodes,
-                        reason.path.relations,
+                reason_details = {
+                    ReportReason(
+                        (
+                            f"file-fallback-{reason.signal}"
+                            if file_fallback
+                            else reason.signal
+                        ),
+                        min(reason.score, 65) if file_fallback else reason.score,
+                        (
+                            "File-level fallback: the changed file contains the ranked symbol, "
+                            "but the change was not proven exact to that symbol. " + reason.summary
+                            if file_fallback
+                            else reason.summary
+                        ),
+                        RequirementImpactPath(reason.path.nodes, reason.path.relations),
+                        tuple(
+                            dict.fromkeys(
+                                (
+                                    *reason.evidence,
+                                    *(("file-level-fallback",) if file_fallback else ()),
+                                )
+                            )
+                        ),
                     )
                     for reason in recommendation.reasons
                 }
-                if file_fallback:
-                    evidence.add("file-level-fallback")
-                    reasons.add(
-                        "The candidate is retained as file-level fallback; "
-                        "it is not exact-symbol proof."
-                    )
                 current = aggregated.get(recommendation.test.id)
                 if current is None:
                     aggregated[recommendation.test.id] = (
                         recommendation.test,
-                        score,
-                        confidence,
                         {artifact_id},
-                        evidence,
-                        reasons,
-                        paths,
+                        reason_details,
                     )
                     if len(aggregated) > MAX_REPORT_TEST_CANDIDATES:
                         raise ValueError(
@@ -557,28 +647,15 @@ def _test_recommendations(
                     continue
                 (
                     node,
-                    current_score,
-                    current_confidence,
                     sources,
-                    combined_evidence,
-                    combined_reasons,
-                    combined_paths,
+                    combined_reason_details,
                 ) = current
                 sources.add(artifact_id)
-                combined_evidence.update(evidence)
-                combined_reasons.update(reasons)
-                combined_paths.update(paths)
-                if score > current_score:
-                    current_score = score
-                    current_confidence = confidence
+                combined_reason_details.update(reason_details)
                 aggregated[recommendation.test.id] = (
                     node,
-                    current_score,
-                    current_confidence,
                     sources,
-                    combined_evidence,
-                    combined_reasons,
-                    combined_paths,
+                    combined_reason_details,
                 )
                 if len(aggregated) > MAX_REPORT_TEST_CANDIDATES:
                     raise ValueError(
@@ -589,25 +666,21 @@ def _test_recommendations(
             (
                 ChangeReportTest(
                     node,
-                    score,
-                    confidence,
+                    ordered_reasons[0].score,
+                    confidence_for_score(ordered_reasons[0].score),
                     tuple(sorted(sources)),
-                    tuple(sorted(evidence)),
-                    tuple(sorted(reasons)),
-                    tuple(
-                        paths[key]
-                        for key in sorted(paths)
-                    ),
+                    ordered_reasons,
                 )
                 for (
                     node,
-                    score,
-                    confidence,
                     sources,
-                    evidence,
-                    reasons,
-                    paths,
+                    reason_details,
                 ) in aggregated.values()
+                if (
+                    ordered_reasons := tuple(
+                        sorted(reason_details, key=_reason_sort_key)
+                    )
+                )
             ),
             key=lambda item: (-item.score, item.test.id),
         )
@@ -632,8 +705,7 @@ def _omitted_requirement(item: RequirementImpact, reason: str) -> OmittedCandida
         item.score,
         item.confidence,
         reason,
-        item.evidence,
-        (item.path,),
+        (item.primary_reason,),
     )
 
 
@@ -644,8 +716,7 @@ def _omitted_test(item: ChangeReportTest, reason: str) -> OmittedCandidate:
         item.score,
         item.confidence,
         reason,
-        item.evidence,
-        item.paths,
+        item.reason_details,
     )
 
 
@@ -657,8 +728,21 @@ def _path_text(path: RequirementImpactPath) -> str:
 
 
 def _omission_text(item: OmittedCandidate) -> str:
-    path = _path_text(item.paths[0]) if item.paths else "none"
+    primary = item.primary_reason
     return (
-        f"- {item.node.id}: {item.score}/100 ({item.confidence}); {item.reason}; "
-        f"path {path}; evidence {', '.join(item.evidence) or 'none'}"
+        f"- {item.node.id}: {item.score}/100 ({item.confidence}); selection reason "
+        f"{item.selection_reason}; ranking reason {primary.signal} ({primary.score}/100): "
+        f"{primary.summary}; path {_path_text(primary.path)}; "
+        f"evidence {', '.join(primary.evidence) or 'none'}"
+    )
+
+
+def _reason_sort_key(reason: ReportReason) -> tuple[object, ...]:
+    return (
+        -reason.score,
+        reason.signal,
+        reason.path.nodes,
+        reason.path.relations,
+        reason.evidence,
+        reason.summary,
     )

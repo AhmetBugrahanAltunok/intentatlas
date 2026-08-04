@@ -9,6 +9,12 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ### Changed
 
+- Bind Change Report scores to structured primary reasons with matching paths and evidence, expose
+  bounded omission-detail totals, and preserve legacy schema-1 aggregate fields additively.
+- Keep Python support modules, fixtures, and package markers in the graph while excluding them
+  from runnable test targets through bounded static pytest filename discovery.
+- Document low confidence as exploratory discovery, recommend medium or higher for automated CI,
+  and distinguish an `80/medium` direct static reference from high changed-test evidence.
 - Unify recommendation confidence at high 85+, medium 65-84, and low below 65 across
   recommend-tests, ChangeReport, guided CLI, JSON, and viewer projections; ChangeReport now
   applies the requested test threshold before limits and strategy selection.

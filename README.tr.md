@@ -342,9 +342,17 @@ uyuşuyorsa sahibi olan sembolün odaklı testi kullanılabilir. JavaScript/Type
 ve varsayılan statik içe aktarımlar kaydedilir; yalnızca tam sembolü içe aktaran tek bir bağımlı
 kaynaktan doğrudan bağlı teste gidilir. Seçilen dosya veya sembolün en son incelenen dar
 eş-değişimindeki testler ayrı bir düşük-güven kanıtıdır; 20 artifact'tan geniş commitler abstain
-eder. Yalnız filename eşleşmesine dayanan ikinci hop düşük kalır ve sıfır-byte package marker'ları
-çalıştırılabilir aday değildir. Sorgu sınırsız geçişli dolaşım yapmaz ve yanlış pozitifleri azaltmak
-için varsayılan olarak `medium` eşiğini kullanır.
+eder. Yalnız filename eşleşmesine dayanan ikinci hop düşük kalır. Python dosyaları ancak sınırlı
+pytest filename desenleri veya güvenle okunan bir `python_files` bildirimi bu rolü kanıtlarsa
+doğrudan çalıştırılabilir hedeftir; `conftest.py`, package marker, typing fixture ve eşleşmeyen
+support dosyaları graph artifact olarak kalır fakat çalıştırılacak komut diye sunulmaz.
+JavaScript/TypeScript ve Go mevcut adapter davranışını korur.
+
+`low` keşif modudur: zayıf filename, fallback ve co-change sinyalleri yüksek fan-out ve düşük
+precision üretebilir. Otomatik CI seçimi için `medium veya üzeri` eşik kullanın; varsayılan ve
+guided akış `medium` kalır. Exact statik direct-reference bilinçli olarak `80/medium` değerindedir;
+`high`, doğrudan değişiklik kümesi içindeki test gibi daha güçlü kanıtlara ayrılmıştır. Sorgu
+sınırsız geçişli dolaşım yapmaz.
 
 `evaluate-recommendations`, aynı üretim sorgusunu değiştirmeden katı ve kapalı-dünya yerel
 etiketleriyle karşılaştırır. Zaman damgasız şema-1 çıktısı eşik farklarını ve regresyonları görünür

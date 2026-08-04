@@ -418,9 +418,17 @@ package re-exports; nested changes can use a focused owning-symbol test when its
 JavaScript/TypeScript records exact named and default static imports, and follows at most one exact
 symbol-dependent source file to a directly linked test. For a selected file or symbol, tests from
 the artifact's most recent analyzed narrow co-change provide separate low-confidence evidence;
-commits wider than 20 artifacts abstain. A filename-only second hop remains low, and zero-byte
-package markers are not runnable candidates. The query never performs unrestricted transitive
-traversal and defaults to medium confidence to reduce false positives.
+commits wider than 20 artifacts abstain. A filename-only second hop remains low. Python files are
+direct runnable targets only when bounded pytest filename patterns or a safely read `python_files`
+declaration prove that role; `conftest.py`, package markers, typing fixtures, and unmatched support
+files remain graph artifacts but are not commands to run. JavaScript/TypeScript and Go retain their
+existing adapter behavior.
+
+Low is exploratory discovery mode: weak filename, fallback, and co-change signals can produce high
+fan-out and low precision. Use medium or higher for automated CI selection; the default and guided
+flows remain medium. An exact static direct reference is intentionally `80/medium`; high is
+reserved for stronger evidence such as a test directly present in the changed set. The query never
+performs unrestricted transitive traversal.
 
 `evaluate-recommendations` reuses that production query unchanged and compares it with strict,
 closed-world local labels. Its timestamp-free schema-1 output makes threshold tradeoffs and
