@@ -1,7 +1,7 @@
 ---
 id: phase-17-recommendation-integrity-strategy
 type: memory
-status: active
+status: complete
 phase: 17
 ---
 # Phase 17 Recommendation Integrity Strategy
@@ -24,6 +24,9 @@ only through bounded eligibility and evidence-strength rules.
    keep bounded co-change below direct structural evidence.
 5. **17E - truthful operation and closure:** correct schema documentation, make stale-revision and
    ambiguity wording actionable, record generated-vault governance, and pass every phase gate.
+6. **17F - evidence presentation and runnable integrity:** preserve linked primary reasons, expose
+   bounded omission totals, distinguish graph artifacts from runnable pytest targets, and explain
+   low discovery risk without retuning scores.
 
 ## Boundaries
 

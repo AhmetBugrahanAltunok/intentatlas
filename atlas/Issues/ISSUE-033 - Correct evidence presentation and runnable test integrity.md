@@ -1,7 +1,7 @@
 ---
 id: ISSUE-033
 type: issue
-status: in-progress
+status: closed
 phase: 17F
 ---
 # Correct evidence presentation and runnable test integrity
@@ -26,7 +26,7 @@ phase: 17F
 ## 17F-D - threshold truth and closure
 
 - [x] Explain low discovery mode and reserve high for stronger evidence without changing scores.
-- [ ] Pass focused/full/package/network/browser/vault/final-head CI gates and re-close Phase 17.
+- [x] Pass focused/full/package/network/browser/vault/final-head CI gates and re-close Phase 17.
 
 ## Links
 

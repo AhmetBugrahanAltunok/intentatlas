@@ -1,7 +1,7 @@
 ---
 id: session-2026-08-04-phase-17f-evidence-integrity
 type: session
-status: active
+status: complete
 phase: 17F
 ---
 # Phase 17F evidence integrity handoff
@@ -13,6 +13,8 @@ phase: 17F
   and a non-runnable typing support file ranked 80/medium.
 - R4 scores remain intentional and R6 low-mode fallback behavior remains available.
 - Phase 17 Evidence/Review are reopened; Phase 11C and release activity remain closed.
+- Phase 17F closed after linked-evidence, omission, runnable-role, local/package/vault, and exact-head
+  `13/13` remote CI gates passed. Phase 11C and release activity remain unstarted.
 
 ## Links
 

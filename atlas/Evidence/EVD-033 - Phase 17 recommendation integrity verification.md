@@ -1,7 +1,7 @@
 ---
 id: EVD-033
 type: evidence
-status: in-progress
+status: complete
 phase: 17
 ---
 # EVD-033 - Phase 17 recommendation integrity verification
@@ -110,6 +110,18 @@ results remain historical evidence, not proof that the new 17F gates pass.
   user-owned areas retained identical bytes, sizes, and mtimes. All 1,521 generated files retained
   identical bytes, sizes, and mtimes across the second pass. `intentatlas status` reported
   `durable orphans 0`. No public corpus, package, provenance, or coverage artifact is tracked.
+
+## 17F remote closure
+
+- Local verification and generated snapshot commit:
+  `9aed1dc189cd5293a5c9df2093939c6d0418efc1`.
+- GitHub Actions run
+  `https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/30874483368` completed
+  successfully at that exact pushed head with `13/13` jobs: Python 3.11/3.12/3.13 test and
+  coverage matrices, six installed-wheel cross-platform E2E jobs, real Chrome, static typing,
+  security/pip-audit, and reproducible package/pipx/extracted-sdist.
+- The immediate documentation closure commit must also receive green final-head CI. Any failure
+  reopens this Evidence and the Phase 17 Review.
 
 ## Entry and frozen baseline
 
@@ -242,11 +254,17 @@ results remain historical evidence, not proof that the new 17F gates pass.
   prefers abstention and can reduce recall.
 - Tracked generated vault outputs remain safe only under the single-writer governance in ADR-034;
   contributor intake requires a separate decision before Phase 11C.
+- Python runner eligibility currently understands only bounded pytest filename/root discovery.
+  Unsupported runner semantics and ambiguous configuration abstain, which protects precision but
+  can reduce recall. Legacy graphs without role metadata retain their earlier behavior until a
+  fresh scan adds roles.
 
 ## Links
 
 - proves:: [[Requirements/REQ-033 - Preserve recommendation integrity across supported surfaces]]
 - references:: [[Decisions/ADR-033 - Canonicalize confidence and conservative Python resolution]]
 - references:: [[Decisions/ADR-034 - Retain generated vault outputs under single-writer governance]]
+- references:: [[Decisions/ADR-035 - Add linked report reasons and explicit runnable test roles]]
 - delivered-by:: [[Issues/ISSUE-032 - Implement recommendation integrity and Python resolution]]
+- delivered-by:: [[Issues/ISSUE-033 - Correct evidence presentation and runnable test integrity]]
 - reviewed-by:: [[Reviews/Phase 17 Recommendation Integrity and Python Resolution Review]]

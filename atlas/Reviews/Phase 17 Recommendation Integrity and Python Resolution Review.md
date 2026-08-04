@@ -1,7 +1,7 @@
 ---
 id: review-phase-17-recommendation-integrity
 type: review
-status: in-progress
+status: passed
 phase: 17
 ---
 # Phase 17 Recommendation Integrity and Python Resolution Review
@@ -23,7 +23,16 @@ presentation, Python runnable-target eligibility, and low-mode risk copy. Phase 
 - [x] Focused, full browser/coverage, static, security/network, reproducible package, pipx, and
       extracted-sdist gates pass on the final implementation head.
 - [x] Final two-pass vault determinism and durable-orphan-zero gate.
-- [ ] Pushed-head remote CI and closure synchronization.
+- [x] Pushed-head remote CI and closure synchronization.
+
+## 17F decision
+
+Pass. R1, R2, R3, and R5 are corrected without changing the intentional R4 scores or removing the
+R6 low-discovery surface. Linked primary evidence, complete omission accounting, bounded runnable
+roles, Click/self-scan determinism, every local/package/browser/network/vault gate, durable orphan
+zero, and exact-head `13/13` remote CI pass. Phase 17 is re-closed without starting Phase 11C or
+performing tag, release, publication, or deployment activity. The immediate documentation closure
+head remains subject to mandatory final-head CI; failure reopens this decision.
 
 ## Acceptance review
 
@@ -50,4 +59,6 @@ failure on the immediate documentation closure head reopens this decision.
 - [[Evidence/EVD-033 - Phase 17 recommendation integrity verification]]
 - [[Requirements/REQ-033 - Preserve recommendation integrity across supported surfaces]]
 - [[Decisions/ADR-033 - Canonicalize confidence and conservative Python resolution]]
+- [[Decisions/ADR-035 - Add linked report reasons and explicit runnable test roles]]
 - [[Issues/ISSUE-032 - Implement recommendation integrity and Python resolution]]
+- [[Issues/ISSUE-033 - Correct evidence presentation and runnable test integrity]]
