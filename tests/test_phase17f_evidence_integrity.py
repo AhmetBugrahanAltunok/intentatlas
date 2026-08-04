@@ -15,7 +15,7 @@ from intentatlas.models import Edge, Node
 from intentatlas.onboarding import GuideSnapshot, TerminalIO, _render_summary
 from intentatlas.recommendations import recommend_tests
 from intentatlas.scanner import scan_repository
-from intentatlas.test_roles import classify_python_test, load_python_test_policy
+from intentatlas.test_eligibility import classify_python_test, load_python_test_policy
 
 
 def _write(root: Path, relative: str, content: str) -> None:
@@ -269,6 +269,26 @@ def test_safe_pytest_python_files_override_and_non_python_behavior(tmp_path) -> 
         "file:tests/core.spec.js",
         "file:core_test.go",
     }
+
+
+def test_pytest_testpaths_exclude_test_named_production_support(tmp_path) -> None:
+    _write(
+        tmp_path,
+        "pyproject.toml",
+        "[tool.pytest.ini_options]\ntestpaths=['tests']\n",
+    )
+    _write(tmp_path, "src/pkg/core.py", "def target():\n    return 1\n")
+    _write(tmp_path, "src/pkg/test_helper.py", "from pkg.core import target\n")
+    _write(tmp_path, "tests/test_core.py", "from pkg.core import target\n")
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    assert graph.nodes["file:src/pkg/test_helper.py"].metadata["test_role"] == "support"
+    assert graph.nodes["file:tests/test_core.py"].metadata["test_role"] == "runnable"
+    result = recommend_tests(
+        graph, "symbol:src/pkg/core.py::target", minimum_confidence="low"
+    )
+    assert [item.test.id for item in result.recommendations] == ["file:tests/test_core.py"]
 
 
 @pytest.mark.parametrize(

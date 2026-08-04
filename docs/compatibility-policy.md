@@ -75,7 +75,8 @@ Phase 17F keeps Change Report schema 1 and graph schema 4. Change Report items a
 set; omission records additionally expose `selection_reason`. Existing `reasons`, `paths`,
 `evidence`, and omission `reason` fields remain readable aggregate or selection fields and are
 deprecated for consumers that need a linked ranking explanation. Python test nodes may add
-`test_role`, `test_runner`, and discovery-evidence metadata. Those fields refine runnable-target
+`test_role`, `test_runner`, and discovery-evidence metadata. Bounded pytest `python_files` and
+`testpaths` declarations refine runnable-target
 eligibility without removing the node or its graph edges. Graphs without role metadata, and
 non-Python adapters, retain their prior recommendation behavior. These are additive fields under
 the existing schema boundaries and require no stored-data migration.

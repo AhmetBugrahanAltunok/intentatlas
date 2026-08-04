@@ -419,8 +419,9 @@ JavaScript/TypeScript records exact named and default static imports, and follow
 symbol-dependent source file to a directly linked test. For a selected file or symbol, tests from
 the artifact's most recent analyzed narrow co-change provide separate low-confidence evidence;
 commits wider than 20 artifacts abstain. A filename-only second hop remains low. Python files are
-direct runnable targets only when bounded pytest filename patterns or a safely read `python_files`
-declaration prove that role; `conftest.py`, package markers, typing fixtures, and unmatched support
+direct runnable targets only when bounded pytest filename patterns and safely read `python_files`
+or `testpaths` declarations prove that role; `conftest.py`, package markers, typing fixtures, files
+outside declared test roots, and unmatched support
 files remain graph artifacts but are not commands to run. JavaScript/TypeScript and Go retain their
 existing adapter behavior.
 

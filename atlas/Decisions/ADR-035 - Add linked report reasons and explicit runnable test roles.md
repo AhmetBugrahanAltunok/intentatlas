@@ -24,9 +24,9 @@ reason, add explicit `selection_reason`, and carry ranking reason records separa
 are additive and require no schema bump or migration.
 
 Keep Python files in test-shaped locations as graph test artifacts, but annotate a separate role.
-Default pytest-compatible runnable filenames are bounded patterns; a safely parsed project
-`python_files` declaration may replace them. `conftest.py`, package markers, and unmatched Python
-files are support artifacts and are not direct runnable recommendations. Existing graphs without
+Default pytest-compatible runnable filenames are bounded patterns; safely parsed project
+`python_files` and `testpaths` declarations may constrain them. `conftest.py`, package markers,
+files outside declared test roots, and unmatched Python files are support artifacts and are not direct runnable recommendations. Existing graphs without
 role metadata and non-Python adapters retain their prior behavior. Ambiguous or unsupported custom
 patterns abstain rather than guessing.
 

@@ -343,9 +343,9 @@ ve varsayılan statik içe aktarımlar kaydedilir; yalnızca tam sembolü içe a
 kaynaktan doğrudan bağlı teste gidilir. Seçilen dosya veya sembolün en son incelenen dar
 eş-değişimindeki testler ayrı bir düşük-güven kanıtıdır; 20 artifact'tan geniş commitler abstain
 eder. Yalnız filename eşleşmesine dayanan ikinci hop düşük kalır. Python dosyaları ancak sınırlı
-pytest filename desenleri veya güvenle okunan bir `python_files` bildirimi bu rolü kanıtlarsa
+pytest filename desenleri ile güvenle okunan `python_files` veya `testpaths` bildirimleri bu rolü kanıtlarsa
 doğrudan çalıştırılabilir hedeftir; `conftest.py`, package marker, typing fixture ve eşleşmeyen
-support dosyaları graph artifact olarak kalır fakat çalıştırılacak komut diye sunulmaz.
+ilan edilmiş test köklerinin dışındaki dosyalar ve diğer support dosyaları graph artifact olarak kalır fakat çalıştırılacak komut diye sunulmaz.
 JavaScript/TypeScript ve Go mevcut adapter davranışını korur.
 
 `low` keşif modudur: zayıf filename, fallback ve co-change sinyalleri yüksek fan-out ve düşük

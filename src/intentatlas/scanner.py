@@ -27,7 +27,7 @@ from .models import Edge, Node
 from .naming import note_title, safe_filename
 from .relations import USER_RELATIONS
 from .scan_cache import AdapterFragmentCache
-from .test_roles import classify_python_test, load_python_test_policy
+from .test_eligibility import classify_python_test, load_python_test_policy
 from .vault import ProjectVault
 from .workspace import WorkspaceModel, discover_workspace, owner_id
 

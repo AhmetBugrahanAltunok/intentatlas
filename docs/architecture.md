@@ -263,7 +263,7 @@ missing output is never treated as proof of no impact.
 
 Python scanning separately classifies graph-visible test artifacts as runnable tests, support
 modules, fixtures, or package markers. Classification uses only bounded static filenames and safe
-pytest `python_files` configuration; it never imports project modules or invokes pytest. Support,
+pytest `python_files`/`testpaths` configuration; it never imports project modules or invokes pytest. Support,
 fixture, and package nodes retain their structural edges but are excluded from executable command
 targets. Unknown legacy role metadata and existing JavaScript/TypeScript and Go behavior remain
 unchanged. Low confidence is exploratory discovery with potentially high fan-out and low
