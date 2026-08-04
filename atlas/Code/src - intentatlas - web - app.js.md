@@ -11,7 +11,7 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>33113</code>
+- **Size Bytes:** <code>34255</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -48,6 +48,7 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/formatRecordedPath - src - intentatlas - web - app.js|formatRecordedPath]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/graphPoint - src - intentatlas - web - app.js|graphPoint]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/kindPriority - src - intentatlas - web - app.js|kindPriority]] _(structure; evidence: javascript-structural)_
+- <code>defines</code> → [[Symbols/linkedReason - src - intentatlas - web - app.js|linkedReason]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/openChangeReport - src - intentatlas - web - app.js|openChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/outcomePaths - src - intentatlas - web - app.js|outcomePaths]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/overviewNodes - src - intentatlas - web - app.js|overviewNodes]] _(structure; evidence: javascript-structural)_
@@ -81,9 +82,9 @@ source_path: "src/intentatlas/web/app.js"
 
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_

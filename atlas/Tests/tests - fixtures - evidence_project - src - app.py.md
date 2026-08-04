@@ -12,6 +12,9 @@ source_path: "tests/fixtures/evidence_project/src/app.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>35</code>
+- **Test Role:** <code>"support"</code>
+- **Test Role Evidence:** <code>"pyproject-pytest-discovery"</code>
+- **Test Runner:** <code>"pytest"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>

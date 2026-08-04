@@ -11,7 +11,12 @@ source_path: "tests/test_browser_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>23989</code>
+- **Size Bytes:** <code>24179</code>
+- **Test Discovery Root:** <code>"tests"</code>
+- **Test Pattern:** <code>"test_*.py"</code>
+- **Test Role:** <code>"runnable"</code>
+- **Test Role Evidence:** <code>"pyproject-pytest-discovery"</code>
+- **Test Runner:** <code>"pytest"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -52,6 +57,7 @@ source_path: "tests/test_browser_e2e.py"
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 3245396 - Stabilize Phase 16 browser settlement gate|Stabilize Phase 16 browser settlement gate]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 5651c34 - test- verify viewer keyboard accessibility|test: verify viewer keyboard accessibility]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

@@ -12,6 +12,11 @@ source_path: "tests/test_config.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>6647</code>
+- **Test Discovery Root:** <code>"tests"</code>
+- **Test Pattern:** <code>"test_*.py"</code>
+- **Test Role:** <code>"runnable"</code>
+- **Test Role Evidence:** <code>"pyproject-pytest-discovery"</code>
+- **Test Runner:** <code>"pytest"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -35,7 +40,6 @@ source_path: "tests/test_config.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
-- <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-021 - Implement bounded open evidence imports|ISSUE-021 - Implement bounded open evidence imports]] _(reference; evidence: wikilink)_

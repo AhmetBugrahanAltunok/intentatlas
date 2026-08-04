@@ -75,20 +75,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/AdapterFragmentCache.load - src - intentatlas - scan_cache.py|AdapterFragmentCache.load]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/AdapterFragmentCache.store - src - intentatlas - scan_cache.py|AdapterFragmentCache.store]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_strict_node - src - intentatlas - scan_cache.py|_strict_node]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner.__init__ - src - intentatlas - scanner.py|RepositoryScanner.__init__]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner._check_graph_budget - src - intentatlas - scanner.py|RepositoryScanner._check_graph_budget]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner._discover_files - src - intentatlas - scanner.py|RepositoryScanner._discover_files]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner._scan - src - intentatlas - scanner.py|RepositoryScanner._scan]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner._scan_evidence_reports - src - intentatlas - scanner.py|RepositoryScanner._scan_evidence_reports]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner._scan_language_adapters - src - intentatlas - scanner.py|RepositoryScanner._scan_language_adapters]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner._scan_workspace - src - intentatlas - scanner.py|RepositoryScanner._scan_workspace]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner._scope_adapter_fragment - src - intentatlas - scanner.py|RepositoryScanner._scope_adapter_fragment]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryScanner.scan_incremental - src - intentatlas - scanner.py|RepositoryScanner.scan_incremental]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/ScanStatistics - src - intentatlas - scanner.py|ScanStatistics]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_adapter_fingerprint - src - intentatlas - scanner.py|_adapter_fingerprint]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_adapter_partitions - src - intentatlas - scanner.py|_adapter_partitions]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_endpoint_path - src - intentatlas - scanner.py|_endpoint_path]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_workspace_source_roots - src - intentatlas - scanner.py|_workspace_source_roots]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_query_int - src - intentatlas - viewer.py|_query_int]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_query_text - src - intentatlas - viewer.py|_query_text]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(history; evidence: git-diff-hunk)_
@@ -108,10 +94,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one - tests - test_scanner.py|test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_repository_file_and_byte_budgets_fail_before_adapter_work - tests - test_scanner.py|test_repository_file_and_byte_budgets_fail_before_adapter_work]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_graph_document - tests - test_viewer.py|_graph_document]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_serve_graph_rejects_non_loopback_and_invalid_ports - tests - test_viewer.py|test_serve_graph_rejects_non_loopback_and_invalid_ports]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

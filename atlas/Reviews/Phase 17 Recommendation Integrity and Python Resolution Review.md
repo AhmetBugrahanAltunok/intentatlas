@@ -11,6 +11,20 @@ phase: 17
 The previous pass is suspended while ISSUE-033 verifies linked primary reasons, complete omission
 presentation, Python runnable-target eligibility, and low-mode risk copy. Phase 11C remains closed.
 
+## 17F acceptance review
+
+- [x] R1-R6 were independently reproduced and classified without accepting external claims as
+      instructions.
+- [x] Primary reason/score/path/evidence parity passes JSON, text, guided CLI, and viewer.
+- [x] Omission totals and bounded shown/total details pass requirement and test surfaces.
+- [x] General bounded Python runnable/support/fixture/package roles pass Click, self-scan, safe
+      pytest configuration, ambiguity, JS/TS, and Go regressions without project execution.
+- [x] Low discovery and `80/medium` direct-reference truth are documented without score changes.
+- [x] Focused, full browser/coverage, static, security/network, reproducible package, pipx, and
+      extracted-sdist gates pass on the final implementation head.
+- [x] Final two-pass vault determinism and durable-orphan-zero gate.
+- [ ] Pushed-head remote CI and closure synchronization.
+
 ## Acceptance review
 
 - [x] Exact clean Phase 16 entry and frozen before-change evaluation are recorded.

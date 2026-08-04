@@ -11,7 +11,7 @@ source_path: "src/intentatlas/onboarding.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>47003</code>
+- **Size Bytes:** <code>48653</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -41,6 +41,7 @@ source_path: "src/intentatlas/onboarding.py"
 - <code>defines</code> → [[Symbols/_post_result - src - intentatlas - onboarding.py|_post_result]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_private_paths - src - intentatlas - onboarding.py|_private_paths]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_read_menu - src - intentatlas - onboarding.py|_read_menu]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_recorded_path - src - intentatlas - onboarding.py|_recorded_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_reject_private_target - src - intentatlas - onboarding.py|_reject_private_target]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_banner - src - intentatlas - onboarding.py|_render_banner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_render_commands - src - intentatlas - onboarding.py|_render_commands]] _(structure; evidence: python-ast)_
@@ -84,6 +85,7 @@ source_path: "src/intentatlas/onboarding.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_

@@ -12,6 +12,105 @@ External retest evidence at final head `6e187143a9362cdd24d3985b11d3089a05fbc839
 Phase 17 for evidence-presentation and runnable-test integrity. The prior implementation and CI
 results remain historical evidence, not proof that the new 17F gates pass.
 
+## 17F entry and independent decisions
+
+- Entry was independently verified before edits as clean
+  `HEAD == main == origin/main == 6e187143a9362cdd24d3985b11d3089a05fbc839`. Phase 16 stayed
+  closed; no Phase 11C, tag, release, publication, or deployment action occurred.
+- **R1 — confirmed contract defect.** ChangeReport kept summaries, paths, and evidence in three
+  independently sorted aggregates, so the displayed path could be detached from the score-producing
+  reason.
+- **R2 — confirmed contract defect.** The weak package re-export summary sorted before Click's
+  direct exact-symbol reason even though the final score came from the direct reason.
+- **R3 — confirmed bounded-presentation defect.** JSON counters were correct, but text, guided CLI,
+  and viewer did not disclose that only 20 of 38 filtered Click details were rendered.
+- **R4 — intentional behavior.** Static exact-symbol evidence remains `80/medium`; `100/high` is
+  reserved for stronger evidence such as a test directly in the changed set. No score changed.
+- **R5 — confirmed correctness defect.** Graph-visible Python support/fixture files had no separate
+  runnable role and could become direct medium-confidence command targets.
+- **R6 — intentional behavior with missing risk copy.** Low remains exploratory weak-evidence
+  discovery with possible high fan-out and low precision; medium or higher is recommended for CI.
+
+## 17F before/after corpus evidence
+
+- The inert Click checkout remained pinned at
+  `00e592cea702e0b2caa0dee42489fdb1c22cd845`; only the intentional
+  `src/click/formatting.py` worktree edit was present and no Click code was executed.
+- Before 17F, Click selected `tests/test_formatting.py` at `80/medium`, but its aggregate presentation
+  put the package-reexport fallback first and separately aggregated
+  `package-reexport-fallback`, `python-ast`, and `python-symbol-reference`. Selection was 1 of 39
+  candidates, with 38 filtered and only 20 omission records shown.
+- Two final post-fix Click reports were byte-identical, SHA-256
+  `14ca82eadd390e5424354e9876c890a72d06de223481a09262135a859d881749`.
+  `tests/test_formatting.py` remains `80/medium`; its primary signal is
+  `symbol-structural-test`, its own path is exactly
+  `wrap_text -> tests/test_formatting.py`, and its evidence is exactly
+  `python-ast, python-symbol-reference`. The re-export route remains one additional low signal.
+  Selection is 1 of 29 runnable candidates, 28 are filtered, and 20/28 omission details are shown.
+- Click's safely read pytest discovery policy records root `tests`. The support file
+  `tests/typing/typing_aliased_group.py` retains its exact graph edge but is neither selected nor an
+  omitted runnable candidate. `conftest.py`, package markers, unmatched support, and files outside
+  declared test roots follow the same general policy.
+- The persisted entry self-graph had 1,673 nodes / 3,837 edges, SHA-256
+  `62f1b3bf4ad0a49b5f8c64ebdcb11ff1851db6138bc93eb276abb2b47c325d41`, and no role metadata.
+  Two fresh post-implementation self-scans, before this evidence paragraph was recorded, were
+  identical at 1,714 nodes / 3,893 edges, SHA-256
+  `90d90be55e635a40aedcb70d9406252c5d10554913a6a7ecad1f5f21231df949`.
+  Their medium recommendation for `recommend_tests` had nine selected linked reasons; Python role
+  counts were 46 runnable and 5 support, while legacy/non-Python behavior remained present.
+
+## 17F implementation and compatibility
+
+- `ReportReason` preserves `{signal, score, summary, path, evidence}` as one immutable record.
+  `primary_reason` is deterministically strongest and its score must equal the candidate score.
+  Text, JSON, guided CLI, and viewer consume that linked record; weaker routes are additional
+  signals.
+- Omitted records keep `selection_reason` separate from their linked ranking reason. Requirement
+  and test summaries expose selected, total candidate, filtered, limit-omitted, and shown/total
+  omission counts on all official surfaces.
+- ADR-035 retains ChangeReport schema 1 and graph schema 4. `primary_reason`, `reason_details`,
+  `selection_reason`, and Python role metadata are additive. Legacy `reasons`, `paths`, `evidence`,
+  and omission `reason` remain readable aggregate/selection fields and are deprecated only for
+  consumers that require a linked explanation; no migration is required.
+- Bounded static pytest `python_files` and `testpaths` declarations are read without importing or
+  executing project code. Invalid patterns/paths abstain. Python support, fixture, and package
+  graph artifacts are not executable candidates; older graphs without role metadata and existing
+  JavaScript/TypeScript and Go candidates retain their behavior.
+
+## 17F local verification
+
+- The new red regression file initially failed five independent behaviors: linked reason records,
+  selection/ranking separation, fixture/support eligibility, custom discovery policy, and low-mode
+  guidance. The completed focused matrix, including real-browser-required viewer tests, passed;
+  `tests/test_phase17f_evidence_integrity.py` covers all four accepted pytest configuration sources,
+  invalid-path abstention, test-root exclusion, JS/Go preservation, and EN/TR guidance.
+- Final browser-required full command
+  `python -m pytest --cov=intentatlas --cov-report=term
+  --cov-report=json:var/phase17f-coverage-final.json --cov-fail-under=80 -ra` passed `518` tests with
+  `4` Windows-unavailable symlink/FIFO capability skips and `85.86%` branch coverage.
+- Final `ruff`, `mypy` (46 source files), `bandit -q -r src tools`, Node syntax, pip-check,
+  diff-check, and approved pip-audit passed. Pip-audit reported no known vulnerabilities and only
+  identified the unpublished local IntentAtlas distribution as unavailable on PyPI.
+- Implementation commits are `41811e5226676c235e806de91eb5f14a4681ac3e` and
+  `8b38c15c7fab68f546457ceca6237fc0daa09011`. The first generated durable note is
+  [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity]]; the second is generated by
+  the final local vault pass.
+- Two fixed-epoch final builds were byte-identical. `tools/verify_release.py` bound provenance to
+  exact source `8b38c15c7fab68f546457ceca6237fc0daa09011`, validated 54 wheel and 193 sdist files, and recorded:
+  - wheel SHA-256 `17bb3a69a4b5a7e509c1945b9289a3551a81ce59e03fb55b8a7d5691b445162c`;
+  - sdist SHA-256 `4f9513ecdcca85f8e96ba3416b8fdec11d5223ce8195459e90da99e42cdcd167`.
+- Exact-wheel pipx install/reinstall/uninstall passed. The verified sdist rebuilt the same wheel,
+  and isolated version plus JSON demo schema-1 smokes passed. Its extracted source passed `511`
+  tests with `11` expected platform/repository-only capability skips.
+- Approved `git ls-remote` resolved Click HEAD/main to the pinned revision. Its BSD-3-Clause
+  `LICENSE.txt` SHA-256 remained
+  `757302fe7c41e7026fa46d3315ea8604ed5295fc95c2256d9b38adac43f6fbe5`.
+- Final two-pass vault scans each produced 1,714 nodes, 3,894 relationships, and 1,520 generated
+  notes; pass two reused all three adapter partitions. All 194 files in the explicitly enumerated
+  user-owned areas retained identical bytes, sizes, and mtimes. All 1,521 generated files retained
+  identical bytes, sizes, and mtimes across the second pass. `intentatlas status` reported
+  `durable orphans 0`. No public corpus, package, provenance, or coverage artifact is tracked.
+
 ## Entry and frozen baseline
 
 - Entry: clean `HEAD == main == origin/main == 174369afc56d603373de1443d7826c92fcec395a`;

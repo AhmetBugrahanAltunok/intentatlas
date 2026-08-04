@@ -12,6 +12,11 @@ source_path: "tests/test_adapter_conformance.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>9782</code>
+- **Test Discovery Root:** <code>"tests"</code>
+- **Test Pattern:** <code>"test_*.py"</code>
+- **Test Role:** <code>"runnable"</code>
+- **Test Role Evidence:** <code>"pyproject-pytest-discovery"</code>
+- **Test Runner:** <code>"pytest"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -53,6 +58,5 @@ source_path: "tests/test_adapter_conformance.py"
 
 ## Incoming relationships
 
-- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(reference; evidence: wikilink)_

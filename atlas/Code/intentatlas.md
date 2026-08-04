@@ -57,6 +57,7 @@ generated: true
 - <code>owns</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - storage.py|src/intentatlas/storage.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/src - intentatlas - test_eligibility.py|src/intentatlas/test_eligibility.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/src - intentatlas - test_outcomes.py|src/intentatlas/test_outcomes.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(boundary; evidence: workspace-boundary)_
@@ -92,6 +93,7 @@ generated: true
 - <code>owns</code> → [[Tests/tests - test_onboarding_walkthroughs.py|tests/test_onboarding_walkthroughs.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_phase17_recommendation_integrity.py|tests/test_phase17_recommendation_integrity.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - test_phase17f_evidence_integrity.py|tests/test_phase17f_evidence_integrity.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_property_fuzz.py|tests/test_property_fuzz.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_real_world.py|tests/test_real_world.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(boundary; evidence: workspace-boundary)_

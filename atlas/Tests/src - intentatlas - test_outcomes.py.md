@@ -12,6 +12,9 @@ source_path: "src/intentatlas/test_outcomes.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>7345</code>
+- **Test Role:** <code>"support"</code>
+- **Test Role Evidence:** <code>"pyproject-pytest-discovery"</code>
+- **Test Runner:** <code>"pytest"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>

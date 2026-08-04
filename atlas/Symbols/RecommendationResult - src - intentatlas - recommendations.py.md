@@ -10,7 +10,7 @@ source_path: "src/intentatlas/recommendations.py"
 
 ## Metadata
 
-- **End Line:** <code>119</code>
+- **End Line:** <code>122</code>
 - **Line:** <code>104</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>

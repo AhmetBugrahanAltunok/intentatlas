@@ -12,6 +12,11 @@ source_path: "tests/test_e2e.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>12236</code>
+- **Test Discovery Root:** <code>"tests"</code>
+- **Test Pattern:** <code>"test_*.py"</code>
+- **Test Role:** <code>"runnable"</code>
+- **Test Role Evidence:** <code>"pyproject-pytest-discovery"</code>
+- **Test Runner:** <code>"pytest"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>

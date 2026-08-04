@@ -12,6 +12,11 @@ source_path: "tests/test_cli.py"
 
 - **Language:** <code>"Python"</code>
 - **Size Bytes:** <code>10726</code>
+- **Test Discovery Root:** <code>"tests"</code>
+- **Test Pattern:** <code>"test_*.py"</code>
+- **Test Role:** <code>"runnable"</code>
+- **Test Role Evidence:** <code>"pyproject-pytest-discovery"</code>
+- **Test Runner:** <code>"pytest"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>

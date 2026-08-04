@@ -8,24 +8,24 @@ phase: 17F
 
 ## 17F-A - linked ranking evidence
 
-- [ ] Preserve reason, score, path, and evidence as one structural record.
-- [ ] Make the strongest score-producing reason primary across JSON, text, guided CLI, and viewer.
-- [ ] Separate omitted-candidate selection reason from its ranking evidence.
+- [x] Preserve reason, score, path, and evidence as one structural record.
+- [x] Make the strongest score-producing reason primary across JSON, text, guided CLI, and viewer.
+- [x] Separate omitted-candidate selection reason from its ranking evidence.
 
 ## 17F-B - complete omission presentation
 
-- [ ] Show selected, candidate, filtered, limit-omitted, and shown/total omission counts everywhere.
-- [ ] Regress bounded requirement and test omission detail counts.
+- [x] Show selected, candidate, filtered, limit-omitted, and shown/total omission counts everywhere.
+- [x] Regress bounded requirement and test omission detail counts.
 
 ## 17F-C - runnable test roles
 
-- [ ] Distinguish Python runnable files from support, fixture, and package artifacts generally.
-- [ ] Consume only bounded safe pytest filename declarations and abstain on unsupported names.
-- [ ] Preserve graph edges and existing JavaScript/TypeScript and Go recommendation behavior.
+- [x] Distinguish Python runnable files from support, fixture, and package artifacts generally.
+- [x] Consume only bounded safe pytest filename/root declarations and abstain on unsupported input.
+- [x] Preserve graph edges and existing JavaScript/TypeScript and Go recommendation behavior.
 
 ## 17F-D - threshold truth and closure
 
-- [ ] Explain low discovery mode and reserve high for stronger evidence without changing scores.
+- [x] Explain low discovery mode and reserve high for stronger evidence without changing scores.
 - [ ] Pass focused/full/package/network/browser/vault/final-head CI gates and re-close Phase 17.
 
 ## Links
