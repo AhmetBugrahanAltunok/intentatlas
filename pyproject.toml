@@ -43,7 +43,7 @@ release = [
   "packaging==26.2",
 ]
 typing = [
-  "mypy>=1.15,<2",
+  "mypy>=1.15,<3",
 ]
 
 [project.scripts]
