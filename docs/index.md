@@ -19,7 +19,7 @@ deliberate persistent actions.
 ## Concepts and operations
 
 - [Architecture and trust boundaries](architecture.md)
-- [Installation status](installation.md)
+- [Installation and first run](installation.md)
 - [Managed public-repository cache](managed-repository-cache.md)
 - [Compatibility policy](compatibility-policy.md)
 - [Incremental scanning](incremental-scanning.md)

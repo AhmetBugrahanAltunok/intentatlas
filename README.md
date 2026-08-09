@@ -12,15 +12,89 @@
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
-IntentAtlas connects the reason a system exists to the code that implements it:
+IntentAtlas shows **why a change exists, which requirement it may affect, and which test has
+evidence for it**. It analyzes repositories locally, uploads no source code, and requires no API
+key.
 
 ```text
 Requirement → Decision → Issue → Code → Test → Evidence → Commit
 ```
 
-Most code graphs explain what calls what. IntentAtlas explains **why a change exists,
-what proves it, and what could be affected next**. It runs locally, requires no API key,
-and keeps its human-readable project memory in an Obsidian-compatible vault.
+<p align="center">
+  <img src="docs/assets/intentatlas-demo.gif" width="960" alt="IntentAtlas demo showing the intent graph, change report, and test evidence paths">
+</p>
+
+## Try it in two minutes
+
+IntentAtlas is currently an unpublished release candidate. From this trusted checkout:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\intentatlas.exe demo --report text
+```
+
+On macOS or Linux, replace the last two executable paths with `.venv/bin/python` and
+`.venv/bin/intentatlas`.
+
+The demo does not scan the current directory or access the network. It prints a small, built-in
+scenario with a recommendation and its evidence. Abridged output:
+
+```text
+Exact changed symbol: rotate_session (src/auth.py)
+Recommended tests:
+- tests/test_auth_rotation.py [medium 80]
+  Why: The test directly references an exactly modified symbol.
+  Path: commit → rotate_session → tests/test_auth_rotation.py
+```
+
+To analyze a local Git repository without writing project files:
+
+```powershell
+.\.venv\Scripts\intentatlas.exe guide C:\path\to\your-project
+```
+
+Or, from a real interactive terminal, inspect an approved public GitHub repository without cloning
+it manually:
+
+```powershell
+.\.venv\Scripts\intentatlas.exe guide https://github.com/OWNER/REPOSITORY
+```
+
+IntentAtlas shows the exact scope, safety limits, and any network/cache effect before asking you to
+press Enter. The result explains possible requirement impact, candidate tests, confidence, and the
+recorded evidence path. See the [guided CLI walkthrough](docs/guided-cli.md).
+
+### Example from a real repository
+
+Against the pinned Click commit used by the repository's reviewed benchmark, the no-write report
+selects one test and explains the exact structural route. Abridged output:
+
+```text
+$ intentatlas changes /path/to/click --commit HEAD --report
+Analysis state: analyzed; freshness aligned
+Test strategy: targeted
+Recommended tests: 1 selected / 1 candidates
+- tests/test_context.py: 80/100 (medium)
+  Why: The test references the owning symbol of an exactly modified nested symbol.
+  Path: Context.__exit__ → Context → tests/test_context.py
+```
+
+This output is advisory. The checkout is pinned and license-reviewed for reproducibility; project
+code and tests are not executed. See the [real-world validation protocol](docs/real-world-validation.md).
+
+## What IntentAtlas is — and is not
+
+| IntentAtlas is | IntentAtlas is not |
+| --- | --- |
+| A local evidence graph connecting intent, code, tests, and Git history | An AI code generator or autonomous coding agent |
+| A read-only change preview before you adopt a persistent vault | A hosted service that uploads your repository |
+| An explainable, confidence-ranked test recommendation tool | A test runner or proof that the suggested tests are sufficient |
+| An optional Markdown/Obsidian project memory you can keep in Git | A replacement for Git, issue trackers, CI, or Obsidian |
+
+An omitted requirement is not proven unaffected, and an omitted test is not proven unnecessary.
+IntentAtlas makes the available structural evidence visible and abstains when that evidence is not
+strong enough.
 
 ## What works today
 
@@ -57,25 +131,11 @@ and keeps its human-readable project memory in an Obsidian-compatible vault.
 
 ## Release candidate status
 
-The current candidate source identifies itself as `0.3.0rc1`. This is a release candidate, not a
-published package or compatibility promise. No tag or package-index release is implied. From a
-trusted checkout of the intended source revision, build and exercise that checkout:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install .
-.\.venv\Scripts\intentatlas.exe --version
-.\.venv\Scripts\intentatlas.exe demo --report text
-```
-
-This confirms the version and behavior of the current checkout; it does not by itself prove the
-Git revision or artifact hash. The exact source, reproducible-build, provenance, and hash procedure
-is documented in [the release process](RELEASING.md).
-
-The report exits without opening a listener and shows why one test is recommended while another
-test connected to a different symbol in the same source file is not recommended from the available
-exact-symbol evidence. Omission is not a claim that the other requirement is unaffected or that
-its test is unnecessary.
+The current source identifies itself as `0.3.0rc1`. It has not been tagged or published to a package
+index and is not yet a compatibility promise. The quick path above confirms the behavior of the
+current checkout; release review additionally verifies the exact revision, reproducible artifacts,
+provenance, hashes, installed wheel, and browser workflow. See [installation status](docs/installation.md)
+and [the release process](RELEASING.md).
 
 ## Quick start
 
