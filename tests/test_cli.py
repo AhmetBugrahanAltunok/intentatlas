@@ -37,7 +37,9 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
 
 def test_cli_reports_invalid_requests(tmp_path, capsys) -> None:
     assert main(["status", str(tmp_path)]) == 2
-    assert "error:" in capsys.readouterr().err
+    error = capsys.readouterr().err
+    assert "error:" in error
+    assert "Run `scan` first using the same IntentAtlas executable" in error
     assert main(["init", str(tmp_path)]) == 0
     assert main(["scan", str(tmp_path)]) == 0
     assert main(["impact", "missing", str(tmp_path)]) == 2

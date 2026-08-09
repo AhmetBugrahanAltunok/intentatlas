@@ -213,7 +213,11 @@ def test_change_report_requires_full_suite_for_fallback_or_unknown_analysis() ->
         f"{change_set.base_revision}, then run intentatlas changes --commit HEAD --report there."
     )
     assert unknown_report.to_dict()["revision_action"] == unknown_report.revision_action
-    assert "Revision action: Use a clean checkout" in render_change_report(unknown_report)
+    rendered = render_change_report(unknown_report)
+    assert "Revision action: Use a clean checkout" in rendered
+    assert "Analysis limitations: 1 file" in rendered
+    assert "auth.py: unknown; freshness stale" in rendered
+    assert "evidence revision-worktree-mismatch" in rendered
 
 
 def test_change_report_abstains_if_any_changed_artifact_is_unknown() -> None:

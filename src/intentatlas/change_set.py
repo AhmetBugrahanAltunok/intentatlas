@@ -316,7 +316,9 @@ def change_file_freshness(root: Path, change_set: ChangeSet, item: ChangeFile) -
         return "unknown"
     try:
         if current.stat().st_size > MAX_SYMBOL_SOURCE_BYTES:
-            return "unknown"
+            return _oversized_file_freshness(
+                root.resolve(), executable, change_set, item.path
+            )
         current_bytes = current.read_bytes()
     except OSError:
         return "unknown"
@@ -328,6 +330,49 @@ def change_file_freshness(root: Path, change_set: ChangeSet, item: ChangeFile) -
         if _normalized_lines(target_bytes) == _normalized_lines(current_bytes)
         else "stale"
     )
+
+
+def _oversized_file_freshness(
+    root: Path,
+    executable: str,
+    change_set: ChangeSet,
+    path: str,
+) -> str:
+    """Compare an oversized file through Git without loading its content into Python."""
+
+    command = [
+        executable,
+        "-c",
+        f"safe.directory={root.as_posix()}",
+        "-c",
+        "core.quotePath=false",
+        "-C",
+        str(root),
+        "diff",
+        "--quiet",
+        "--no-ext-diff",
+        "--no-textconv",
+    ]
+    if change_set.scope != "staged":
+        if change_set.head_revision is None:
+            return "unknown"
+        command.append(change_set.head_revision)
+    command.extend(("--", path))
+    try:
+        result = subprocess.run(  # noqa: S603  # nosec B603
+            command,
+            check=False,
+            capture_output=True,
+            timeout=10,
+            shell=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return "unknown"
+    if result.returncode == 0:
+        return "aligned"
+    if result.returncode == 1:
+        return "stale"
+    return "unknown"
 
 
 def _finish_change_set(

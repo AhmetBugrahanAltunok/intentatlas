@@ -26,6 +26,10 @@ Requirement → Decision → Issue → Code → Test → Evidence → Commit
 
 ## Try it in two minutes
 
+Prerequisites: Python 3.11, 3.12, or 3.13. Git is required for repository analysis but not for the
+built-in demo. The install step may contact your configured Python package index to obtain build
+dependencies.
+
 IntentAtlas is currently an unpublished release candidate. From this trusted checkout:
 
 ```powershell
@@ -36,6 +40,17 @@ python -m venv .venv
 
 On macOS or Linux, replace the last two executable paths with `.venv/bin/python` and
 `.venv/bin/intentatlas`.
+
+If `.venv` already exists, Python reuses it; choose another folder name for a completely isolated
+first run. Later examples use the short `intentatlas` command only after activating this same
+environment:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+On macOS or Linux, run `source .venv/bin/activate`. If activation is unavailable, keep using the
+full executable path shown above.
 
 The demo does not scan the current directory or access the network. It prints a small, built-in
 scenario with a recommendation and its evidence. Abridged output:
@@ -48,14 +63,14 @@ Recommended tests:
   Path: commit → rotate_session → tests/test_auth_rotation.py
 ```
 
-To analyze a local Git repository without writing project files:
+The guided flow requires a real interactive terminal; pipes, redirects, and non-interactive shells
+are rejected. To analyze a local Git repository without writing project files:
 
 ```powershell
 .\.venv\Scripts\intentatlas.exe guide C:\path\to\your-project
 ```
 
-Or, from a real interactive terminal, inspect an approved public GitHub repository without cloning
-it manually:
+Or inspect an approved public GitHub repository without cloning it manually:
 
 ```powershell
 .\.venv\Scripts\intentatlas.exe guide https://github.com/OWNER/REPOSITORY
@@ -63,7 +78,8 @@ it manually:
 
 IntentAtlas shows the exact scope, safety limits, and any network/cache effect before asking you to
 press Enter. The result explains possible requirement impact, candidate tests, confidence, and the
-recorded evidence path. See the [guided CLI walkthrough](docs/guided-cli.md).
+recorded evidence path. Choose Quit to exit the guide; if you open the local viewer, stop its
+terminal process with Ctrl+C. See the [guided CLI walkthrough](docs/guided-cli.md).
 
 ### Example from a real repository
 
@@ -211,6 +227,10 @@ After interpreting the preview, deliberately adopt the persistent vault workflow
 
 `init` creates generic guidance and empty intent folders; it never seeds IntentAtlas's own
 requirements, decisions, evidence, reviews, or dated sessions into the target repository.
+
+`status`, `impact`, `recommend-tests`, `diff`, and recommendation evaluation read the persistent
+graph and therefore require `scan` first. `diagnose`, `guide`, and `changes --report` perform their
+own read-only inspection and do not require a saved graph.
 
 Repeated CLI scans reuse a bounded content-addressed fragment for each unchanged built-in language
 adapter. The command reports reused and rebuilt adapter counts. This cache contains graph metadata,

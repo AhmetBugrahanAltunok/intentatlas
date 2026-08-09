@@ -19,6 +19,7 @@ CHANGE_REPORT_SCHEMA_VERSION = 1
 MAX_REPORT_RESULTS = 100
 MAX_REPORT_ARTIFACTS = 200
 MAX_REPORT_TEST_CANDIDATES = 10_000
+MAX_REPORT_ANALYSIS_LIMITATIONS = 20
 MAX_REQUIREMENT_VISITS = 1_000
 MAX_REQUIREMENT_DEPTH = 5
 _INTENT_RELATIONS = {"defines", "implemented-by", "tracked-by", "drives"}
@@ -445,6 +446,25 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
         lines.append(f"Threshold note: {LOW_CONFIDENCE_GUIDANCE}")
     if report.revision_action is not None:
         lines.append(f"Revision action: {report.revision_action}")
+    limitations = tuple(
+        item
+        for item in report.analysis.files
+        if item.state != "analyzed" or item.freshness != "aligned"
+    )
+    if limitations:
+        shown = limitations[:MAX_REPORT_ANALYSIS_LIMITATIONS]
+        noun = "file" if len(limitations) == 1 else "files"
+        lines.append(f"Analysis limitations: {len(limitations)} {noun}")
+        for item in shown:
+            lines.append(
+                f"- {item.path}: {item.state}; freshness {item.freshness}; "
+                f"confidence {item.confidence}; "
+                f"evidence {', '.join(item.evidence) or 'none'}"
+            )
+        if len(limitations) > len(shown):
+            lines.append(
+                f"- {len(limitations) - len(shown)} additional limitation(s) omitted"
+            )
     for requirement_item in report.requirements:
         lines.append(
             f"- {requirement_item.requirement.id}: {requirement_item.score}/100 "

@@ -71,6 +71,7 @@ def test_diagnostic_is_deterministic_and_no_write_without_config_or_vault(
     assert payload["network_required"] is False
     assert payload["config"]["state"] == "missing"
     assert payload["repository"]["git_state"] == "ready"
+    assert payload["artifacts"]["change_report_state"] == "available-unassessed"
     assert payload["next_safe_command"] == "intentatlas changes --commit HEAD --report"
     assert main(["diagnose", str(tmp_path), "--format", "json"]) == 0
     assert json.loads(capsys.readouterr().out) == payload

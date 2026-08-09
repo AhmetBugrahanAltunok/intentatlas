@@ -14,6 +14,8 @@ intentatlas https://github.com/OWNER/REPOSITORY
 Empty arguments open the guide only when both stdin and stdout are TTYs. A pipe, redirected stream,
 CI process, or other non-TTY context retains the existing argparse diagnostic on stderr and exit
 code 2. It never prompts, scans, or waits. The explicit `guide` command also refuses non-TTY use.
+If the command was installed into a virtual environment, activate that environment first or invoke
+its `intentatlas` executable by full path.
 
 ## Scope and trust contract
 

@@ -22,6 +22,10 @@ Gereksinim → Karar → İş → Kod → Test → Kanıt → Commit
 
 ## İki dakikada deneyin
 
+Gerekenler: Python 3.11, 3.12 veya 3.13. Git, gerçek depo analizi için gereklidir; yerleşik demo
+için gerekli değildir. Kurulum adımı, derleme bağımlılıklarını almak için ayarlı Python paket
+indeksinize bağlanabilir.
+
 IntentAtlas şu anda henüz yayımlanmamış bir sürüm adayıdır. Bu güvenilen checkout içinden:
 
 ```powershell
@@ -32,6 +36,17 @@ python -m venv .venv
 
 macOS veya Linux'ta son iki executable yolu yerine `.venv/bin/python` ve
 `.venv/bin/intentatlas` kullanın.
+
+`.venv` zaten varsa Python bu ortamı yeniden kullanır; tamamen temiz bir ilk deneme için başka bir
+klasör adı seçin. Aşağıdaki kısa `intentatlas` komutları ancak aynı ortam etkinleştirildikten sonra
+çalışır:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+macOS veya Linux'ta `source .venv/bin/activate` çalıştırın. Etkinleştirme kullanılamıyorsa yukarıdaki
+tam executable yolunu kullanmaya devam edin.
 
 Demo mevcut klasörü taramaz ve ağa erişmez. Bir öneri ile kanıtını içeren küçük, yerleşik bir
 senaryo yazdırır. Kısaltılmış çıktı:
@@ -44,14 +59,14 @@ Recommended tests:
   Path: commit → rotate_session → tests/test_auth_rotation.py
 ```
 
-Yerel bir Git deposunu proje dosyalarına yazmadan analiz etmek için:
+Rehberli akış gerçek bir etkileşimli terminal ister; pipe, yönlendirme ve etkileşimsiz kabukları
+reddeder. Yerel bir Git deposunu proje dosyalarına yazmadan analiz etmek için:
 
 ```powershell
 .\.venv\Scripts\intentatlas.exe guide C:\projenizin\yolu
 ```
 
-Ya da gerçek bir etkileşimli terminalden, onayladığınız public GitHub deposunu elle klonlamadan
-inceleyin:
+Ya da onayladığınız public GitHub deposunu elle klonlamadan inceleyin:
 
 ```powershell
 .\.venv\Scripts\intentatlas.exe guide https://github.com/OWNER/REPOSITORY
@@ -59,7 +74,8 @@ inceleyin:
 
 IntentAtlas Enter ile onay istemeden önce kesin kapsamı, güvenlik sınırlarını ve olası ağ/cache
 etkisini gösterir. Sonuç; olası gereksinim etkisini, aday testleri, güven düzeyini ve kaydedilmiş
-kanıt yolunu açıklar. Bkz. [rehberli CLI turu](docs/guided-cli.md).
+kanıt yolunu açıklar. Rehberden çıkmak için Quit seçeneğini kullanın; yerel görüntüleyiciyi
+açarsanız terminal sürecini Ctrl+C ile durdurun. Bkz. [rehberli CLI turu](docs/guided-cli.md).
 
 ### Gerçek bir depodan örnek
 
@@ -183,6 +199,10 @@ açıklar.
 
 `init`, genel yönlendirme ile boş niyet klasörleri oluşturur; IntentAtlas'ın kendi gereksinim,
 karar, kanıt, inceleme veya tarihli oturumlarını hedef depoya örnek veri olarak eklemez.
+
+`status`, `impact`, `recommend-tests`, `diff` ve öneri değerlendirme komutları kalıcı grafiği okur;
+bu nedenle önce `scan` çalıştırılmalıdır. `diagnose`, `guide` ve `changes --report` kendi salt-okunur
+incelemesini yapar ve kayıtlı grafik gerektirmez.
 
 Tekrarlanan CLI taramaları, değişmeyen her yerleşik dil adaptörü için sınırlı ve içerik-karmalı bir
 parçayı yeniden kullanır. Komut, yeniden kullanılan ve yeniden üretilen adaptör sayılarını gösterir.

@@ -540,7 +540,7 @@ def _scan(root: Path) -> int:
 
 def _status(root: Path) -> int:
     config = ProjectConfig.load(root)
-    graph = AtlasGraph.load(config.graph_path(root))
+    graph = _load_project_graph(root, config)
     print(f"IntentAtlas status - {root.name}")
     for kind, count in graph.summary().items():
         print(f"  {kind:12} {count}")
@@ -557,7 +557,7 @@ def _impact(root: Path, target: str, depth: int, direction: str) -> int:
     if depth < 1 or depth > 10:
         raise ValueError("Depth must be between 1 and 10")
     config = ProjectConfig.load(root)
-    graph = AtlasGraph.load(config.graph_path(root))
+    graph = _load_project_graph(root, config)
     origin = graph.find(target)
     records = graph.impact(origin.id, depth=depth, direction=direction)
     print(f"{origin.label} [{origin.kind}] - {origin.id}")
@@ -584,7 +584,7 @@ def _recommend_tests(
     output_format: str,
 ) -> int:
     config = ProjectConfig.load(root)
-    graph = AtlasGraph.load(config.graph_path(root))
+    graph = _load_project_graph(root, config)
     origin = graph.find(target)
     result = recommend_tests(
         graph,
@@ -759,7 +759,7 @@ def _evaluate_recommendations(
     output_format: str,
 ) -> int:
     config = ProjectConfig.load(root)
-    graph = AtlasGraph.load(config.graph_path(root))
+    graph = _load_project_graph(root, config)
     labels_path = _project_path(
         root,
         config,
@@ -902,7 +902,7 @@ def _diff(root: Path, base: str, output: str | None, check: bool) -> int:
     config = ProjectConfig.load(root)
     current_path = config.graph_path(root)
     base_path = _project_path(root, config, base, "baseline graph", must_exist=True)
-    current = AtlasGraph.load(current_path)
+    current = _load_project_graph(root, config)
     baseline = AtlasGraph.load(base_path)
     value = graph_diff(baseline, current)
     rendered = render_graph_diff(value)
@@ -916,6 +916,16 @@ def _diff(root: Path, base: str, output: str | None, check: bool) -> int:
         output_path.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"Graph diff: {output_path.relative_to(root)}")
     return 1 if check and value["has_changes"] else 0
+
+
+def _load_project_graph(root: Path, config: ProjectConfig) -> AtlasGraph:
+    graph_path = config.graph_path(root)
+    if not graph_path.is_file():
+        raise ValueError(
+            "No IntentAtlas graph exists for this project. "
+            "Run `scan` first using the same IntentAtlas executable, then retry the command."
+        )
+    return AtlasGraph.load(graph_path)
 
 
 def _project_path(

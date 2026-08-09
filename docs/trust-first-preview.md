@@ -28,7 +28,8 @@ On macOS or Linux, replace the path with `/path/to/project`. Use `--worktree` in
 
 The diagnostic is schema 1. It reports configuration and Git readiness, bounded adapter
 capabilities, unsupported languages, oversized inputs, project/source-root ambiguity, configured
-evidence without claiming freshness, graph/report availability, and the next safe command. It
+evidence without claiming freshness, graph/report command availability without claiming the
+report itself is ready, and the next safe command. It
 reads bounded local metadata and supported sources, excludes the configured vault and literal
 `atlas/Private/`, and does not write project or Git state.
 
@@ -36,7 +37,8 @@ The report is Change Report schema 1. Read it in this order:
 
 1. Confirm the exact scope and base/head revision.
 2. Check analysis state and freshness. `fallback` or `unknown` requires the displayed full-suite
-   strategy; it is not targeted sufficiency.
+   strategy; it is not targeted sufficiency. Read the per-file **Analysis limitations** lines to
+   see why the analysis fell back or abstained.
 3. Confirm the minimum confidence threshold and selected/total/filtered/limit-omitted counts.
 4. Inspect each score, confidence, evidence tag, reason, and recorded ranking path.
 5. Treat an omitted candidate only as below the shown threshold or result limit. It is never proof
@@ -61,6 +63,9 @@ intentatlas init C:\path\to\project
 intentatlas scan C:\path\to\project
 intentatlas open C:\path\to\project
 ```
+
+Commands that read the saved graph, including `status`, `impact`, `recommend-tests`, and `diff`,
+require `scan` first. If the graph is missing, the CLI states that prerequisite directly.
 
 See the deterministic [example report](examples/trust-first-report.json) and its original
 [visual artifact](assets/trust-first-preview.svg). They demonstrate output semantics, not a claim

@@ -6,6 +6,7 @@ import subprocess
 
 import pytest
 
+import intentatlas.change_set as change_set_module
 from intentatlas.change_analysis import analyze_change_set, render_change_analysis
 from intentatlas.change_set import collect_change_set
 from intentatlas.config import ProjectConfig
@@ -109,3 +110,40 @@ def test_worktree_analysis_marks_untracked_source_as_file_fallback(tmp_path) -> 
     )
     assert item.artifact_ids == ("file:new.py",)
     assert "untracked-content-not-read" in item.evidence
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_oversized_unscanned_commit_file_uses_safe_file_fallback(
+    tmp_path, monkeypatch
+) -> None:
+    def git(*arguments: str) -> None:
+        subprocess.run(
+            ["git", *arguments],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+        )
+
+    git("init", "-q")
+    git("config", "user.name", "Change Analysis Test")
+    git("config", "user.email", "change-analysis@example.invalid")
+    asset = tmp_path / "demo.gif"
+    asset.write_bytes(b"GIF89a" + (b"x" * 64))
+    git("add", "demo.gif")
+    git("commit", "-qm", "add demo")
+    monkeypatch.setattr(change_set_module, "MAX_SYMBOL_SOURCE_BYTES", 16)
+
+    change_set = collect_change_set(tmp_path, scope="commit", revision="HEAD")
+    result = analyze_change_set(
+        tmp_path, change_set, ProjectConfig(git_history_limit=0)
+    )
+
+    assert result.state == "fallback"
+    assert len(result.files) == 1
+    item = result.files[0]
+    assert (item.state, item.freshness, item.confidence) == (
+        "fallback",
+        "aligned",
+        "low",
+    )
+    assert "unscanned-file-fallback" in item.evidence

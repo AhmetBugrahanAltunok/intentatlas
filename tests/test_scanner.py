@@ -100,6 +100,22 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
     ) in relationships
 
 
+def test_scanner_parses_windows_utf8_bom_python_files(tmp_path) -> None:
+    source = tmp_path / "app.py"
+    test = tmp_path / "test_app.py"
+    source.write_bytes(b"\xef\xbb\xbfdef run():\n    return True\n")
+    test.write_bytes(
+        b"\xef\xbb\xbffrom app import run\n\ndef test_run():\n    assert run()\n"
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    assert "symbol:app.py::run" in graph.nodes
+    assert "symbol:test_app.py::test_run" in graph.nodes
+    relationships = {(edge.source, edge.target, edge.relation) for edge in graph.edges}
+    assert ("file:test_app.py", "symbol:app.py::run", "tests") in relationships
+
+
 def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> None:
     first = scan_repository(TYPESCRIPT_FIXTURE, ProjectConfig(git_history_limit=0))
     second = scan_repository(TYPESCRIPT_FIXTURE, ProjectConfig(git_history_limit=0))

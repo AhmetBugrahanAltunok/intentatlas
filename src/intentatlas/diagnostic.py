@@ -187,10 +187,10 @@ def diagnose_repository(root: Path) -> RepositoryDiagnostic:
     evidence_state = "not-configured" if configured_evidence_count == 0 else "configured-unverified"
     if git_state == "ready":
         next_command = "intentatlas changes --commit HEAD --report"
-        report_state = "ready"
+        report_state = "available-unassessed"
     elif git_state == "empty":
         next_command = "intentatlas changes --worktree --report"
-        report_state = "worktree-only"
+        report_state = "worktree-available-unassessed"
     else:
         next_command = "intentatlas demo --report text"
         report_state = "unavailable"
