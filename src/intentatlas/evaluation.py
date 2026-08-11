@@ -173,7 +173,11 @@ def evaluate_recommendations(
     for case in labels.cases:
         target = graph.nodes.get(case.target)
         if target is None:
-            raise ValueError(f"Unknown evaluation target in case {case.id}: {case.target}")
+            raise ValueError(
+                f"Evaluation target is absent from the saved graph in case {case.id}: "
+                f"{case.target}. Run `scan` first. If it is still absent, increase "
+                "`git_history_limit` to include the pinned commit or refresh the reviewed labels."
+            )
         if target.kind not in {"commit", "file", "symbol", "test"}:
             raise ValueError(
                 f"Unsupported evaluation target kind in case {case.id}: {target.kind}"
@@ -182,7 +186,9 @@ def evaluate_recommendations(
             expected = graph.nodes.get(f"file:{expected_path}")
             if expected is None or expected.kind != "test" or expected.path != expected_path:
                 raise ValueError(
-                    f"Unknown expected test in case {case.id}: {expected_path}"
+                    f"Expected test is absent from the saved graph in case {case.id}: "
+                    f"{expected_path}. Run `scan` first; if it remains absent, refresh the "
+                    "reviewed labels for the current test suite."
                 )
 
         recommendation = recommend_tests(

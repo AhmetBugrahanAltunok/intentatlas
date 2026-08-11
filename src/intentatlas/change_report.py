@@ -430,6 +430,7 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
         ),
         f"Analysis state: {report.analysis.state}; freshness {report.freshness}",
         f"Minimum confidence: {report.minimum_confidence}",
+        "Confidence bands: low 0-64; medium 65-84; high 85-100",
         f"Test strategy: {report.test_strategy}",
         (
             "Requirement impacts: "
@@ -444,6 +445,13 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
     ]
     if report.minimum_confidence == "low":
         lines.append(f"Threshold note: {LOW_CONFIDENCE_GUIDANCE}")
+    elif report.requirement_filtered_count:
+        lines.append(
+            "Requirement threshold: "
+            f"{report.requirement_filtered_count} candidate(s) are below "
+            f"{report.minimum_confidence}. Use `--minimum-confidence low` only to inspect "
+            "weaker exploratory evidence; it is not stronger proof."
+        )
     if report.revision_action is not None:
         lines.append(f"Revision action: {report.revision_action}")
     limitations = tuple(
@@ -466,11 +474,15 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
                 f"- {len(limitations) - len(shown)} additional limitation(s) omitted"
             )
     for requirement_item in report.requirements:
-        lines.append(
-            f"- {requirement_item.requirement.id}: {requirement_item.score}/100 "
-            f"({requirement_item.confidence}); selected because confidence meets "
-            f"{report.minimum_confidence}; path {_path_text(requirement_item.path)}; "
-            f"evidence {', '.join(requirement_item.evidence) or 'none'}"
+        primary = requirement_item.primary_reason
+        lines.extend(
+            [
+                f"- {requirement_item.requirement.id}: {requirement_item.score}/100 "
+                f"({requirement_item.confidence})",
+                f"  Why: {primary.summary}",
+                f"  Path: {_path_text(requirement_item.path)}",
+                f"  Evidence: {', '.join(requirement_item.evidence) or 'none'}",
+            ]
         )
     if report.omitted_requirements:
         lines.append("Omitted requirement candidates:")
@@ -485,13 +497,17 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
     )
     for test_item in report.tests:
         primary = test_item.primary_reason
-        lines.append(
-            f"- {test_item.test.id}: {test_item.score}/100 ({test_item.confidence}); "
-            f"selected from {len(test_item.artifact_ids)} changed artifacts; "
-            f"primary reason {primary.signal} ({primary.score}/100): {primary.summary}; "
-            f"path {_path_text(primary.path)}; "
-            f"evidence {', '.join(primary.evidence) or 'none'}; "
-            f"additional signals: {len(test_item.reason_details) - 1}"
+        additional = len(test_item.reason_details) - 1
+        lines.extend(
+            [
+                f"- {test_item.test.id}: {test_item.score}/100 ({test_item.confidence}); "
+                f"selected from {len(test_item.artifact_ids)} changed artifacts",
+                f"  Why: {primary.summary} ({primary.signal}, {primary.score}/100)",
+                f"  Path: {_path_text(primary.path)}",
+                f"  Evidence: {', '.join(primary.evidence) or 'none'}",
+                "  Additional signals: "
+                f"{additional} (inspect `tests[].reason_details` in `--format json`)",
+            ]
         )
     if report.omitted_tests:
         lines.append("Omitted test candidates:")
@@ -750,10 +766,11 @@ def _path_text(path: RequirementImpactPath) -> str:
 def _omission_text(item: OmittedCandidate) -> str:
     primary = item.primary_reason
     return (
-        f"- {item.node.id}: {item.score}/100 ({item.confidence}); selection reason "
-        f"{item.selection_reason}; ranking reason {primary.signal} ({primary.score}/100): "
-        f"{primary.summary}; path {_path_text(primary.path)}; "
-        f"evidence {', '.join(primary.evidence) or 'none'}"
+        f"- {item.node.id}: {item.score}/100 ({item.confidence}); not selected: "
+        f"{item.selection_reason}\n"
+        f"  Why: {primary.summary} ({primary.signal}, {primary.score}/100)\n"
+        f"  Path: {_path_text(primary.path)}\n"
+        f"  Evidence: {', '.join(primary.evidence) or 'none'}"
     )
 
 

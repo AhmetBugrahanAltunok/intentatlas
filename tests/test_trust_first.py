@@ -73,7 +73,11 @@ def test_diagnostic_and_real_repository_preview_are_no_write(
     diagnostic_text = capsys.readouterr().out
     assert "Read only: yes" in diagnostic_text
     assert "network required: no" in diagnostic_text
-    assert "intentatlas changes --commit HEAD --report" in diagnostic_text
+    quoted_project = subprocess.list2cmdline([str(project.resolve())])
+    assert (
+        f"intentatlas changes {quoted_project} --commit HEAD --report"
+        in diagnostic_text
+    )
 
     assert main(["diagnose", str(project), "--format", "json"]) == 0
     diagnostic_json = json.loads(capsys.readouterr().out)

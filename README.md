@@ -30,27 +30,28 @@ Prerequisites: Python 3.11, 3.12, or 3.13. Git is required for repository analys
 built-in demo. The install step may contact your configured Python package index to obtain build
 dependencies.
 
-IntentAtlas is currently an unpublished release candidate. From this trusted checkout:
+IntentAtlas is currently an unpublished release candidate. Choose the environment folder once;
+if `.venv` already belongs to another setup, change the first line to
+`$IntentAtlasVenv = ".venv-intentatlas"`:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install .
-.\.venv\Scripts\intentatlas.exe demo --report text
+$IntentAtlasVenv = ".venv"
+python -m venv $IntentAtlasVenv
+& "$IntentAtlasVenv\Scripts\python.exe" -m pip install .
+& "$IntentAtlasVenv\Scripts\intentatlas.exe" demo --report text
 ```
 
-On macOS or Linux, replace the last two executable paths with `.venv/bin/python` and
-`.venv/bin/intentatlas`.
-
-If `.venv` already exists, Python reuses it; choose another folder name for a completely isolated
-first run. Later examples use the short `intentatlas` command only after activating this same
-environment:
+Python reuses an existing environment folder. Later examples use the short `intentatlas` command
+after activating the exact folder selected above:
 
 ```powershell
-.\.venv\Scripts\Activate.ps1
+& "$IntentAtlasVenv\Scripts\Activate.ps1"
 ```
 
-On macOS or Linux, run `source .venv/bin/activate`. If activation is unavailable, keep using the
-full executable path shown above.
+On macOS or Linux, set `IntentAtlasVenv=.venv` (or another name), use
+`$IntentAtlasVenv/bin/python` and `$IntentAtlasVenv/bin/intentatlas`, then run
+`source "$IntentAtlasVenv/bin/activate"`. If activation is unavailable, keep using the selected
+folder's full executable path.
 
 The demo does not scan the current directory or access the network. It prints a small, built-in
 scenario with a recommendation and its evidence. Abridged output:
@@ -67,13 +68,13 @@ The guided flow requires a real interactive terminal; pipes, redirects, and non-
 are rejected. To analyze a local Git repository without writing project files:
 
 ```powershell
-.\.venv\Scripts\intentatlas.exe guide C:\path\to\your-project
+intentatlas guide C:\path\to\your-project
 ```
 
 Or inspect an approved public GitHub repository without cloning it manually:
 
 ```powershell
-.\.venv\Scripts\intentatlas.exe guide https://github.com/OWNER/REPOSITORY
+intentatlas guide https://github.com/OWNER/REPOSITORY
 ```
 
 IntentAtlas shows the exact scope, safety limits, and any network/cache effect before asking you to
@@ -98,6 +99,12 @@ Recommended tests: 1 selected / 1 candidates
 
 This output is advisory. The checkout is pinned and license-reviewed for reproducibility; project
 code and tests are not executed. See the [real-world validation protocol](docs/real-world-validation.md).
+
+That pinned example is intentionally small. A larger change can produce many requirement and test
+candidates, and fallback analysis adds a full-suite strategy. Use `--limit 5` for a shorter human
+report. `--format json` preserves the bounded analysis, all recorded reason details, and paths for
+automation, so even one broad commit can produce thousands of lines; redirect it to a file instead
+of treating it as a compact terminal view.
 
 ## What IntentAtlas is — and is not
 
@@ -220,9 +227,9 @@ See the [trust-first preview](docs/trust-first-preview.md) and [documentation in
 After interpreting the preview, deliberately adopt the persistent vault workflow:
 
 ```powershell
-.\.venv\Scripts\intentatlas.exe init C:\path\to\your-project
-.\.venv\Scripts\intentatlas.exe scan C:\path\to\your-project
-.\.venv\Scripts\intentatlas.exe open C:\path\to\your-project
+intentatlas init C:\path\to\your-project
+intentatlas scan C:\path\to\your-project
+intentatlas open C:\path\to\your-project
 ```
 
 `init` creates generic guidance and empty intent folders; it never seeds IntentAtlas's own
@@ -232,6 +239,18 @@ requirements, decisions, evidence, reviews, or dated sessions into the target re
 graph and therefore require `scan` first. `diagnose`, `guide`, and `changes --report` perform their
 own read-only inspection and do not require a saved graph.
 
+For `impact`, `TARGET` may be an exact graph ID (`commit:FULL_SHA` or
+`symbol:src/auth.py::rotate_session`), a project-relative path such as `src/auth.py`, an exact
+label, or a unique partial match:
+
+```text
+intentatlas impact src/auth.py --depth 2
+intentatlas impact symbol:src/auth.py::rotate_session --direction upstream
+```
+
+Every two spaces in the result means one relationship hop from the original target. Rows are a
+flat traversal result; an indented row is not a child of the line immediately above it.
+
 Repeated CLI scans reuse a bounded content-addressed fragment for each unchanged built-in language
 adapter. The command reports reused and rebuilt adapter counts. This cache contains graph metadata,
 not source text, and is always safe to remove; a malformed or stale entry is rebuilt. Graph and
@@ -240,8 +259,8 @@ cache files are replaced atomically. See [incremental scanning](docs/incremental
 Then open the `atlas/` directory as an Obsidian vault. The standard Graph View will
 show requirements, decisions, code, tests, evidence, and commits as color-coded nodes.
 
-On macOS or Linux, replace `.\.venv\Scripts\intentatlas.exe` with
-`./.venv/bin/intentatlas` and use an explicit path such as `/path/to/your-project`.
+On macOS or Linux, use an explicit path such as `/path/to/your-project`. If the environment is not
+activated, invoke `intentatlas` from the environment folder selected during installation.
 
 Python 3.11, 3.12, and 3.13 are supported. The complete suite runs on Linux, while an installed
 wheel smoke test covers the CLI, scan, recommendation, and loopback viewer workflow on Linux,
@@ -306,6 +325,12 @@ unlisted requirements or tests are unaffected.
 Add `--open` to inspect that same in-memory report in the loopback viewer without persisting a
 second graph or report artifact.
 
+Both `--analyze` and `--report` perform a fresh bounded worktree scan; they do not reuse the saved
+graph, so a large repository can take noticeably longer than `status` or `impact`. Text output
+shows the score bands (`low` 0–64, `medium` 65–84, `high` 85–100). Lowering the threshold to `low`
+is useful only to inspect weaker exploratory evidence. `Additional signals` counts other recorded
+ranking reasons; inspect `tests[].reason_details` in `--format json` to see them.
+
 For pull-request or CI experimentation, `review` composes the same range ChangeSet and Change
 Report into deterministic Markdown, JSON, or bounded SARIF 2.1.0:
 
@@ -355,11 +380,19 @@ but withheld from recommendations. Raw symbols, diagnostics, messages, snippets,
 code flows, source content, and absolute paths are not retained. See
 [open evidence imports](docs/open-evidence.md).
 
-To compare the current cache with a saved baseline:
+To compare the current graph with a saved baseline, first scan a known-good state and save that
+generated graph. After the project changes, scan again and compare it with the saved copy:
 
-```text
+```powershell
+intentatlas scan
+Copy-Item .intentatlas\graph.json .intentatlas\baseline.json
+# Make the intended project change, then refresh the current graph:
+intentatlas scan
 intentatlas diff .intentatlas/baseline.json --output .intentatlas/diff.json --check
 ```
+
+On macOS or Linux, use `cp .intentatlas/graph.json .intentatlas/baseline.json`. A baseline is an
+explicit snapshot chosen by the user; `scan` does not create or overwrite it automatically.
 
 To rank test files for a commit, file, or symbol without running them:
 
@@ -379,13 +412,17 @@ From a full IntentAtlas repository checkout, measure recommendation quality agai
 exhaustive reviewed label set:
 
 ```text
+intentatlas scan
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json --minimum-confidence high --format json
 ```
 
 Evaluation reports TP, FP, FN, precision, and recall without running tests or changing ranking
 scores. This repository-only two-case baseline is a regression aid, not evidence of accuracy on
-other repositories; it is not included in the source-distribution corpus. See
+other repositories; it is not included in the source-distribution corpus. Its targets are pinned
+historical commits, so the saved graph's `git_history_limit` must still include them. This checkout
+uses the maximum bounded history of 250 for that reason. `evaluate-corpus` differs: it reads the
+small saved graphs named by its manifest and does not require a project `scan`. See
 [the evaluation schema and metric contract](docs/recommendation-evaluation.md).
 
 To compare all confidence thresholds across the original Python, TypeScript, and Go graph

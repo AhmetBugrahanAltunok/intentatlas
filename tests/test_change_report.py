@@ -140,6 +140,14 @@ def test_change_report_keeps_file_level_requirements_below_default_threshold() -
     assert payload["omitted_requirements"][0]["node"]["id"] == "REQ-18"
     assert payload["omitted_requirements"][0]["reason"] == "below-minimum-confidence"
 
+    text = render_change_report(result)
+    assert "Confidence bands: low 0-64; medium 65-84; high 85-100" in text
+    assert "Requirement threshold: 1 candidate(s) are below medium" in text
+    assert "  Why: The requirement is connected" in text
+    assert "  Path: REQ-9 -[drives]-> ADR-9" in text
+    assert "  Why: The test directly references" in text
+    assert "  Additional signals: 0 (inspect `tests[].reason_details`" in text
+
 
 def test_change_report_distinguishes_result_limit_omissions() -> None:
     graph = report_graph()

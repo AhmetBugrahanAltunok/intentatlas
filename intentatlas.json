@@ -2,7 +2,7 @@
   "schema_version": 1,
   "vault": "atlas",
   "graph": ".intentatlas/graph.json",
-  "git_history_limit": 25,
+  "git_history_limit": 250,
   "exclude": [
     ".git",
     ".intentatlas",

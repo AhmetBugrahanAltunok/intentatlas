@@ -561,6 +561,11 @@ def _impact(root: Path, target: str, depth: int, direction: str) -> int:
     origin = graph.find(target)
     records = graph.impact(origin.id, depth=depth, direction=direction)
     print(f"{origin.label} [{origin.kind}] - {origin.id}")
+    print(f"Traversal: direction {direction}; maximum depth {depth}")
+    print(
+        "Indentation: two spaces per hop from the target; each row is relative to the "
+        "target, not nested under the preceding row."
+    )
     if not records:
         print("  No relationships in the selected direction.")
         return 0
@@ -901,8 +906,14 @@ def _open(root: Path, host: str, port: int, open_browser: bool) -> int:
 def _diff(root: Path, base: str, output: str | None, check: bool) -> int:
     config = ProjectConfig.load(root)
     current_path = config.graph_path(root)
-    base_path = _project_path(root, config, base, "baseline graph", must_exist=True)
     current = _load_project_graph(root, config)
+    base_path = _project_path(root, config, base, "baseline graph", must_exist=False)
+    if not base_path.is_file():
+        raise ValueError(
+            f"Baseline graph does not exist: {base}. After a known-good `scan`, copy "
+            f"{current_path.relative_to(root).as_posix()} to {base}, then scan the changed "
+            "project and retry `diff`."
+        )
     baseline = AtlasGraph.load(base_path)
     value = graph_diff(baseline, current)
     rendered = render_graph_diff(value)

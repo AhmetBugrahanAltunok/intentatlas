@@ -107,10 +107,12 @@ def test_change_report_preserves_primary_reason_path_and_evidence() -> None:
     }
     assert payload["reasons"] and payload["paths"] and payload["evidence"]
     text = render_change_report(report)
-    assert "primary reason symbol-structural-test (80/100)" in text
-    assert f"path {target} -[tested-by]-> file:tests/test_core.py" in text
-    assert "evidence python-ast, python-symbol-reference" in text
-    assert "additional signals: 1" in text
+    assert "Why: The test directly references an exactly modified symbol." in text
+    assert "(symbol-structural-test, 80/100)" in text
+    assert f"Path: {target} -[tested-by]-> file:tests/test_core.py" in text
+    assert "Evidence: python-ast, python-symbol-reference" in text
+    assert "Additional signals: 1" in text
+    assert "tests[].reason_details" in text
 
 
 def test_omission_counts_and_ranking_reason_remain_separate_on_all_human_surfaces() -> None:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shlex
 import shutil
 import subprocess  # nosec B404
 from dataclasses import asdict, dataclass
@@ -79,7 +80,10 @@ class RepositoryDiagnostic:
         return (
             "Detected roots are bounded readiness heuristics, not proof that symbol resolution "
             "abstained; the scanner independently requires unique declared workspace ownership, "
-            "module identity, and symbol identity."
+            "module identity, and symbol identity. No action is required for this heuristic "
+            "alone. If an actual result reports ambiguous ownership, exclude unrelated nested "
+            "fixtures/projects in intentatlas.json or correct the relevant project manifests, "
+            "then run scan again."
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -186,10 +190,12 @@ def diagnose_repository(root: Path) -> RepositoryDiagnostic:
     )
     evidence_state = "not-configured" if configured_evidence_count == 0 else "configured-unverified"
     if git_state == "ready":
-        next_command = "intentatlas changes --commit HEAD --report"
+        next_command = (
+            f"intentatlas changes {_command_path(root)} --commit HEAD --report"
+        )
         report_state = "available-unassessed"
     elif git_state == "empty":
-        next_command = "intentatlas changes --worktree --report"
+        next_command = f"intentatlas changes {_command_path(root)} --worktree --report"
         report_state = "worktree-available-unassessed"
     else:
         next_command = "intentatlas demo --report text"
@@ -259,7 +265,7 @@ def render_diagnostic(result: RepositoryDiagnostic, output_format: str = "text")
                     else ""
                 )
             ),
-            f"Ambiguity scope: {result.ambiguity_detail}",
+            f"Ambiguity guidance: {result.ambiguity_detail}",
             (
                 f"Evidence: {result.evidence_state}; freshness not-assessed; "
                 f"configured sources {result.configured_evidence_source_count}"
@@ -270,6 +276,13 @@ def render_diagnostic(result: RepositoryDiagnostic, output_format: str = "text")
         ]
     )
     return "\n".join(lines) + "\n"
+
+
+def _command_path(root: Path) -> str:
+    value = str(root)
+    if os.name == "nt":
+        return subprocess.list2cmdline([value])
+    return shlex.quote(value)
 
 
 def _discover_metadata(

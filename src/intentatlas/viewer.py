@@ -166,8 +166,8 @@ def serve_graph(
     actual_port = server.server_address[1]
     allowed_hosts = {bind_host, f"{bind_host}:{actual_port}"}
     url = f"http://{bind_host}:{actual_port}"
-    print(f"IntentAtlas viewer: {url}")
-    print("Press Ctrl+C to stop.")
+    print(f"IntentAtlas viewer: {url}", flush=True)
+    print("Press Ctrl+C to stop.", flush=True)
     if open_browser:
         threading.Timer(0.2, webbrowser.open, args=(url,)).start()
     try:

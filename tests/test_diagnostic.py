@@ -72,7 +72,10 @@ def test_diagnostic_is_deterministic_and_no_write_without_config_or_vault(
     assert payload["config"]["state"] == "missing"
     assert payload["repository"]["git_state"] == "ready"
     assert payload["artifacts"]["change_report_state"] == "available-unassessed"
-    assert payload["next_safe_command"] == "intentatlas changes --commit HEAD --report"
+    assert payload["next_safe_command"] == (
+        f"intentatlas changes {subprocess.list2cmdline([str(tmp_path.resolve())])} "
+        "--commit HEAD --report"
+    )
     assert main(["diagnose", str(tmp_path), "--format", "json"]) == 0
     assert json.loads(capsys.readouterr().out) == payload
     assert _snapshot(tmp_path) == before
@@ -106,7 +109,10 @@ def test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity(
         "detail": (
             "Detected roots are bounded readiness heuristics, not proof that symbol resolution "
             "abstained; the scanner independently requires unique declared workspace ownership, "
-            "module identity, and symbol identity."
+            "module identity, and symbol identity. No action is required for this heuristic "
+            "alone. If an actual result reports ambiguous ownership, exclude unrelated nested "
+            "fixtures/projects in intentatlas.json or correct the relevant project manifests, "
+            "then run scan again."
         ),
     }
     assert payload["project_roots"] == [".", "packages/client"]
@@ -144,4 +150,25 @@ def test_diagnostic_text_preserves_safe_next_action_and_advisory(tmp_path: Path)
     assert "Evidence: not-configured; freshness not-assessed" in rendered
     assert "Next safe command: intentatlas demo --report text" in rendered
     assert "absence is not proof of no impact" in rendered
+    assert "Ambiguity guidance:" in rendered
+    assert "No action is required for this heuristic alone" in rendered
     assert "not proof that symbol resolution abstained" in rendered
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_diagnostic_next_command_quotes_the_project_path(tmp_path: Path) -> None:
+    project = tmp_path / "project with spaces"
+    project.mkdir()
+    _git(project, "init", "-q")
+    (project / "app.py").write_text("value = 1\n", encoding="utf-8")
+    _git(project, "add", "app.py")
+    _git(project, "config", "user.name", "Diagnostic Test")
+    _git(project, "config", "user.email", "diagnostic@example.invalid")
+    _git(project, "commit", "-qm", "baseline")
+
+    result = diagnose_repository(project)
+
+    quoted = subprocess.list2cmdline([str(project.resolve())])
+    assert result.next_safe_command == (
+        f"intentatlas changes {quoted} --commit HEAD --report"
+    )

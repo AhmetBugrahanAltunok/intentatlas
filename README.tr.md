@@ -26,27 +26,27 @@ Gerekenler: Python 3.11, 3.12 veya 3.13. Git, gerçek depo analizi için gerekli
 için gerekli değildir. Kurulum adımı, derleme bağımlılıklarını almak için ayarlı Python paket
 indeksinize bağlanabilir.
 
-IntentAtlas şu anda henüz yayımlanmamış bir sürüm adayıdır. Bu güvenilen checkout içinden:
+IntentAtlas şu anda henüz yayımlanmamış bir sürüm adayıdır. Ortam klasörünü bir kez seçin; `.venv`
+başka bir kuruluma aitse ilk satırı `$IntentAtlasVenv = ".venv-intentatlas"` olarak değiştirin:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install .
-.\.venv\Scripts\intentatlas.exe demo --report text
+$IntentAtlasVenv = ".venv"
+python -m venv $IntentAtlasVenv
+& "$IntentAtlasVenv\Scripts\python.exe" -m pip install .
+& "$IntentAtlasVenv\Scripts\intentatlas.exe" demo --report text
 ```
 
-macOS veya Linux'ta son iki executable yolu yerine `.venv/bin/python` ve
-`.venv/bin/intentatlas` kullanın.
-
-`.venv` zaten varsa Python bu ortamı yeniden kullanır; tamamen temiz bir ilk deneme için başka bir
-klasör adı seçin. Aşağıdaki kısa `intentatlas` komutları ancak aynı ortam etkinleştirildikten sonra
-çalışır:
+Python var olan ortam klasörünü yeniden kullanır. Aşağıdaki kısa `intentatlas` komutları, yukarıda
+seçilen klasör etkinleştirildikten sonra çalışır:
 
 ```powershell
-.\.venv\Scripts\Activate.ps1
+& "$IntentAtlasVenv\Scripts\Activate.ps1"
 ```
 
-macOS veya Linux'ta `source .venv/bin/activate` çalıştırın. Etkinleştirme kullanılamıyorsa yukarıdaki
-tam executable yolunu kullanmaya devam edin.
+macOS veya Linux'ta `IntentAtlasVenv=.venv` (veya başka bir ad) ayarlayın;
+`$IntentAtlasVenv/bin/python` ile `$IntentAtlasVenv/bin/intentatlas` yollarını kullanın ve
+`source "$IntentAtlasVenv/bin/activate"` çalıştırın. Etkinleştirme kullanılamıyorsa seçtiğiniz
+klasördeki tam executable yolunu kullanın.
 
 Demo mevcut klasörü taramaz ve ağa erişmez. Bir öneri ile kanıtını içeren küçük, yerleşik bir
 senaryo yazdırır. Kısaltılmış çıktı:
@@ -63,13 +63,13 @@ Rehberli akış gerçek bir etkileşimli terminal ister; pipe, yönlendirme ve e
 reddeder. Yerel bir Git deposunu proje dosyalarına yazmadan analiz etmek için:
 
 ```powershell
-.\.venv\Scripts\intentatlas.exe guide C:\projenizin\yolu
+intentatlas guide C:\projenizin\yolu
 ```
 
 Ya da onayladığınız public GitHub deposunu elle klonlamadan inceleyin:
 
 ```powershell
-.\.venv\Scripts\intentatlas.exe guide https://github.com/OWNER/REPOSITORY
+intentatlas guide https://github.com/OWNER/REPOSITORY
 ```
 
 IntentAtlas Enter ile onay istemeden önce kesin kapsamı, güvenlik sınırlarını ve olası ağ/cache
@@ -192,9 +192,9 @@ açıklar.
 Önizlemeyi yorumladıktan sonra kalıcı vault akışını bilinçli olarak benimseyin:
 
 ```powershell
-.\.venv\Scripts\intentatlas.exe init C:\projenizin\yolu
-.\.venv\Scripts\intentatlas.exe scan C:\projenizin\yolu
-.\.venv\Scripts\intentatlas.exe open C:\projenizin\yolu
+intentatlas init C:\projenizin\yolu
+intentatlas scan C:\projenizin\yolu
+intentatlas open C:\projenizin\yolu
 ```
 
 `init`, genel yönlendirme ile boş niyet klasörleri oluşturur; IntentAtlas'ın kendi gereksinim,
@@ -203,6 +203,18 @@ karar, kanıt, inceleme veya tarihli oturumlarını hedef depoya örnek veri ola
 `status`, `impact`, `recommend-tests`, `diff` ve öneri değerlendirme komutları kalıcı grafiği okur;
 bu nedenle önce `scan` çalıştırılmalıdır. `diagnose`, `guide` ve `changes --report` kendi salt-okunur
 incelemesini yapar ve kayıtlı grafik gerektirmez.
+
+`impact` için `TARGET`; kesin grafik kimliği (`commit:TAM_SHA` veya
+`symbol:src/auth.py::rotate_session`), `src/auth.py` gibi proje-göreli yol, kesin etiket veya tekil
+kısmi eşleşme olabilir:
+
+```text
+intentatlas impact src/auth.py --depth 2
+intentatlas impact symbol:src/auth.py::rotate_session --direction upstream
+```
+
+Çıktıdaki her iki boşluk, asıl hedeften bir ilişki hop'u demektir. Satırlar düz bir traversal
+sonucudur; girintili satır hemen üstündeki satırın çocuğu değildir.
 
 Tekrarlanan CLI taramaları, değişmeyen her yerleşik dil adaptörü için sınırlı ve içerik-karmalı bir
 parçayı yeniden kullanır. Komut, yeniden kullanılan ve yeniden üretilen adaptör sayılarını gösterir.
@@ -214,8 +226,8 @@ Ardından `atlas/` klasörünü Obsidian’da vault olarak açın. Graph View; g
 kararları, kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak
 gösterecektir.
 
-macOS veya Linux'ta `.\.venv\Scripts\intentatlas.exe` yerine `./.venv/bin/intentatlas` ve
-`/projenizin/yolu` gibi açık bir hedef yol kullanın.
+macOS veya Linux'ta `/projenizin/yolu` gibi açık bir hedef yol kullanın. Ortam etkin değilse
+kurulumda seçtiğiniz ortam klasörünün içindeki `intentatlas` executable'ını çağırın.
 
 Python 3.11, 3.12 ve 3.13 desteklenir. Tam test paketi Linux üzerinde; kurulmuş wheel ile CLI,
 tarama, test önerisi ve yerel görüntüleyici akışı ise en eski ve en yeni desteklenen Python

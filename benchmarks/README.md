@@ -24,8 +24,13 @@ dependencies are added, removed, or restructured.
 Run the default baseline from the repository root:
 
 ```console
+intentatlas scan
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 ```
+
+The cases target pinned historical commits. The repository's bounded `git_history_limit` must
+include those commits; renew the labels when they age beyond that history or no longer describe the
+current test suite.
 
 See `docs/recommendation-evaluation.md` for the label schema and metric contract.
 

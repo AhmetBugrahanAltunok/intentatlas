@@ -57,7 +57,13 @@ has no denominator, JSON represents it as `null` and text represents it as `n/a`
 
 ## CLI
 
+This command reads the project's saved graph. Run `scan` with the same IntentAtlas executable
+first. Commit targets in a label file must fall within the configured `git_history_limit`; if a
+pinned commit has aged out of that bounded history, increase the limit (maximum 250) or renew the
+reviewed labels. Missing targets and tests produce an error that distinguishes these next steps.
+
 ```console
+intentatlas scan
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json --minimum-confidence high
 intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json --format json
@@ -66,3 +72,6 @@ intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
 Text and JSON output contain no timestamps and are stable for an unchanged graph, label file, and
 options. Metrics describe only the reviewed label cases; they do not prove accuracy on other
 commits or repositories.
+
+`evaluate-corpus` has a different input contract: its manifest points to bundled saved graphs, so
+it does not read the current project's persistent graph and does not require `scan`.

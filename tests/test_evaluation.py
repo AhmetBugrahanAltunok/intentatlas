@@ -237,7 +237,7 @@ def test_label_parser_rejects_duplicates_symlinks_and_bounds(tmp_path, monkeypat
 
 def test_evaluation_rejects_stale_or_invalid_graph_labels() -> None:
     graph = evaluation_graph()
-    with pytest.raises(ValueError, match="Unknown evaluation target"):
+    with pytest.raises(ValueError, match="Run `scan` first.*git_history_limit"):
         evaluate_recommendations(
             graph,
             EvaluationLabels("x", (EvaluationCase("missing", "commit:missing", ()),)),
@@ -247,7 +247,7 @@ def test_evaluation_rejects_stale_or_invalid_graph_labels() -> None:
             graph,
             EvaluationLabels("x", (EvaluationCase("requirement", "REQ-X", ()),)),
         )
-    with pytest.raises(ValueError, match="Unknown expected test"):
+    with pytest.raises(ValueError, match="Run `scan` first.*refresh the reviewed labels"):
         evaluate_recommendations(
             graph,
             EvaluationLabels(

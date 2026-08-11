@@ -33,6 +33,11 @@ report itself is ready, and the next safe command. It
 reads bounded local metadata and supported sources, excludes the configured vault and literal
 `atlas/Private/`, and does not write project or Git state.
 
+Multiple detected roots are a readiness heuristic, not an automatic failure. No action is needed
+unless a scan or recommendation reports actual ambiguous ownership. In that case, exclude
+unrelated nested fixtures/projects in `intentatlas.json` or correct the relevant project manifests,
+then scan again.
+
 The report is Change Report schema 1. Read it in this order:
 
 1. Confirm the exact scope and base/head revision.

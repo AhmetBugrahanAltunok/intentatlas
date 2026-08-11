@@ -129,6 +129,38 @@ def test_serve_graph_starts_and_closes_server(tmp_path, monkeypatch, capsys) -> 
     assert "http://127.0.0.1:1234" in capsys.readouterr().out
 
 
+def test_serve_graph_flushes_url_for_redirected_output(tmp_path, monkeypatch) -> None:
+    graph = tmp_path / "graph.json"
+    graph.write_text(_graph_document(), encoding="utf-8")
+
+    class FakeServer:
+        server_address = ("127.0.0.1", 4317)
+
+        def __init__(self, address, handler):
+            pass
+
+        def serve_forever(self):
+            raise KeyboardInterrupt
+
+        def server_close(self):
+            pass
+
+    printed: list[tuple[str, bool]] = []
+
+    def capture_print(value: str, *, flush: bool = False) -> None:
+        printed.append((value, flush))
+
+    monkeypatch.setattr(viewer, "LoopbackHTTPServer", FakeServer)
+    monkeypatch.setattr(viewer, "print", capture_print, raising=False)
+
+    viewer.serve_graph(graph, open_browser=False)
+
+    assert printed == [
+        ("IntentAtlas viewer: http://127.0.0.1:4317", True),
+        ("Press Ctrl+C to stop.", True),
+    ]
+
+
 def test_loopback_server_binding_does_not_require_reverse_dns(monkeypatch) -> None:
     def reject_reverse_dns(host: str) -> str:
         raise AssertionError(f"unexpected reverse DNS lookup for {host}")

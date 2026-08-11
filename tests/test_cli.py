@@ -28,6 +28,8 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
     assert "IntentAtlas status -" in output
     assert "relationships" in output
     assert "app.py" in output
+    assert "Traversal: direction both; maximum depth 1" in output
+    assert "each row is relative to the target" in output
     assert "tested-by / verification" in output
     assert "via python-ast" in output
 
@@ -52,6 +54,9 @@ def test_cli_writes_deterministic_graph_diff_and_supports_ci_check(tmp_path, cap
     app.write_text("value = 1\n", encoding="utf-8")
     assert main(["scan", str(tmp_path)]) == 0
     baseline = tmp_path / ".intentatlas" / "baseline.json"
+    assert main(["diff", ".intentatlas/baseline.json", str(tmp_path)]) == 2
+    error = capsys.readouterr().err
+    assert "After a known-good `scan`, copy .intentatlas/graph.json" in error
     shutil.copyfile(tmp_path / ".intentatlas" / "graph.json", baseline)
 
     app.write_text("value = 1\n\ndef added():\n    return value\n", encoding="utf-8")
