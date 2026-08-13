@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import shlex
 import shutil
 import subprocess
 from pathlib import Path
@@ -23,6 +25,13 @@ def _git(root: Path, *arguments: str) -> str:
         encoding="utf-8",
     )
     return completed.stdout
+
+
+def _quoted_command_path(path: Path) -> str:
+    value = str(path.resolve())
+    if os.name == "nt":
+        return subprocess.list2cmdline([value])
+    return shlex.quote(value)
 
 
 def _project_snapshot(root: Path) -> dict[str, tuple[int, int, str]]:
@@ -73,7 +82,7 @@ def test_diagnostic_and_real_repository_preview_are_no_write(
     diagnostic_text = capsys.readouterr().out
     assert "Read only: yes" in diagnostic_text
     assert "network required: no" in diagnostic_text
-    quoted_project = subprocess.list2cmdline([str(project.resolve())])
+    quoted_project = _quoted_command_path(project)
     assert (
         f"intentatlas changes {quoted_project} --commit HEAD --report"
         in diagnostic_text

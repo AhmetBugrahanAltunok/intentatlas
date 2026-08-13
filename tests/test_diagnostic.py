@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shlex
 import shutil
 import subprocess
 from pathlib import Path
@@ -50,6 +51,13 @@ def _git(root: Path, *arguments: str) -> str:
     ).stdout.strip()
 
 
+def _quoted_command_path(path: Path) -> str:
+    value = str(path.resolve())
+    if os.name == "nt":
+        return subprocess.list2cmdline([value])
+    return shlex.quote(value)
+
+
 @pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
 def test_diagnostic_is_deterministic_and_no_write_without_config_or_vault(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
@@ -78,7 +86,7 @@ def test_diagnostic_is_deterministic_and_no_write_without_config_or_vault(
     assert payload["recommended_change_scope"]["scope"] == "commit"
     assert payload["symbol_test_links"]["state"] == "not-assessed"
     assert payload["next_safe_command"] == (
-        f"intentatlas changes {subprocess.list2cmdline([str(tmp_path.resolve())])} "
+        f"intentatlas changes {_quoted_command_path(tmp_path)} "
         "--commit HEAD --report"
     )
     assert main(["diagnose", str(tmp_path), "--format", "json"]) == 0
@@ -207,7 +215,7 @@ def test_diagnostic_next_command_quotes_the_project_path(tmp_path: Path) -> None
 
     result = diagnose_repository(project)
 
-    quoted = subprocess.list2cmdline([str(project.resolve())])
+    quoted = _quoted_command_path(project)
     assert result.next_safe_command == (
         f"intentatlas changes {quoted} --commit HEAD --report"
     )
