@@ -38,6 +38,10 @@ def build_python_project(tmp_path) -> None:
     (tmp_path / "README.md").write_text("# Demo\n", encoding="utf-8")
     (tmp_path / ".venv").mkdir()
     (tmp_path / ".venv" / "ignored.py").write_text("raise Exception\n", encoding="utf-8")
+    (tmp_path / ".venv-intentatlas").mkdir()
+    (tmp_path / ".venv-intentatlas" / "ignored.py").write_text(
+        "raise Exception\n", encoding="utf-8"
+    )
     (tmp_path / ".obsidian").mkdir()
     (tmp_path / ".obsidian" / "ignored.md").write_text("# Wrong vault\n", encoding="utf-8")
 
@@ -85,6 +89,7 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
         "workspace_state": "aligned",
     }
     assert "file:.venv/ignored.py" not in graph.nodes
+    assert "file:.venv-intentatlas/ignored.py" not in graph.nodes
     assert "file:.obsidian/ignored.md" not in graph.nodes
 
     relationships = {(edge.source, edge.target, edge.relation) for edge in graph.edges}
@@ -98,6 +103,98 @@ def test_scanner_connects_python_symbols_imports_and_tests(tmp_path) -> None:
         "file:src/demo/core.py",
         "tests",
     ) in relationships
+
+
+def test_python_adapter_resolves_markerless_src_namespace_imports(tmp_path) -> None:
+    (tmp_path / "src").mkdir()
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "src" / "auth.py").write_text(
+        "def rotate_session(value: str) -> str:\n    return value[::-1]\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "tests" / "test_auth_rotation.py").write_text(
+        "from src.auth import rotate_session\n\n"
+        "def test_rotate_session():\n    assert rotate_session('abc') == 'cba'\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "tests" / "test_auth_audit.py").write_text(
+        "def test_unrelated():\n    assert True\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+    relationships = {
+        (edge.source, edge.target, edge.relation, edge.evidence)
+        for edge in graph.edges
+    }
+
+    assert (
+        "file:tests/test_auth_rotation.py",
+        "symbol:src/auth.py::rotate_session",
+        "tests",
+        "python-symbol-reference",
+    ) in relationships
+    assert not any(
+        edge.source == "file:tests/test_auth_audit.py"
+        and edge.target == "symbol:src/auth.py::rotate_session"
+        for edge in graph.edges
+    )
+
+    recommendation = recommend_tests(
+        graph,
+        "file:src/auth.py",
+        minimum_confidence="low",
+    )
+    assert [item.test.id for item in recommendation.recommendations] == [
+        "file:tests/test_auth_rotation.py"
+    ]
+    assert recommendation.recommendations[0].score == 65
+    assert recommendation.recommendations[0].reasons[0].signal == "file-symbol-test"
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_file_recommendation_ranks_exact_src_symbol_test_above_cochange(tmp_path) -> None:
+    (tmp_path / "src").mkdir()
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "src" / "auth.py").write_text(
+        "def rotate_session(value: str) -> str:\n    return value[::-1]\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "tests" / "test_auth_rotation.py").write_text(
+        "from src.auth import rotate_session\n\n"
+        "def test_rotate_session():\n    assert rotate_session('abc') == 'cba'\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "tests" / "test_auth_audit.py").write_text(
+        "def test_unrelated():\n    assert True\n",
+        encoding="utf-8",
+    )
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    subprocess.run(
+        ["git", "config", "user.name", "IntentAtlas Test"], cwd=tmp_path, check=True
+    )
+    subprocess.run(
+        ["git", "config", "user.email", "test@example.invalid"],
+        cwd=tmp_path,
+        check=True,
+    )
+    subprocess.run(["git", "add", "."], cwd=tmp_path, check=True)
+    subprocess.run(["git", "commit", "-qm", "baseline"], cwd=tmp_path, check=True)
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=25))
+    result = recommend_tests(
+        graph,
+        "file:src/auth.py",
+        minimum_confidence="low",
+    )
+
+    assert [item.test.id for item in result.recommendations] == [
+        "file:tests/test_auth_rotation.py",
+        "file:tests/test_auth_audit.py",
+    ]
+    assert [item.score for item in result.recommendations] == [80, 60]
+    assert result.recommendations[0].reasons[0].signal == "symbol-structural-test"
+    assert result.recommendations[1].reasons[0].signal == "recent-cochange-test"
 
 
 def test_scanner_parses_windows_utf8_bom_python_files(tmp_path) -> None:

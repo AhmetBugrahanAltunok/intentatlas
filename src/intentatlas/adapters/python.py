@@ -13,7 +13,7 @@ class PythonAdapter:
     name = "python"
     suffixes = frozenset({".py"})
     cache_input_suffixes = suffixes
-    cache_version = 3
+    cache_version = 4
     evidence_kinds = frozenset(
         {"filename-convention", "python-ast", "python-symbol-reference"}
     )
@@ -147,7 +147,10 @@ def _build_module_maps(
                 if source_root:
                     module_path = PurePosixPath(relative).relative_to(source_root).with_suffix("")
         parts = list(module_path.parts)
-        if not context.source_roots and parts and parts[0] == "src":
+        markerless_src_module = bool(
+            not context.source_roots and parts and parts[0] == "src"
+        )
+        if markerless_src_module:
             parts = parts[1:]
         if parts and parts[-1] == "__init__":
             parts = parts[:-1]
@@ -156,6 +159,8 @@ def _build_module_maps(
         module = ".".join(parts)
         owner = owners[0] if len(owners) == 1 else ""
         module_candidates[(owner, module)].add(f"file:{relative}")
+        if markerless_src_module:
+            module_candidates[(owner, f"src.{module}")].add(f"file:{relative}")
         path_to_module[relative] = module
     module_to_nodes = {
         module: tuple(sorted(candidates))
@@ -233,13 +238,19 @@ class _PythonSymbolResolver:
         self.reexports: defaultdict[
             tuple[str, str, str], set[tuple[str, str]]
         ] = defaultdict(set)
+        modules_by_file: defaultdict[tuple[str, str], set[str]] = defaultdict(set)
+        for (owner, module_identity), targets in module_to_nodes.items():
+            for target in targets:
+                modules_by_file[(owner, target.removeprefix("file:"))].add(
+                    module_identity
+                )
         for node in nodes:
             if node.path is None or "." in node.label:
                 continue
-            module = path_to_module.get(node.path)
             owners = context.workspace_owners.get(node.path, ())
-            if module and len(owners) == 1:
-                self.direct[(owners[0], module, node.label)].add(node.id)
+            if len(owners) == 1:
+                for node_module in modules_by_file.get((owners[0], node.path), ()):
+                    self.direct[(owners[0], node_module, node.label)].add(node.id)
         for relative, tree in trees.items():
             module = path_to_module.get(relative)
             owners = context.workspace_owners.get(relative, ())
@@ -255,9 +266,12 @@ class _PythonSymbolResolver:
                     if alias.name == "*":
                         continue
                     exported_name = alias.asname or alias.name
-                    self.reexports[(owners[0], module, exported_name)].add(
-                        (base, alias.name)
-                    )
+                    for module_identity in modules_by_file.get(
+                        (owners[0], relative), (module,)
+                    ):
+                        self.reexports[(owners[0], module_identity, exported_name)].add(
+                            (base, alias.name)
+                        )
 
     def resolve(self, owners: tuple[str, ...], module: str, name: str) -> str | None:
         current = (module, name)

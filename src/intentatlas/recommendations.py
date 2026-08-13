@@ -214,18 +214,31 @@ def recommend_tests(
                         (*signal.path.relations, "tested-by"),
                     )
             else:
-                score = 45 if convention else 65
-                signal_name = "file-filename-test" if convention else "file-structural-test"
-                summary = (
-                    "The filename convention associates this test with a changed file."
-                    if convention
-                    else "The test structurally targets a changed file without exact symbol "
-                    "evidence."
-                )
-                path = RecommendationPath(
-                    (*signal.path.nodes, test.id),
-                    (*signal.path.relations, "tested-by"),
-                )
+                if match.matched_symbol_id is not None:
+                    score = 65
+                    signal_name = "file-symbol-test"
+                    summary = (
+                        "The test directly references a symbol defined in the selected file."
+                    )
+                    path = RecommendationPath(
+                        (*signal.path.nodes, match.matched_symbol_id, test.id),
+                        (*signal.path.relations, "defines", "tested-by"),
+                    )
+                else:
+                    score = 45 if convention else 65
+                    signal_name = (
+                        "file-filename-test" if convention else "file-structural-test"
+                    )
+                    summary = (
+                        "The filename convention associates this test with a changed file."
+                        if convention
+                        else "The test structurally targets a changed file without exact symbol "
+                        "evidence."
+                    )
+                    path = RecommendationPath(
+                        (*signal.path.nodes, test.id),
+                        (*signal.path.relations, "tested-by"),
+                    )
             _add_reason(
                 reasons_by_test,
                 test.id,
@@ -276,17 +289,28 @@ def recommend_tests(
     return RecommendationResult(target, minimum_confidence, candidate_count, filtered)
 
 
-def render_recommendations(result: RecommendationResult, output_format: str = "text") -> str:
+def render_recommendations(
+    result: RecommendationResult,
+    output_format: str = "text",
+    *,
+    project_root: str | None = None,
+) -> str:
     if output_format == "json":
-        return json.dumps(result.to_dict(), indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+        payload = result.to_dict()
+        if project_root is not None:
+            payload["project_root"] = project_root
+        return json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
     if output_format != "text":
         raise ValueError(f"Unknown recommendation output format: {output_format}")
 
-    lines = [
+    lines = []
+    if project_root is not None:
+        lines.append(f"Project: {project_root}")
+    lines.extend([
         f"Test recommendations for {result.target.label} [{result.target.kind}]",
         f"Minimum confidence: {result.minimum_confidence}",
         f"Advisory: {ADVISORY}",
-    ]
+    ])
     if result.minimum_confidence == "low":
         lines.append(f"Threshold note: {LOW_CONFIDENCE_GUIDANCE}")
     if not result.recommendations:
@@ -448,7 +472,18 @@ def _preferred_test_edges(
                 for candidate in index.outgoing(edge.source, "tests")
             )
         )
-    return tuple(_PreferredTestEdge(edge) for edge in file_edges)
+        return tuple(_PreferredTestEdge(edge) for edge in file_edges)
+
+    selected: dict[str, _PreferredTestEdge] = {}
+    for defines_edge in index.outgoing(target_id, "defines"):
+        symbol = graph.nodes.get(defines_edge.target)
+        if symbol is None or symbol.kind != "symbol":
+            continue
+        for edge in _select_test_edges(index.incoming(symbol.id, "tests")):
+            selected.setdefault(edge.source, _PreferredTestEdge(edge, symbol.id))
+    for edge in file_edges:
+        selected.setdefault(edge.source, _PreferredTestEdge(edge))
+    return tuple(selected[test_id] for test_id in sorted(selected))
 
 
 def _select_test_edges(edges: tuple[Edge, ...]) -> tuple[Edge, ...]:

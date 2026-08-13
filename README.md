@@ -24,11 +24,14 @@ Requirement → Decision → Issue → Code → Test → Evidence → Commit
   <img src="docs/assets/intentatlas-demo.gif" width="960" alt="IntentAtlas demo showing the intent graph, change report, and test evidence paths">
 </p>
 
-## Try it in two minutes
+## Get the first demo in two minutes
 
 Prerequisites: Python 3.11, 3.12, or 3.13. Git is required for repository analysis but not for the
 built-in demo. The install step may contact your configured Python package index to obtain build
 dependencies.
+
+The two-minute target ends when the first text demo appears. Reading the output and trying the
+repository workflows below takes longer.
 
 IntentAtlas is currently an unpublished release candidate. Choose the environment folder once;
 if `.venv` already belongs to another setup, change the first line to
@@ -64,14 +67,19 @@ Recommended tests:
   Path: commit → rotate_session → tests/test_auth_rotation.py
 ```
 
+`medium 80` means a score of 80 in the medium band: low is 0–64, medium is 65–84, and high is
+85–100. Confidence ranks available structural evidence; it is not a probability of correctness.
+
 The guided flow requires a real interactive terminal; pipes, redirects, and non-interactive shells
-are rejected. To analyze a local Git repository without writing project files:
+are rejected. In a non-interactive shell, run `intentatlas diagnose PATH`, then copy its exact
+**Next safe command**. To analyze a local Git repository interactively without writing project
+files:
 
 ```powershell
 intentatlas guide C:\path\to\your-project
 ```
 
-Or inspect an approved public GitHub repository without cloning it manually:
+Or inspect a public GitHub repository that you explicitly approve without cloning it manually:
 
 ```powershell
 intentatlas guide https://github.com/OWNER/REPOSITORY
@@ -96,6 +104,9 @@ Recommended tests: 1 selected / 1 candidates
   Why: The test references the owning symbol of an exactly modified nested symbol.
   Path: Context.__exit__ → Context → tests/test_context.py
 ```
+
+`candidates` is the total set found before the displayed confidence threshold and result limit;
+`selected` is the subset shown after those rules are applied.
 
 This output is advisory. The checkout is pinned and license-reviewed for reproducibility; project
 code and tests are not executed. See the [real-world validation protocol](docs/real-world-validation.md).
@@ -162,6 +173,18 @@ and [the release process](RELEASING.md).
 
 ## Quick start
 
+### Choose the right first command
+
+| Your situation | Use | Project writes | Network |
+| --- | --- | --- | --- |
+| You only want to see the idea | `intentatlas demo --report text` | None | None |
+| You have an interactive terminal | `intentatlas guide PATH` | None | None for a local path |
+| You are non-interactive or unsure which Git scope to use | `intentatlas diagnose PATH`, then its **Next safe command** (`intentatlas changes ...`) | None | None |
+| You want a persistent project map | `intentatlas init PATH`, then `intentatlas scan PATH` | `intentatlas.json`, `.gitignore`, `.intentatlas/`, and `atlas/` | None |
+
+Only an explicitly approved public GitHub URL may use the network and managed OS cache. Installing
+the package may also contact the configured Python package index; local analysis itself is offline.
+
 From a real repository in an interactive terminal, run one command:
 
 ```powershell
@@ -213,7 +236,8 @@ The explicit expert commands remain available for a zero-footprint preview:
 
 ```powershell
 intentatlas diagnose C:\path\to\your-project
-intentatlas changes C:\path\to\your-project --commit HEAD --report
+# Then run the exact Next safe command it prints. Examples:
+intentatlas changes C:\path\to\your-project --worktree --report
 intentatlas changes C:\path\to\your-project --commit HEAD --report --format json
 ```
 
@@ -221,6 +245,13 @@ These commands are offline and no-write. The diagnostic reports bounded capabili
 evidence readiness, and the safe next command. The report states its exact revision and scope,
 freshness, confidence threshold, selected and omitted candidates, recorded ranking paths, and
 fallback test strategy. An omission is not proof that intent is unaffected or a test unnecessary.
+If a saved graph exists, `diagnose` also reports the number of detected Python test files and exact
+`python-symbol-reference` test links. `missing-exact-links` means tests were found but no exact
+symbol-to-test edge was formed; it is not a ready result. Graph freshness is still not assessed.
+For the next command, `diagnose` selects `worktree` for unstaged, untracked, or conflicted changes;
+`staged` when only the index changed; exact `HEAD` when the working copy is clean; and `worktree`
+for a repository with no commit yet. This prevents a dirty working copy from being mistaken for
+the committed `HEAD` snapshot.
 Only `--open` explicitly starts the loopback-only viewer for that same in-memory report snapshot.
 See the [trust-first preview](docs/trust-first-preview.md) and [documentation index](docs/index.md).
 
@@ -232,8 +263,19 @@ intentatlas scan C:\path\to\your-project
 intentatlas open C:\path\to\your-project
 ```
 
+If you do not want to write into an active repository yet, try these three commands in a disposable
+copy or small test repository first. `init` creates `intentatlas.json`, starter Markdown folders,
+portable Obsidian settings, and missing local-state `.gitignore` rules. `scan` writes the disposable
+`.intentatlas/` cache and generated areas under `atlas/`; it never executes project code and never
+overwrites user-owned notes. Review `git status` before committing anything.
+
 `init` creates generic guidance and empty intent folders; it never seeds IntentAtlas's own
 requirements, decisions, evidence, reviews, or dated sessions into the target repository.
+It also preserves the existing `.gitignore` and adds only missing local-state rules for
+`.intentatlas/`, `.venv-intentatlas/`, and Obsidian workspace/cache files. The durable `atlas/`
+notes and portable Obsidian settings remain trackable.
+Obsidian is optional: `atlas/` is the Markdown layer used by the persistent workflow, but you can
+inspect the same generated graph with `intentatlas open` without installing Obsidian.
 
 `status`, `impact`, `recommend-tests`, `diff`, and recommendation evaluation read the persistent
 graph and therefore require `scan` first. `diagnose`, `guide`, and `changes --report` perform their
@@ -244,20 +286,22 @@ For `impact`, `TARGET` may be an exact graph ID (`commit:FULL_SHA` or
 label, or a unique partial match:
 
 ```text
-intentatlas impact src/auth.py --depth 2
-intentatlas impact symbol:src/auth.py::rotate_session --direction upstream
+intentatlas impact src/auth.py C:\path\to\your-project --depth 2
+intentatlas impact symbol:src/auth.py::rotate_session C:\path\to\your-project --direction upstream
 ```
 
 Every two spaces in the result means one relationship hop from the original target. Rows are a
 flat traversal result; an indented row is not a child of the line immediately above it.
+Commands with optional `[PATH]` use the current directory when it is omitted. `impact` and
+`recommend-tests` print the resolved project root so a graph from the wrong directory is visible.
 
 Repeated CLI scans reuse a bounded content-addressed fragment for each unchanged built-in language
 adapter. The command reports reused and rebuilt adapter counts. This cache contains graph metadata,
 not source text, and is always safe to remove; a malformed or stale entry is rebuilt. Graph and
 cache files are replaced atomically. See [incremental scanning](docs/incremental-scanning.md).
 
-Then open the `atlas/` directory as an Obsidian vault. The standard Graph View will
-show requirements, decisions, code, tests, evidence, and commits as color-coded nodes.
+If you use Obsidian, open the `atlas/` directory as a vault. Its standard Graph View will show
+requirements, decisions, code, tests, evidence, and commits as color-coded nodes.
 
 On macOS or Linux, use an explicit path such as `/path/to/your-project`. If the environment is not
 activated, invoke `intentatlas` from the environment folder selected during installation.
@@ -276,14 +320,16 @@ but no package has been published and no zero-prerequisite Windows installer exi
 ```text
 intentatlas init [PATH]                  Create the project brain and local config
 intentatlas guide [SOURCE]               Guide a local path or approved public GitHub URL
-intentatlas cache list|info|clear         Inspect or clear exact managed cache entries offline
+intentatlas cache list                    List managed cache entries and their CACHE_ID
+intentatlas cache info CACHE_ID           Inspect one exact managed cache entry offline
+intentatlas cache clear CACHE_ID          Clear one exact managed cache entry offline
 intentatlas diagnose [PATH]              Inspect readiness without writing project state
 intentatlas scan [PATH]                  Rebuild the graph and generated vault notes
 intentatlas status [PATH]                Show graph and orphan-note health
-intentatlas impact TARGET [--depth 2]    Explain upstream/downstream relationships
-intentatlas recommend-tests TARGET       Rank advisory test candidates with explanations
-intentatlas changes --commit REV         Inspect bounded revision-scoped change metadata
-intentatlas review --base REV --head REV Review a range in non-blocking CI shadow mode
+intentatlas impact TARGET [PATH] [--depth 2]  Explain upstream/downstream relationships
+intentatlas recommend-tests TARGET [PATH]    Rank advisory test candidates with explanations
+intentatlas changes [PATH] --commit REV      Inspect bounded revision-scoped change metadata
+intentatlas review [PATH] --base REV --head REV  Review a range in non-blocking CI shadow mode
 intentatlas evaluate-recommendations LABELS  Measure recommendations against reviewed labels
 intentatlas evaluate-corpus CORPUS       Compare thresholds across labeled local graphs
 intentatlas evaluate-real-world MANIFEST CHECKOUTS  Validate pinned public checkouts offline
@@ -306,6 +352,24 @@ intentatlas changes --staged --analyze --format json
 intentatlas changes --staged --report --format json
 intentatlas changes --worktree --report --open
 ```
+
+Choose the scope by what you mean to inspect: `--worktree` includes current staged, unstaged, and
+untracked changes; `--staged` inspects only the index; `--commit HEAD` inspects the committed HEAD
+snapshot and expects its affected files to still match that revision. On a dirty repository, use
+the command printed by `diagnose` instead of guessing.
+
+| Output term | Meaning |
+| --- | --- |
+| `aligned` | The selected change-side artifact matches the current file that was safely scanned. |
+| `stale` | The selected commit/index artifact differs from the current file, so exact claims abstain. |
+| `analyzed` | Exact supported artifact evidence was formed for the changed file. |
+| `fallback` | Only broader file-level evidence was available; follow the displayed full-suite policy. |
+| `unknown` | The artifact could not be safely matched or analyzed; no targeted-sufficiency claim is made. |
+
+`--analyze` returns the per-file state, freshness, confidence, and artifact IDs. `--report` performs
+that same fresh analysis and additionally ranks requirement impacts and tests, selects a test
+strategy, and explains omissions. `--report --open` shows that same in-memory report in the local
+viewer.
 
 ChangeSet output contains statuses, safe project-relative paths, resolved commit IDs, and
 current-side hunk ranges. It never stores raw diff lines. Worktree mode includes ignored-aware
@@ -393,6 +457,9 @@ intentatlas diff .intentatlas/baseline.json --output .intentatlas/diff.json --ch
 
 On macOS or Linux, use `cp .intentatlas/graph.json .intentatlas/baseline.json`. A baseline is an
 explicit snapshot chosen by the user; `scan` does not create or overwrite it automatically.
+With `--check`, exit status `1` means graph changes were found—the expected CI signal, not a runtime
+failure. Exit status `0` means no graph changes. The command prints this explanation to stderr so
+the JSON written to stdout or `--output` remains machine-readable.
 
 To rank test files for a commit, file, or symbol without running them:
 
@@ -532,6 +599,11 @@ deletions, module-level edits, unsupported span adapters, and uncertain cases.
 `recommend-tests` consumes those validated graph relationships and ranks test-file candidates as
 high, medium, or low confidence. Python tests can target exact imported symbols through bounded
 package re-exports; nested changes can use a focused owning-symbol test when its test name agrees.
+For a markerless root `src/` layout, both conventional imports such as `from auth import ...` and
+namespace-style imports such as `from src.auth import ...` resolve when they identify one local
+module. A `pyproject.toml` with setuptools, Hatch, or Flit source-root metadata takes precedence.
+Ambiguous module or symbol identities remain deliberately unlinked; run `scan`, then `diagnose`,
+to check whether the saved graph contains exact Python symbol-test links.
 JavaScript/TypeScript records exact named and default static imports, and follows at most one exact
 symbol-dependent source file to a directly linked test. For a selected file or symbol, tests from
 the artifact's most recent analyzed narrow co-change provide separate low-confidence evidence;

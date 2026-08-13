@@ -11,10 +11,12 @@ from typing import Any
 
 from .adapters import BUILTIN_ADAPTERS
 from .config import CONFIG_NAME, ProjectConfig
+from .graph import AtlasGraph
 from .scanner import MAX_PARSE_BYTES
 
 DIAGNOSTIC_SCHEMA_VERSION = 1
 MAX_DIAGNOSTIC_FILES = 20_000
+MAX_GIT_STATUS_BYTES = 1_000_000
 _PROJECT_MARKERS = frozenset({"go.mod", "package.json", "pnpm-workspace.yaml", "pyproject.toml"})
 _SOURCE_ROOT_NAMES = frozenset({"app", "apps", "cmd", "internal", "lib", "packages", "pkg", "src"})
 _LANGUAGE_NAMES = {
@@ -56,6 +58,7 @@ class DiagnosticCapability:
 
 @dataclass(frozen=True, slots=True)
 class RepositoryDiagnostic:
+    project_root: str
     config_state: str
     config_detail: str
     git_state: str
@@ -73,6 +76,12 @@ class RepositoryDiagnostic:
     configured_evidence_source_count: int
     graph_state: str
     report_state: str
+    recommended_scope: str
+    scope_detail: str
+    symbol_test_state: str
+    python_test_count: int
+    exact_symbol_test_link_count: int
+    symbol_test_detail: str
     next_safe_command: str
 
     @property
@@ -92,6 +101,7 @@ class RepositoryDiagnostic:
             "advisory": _ADVISORY,
             "read_only": True,
             "network_required": False,
+            "project_root": self.project_root,
             "config": {
                 "state": self.config_state,
                 "detail": self.config_detail,
@@ -124,6 +134,17 @@ class RepositoryDiagnostic:
             "artifacts": {
                 "graph_state": self.graph_state,
                 "change_report_state": self.report_state,
+            },
+            "recommended_change_scope": {
+                "scope": self.recommended_scope,
+                "detail": self.scope_detail,
+            },
+            "symbol_test_links": {
+                "state": self.symbol_test_state,
+                "python_test_count": self.python_test_count,
+                "exact_link_count": self.exact_symbol_test_link_count,
+                "freshness": "not-assessed",
+                "detail": self.symbol_test_detail,
             },
             "next_safe_command": self.next_safe_command,
         }
@@ -178,6 +199,12 @@ def diagnose_repository(root: Path) -> RepositoryDiagnostic:
 
     git_state, head_revision = _git_readiness(root)
     graph_state = _graph_state(root, config, config_state)
+    (
+        symbol_test_state,
+        python_test_count,
+        exact_symbol_test_link_count,
+        symbol_test_detail,
+    ) = _symbol_test_health(root, config, graph_state)
     configured_evidence_count = sum(
         len(values)
         for values in (
@@ -189,19 +216,31 @@ def diagnose_repository(root: Path) -> RepositoryDiagnostic:
         )
     )
     evidence_state = "not-configured" if configured_evidence_count == 0 else "configured-unverified"
-    if git_state == "ready":
-        next_command = (
-            f"intentatlas changes {_command_path(root)} --commit HEAD --report"
+    if git_state in {"ready", "empty"}:
+        recommended_scope, scope_detail = _recommended_change_scope(
+            root,
+            config,
+            head_revision,
         )
-        report_state = "available-unassessed"
-    elif git_state == "empty":
-        next_command = f"intentatlas changes {_command_path(root)} --worktree --report"
-        report_state = "worktree-available-unassessed"
+        selector = {
+            "commit": "--commit HEAD",
+            "staged": "--staged",
+            "worktree": "--worktree",
+        }[recommended_scope]
+        next_command = f"intentatlas changes {_command_path(root)} {selector} --report"
+        report_state = (
+            "worktree-available-unassessed"
+            if git_state == "empty"
+            else "available-unassessed"
+        )
     else:
+        recommended_scope = "unavailable"
+        scope_detail = "A local Git change scope is unavailable for this path."
         next_command = "intentatlas demo --report text"
         report_state = "unavailable"
 
     return RepositoryDiagnostic(
+        project_root=str(root),
         config_state=config_state,
         config_detail=config_detail,
         git_state=git_state,
@@ -223,6 +262,12 @@ def diagnose_repository(root: Path) -> RepositoryDiagnostic:
         configured_evidence_source_count=configured_evidence_count,
         graph_state=graph_state,
         report_state=report_state,
+        recommended_scope=recommended_scope,
+        scope_detail=scope_detail,
+        symbol_test_state=symbol_test_state,
+        python_test_count=python_test_count,
+        exact_symbol_test_link_count=exact_symbol_test_link_count,
+        symbol_test_detail=symbol_test_detail,
         next_safe_command=next_command,
     )
 
@@ -236,6 +281,7 @@ def render_diagnostic(result: RepositoryDiagnostic, output_format: str = "text")
     lines = [
         "IntentAtlas read-only diagnostic",
         "Read only: yes; network required: no",
+        f"Project: {result.project_root}",
         f"Configuration: {result.config_state} - {result.config_detail}",
         f"Git: {result.git_state}; HEAD {head}",
         (
@@ -271,6 +317,13 @@ def render_diagnostic(result: RepositoryDiagnostic, output_format: str = "text")
                 f"configured sources {result.configured_evidence_source_count}"
             ),
             f"Artifacts: graph {result.graph_state}; change report {result.report_state}",
+            f"Recommended change scope: {result.recommended_scope} - {result.scope_detail}",
+            (
+                f"Exact Python symbol-test links: {result.symbol_test_state}; "
+                f"tests {result.python_test_count}; links "
+                f"{result.exact_symbol_test_link_count}"
+            ),
+            f"Symbol-test guidance: {result.symbol_test_detail}",
             f"Next safe command: {result.next_safe_command}",
             f"Advisory: {_ADVISORY}",
         ]
@@ -463,6 +516,122 @@ def _git_value(root: Path, executable: str, *arguments: str) -> str | None:
     return value if value else None
 
 
+def _recommended_change_scope(
+    root: Path,
+    config: ProjectConfig,
+    head_revision: str | None,
+) -> tuple[str, str]:
+    executable = shutil.which("git")
+    if executable is None:
+        return "worktree", "Git is unavailable; worktree is the conservative fallback."
+    pathspecs = _diagnostic_pathspecs(config)
+    try:
+        conflict = _git_changed(
+            root,
+            executable,
+            "diff",
+            "--quiet",
+            "--diff-filter=U",
+            "--no-ext-diff",
+            "--ignore-submodules=all",
+            "--",
+            *pathspecs,
+        )
+        unstaged = _git_changed(
+            root,
+            executable,
+            "diff",
+            "--quiet",
+            "--no-ext-diff",
+            "--ignore-submodules=all",
+            "--",
+            *pathspecs,
+        )
+        untracked = bool(
+            _git_status_output(
+                root,
+                executable,
+                "ls-files",
+                "--others",
+                "--exclude-standard",
+                "-z",
+                "--",
+                *pathspecs,
+            )
+        )
+        staged = _git_changed(
+            root,
+            executable,
+            "diff",
+            "--cached",
+            "--quiet",
+            "--no-ext-diff",
+            "--ignore-submodules=all",
+            "--",
+            *pathspecs,
+        )
+    except ValueError:
+        return (
+            "worktree",
+            "Git change state could not be fully inspected; worktree is the conservative "
+            "fallback.",
+        )
+    if conflict or unstaged or untracked:
+        return (
+            "worktree",
+            "Uncommitted, untracked, or conflicted changes exist; analyze the current working "
+            "copy.",
+        )
+    if staged:
+        return "staged", "Only staged changes exist; analyze the index."
+    if head_revision is not None:
+        return "commit", "The working copy is clean; analyze exact HEAD."
+    return "worktree", "The repository has no commit yet; analyze the current working copy."
+
+
+def _diagnostic_pathspecs(config: ProjectConfig) -> tuple[str, ...]:
+    excluded = {
+        value.strip().replace("\\", "/").strip("/")
+        for value in (*config.exclude, config.vault, "atlas/Private")
+        if value.strip().replace("\\", "/").strip("/")
+    }
+    return (".", *(f":(exclude,literal){value}" for value in sorted(excluded)))
+
+
+def _git_changed(root: Path, executable: str, *arguments: str) -> bool:
+    completed = subprocess.run(  # noqa: S603  # nosec B603
+        [executable, *arguments],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=10,
+    )
+    if completed.returncode not in {0, 1}:
+        raise ValueError("Cannot inspect Git change state")
+    return completed.returncode == 1
+
+
+def _git_status_output(root: Path, executable: str, *arguments: str) -> str:
+    completed = subprocess.run(  # noqa: S603  # nosec B603
+        [executable, *arguments],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=10,
+    )
+    if completed.returncode != 0:
+        raise ValueError("Cannot inspect Git change state")
+    if len(completed.stdout.encode("utf-8")) > MAX_GIT_STATUS_BYTES:
+        raise ValueError("Git change metadata exceeds the diagnostic limit")
+    return completed.stdout
+
+
 def _graph_state(root: Path, config: ProjectConfig, config_state: str) -> str:
     if config_state == "invalid":
         return "unavailable-invalid-config"
@@ -481,3 +650,65 @@ def _graph_state(root: Path, config: ProjectConfig, config_state: str) -> str:
     except OSError:
         return "unavailable"
     return "missing"
+
+
+def _symbol_test_health(
+    root: Path,
+    config: ProjectConfig,
+    graph_state: str,
+) -> tuple[str, int, int, str]:
+    if graph_state != "available":
+        return (
+            "not-assessed",
+            0,
+            0,
+            "Run `intentatlas scan PATH`, then repeat diagnose to inspect the saved graph. "
+            "Readiness alone does not prove that exact symbol-test links were formed.",
+        )
+    try:
+        graph = AtlasGraph.load(config.graph_path(root))
+    except (OSError, ValueError):
+        return (
+            "unavailable",
+            0,
+            0,
+            "The saved graph could not be validated. Run `intentatlas scan PATH`, then repeat "
+            "diagnose.",
+        )
+    python_tests = {
+        node.id
+        for node in graph.nodes.values()
+        if node.kind == "test" and node.metadata.get("language") == "Python"
+    }
+    exact_links = {
+        (edge.source, edge.target)
+        for edge in graph.edges
+        if edge.source in python_tests
+        and edge.relation == "tests"
+        and edge.evidence == "python-symbol-reference"
+        and graph.nodes.get(edge.target) is not None
+        and graph.nodes[edge.target].kind == "symbol"
+    }
+    if not python_tests:
+        return (
+            "not-applicable",
+            0,
+            0,
+            "The saved graph contains no detected Python test files. Graph freshness is not "
+            "assessed by diagnose.",
+        )
+    if exact_links:
+        return (
+            "ready",
+            len(python_tests),
+            len(exact_links),
+            "The saved graph contains at least one exact Python symbol-test link. This does not "
+            "prove that every test was linked, and graph freshness is not assessed.",
+        )
+    return (
+        "missing-exact-links",
+        len(python_tests),
+        0,
+        "Python tests were detected, but the saved graph has no exact symbol-test links. Check "
+        "the tests' local import paths and project/source-root metadata, then scan again.",
+    )

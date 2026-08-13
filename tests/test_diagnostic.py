@@ -10,7 +10,9 @@ from pathlib import Path
 import pytest
 
 from intentatlas.cli import main
+from intentatlas.config import ProjectConfig
 from intentatlas.diagnostic import diagnose_repository, render_diagnostic
+from intentatlas.scanner import scan_repository
 
 
 def _snapshot(root: Path) -> tuple[tuple[str, str, int, int, str], ...]:
@@ -69,9 +71,12 @@ def test_diagnostic_is_deterministic_and_no_write_without_config_or_vault(
     assert payload["schema_version"] == 1
     assert payload["read_only"] is True
     assert payload["network_required"] is False
+    assert payload["project_root"] == str(tmp_path.resolve())
     assert payload["config"]["state"] == "missing"
     assert payload["repository"]["git_state"] == "ready"
     assert payload["artifacts"]["change_report_state"] == "available-unassessed"
+    assert payload["recommended_change_scope"]["scope"] == "commit"
+    assert payload["symbol_test_links"]["state"] == "not-assessed"
     assert payload["next_safe_command"] == (
         f"intentatlas changes {subprocess.list2cmdline([str(tmp_path.resolve())])} "
         "--commit HEAD --report"
@@ -147,12 +152,46 @@ def test_diagnostic_text_preserves_safe_next_action_and_advisory(tmp_path: Path)
     rendered = render_diagnostic(diagnose_repository(tmp_path), "text")
 
     assert "IntentAtlas read-only diagnostic" in rendered
+    assert f"Project: {tmp_path.resolve()}" in rendered
     assert "Evidence: not-configured; freshness not-assessed" in rendered
     assert "Next safe command: intentatlas demo --report text" in rendered
     assert "absence is not proof of no impact" in rendered
     assert "Ambiguity guidance:" in rendered
     assert "No action is required for this heuristic alone" in rendered
     assert "not proof that symbol resolution abstained" in rendered
+    assert "Exact Python symbol-test links: not-assessed" in rendered
+
+
+def test_diagnostic_reports_missing_and_ready_exact_python_test_links(tmp_path: Path) -> None:
+    (tmp_path / "src").mkdir()
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "src" / "auth.py").write_text(
+        "def rotate_session(value: str) -> str:\n    return value[::-1]\n",
+        encoding="utf-8",
+    )
+    test = tmp_path / "tests" / "test_auth_rotation.py"
+    test.write_text("def test_placeholder():\n    assert True\n", encoding="utf-8")
+    graph_path = tmp_path / ".intentatlas" / "graph.json"
+    scan_repository(tmp_path, ProjectConfig(git_history_limit=0)).save(graph_path)
+
+    missing = diagnose_repository(tmp_path).to_dict()["symbol_test_links"]
+
+    assert missing["state"] == "missing-exact-links"
+    assert missing["python_test_count"] == 1
+    assert missing["exact_link_count"] == 0
+
+    test.write_text(
+        "from src.auth import rotate_session\n\n"
+        "def test_rotate_session():\n    assert rotate_session('abc') == 'cba'\n",
+        encoding="utf-8",
+    )
+    scan_repository(tmp_path, ProjectConfig(git_history_limit=0)).save(graph_path)
+
+    ready = diagnose_repository(tmp_path).to_dict()["symbol_test_links"]
+
+    assert ready["state"] == "ready"
+    assert ready["python_test_count"] == 1
+    assert ready["exact_link_count"] == 1
 
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
@@ -172,3 +211,48 @@ def test_diagnostic_next_command_quotes_the_project_path(tmp_path: Path) -> None
     assert result.next_safe_command == (
         f"intentatlas changes {quoted} --commit HEAD --report"
     )
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_diagnostic_selects_worktree_staged_and_clean_scopes(tmp_path: Path) -> None:
+    _git(tmp_path, "init", "-q")
+    _git(tmp_path, "config", "user.name", "Diagnostic Test")
+    _git(tmp_path, "config", "user.email", "diagnostic@example.invalid")
+    tracked = tmp_path / "app.py"
+    tracked.write_text("value = 1\n", encoding="utf-8")
+    _git(tmp_path, "add", "app.py")
+    _git(tmp_path, "commit", "-qm", "baseline")
+
+    clean = diagnose_repository(tmp_path)
+    assert clean.recommended_scope == "commit"
+    assert clean.next_safe_command.endswith("--commit HEAD --report")
+
+    tracked.write_text("value = 2\n", encoding="utf-8")
+    dirty = diagnose_repository(tmp_path)
+    assert dirty.recommended_scope == "worktree"
+    assert dirty.next_safe_command.endswith("--worktree --report")
+
+    _git(tmp_path, "add", "app.py")
+    staged = diagnose_repository(tmp_path)
+    assert staged.recommended_scope == "staged"
+    assert staged.next_safe_command.endswith("--staged --report")
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_diagnostic_scope_ignores_private_and_generated_paths(tmp_path: Path) -> None:
+    _git(tmp_path, "init", "-q")
+    _git(tmp_path, "config", "user.name", "Diagnostic Test")
+    _git(tmp_path, "config", "user.email", "diagnostic@example.invalid")
+    (tmp_path / "app.py").write_text("value = 1\n", encoding="utf-8")
+    _git(tmp_path, "add", "app.py")
+    _git(tmp_path, "commit", "-qm", "baseline")
+    private = tmp_path / "atlas" / "Private"
+    private.mkdir(parents=True)
+    (private / "secret.py").write_text("must not affect scope\n", encoding="utf-8")
+    generated = tmp_path / ".intentatlas"
+    generated.mkdir()
+    (generated / "cache.json").write_text("{}\n", encoding="utf-8")
+
+    result = diagnose_repository(tmp_path)
+
+    assert result.recommended_scope == "commit"

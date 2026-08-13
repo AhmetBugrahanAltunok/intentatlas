@@ -446,7 +446,11 @@ def run_guide(
 
     active_terminal = terminal or TerminalIO.system()
     if not active_terminal.interactive:
-        raise ValueError("guided mode requires interactive stdin and stdout")
+        raise ValueError(
+            "guided mode requires interactive stdin and stdout. In a non-interactive shell, "
+            "use `intentatlas diagnose PATH`, then `intentatlas changes PATH --commit HEAD "
+            "--report` (or `--worktree --report` for uncommitted changes)."
+        )
     active_language = _language(language)
     try:
         _render_banner(active_terminal, active_language)

@@ -29,6 +29,7 @@ def test_config_round_trip_and_bounds(tmp_path) -> None:
     assert loaded.sarif_reports == ["reports/results.sarif"]
     assert loaded.test_execution_reports == ["reports/execution.json"]
     assert ".obsidian" in loaded.exclude
+    assert ".venv-intentatlas" in loaded.exclude
     assert loaded.vault_path(tmp_path) == (tmp_path / "atlas").resolve()
 
 

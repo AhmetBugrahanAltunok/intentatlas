@@ -394,6 +394,7 @@ def test_recommendation_json_and_cli_are_deterministic(tmp_path, capsys) -> None
         == 0
     )
     cli_value = json.loads(capsys.readouterr().out)
+    assert cli_value["project_root"] == str(tmp_path.resolve())
     assert cli_value["minimum_confidence"] == "high"
     assert [item["test"]["id"] for item in cli_value["recommendations"]] == [
         "file:tests/test_changed.py"

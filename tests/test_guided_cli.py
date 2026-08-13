@@ -749,7 +749,10 @@ def test_cli_empty_argv_tty_gate_and_explicit_non_tty_refusal(monkeypatch, capsy
 
     monkeypatch.setattr(cli, "run_guide", onboarding.run_guide)
     assert cli.main(["guide"]) == 2
-    assert "requires interactive stdin and stdout" in capsys.readouterr().err
+    error = capsys.readouterr().err
+    assert "requires interactive stdin and stdout" in error
+    assert "intentatlas diagnose PATH" in error
+    assert "--worktree --report" in error
 
 
 def test_non_tty_subprocess_preserves_argparse_exit_2_without_prompt(tmp_path: Path) -> None:

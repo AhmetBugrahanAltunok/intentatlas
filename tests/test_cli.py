@@ -13,6 +13,11 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
     assert main(["init", str(tmp_path)]) == 0
     assert (tmp_path / "intentatlas.json").exists()
     assert (tmp_path / "atlas" / "Home.md").exists()
+    gitignore = (tmp_path / ".gitignore").read_text(encoding="utf-8")
+    assert ".intentatlas/" in gitignore
+    assert ".venv-intentatlas/" in gitignore
+    assert "atlas/.obsidian/workspace*.json" in gitignore
+    assert "atlas/.obsidian/cache/" in gitignore
 
     (tmp_path / "app.py").write_text("def run():\n    return True\n", encoding="utf-8")
     (tmp_path / "test_app.py").write_text(
@@ -28,6 +33,7 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
     assert "IntentAtlas status -" in output
     assert "relationships" in output
     assert "app.py" in output
+    assert f"Project: {tmp_path.resolve()}" in output
     assert "Traversal: direction both; maximum depth 1" in output
     assert "each row is relative to the target" in output
     assert "tested-by / verification" in output
@@ -35,6 +41,23 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
 
     assert main(["scan", str(tmp_path)]) == 0
     assert "Adapter cache: 3 reused, 0 rebuilt" in capsys.readouterr().out
+
+
+def test_cli_init_preserves_and_idempotently_extends_gitignore(tmp_path, capsys) -> None:
+    gitignore = tmp_path / ".gitignore"
+    gitignore.write_text("dist/\n# keep this comment\n", encoding="utf-8")
+
+    assert main(["init", str(tmp_path)]) == 0
+    first = gitignore.read_text(encoding="utf-8")
+    first_output = capsys.readouterr().out
+    assert first.startswith("dist/\n# keep this comment\n")
+    assert first.count(".intentatlas/") == 1
+    assert "Git ignore: .gitignore (added" in first_output
+
+    assert main(["init", str(tmp_path)]) == 0
+    second_output = capsys.readouterr().out
+    assert gitignore.read_text(encoding="utf-8") == first
+    assert "Git ignore: .gitignore (already covered)" in second_output
 
 
 def test_cli_reports_invalid_requests(tmp_path, capsys) -> None:
@@ -45,6 +68,7 @@ def test_cli_reports_invalid_requests(tmp_path, capsys) -> None:
     assert main(["init", str(tmp_path)]) == 0
     assert main(["scan", str(tmp_path)]) == 0
     assert main(["impact", "missing", str(tmp_path)]) == 2
+    assert f"project: {tmp_path.resolve()}" in capsys.readouterr().err
     assert main(["impact", "Home", str(tmp_path), "--depth", "20"]) == 2
 
 
@@ -82,10 +106,14 @@ def test_cli_writes_deterministic_graph_diff_and_supports_ci_check(tmp_path, cap
         )
         == 1
     )
+    check_output = capsys.readouterr()
+    assert "Summary: nodes +" in check_output.out
+    assert "Exit status 1 is the expected `--check` signal" in check_output.err
     assert (tmp_path / output).read_text(encoding="utf-8") == first
-    capsys.readouterr()
     assert main(["diff", ".intentatlas/graph.json", str(tmp_path), "--check"]) == 0
-    assert json.loads(capsys.readouterr().out)["has_changes"] is False
+    unchanged = capsys.readouterr()
+    assert json.loads(unchanged.out)["has_changes"] is False
+    assert "Exit status 0" in unchanged.err
 
 
 def test_cli_rejects_unsafe_graph_diff_paths(tmp_path, capsys) -> None:

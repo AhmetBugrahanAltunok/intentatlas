@@ -20,11 +20,14 @@ Gereksinim → Karar → İş → Kod → Test → Kanıt → Commit
   <img src="docs/assets/intentatlas-demo.gif" width="960" alt="Niyet grafiğini, değişiklik raporunu ve test kanıt yollarını gösteren IntentAtlas demosu">
 </p>
 
-## İki dakikada deneyin
+## İlk demoyu iki dakikada görün
 
 Gerekenler: Python 3.11, 3.12 veya 3.13. Git, gerçek depo analizi için gereklidir; yerleşik demo
 için gerekli değildir. Kurulum adımı, derleme bağımlılıklarını almak için ayarlı Python paket
 indeksinize bağlanabilir.
+
+İki dakikalık hedef, ilk metin demosu göründüğünde biter. Çıktıyı okumak ve aşağıdaki gerçek repo
+akışlarını denemek daha uzun sürer.
 
 IntentAtlas şu anda henüz yayımlanmamış bir sürüm adayıdır. Ortam klasörünü bir kez seçin; `.venv`
 başka bir kuruluma aitse ilk satırı `$IntentAtlasVenv = ".venv-intentatlas"` olarak değiştirin:
@@ -59,14 +62,19 @@ Recommended tests:
   Path: commit → rotate_session → tests/test_auth_rotation.py
 ```
 
+`medium 80`, 80 puanın orta bantta olduğunu gösterir: low 0–64, medium 65–84, high 85–100.
+Güven puanı mevcut yapısal kanıtı sıralar; doğruluk olasılığı değildir.
+
 Rehberli akış gerçek bir etkileşimli terminal ister; pipe, yönlendirme ve etkileşimsiz kabukları
-reddeder. Yerel bir Git deposunu proje dosyalarına yazmadan analiz etmek için:
+reddeder. Etkileşimsiz kabukta `intentatlas diagnose PATH` çalıştırın, ardından yazdırdığı kesin
+**Next safe command** satırını kopyalayın. Yerel bir Git deposunu proje dosyalarına yazmadan
+etkileşimli incelemek için:
 
 ```powershell
 intentatlas guide C:\projenizin\yolu
 ```
 
-Ya da onayladığınız public GitHub deposunu elle klonlamadan inceleyin:
+Ya da açıkça onayladığınız public GitHub deposunu elle klonlamadan inceleyin:
 
 ```powershell
 intentatlas guide https://github.com/OWNER/REPOSITORY
@@ -91,6 +99,9 @@ Recommended tests: 1 selected / 1 candidates
   Why: The test references the owning symbol of an exactly modified nested symbol.
   Path: Context.__exit__ → Context → tests/test_context.py
 ```
+
+`candidates`, gösterilen güven eşiği ve sonuç limitinden önce bulunan toplam kümedir; `selected`,
+bu kurallar uygulandıktan sonra gösterilen alt kümedir.
 
 Bu çıktı tavsiye niteliğindedir. Checkout yeniden üretilebilirlik için sabitlenmiş ve lisansı
 incelenmiştir; proje kodu ve testler çalıştırılmaz. Bkz.
@@ -121,6 +132,18 @@ hash'leri, kurulu wheel'i ve browser akışını doğrular. Bkz. [kurulum durumu
 ve [sürüm süreci](RELEASING.md).
 
 ## Hızlı başlangıç
+
+### İlk komutu seçin
+
+| Durumunuz | Kullanın | Projeye yazılanlar | Ağ |
+| --- | --- | --- | --- |
+| Yalnız fikri görmek istiyorsunuz | `intentatlas demo --report text` | Yok | Yok |
+| Etkileşimli terminaliniz var | `intentatlas guide PATH` | Yok | Yerel yol için yok |
+| Etkileşimsizsiniz veya Git kapsamından emin değilsiniz | `intentatlas diagnose PATH`, ardından **Next safe command** (`intentatlas changes ...`) | Yok | Yok |
+| Kalıcı proje haritası istiyorsunuz | `intentatlas init PATH`, ardından `intentatlas scan PATH` | `intentatlas.json`, `.gitignore`, `.intentatlas/` ve `atlas/` | Yok |
+
+Yalnız açıkça onaylanan public GitHub URL'si ağ ve yönetilen işletim sistemi cache'ini kullanabilir.
+Paket kurulumu da ayarlı Python paket indeksine bağlanabilir; yerel analiz çevrimdışıdır.
 
 Etkileşimli terminalde gerçek bir repo içinden tek komut çalıştırın:
 
@@ -177,15 +200,23 @@ Açık uzman komutları sıfır-izli önizleme için kullanılmaya devam eder:
 
 ```powershell
 intentatlas diagnose C:\projenizin\yolu
-intentatlas changes C:\projenizin\yolu --commit HEAD --report
+# Sonra yazdırdığı kesin Next safe command satırını çalıştırın. Örnekler:
+intentatlas changes C:\projenizin\yolu --worktree --report
 intentatlas changes C:\projenizin\yolu --commit HEAD --report --format json
 ```
 
 Bu komutlar çevrimdışı ve salt okunurdur. Tanı; sınırlı yetenekleri, belirsizliği, kanıt
 hazırlığını ve sonraki güvenli komutu bildirir. Rapor kesin revision/kapsamı, güncelliği, güven
 eşiğini, seçilen ve atlanan adayları, kaydedilmiş sıralama yollarını ve yedek test stratejisini
-gösterir. Atlanmak, niyetin etkilenmediğini veya testin gereksiz olduğunu kanıtlamaz. Yalnız açıkça
-verilen `--open`, aynı bellek içi rapor anlık görüntüsü için loopback görüntüleyicisini başlatır.
+gösterir. Atlanmak, niyetin etkilenmediğini veya testin gereksiz olduğunu kanıtlamaz. Kayıtlı
+grafik varsa `diagnose`, bulunan Python test dosyası ve kesin `python-symbol-reference`
+bağlantısı sayılarını da gösterir. `missing-exact-links`, testlerin bulunduğu fakat kesin sembol→test
+bağının kurulmadığı anlamına gelir; hazır sonucu değildir. Grafik güncelliği yine ayrıca doğrulanmaz.
+Sonraki komut için `diagnose`; unstaged, untracked veya conflicted değişikliklerde `worktree`, yalnız
+index değiştiğinde `staged`, çalışma kopyası temizse exact `HEAD`, henüz commit yoksa `worktree`
+seçer. Böylece kirli çalışma kopyası yanlışlıkla commit edilmiş `HEAD` görüntüsü sanılmaz.
+Yalnız açıkça verilen `--open`, aynı bellek içi rapor anlık görüntüsü için loopback görüntüleyicisini
+başlatır.
 [Güven-öncelikli önizleme](docs/trust-first-preview.md) ve [belge dizini](docs/index.md) ayrıntıları
 açıklar.
 
@@ -197,8 +228,19 @@ intentatlas scan C:\projenizin\yolu
 intentatlas open C:\projenizin\yolu
 ```
 
+Aktif reponuza henüz yazmak istemiyorsanız bu üç komutu önce atılabilir bir kopya veya küçük test
+reposunda deneyin. `init`; `intentatlas.json`, başlangıç Markdown klasörleri, taşınabilir Obsidian
+ayarları ve eksik yerel-durum `.gitignore` kurallarını oluşturur. `scan`, atılabilir `.intentatlas/`
+cache'ini ve `atlas/` altındaki üretilmiş alanları yazar; proje kodunu çalıştırmaz ve kullanıcıya
+ait notların üzerine yazmaz. Her şeyi commit etmeden önce `git status` ile inceleyin.
+
 `init`, genel yönlendirme ile boş niyet klasörleri oluşturur; IntentAtlas'ın kendi gereksinim,
 karar, kanıt, inceleme veya tarihli oturumlarını hedef depoya örnek veri olarak eklemez.
+Mevcut `.gitignore` dosyasını korur; yalnız `.intentatlas/`, `.venv-intentatlas/` ve Obsidian'ın
+makineye özel workspace/cache dosyaları için eksik kuralları ekler. Kalıcı `atlas/` notları ve
+taşınabilir Obsidian ayarları Git tarafından izlenebilir kalır.
+Obsidian isteğe bağlıdır: `atlas/` kalıcı akışın Markdown katmanıdır; Obsidian kurmadan aynı
+üretilmiş grafiği `intentatlas open` ile inceleyebilirsiniz.
 
 `status`, `impact`, `recommend-tests`, `diff` ve öneri değerlendirme komutları kalıcı grafiği okur;
 bu nedenle önce `scan` çalıştırılmalıdır. `diagnose`, `guide` ve `changes --report` kendi salt-okunur
@@ -209,12 +251,14 @@ incelemesini yapar ve kayıtlı grafik gerektirmez.
 kısmi eşleşme olabilir:
 
 ```text
-intentatlas impact src/auth.py --depth 2
-intentatlas impact symbol:src/auth.py::rotate_session --direction upstream
+intentatlas impact src/auth.py C:\projenizin\yolu --depth 2
+intentatlas impact symbol:src/auth.py::rotate_session C:\projenizin\yolu --direction upstream
 ```
 
 Çıktıdaki her iki boşluk, asıl hedeften bir ilişki hop'u demektir. Satırlar düz bir traversal
 sonucudur; girintili satır hemen üstündeki satırın çocuğu değildir.
+İsteğe bağlı `[PATH]` verilmezse komutlar geçerli klasörü kullanır. `impact` ve `recommend-tests`,
+yanlış klasörün grafiği kullanılıyorsa bunun görülebilmesi için çözümlenen proje kökünü yazdırır.
 
 Tekrarlanan CLI taramaları, değişmeyen her yerleşik dil adaptörü için sınırlı ve içerik-karmalı bir
 parçayı yeniden kullanır. Komut, yeniden kullanılan ve yeniden üretilen adaptör sayılarını gösterir.
@@ -222,9 +266,16 @@ Bu cache kaynak metni değil yalnızca grafik metadata'sını taşır ve güvenl
 eski kayıt yeniden üretilir. Grafik ve cache dosyaları atomik olarak değiştirilir. Ayrıntılar için
 [artımlı tarama belgesine](docs/incremental-scanning.md) bakın.
 
-Ardından `atlas/` klasörünü Obsidian’da vault olarak açın. Graph View; gereksinimleri,
-kararları, kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak
-gösterecektir.
+Yönetilen public GitHub cache kayıtlarında önce kimliği listeleyin, sonra kesin kimliği kullanın:
+
+```text
+intentatlas cache list
+intentatlas cache info CACHE_ID
+intentatlas cache clear CACHE_ID
+```
+
+Obsidian kullanıyorsanız `atlas/` klasörünü vault olarak açın. Graph View; gereksinimleri, kararları,
+kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak gösterecektir.
 
 macOS veya Linux'ta `/projenizin/yolu` gibi açık bir hedef yol kullanın. Ortam etkin değilse
 kurulumda seçtiğiniz ortam klasörünün içindeki `intentatlas` executable'ını çağırın.
@@ -270,6 +321,23 @@ intentatlas changes --staged --analyze --format json
 intentatlas changes --staged --report --format json
 intentatlas changes --worktree --report --open
 ```
+
+Neyi incelemek istediğinize göre kapsam seçin: `--worktree` mevcut staged, unstaged ve untracked
+değişiklikleri birlikte kapsar; `--staged` yalnız index'i; `--commit HEAD` commit edilmiş HEAD
+görüntüsünü inceler ve etkilenen dosyaların hâlâ o revision ile eşleşmesini bekler. Kirli repoda
+tahmin yürütmek yerine `diagnose` çıktısındaki komutu kullanın.
+
+| Çıktı terimi | Anlamı |
+| --- | --- |
+| `aligned` | Seçilen değişiklik tarafı, güvenle taranan mevcut dosyayla eşleşiyor. |
+| `stale` | Seçilen commit/index içeriği mevcut dosyadan farklı; kesin iddialardan kaçınılıyor. |
+| `analyzed` | Değişen dosya için desteklenen kesin artifact kanıtı kuruldu. |
+| `fallback` | Yalnız daha geniş dosya-seviyesi kanıt var; gösterilen tam-paket politikasını izleyin. |
+| `unknown` | Artifact güvenle eşleştirilemedi veya analiz edilemedi; hedefli yeterlilik iddiası yok. |
+
+`--analyze`, dosya başına durum, güncellik, güven ve artifact kimliklerini verir. `--report`, aynı
+taze analize ek olarak gereksinim etkilerini ve testleri sıralar, test stratejisini seçer ve
+atlamaları açıklar. `--report --open`, aynı bellek-içi raporu yerel görüntüleyicide gösterir.
 
 `--open`, aynı bellek içi raporu ikinci bir grafik veya rapor dosyası kaydetmeden yalnızca yerel
 arayüzde açar.
@@ -428,6 +496,11 @@ desteği olmayan adaptör veya belirsizlik durumunda mevcut dosya-seviyesi `chan
 yedek olarak korunur.
 
 `recommend-tests`, doğrulanmış grafik ilişkilerinden test dosyalarını `high`, `medium` veya `low`
+güvenle sıralar. Manifesti olmayan kök `src/` düzeninde hem `from auth import ...` gibi geleneksel
+hem de `from src.auth import ...` gibi namespace importları tek bir yerel modülü gösterdiğinde
+çözülür. Setuptools, Hatch veya Flit source-root bilgisi taşıyan `pyproject.toml` varsa bu bilgi
+önceliklidir. Belirsiz modül veya sembol kimlikleri bilinçli olarak bağlanmaz; kesin Python
+sembol→test bağlantılarını görmek için `scan` sonrasında `diagnose` çalıştırın.
 güvenle sıralar ve her sonucun neden yolunu gösterir. Python testleri, sınırlı paket yeniden
 dışa-aktarımları üzerinden tam içe aktarılan sembole bağlanabilir; iç içe bir değişiklikte test adı
 uyuşuyorsa sahibi olan sembolün odaklı testi kullanılabilir. JavaScript/TypeScript için adlandırılmış

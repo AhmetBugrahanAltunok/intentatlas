@@ -51,6 +51,7 @@ class ProjectConfig:
             ".pytest_tmp",
             ".ruff_cache",
             ".venv",
+            ".venv-intentatlas",
             "atlas",
             "build",
             "dist",

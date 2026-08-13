@@ -63,6 +63,7 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
     explicit_non_tty = _cli("guide", cwd=tmp_path)
     assert explicit_non_tty.returncode == 2
     assert "requires interactive stdin and stdout" in explicit_non_tty.stderr
+    assert "intentatlas diagnose PATH" in explicit_non_tty.stderr
 
     demo_report = _cli("demo", "--report", "json", cwd=tmp_path)
     assert demo_report.returncode == 0, demo_report.stderr

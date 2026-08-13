@@ -36,6 +36,7 @@ from .longitudinal import (
     load_pilot_manifest,
     render_longitudinal,
 )
+from .models import Node
 from .onboarding import run_guide
 from .real_world import (
     evaluate_real_world,
@@ -44,11 +45,21 @@ from .real_world import (
 )
 from .recommendations import recommend_tests, render_recommendations
 from .review import build_review_report, render_review
+from .safe_io import read_bounded_regular_file
 from .scale import render_scale_benchmark, run_scale_benchmark
 from .scanner import USER_VAULT_AREAS, scan_repository_incremental
+from .storage import atomic_write_text
 from .test_outcomes import load_test_outcomes
 from .vault import ProjectVault
 from .viewer import serve_graph
+
+MAX_GITIGNORE_BYTES = 1_000_000
+INTENTATLAS_GITIGNORE_PATTERNS = (
+    ".intentatlas/",
+    ".venv-intentatlas/",
+    "atlas/.obsidian/workspace*.json",
+    "atlas/.obsidian/cache/",
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -498,6 +509,7 @@ def _cache(command: str, args: argparse.Namespace) -> int:
 
 def _init(root: Path) -> int:
     root.mkdir(parents=True, exist_ok=True)
+    gitignore_path, added_patterns = _ensure_gitignore(root)
     config = ProjectConfig.load(root)
     config_path = config.save_if_missing(root)
     vault = ProjectVault(config.vault_path(root))
@@ -505,8 +517,50 @@ def _init(root: Path) -> int:
     print(f"Initialized IntentAtlas in {root}")
     print(f"Config: {config_path.relative_to(root)}")
     print(f"Obsidian vault: {config.vault_path(root).relative_to(root)}")
+    if added_patterns:
+        print(
+            f"Git ignore: {gitignore_path.relative_to(root)} "
+            f"(added {', '.join(added_patterns)})"
+        )
+    else:
+        print(f"Git ignore: {gitignore_path.relative_to(root)} (already covered)")
     print("Next: intentatlas scan")
     return 0
+
+
+def _ensure_gitignore(root: Path) -> tuple[Path, tuple[str, ...]]:
+    path = root / ".gitignore"
+    if path.is_symlink():
+        raise ValueError(f"Git ignore path may not be a symbolic link: {path}")
+    existing = ""
+    if path.exists():
+        raw = read_bounded_regular_file(path, MAX_GITIGNORE_BYTES)
+        if raw is None:
+            raise ValueError(
+                f"Git ignore must be a bounded regular file: {path}"
+            )
+        try:
+            existing = raw.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ValueError(f"Git ignore must be UTF-8: {path}") from exc
+    normalized = {
+        line.strip().removeprefix("/").rstrip("/")
+        for line in existing.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
+    missing = tuple(
+        pattern
+        for pattern in INTENTATLAS_GITIGNORE_PATTERNS
+        if pattern.removeprefix("/").rstrip("/") not in normalized
+    )
+    if not missing:
+        return path, ()
+    newline = "\r\n" if "\r\n" in existing else "\n"
+    prefix = existing.rstrip("\r\n")
+    block = newline.join(("# IntentAtlas local generated state", *missing))
+    updated = f"{prefix}{newline * 2 if prefix else ''}{block}{newline}"
+    atomic_write_text(path, updated)
+    return path, missing
 
 
 def _scan(root: Path) -> int:
@@ -558,8 +612,9 @@ def _impact(root: Path, target: str, depth: int, direction: str) -> int:
         raise ValueError("Depth must be between 1 and 10")
     config = ProjectConfig.load(root)
     graph = _load_project_graph(root, config)
-    origin = graph.find(target)
+    origin = _find_project_node(graph, target, root)
     records = graph.impact(origin.id, depth=depth, direction=direction)
+    print(f"Project: {root}")
     print(f"{origin.label} [{origin.kind}] - {origin.id}")
     print(f"Traversal: direction {direction}; maximum depth {depth}")
     print(
@@ -590,14 +645,17 @@ def _recommend_tests(
 ) -> int:
     config = ProjectConfig.load(root)
     graph = _load_project_graph(root, config)
-    origin = graph.find(target)
+    origin = _find_project_node(graph, target, root)
     result = recommend_tests(
         graph,
         origin.id,
         minimum_confidence=minimum_confidence,
         limit=limit,
     )
-    print(render_recommendations(result, output_format), end="")
+    print(
+        render_recommendations(result, output_format, project_root=str(root)),
+        end="",
+    )
     return 0
 
 
@@ -926,7 +984,23 @@ def _diff(root: Path, base: str, output: str | None, check: bool) -> int:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"Graph diff: {output_path.relative_to(root)}")
-    return 1 if check and value["has_changes"] else 0
+        summary = value["summary"]
+        print(
+            "Summary: "
+            f"nodes +{summary['nodes_added']} -{summary['nodes_removed']} "
+            f"changed {summary['nodes_changed']}; "
+            f"edges +{summary['edges_added']} -{summary['edges_removed']}"
+        )
+    if check:
+        if value["has_changes"]:
+            print(
+                "Check: graph changes detected. Exit status 1 is the expected `--check` "
+                "signal for CI, not a runtime failure.",
+                file=sys.stderr,
+            )
+            return 1
+        print("Check: no graph changes detected. Exit status 0.", file=sys.stderr)
+    return 0
 
 
 def _load_project_graph(root: Path, config: ProjectConfig) -> AtlasGraph:
@@ -937,6 +1011,13 @@ def _load_project_graph(root: Path, config: ProjectConfig) -> AtlasGraph:
             "Run `scan` first using the same IntentAtlas executable, then retry the command."
         )
     return AtlasGraph.load(graph_path)
+
+
+def _find_project_node(graph: AtlasGraph, target: str, root: Path) -> Node:
+    try:
+        return graph.find(target)
+    except ValueError as exc:
+        raise ValueError(f"{exc} (project: {root})") from exc
 
 
 def _project_path(

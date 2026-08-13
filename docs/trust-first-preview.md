@@ -19,17 +19,20 @@ state. The explicit commands remain available for automation and advanced use:
 
 ```powershell
 intentatlas diagnose C:\path\to\project
-intentatlas changes C:\path\to\project --commit HEAD --report
+# Run the exact Next safe command printed by diagnose. Examples:
+intentatlas changes C:\path\to\project --worktree --report
 intentatlas changes C:\path\to\project --commit HEAD --report --format json
 ```
 
-On macOS or Linux, replace the path with `/path/to/project`. Use `--worktree` instead of
-`--commit HEAD` only when the intended subject is the current tracked/untracked worktree state.
+On macOS or Linux, replace the path with `/path/to/project`. The diagnostic selects `worktree` for
+unstaged, untracked, or conflicted changes; `staged` for an index-only change; exact `HEAD` for a
+clean working copy; and `worktree` for a repository with no commit yet.
 
 The diagnostic is schema 1. It reports configuration and Git readiness, bounded adapter
 capabilities, unsupported languages, oversized inputs, project/source-root ambiguity, configured
 evidence without claiming freshness, graph/report command availability without claiming the
-report itself is ready, and the next safe command. It
+report itself is ready, the recommended change scope, why it was selected, and the next safe
+command. It
 reads bounded local metadata and supported sources, excludes the configured vault and literal
 `atlas/Private/`, and does not write project or Git state.
 
