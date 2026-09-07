@@ -4,7 +4,33 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # The release toolchain is frozen on purpose: `pyproject.toml` pins these
+    # three exactly and `tools/verify_release.py` asserts the identical tuple
+    # (EXPECTED_RELEASE_DEPENDENCIES). A bump therefore has to change two files
+    # at once. Dependabot can only edit `pyproject.toml`, so every PR it opens
+    # here fails `reproducible-package` with "Source pyproject must retain the
+    # fixed release toolchain" and can never be merged as-is.
+    # Bumping them is a deliberate manual step — see RELEASING.md,
+    # "Updating the frozen toolchain and the hash-bound actions".
+    ignore:
+      - dependency-name: "build"
+      - dependency-name: "hatchling"
+      - dependency-name: "packaging"
+
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    # Every external action is pinned to a full commit SHA, and the trusted
+    # publish workflow goes further: `tests/test_action.py` hardcodes the exact
+    # SHA of these two. Dependabot rewrites the workflow but not the test, so
+    # the bump fails
+    # `test_trusted_publish_workflow_is_manual_protected_and_hash_bound`.
+    # Same manual procedure as above.
+    #
+    # Other actions stay under Dependabot: it preserves SHA pinning, so those
+    # bumps still satisfy
+    # `test_external_actions_are_pinned_to_immutable_full_commit_shas`.
+    ignore:
+      - dependency-name: "actions/upload-artifact"
+      - dependency-name: "actions/download-artifact"

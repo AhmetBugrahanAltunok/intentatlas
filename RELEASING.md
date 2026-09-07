@@ -160,3 +160,32 @@ permission, runs no checkout, build backend, package installation, or project co
 transferred hashes, and gives only those bytes to the immutable trusted-publishing Action. It
 receives no long-lived package token. The presence of this workflow is not release approval, and
 it must not be dispatched while any recorded gate remains open.
+
+## 6. Updating the frozen toolchain and the hash-bound actions
+
+Some dependencies are deliberately frozen, and a bump has to change two files in the same commit.
+Dependabot can only ever change one of them, so it is configured to leave these alone
+(`.github/dependabot.yml`). Update them by hand.
+
+**Release toolchain — `build`, `hatchling`, `packaging`.** `pyproject.toml` pins the exact versions
+and `tools/verify_release.py` asserts the identical tuple in `EXPECTED_RELEASE_DEPENDENCIES`.
+Changing only `pyproject.toml` fails the `reproducible-package` job with
+`Source pyproject must retain the fixed release toolchain`.
+
+1. Update the version in `pyproject.toml` — both `[build-system] requires` (for `hatchling`) and
+   the `release` optional-dependency group.
+2. Update `EXPECTED_RELEASE_DEPENDENCIES` in `tools/verify_release.py` to the same tuple.
+3. Rebuild twice and confirm the artifacts stay byte-identical; a build-backend change is exactly
+   the kind of change that can break reproducibility.
+
+**Publish workflow actions — `actions/upload-artifact`, `actions/download-artifact`.** These are
+pinned to full commit SHAs in `.github/workflows/`, and `tests/test_action.py` hardcodes the same
+SHAs so a silently swapped action fails the suite. Changing only the workflow fails
+`test_trusted_publish_workflow_is_manual_protected_and_hash_bound`.
+
+1. Resolve the new tag to its full commit SHA and confirm it against the upstream repository.
+2. Update the `uses:` line, keeping the `# vX.Y.Z` comment accurate.
+3. Update the expected SHA in `tests/test_action.py`.
+
+Every other action stays under Dependabot: it preserves full-SHA pinning, so those bumps still
+satisfy `test_external_actions_are_pinned_to_immutable_full_commit_shas`.
