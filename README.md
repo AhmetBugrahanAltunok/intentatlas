@@ -30,6 +30,13 @@ Prerequisites: Python 3.11, 3.12, or 3.13. Git is required for repository analys
 built-in demo. The install step may contact your configured Python package index to obtain build
 dependencies.
 
+> **Windows: enable long paths before cloning this repository.** IntentAtlas ships its own `atlas/`
+> vault, and 51 of its generated symbol notes have paths longer than 120 characters. Cloning into
+> anything but a short directory exceeds the 260-character `MAX_PATH` limit and the checkout aborts
+> with `Filename too long`, leaving an empty working tree. Run
+> `git config --global core.longpaths true` once, or clone to a short path such as
+> `C:\src\intentatlas`. This affects cloning IntentAtlas itself, not the repositories it analyzes.
+
 The two-minute target ends when the first text demo appears. Reading the output and trying the
 repository workflows below takes longer.
 
