@@ -26,10 +26,17 @@ Gerekenler: Python 3.11, 3.12 veya 3.13. Git, gerçek depo analizi için gerekli
 için gerekli değildir. Kurulum adımı, derleme bağımlılıklarını almak için ayarlı Python paket
 indeksinize bağlanabilir.
 
+> **Windows: bu depoyu klonlamadan önce uzun yolları açın.** IntentAtlas kendi `atlas/` kasasını
+> taşır ve üretilmiş sembol notlarının 51 tanesinin yolu 120 karakterden uzundur. Kısa olmayan bir
+> klasöre klonlamak 260 karakterlik `MAX_PATH` sınırını aşar; checkout `Filename too long` ile
+> durur ve çalışma ağacı boş kalır. Bir kez
+> `git config --global core.longpaths true` çalıştırın ya da `C:\src\intentatlas` gibi kısa bir
+> yola klonlayın. Bu yalnızca IntentAtlas'ı klonlamayı etkiler, analiz ettiği depoları değil.
+
 İki dakikalık hedef, ilk metin demosu göründüğünde biter. Çıktıyı okumak ve aşağıdaki gerçek repo
 akışlarını denemek daha uzun sürer.
 
-IntentAtlas şu anda henüz yayımlanmamış bir sürüm adayıdır. Ortam klasörünü bir kez seçin; `.venv`
+IntentAtlas şu anda henüz yayımlanmamış bir beta sürümüdür. Ortam klasörünü bir kez seçin; `.venv`
 başka bir kuruluma aitse ilk satırı `$IntentAtlasVenv = ".venv-intentatlas"` olarak değiştirin:
 
 ```powershell
@@ -123,9 +130,9 @@ Güncel fazlar ve tamamlanma durumları
 [Ürün Yol Haritası](https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md) belgesinde izlenir. Repo kökündeki
 `ROADMAP.md`, ilk 0.1–0.3 teknik planının açıkça arşivlenmiş tarihsel kaydıdır.
 
-## Sürüm adayı durumu
+## Beta durumu
 
-Mevcut kaynak kendisini `0.3.0rc1` olarak tanımlar. Henüz tag'lenmemiş, paket indeksinde
+Mevcut kaynak kendisini `0.3.0b1` olarak tanımlar. Henüz tag'lenmemiş, paket indeksinde
 yayımlanmamış ve uyumluluk sözü vermemiştir. Yukarıdaki hızlı yol mevcut checkout'un davranışını
 doğrular; release incelemesi ayrıca kesin revision'ı, tekrarlanabilir artifact'leri, provenance'ı,
 hash'leri, kurulu wheel'i ve browser akışını doğrular. Bkz. [kurulum durumu](docs/installation.md)

@@ -40,7 +40,7 @@ dependencies.
 The two-minute target ends when the first text demo appears. Reading the output and trying the
 repository workflows below takes longer.
 
-IntentAtlas is currently an unpublished release candidate. Choose the environment folder once;
+IntentAtlas is currently an unpublished beta. Choose the environment folder once;
 if `.venv` already belongs to another setup, change the first line to
 `$IntentAtlasVenv = ".venv-intentatlas"`:
 
@@ -170,9 +170,9 @@ strong enough.
   synthetic scale benchmark for contributors.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
-## Release candidate status
+## Beta status
 
-The current source identifies itself as `0.3.0rc1`. It has not been tagged or published to a package
+The current source identifies itself as `0.3.0b1`. It has not been tagged or published to a package
 index and is not yet a compatibility promise. The quick path above confirms the behavior of the
 current checkout; release review additionally verifies the exact revision, reproducible artifacts,
 provenance, hashes, installed wheel, and browser workflow. See [installation status](docs/installation.md)

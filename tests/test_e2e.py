@@ -53,7 +53,7 @@ def _http_get(port: int, path: str) -> bytes:
 def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
     version = _cli("--version", cwd=tmp_path)
     assert version.returncode == 0, version.stderr
-    assert version.stdout.strip() == "IntentAtlas 0.3.0rc1"
+    assert version.stdout.strip() == "IntentAtlas 0.3.0b1"
 
     empty_non_tty = _cli(cwd=tmp_path)
     assert empty_non_tty.returncode == 2

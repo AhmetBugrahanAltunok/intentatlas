@@ -1,7 +1,7 @@
 # Installation
 
 IntentAtlas requires Python 3.11, 3.12, or 3.13. Git is required for repository analysis but not
-for the built-in demo. It is currently an unpublished release candidate, so
+for the built-in demo. It is currently an unpublished beta, so
 `pipx install intentatlas` is not yet a valid public installation path. Installing this checkout
 may contact the configured Python package index for build dependencies.
 
