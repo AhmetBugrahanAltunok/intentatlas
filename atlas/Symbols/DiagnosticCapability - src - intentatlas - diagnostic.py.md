@@ -10,8 +10,8 @@ source_path: "src/intentatlas/diagnostic.py"
 
 ## Metadata
 
-- **End Line:** <code>53</code>
-- **Line:** <code>45</code>
+- **End Line:** <code>59</code>
+- **Line:** <code>51</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

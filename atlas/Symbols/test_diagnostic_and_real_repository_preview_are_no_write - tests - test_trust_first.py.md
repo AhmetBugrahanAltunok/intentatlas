@@ -10,8 +10,8 @@ source_path: "tests/test_trust_first.py"
 
 ## Metadata
 
-- **End Line:** <code>102</code>
-- **Line:** <code>52</code>
+- **End Line:** <code>115</code>
+- **Line:** <code>61</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_trust_first.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_trust_first.py|tests/test_trust_first.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit f407e49 - Fix cross-platform diagnostic command tests|Fix cross-platform diagnostic command tests]] _(history; evidence: git-diff-hunk)_

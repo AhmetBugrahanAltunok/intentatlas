@@ -11,7 +11,7 @@ source_path: "tests/test_delivery.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>7621</code>
+- **Size Bytes:** <code>11618</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -26,6 +26,8 @@ source_path: "tests/test_delivery.py"
 
 - <code>defines</code> → [[Symbols/test_delivery_links_only_exact_known_commit_shas - tests - test_delivery.py|test_delivery_links_only_exact_known_commit_shas]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_delivery_nodes_sync_to_generated_commit_subfolders - tests - test_delivery.py|test_delivery_nodes_sync_to_generated_commit_subfolders]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_delivery_redacts_external_strings_before_graph_and_vault_persistence - tests - test_delivery.py|test_delivery_redacts_external_strings_before_graph_and_vault_persistence]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_delivery_rejects_redacted_identity_collisions_across_reports - tests - test_delivery.py|test_delivery_rejects_redacted_identity_collisions_across_reports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_imports_local_delivery_context_deterministically - tests - test_delivery.py|test_imports_local_delivery_context_deterministically]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_literal_private_delivery_boundary_is_independent_of_custom_vault - tests - test_delivery.py|test_literal_private_delivery_boundary_is_independent_of_custom_vault]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_rejects_duplicate_keys_unsafe_urls_and_bounds - tests - test_delivery.py|test_rejects_duplicate_keys_unsafe_urls_and_bounds]] _(structure; evidence: python-ast)_
@@ -36,12 +38,15 @@ source_path: "tests/test_delivery.py"
 - <code>tests</code> → [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/import_delivery - src - intentatlas - delivery.py|import_delivery]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/web/app.js"
 ## Metadata
 
 - **Language:** <code>"JavaScript"</code>
-- **Size Bytes:** <code>34255</code>
+- **Size Bytes:** <code>33607</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -20,7 +20,6 @@ source_path: "src/intentatlas/web/app.js"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/activate - src - intentatlas - web - app.js|activate]] _(structure; evidence: javascript-structural)_
-- <code>defines</code> → [[Symbols/add - src - intentatlas - web - app.js|add]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/applySearch - src - intentatlas - web - app.js|applySearch]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/bestSearchMatch - src - intentatlas - web - app.js|bestSearchMatch]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/bindEvents - src - intentatlas - web - app.js|bindEvents]] _(structure; evidence: javascript-structural)_
@@ -28,7 +27,6 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/bindNode - src - intentatlas - web - app.js|bindNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/boot - src - intentatlas - web - app.js|boot]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/buildGraphIndexes - src - intentatlas - web - app.js|buildGraphIndexes]] _(structure; evidence: javascript-structural)_
-- <code>defines</code> → [[Symbols/buildPathAdjacency - src - intentatlas - web - app.js|buildPathAdjacency]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/clamp - src - intentatlas - web - app.js|clamp]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/closeChangeReport - src - intentatlas - web - app.js|closeChangeReport]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/closeDetail - src - intentatlas - web - app.js|closeDetail]] _(structure; evidence: javascript-structural)_
@@ -41,7 +39,6 @@ source_path: "src/intentatlas/web/app.js"
 - <code>defines</code> → [[Symbols/edgeKey - src - intentatlas - web - app.js|edgeKey]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/escapeAttr - src - intentatlas - web - app.js|escapeAttr]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/escapeHTML - src - intentatlas - web - app.js|escapeHTML]] _(structure; evidence: javascript-structural)_
-- <code>defines</code> → [[Symbols/findEvidencePaths - src - intentatlas - web - app.js|findEvidencePaths]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/fitGraph - src - intentatlas - web - app.js|fitGraph]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/focusNode - src - intentatlas - web - app.js|focusNode]] _(structure; evidence: javascript-structural)_
 - <code>defines</code> → [[Symbols/focusedNodes - src - intentatlas - web - app.js|focusedNodes]] _(structure; evidence: javascript-structural)_
@@ -80,12 +77,22 @@ source_path: "src/intentatlas/web/app.js"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-012 - Implement guided demo and viewer evidence paths|ISSUE-012 - Implement guided demo and viewer evidence paths]] _(implementation; evidence: wikilink)_

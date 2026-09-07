@@ -10,8 +10,8 @@ source_path: "src/intentatlas/adapters/python.py"
 
 ## Metadata
 
-- **End Line:** <code>286</code>
-- **Line:** <code>262</code>
+- **End Line:** <code>491</code>
+- **Line:** <code>467</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

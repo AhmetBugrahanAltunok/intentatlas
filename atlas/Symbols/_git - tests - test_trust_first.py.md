@@ -10,8 +10,8 @@ source_path: "tests/test_trust_first.py"
 
 ## Metadata
 
-- **End Line:** <code>25</code>
-- **Line:** <code>16</code>
+- **End Line:** <code>27</code>
+- **Line:** <code>18</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

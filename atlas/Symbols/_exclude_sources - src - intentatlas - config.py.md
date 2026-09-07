@@ -10,8 +10,8 @@ source_path: "src/intentatlas/config.py"
 
 ## Metadata
 
-- **End Line:** <code>186</code>
-- **Line:** <code>166</code>
+- **End Line:** <code>187</code>
+- **Line:** <code>167</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/config.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-diff-hunk)_

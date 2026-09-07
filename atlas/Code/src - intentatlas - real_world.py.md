@@ -11,7 +11,7 @@ source_path: "src/intentatlas/real_world.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>14935</code>
+- **Size Bytes:** <code>14890</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -37,10 +37,13 @@ source_path: "src/intentatlas/real_world.py"
 - <code>defines</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_real_world - src - intentatlas - real_world.py|render_real_world]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - bounded_process.py|src/intentatlas/bounded_process.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ProcessCollectionError - src - intentatlas - bounded_process.py|ProcessCollectionError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/run_bounded_process - src - intentatlas - bounded_process.py|run_bounded_process]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/CorpusEvaluationResult - src - intentatlas - corpus.py|CorpusEvaluationResult]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/CorpusProject - src - intentatlas - corpus.py|CorpusProject]] _(structure; evidence: python-symbol-reference)_
@@ -51,6 +54,8 @@ source_path: "src/intentatlas/real_world.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-013 - Implement license-reviewed real-world validation|ISSUE-013 - Implement license-reviewed real-world validation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

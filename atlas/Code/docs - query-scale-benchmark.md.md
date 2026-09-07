@@ -19,5 +19,6 @@ source_path: "docs/query-scale-benchmark.md"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

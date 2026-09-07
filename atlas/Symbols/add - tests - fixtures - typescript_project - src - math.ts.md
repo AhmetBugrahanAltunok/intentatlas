@@ -10,6 +10,7 @@ source_path: "tests/fixtures/typescript_project/src/math.ts"
 
 ## Metadata
 
+- **End Line:** <code>13</code>
 - **Line:** <code>11</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>

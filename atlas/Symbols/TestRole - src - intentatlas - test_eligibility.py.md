@@ -20,3 +20,4 @@ source_path: "src/intentatlas/test_eligibility.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/src - intentatlas - test_eligibility.py|src/intentatlas/test_eligibility.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 8b38c15 - Constrain Python test discovery roots|Constrain Python test discovery roots]] _(history; evidence: git-diff-hunk)_

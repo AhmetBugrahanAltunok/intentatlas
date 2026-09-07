@@ -10,8 +10,8 @@ source_path: "src/intentatlas/longitudinal.py"
 
 ## Metadata
 
-- **End Line:** <code>108</code>
-- **Line:** <code>90</code>
+- **End Line:** <code>109</code>
+- **Line:** <code>91</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

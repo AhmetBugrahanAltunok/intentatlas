@@ -10,8 +10,8 @@ source_path: "src/intentatlas/graph_query.py"
 
 ## Metadata
 
-- **End Line:** <code>211</code>
-- **Line:** <code>186</code>
+- **End Line:** <code>237</code>
+- **Line:** <code>212</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/graph_query.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - graph_query.py|src/intentatlas/graph_query.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_

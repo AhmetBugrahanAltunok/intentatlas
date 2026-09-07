@@ -26,6 +26,7 @@ source_path: "tests/fixtures/typescript_project/src/math.ts"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - fixtures - typescript_project - src - legacy.js|tests/fixtures/typescript_project/src/legacy.js]] _(verification; evidence: javascript-structural)_
 - <code>tested-by</code> ← [[Tests/tests - fixtures - typescript_project - src - main.ts|tests/fixtures/typescript_project/src/main.ts]] _(verification; evidence: javascript-structural)_

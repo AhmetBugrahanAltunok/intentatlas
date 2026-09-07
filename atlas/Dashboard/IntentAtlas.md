@@ -11,39 +11,39 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 25
+- **commit:** 58
 - **config:** 8
-- **decision:** 35
+- **decision:** 38
 - **document:** 33
-- **evidence:** 33
-- **file:** 47
-- **issue:** 33
-- **memory:** 11
+- **evidence:** 36
+- **file:** 49
+- **issue:** 36
+- **memory:** 12
 - **project:** 3
 - **repository:** 1
-- **requirement:** 33
-- **review:** 33
-- **session:** 16
+- **requirement:** 36
+- **review:** 36
+- **session:** 17
 - **source-root:** 3
-- **symbol:** 1321
-- **test:** 79
-- **relationships:** 3898
+- **symbol:** 1483
+- **test:** 83
+- **relationships:** 4747
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 224 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 116 relationships
-- [[Code/intentatlas|intentatlas]] — 100 relationships
-- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 96 relationships
-- [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] — 94 relationships
-- [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] — 81 relationships
-- [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 73 relationships
-- [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 72 relationships
-- [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] — 71 relationships
-- [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 71 relationships
-- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 70 relationships
-- [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] — 68 relationships
+- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 253 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 243 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 141 relationships
+- [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 112 relationships
+- [[Code/intentatlas|intentatlas]] — 106 relationships
+- [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] — 85 relationships
+- [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 79 relationships
+- [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 77 relationships
+- [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 75 relationships
+- [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 75 relationships
+- [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 68 relationships
+- [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 66 relationships
 
 ## Workflow
 

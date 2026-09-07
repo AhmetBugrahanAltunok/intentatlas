@@ -11,7 +11,7 @@ source_path: "src/intentatlas/change_analysis.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9968</code>
+- **Size Bytes:** <code>8767</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -26,7 +26,6 @@ source_path: "src/intentatlas/change_analysis.py"
 - <code>defines</code> → [[Symbols/_analyze_change_set_with_graph - src - intentatlas - change_analysis.py|_analyze_change_set_with_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_analyze_file - src - intentatlas - change_analysis.py|_analyze_file]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_exact_symbols - src - intentatlas - change_analysis.py|_exact_symbols]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_valid_span - src - intentatlas - change_analysis.py|_valid_span]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_vault_artifact - src - intentatlas - change_analysis.py|_vault_artifact]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/analyze_change_set - src - intentatlas - change_analysis.py|analyze_change_set]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_change_analysis - src - intentatlas - change_analysis.py|render_change_analysis]] _(structure; evidence: python-ast)_
@@ -35,6 +34,7 @@ source_path: "src/intentatlas/change_analysis.py"
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - symbol_spans.py|src/intentatlas/symbol_spans.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(structure; evidence: python-symbol-reference)_
@@ -43,9 +43,13 @@ source_path: "src/intentatlas/change_analysis.py"
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/scan_repository - src - intentatlas - scanner.py|scan_repository]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/map_hunks_to_most_specific_symbols - src - intentatlas - symbol_spans.py|map_hunks_to_most_specific_symbols]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/valid_symbol_span - src - intentatlas - symbol_spans.py|valid_symbol_span]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

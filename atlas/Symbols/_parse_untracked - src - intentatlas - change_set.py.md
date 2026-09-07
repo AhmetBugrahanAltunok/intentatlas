@@ -10,8 +10,8 @@ source_path: "src/intentatlas/change_set.py"
 
 ## Metadata
 
-- **End Line:** <code>525</code>
-- **Line:** <code>517</code>
+- **End Line:** <code>601</code>
+- **Line:** <code>593</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

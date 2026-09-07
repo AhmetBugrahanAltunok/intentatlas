@@ -11,7 +11,7 @@ source_path: "src/intentatlas/graph_query.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9083</code>
+- **Size Bytes:** <code>10404</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -37,6 +37,7 @@ source_path: "src/intentatlas/graph_query.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_

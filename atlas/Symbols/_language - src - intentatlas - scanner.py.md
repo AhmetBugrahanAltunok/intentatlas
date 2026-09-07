@@ -10,8 +10,8 @@ source_path: "src/intentatlas/scanner.py"
 
 ## Metadata
 
-- **End Line:** <code>749</code>
-- **Line:** <code>724</code>
+- **End Line:** <code>750</code>
+- **Line:** <code>725</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

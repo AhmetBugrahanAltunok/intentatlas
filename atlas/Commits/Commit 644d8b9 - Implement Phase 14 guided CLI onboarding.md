@@ -31,8 +31,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_release.py|tests/test_release.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_trust_first.py|tests/test_trust_first.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/tools - verify_release.py|tools/verify_release.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/test_installed_cli_scan_recommend_and_viewer_workflow - tests - test_e2e.py|test_installed_cli_scan_recommend_and_viewer_workflow]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_trust_first_documentation_sequence_and_artifacts_are_frozen - tests - test_trust_first.py|test_trust_first_documentation_sequence_and_artifacts_are_frozen]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

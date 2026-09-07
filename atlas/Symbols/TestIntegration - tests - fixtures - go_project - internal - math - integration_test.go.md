@@ -10,6 +10,7 @@ source_path: "tests/fixtures/go_project/internal/math/integration_test.go"
 
 ## Metadata
 
+- **End Line:** <code>12</code>
 - **Line:** <code>8</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project"]</code>

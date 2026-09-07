@@ -10,7 +10,7 @@ source_path: "tests/test_phase17f_evidence_integrity.py"
 
 ## Metadata
 
-- **End Line:** <code>113</code>
+- **End Line:** <code>115</code>
 - **Line:** <code>87</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_phase17f_evidence_integrity.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_phase17f_evidence_integrity.py|tests/test_phase17f_evidence_integrity.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-diff-hunk)_

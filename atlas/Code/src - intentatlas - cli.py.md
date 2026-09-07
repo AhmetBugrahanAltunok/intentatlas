@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>33549</code>
+- **Size Bytes:** <code>37529</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -22,12 +22,15 @@ source_path: "src/intentatlas/cli.py"
 - <code>defines</code> → [[Symbols/_cache - src - intentatlas - cli.py|_cache]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_changes - src - intentatlas - cli.py|_changes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_diff - src - intentatlas - cli.py|_diff]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_ensure_gitignore - src - intentatlas - cli.py|_ensure_gitignore]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_corpus - src - intentatlas - cli.py|_evaluate_corpus]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_longitudinal - src - intentatlas - cli.py|_evaluate_longitudinal]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_real_world - src - intentatlas - cli.py|_evaluate_real_world]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_evaluate_recommendations - src - intentatlas - cli.py|_evaluate_recommendations]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_find_project_node - src - intentatlas - cli.py|_find_project_node]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_impact - src - intentatlas - cli.py|_impact]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_init - src - intentatlas - cli.py|_init]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_load_project_graph - src - intentatlas - cli.py|_load_project_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_open - src - intentatlas - cli.py|_open]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_path_argument - src - intentatlas - cli.py|_path_argument]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_private_paths - src - intentatlas - cli.py|_private_paths]] _(structure; evidence: python-ast)_
@@ -55,12 +58,15 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - real_world.py|src/intentatlas/real_world.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - storage.py|src/intentatlas/storage.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Tests/src - intentatlas - test_outcomes.py|src/intentatlas/test_outcomes.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - vault.py|src/intentatlas/vault.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(structure; evidence: python-ast)_
@@ -94,6 +100,7 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Symbols/evaluate_longitudinal - src - intentatlas - longitudinal.py|evaluate_longitudinal]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_pilot_manifest - src - intentatlas - longitudinal.py|load_pilot_manifest]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/evaluate_real_world - src - intentatlas - real_world.py|evaluate_real_world]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_real_world_manifest - src - intentatlas - real_world.py|load_real_world_manifest]] _(structure; evidence: python-symbol-reference)_
@@ -102,23 +109,41 @@ source_path: "src/intentatlas/cli.py"
 - <code>imports</code> → [[Symbols/render_recommendations - src - intentatlas - recommendations.py|render_recommendations]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/build_review_report - src - intentatlas - review.py|build_review_report]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_review - src - intentatlas - review.py|render_review]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_scale_benchmark - src - intentatlas - scale.py|render_scale_benchmark]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/run_scale_benchmark - src - intentatlas - scale.py|run_scale_benchmark]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/scan_repository_incremental - src - intentatlas - scanner.py|scan_repository_incremental]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/atomic_write_text - src - intentatlas - storage.py|atomic_write_text]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/load_test_outcomes - src - intentatlas - test_outcomes.py|load_test_outcomes]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ProjectVault - src - intentatlas - vault.py|ProjectVault]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit d9cd557 - feat- measure test recommendation quality|feat: measure test recommendation quality]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-003 - Implement evidence imports and graph diff|ISSUE-003 - Implement evidence imports and graph diff]] _(implementation; evidence: wikilink)_

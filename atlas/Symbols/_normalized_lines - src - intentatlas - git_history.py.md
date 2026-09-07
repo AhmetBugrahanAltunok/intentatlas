@@ -10,8 +10,8 @@ source_path: "src/intentatlas/git_history.py"
 
 ## Metadata
 
-- **End Line:** <code>312</code>
-- **Line:** <code>311</code>
+- **End Line:** <code>311</code>
+- **Line:** <code>310</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

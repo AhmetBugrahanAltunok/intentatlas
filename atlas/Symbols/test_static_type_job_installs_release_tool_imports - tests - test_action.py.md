@@ -20,4 +20,3 @@ source_path: "tests/test_action.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_action.py|tests/test_action.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit bfd0f1e - ci- install release imports for typing|ci: install release imports for typing]] _(history; evidence: git-diff-hunk)_

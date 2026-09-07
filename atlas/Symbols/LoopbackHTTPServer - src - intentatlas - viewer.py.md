@@ -10,8 +10,8 @@ source_path: "src/intentatlas/viewer.py"
 
 ## Metadata
 
-- **End Line:** <code>29</code>
-- **Line:** <code>24</code>
+- **End Line:** <code>30</code>
+- **Line:** <code>25</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

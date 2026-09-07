@@ -10,8 +10,8 @@ source_path: "tests/test_git_history.py"
 
 ## Metadata
 
-- **End Line:** <code>117</code>
-- **Line:** <code>108</code>
+- **End Line:** <code>132</code>
+- **Line:** <code>123</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_git_history.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-diff-hunk)_

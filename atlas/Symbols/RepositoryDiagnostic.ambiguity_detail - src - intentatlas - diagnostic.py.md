@@ -10,8 +10,8 @@ source_path: "src/intentatlas/diagnostic.py"
 
 ## Metadata
 
-- **End Line:** <code>83</code>
-- **Line:** <code>77</code>
+- **End Line:** <code>99</code>
+- **Line:** <code>90</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/diagnostic.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-diff-hunk)_

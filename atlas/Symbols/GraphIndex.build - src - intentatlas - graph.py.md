@@ -10,8 +10,8 @@ source_path: "src/intentatlas/graph.py"
 
 ## Metadata
 
-- **End Line:** <code>52</code>
-- **Line:** <code>29</code>
+- **End Line:** <code>56</code>
+- **Line:** <code>33</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

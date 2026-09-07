@@ -10,8 +10,8 @@ source_path: "src/intentatlas/delivery.py"
 
 ## Metadata
 
-- **End Line:** <code>289</code>
-- **Line:** <code>286</code>
+- **End Line:** <code>321</code>
+- **Line:** <code>318</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

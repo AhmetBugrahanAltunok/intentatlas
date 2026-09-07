@@ -10,6 +10,7 @@ source_path: "tests/fixtures/typescript_project/src/escape.ts"
 
 ## Metadata
 
+- **End Line:** <code>3</code>
 - **Line:** <code>3</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>

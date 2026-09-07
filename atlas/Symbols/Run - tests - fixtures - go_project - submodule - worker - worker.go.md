@@ -10,6 +10,7 @@ source_path: "tests/fixtures/go_project/submodule/worker/worker.go"
 
 ## Metadata
 
+- **End Line:** <code>3</code>
 - **Line:** <code>3</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:go-module:tests/fixtures/go_project", "workspace:go-module:tests/fixtures/go_project/submodule"]</code>

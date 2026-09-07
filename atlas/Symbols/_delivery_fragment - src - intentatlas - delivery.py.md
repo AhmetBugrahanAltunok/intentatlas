@@ -10,8 +10,8 @@ source_path: "src/intentatlas/delivery.py"
 
 ## Metadata
 
-- **End Line:** <code>186</code>
-- **Line:** <code>58</code>
+- **End Line:** <code>211</code>
+- **Line:** <code>68</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "src/intentatlas/delivery.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

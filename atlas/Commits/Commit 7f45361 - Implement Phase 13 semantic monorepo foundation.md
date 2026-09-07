@@ -43,27 +43,8 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_workspace.py|tests/test_workspace.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_validate_symbol_node - src - intentatlas - adapters - conformance.py|_validate_symbol_node]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/JavaScriptAdapter.scan - src - intentatlas - adapters - javascript.py|JavaScriptAdapter.scan]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_alias_targets - src - intentatlas - adapters - javascript.py|_alias_targets]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_alias_wildcard - src - intentatlas - adapters - javascript.py|_alias_wildcard]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_module_specifiers - src - intentatlas - adapters - javascript.py|_module_specifiers]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_resolve_local_module - src - intentatlas - adapters - javascript.py|_resolve_local_module]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/import_evidence - src - intentatlas - evidence.py|import_evidence]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/AtlasGraph.edge_count - src - intentatlas - graph.py|AtlasGraph.edge_count]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/AtlasGraph.from_dict - src - intentatlas - graph.py|AtlasGraph.from_dict]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/AtlasGraph.load - src - intentatlas - graph.py|AtlasGraph.load]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/GraphQuerySnapshot._response - src - intentatlas - graph_query.py|GraphQuerySnapshot._response]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/GraphQuerySnapshot._window - src - intentatlas - graph_query.py|GraphQuerySnapshot._window]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/GraphQuerySnapshot.neighborhood - src - intentatlas - graph_query.py|GraphQuerySnapshot.neighborhood]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/GraphQuerySnapshot.overview - src - intentatlas - graph_query.py|GraphQuerySnapshot.overview]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/GraphQuerySnapshot.paths - src - intentatlas - graph_query.py|GraphQuerySnapshot.paths]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/GraphQuerySnapshot.search - src - intentatlas - graph_query.py|GraphQuerySnapshot.search]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_bounded - src - intentatlas - graph_query.py|_bounded]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_node_id - src - intentatlas - graph_query.py|_node_id]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_query - src - intentatlas - graph_query.py|_query]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_scip_freshness - src - intentatlas - open_evidence.py|_scip_freshness]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_scip_metadata - src - intentatlas - open_evidence.py|_scip_metadata]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_scip_metadata_string - src - intentatlas - open_evidence.py|_scip_metadata_string]] _(history; evidence: git-diff-hunk)_
@@ -75,25 +56,13 @@ generated: true
 - <code>modifies</code> → [[Symbols/AdapterFragmentCache.load - src - intentatlas - scan_cache.py|AdapterFragmentCache.load]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/AdapterFragmentCache.store - src - intentatlas - scan_cache.py|AdapterFragmentCache.store]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_strict_node - src - intentatlas - scan_cache.py|_strict_node]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_query_int - src - intentatlas - viewer.py|_query_int]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_query_text - src - intentatlas - viewer.py|_query_text]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph.Handler._graph_query - src - intentatlas - viewer.py|serve_graph.Handler._graph_query]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_graph.Handler.do_GET - src - intentatlas - viewer.py|serve_graph.Handler.do_GET]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_graph_round_trip_and_summary - tests - test_graph.py|test_graph_round_trip_and_summary]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_load_migrates_schema_one_and_rejects_invalid_typed_relations - tests - test_graph.py|test_load_migrates_schema_one_and_rejects_invalid_typed_relations]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_snapshot - tests - test_graph_query.py|_snapshot]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_bounded_query_windows_carry_snapshot_totals_and_omissions - tests - test_graph_query.py|test_bounded_query_windows_carry_snapshot_totals_and_omissions]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_query_contract_rejects_unbounded_or_unknown_requests - tests - test_graph_query.py|test_query_contract_rejects_unbounded_or_unknown_requests]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_imports_open_evidence_without_retaining_raw_content - tests - test_open_evidence.py|test_imports_open_evidence_without_retaining_raw_content]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_revision_bound_scip_creates_exact_symbol_test_edge_only_when_aligned - tests - test_open_evidence.py|test_revision_bound_scip_creates_exact_symbol_test_edge_only_when_aligned]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_scip_ambiguous_owner_and_unsupported_roles_remain_fallback - tests - test_open_evidence.py|test_scip_ambiguous_owner_and_unsupported_roles_remain_fallback]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/test_scip_import_does_not_launch_repository_tooling - tests - test_open_evidence.py|test_scip_import_does_not_launch_repository_tooling]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_scip_import_does_not_launch_repository_tooling.git_only - tests - test_open_evidence.py|test_scip_import_does_not_launch_repository_tooling.git_only]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_large_graph_benchmark_has_exact_work_counts_and_bounded_queries - tests - test_scale.py|test_large_graph_benchmark_has_exact_work_counts_and_bounded_queries]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_workspace_partitions_reuse_unrelated_projects_and_invalidate_dependents - tests - test_scan_cache.py|test_workspace_partitions_reuse_unrelated_projects_and_invalidate_dependents]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one - tests - test_scanner.py|test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_repository_file_and_byte_budgets_fail_before_adapter_work - tests - test_scanner.py|test_repository_file_and_byte_budgets_fail_before_adapter_work]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

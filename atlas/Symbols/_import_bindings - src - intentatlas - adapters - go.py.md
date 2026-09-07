@@ -10,8 +10,8 @@ source_path: "src/intentatlas/adapters/go.py"
 
 ## Metadata
 
-- **End Line:** <code>411</code>
-- **Line:** <code>396</code>
+- **End Line:** <code>501</code>
+- **Line:** <code>486</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

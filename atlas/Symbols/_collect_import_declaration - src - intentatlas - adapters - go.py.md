@@ -10,8 +10,8 @@ source_path: "src/intentatlas/adapters/go.py"
 
 ## Metadata
 
-- **End Line:** <code>461</code>
-- **Line:** <code>414</code>
+- **End Line:** <code>551</code>
+- **Line:** <code>504</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/adapters/go.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - adapters - go.py|src/intentatlas/adapters/go.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-diff-hunk)_

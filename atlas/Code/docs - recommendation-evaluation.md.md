@@ -11,7 +11,7 @@ source_path: "docs/recommendation-evaluation.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>2830</code>
+- **Size Bytes:** <code>3417</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -19,4 +19,6 @@ source_path: "docs/recommendation-evaluation.md"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit d9cd557 - feat- measure test recommendation quality|feat: measure test recommendation quality]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

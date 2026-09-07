@@ -10,8 +10,8 @@ source_path: "tests/test_graph.py"
 
 ## Metadata
 
-- **End Line:** <code>35</code>
-- **Line:** <code>29</code>
+- **End Line:** <code>36</code>
+- **Line:** <code>30</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

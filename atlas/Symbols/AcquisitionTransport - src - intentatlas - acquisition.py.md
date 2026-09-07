@@ -10,8 +10,8 @@ source_path: "src/intentatlas/acquisition.py"
 
 ## Metadata
 
-- **End Line:** <code>75</code>
-- **Line:** <code>74</code>
+- **End Line:** <code>89</code>
+- **Line:** <code>88</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

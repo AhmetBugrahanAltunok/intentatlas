@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/python.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>15703</code>
+- **Size Bytes:** <code>24920</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -26,19 +26,30 @@ source_path: "src/intentatlas/adapters/python.py"
 - <code>defines</code> → [[Symbols/_PythonSymbolResolver.references - src - intentatlas - adapters - python.py|_PythonSymbolResolver.references]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_PythonSymbolResolver.resolve - src - intentatlas - adapters - python.py|_PythonSymbolResolver.resolve]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_PythonSymbolResolver.resolve_qualified - src - intentatlas - adapters - python.py|_PythonSymbolResolver.resolve_qualified]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolCandidate - src - intentatlas - adapters - python.py|_SymbolCandidate]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor - src - intentatlas - adapters - python.py|_SymbolVisitor]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor.__init__ - src - intentatlas - adapters - python.py|_SymbolVisitor.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor._is_overload_declaration - src - intentatlas - adapters - python.py|_SymbolVisitor._is_overload_declaration]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_SymbolVisitor._trusted_binding - src - intentatlas - adapters - python.py|_SymbolVisitor._trusted_binding]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor._visit_symbol - src - intentatlas - adapters - python.py|_SymbolVisitor._visit_symbol]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor.visit_AsyncFunctionDef - src - intentatlas - adapters - python.py|_SymbolVisitor.visit_AsyncFunctionDef]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor.visit_ClassDef - src - intentatlas - adapters - python.py|_SymbolVisitor.visit_ClassDef]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_SymbolVisitor.visit_FunctionDef - src - intentatlas - adapters - python.py|_SymbolVisitor.visit_FunctionDef]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_allowed_owners - src - intentatlas - adapters - python.py|_allowed_owners]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_body_bound_names - src - intentatlas - adapters - python.py|_body_bound_names]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_build_module_maps - src - intentatlas - adapters - python.py|_build_module_maps]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_definition_contexts - src - intentatlas - adapters - python.py|_definition_contexts]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_definition_contexts.visit - src - intentatlas - adapters - python.py|_definition_contexts.visit]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_definition_token - src - intentatlas - adapters - python.py|_definition_token]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - python.py|_filename_test_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_overload_implementation - src - intentatlas - adapters - python.py|_overload_implementation]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_python_attribute_chain - src - intentatlas - adapters - python.py|_python_attribute_chain]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_python_import_base - src - intentatlas - adapters - python.py|_python_import_base]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_python_imports - src - intentatlas - adapters - python.py|_python_imports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_module - src - intentatlas - adapters - python.py|_resolve_module]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_scope_shadowed_names - src - intentatlas - adapters - python.py|_scope_shadowed_names]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_statement_bound_names - src - intentatlas - adapters - python.py|_statement_bound_names]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_typing_overload_bindings - src - intentatlas - adapters - python.py|_typing_overload_bindings]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_unique_symbol_nodes - src - intentatlas - adapters - python.py|_unique_symbol_nodes]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
@@ -50,13 +61,21 @@ source_path: "src/intentatlas/adapters/python.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-024 - Implement the honest 0.3.0 release candidate demo|ISSUE-024 - Implement the honest 0.3.0 release candidate demo]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-034 - Apply first-run observation fixes|ISSUE-034 - Apply first-run observation fixes]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

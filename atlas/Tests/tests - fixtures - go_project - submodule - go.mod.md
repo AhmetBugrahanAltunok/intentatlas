@@ -19,4 +19,5 @@ source_path: "tests/fixtures/go_project/submodule/go.mod"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/tests - fixtures - go_project - submodule - ee3ea4fe|example.com/intentatlas/plugin]] _(boundary; evidence: workspace-boundary)_

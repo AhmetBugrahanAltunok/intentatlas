@@ -10,8 +10,8 @@ source_path: "src/intentatlas/change_set.py"
 
 ## Metadata
 
-- **End Line:** <code>463</code>
-- **Line:** <code>435</code>
+- **End Line:** <code>520</code>
+- **Line:** <code>495</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,5 @@ source_path: "src/intentatlas/change_set.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_
+- <code>tested-by</code> ← [[Tests/tests - test_change_set.py|tests/test_change_set.py]] _(verification; evidence: python-symbol-reference)_

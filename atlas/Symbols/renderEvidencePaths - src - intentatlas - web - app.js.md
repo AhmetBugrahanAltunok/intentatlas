@@ -10,7 +10,8 @@ source_path: "src/intentatlas/web/app.js"
 
 ## Metadata
 
-- **Line:** <code>534</code>
+- **End Line:** <code>570</code>
+- **Line:** <code>532</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
@@ -19,3 +20,4 @@ source_path: "src/intentatlas/web/app.js"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] _(structure; evidence: javascript-structural)_
+- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

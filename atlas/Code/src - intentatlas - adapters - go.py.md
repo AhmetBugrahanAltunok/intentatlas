@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/go.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>23596</code>
+- **Size Bytes:** <code>26224</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -26,6 +26,7 @@ source_path: "src/intentatlas/adapters/go.py"
 - <code>defines</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - go.py|_filename_test_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_function_body_start - src - intentatlas - adapters - go.py|_function_body_start]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_function_call_references - src - intentatlas - adapters - go.py|_function_call_references]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_function_end_line - src - intentatlas - adapters - go.py|_function_end_line]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_go_symbol_test_edges - src - intentatlas - adapters - go.py|_go_symbol_test_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_go_tokens - src - intentatlas - adapters - go.py|_go_tokens]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_import_bindings - src - intentatlas - adapters - go.py|_import_bindings]] _(structure; evidence: python-ast)_
@@ -35,13 +36,16 @@ source_path: "src/intentatlas/adapters/go.py"
 - <code>defines</code> → [[Symbols/_mask_comments_and_literals - src - intentatlas - adapters - go.py|_mask_comments_and_literals]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_matching_delimiter - src - intentatlas - adapters - go.py|_matching_delimiter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_module_roots - src - intentatlas - adapters - go.py|_module_roots]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_next_go_declaration - src - intentatlas - adapters - go.py|_next_go_declaration]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_call_edges - src - intentatlas - adapters - go.py|_package_call_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_files - src - intentatlas - adapters - go.py|_package_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_name - src - intentatlas - adapters - go.py|_package_name]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_package_symbol_test_edges - src - intentatlas - adapters - go.py|_package_symbol_test_edges]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_qualified_identifiers - src - intentatlas - adapters - go.py|_qualified_identifiers]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_local_import - src - intentatlas - adapters - go.py|_resolve_local_import]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_symbol_metadata - src - intentatlas - adapters - go.py|_symbol_metadata]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_symbols - src - intentatlas - adapters - go.py|_symbols]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_type_end_line - src - intentatlas - adapters - go.py|_type_end_line]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_valid_import_path - src - intentatlas - adapters - go.py|_valid_import_path]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
@@ -53,10 +57,18 @@ source_path: "src/intentatlas/adapters/go.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit db64192 - feat- improve Go test evidence|feat: improve Go test evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-015 - Expand and refine real-world validation|ISSUE-015 - Expand and refine real-world validation]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-035 - Apply audited reliability fixes|ISSUE-035 - Apply audited reliability fixes]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

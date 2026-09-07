@@ -10,8 +10,8 @@ source_path: "src/intentatlas/git_history.py"
 
 ## Metadata
 
-- **End Line:** <code>75</code>
-- **Line:** <code>49</code>
+- **End Line:** <code>74</code>
+- **Line:** <code>48</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -21,4 +21,3 @@ source_path: "src/intentatlas/git_history.py"
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-symbol-reference)_
-- <code>modified-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-diff-hunk)_

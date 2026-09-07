@@ -10,8 +10,8 @@ source_path: "tests/test_diagnostic.py"
 
 ## Metadata
 
-- **End Line:** <code>48</code>
-- **Line:** <code>40</code>
+- **End Line:** <code>53</code>
+- **Line:** <code>45</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

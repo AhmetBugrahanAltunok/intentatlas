@@ -10,8 +10,8 @@ source_path: "tests/test_phase17f_evidence_integrity.py"
 
 ## Metadata
 
-- **End Line:** <code>291</code>
-- **Line:** <code>274</code>
+- **End Line:** <code>293</code>
+- **Line:** <code>276</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_phase17f_evidence_integrity.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_phase17f_evidence_integrity.py|tests/test_phase17f_evidence_integrity.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 8b38c15 - Constrain Python test discovery roots|Constrain Python test discovery roots]] _(history; evidence: git-diff-hunk)_

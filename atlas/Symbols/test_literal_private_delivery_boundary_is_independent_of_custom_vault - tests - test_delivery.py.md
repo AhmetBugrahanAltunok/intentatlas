@@ -10,8 +10,8 @@ source_path: "tests/test_delivery.py"
 
 ## Metadata
 
-- **End Line:** <code>125</code>
-- **Line:** <code>117</code>
+- **End Line:** <code>243</code>
+- **Line:** <code>235</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_delivery.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_delivery.py|tests/test_delivery.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-diff-hunk)_

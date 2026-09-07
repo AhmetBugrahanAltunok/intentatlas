@@ -11,7 +11,7 @@ source_path: "src/intentatlas/change_set.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>18222</code>
+- **Size Bytes:** <code>20458</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -24,15 +24,19 @@ source_path: "src/intentatlas/change_set.py"
 - <code>defines</code> → [[Symbols/ChangeSet - src - intentatlas - change_set.py|ChangeSet]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ChangeSet.hunk_count - src - intentatlas - change_set.py|ChangeSet.hunk_count]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/ChangeSet.to_dict - src - intentatlas - change_set.py|ChangeSet.to_dict]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_GitCollectionError - src - intentatlas - change_set.py|_GitCollectionError]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_GitOutputLimitError - src - intentatlas - change_set.py|_GitOutputLimitError]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_diff_arguments - src - intentatlas - change_set.py|_diff_arguments]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_finish_change_set - src - intentatlas - change_set.py|_finish_change_set]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_git_output - src - intentatlas - change_set.py|_git_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_merge_files - src - intentatlas - change_set.py|_merge_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_normalized_lines - src - intentatlas - change_set.py|_normalized_lines]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_oversized_file_freshness - src - intentatlas - change_set.py|_oversized_file_freshness]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_parse_patch_hunks - src - intentatlas - change_set.py|_parse_patch_hunks]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_parse_untracked - src - intentatlas - change_set.py|_parse_untracked]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_pathspecs - src - intentatlas - change_set.py|_pathspecs]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_revision - src - intentatlas - change_set.py|_resolve_revision]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_run_git_bounded - src - intentatlas - change_set.py|_run_git_bounded]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_safe_git_path - src - intentatlas - change_set.py|_safe_git_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_try_git_blob - src - intentatlas - change_set.py|_try_git_blob]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_try_resolve_revision - src - intentatlas - change_set.py|_try_resolve_revision]] _(structure; evidence: python-ast)_
@@ -40,13 +44,21 @@ source_path: "src/intentatlas/change_set.py"
 - <code>defines</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/parse_name_status - src - intentatlas - change_set.py|parse_name_status]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_change_set - src - intentatlas - change_set.py|render_change_set]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - bounded_process.py|src/intentatlas/bounded_process.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ProcessCollectionError - src - intentatlas - bounded_process.py|ProcessCollectionError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ProcessOutputLimitError - src - intentatlas - bounded_process.py|ProcessOutputLimitError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/run_bounded_process - src - intentatlas - bounded_process.py|run_bounded_process]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/DiffHunk - src - intentatlas - git_history.py|DiffHunk]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/parse_git_diffs - src - intentatlas - git_history.py|parse_git_diffs]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-035 - Apply audited reliability fixes|ISSUE-035 - Apply audited reliability fixes]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_

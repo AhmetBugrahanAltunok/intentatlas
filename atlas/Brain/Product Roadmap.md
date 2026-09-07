@@ -15,6 +15,18 @@ the [[Brain/Phase Completion Protocol]] is satisfied and its evidence and review
 The product continues to serve [[Requirements/REQ-001 - Explain change impact]] while remaining
 independent, MIT-licensed, local-first, and vault-first.
 
+## Current execution checkpoint — 2026-09-07
+
+- Latest completed delivery: **Phase 20 — Complete change coverage and repeatable browser evidence**.
+- Next queued delivery: **Phase 21 — Reproducible installation and first useful report**.
+- Forward plan, acceptance gates, risks, and next actions:
+  [[Brain/Alpha Release Execution Plan]].
+- Latest working checkpoint: [[Sessions/2026-09-07 - Alpha readiness checkpoint]].
+- Phase 18 and 19 closure records existed outside this roadmap. They are now linked below;
+  Phase 20 records the 2026-09-07 revalidation defects, corrections, and final local pass.
+- Public launch is still contingent on the Phase 11C human-validation and release gates.
+  No public release or package upload has been performed as part of this checkpoint.
+
 ## Phase 1 — Trustworthy foundation
 
 Status: complete (2026-07-30)
@@ -606,6 +618,71 @@ Status: complete after 17F correction (2026-08-04)
 - Review: [[Reviews/Phase 17 Recommendation Integrity and Python Resolution Review]]
 - Strategy: [[Brain/Phase 17 Recommendation Integrity Strategy]]
 - Handoff: [[Sessions/2026-08-03 - Phase 17 recommendation integrity handoff]]
+
+## Phase 18 — First-run experience hardening
+
+Status: historical closure recorded; current release readiness is subject to Phase 20 revalidation.
+
+- Requirement: [[Requirements/REQ-034 - Harden the first-run experience from observed use]]
+- Decision: [[Decisions/ADR-036 - Use repository-state-aware first-run guidance]]
+- Issue: [[Issues/ISSUE-034 - Apply first-run observation fixes]]
+- Evidence: [[Evidence/EVD-034 - Phase 18 first-run experience hardening verification]]
+- Review: [[Reviews/Phase 18 First-Run Experience Hardening Review]]
+
+## Phase 19 — Audited reliability
+
+Status: historical local pass recorded; follow-up correctness and browser gaps reopened in Phase 20.
+
+- Requirement: [[Requirements/REQ-035 - Close audited trust and cross-language analysis gaps]]
+- Decision: [[Decisions/ADR-037 - Bound trust claims and abstain on uncertain structure]]
+- Issue: [[Issues/ISSUE-035 - Apply audited reliability fixes]]
+- Evidence: [[Evidence/EVD-035 - Phase 19 audited reliability verification]]
+- Review: [[Reviews/Phase 19 Audited Reliability Review]]
+- Revalidation: 2026-09-07 source-tree suite had 569 passed, 1 failed, 4 skipped;
+  partial-hunk and mixed-deletion coverage defects were reproduced separately.
+
+## Phase 20 — Complete change coverage and repeatable browser evidence
+
+Status: complete (2026-09-07); 595 passed, 4 platform skips, 86.47% branch-enabled total coverage;
+EVD-036 verified and Phase 20 Review passed. Next: Phase 21.
+
+- Requirement: [[Requirements/REQ-036 - Require complete change coverage before targeted advice]]
+- Decision: [[Decisions/ADR-038 - Preserve uncovered change ranges and deletion uncertainty]]
+- Issue: [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions]]
+- Evidence: [[Evidence/EVD-036 - Phase 20 change coverage verification]]
+- Review: [[Reviews/Phase 20 Change Coverage Review]]
+- Correct whole-hunk coverage, nested-symbol ownership, and mixed deletion uncertainty.
+- Diagnose and correct the browser evidence-path failure without weakening its assertion.
+- Close only after focused regressions, complete tests, lint, typing, security, CLI/browser
+  workflows, and deterministic vault verification pass.
+
+## Phase 21 — Reproducible installation and first useful report
+
+Status: queued after Phase 20. Detailed gates: [[Brain/Alpha Release Execution Plan]].
+
+- Verify exact candidate artifacts in clean environments and source/package import identity.
+- Validate EN/TR first-run instructions and a real local-repository no-write report.
+- Reconcile release inventory and choose generated-vault contribution governance explicitly.
+- Record source revision, artifact hashes, supported-platform evidence, and remaining limitations.
+
+## Phase 22 — Independent first-run and repeat-use evidence
+
+Status: queued after Phase 21; actual human participation is required.
+
+- Satisfy the existing Phase 11C minimum of five independent first-run observations and a
+  below-ten-minute median before public launch or a user-time claim.
+- Record task completion, assistance, interpretation errors, and willingness to reuse;
+  collect actual second-use evidence separately rather than inventing adoption from tests.
+- Keep identities and repository source out of public evidence; retain aggregate observations.
+
+## Phase 23 — Controlled alpha release (Phase 11C execution)
+
+Status: queued after Phase 22 and exact release-readiness review.
+
+- Review the exact version, clean source revision, reproducible artifacts, supported-platform CI,
+  dependency audit, security reporting, publishing configuration, and release notes.
+- Execute the concrete approved public actions only after these gates are satisfied.
+- Keep advice non-blocking; triage reported correctness failures before new capabilities.
 
 ## Completion rule
 

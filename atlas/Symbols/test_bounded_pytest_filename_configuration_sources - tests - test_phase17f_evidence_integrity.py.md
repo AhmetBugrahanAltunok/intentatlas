@@ -10,8 +10,8 @@ source_path: "tests/test_phase17f_evidence_integrity.py"
 
 ## Metadata
 
-- **End Line:** <code>321</code>
-- **Line:** <code>294</code>
+- **End Line:** <code>323</code>
+- **Line:** <code>296</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

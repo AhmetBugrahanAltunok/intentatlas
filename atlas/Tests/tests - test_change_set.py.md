@@ -11,7 +11,7 @@ source_path: "tests/test_change_set.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4382</code>
+- **Size Bytes:** <code>7398</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -27,16 +27,34 @@ source_path: "tests/test_change_set.py"
 - <code>defines</code> → [[Symbols/test_collect_change_set_rejects_invalid_scope_and_revision - tests - test_change_set.py|test_collect_change_set_rejects_invalid_scope_and_revision]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_collect_change_set_unifies_commit_range_staged_and_worktree - tests - test_change_set.py|test_collect_change_set_unifies_commit_range_staged_and_worktree]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_collect_change_set_unifies_commit_range_staged_and_worktree.git - tests - test_change_set.py|test_collect_change_set_unifies_commit_range_staged_and_worktree.git]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.NoopJob - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.NoopJob]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.NoopJob.__init__ - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.NoopJob.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.NoopJob.close - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.NoopJob.close]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.OutputProcess - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.OutputProcess]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.__init__ - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.kill - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.kill]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.poll - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.poll]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.wait - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.OutputProcess.wait]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.ProbedOutput - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.ProbedOutput]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.ProbedOutput.read - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.ProbedOutput.read]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_output_is_bounded_while_the_process_is_drained.output_or_system_process - tests - test_change_set.py|test_git_output_is_bounded_while_the_process_is_drained.output_or_system_process]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_name_status_fails_closed_on_over_limit_output - tests - test_change_set.py|test_parse_name_status_fails_closed_on_over_limit_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_name_status_handles_bounded_paths_and_renames - tests - test_change_set.py|test_parse_name_status_handles_bounded_paths_and_renames]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_worktree_collapses_staged_delete_and_same_path_recreation_to_modified - tests - test_change_set.py|test_worktree_collapses_staged_delete_and_same_path_recreation_to_modified]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_worktree_collapses_staged_delete_and_same_path_recreation_to_modified.git - tests - test_change_set.py|test_worktree_collapses_staged_delete_and_same_path_recreation_to_modified.git]] _(structure; evidence: python-ast)_
+- <code>tests</code> → [[Code/src - intentatlas - bounded_process.py|src/intentatlas/bounded_process.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/ChangeFile - src - intentatlas - change_set.py|ChangeFile]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/_git_output - src - intentatlas - change_set.py|_git_output]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/parse_name_status - src - intentatlas - change_set.py|parse_name_status]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/render_change_set - src - intentatlas - change_set.py|render_change_set]] _(verification; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>8119</code>
+- **Size Bytes:** <code>9005</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -32,15 +32,25 @@ source_path: "src/intentatlas/viewer.py"
 - <code>defines</code> → [[Symbols/serve_graph.Handler.log_message - src - intentatlas - viewer.py|serve_graph.Handler.log_message]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - graph_query.py|src/intentatlas/graph_query.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/GraphQuerySnapshot - src - intentatlas - graph_query.py|GraphQuerySnapshot]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 28cf029 - fix- avoid reverse DNS in local viewer|fix: avoid reverse DNS in local viewer]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-035 - Apply audited reliability fixes|ISSUE-035 - Apply audited reliability fixes]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-ast)_

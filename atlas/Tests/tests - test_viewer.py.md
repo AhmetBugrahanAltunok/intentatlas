@@ -11,7 +11,7 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>5712</code>
+- **Size Bytes:** <code>8966</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -25,10 +25,21 @@ source_path: "tests/test_viewer.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_graph_document - tests - test_viewer.py|_graph_document]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer.__init__ - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.response_status - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.response_status]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output.FakeServer - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output.FakeServer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output.FakeServer.__init__ - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output.FakeServer.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output.FakeServer.serve_forever - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output.FakeServer.serve_forever]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output.FakeServer.server_close - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output.FakeServer.server_close]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output.capture_print - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output.capture_print]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_rejects_missing_graph - tests - test_viewer.py|test_serve_graph_rejects_missing_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_rejects_non_loopback_and_invalid_ports - tests - test_viewer.py|test_serve_graph_rejects_non_loopback_and_invalid_ports]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_serve_graph_rejects_oversized_file_and_in_memory_documents - tests - test_viewer.py|test_serve_graph_rejects_oversized_file_and_in_memory_documents]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.__init__ - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.__init__]] _(structure; evidence: python-ast)_
@@ -43,10 +54,21 @@ source_path: "tests/test_viewer.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 28cf029 - fix- avoid reverse DNS in local viewer|fix: avoid reverse DNS in local viewer]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-022 - Implement adapter conformance and bounded viewer windows|ISSUE-022 - Implement adapter conformance and bounded viewer windows]] _(reference; evidence: wikilink)_

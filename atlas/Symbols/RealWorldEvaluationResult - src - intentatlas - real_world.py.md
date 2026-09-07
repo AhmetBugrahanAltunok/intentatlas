@@ -10,8 +10,8 @@ source_path: "src/intentatlas/real_world.py"
 
 ## Metadata
 
-- **End Line:** <code>89</code>
-- **Line:** <code>75</code>
+- **End Line:** <code>90</code>
+- **Line:** <code>76</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

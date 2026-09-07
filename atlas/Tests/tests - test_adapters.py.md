@@ -11,7 +11,7 @@ source_path: "tests/test_adapters.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6174</code>
+- **Size Bytes:** <code>9010</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -25,11 +25,13 @@ source_path: "tests/test_adapters.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/test_adapter_contract_is_offline_bounded_and_immutable - tests - test_adapters.py|test_adapter_contract_is_offline_bounded_and_immutable]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cross_language_symbol_spans_abstain_on_ambiguous_or_unclosed_bodies - tests - test_adapters.py|test_cross_language_symbol_spans_abstain_on_ambiguous_or_unclosed_bodies]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_go_adapter_links_only_unique_exported_symbol_references - tests - test_adapters.py|test_go_adapter_links_only_unique_exported_symbol_references]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_go_adapter_skips_oversized_files_and_unclosed_import_blocks - tests - test_adapters.py|test_go_adapter_skips_oversized_files_and_unclosed_import_blocks]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan - tests - test_adapters.py|test_scanner_rejects_invalid_adapter_fragments.InvalidAdapter.scan]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_typescript_spans_skip_balanced_header_braces_before_the_body - tests - test_adapters.py|test_typescript_spans_skip_balanced_header_braces_before_the_body]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Symbols/AdapterContext - src - intentatlas - adapters - base.py|AdapterContext]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/GraphFragment - src - intentatlas - adapters - base.py|GraphFragment]] _(verification; evidence: python-symbol-reference)_
@@ -42,6 +44,12 @@ source_path: "tests/test_adapters.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit db64192 - feat- improve Go test evidence|feat: improve Go test evidence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-015 - Expand and refine real-world validation|ISSUE-015 - Expand and refine real-world validation]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

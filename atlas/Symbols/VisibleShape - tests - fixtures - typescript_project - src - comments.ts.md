@@ -10,6 +10,7 @@ source_path: "tests/fixtures/typescript_project/src/comments.ts"
 
 ## Metadata
 
+- **End Line:** <code>15</code>
 - **Line:** <code>13</code>
 - **Symbol Kind:** <code>"interface"</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>

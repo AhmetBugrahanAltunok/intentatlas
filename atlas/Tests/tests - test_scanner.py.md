@@ -11,7 +11,7 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>30448</code>
+- **Size Bytes:** <code>36217</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -25,19 +25,22 @@ source_path: "tests/test_scanner.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/build_python_project - tests - test_scanner.py|build_python_project]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_file_recommendation_ranks_exact_src_symbol_test_above_cochange - tests - test_scanner.py|test_file_recommendation_ranks_exact_src_symbol_test_above_cochange]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_go_recommendations_follow_one_exact_intra_package_caller - tests - test_scanner.py|test_go_recommendations_follow_one_exact_intra_package_caller]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_python_adapter_abstains_on_direct_and_reexport_binding_collision - tests - test_scanner.py|test_python_adapter_abstains_on_direct_and_reexport_binding_collision]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_python_adapter_abstains_when_root_and_src_modules_collide - tests - test_scanner.py|test_python_adapter_abstains_when_root_and_src_modules_collide]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_python_adapter_does_not_guess_nested_monorepo_source_roots - tests - test_scanner.py|test_python_adapter_does_not_guess_nested_monorepo_source_roots]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_python_adapter_resolves_markerless_src_namespace_imports - tests - test_scanner.py|test_python_adapter_resolves_markerless_src_namespace_imports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_python_adapter_resolves_unique_namespace_modules_across_root_and_src - tests - test_scanner.py|test_python_adapter_resolves_unique_namespace_modules_across_root_and_src]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one - tests - test_scanner.py|test_repeated_python_qualified_symbol_abstains_instead_of_selecting_one]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_repository_file_and_byte_budgets_fail_before_adapter_work - tests - test_scanner.py|test_repository_file_and_byte_budgets_fail_before_adapter_work]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_go_symbols_local_imports_and_tests - tests - test_scanner.py|test_scanner_connects_go_symbols_local_imports_and_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_python_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_python_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_connects_typescript_javascript_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_typescript_javascript_symbols_imports_and_tests]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_maps_git_hunks_only_to_exact_python_symbols - tests - test_scanner.py|test_scanner_maps_git_hunks_only_to_exact_python_symbols]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/test_scanner_maps_git_hunks_only_to_exact_python_symbols.git - tests - test_scanner.py|test_scanner_maps_git_hunks_only_to_exact_python_symbols.git]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_maps_git_hunks_to_exact_supported_language_symbols - tests - test_scanner.py|test_scanner_maps_git_hunks_to_exact_supported_language_symbols]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_maps_git_hunks_to_exact_supported_language_symbols.git - tests - test_scanner.py|test_scanner_maps_git_hunks_to_exact_supported_language_symbols.git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_only_reads_ids_from_frontmatter - tests - test_scanner.py|test_scanner_only_reads_ids_from_frontmatter]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_scanner_parses_windows_utf8_bom_python_files - tests - test_scanner.py|test_scanner_parses_windows_utf8_bom_python_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_preserves_explicit_typed_intent_links - tests - test_scanner.py|test_scanner_preserves_explicit_typed_intent_links]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir - tests - test_scanner.py|test_scanner_prunes_configured_nested_excludes_before_descent.guarded_scandir]] _(structure; evidence: python-ast)_
@@ -56,8 +59,22 @@ source_path: "tests/test_scanner.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 88fb6ce - feat- add deterministic Go structure tracing|feat: add deterministic Go structure tracing]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit db64192 - feat- improve Go test evidence|feat: improve Go test evidence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-004 - Implement Go language adapter|ISSUE-004 - Implement Go language adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-014 - Implement conservative Go symbol test links|ISSUE-014 - Implement conservative Go symbol test links]] _(implementation; evidence: wikilink)_
@@ -68,3 +85,4 @@ source_path: "tests/test_scanner.py"
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-034 - Apply first-run observation fixes|ISSUE-034 - Apply first-run observation fixes]] _(reference; evidence: wikilink)_

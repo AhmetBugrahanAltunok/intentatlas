@@ -10,8 +10,8 @@ source_path: "tests/test_git_history.py"
 
 ## Metadata
 
-- **End Line:** <code>91</code>
-- **Line:** <code>69</code>
+- **End Line:** <code>106</code>
+- **Line:** <code>84</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

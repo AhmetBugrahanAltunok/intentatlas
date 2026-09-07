@@ -10,8 +10,8 @@ source_path: "tests/test_acquisition.py"
 
 ## Metadata
 
-- **End Line:** <code>264</code>
-- **Line:** <code>245</code>
+- **End Line:** <code>326</code>
+- **Line:** <code>307</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_acquisition.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_acquisition.py|tests/test_acquisition.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-diff-hunk)_

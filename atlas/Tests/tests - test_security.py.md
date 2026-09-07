@@ -11,7 +11,7 @@ source_path: "tests/test_security.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1706</code>
+- **Size Bytes:** <code>3010</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -27,6 +27,8 @@ source_path: "tests/test_security.py"
 - <code>defines</code> → [[Symbols/test_bounded_regular_reader_rejects_fifo_without_blocking - tests - test_security.py|test_bounded_regular_reader_rejects_fifo_without_blocking]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_bounded_regular_reader_rejects_growth_and_identity_changes - tests - test_security.py|test_bounded_regular_reader_rejects_growth_and_identity_changes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_bounded_regular_reader_rejects_growth_and_identity_changes.changing_stat - tests - test_security.py|test_bounded_regular_reader_rejects_growth_and_identity_changes.changing_stat]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_redact_exact_token_auth_keys_and_quoted_json_shapes - tests - test_security.py|test_redact_exact_token_auth_keys_and_quoted_json_shapes]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_redact_header_style_authorization_values - tests - test_security.py|test_redact_header_style_authorization_values]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_redact_nested_values_and_common_token_shapes - tests - test_security.py|test_redact_nested_values_and_common_token_shapes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_redact_preserves_non_strings - tests - test_security.py|test_redact_preserves_non_strings]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(verification; evidence: filename-convention)_
@@ -35,6 +37,8 @@ source_path: "tests/test_security.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

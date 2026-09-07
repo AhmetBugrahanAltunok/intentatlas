@@ -10,7 +10,7 @@ source_path: "tests/test_config.py"
 
 ## Metadata
 
-- **End Line:** <code>32</code>
+- **End Line:** <code>33</code>
 - **Line:** <code>11</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_config.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_config.py|tests/test_config.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-diff-hunk)_

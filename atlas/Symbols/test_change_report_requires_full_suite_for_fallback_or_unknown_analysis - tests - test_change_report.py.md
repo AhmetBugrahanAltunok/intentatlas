@@ -10,8 +10,8 @@ source_path: "tests/test_change_report.py"
 
 ## Metadata
 
-- **End Line:** <code>216</code>
-- **Line:** <code>168</code>
+- **End Line:** <code>356</code>
+- **Line:** <code>304</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_change_report.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_change_report.py|tests/test_change_report.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-diff-hunk)_

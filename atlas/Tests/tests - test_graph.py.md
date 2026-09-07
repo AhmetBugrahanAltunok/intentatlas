@@ -11,7 +11,7 @@ source_path: "tests/test_graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>9020</code>
+- **Size Bytes:** <code>10138</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -34,6 +34,7 @@ source_path: "tests/test_graph.py"
 - <code>defines</code> → [[Symbols/test_graph_round_trip_and_summary - tests - test_graph.py|test_graph_round_trip_and_summary]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_impact_walks_both_directions_with_depth - tests - test_graph.py|test_impact_walks_both_directions_with_depth]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_migrates_schema_one_and_rejects_invalid_typed_relations - tests - test_graph.py|test_load_migrates_schema_one_and_rejects_invalid_typed_relations]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_load_rejects_graph_documents_over_byte_node_and_edge_limits - tests - test_graph.py|test_load_rejects_graph_documents_over_byte_node_and_edge_limits]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_rejects_malformed_graph_documents - tests - test_graph.py|test_load_rejects_malformed_graph_documents]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_load_rejects_unknown_schema_and_invalid_edges - tests - test_graph.py|test_load_rejects_unknown_schema_and_invalid_edges]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(verification; evidence: filename-convention)_
@@ -45,7 +46,17 @@ source_path: "tests/test_graph.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Evidence/EVD-001 - Initial scanner acceptance|EVD-001 - Initial scanner acceptance]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(reference; evidence: wikilink)_

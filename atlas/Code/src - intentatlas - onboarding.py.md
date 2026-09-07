@@ -11,7 +11,7 @@ source_path: "src/intentatlas/onboarding.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>48653</code>
+- **Size Bytes:** <code>48985</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -62,6 +62,7 @@ source_path: "src/intentatlas/onboarding.py"
 - <code>defines</code> → [[Symbols/run_guide - src - intentatlas - onboarding.py|run_guide]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/select_default_scope - src - intentatlas - onboarding.py|select_default_scope]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - bounded_process.py|src/intentatlas/bounded_process.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - config.py|src/intentatlas/config.py]] _(structure; evidence: python-ast)_
@@ -72,6 +73,9 @@ source_path: "src/intentatlas/onboarding.py"
 - <code>imports</code> → [[Symbols/ManagedRepositoryCache - src - intentatlas - acquisition.py|ManagedRepositoryCache]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/is_github_url - src - intentatlas - acquisition.py|is_github_url]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/normalize_github_url - src - intentatlas - acquisition.py|normalize_github_url]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ProcessCollectionError - src - intentatlas - bounded_process.py|ProcessCollectionError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ProcessOutputLimitError - src - intentatlas - bounded_process.py|ProcessOutputLimitError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/run_bounded_process - src - intentatlas - bounded_process.py|run_bounded_process]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ChangeReport - src - intentatlas - change_report.py|ChangeReport]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/collect_change_report_context - src - intentatlas - change_report.py|collect_change_report_context]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/render_change_report - src - intentatlas - change_report.py|render_change_report]] _(structure; evidence: python-symbol-reference)_
@@ -85,12 +89,15 @@ source_path: "src/intentatlas/onboarding.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding|ISSUE-028 - Implement one-command guided CLI onboarding]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-034 - Apply first-run observation fixes|ISSUE-034 - Apply first-run observation fixes]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Evidence/EVD-030 - Phase 14 guided CLI verification|EVD-030 - Phase 14 guided CLI verification]] _(reference; evidence: wikilink)_

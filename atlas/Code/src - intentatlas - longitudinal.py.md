@@ -11,7 +11,7 @@ source_path: "src/intentatlas/longitudinal.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>42522</code>
+- **Size Bytes:** <code>42477</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -69,6 +69,7 @@ source_path: "src/intentatlas/longitudinal.py"
 - <code>defines</code> → [[Symbols/load_pilot_manifest - src - intentatlas - longitudinal.py|load_pilot_manifest]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/partition_hashes - src - intentatlas - longitudinal.py|partition_hashes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_longitudinal - src - intentatlas - longitudinal.py|render_longitudinal]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - bounded_process.py|src/intentatlas/bounded_process.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
@@ -76,6 +77,8 @@ source_path: "src/intentatlas/longitudinal.py"
 - <code>imports</code> → [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ProcessCollectionError - src - intentatlas - bounded_process.py|ProcessCollectionError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/run_bounded_process - src - intentatlas - bounded_process.py|run_bounded_process]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/_analyze_change_set_with_graph - src - intentatlas - change_analysis.py|_analyze_change_set_with_graph]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/collect_change_set - src - intentatlas - change_set.py|collect_change_set]] _(structure; evidence: python-symbol-reference)_
@@ -86,6 +89,7 @@ source_path: "src/intentatlas/longitudinal.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-025 - Implement longitudinal pilot and compatibility baseline|ISSUE-025 - Implement longitudinal pilot and compatibility baseline]] _(implementation; evidence: wikilink)_

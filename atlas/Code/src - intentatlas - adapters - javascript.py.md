@@ -11,7 +11,7 @@ source_path: "src/intentatlas/adapters/javascript.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>15392</code>
+- **Size Bytes:** <code>21980</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -23,16 +23,25 @@ source_path: "src/intentatlas/adapters/javascript.py"
 - <code>defines</code> → [[Symbols/JavaScriptAdapter.scan - src - intentatlas - adapters - javascript.py|JavaScriptAdapter.scan]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_alias_targets - src - intentatlas - adapters - javascript.py|_alias_targets]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_alias_wildcard - src - intentatlas - adapters - javascript.py|_alias_wildcard]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_balanced_brace_end - src - intentatlas - adapters - javascript.py|_balanced_brace_end]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_body_brace_after_header - src - intentatlas - adapters - javascript.py|_body_brace_after_header]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_default_export_name - src - intentatlas - adapters - javascript.py|_default_export_name]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_filename_test_edges - src - intentatlas - adapters - javascript.py|_filename_test_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_javascript_end_line - src - intentatlas - adapters - javascript.py|_javascript_end_line]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_javascript_function_body - src - intentatlas - adapters - javascript.py|_javascript_function_body]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_javascript_imports - src - intentatlas - adapters - javascript.py|_javascript_imports]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_line_number - src - intentatlas - adapters - javascript.py|_line_number]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_mask_comments_and_templates - src - intentatlas - adapters - javascript.py|_mask_comments_and_templates]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_mask_quoted_strings - src - intentatlas - adapters - javascript.py|_mask_quoted_strings]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_matching_delimiter - src - intentatlas - adapters - javascript.py|_matching_delimiter]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_module_aliases - src - intentatlas - adapters - javascript.py|_module_aliases]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_module_specifiers - src - intentatlas - adapters - javascript.py|_module_specifiers]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_module_statements - src - intentatlas - adapters - javascript.py|_module_statements]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_next_content - src - intentatlas - adapters - javascript.py|_next_content]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_next_content_after_balanced_brace - src - intentatlas - adapters - javascript.py|_next_content_after_balanced_brace]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_local_module - src - intentatlas - adapters - javascript.py|_resolve_local_module]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_statement_end_line - src - intentatlas - adapters - javascript.py|_statement_end_line]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_symbol_metadata - src - intentatlas - adapters - javascript.py|_symbol_metadata]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_symbols - src - intentatlas - adapters - javascript.py|_symbols]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
@@ -44,8 +53,14 @@ source_path: "src/intentatlas/adapters/javascript.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cabeadd - feat- add TypeScript and JavaScript adapters|feat: add TypeScript and JavaScript adapters]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-002 - Implement TypeScript and JavaScript adapter|ISSUE-002 - Implement TypeScript and JavaScript adapter]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-035 - Apply audited reliability fixes|ISSUE-035 - Apply audited reliability fixes]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - adapters - __init__.py|src/intentatlas/adapters/__init__.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

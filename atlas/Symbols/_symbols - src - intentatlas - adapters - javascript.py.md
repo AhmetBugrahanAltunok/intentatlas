@@ -10,7 +10,7 @@ source_path: "src/intentatlas/adapters/javascript.py"
 
 ## Metadata
 
-- **End Line:** <code>146</code>
+- **End Line:** <code>161</code>
 - **Line:** <code>126</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "src/intentatlas/adapters/javascript.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - adapters - javascript.py|src/intentatlas/adapters/javascript.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

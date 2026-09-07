@@ -11,7 +11,7 @@ source_path: "src/intentatlas/security.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>1290</code>
+- **Size Bytes:** <code>1850</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -24,6 +24,10 @@ source_path: "src/intentatlas/security.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>implements</code> ← [[Issues/ISSUE-035 - Apply audited reliability fixes|ISSUE-035 - Apply audited reliability fixes]] _(implementation; evidence: wikilink)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - delivery.py|src/intentatlas/delivery.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - git_history.py|src/intentatlas/git_history.py]] _(structure; evidence: python-ast)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>tested-by</code> ← [[Tests/tests - test_security.py|tests/test_security.py]] _(verification; evidence: filename-convention)_

@@ -10,8 +10,8 @@ source_path: "tests/test_acquisition.py"
 
 ## Metadata
 
-- **End Line:** <code>176</code>
-- **Line:** <code>143</code>
+- **End Line:** <code>177</code>
+- **Line:** <code>144</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

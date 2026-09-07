@@ -36,19 +36,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_version.py|tests/test_version.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/tools - verify_release.py|tools/verify_release.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_build_demo_report - src - intentatlas - demo.py|_build_demo_report]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/build_demo_change_report - src - intentatlas - demo.py|build_demo_change_report]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/build_demo_graph - src - intentatlas - demo.py|build_demo_graph]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/build_demo_report - src - intentatlas - demo.py|build_demo_report]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/render_demo_report - src - intentatlas - demo.py|render_demo_report]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/serve_demo - src - intentatlas - demo.py|serve_demo]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_demo_change_report_matches_the_terminal_recommendation - tests - test_demo.py|test_demo_change_report_matches_the_terminal_recommendation]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_demo_graph_is_deterministic_and_covers_intent_to_proof - tests - test_demo.py|test_demo_graph_is_deterministic_and_covers_intent_to_proof]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_demo_report_derives_the_changed_symbol_from_the_graph - tests - test_demo.py|test_demo_report_derives_the_changed_symbol_from_the_graph]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_demo_report_is_deterministic_and_exposes_same_file_boundary - tests - test_demo.py|test_demo_report_is_deterministic_and_exposes_same_file_boundary]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_demo_uses_temporary_graph_and_cleans_it.fake_serve - tests - test_demo.py|test_demo_uses_temporary_graph_and_cleans_it.fake_serve]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_release_candidate_uses_one_canonical_version_source - tests - test_version.py|test_release_candidate_uses_one_canonical_version_source]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

@@ -11,7 +11,7 @@ source_path: "src/intentatlas/recommendations.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>32164</code>
+- **Size Bytes:** <code>33911</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -42,6 +42,7 @@ source_path: "src/intentatlas/recommendations.py"
 - <code>defines</code> → [[Symbols/_latest_file_symbol_signals - src - intentatlas - recommendations.py|_latest_file_symbol_signals]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_owner_named_tests - src - intentatlas - recommendations.py|_owner_named_tests]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_preferred_test_edges - src - intentatlas - recommendations.py|_preferred_test_edges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_recommendation_candidates - src - intentatlas - recommendations.py|_recommendation_candidates]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_recommendations - src - intentatlas - recommendations.py|_recommendations]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_safe_duration - src - intentatlas - recommendations.py|_safe_duration]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_safe_nonnegative_int - src - intentatlas - recommendations.py|_safe_nonnegative_int]] _(structure; evidence: python-ast)_
@@ -64,13 +65,20 @@ source_path: "src/intentatlas/recommendations.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6758ec0 - feat- add explainable test recommendations|feat: add explainable test recommendations]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-007 - Implement explainable test recommendations|ISSUE-007 - Implement explainable test recommendations]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-016 - Implement bounded symbol-aware test evidence|ISSUE-016 - Implement bounded symbol-aware test evidence]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-034 - Apply first-run observation fixes|ISSUE-034 - Apply first-run observation fixes]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_

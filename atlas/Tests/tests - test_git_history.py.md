@@ -11,7 +11,7 @@ source_path: "tests/test_git_history.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6613</code>
+- **Size Bytes:** <code>7048</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -31,6 +31,7 @@ source_path: "tests/test_git_history.py"
 - <code>defines</code> → [[Symbols/test_history_excludes_private_and_configured_paths_at_git_boundary.git - tests - test_git_history.py|test_history_excludes_private_and_configured_paths_at_git_boundary.git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_history_excludes_private_and_configured_paths_at_git_boundary.guarded_runner - tests - test_git_history.py|test_history_excludes_private_and_configured_paths_at_git_boundary.guarded_runner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_diffs_collects_only_safe_current_side_ranges - tests - test_git_history.py|test_parse_git_diffs_collects_only_safe_current_side_ranges]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_parse_git_diffs_preserves_deletion_uncertainty_in_surviving_files - tests - test_git_history.py|test_parse_git_diffs_preserves_deletion_uncertainty_in_surviving_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_diffs_rejects_malformed_paths_and_excessive_output - tests - test_git_history.py|test_parse_git_diffs_rejects_malformed_paths_and_excessive_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_log_collects_paths_and_redacts_subjects - tests - test_git_history.py|test_parse_git_log_collects_paths_and_redacts_subjects]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_parse_git_log_ignores_malformed_blocks - tests - test_git_history.py|test_parse_git_log_ignores_malformed_blocks]] _(structure; evidence: python-ast)_
@@ -44,7 +45,11 @@ source_path: "tests/test_git_history.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 8c229ae - feat- trace exact Python symbol changes|feat: trace exact Python symbol changes]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-006 - Implement symbol-level commit impact|ISSUE-006 - Implement symbol-level commit impact]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions|ISSUE-036 - Close partial hunk deletion and browser regressions]] _(reference; evidence: wikilink)_

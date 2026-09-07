@@ -36,6 +36,7 @@ source_path: "tests/test_scale.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

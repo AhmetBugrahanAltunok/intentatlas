@@ -20,5 +20,6 @@ source_path: "src/intentatlas/storage.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - storage.py|src/intentatlas/storage.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - scan_cache.py|src/intentatlas/scan_cache.py]] _(structure; evidence: python-symbol-reference)_

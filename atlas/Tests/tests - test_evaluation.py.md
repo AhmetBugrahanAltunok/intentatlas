@@ -11,7 +11,7 @@ source_path: "tests/test_evaluation.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11343</code>
+- **Size Bytes:** <code>11377</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -46,5 +46,7 @@ source_path: "tests/test_evaluation.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit d9cd557 - feat- measure test recommendation quality|feat: measure test recommendation quality]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-009 - Implement labeled recommendation evaluation|ISSUE-009 - Implement labeled recommendation evaluation]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

@@ -10,8 +10,8 @@ source_path: "tests/test_change_analysis.py"
 
 ## Metadata
 
-- **End Line:** <code>90</code>
-- **Line:** <code>14</code>
+- **End Line:** <code>91</code>
+- **Line:** <code>15</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

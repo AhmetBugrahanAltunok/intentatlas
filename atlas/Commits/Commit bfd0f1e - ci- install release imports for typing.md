@@ -16,4 +16,3 @@ generated: true
 
 - <code>changes</code> → [[Code/github - workflows - ci.yml|.github/workflows/ci.yml]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_action.py|tests/test_action.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/test_static_type_job_installs_release_tool_imports - tests - test_action.py|test_static_type_job_installs_release_tool_imports]] _(history; evidence: git-diff-hunk)_

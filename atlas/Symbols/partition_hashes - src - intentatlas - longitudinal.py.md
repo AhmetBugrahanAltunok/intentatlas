@@ -10,8 +10,8 @@ source_path: "src/intentatlas/longitudinal.py"
 
 ## Metadata
 
-- **End Line:** <code>675</code>
-- **Line:** <code>655</code>
+- **End Line:** <code>676</code>
+- **Line:** <code>656</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,5 +20,4 @@ source_path: "src/intentatlas/longitudinal.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-diff-hunk)_
 - <code>tested-by</code> ← [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(verification; evidence: python-symbol-reference)_

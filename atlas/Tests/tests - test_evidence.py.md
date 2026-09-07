@@ -40,6 +40,7 @@ source_path: "tests/test_evidence.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-026 - Phase 11A release candidate and demo verification|EVD-026 - Phase 11A release candidate and demo verification]] _(evidence; evidence: wikilink)_

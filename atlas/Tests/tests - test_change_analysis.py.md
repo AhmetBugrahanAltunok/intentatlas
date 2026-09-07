@@ -11,7 +11,7 @@ source_path: "tests/test_change_analysis.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4082</code>
+- **Size Bytes:** <code>5325</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -26,6 +26,8 @@ source_path: "tests/test_change_analysis.py"
 
 - <code>defines</code> → [[Symbols/test_change_analysis_distinguishes_exact_fallback_and_stale_files - tests - test_change_analysis.py|test_change_analysis_distinguishes_exact_fallback_and_stale_files]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_change_analysis_distinguishes_exact_fallback_and_stale_files.git - tests - test_change_analysis.py|test_change_analysis_distinguishes_exact_fallback_and_stale_files.git]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_oversized_unscanned_commit_file_uses_safe_file_fallback - tests - test_change_analysis.py|test_oversized_unscanned_commit_file_uses_safe_file_fallback]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_oversized_unscanned_commit_file_uses_safe_file_fallback.git - tests - test_change_analysis.py|test_oversized_unscanned_commit_file_uses_safe_file_fallback.git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_worktree_analysis_marks_untracked_source_as_file_fallback - tests - test_change_analysis.py|test_worktree_analysis_marks_untracked_source_as_file_fallback]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/analyze_change_set - src - intentatlas - change_analysis.py|analyze_change_set]] _(verification; evidence: python-symbol-reference)_
@@ -35,5 +37,7 @@ source_path: "tests/test_change_analysis.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_

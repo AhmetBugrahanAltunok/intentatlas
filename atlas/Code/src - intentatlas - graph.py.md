@@ -11,7 +11,7 @@ source_path: "src/intentatlas/graph.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>13809</code>
+- **Size Bytes:** <code>14677</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -46,17 +46,27 @@ source_path: "src/intentatlas/graph.py"
 - <code>defines</code> → [[Symbols/_validate_legacy_relation_catalog - src - intentatlas - graph.py|_validate_legacy_relation_catalog]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - relations.py|src/intentatlas/relations.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - storage.py|src/intentatlas/storage.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/ImpactRecord - src - intentatlas - models.py|ImpactRecord]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/relation_catalog - src - intentatlas - relations.py|relation_catalog]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/relation_type - src - intentatlas - relations.py|relation_type]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/atomic_write_text - src - intentatlas - storage.py|atomic_write_text]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 3b9843e - feat- index graph queries for scale|feat: index graph queries for scale]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-001 - Implement typed intent chain|ISSUE-001 - Implement typed intent chain]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-011 - Implement indexed graph queries and scale benchmark|ISSUE-011 - Implement indexed graph queries and scale benchmark]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-020 - Implement content-addressed scan foundation|ISSUE-020 - Implement content-addressed scan foundation]] _(implementation; evidence: wikilink)_
@@ -66,6 +76,7 @@ source_path: "src/intentatlas/graph.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - corpus.py|src/intentatlas/corpus.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_
+- <code>imported-by</code> ← [[Code/src - intentatlas - diagnostic.py|src/intentatlas/diagnostic.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - evaluation.py|src/intentatlas/evaluation.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph_diff.py|src/intentatlas/graph_diff.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - graph_query.py|src/intentatlas/graph_query.py]] _(structure; evidence: python-ast)_

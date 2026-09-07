@@ -20,3 +20,4 @@ source_path: "src/intentatlas/adapters/base.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - adapters - base.py|src/intentatlas/adapters/base.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-diff-hunk)_

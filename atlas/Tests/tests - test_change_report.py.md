@@ -11,7 +11,7 @@ source_path: "tests/test_change_report.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11148</code>
+- **Size Bytes:** <code>16116</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -27,9 +27,12 @@ source_path: "tests/test_change_report.py"
 - <code>defines</code> → [[Symbols/exact_analysis - tests - test_change_report.py|exact_analysis]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/report_graph - tests - test_change_report.py|report_graph]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_change_report_abstains_if_any_changed_artifact_is_unknown - tests - test_change_report.py|test_change_report_abstains_if_any_changed_artifact_is_unknown]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_change_report_counts_high_fanout_candidates_before_result_limit - tests - test_change_report.py|test_change_report_counts_high_fanout_candidates_before_result_limit]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_change_report_distinguishes_result_limit_omissions - tests - test_change_report.py|test_change_report_distinguishes_result_limit_omissions]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_change_report_keeps_file_level_requirements_below_default_threshold - tests - test_change_report.py|test_change_report_keeps_file_level_requirements_below_default_threshold]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_change_report_requires_full_suite_for_fallback_or_unknown_analysis - tests - test_change_report.py|test_change_report_requires_full_suite_for_fallback_or_unknown_analysis]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_change_report_truncates_artifacts_with_explicit_lower_bound_semantics - tests - test_change_report.py|test_change_report_truncates_artifacts_with_explicit_lower_bound_semantics]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_change_report_truncates_file_symbol_signals_without_failing - tests - test_change_report.py|test_change_report_truncates_file_symbol_signals_without_failing]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_staged_same_file_requirement_holdout_preserves_symbol_precision - tests - test_change_report.py|test_staged_same_file_requirement_holdout_preserves_symbol_precision]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_staged_same_file_requirement_holdout_preserves_symbol_precision.git - tests - test_change_report.py|test_staged_same_file_requirement_holdout_preserves_symbol_precision.git]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(verification; evidence: filename-convention)_
@@ -49,8 +52,12 @@ source_path: "tests/test_change_report.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_

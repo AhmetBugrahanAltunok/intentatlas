@@ -11,7 +11,7 @@ source_path: "src/intentatlas/delivery.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12828</code>
+- **Size Bytes:** <code>14286</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -27,6 +27,7 @@ source_path: "src/intentatlas/delivery.py"
 - <code>defines</code> → [[Symbols/_only_keys - src - intentatlas - delivery.py|_only_keys]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_read_json - src - intentatlas - delivery.py|_read_json]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_records - src - intentatlas - delivery.py|_records]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_redacted_text - src - intentatlas - delivery.py|_redacted_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_report_path - src - intentatlas - delivery.py|_report_path]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_resolve_file - src - intentatlas - delivery.py|_resolve_file]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_state - src - intentatlas - delivery.py|_state]] _(structure; evidence: python-ast)_
@@ -37,12 +38,16 @@ source_path: "src/intentatlas/delivery.py"
 - <code>defines</code> → [[Symbols/import_delivery - src - intentatlas - delivery.py|import_delivery]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - models.py|src/intentatlas/models.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Code/src - intentatlas - safe_io.py|src/intentatlas/safe_io.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - security.py|src/intentatlas/security.py]] _(structure; evidence: python-ast)_
 - <code>imports</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(structure; evidence: python-symbol-reference)_
 - <code>imports</code> → [[Symbols/read_bounded_regular_file - src - intentatlas - safe_io.py|read_bounded_regular_file]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-005 - Implement local delivery imports|ISSUE-005 - Implement local delivery imports]] _(implementation; evidence: wikilink)_

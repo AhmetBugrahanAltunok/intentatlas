@@ -10,8 +10,8 @@ source_path: "src/intentatlas/git_history.py"
 
 ## Metadata
 
-- **End Line:** <code>36</code>
-- **Line:** <code>32</code>
+- **End Line:** <code>35</code>
+- **Line:** <code>31</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -27,4 +27,5 @@ source_path: "src/intentatlas/git_history.py"
 - <code>tested-by</code> ← [[Tests/tests - test_git_history.py|tests/test_git_history.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_onboarding_walkthroughs.py|tests/test_onboarding_walkthroughs.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_python_overloads.py|tests/test_python_overloads.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_review.py|tests/test_review.py]] _(verification; evidence: python-symbol-reference)_

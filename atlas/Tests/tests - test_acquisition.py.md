@@ -11,7 +11,7 @@ source_path: "tests/test_acquisition.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11162</code>
+- **Size Bytes:** <code>17261</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -38,9 +38,17 @@ source_path: "tests/test_acquisition.py"
 - <code>defines</code> → [[Symbols/test_cache_create_hit_refresh_list_info_and_clear - tests - test_acquisition.py|test_cache_create_hit_refresh_list_info_and_clear]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cache_create_hit_refresh_list_info_and_clear.clock - tests - test_acquisition.py|test_cache_create_hit_refresh_list_info_and_clear.clock]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cache_identity_and_cleanup_reject_traversal_and_links - tests - test_acquisition.py|test_cache_identity_and_cleanup_reject_traversal_and_links]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cache_lock_never_reaps_an_old_live_owner - tests - test_acquisition.py|test_cache_lock_never_reaps_an_old_live_owner]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cache_lock_recovers_only_after_bounded_owner_age - tests - test_acquisition.py|test_cache_lock_recovers_only_after_bounded_owner_age]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_cache_tree_removal_uses_the_runtime_callback_without_deprecation - tests - test_acquisition.py|test_cache_tree_removal_uses_the_runtime_callback_without_deprecation]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_corruption_recovers_atomically_and_failure_preserves_prior_good_entry - tests - test_acquisition.py|test_corruption_recovers_atomically_and_failure_preserves_prior_good_entry]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_transport_checks_limits_after_a_fast_process_exit - tests - test_acquisition.py|test_git_transport_checks_limits_after_a_fast_process_exit]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_git_transport_enforces_output_time_and_disk_bounds - tests - test_acquisition.py|test_git_transport_enforces_output_time_and_disk_bounds]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_transport_enforces_output_time_and_disk_bounds.NoopContainer - tests - test_acquisition.py|test_git_transport_enforces_output_time_and_disk_bounds.NoopContainer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_transport_enforces_output_time_and_disk_bounds.NoopContainer.close - tests - test_acquisition.py|test_git_transport_enforces_output_time_and_disk_bounds.NoopContainer.close]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_git_transport_timeout_terminates_descendant_processes - tests - test_acquisition.py|test_git_transport_timeout_terminates_descendant_processes]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_interrupted_acquisition_removes_staging_and_lock - tests - test_acquisition.py|test_interrupted_acquisition_removes_staging_and_lock]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_managed_git_metadata_is_bounded_during_collection_and_times_out - tests - test_acquisition.py|test_managed_git_metadata_is_bounded_during_collection_and_times_out]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_metadata_contains_no_source_or_environment_content - tests - test_acquisition.py|test_metadata_contains_no_source_or_environment_content]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_safe_git_contract_disables_external_execution_and_auth - tests - test_acquisition.py|test_safe_git_contract_disables_external_execution_and_auth]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_same_repository_concurrency_uses_one_atomic_acquisition - tests - test_acquisition.py|test_same_repository_concurrency_uses_one_atomic_acquisition]] _(structure; evidence: python-ast)_
@@ -62,6 +70,7 @@ source_path: "tests/test_acquisition.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Evidence/EVD-031 - Phase 15 source-to-atlas verification|EVD-031 - Phase 15 source-to-atlas verification]] _(reference; evidence: wikilink)_

@@ -11,7 +11,7 @@ source_path: "tests/test_graph_query.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>2694</code>
+- **Size Bytes:** <code>4472</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -26,6 +26,7 @@ source_path: "tests/test_graph_query.py"
 
 - <code>defines</code> → [[Symbols/_snapshot - tests - test_graph_query.py|_snapshot]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_bounded_query_windows_carry_snapshot_totals_and_omissions - tests - test_graph_query.py|test_bounded_query_windows_carry_snapshot_totals_and_omissions]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_paths_abstain_from_complete_count_when_an_alternative_route_is_deduplicated - tests - test_graph_query.py|test_paths_abstain_from_complete_count_when_an_alternative_route_is_deduplicated]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_query_contract_rejects_unbounded_or_unknown_requests - tests - test_graph_query.py|test_query_contract_rejects_unbounded_or_unknown_requests]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - graph_query.py|src/intentatlas/graph_query.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
@@ -35,6 +36,7 @@ source_path: "tests/test_graph_query.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-029 - Phase 13 semantic monorepo verification|EVD-029 - Phase 13 semantic monorepo verification]] _(evidence; evidence: wikilink)_

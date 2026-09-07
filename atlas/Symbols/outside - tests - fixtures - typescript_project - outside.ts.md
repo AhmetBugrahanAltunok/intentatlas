@@ -10,6 +10,7 @@ source_path: "tests/fixtures/typescript_project/outside.ts"
 
 ## Metadata
 
+- **End Line:** <code>1</code>
 - **Line:** <code>1</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>

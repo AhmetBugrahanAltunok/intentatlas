@@ -35,20 +35,9 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_phase17_recommendation_integrity.py|tests/test_phase17_recommendation_integrity.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_recommendations.py|tests/test_recommendations.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/PythonAdapter - src - intentatlas - adapters - python.py|PythonAdapter]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_PythonSymbolResolver.references - src - intentatlas - adapters - python.py|_PythonSymbolResolver.references]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_PythonSymbolResolver.resolve_qualified - src - intentatlas - adapters - python.py|_PythonSymbolResolver.resolve_qualified]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryDiagnostic.ambiguity_detail - src - intentatlas - diagnostic.py|RepositoryDiagnostic.ambiguity_detail]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/RepositoryDiagnostic.to_dict - src - intentatlas - diagnostic.py|RepositoryDiagnostic.to_dict]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/render_diagnostic - src - intentatlas - diagnostic.py|render_diagnostic]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_conventional_python_src_roots - src - intentatlas - workspace.py|_conventional_python_src_roots]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_python_source_roots - src - intentatlas - workspace.py|_python_source_roots]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/discover_workspace - src - intentatlas - workspace.py|discover_workspace]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_change_report_requires_full_suite_for_fallback_or_unknown_analysis - tests - test_change_report.py|test_change_report_requires_full_suite_for_fallback_or_unknown_analysis]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_cli_init_scan_status_and_impact - tests - test_cli.py|test_cli_init_scan_status_and_impact]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity - tests - test_diagnostic.py|test_diagnostic_reports_experimental_unsupported_oversize_and_ambiguity]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_diagnostic_text_preserves_safe_next_action_and_advisory - tests - test_diagnostic.py|test_diagnostic_text_preserves_safe_next_action_and_advisory]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_guided_projection_preserves_production_report_semantics_for_all_strategies - tests - test_guided_cli.py|test_guided_projection_preserves_production_report_semantics_for_all_strategies]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_dependent_graph - tests - test_phase17_recommendation_integrity.py|_dependent_graph]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_exact_analysis - tests - test_phase17_recommendation_integrity.py|_exact_analysis]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_write - tests - test_phase17_recommendation_integrity.py|_write]] _(history; evidence: git-diff-hunk)_
@@ -60,7 +49,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/test_pyproject_root_and_src_collision_abstains - tests - test_phase17_recommendation_integrity.py|test_pyproject_root_and_src_collision_abstains]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_self_scan_resolves_intentatlas_absolute_imports - tests - test_phase17_recommendation_integrity.py|test_self_scan_resolves_intentatlas_absolute_imports]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_single_broad_commit_cochange_does_not_outrank_direct_evidence - tests - test_phase17_recommendation_integrity.py|test_single_broad_commit_cochange_does_not_outrank_direct_evidence]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_recommendations_use_exact_direct_dependents_and_recent_cochange - tests - test_recommendations.py|test_recommendations_use_exact_direct_dependents_and_recent_cochange]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

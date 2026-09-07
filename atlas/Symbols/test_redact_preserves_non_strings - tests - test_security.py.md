@@ -10,8 +10,8 @@ source_path: "tests/test_security.py"
 
 ## Metadata
 
-- **End Line:** <code>22</code>
-- **Line:** <code>20</code>
+- **End Line:** <code>65</code>
+- **Line:** <code>63</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

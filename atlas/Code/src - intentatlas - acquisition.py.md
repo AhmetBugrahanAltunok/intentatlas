@@ -11,7 +11,7 @@ source_path: "src/intentatlas/acquisition.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>26458</code>
+- **Size Bytes:** <code>34869</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -43,17 +43,21 @@ source_path: "src/intentatlas/acquisition.py"
 - <code>defines</code> → [[Symbols/_CacheLock.__enter__ - src - intentatlas - acquisition.py|_CacheLock.__enter__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_CacheLock.__exit__ - src - intentatlas - acquisition.py|_CacheLock.__exit__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_CacheLock.__init__ - src - intentatlas - acquisition.py|_CacheLock.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_CacheLock._reap_stale - src - intentatlas - acquisition.py|_CacheLock._reap_stale]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_CacheLock._write_owner - src - intentatlas - acquisition.py|_CacheLock._write_owner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_checkout_size - src - intentatlas - acquisition.py|_checkout_size]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_entry_from_metadata - src - intentatlas - acquisition.py|_entry_from_metadata]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_git_capture - src - intentatlas - acquisition.py|_git_capture]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_load_metadata - src - intentatlas - acquisition.py|_load_metadata]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_process_is_alive - src - intentatlas - acquisition.py|_process_is_alive]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_read_lock_owner - src - intentatlas - acquisition.py|_read_lock_owner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_reject_link - src - intentatlas - acquisition.py|_reject_link]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_remove_tree - src - intentatlas - acquisition.py|_remove_tree]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_remove_tree.make_writable - src - intentatlas - acquisition.py|_remove_tree.make_writable]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_remove_tree.on_error - src - intentatlas - acquisition.py|_remove_tree.on_error]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_safe_git_command - src - intentatlas - acquisition.py|_safe_git_command]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_safe_git_environment - src - intentatlas - acquisition.py|_safe_git_environment]] _(structure; evidence: python-ast)_
-- <code>defines</code> → [[Symbols/_terminate_process - src - intentatlas - acquisition.py|_terminate_process]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_stale_lock_seconds - src - intentatlas - acquisition.py|_stale_lock_seconds]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_tree_size - src - intentatlas - acquisition.py|_tree_size]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_write_metadata - src - intentatlas - acquisition.py|_write_metadata]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/cache_identity - src - intentatlas - acquisition.py|cache_identity]] _(structure; evidence: python-ast)_
@@ -61,9 +65,17 @@ source_path: "src/intentatlas/acquisition.py"
 - <code>defines</code> → [[Symbols/is_github_url - src - intentatlas - acquisition.py|is_github_url]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/normalize_github_url - src - intentatlas - acquisition.py|normalize_github_url]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/render_cache_entry - src - intentatlas - acquisition.py|render_cache_entry]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Code/src - intentatlas - bounded_process.py|src/intentatlas/bounded_process.py]] _(structure; evidence: python-ast)_
+- <code>imports</code> → [[Symbols/ProcessCollectionError - src - intentatlas - bounded_process.py|ProcessCollectionError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/ProcessOutputLimitError - src - intentatlas - bounded_process.py|ProcessOutputLimitError]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/contain_process_tree - src - intentatlas - bounded_process.py|contain_process_tree]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/contained_process_creation_flags - src - intentatlas - bounded_process.py|contained_process_creation_flags]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/run_bounded_process - src - intentatlas - bounded_process.py|run_bounded_process]] _(structure; evidence: python-symbol-reference)_
+- <code>imports</code> → [[Symbols/terminate_process_tree - src - intentatlas - bounded_process.py|terminate_process_tree]] _(structure; evidence: python-symbol-reference)_
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-ast)_

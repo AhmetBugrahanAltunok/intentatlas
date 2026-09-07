@@ -11,7 +11,7 @@ source_path: "tests/test_browser_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>24179</code>
+- **Size Bytes:** <code>26238</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -40,6 +40,8 @@ source_path: "tests/test_browser_e2e.py"
 - <code>defines</code> → [[Symbols/_keyboard_accessibility_probe.evaluate - tests - test_browser_e2e.py|_keyboard_accessibility_probe.evaluate]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_layout_stability_probe - tests - test_browser_e2e.py|_layout_stability_probe]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_layout_stability_probe.evaluate - tests - test_browser_e2e.py|_layout_stability_probe.evaluate]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_server_evidence_path_probe - tests - test_browser_e2e.py|_server_evidence_path_probe]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_server_evidence_path_probe.evaluate - tests - test_browser_e2e.py|_server_evidence_path_probe.evaluate]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_stop_server - tests - test_browser_e2e.py|_stop_server]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_viewer_url - tests - test_browser_e2e.py|_viewer_url]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_viewer_url.read_ready - tests - test_browser_e2e.py|_viewer_url.read_ready]] _(structure; evidence: python-ast)_
@@ -52,6 +54,7 @@ source_path: "tests/test_browser_e2e.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
@@ -65,3 +68,4 @@ source_path: "tests/test_browser_e2e.py"
 - <code>proven-by</code> ← [[Evidence/EVD-029 - Phase 13 semantic monorepo verification|EVD-029 - Phase 13 semantic monorepo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions|ISSUE-036 - Close partial hunk deletion and browser regressions]] _(reference; evidence: wikilink)_

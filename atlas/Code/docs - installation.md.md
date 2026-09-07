@@ -11,7 +11,7 @@ source_path: "docs/installation.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>976</code>
+- **Size Bytes:** <code>3277</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -19,6 +19,9 @@ source_path: "docs/installation.md"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 310d9d5 - Improve first-run documentation and demo|Improve first-run documentation and demo]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 884ee80 - Normalize Phase 15 documentation formatting|Normalize Phase 15 documentation formatting]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

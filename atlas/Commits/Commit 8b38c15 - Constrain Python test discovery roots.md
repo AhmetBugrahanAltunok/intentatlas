@@ -22,6 +22,7 @@ generated: true
 - <code>changes</code> → [[Tests/src - intentatlas - test_eligibility.py|src/intentatlas/test_eligibility.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_phase17f_evidence_integrity.py|tests/test_phase17f_evidence_integrity.py]] _(history; evidence: git-log)_
 - <code>modifies</code> → [[Symbols/PythonTestPolicy - src - intentatlas - test_eligibility.py|PythonTestPolicy]] _(history; evidence: git-diff-hunk)_
+- <code>modifies</code> → [[Symbols/TestRole - src - intentatlas - test_eligibility.py|TestRole]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/TestRole.metadata - src - intentatlas - test_eligibility.py|TestRole.metadata]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_ini_policy - src - intentatlas - test_eligibility.py|_ini_policy]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_matching_testpath - src - intentatlas - test_eligibility.py|_matching_testpath]] _(history; evidence: git-diff-hunk)_
@@ -31,4 +32,3 @@ generated: true
 - <code>modifies</code> → [[Symbols/_toml_policy - src - intentatlas - test_eligibility.py|_toml_policy]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/classify_python_test - src - intentatlas - test_eligibility.py|classify_python_test]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/load_python_test_policy - src - intentatlas - test_eligibility.py|load_python_test_policy]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_pytest_testpaths_exclude_test_named_production_support - tests - test_phase17f_evidence_integrity.py|test_pytest_testpaths_exclude_test_named_production_support]] _(history; evidence: git-diff-hunk)_

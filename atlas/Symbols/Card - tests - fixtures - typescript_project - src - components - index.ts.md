@@ -10,6 +10,7 @@ source_path: "tests/fixtures/typescript_project/src/components/index.ts"
 
 ## Metadata
 
+- **End Line:** <code>3</code>
 - **Line:** <code>1</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>

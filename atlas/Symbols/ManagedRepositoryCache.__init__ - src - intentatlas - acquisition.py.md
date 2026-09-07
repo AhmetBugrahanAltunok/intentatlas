@@ -10,8 +10,8 @@ source_path: "src/intentatlas/acquisition.py"
 
 ## Metadata
 
-- **End Line:** <code>191</code>
-- **Line:** <code>180</code>
+- **End Line:** <code>221</code>
+- **Line:** <code>210</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/acquisition.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-diff-hunk)_
