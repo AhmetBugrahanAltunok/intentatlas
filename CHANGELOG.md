@@ -7,6 +7,16 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ## [Unreleased]
 
+### Fixed
+
+- Require complete changed-line coverage before reporting exact symbol analysis; retain parent
+  and nested-symbol changes when both own changed lines within the same diff hunk.
+- Preserve zero-count deletion hunks in surviving files so mixed edits/deletions require a
+  full-suite fallback instead of incorrectly reporting complete targeted analysis. ChangeSet
+  schema 1 keeps its existing fields; consumers must retain `count: 0` as uncertainty.
+- Make the browser evidence-path regression await one selection and a real delayed response
+  instead of clearing and restarting its own request on every observation.
+
 ### Changed
 
 - Bind Change Report scores to structured primary reasons with matching paths and evidence, expose

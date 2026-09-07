@@ -3,12 +3,11 @@ from __future__ import annotations
 import re
 import shutil
 import subprocess  # nosec B404
-import threading
 from collections.abc import Iterable
-from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
+from .bounded_process import ProcessCollectionError, run_bounded_process
 from .safe_io import read_bounded_regular_file
 from .security import redact
 
@@ -313,7 +312,7 @@ def _normalized_lines(value: bytes) -> bytes:
 
 
 def parse_git_diffs(output: str) -> dict[str, tuple[DiffHunk, ...]]:
-    """Parse bounded zero-context patches into current-side line ranges."""
+    """Parse bounded patches, retaining zero-count ranges as deletion uncertainty."""
 
     if len(output.encode("utf-8")) > MAX_DIFF_BYTES:
         return {}
@@ -343,8 +342,9 @@ def parse_git_diffs(output: str) -> dict[str, tuple[DiffHunk, ...]]:
             start = int(match.group(1))
             count = int(match.group(2) or "1")
             if (
-                start < 1
-                or count <= 0
+                start < 0
+                or count < 0
+                or (start == 0 and count > 0)
                 or start > MAX_DIFF_LINE
                 or count > MAX_DIFF_LINE
             ):
@@ -413,62 +413,17 @@ def _run_git_bounded(
 ) -> bytes | None:
     """Run fixed Git arguments while bounding stdout during collection."""
 
-    if max_bytes < 0:
-        return None
-    process = subprocess.Popen(  # noqa: S603  # nosec B603
-        command,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.DEVNULL,
-        shell=False,
-    )
-    if process.stdout is None:
-        process.kill()
-        return None
-    stdout = process.stdout
-    chunks: list[bytes] = []
-    size = 0
-    exceeded = False
-    failed = False
-
-    def drain() -> None:
-        nonlocal exceeded, failed, size
-        try:
-            while True:
-                chunk = stdout.read(65_536)
-                if not chunk:
-                    return
-                size += len(chunk)
-                if size > max_bytes:
-                    exceeded = True
-                    with suppress(OSError):
-                        process.kill()
-                    return
-                chunks.append(chunk)
-        except OSError:
-            failed = True
-            with suppress(OSError):
-                process.kill()
-
-    reader = threading.Thread(target=drain, daemon=True)
-    reader.start()
     try:
-        return_code = process.wait(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        process.kill()
-        process.wait()
-        reader.join(timeout=1)
-        stdout.close()
+        result = run_bounded_process(
+            command,
+            max_stdout_bytes=max_bytes,
+            timeout=timeout,
+        )
+    except ProcessCollectionError:
         return None
-    reader.join(timeout=1)
-    if reader.is_alive():
-        process.kill()
-        process.wait()
-        stdout.close()
+    if result.returncode != 0:
         return None
-    stdout.close()
-    if return_code != 0 or exceeded or failed:
-        return None
-    return b"".join(chunks)
+    return result.stdout
 
 
 def _safe_git_path(value: str) -> str | None:

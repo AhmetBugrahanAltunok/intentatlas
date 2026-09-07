@@ -10,13 +10,16 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .adapters import BUILTIN_ADAPTERS
+from .bounded_process import ProcessCollectionError, run_bounded_process
 from .config import CONFIG_NAME, ProjectConfig
 from .graph import AtlasGraph
 from .scanner import MAX_PARSE_BYTES
 
 DIAGNOSTIC_SCHEMA_VERSION = 1
 MAX_DIAGNOSTIC_FILES = 20_000
+MAX_GIT_VALUE_BYTES = 65_536
 MAX_GIT_STATUS_BYTES = 1_000_000
+GIT_TIMEOUT_SECONDS = 10
 _PROJECT_MARKERS = frozenset({"go.mod", "package.json", "pnpm-workspace.yaml", "pyproject.toml"})
 _SOURCE_ROOT_NAMES = frozenset({"app", "apps", "cmd", "internal", "lib", "packages", "pkg", "src"})
 _LANGUAGE_NAMES = {
@@ -500,19 +503,18 @@ def _git_readiness(root: Path) -> tuple[str, str | None]:
 
 
 def _git_value(root: Path, executable: str, *arguments: str) -> str | None:
-    completed = subprocess.run(  # noqa: S603  # nosec B603
-        [executable, *arguments],
-        cwd=root,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=10,
-    )
-    if completed.returncode != 0:
+    try:
+        completed = _run_git_bounded(
+            [executable, *arguments],
+            cwd=root,
+            max_bytes=MAX_GIT_VALUE_BYTES,
+            timeout=GIT_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.SubprocessError):
         return None
-    value = completed.stdout.strip()
+    if completed is None or completed[0] != 0:
+        return None
+    value = completed[1].decode("utf-8", errors="replace").strip()
     return value if value else None
 
 
@@ -599,37 +601,54 @@ def _diagnostic_pathspecs(config: ProjectConfig) -> tuple[str, ...]:
 
 
 def _git_changed(root: Path, executable: str, *arguments: str) -> bool:
-    completed = subprocess.run(  # noqa: S603  # nosec B603
-        [executable, *arguments],
-        cwd=root,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=10,
-    )
-    if completed.returncode not in {0, 1}:
+    try:
+        completed = _run_git_bounded(
+            [executable, *arguments],
+            cwd=root,
+            max_bytes=0,
+            timeout=GIT_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise ValueError("Cannot inspect Git change state") from exc
+    if completed is None or completed[0] not in {0, 1}:
         raise ValueError("Cannot inspect Git change state")
-    return completed.returncode == 1
+    return completed[0] == 1
 
 
 def _git_status_output(root: Path, executable: str, *arguments: str) -> str:
-    completed = subprocess.run(  # noqa: S603  # nosec B603
-        [executable, *arguments],
-        cwd=root,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=10,
-    )
-    if completed.returncode != 0:
+    try:
+        completed = _run_git_bounded(
+            [executable, *arguments],
+            cwd=root,
+            max_bytes=MAX_GIT_STATUS_BYTES,
+            timeout=GIT_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise ValueError("Cannot inspect Git change state") from exc
+    if completed is None or completed[0] != 0:
         raise ValueError("Cannot inspect Git change state")
-    if len(completed.stdout.encode("utf-8")) > MAX_GIT_STATUS_BYTES:
-        raise ValueError("Git change metadata exceeds the diagnostic limit")
-    return completed.stdout
+    return completed[1].decode("utf-8", errors="replace")
+
+
+def _run_git_bounded(
+    command: list[str],
+    *,
+    cwd: Path,
+    max_bytes: int,
+    timeout: float,
+) -> tuple[int, bytes] | None:
+    """Run fixed Git arguments while bounding stdout during collection."""
+
+    try:
+        result = run_bounded_process(
+            command,
+            cwd=cwd,
+            max_stdout_bytes=max_bytes,
+            timeout=timeout,
+        )
+    except ProcessCollectionError:
+        return None
+    return result.returncode, result.stdout
 
 
 def _graph_state(root: Path, config: ProjectConfig, config_state: str) -> str:

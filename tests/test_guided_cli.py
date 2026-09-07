@@ -314,6 +314,10 @@ def test_common_guide_path_reaches_production_report_with_one_enter_and_no_write
     assert "--- RECOMMENDATIONS ---" in transcript
     assert "--- ATLAS SNAPSHOT ---" in transcript
     assert "--- NEXT ACTION ---" in transcript
+    confirmation = transcript.index("[Enter] Analyze the recommended scope")
+    analysis = transcript.index("--- ANALYSIS RESULT ---")
+    result_exit = transcript.index("[Enter/Q] Exit")
+    assert confirmation < analysis < result_exit
     assert "\n  [1] Show selection reasons\n" in transcript
     assert "\n  [4] Open this exact snapshot in the interactive Atlas\n" in transcript
     assert "1 reasons | 2 omissions" not in transcript
@@ -325,6 +329,7 @@ def test_common_guide_path_reaches_production_report_with_one_enter_and_no_write
     assert "Test strategy:" in transcript
     assert "Tests executed: 0" in transcript
     assert "Not selected never means unaffected or unnecessary" in transcript
+    assert "Exited without persistent output." in transcript
     assert project_snapshot(root) == before
     assert git_snapshot(root) == before_git
     assert observed

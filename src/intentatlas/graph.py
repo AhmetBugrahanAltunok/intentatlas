@@ -11,9 +11,13 @@ from typing import Any, TypeVar
 
 from .models import Edge, ImpactRecord, Node
 from .relations import RELATION_SCHEMA_VERSION, relation_catalog, relation_type
+from .safe_io import read_bounded_regular_file
 from .storage import atomic_write_text
 
 _BucketKey = TypeVar("_BucketKey")
+MAX_GRAPH_DOCUMENT_BYTES = 256 * 1024 * 1024
+MAX_GRAPH_DOCUMENT_NODES = 1_000_000
+MAX_GRAPH_DOCUMENT_EDGES = 4_000_000
 
 
 @dataclass(frozen=True, slots=True)
@@ -247,12 +251,18 @@ class AtlasGraph:
 
     @classmethod
     def load(cls, path: Path) -> AtlasGraph:
+        data = read_bounded_regular_file(path, MAX_GRAPH_DOCUMENT_BYTES)
+        if data is None:
+            raise ValueError(
+                f"Cannot read graph at {path}: not a stable regular file within the "
+                f"{MAX_GRAPH_DOCUMENT_BYTES}-byte limit"
+            )
         try:
             value = json.loads(
-                path.read_text(encoding="utf-8"),
+                data.decode("utf-8"),
                 object_pairs_hook=_unique_object,
             )
-        except (OSError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
+        except (UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
             raise ValueError(f"Cannot read graph at {path}: {exc}") from exc
         return cls.from_dict(value, source=str(path))
 
@@ -279,6 +289,16 @@ class AtlasGraph:
         edges = value.get("edges", [])
         if not isinstance(nodes, list) or not isinstance(edges, list):
             raise ValueError(f"Invalid graph document at {source}: nodes and edges must be lists")
+        if len(nodes) > MAX_GRAPH_DOCUMENT_NODES:
+            raise ValueError(
+                f"Invalid graph document at {source}: exceeds the "
+                f"{MAX_GRAPH_DOCUMENT_NODES}-node limit"
+            )
+        if len(edges) > MAX_GRAPH_DOCUMENT_EDGES:
+            raise ValueError(
+                f"Invalid graph document at {source}: exceeds the "
+                f"{MAX_GRAPH_DOCUMENT_EDGES}-edge limit"
+            )
         if schema_version in {2, 3}:
             relation_schema_version = value.get("relation_schema_version")
             if (

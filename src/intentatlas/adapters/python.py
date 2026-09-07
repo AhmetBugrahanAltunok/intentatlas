@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import ast
 from collections import defaultdict
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
+from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
 from ..models import Edge, Node
@@ -13,7 +14,7 @@ class PythonAdapter:
     name = "python"
     suffixes = frozenset({".py"})
     cache_input_suffixes = suffixes
-    cache_version = 4
+    cache_version = 5
     evidence_kinds = frozenset(
         {"filename-convention", "python-ast", "python-symbol-reference"}
     )
@@ -37,7 +38,14 @@ class PythonAdapter:
             trees[relative] = parsed_tree
 
             file_node = f"file:{relative}"
-            visitor = _SymbolVisitor(relative)
+            overload_names, typing_module_names = _typing_overload_bindings(parsed_tree)
+            visitor = _SymbolVisitor(
+                relative,
+                overload_names,
+                typing_module_names,
+                _definition_contexts(parsed_tree),
+                _scope_shadowed_names(parsed_tree),
+            )
             visitor.visit(parsed_tree)
             file_symbols = _unique_symbol_nodes(visitor.nodes)
             nodes.extend(file_symbols)
@@ -82,11 +90,35 @@ class PythonAdapter:
         return canonical_graph_fragment(nodes, edges)
 
 
+_DefinitionToken = tuple[str, str, int, int]
+_DefinitionContext = tuple[tuple[_DefinitionToken, ...], bool, _DefinitionToken]
+
+
+@dataclass(frozen=True, slots=True)
+class _SymbolCandidate:
+    node: Node
+    overload_declaration: bool
+    lexical_scope: tuple[_DefinitionToken, ...]
+    direct_definition: bool
+    definition_token: _DefinitionToken
+
+
 class _SymbolVisitor(ast.NodeVisitor):
-    def __init__(self, relative: str):
+    def __init__(
+        self,
+        relative: str,
+        overload_names: Mapping[str, int],
+        typing_module_names: Mapping[str, int],
+        definition_contexts: Mapping[int, _DefinitionContext],
+        scope_shadowed_names: Mapping[_DefinitionToken, frozenset[str]],
+    ):
         self.relative = relative
+        self.overload_names = overload_names
+        self.typing_module_names = typing_module_names
+        self.definition_contexts = definition_contexts
+        self.scope_shadowed_names = scope_shadowed_names
         self.stack: list[str] = []
-        self.nodes: list[Node] = []
+        self.nodes: list[_SymbolCandidate] = []
 
     def _visit_symbol(self, node: ast.ClassDef | ast.FunctionDef | ast.AsyncFunctionDef) -> None:
         qualname = ".".join([*self.stack, node.name])
@@ -94,18 +126,29 @@ class _SymbolVisitor(ast.NodeVisitor):
         decorator_lines = [decorator.lineno for decorator in node.decorator_list]
         start_line = min([node.lineno, *decorator_lines])
         end_line = node.end_lineno if node.end_lineno is not None else node.lineno
+        lexical_scope, direct_definition, definition_token = self.definition_contexts[
+            id(node)
+        ]
+        symbol = Node(
+            id=f"symbol:{self.relative}::{qualname}",
+            kind="symbol",
+            label=qualname,
+            path=self.relative,
+            metadata={
+                "symbol_kind": kind,
+                "line": start_line,
+                "end_line": end_line,
+                "owner": "scanner",
+            },
+        )
         self.nodes.append(
-            Node(
-                id=f"symbol:{self.relative}::{qualname}",
-                kind="symbol",
-                label=qualname,
-                path=self.relative,
-                metadata={
-                    "symbol_kind": kind,
-                    "line": start_line,
-                    "end_line": end_line,
-                    "owner": "scanner",
-                },
+            _SymbolCandidate(
+                symbol,
+                not isinstance(node, ast.ClassDef)
+                and self._is_overload_declaration(node),
+                lexical_scope,
+                direct_definition,
+                definition_token,
             )
         )
         self.stack.append(node.name)
@@ -120,6 +163,154 @@ class _SymbolVisitor(ast.NodeVisitor):
 
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:  # noqa: N802
         self._visit_symbol(node)
+
+    def _is_overload_declaration(
+        self, node: ast.FunctionDef | ast.AsyncFunctionDef
+    ) -> bool:
+        lexical_scope = self.definition_contexts[id(node)][0]
+        for decorator in node.decorator_list:
+            if (
+                isinstance(decorator, ast.Name)
+                and self._trusted_binding(
+                    decorator.id,
+                    decorator.lineno,
+                    self.overload_names,
+                    lexical_scope,
+                )
+            ):
+                return True
+            if (
+                isinstance(decorator, ast.Attribute)
+                and decorator.attr == "overload"
+                and isinstance(decorator.value, ast.Name)
+                and self._trusted_binding(
+                    decorator.value.id,
+                    decorator.lineno,
+                    self.typing_module_names,
+                    lexical_scope,
+                )
+            ):
+                return True
+        return False
+
+    def _trusted_binding(
+        self,
+        name: str,
+        decorator_line: int,
+        trusted_imports: Mapping[str, int],
+        lexical_scope: tuple[_DefinitionToken, ...],
+    ) -> bool:
+        import_line = trusted_imports.get(name)
+        return (
+            import_line is not None
+            and import_line < decorator_line
+            and not any(
+                name in self.scope_shadowed_names.get(scope, frozenset())
+                for scope in lexical_scope
+            )
+        )
+
+
+def _typing_overload_bindings(
+    tree: ast.AST,
+) -> tuple[dict[str, int], dict[str, int]]:
+    overload_imports: defaultdict[str, list[int]] = defaultdict(list)
+    typing_module_imports: defaultdict[str, list[int]] = defaultdict(list)
+    for statement in getattr(tree, "body", ()):
+        if isinstance(statement, ast.ImportFrom) and statement.module in {
+            "typing",
+            "typing_extensions",
+        }:
+            for alias in statement.names:
+                if alias.name == "overload":
+                    overload_imports[alias.asname or alias.name].append(statement.lineno)
+        elif isinstance(statement, ast.Import):
+            for alias in statement.names:
+                if alias.name in {"typing", "typing_extensions"}:
+                    typing_module_imports[alias.asname or alias.name].append(
+                        statement.lineno
+                    )
+    binding_counts: defaultdict[str, int] = defaultdict(int)
+    for name in _body_bound_names(getattr(tree, "body", ())):
+        binding_counts[name] += 1
+    overload_names = {
+        name: lines[0]
+        for name, lines in sorted(overload_imports.items())
+        if len(lines) == 1 and binding_counts[name] == 1
+    }
+    typing_module_names = {
+        name: lines[0]
+        for name, lines in sorted(typing_module_imports.items())
+        if len(lines) == 1 and binding_counts[name] == 1
+    }
+    return overload_names, typing_module_names
+
+
+def _body_bound_names(statements: Iterable[ast.stmt]) -> Iterable[str]:
+    for statement in statements:
+        yield from _statement_bound_names(statement)
+
+
+def _statement_bound_names(node: ast.AST) -> Iterable[str]:
+    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        yield node.name
+        return
+    if isinstance(node, ast.Lambda):
+        return
+    if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)):
+        yield node.id
+    elif isinstance(node, ast.alias):
+        yield node.asname or node.name.split(".", 1)[0]
+    elif isinstance(node, ast.ExceptHandler) and node.name:
+        yield node.name
+    for child in ast.iter_child_nodes(node):
+        yield from _statement_bound_names(child)
+
+
+def _scope_shadowed_names(
+    tree: ast.AST,
+) -> dict[_DefinitionToken, frozenset[str]]:
+    shadowed: dict[_DefinitionToken, frozenset[str]] = {}
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        names = set(_body_bound_names(node.body))
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            names.update(
+                argument.arg
+                for argument in ast.walk(node.args)
+                if isinstance(argument, ast.arg)
+            )
+        shadowed[_definition_token(node)] = frozenset(names)
+    return shadowed
+
+
+def _definition_token(
+    node: ast.ClassDef | ast.FunctionDef | ast.AsyncFunctionDef,
+) -> _DefinitionToken:
+    return type(node).__name__, node.name, node.lineno, node.col_offset
+
+
+def _definition_contexts(tree: ast.AST) -> dict[int, _DefinitionContext]:
+    contexts: dict[int, _DefinitionContext] = {}
+
+    def visit(
+        node: ast.AST,
+        lexical_scope: tuple[_DefinitionToken, ...],
+        direct_definition: bool,
+    ) -> None:
+        if isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+            token = _definition_token(node)
+            contexts[id(node)] = (lexical_scope, direct_definition, token)
+            for statement in node.body:
+                visit(statement, (*lexical_scope, token), True)
+            return
+        for child in ast.iter_child_nodes(node):
+            visit(child, lexical_scope, False)
+
+    for statement in getattr(tree, "body", ()):
+        visit(statement, (), True)
+    return contexts
 
 
 def _build_module_maps(
@@ -413,12 +604,50 @@ def _filename_test_edges(context: AdapterContext) -> Iterable[Edge]:
             )
 
 
-def _unique_symbol_nodes(nodes: list[Node]) -> tuple[Node, ...]:
-    candidates: defaultdict[str, list[Node]] = defaultdict(list)
-    for node in nodes:
-        candidates[node.id].append(node)
+def _unique_symbol_nodes(nodes: list[_SymbolCandidate]) -> tuple[Node, ...]:
+    candidates: defaultdict[str, list[_SymbolCandidate]] = defaultdict(list)
+    for candidate in nodes:
+        candidates[candidate.node.id].append(candidate)
+    resolved: dict[str, _SymbolCandidate | None] = {}
+    excluded_definition_tokens: set[_DefinitionToken] = set()
+    for node_id, values in sorted(candidates.items()):
+        if len(values) == 1 and values[0].node.id == node_id:
+            resolved[node_id] = values[0]
+            continue
+        implementation = _overload_implementation(values)
+        resolved[node_id] = implementation
+        if implementation is None:
+            excluded_definition_tokens.update(value.definition_token for value in values)
+        else:
+            excluded_definition_tokens.update(
+                value.definition_token for value in values if value.overload_declaration
+            )
     return tuple(
-        values[0]
-        for node_id, values in sorted(candidates.items())
-        if len(values) == 1 and values[0].id == node_id
+        candidate.node
+        for node_id, candidate in sorted(resolved.items())
+        if candidate is not None
+        and candidate.node.id == node_id
+        and not excluded_definition_tokens.intersection(candidate.lexical_scope)
     )
+
+
+def _overload_implementation(
+    values: list[_SymbolCandidate],
+) -> _SymbolCandidate | None:
+    implementations = [value for value in values if not value.overload_declaration]
+    declarations = [value for value in values if value.overload_declaration]
+    if len(implementations) != 1 or not declarations:
+        return None
+    implementation = implementations[0]
+    if not all(
+        value.direct_definition and value.lexical_scope == implementation.lexical_scope
+        for value in values
+    ):
+        return None
+    implementation_start = int(implementation.node.metadata["line"])
+    if any(
+        int(declaration.node.metadata["end_line"]) >= implementation_start
+        for declaration in declarations
+    ):
+        return None
+    return implementation

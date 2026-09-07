@@ -239,6 +239,12 @@ def test_scanner_connects_typescript_javascript_symbols_imports_and_tests() -> N
     assert first.nodes["file:src/main.test.ts"].kind == "test"
     assert first.nodes["file:src/main.test.ts"].metadata["language"] == "TypeScript"
     assert first.nodes["file:src/view.jsx"].metadata["language"] == "JavaScript"
+    assert first.nodes["symbol:src/math.ts::Calculator"].metadata["end_line"] == 3
+    assert first.nodes["symbol:src/math.ts::Numeric"].metadata["end_line"] == 5
+    assert first.nodes["symbol:src/math.ts::Operation"].metadata["end_line"] == 9
+    assert first.nodes["symbol:src/math.ts::add"].metadata["end_line"] == 13
+    assert first.nodes["symbol:src/card.tsx::CardView"].metadata["end_line"] == 1
+    assert first.nodes["symbol:src/multiline.ts::createCard"].metadata["end_line"] == 7
 
     relationships = {
         (edge.source, edge.target, edge.relation, edge.evidence) for edge in first.edges
@@ -537,6 +543,11 @@ def test_scanner_connects_go_symbols_local_imports_and_tests() -> None:
     assert first.nodes["file:go.mod"].metadata["language"] == "Go Modules"
     assert first.nodes["file:internal/math/add_test.go"].kind == "test"
     assert first.nodes["file:internal/math/add.go"].metadata["language"] == "Go"
+    assert first.nodes["symbol:internal/math/add.go::Number"].metadata["end_line"] == 5
+    assert first.nodes["symbol:internal/math/add.go::Operation"].metadata["end_line"] == 8
+    assert first.nodes["symbol:internal/math/add.go::Calculator"].metadata["end_line"] == 9
+    assert first.nodes["symbol:internal/math/add.go::Add"].metadata["end_line"] == 14
+    assert first.nodes["symbol:internal/math/add.go::Calculator.Sum"].metadata["end_line"] == 22
 
     relationships = {
         (edge.source, edge.target, edge.relation, edge.evidence) for edge in first.edges
@@ -654,7 +665,7 @@ def test_go_recommendations_follow_one_exact_intra_package_caller(tmp_path) -> N
 
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
-def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
+def test_scanner_maps_git_hunks_to_exact_supported_language_symbols(tmp_path) -> None:
     def git(*arguments: str) -> str:
         result = subprocess.run(
             ["git", *arguments],
@@ -669,6 +680,7 @@ def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
     (tmp_path / "src").mkdir()
     auth = tmp_path / "src" / "auth.py"
     javascript = tmp_path / "src" / "app.js"
+    go_source = tmp_path / "src" / "app.go"
     auth.write_text(
         "class Auth:\n"
         "    def requirement_nine(self):\n"
@@ -678,10 +690,11 @@ def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
         encoding="utf-8",
     )
     javascript.write_text("export function run() { return 1; }\n", encoding="utf-8")
+    go_source.write_text("package app\n\nfunc Run() int { return 1 }\n", encoding="utf-8")
     git("init", "-q")
     git("config", "user.name", "IntentAtlas Test")
     git("config", "user.email", "intentatlas-test@example.invalid")
-    git("add", "src/auth.py", "src/app.js")
+    git("add", "src/auth.py", "src/app.js", "src/app.go")
     git("commit", "-q", "-m", "initial")
 
     auth.write_text(
@@ -698,10 +711,15 @@ def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
 
     javascript.write_text("export function run() { return 2; }\n", encoding="utf-8")
     git("add", "src/app.js")
-    git("commit", "-q", "-m", "change JavaScript without spans")
+    git("commit", "-q", "-m", "change one JavaScript symbol")
     javascript_commit = git("rev-parse", "HEAD")
 
-    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=3))
+    go_source.write_text("package app\n\nfunc Run() int { return 2 }\n", encoding="utf-8")
+    git("add", "src/app.go")
+    git("commit", "-q", "-m", "change one Go symbol")
+    go_commit = git("rev-parse", "HEAD")
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=4))
     relationships = {
         (edge.source, edge.target, edge.relation, edge.evidence) for edge in graph.edges
     }
@@ -734,10 +752,18 @@ def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
         "changes",
         "git-log",
     ) in relationships
-    assert not any(
-        source == f"commit:{javascript_commit}" and relation == "modifies"
-        for source, _target, relation, _evidence in relationships
-    )
+    assert (
+        f"commit:{javascript_commit}",
+        "symbol:src/app.js::run",
+        "modifies",
+        "git-diff-hunk",
+    ) in relationships
+    assert (
+        f"commit:{go_commit}",
+        "symbol:src/app.go::Run",
+        "modifies",
+        "git-diff-hunk",
+    ) in relationships
 
     auth.write_text(
         "class Auth:\n"
@@ -751,7 +777,7 @@ def test_scanner_maps_git_hunks_only_to_exact_python_symbols(tmp_path) -> None:
     git("commit", "-q", "-m", "change the sibling later")
     later_commit = git("rev-parse", "HEAD")
 
-    later_graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=4))
+    later_graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=5))
     later_relationships = {
         (edge.source, edge.target, edge.relation, edge.evidence)
         for edge in later_graph.edges

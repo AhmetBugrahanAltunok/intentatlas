@@ -12,7 +12,7 @@ from .confidence import CONFIDENCE_RANK, LOW_CONFIDENCE_GUIDANCE, confidence_for
 from .config import ProjectConfig
 from .graph import AtlasGraph
 from .models import Node
-from .recommendations import recommend_tests
+from .recommendations import _recommendation_candidates
 from .scanner import scan_repository
 
 CHANGE_REPORT_SCHEMA_VERSION = 1
@@ -190,6 +190,74 @@ class OmittedCandidate:
 
 
 @dataclass(frozen=True, slots=True)
+class ReportAnalysisCoverage:
+    artifact_limit: int
+    artifact_candidate_count: int
+    artifact_analyzed_count: int
+    test_signal_limit: int
+    test_signal_candidate_count: int
+    test_signal_analyzed_count: int
+
+    @property
+    def artifact_limit_omitted_count(self) -> int:
+        return self.artifact_candidate_count - self.artifact_analyzed_count
+
+    @property
+    def test_signal_limit_omitted_count(self) -> int:
+        return self.test_signal_candidate_count - self.test_signal_analyzed_count
+
+    @property
+    def artifact_selection_complete(self) -> bool:
+        return self.artifact_limit_omitted_count == 0
+
+    @property
+    def test_signal_selection_complete(self) -> bool:
+        return (
+            self.artifact_selection_complete
+            and self.test_signal_limit_omitted_count == 0
+        )
+
+    def to_dict(
+        self,
+        *,
+        complete: bool,
+        requirement_candidate_count_complete: bool,
+        test_candidate_count_complete: bool,
+    ) -> dict[str, Any]:
+        return {
+            "complete": complete,
+            "requirement_candidate_count_complete": (
+                requirement_candidate_count_complete
+            ),
+            "test_candidate_count_complete": test_candidate_count_complete,
+            "artifact_selection": {
+                "analysis_limit": self.artifact_limit,
+                "total_candidate_count": self.artifact_candidate_count,
+                "analyzed_count": self.artifact_analyzed_count,
+                "limit_omitted_count": self.artifact_limit_omitted_count,
+                "bounded_selection_complete": self.artifact_selection_complete,
+            },
+            "test_signal_selection": {
+                "analysis_limit": self.test_signal_limit,
+                "total_candidate_count": self.test_signal_candidate_count,
+                "analyzed_count": self.test_signal_analyzed_count,
+                "limit_omitted_count": self.test_signal_limit_omitted_count,
+                "bounded_selection_complete": self.test_signal_selection_complete,
+            },
+        }
+
+
+_EMPTY_ANALYSIS_COVERAGE = ReportAnalysisCoverage(
+    MAX_REPORT_ARTIFACTS,
+    0,
+    0,
+    MAX_REPORT_ARTIFACTS,
+    0,
+    0,
+)
+
+
+@dataclass(frozen=True, slots=True)
 class ChangeReport:
     analysis: ChangeAnalysis
     freshness: str
@@ -206,6 +274,23 @@ class ChangeReport:
     omitted_tests: tuple[OmittedCandidate, ...]
     test_strategy: str
     analysis_coverage_complete: bool
+    analysis_coverage: ReportAnalysisCoverage = _EMPTY_ANALYSIS_COVERAGE
+
+    @property
+    def requirement_candidate_count_complete(self) -> bool:
+        source_analysis_available = self.analysis.state != "unknown" or not self.analysis.files
+        return (
+            source_analysis_available
+            and self.analysis_coverage.artifact_selection_complete
+        )
+
+    @property
+    def test_candidate_count_complete(self) -> bool:
+        source_analysis_available = self.analysis.state != "unknown" or not self.analysis.files
+        return (
+            source_analysis_available
+            and self.analysis_coverage.test_signal_selection_complete
+        )
 
     @property
     def revision_action(self) -> str | None:
@@ -233,6 +318,13 @@ class ChangeReport:
             "analysis_state": self.analysis.state,
             "freshness": self.freshness,
             "analysis_coverage_complete": self.analysis_coverage_complete,
+            "analysis_coverage": self.analysis_coverage.to_dict(
+                complete=self.analysis_coverage_complete,
+                requirement_candidate_count_complete=(
+                    self.requirement_candidate_count_complete
+                ),
+                test_candidate_count_complete=self.test_candidate_count_complete,
+            ),
             "test_strategy": self.test_strategy,
             "revision_action": self.revision_action,
             "requirement_candidate_count": self.requirement_candidate_count,
@@ -321,7 +413,7 @@ def build_change_report(
     if isinstance(limit, bool) or limit < 1 or limit > MAX_REPORT_RESULTS:
         raise ValueError(f"Report limit must be between 1 and {MAX_REPORT_RESULTS}")
 
-    artifact_ids = tuple(
+    artifact_candidates = tuple(
         sorted(
             {
                 artifact_id
@@ -333,11 +425,8 @@ def build_change_report(
         )
     )
     if analysis.state == "unknown":
-        artifact_ids = ()
-    if len(artifact_ids) > MAX_REPORT_ARTIFACTS:
-        raise ValueError(
-            f"Change report exceeds the {MAX_REPORT_ARTIFACTS}-artifact analysis limit"
-        )
+        artifact_candidates = ()
+    artifact_ids = artifact_candidates[:MAX_REPORT_ARTIFACTS]
 
     requirement_candidates = _requirement_impacts(graph, analysis, artifact_ids)
     minimum_rank = CONFIDENCE_RANK[minimum_confidence]
@@ -353,7 +442,8 @@ def build_change_report(
     )
     requirements = eligible_requirements[:limit]
     limit_omitted_requirements = eligible_requirements[limit:]
-    test_candidates = _test_recommendations(graph, artifact_ids)
+    test_analysis = _test_recommendations(graph, artifact_ids)
+    test_candidates = test_analysis.candidates
     eligible_tests = tuple(
         item
         for item in test_candidates
@@ -367,14 +457,25 @@ def build_change_report(
     tests = eligible_tests[:limit]
     limit_omitted_tests = eligible_tests[limit:]
 
-    coverage_complete = analysis.state == "analyzed" or not analysis.files
+    analysis_coverage = ReportAnalysisCoverage(
+        MAX_REPORT_ARTIFACTS,
+        len(artifact_candidates),
+        len(artifact_ids),
+        MAX_REPORT_ARTIFACTS,
+        test_analysis.signal_candidate_count,
+        test_analysis.signal_analyzed_count,
+    )
+    bounded_selection_complete = analysis_coverage.test_signal_selection_complete
+    coverage_complete = (
+        analysis.state == "analyzed" or not analysis.files
+    ) and bounded_selection_complete
     if not analysis.files:
         strategy = "no-changes"
     elif analysis.state == "unknown":
         strategy = "abstain-and-full-suite"
-    elif analysis.state == "fallback" and tests:
+    elif (analysis.state == "fallback" or not bounded_selection_complete) and tests:
         strategy = "targeted-plus-full-suite"
-    elif analysis.state == "fallback":
+    elif analysis.state == "fallback" or not bounded_selection_complete:
         strategy = "full-suite-fallback"
     elif tests:
         strategy = "targeted"
@@ -412,6 +513,7 @@ def build_change_report(
         )[:limit],
         strategy,
         coverage_complete,
+        analysis_coverage,
     )
 
 
@@ -433,6 +535,17 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
         "Confidence bands: low 0-64; medium 65-84; high 85-100",
         f"Test strategy: {report.test_strategy}",
         (
+            "Analysis coverage: "
+            f"{report.analysis_coverage.artifact_analyzed_count}/"
+            f"{report.analysis_coverage.artifact_candidate_count} artifacts analyzed; "
+            f"{report.analysis_coverage.artifact_limit_omitted_count} omitted by the "
+            f"{report.analysis_coverage.artifact_limit}-artifact limit; "
+            f"{report.analysis_coverage.test_signal_analyzed_count}/"
+            f"{report.analysis_coverage.test_signal_candidate_count} test signals analyzed; "
+            f"{report.analysis_coverage.test_signal_limit_omitted_count} omitted by the "
+            f"{report.analysis_coverage.test_signal_limit}-signal limit"
+        ),
+        (
             "Requirement impacts: "
             f"{len(report.requirements)} selected / "
             f"{report.requirement_candidate_count} candidates; "
@@ -443,6 +556,14 @@ def render_change_report(report: ChangeReport, output_format: str = "text") -> s
             "omission details shown"
         ),
     ]
+    if (
+        not report.requirement_candidate_count_complete
+        or not report.test_candidate_count_complete
+    ):
+        lines.append(
+            "Coverage note: Candidate totals include only the analyzed subset and are lower "
+            "bounds; omitted or unavailable artifacts and signals were not classified."
+        )
     if report.minimum_confidence == "low":
         lines.append(f"Threshold note: {LOW_CONFIDENCE_GUIDANCE}")
     elif report.requirement_filtered_count:
@@ -606,9 +727,16 @@ def _impact_sort_key(item: RequirementImpact) -> tuple[object, ...]:
     return (-item.score, item.requirement.id, item.source_artifact_id, item.path.nodes)
 
 
+@dataclass(frozen=True, slots=True)
+class _TestRecommendationAnalysis:
+    candidates: tuple[ChangeReportTest, ...]
+    signal_candidate_count: int
+    signal_analyzed_count: int
+
+
 def _test_recommendations(
     graph: AtlasGraph, artifact_ids: tuple[str, ...]
-) -> tuple[ChangeReportTest, ...]:
+) -> _TestRecommendationAnalysis:
     aggregated: dict[
         str,
         tuple[
@@ -617,7 +745,8 @@ def _test_recommendations(
             set[ReportReason],
         ],
     ] = {}
-    signal_count = 0
+    signals: list[tuple[str, str, bool]] = []
+    signal_candidate_count = 0
     for artifact_id in artifact_ids:
         target = graph.nodes[artifact_id]
         if target.kind not in {"commit", "file", "symbol", "test"}:
@@ -630,74 +759,72 @@ def _test_recommendations(
                 if edge.target in graph.nodes and graph.nodes[edge.target].kind == "symbol"
             ]
             targets.extend(expanded)
-        signal_count += len(targets)
-        if signal_count > MAX_REPORT_ARTIFACTS:
-            raise ValueError(
-                "Change report exceeds the bounded file-symbol analysis limit"
-            )
-        for recommendation_target, file_fallback in targets:
-            result = recommend_tests(
-                graph,
-                recommendation_target,
-                minimum_confidence="low",
-                limit=MAX_REPORT_RESULTS,
-            )
-            for recommendation in result.recommendations:
-                reason_details = {
-                    ReportReason(
-                        (
-                            f"file-fallback-{reason.signal}"
-                            if file_fallback
-                            else reason.signal
-                        ),
-                        min(reason.score, 65) if file_fallback else reason.score,
-                        (
-                            "File-level fallback: the changed file contains the ranked symbol, "
-                            "but the change was not proven exact to that symbol. " + reason.summary
-                            if file_fallback
-                            else reason.summary
-                        ),
-                        RequirementImpactPath(reason.path.nodes, reason.path.relations),
-                        tuple(
-                            dict.fromkeys(
-                                (
-                                    *reason.evidence,
-                                    *(("file-level-fallback",) if file_fallback else ()),
-                                )
+        signal_candidate_count += len(targets)
+        available = max(0, MAX_REPORT_ARTIFACTS - len(signals))
+        signals.extend(
+            (artifact_id, recommendation_target, file_fallback)
+            for recommendation_target, file_fallback in targets[:available]
+        )
+    for artifact_id, recommendation_target, file_fallback in signals:
+        _target, recommendations = _recommendation_candidates(
+            graph, recommendation_target
+        )
+        for recommendation in recommendations:
+            reason_details = {
+                ReportReason(
+                    (
+                        f"file-fallback-{reason.signal}"
+                        if file_fallback
+                        else reason.signal
+                    ),
+                    min(reason.score, 65) if file_fallback else reason.score,
+                    (
+                        "File-level fallback: the changed file contains the ranked symbol, "
+                        "but the change was not proven exact to that symbol. " + reason.summary
+                        if file_fallback
+                        else reason.summary
+                    ),
+                    RequirementImpactPath(reason.path.nodes, reason.path.relations),
+                    tuple(
+                        dict.fromkeys(
+                            (
+                                *reason.evidence,
+                                *(("file-level-fallback",) if file_fallback else ()),
                             )
-                        ),
-                    )
-                    for reason in recommendation.reasons
-                }
-                current = aggregated.get(recommendation.test.id)
-                if current is None:
-                    aggregated[recommendation.test.id] = (
-                        recommendation.test,
-                        {artifact_id},
-                        reason_details,
-                    )
-                    if len(aggregated) > MAX_REPORT_TEST_CANDIDATES:
-                        raise ValueError(
-                            "Change report exceeds the bounded test-candidate limit"
                         )
-                    continue
-                (
-                    node,
-                    sources,
-                    combined_reason_details,
-                ) = current
-                sources.add(artifact_id)
-                combined_reason_details.update(reason_details)
+                    ),
+                )
+                for reason in recommendation.reasons
+            }
+            current = aggregated.get(recommendation.test.id)
+            if current is None:
                 aggregated[recommendation.test.id] = (
-                    node,
-                    sources,
-                    combined_reason_details,
+                    recommendation.test,
+                    {artifact_id},
+                    reason_details,
                 )
                 if len(aggregated) > MAX_REPORT_TEST_CANDIDATES:
                     raise ValueError(
                         "Change report exceeds the bounded test-candidate limit"
                     )
-    return tuple(
+                continue
+            (
+                node,
+                sources,
+                combined_reason_details,
+            ) = current
+            sources.add(artifact_id)
+            combined_reason_details.update(reason_details)
+            aggregated[recommendation.test.id] = (
+                node,
+                sources,
+                combined_reason_details,
+            )
+            if len(aggregated) > MAX_REPORT_TEST_CANDIDATES:
+                raise ValueError(
+                    "Change report exceeds the bounded test-candidate limit"
+                )
+    candidates = tuple(
         sorted(
             (
                 ChangeReportTest(
@@ -720,6 +847,11 @@ def _test_recommendations(
             ),
             key=lambda item: (-item.score, item.test.id),
         )
+    )
+    return _TestRecommendationAnalysis(
+        candidates,
+        signal_candidate_count,
+        len(signals),
     )
 
 

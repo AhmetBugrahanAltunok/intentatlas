@@ -9,14 +9,13 @@ const colors = {
   "pull-request": "#facc15", commit: "#94a3b8"
 };
 const kindOrder = ["requirement", "decision", "issue", "delivery-issue", "pull-request", "evidence", "review", "memory", "session", "file", "config", "document", "symbol", "test", "coverage", "test-result", "commit"];
-const proofKinds = new Set(["test", "evidence", "coverage", "test-result", "commit", "pull-request"]);
 const pathLimits = { depth: 6, visited: 800, results: 6 };
 const renderLimits = { nodes: 240, edges: 900, focusDepth: 2, relationships: 80 };
 const state = {
   data: null, report: null, review: null, nodeById: new Map(), edgeByNode: new Map(),
-  degreeById: new Map(), searchIndex: [], pathAdjacency: new Map(), enabled: new Set(),
+  degreeById: new Map(), searchIndex: [], enabled: new Set(),
   nodes: [], edges: [], visibleNodeById: new Map(), selected: null, viewMode: "overview",
-  focus: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null
+  focus: null, scale: 1, tx: 0, ty: 0, alpha: 1, frame: null, pathRequest: 0
 };
 const svg = document.querySelector("#graph");
 const viewport = document.querySelector("#viewport");
@@ -51,7 +50,6 @@ function setGraphWindow(data) {
   state.data = data;
   state.nodeById = new Map(data.nodes.map(node => [node.id, node]));
   buildGraphIndexes();
-  state.pathAdjacency = buildPathAdjacency();
   for (const node of data.nodes) state.enabled.add(node.kind);
 }
 
@@ -531,9 +529,38 @@ function selectNode(id) {
   document.querySelector("#detail").classList.add("open");
 }
 
-function renderEvidencePaths(node) {
+async function renderEvidencePaths(node) {
   const container = document.querySelector("#detail-paths");
-  const paths = findEvidencePaths(node.id);
+  const request = ++state.pathRequest;
+  container.innerHTML = "<p class='hint'>Loading bounded evidence paths...</p>";
+  const query = new URLSearchParams({
+    start: node.id,
+    depth: String(pathLimits.depth),
+    visited_limit: String(pathLimits.visited),
+    result_limit: String(pathLimits.results)
+  });
+  let paths;
+  try {
+    const response = await fetch(`/api/graph/paths?${query}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const result = await response.json();
+    if (state.data?.snapshot && result.snapshot !== state.data.snapshot) {
+      throw new Error("Graph snapshot changed; reload the viewer.");
+    }
+    paths = result.paths.map(path => ({
+      destination: path.destination,
+      hops: path.relations.map((relation, index) => {
+        const id = path.nodes[index + 1];
+        return { direction: "→", relation, label: state.nodeById.get(id)?.label || id };
+      })
+    }));
+  } catch (_error) {
+    if (request === state.pathRequest && state.selected === node.id) {
+      container.innerHTML = "<p class='hint'>Bounded evidence paths are unavailable.</p>";
+    }
+    return;
+  }
+  if (request !== state.pathRequest || state.selected !== node.id) return;
   container.innerHTML = paths.length ? paths.map((path, index) => {
     const destination = path.destination;
     const hops = path.hops.map(hop => `${hop.direction} ${hop.relation} ${hop.label}`).join(" · ");
@@ -548,47 +575,6 @@ function bindFocusButton(button) {
   button.addEventListener("keydown", event => {
     if (event.key === "Enter" || event.key === " ") { event.preventDefault(); activate(); }
   });
-}
-
-function findEvidencePaths(startId) {
-  const nodes = state.nodeById;
-  const adjacency = state.pathAdjacency;
-  const visited = new Set([startId]);
-  const queue = [{ id: startId, hops: [] }];
-  const results = [];
-  while (queue.length && visited.size <= pathLimits.visited && results.length < pathLimits.results) {
-    const current = queue.shift();
-    if (current.hops.length >= pathLimits.depth) continue;
-    for (const hop of adjacency.get(current.id) || []) {
-      if (visited.has(hop.id) || visited.size >= pathLimits.visited) continue;
-      visited.add(hop.id);
-      const hops = [...current.hops, hop];
-      const destination = nodes.get(hop.id);
-      if (proofKinds.has(destination.kind)) results.push({ destination, hops });
-      if (results.length >= pathLimits.results) break;
-      queue.push({ id: hop.id, hops });
-    }
-  }
-  return results;
-}
-
-function buildPathAdjacency() {
-  const nodes = state.nodeById;
-  const adjacency = new Map();
-  const add = (source, hop) => {
-    if (!adjacency.has(source)) adjacency.set(source, []);
-    adjacency.get(source).push(hop);
-  };
-  for (const edge of state.data.edges) {
-    const target = nodes.get(edge.target), source = nodes.get(edge.source);
-    if (!target || !source) continue;
-    add(edge.source, { id: edge.target, label: target.label, relation: edge.relation, direction: "→" });
-    add(edge.target, { id: edge.source, label: source.label, relation: edge.inverse || edge.relation, direction: "←" });
-  }
-  for (const hops of adjacency.values()) {
-    hops.sort((a, b) => a.id.localeCompare(b.id) || a.relation.localeCompare(b.relation) || a.direction.localeCompare(b.direction));
-  }
-  return adjacency;
 }
 
 async function focusNode(id) {

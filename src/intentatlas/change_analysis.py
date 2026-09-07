@@ -9,6 +9,7 @@ from .config import ProjectConfig
 from .graph import AtlasGraph
 from .models import Node
 from .scanner import scan_repository
+from .symbol_spans import map_hunks_to_most_specific_symbols, valid_symbol_span
 from .vault import USER_KINDS
 
 CHANGE_ANALYSIS_SCHEMA_VERSION = 1
@@ -208,54 +209,16 @@ def _analyze_file(
 def _exact_symbols(
     graph: AtlasGraph, file_node: Node, item: ChangeFile
 ) -> tuple[tuple[str, ...], bool]:
-    if not item.hunks:
-        return (), False
     symbols = tuple(
         graph.nodes[edge.target]
         for edge in graph.index.outgoing(file_node.id, "defines")
-        if edge.target in graph.nodes and _valid_span(graph.nodes[edge.target])
+        if edge.target in graph.nodes and valid_symbol_span(graph.nodes[edge.target])
     )
-    modified: set[str] = set()
-    complete = True
-    for hunk in item.hunks:
-        hunk_end = hunk.start + hunk.count - 1
-        candidates = [
-            symbol
-            for symbol in symbols
-            if int(symbol.metadata["line"]) <= hunk_end
-            and int(symbol.metadata["end_line"]) >= hunk.start
-        ]
-        if not candidates:
-            complete = False
-            continue
-        for candidate in candidates:
-            start = int(candidate.metadata["line"])
-            end = int(candidate.metadata["end_line"])
-            contains_more_specific = any(
-                other.id != candidate.id
-                and start <= int(other.metadata["line"])
-                and end >= int(other.metadata["end_line"])
-                and (start, end)
-                != (int(other.metadata["line"]), int(other.metadata["end_line"]))
-                for other in candidates
-            )
-            if not contains_more_specific:
-                modified.add(candidate.id)
-    return tuple(sorted(modified)), complete
-
-
-def _valid_span(node: Node) -> bool:
-    start = node.metadata.get("line")
-    end = node.metadata.get("end_line")
-    return (
-        node.kind == "symbol"
-        and isinstance(start, int)
-        and not isinstance(start, bool)
-        and isinstance(end, int)
-        and not isinstance(end, bool)
-        and start >= 1
-        and end >= start
+    match = map_hunks_to_most_specific_symbols(
+        item.hunks,
+        {hunk.path: symbols for hunk in item.hunks},
     )
+    return match.symbol_ids, match.complete
 
 
 def _vault_artifact(

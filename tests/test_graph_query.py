@@ -58,6 +58,48 @@ def test_bounded_query_windows_carry_snapshot_totals_and_omissions() -> None:
         "commit",
         "test",
     }
+    assert paths["omitted_counts"]["paths"] == 0
+    assert paths["truncated"]["paths"] is False
+
+    truncated = snapshot.paths("REQ-1", result_limit=1)
+    assert truncated["omitted_counts"]["paths"] is None
+    assert truncated["truncated"]["paths"] is True
+
+    exact_visited_boundary = snapshot.paths("REQ-1", visited_limit=4)
+    assert exact_visited_boundary["work"]["visited_nodes"] == 4
+    assert exact_visited_boundary["omitted_counts"]["visited"] == 0
+    assert exact_visited_boundary["truncated"]["visited"] is False
+
+    visited_truncated = snapshot.paths("REQ-1", visited_limit=3)
+    assert visited_truncated["work"]["visited_nodes"] == 3
+    assert visited_truncated["omitted_counts"]["visited"] is None
+    assert visited_truncated["truncated"]["visited"] is True
+    assert visited_truncated["omitted_counts"]["paths"] is None
+    assert visited_truncated["truncated"]["paths"] is True
+
+
+def test_paths_abstain_from_complete_count_when_an_alternative_route_is_deduplicated() -> None:
+    graph = AtlasGraph()
+    graph.extend(
+        [
+            Node("REQ", "requirement", "Requirement"),
+            Node("file:a", "file", "a", path="a"),
+            Node("file:b", "file", "b", path="b"),
+            Node("file:test", "test", "test", path="test"),
+        ],
+        [
+            Edge("REQ", "file:a", "implemented-by", "fixture"),
+            Edge("REQ", "file:b", "implemented-by", "fixture"),
+            Edge("file:test", "file:a", "tests", "fixture"),
+            Edge("file:test", "file:b", "tests", "fixture"),
+        ],
+    )
+
+    result = GraphQuerySnapshot(graph, "b" * 64).paths("REQ")
+
+    assert result["returned_counts"]["paths"] == 1
+    assert result["omitted_counts"]["paths"] is None
+    assert result["truncated"]["paths"] is True
 
 
 @pytest.mark.parametrize(

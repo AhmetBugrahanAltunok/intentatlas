@@ -6,10 +6,12 @@ import os
 import shlex
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
 
+import intentatlas.diagnostic as diagnostic_module
 from intentatlas.cli import main
 from intentatlas.config import ProjectConfig
 from intentatlas.diagnostic import diagnose_repository, render_diagnostic
@@ -168,6 +170,62 @@ def test_diagnostic_text_preserves_safe_next_action_and_advisory(tmp_path: Path)
     assert "No action is required for this heuristic alone" in rendered
     assert "not proof that symbol resolution abstained" in rendered
     assert "Exact Python symbol-test links: not-assessed" in rendered
+
+
+def test_diagnostic_git_runner_bounds_stdout_during_collection_and_times_out(
+    tmp_path: Path,
+) -> None:
+    overflow = [
+        sys.executable,
+        "-c",
+        "import sys; sys.stdout.buffer.write(b'x' * 4097)",
+    ]
+    delayed = [sys.executable, "-c", "import time; time.sleep(60)"]
+
+    assert diagnostic_module._run_git_bounded(
+        overflow,
+        cwd=tmp_path,
+        max_bytes=4096,
+        timeout=5,
+    ) is None
+    assert diagnostic_module._run_git_bounded(
+        delayed,
+        cwd=tmp_path,
+        max_bytes=4096,
+        timeout=0.05,
+    ) is None
+
+
+def test_diagnostic_cli_contains_git_timeout_and_process_errors(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    (tmp_path / ".git").mkdir()
+    monkeypatch.setattr(diagnostic_module.shutil, "which", lambda _name: "git")
+
+    def timeout(*_args, **_kwargs):
+        raise subprocess.TimeoutExpired(["git"], 10)
+
+    monkeypatch.setattr(diagnostic_module, "_run_git_bounded", timeout)
+    assert main(["diagnose", str(tmp_path), "--format", "json"]) == 0
+    captured = capsys.readouterr()
+    assert json.loads(captured.out)["repository"]["git_state"] == "not-a-repository"
+    assert "Traceback" not in captured.err
+
+    monkeypatch.setattr(
+        diagnostic_module,
+        "_git_readiness",
+        lambda _root: ("ready", "a" * 40),
+    )
+
+    def process_error(*_args, **_kwargs):
+        raise subprocess.SubprocessError("simulated process failure")
+
+    monkeypatch.setattr(diagnostic_module, "_run_git_bounded", process_error)
+    result = diagnose_repository(tmp_path)
+    assert result.recommended_scope == "worktree"
+    assert result.scope_detail.startswith("Git change state could not be fully inspected")
 
 
 def test_diagnostic_reports_missing_and_ready_exact_python_test_links(tmp_path: Path) -> None:

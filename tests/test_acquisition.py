@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import threading
 import time
+import warnings
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -223,6 +224,67 @@ def test_same_repository_concurrency_uses_one_atomic_acquisition(tmp_path: Path)
     assert transport.calls == 1
 
 
+def test_cache_lock_recovers_only_after_bounded_owner_age(tmp_path: Path) -> None:
+    root = tmp_path / "cache"
+    root.mkdir()
+    url = "https://github.com/owner/repo"
+    cache_id = cache_identity(url)
+    lock = root / f".{cache_id}.lock"
+    lock.mkdir()
+    owner = lock / "owner.json"
+    payload = {
+        "schema_version": acquisition.LOCK_SCHEMA_VERSION,
+        "pid": 999_999,
+        "created_unix": time.time(),
+        "token": "a" * 32,
+    }
+    owner.write_text(json.dumps(payload), encoding="utf-8")
+    limits = AcquisitionLimits(timeout_seconds=1, lock_timeout_seconds=0)
+    cache = ManagedRepositoryCache(root, transport=LocalTransport(), limits=limits)
+
+    with pytest.raises(ValueError, match="0-second limit"):
+        cache.acquire(url)
+    assert lock.is_dir()
+
+    payload["created_unix"] = time.time() - 10_000
+    owner.write_text(json.dumps(payload), encoding="utf-8")
+    entry = cache.acquire(url)
+
+    assert entry.cache_id == cache_id
+    assert not lock.exists()
+    assert not tuple(root.glob(".*.stale-lock-*"))
+
+
+def test_cache_lock_never_reaps_an_old_live_owner(tmp_path: Path) -> None:
+    root = tmp_path / "cache"
+    root.mkdir()
+    url = "https://github.com/owner/repo"
+    cache_id = cache_identity(url)
+    lock = root / f".{cache_id}.lock"
+    lock.mkdir()
+    (lock / "owner.json").write_text(
+        json.dumps(
+            {
+                "schema_version": acquisition.LOCK_SCHEMA_VERSION,
+                "pid": os.getpid(),
+                "created_unix": time.time() - 100_000,
+                "token": "a" * 32,
+            }
+        ),
+        encoding="utf-8",
+    )
+    cache = ManagedRepositoryCache(
+        root,
+        transport=LocalTransport(),
+        limits=AcquisitionLimits(timeout_seconds=1, lock_timeout_seconds=0),
+    )
+
+    with pytest.raises(ValueError, match="0-second limit"):
+        cache.acquire(url)
+
+    assert lock.is_dir()
+
+
 def test_cache_identity_and_cleanup_reject_traversal_and_links(tmp_path: Path) -> None:
     cache = ManagedRepositoryCache(tmp_path / "cache", transport=LocalTransport())
     entry = cache.acquire("https://github.com/owner/repo")
@@ -294,6 +356,49 @@ def test_interrupted_acquisition_removes_staging_and_lock(tmp_path: Path) -> Non
     assert not tuple(root.iterdir())
 
 
+def test_cache_tree_removal_uses_the_runtime_callback_without_deprecation(
+    tmp_path: Path,
+) -> None:
+    target = tmp_path / "remove-me"
+    target.mkdir()
+    (target / "entry.txt").write_text("cache\n", encoding="utf-8")
+    expected = "onexc" if acquisition.sys.version_info >= (3, 12) else "onerror"
+
+    assert expected == acquisition._RMTREE_ERROR_CALLBACK
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", DeprecationWarning)
+        acquisition._remove_tree(target)
+
+    assert not target.exists()
+
+
+def test_managed_git_metadata_is_bounded_during_collection_and_times_out(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    executable = Path(acquisition.sys.executable)
+    monkeypatch.setattr(acquisition.shutil, "which", lambda _name: str(executable))
+    monkeypatch.setattr(
+        acquisition,
+        "_safe_git_command",
+        lambda _executable, _root, *arguments: [str(executable), *arguments],
+    )
+    monkeypatch.setattr(acquisition, "MAX_METADATA_BYTES", 1)
+
+    with pytest.raises(ValueError, match="validation failed"):
+        acquisition._git_capture(
+            tmp_path,
+            "-c",
+            "import sys,time; sys.stdout.buffer.write(b'too much'); "
+            "sys.stdout.flush(); time.sleep(5)",
+        )
+
+    monkeypatch.setattr(acquisition, "MAX_METADATA_BYTES", 32_768)
+    monkeypatch.setattr(acquisition, "GIT_METADATA_TIMEOUT_SECONDS", 0.05)
+    with pytest.raises(ValueError, match="cannot validate"):
+        acquisition._git_capture(tmp_path, "-c", "import time; time.sleep(5)")
+
+
 @pytest.mark.parametrize(
     ("argument", "limits", "message", "monitor"),
     [
@@ -315,7 +420,21 @@ def test_git_transport_enforces_output_time_and_disk_bounds(
     message: str,
     monitor: bool,
 ) -> None:
+    class NoopContainer:
+        def close(self) -> None:
+            pass
+
     monkeypatch.setattr(acquisition.subprocess, "Popen", HangingProcess)
+    monkeypatch.setattr(
+        acquisition,
+        "contain_process_tree",
+        lambda _process, *, resume=False: NoopContainer(),
+    )
+    monkeypatch.setattr(
+        acquisition,
+        "terminate_process_tree",
+        lambda process, container: (container.close() if container else None, process.kill()),
+    )
     monitored = tmp_path if monitor else None
     if monitor:
         (tmp_path / "existing").write_text("x", encoding="utf-8")
@@ -324,5 +443,82 @@ def test_git_transport_enforces_output_time_and_disk_bounds(
             tmp_path,
             limits,
             argument,
+            monitor_root=monitored,
+        )
+
+
+def test_git_transport_timeout_terminates_descendant_processes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    marker = tmp_path / "descendant-survived"
+    child = tmp_path / "child.py"
+    child.write_text(
+        "import pathlib,sys,time\n"
+        "time.sleep(1)\n"
+        "pathlib.Path(sys.argv[1]).write_text('survived', encoding='utf-8')\n",
+        encoding="utf-8",
+    )
+    parent = tmp_path / "parent.py"
+    parent.write_text(
+        "import subprocess,sys,time\n"
+        "subprocess.Popen([sys.executable, sys.argv[1], sys.argv[2]])\n"
+        "time.sleep(5)\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        acquisition,
+        "_safe_git_command",
+        lambda _executable, _cwd, *_arguments: [
+            acquisition.sys.executable,
+            str(parent),
+            str(child),
+            str(marker),
+        ],
+    )
+
+    with pytest.raises(ValueError, match="0-second limit"):
+        GitTransport("git")._run(
+            tmp_path,
+            AcquisitionLimits(timeout_seconds=0),
+            "status",
+        )
+
+    time.sleep(1.2)
+    assert not marker.exists()
+
+
+@pytest.mark.parametrize(
+    ("max_output", "max_cache", "message"),
+    [(1, 1_000_000, "output exceeded"), (1_000_000, 1, "disk limit")],
+)
+def test_git_transport_checks_limits_after_a_fast_process_exit(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    max_output: int,
+    max_cache: int,
+    message: str,
+) -> None:
+    monitored = tmp_path / "monitored"
+    monitored.mkdir()
+    (monitored / "payload").write_bytes(b"disk payload")
+    monkeypatch.setattr(
+        acquisition,
+        "_safe_git_command",
+        lambda _executable, _cwd, *_arguments: [
+            acquisition.sys.executable,
+            "-c",
+            "import sys; sys.stdout.buffer.write(b'x' * 1024)",
+        ],
+    )
+
+    with pytest.raises(ValueError, match=message):
+        GitTransport("git")._run(
+            tmp_path,
+            AcquisitionLimits(
+                max_git_output_bytes=max_output,
+                max_cache_bytes=max_cache,
+            ),
+            "status",
             monitor_root=monitored,
         )

@@ -27,6 +27,7 @@ from .models import Edge, Node
 from .naming import note_title, safe_filename
 from .relations import USER_RELATIONS
 from .scan_cache import AdapterFragmentCache
+from .symbol_spans import map_hunks_to_most_specific_symbols, symbol_spans_by_path
 from .test_eligibility import classify_python_test, load_python_test_policy
 from .vault import ProjectVault
 from .workspace import WorkspaceModel, discover_workspace, owner_id
@@ -817,60 +818,10 @@ def _validate_user_id(value: str, relative: str) -> str:
 
 
 def _symbols_by_path(nodes: Iterable[Node]) -> dict[str, tuple[Node, ...]]:
-    grouped: dict[str, list[Node]] = defaultdict(list)
-    for node in nodes:
-        if node.kind != "symbol" or node.path is None:
-            continue
-        start = node.metadata.get("line")
-        end = node.metadata.get("end_line")
-        if (
-            not isinstance(start, int)
-            or isinstance(start, bool)
-            or not isinstance(end, int)
-            or isinstance(end, bool)
-            or start < 1
-            or end < start
-        ):
-            continue
-        grouped[node.path].append(node)
-    return {
-        path: tuple(
-            sorted(
-                values,
-                key=lambda item: (
-                    int(item.metadata["line"]),
-                    int(item.metadata["end_line"]),
-                    item.id,
-                ),
-            )
-        )
-        for path, values in grouped.items()
-    }
+    return symbol_spans_by_path(nodes)
 
 
 def _modified_symbols(
     hunks: tuple[DiffHunk, ...], symbols_by_path: dict[str, tuple[Node, ...]]
 ) -> tuple[str, ...]:
-    modified: set[str] = set()
-    for hunk in hunks:
-        hunk_end = hunk.start + hunk.count - 1
-        candidates = [
-            node
-            for node in symbols_by_path.get(hunk.path, ())
-            if int(node.metadata["line"]) <= hunk_end
-            and int(node.metadata["end_line"]) >= hunk.start
-        ]
-        for candidate in candidates:
-            start = int(candidate.metadata["line"])
-            end = int(candidate.metadata["end_line"])
-            contains_more_specific = any(
-                other.id != candidate.id
-                and start <= int(other.metadata["line"])
-                and end >= int(other.metadata["end_line"])
-                and (start, end)
-                != (int(other.metadata["line"]), int(other.metadata["end_line"]))
-                for other in candidates
-            )
-            if not contains_more_specific:
-                modified.add(candidate.id)
-    return tuple(sorted(modified))
+    return map_hunks_to_most_specific_symbols(hunks, symbols_by_path).symbol_ids

@@ -66,6 +66,21 @@ def test_parse_git_diffs_rejects_malformed_paths_and_excessive_output() -> None:
     assert parse_git_diffs("x" * (MAX_DIFF_BYTES + 1)) == {}
 
 
+def test_parse_git_diffs_preserves_deletion_uncertainty_in_surviving_files() -> None:
+    sha = "d" * 40
+    patch = (
+        f"\x00{sha}\n+++ b/app.py\n"
+        "@@ -1,2 +0,0 @@\n-old\n-old\n"
+        "@@ -6 +4 @@\n-old\n+new\n"
+        "@@ -12,2 +9,0 @@\n-old\n-old\n"
+    )
+    assert parse_git_diffs(patch) == {sha: (
+        DiffHunk("app.py", 0, 0),
+        DiffHunk("app.py", 4, 1),
+        DiffHunk("app.py", 9, 0),
+    )}
+
+
 def test_alignment_checks_only_scanned_sources_with_trusted_symbol_spans(monkeypatch) -> None:
     sha = "c" * 40
     checked: list[str] = []

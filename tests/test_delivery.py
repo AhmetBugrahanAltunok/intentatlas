@@ -8,6 +8,7 @@ import pytest
 import intentatlas.delivery as delivery_module
 from intentatlas.config import ProjectConfig
 from intentatlas.delivery import import_delivery
+from intentatlas.graph import AtlasGraph
 from intentatlas.models import Node
 from intentatlas.scanner import scan_repository
 from intentatlas.vault import GENERATED_MARKER, ProjectVault
@@ -61,6 +62,123 @@ def test_delivery_nodes_sync_to_generated_commit_subfolders(tmp_path: Path) -> N
     assert "addressed-by" in issue_notes[0].read_text(encoding="utf-8")
     vault.sync(graph)
     assert len(list((vault.root / "Commits" / "Issues").glob("*.md"))) == 1
+
+
+def test_delivery_redacts_external_strings_before_graph_and_vault_persistence(
+    tmp_path: Path,
+) -> None:
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    report = reports / "token=report-path-secret.json"
+    source_issue_id = "ghp_abcdefghijklmnopqrstuvwxyz"
+    pull_url_secret = "ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ123456"
+    secrets = {
+        "source-secret",
+        "repository-secret",
+        source_issue_id,
+        "issue-title-secret",
+        "issue-url-secret",
+        "label-auth-secret",
+        "label-password-secret",
+        "pull-title-secret",
+        pull_url_secret,
+        "report-path-secret",
+    }
+    report.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source": "provider token=source-secret",
+                "repository": "acme/auth=repository-secret",
+                "issues": [
+                    {
+                        "id": source_issue_id,
+                        "title": 'Issue {"token": "issue-title-secret"}',
+                        "state": "open",
+                        "url": "https://example.invalid/token=issue-url-secret",
+                        "labels": [
+                            '{"auth": "Bearer label-auth-secret"}',
+                            "password=label-password-secret",
+                        ],
+                    }
+                ],
+                "pull_requests": [
+                    {
+                        "id": 2,
+                        "title": "PR secret=pull-title-secret",
+                        "state": "merged",
+                        "url": f"https://example.invalid/{pull_url_secret}",
+                        "issue_ids": [source_issue_id],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    fragment = import_delivery(
+        tmp_path,
+        files={},
+        graph_nodes={},
+        vault=tmp_path / "atlas",
+        reports=["reports/token=report-path-secret.json"],
+    )
+    graph = AtlasGraph()
+    graph.extend(fragment.nodes, fragment.edges)
+    graph_text = json.dumps(graph.to_dict(), ensure_ascii=False, sort_keys=True)
+
+    assert "[REDACTED]" in graph_text
+    for secret in secrets:
+        assert secret not in graph_text
+
+    vault = ProjectVault(tmp_path / "vault")
+    vault.sync(graph)
+    persisted = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in sorted(vault.root.rglob("*.md"))
+    )
+    persisted_names = "\n".join(
+        path.relative_to(vault.root).as_posix() for path in sorted(vault.root.rglob("*"))
+    )
+    for secret in secrets:
+        assert secret not in persisted
+        assert secret not in persisted_names
+
+
+def test_delivery_rejects_redacted_identity_collisions_across_reports(
+    tmp_path: Path,
+) -> None:
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    for index in (1, 2):
+        (reports / f"delivery-{index}.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "source": f"provider token=source-secret-{index}",
+                    "repository": f"repository token=repository-secret-{index}",
+                    "issues": [
+                        {
+                            "id": f"ghp_abcdefghijklmnopqrstuvwxyz{index}",
+                            "title": f"Issue {index}",
+                            "state": "open",
+                            "url": f"https://example.invalid/issues/{index}",
+                        }
+                    ],
+                    "pull_requests": [],
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    with pytest.raises(ValueError, match="collide across reports after redaction"):
+        import_delivery(
+            tmp_path,
+            files={},
+            graph_nodes={},
+            vault=tmp_path / "atlas",
+            reports=["reports/delivery-1.json", "reports/delivery-2.json"],
+        )
 
 
 def test_delivery_links_only_exact_known_commit_shas(tmp_path: Path) -> None:

@@ -118,12 +118,15 @@ class GraphQuerySnapshot:
         depth = _bounded(depth, "depth", 1, MAX_QUERY_DEPTH)
         visited_limit = _bounded(visited_limit, "visited_limit", 1, MAX_QUERY_VISITED)
         result_limit = _bounded(result_limit, "result_limit", 1, MAX_QUERY_PATHS)
+        collection_limit = result_limit + 1
         visited = {start}
         queue: deque[tuple[str, tuple[str, ...], tuple[str, ...]]] = deque(
             [(start, (start,), ())]
         )
         results: list[dict[str, Any]] = []
-        while queue and len(visited) < visited_limit and len(results) < result_limit:
+        visited_truncated = False
+        alternative_route_omitted = False
+        while queue and len(results) < collection_limit and not visited_truncated:
             current, nodes, relations = queue.popleft()
             if len(relations) >= depth:
                 continue
@@ -136,7 +139,17 @@ class GraphQuerySnapshot:
             )
             for neighbor, relation in sorted(hops):
                 if neighbor in visited:
+                    if neighbor not in nodes:
+                        # This endpoint returns one deterministic shortest path
+                        # per reached node. A second acyclic route to that node
+                        # may imply an omitted structural proof path.
+                        alternative_route_omitted = True
                     continue
+                if len(visited) >= visited_limit:
+                    # Expand every node admitted by the bound. Only claim
+                    # truncation after observing one additional neighbor.
+                    visited_truncated = True
+                    break
                 visited.add(neighbor)
                 next_nodes = (*nodes, neighbor)
                 next_relations = (*relations, relation)
@@ -154,9 +167,14 @@ class GraphQuerySnapshot:
                             "destination": destination.to_dict(),
                         }
                     )
-                if len(results) == result_limit or len(visited) == visited_limit:
+                if len(results) == collection_limit:
                     break
                 queue.append((neighbor, next_nodes, next_relations))
+        has_more_paths = len(results) > result_limit
+        paths_truncated = (
+            has_more_paths or visited_truncated or alternative_route_omitted
+        )
+        results = results[:result_limit]
         return {
             "schema_version": 1,
             "snapshot": self.snapshot,
@@ -166,8 +184,16 @@ class GraphQuerySnapshot:
             },
             "returned_counts": {"paths": len(results)},
             "omitted_counts": {
-                "paths": 1 if queue and len(results) == result_limit else 0,
-                "visited": max(0, len(visited) - visited_limit),
+                # Bounded BFS cannot know the exact omitted population without
+                # performing the unbounded work this endpoint is designed to avoid.
+                "paths": None if paths_truncated else 0,
+                "visited": None if visited_truncated else 0,
+            },
+            "truncated": {
+                # A visited-node cut can also hide paths even when the one-extra
+                # result probe did not reach another proof destination.
+                "paths": paths_truncated,
+                "visited": visited_truncated,
             },
             "work": {"visited_nodes": len(visited), "max_visited_nodes": visited_limit},
             "paths": results,

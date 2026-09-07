@@ -19,6 +19,7 @@ _TYPE_DECLARATION = re.compile(
     rf"(?m)^[ \t]*type[ \t]+({_IDENTIFIER})(?:[ \t]*\[[^\]\n]*\])?[ \t]+"
 )
 _TYPE_BLOCK = re.compile(r"(?ms)^[ \t]*type[ \t]*\((.*?)^[ \t]*\)")
+_TYPE_BLOCK_START = re.compile(r"(?m)^[ \t]*type[ \t]*\(")
 _BLOCK_TYPE_DECLARATION = re.compile(
     rf"(?m)^[ \t]*({_IDENTIFIER})(?:[ \t]*\[[^\]\n]*\])?[ \t]+"
 )
@@ -30,7 +31,7 @@ class GoAdapter:
     name = "go"
     suffixes = frozenset({".go"})
     cache_input_suffixes = frozenset({".go", ".mod"})
-    cache_version = 1
+    cache_version = 2
     evidence_kinds = frozenset(
         {"filename-convention", "go-call-reference", "go-structural", "go-symbol-reference"}
     )
@@ -136,21 +137,46 @@ class GoAdapter:
 
 
 def _symbols(relative: str, source: str) -> list[Node]:
-    discovered: dict[str, tuple[str, int]] = {}
+    discovered: dict[str, tuple[str, int, int | None]] = {}
     for match in _TYPE_DECLARATION.finditer(source):
         name = match.group(1)
-        discovered.setdefault(name, ("type", _line_number(source, match.start())))
+        discovered.setdefault(
+            name,
+            (
+                "type",
+                _line_number(source, match.start()),
+                _type_end_line(source, match.end()),
+            ),
+        )
     for block in _TYPE_BLOCK.finditer(source):
         body = block.group(1)
         body_offset = block.start(1)
         for match in _BLOCK_TYPE_DECLARATION.finditer(body):
             name = match.group(1)
             offset = body_offset + match.start()
-            discovered.setdefault(name, ("type", _line_number(source, offset)))
+            discovered.setdefault(
+                name,
+                (
+                    "type",
+                    _line_number(source, offset),
+                    _type_end_line(source, body_offset + match.end()),
+                ),
+            )
     for match in _FUNCTION_DECLARATION.finditer(source):
         receiver, name = match.groups()
         label = f"{receiver}.{name}" if receiver else name
-        discovered.setdefault(label, ("function", _line_number(source, match.start())))
+        discovered.setdefault(
+            label,
+            (
+                "function",
+                _line_number(source, match.start()),
+                _function_end_line(
+                    source,
+                    match,
+                    _next_go_declaration(source, match.start()),
+                ),
+            ),
+        )
 
     return [
         Node(
@@ -158,14 +184,78 @@ def _symbols(relative: str, source: str) -> list[Node]:
             kind="symbol",
             label=name,
             path=relative,
-            metadata={"symbol_kind": kind, "line": line, "owner": "scanner"},
+            metadata=_symbol_metadata(kind, line, end_line),
         )
-        for name, (kind, line) in sorted(discovered.items())
+        for name, (kind, line, end_line) in sorted(discovered.items())
     ]
 
 
 def _line_number(source: str, offset: int) -> int:
     return source.count("\n", 0, offset) + 1
+
+
+def _symbol_metadata(kind: str, line: int, end_line: int | None) -> dict[str, str | int]:
+    metadata: dict[str, str | int] = {
+        "symbol_kind": kind,
+        "line": line,
+        "owner": "scanner",
+    }
+    if end_line is not None:
+        metadata["end_line"] = end_line
+    return metadata
+
+
+def _function_end_line(
+    source: str,
+    match: re.Match[str],
+    boundary: int,
+) -> int | None:
+    body_start = _function_body_start(source, match.end() - 1, boundary)
+    if body_start is None:
+        return None
+    body_end = _matching_delimiter(source, body_start, "{", "}")
+    return (
+        None
+        if body_end is None or body_end >= boundary
+        else _line_number(source, body_end)
+    )
+
+
+def _next_go_declaration(source: str, start: int) -> int:
+    candidates = [
+        match.start()
+        for pattern in (_FUNCTION_DECLARATION, _TYPE_DECLARATION, _TYPE_BLOCK_START)
+        for match in pattern.finditer(source, start + 1)
+    ]
+    return min(candidates, default=len(source))
+
+
+def _type_end_line(source: str, start: int) -> int | None:
+    """Return a span only for a balanced Go type declaration."""
+
+    pairs = {"(": ")", "[": "]", "{": "}"}
+    stack: list[str] = []
+    last_content: int | None = None
+    for index in range(start, len(source)):
+        character = source[index]
+        if character in pairs:
+            stack.append(pairs[character])
+            last_content = index
+            continue
+        if character in pairs.values():
+            if not stack or stack.pop() != character:
+                return None
+            last_content = index
+            continue
+        if character in {"\n", ";"} and not stack:
+            return (
+                None
+                if last_content is None
+                else _line_number(source, last_content)
+            )
+        if not character.isspace():
+            last_content = index
+    return None if stack or last_content is None else _line_number(source, last_content)
 
 
 def _function_call_references(

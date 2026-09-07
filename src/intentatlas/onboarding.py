@@ -13,6 +13,11 @@ from pathlib import Path
 from typing import IO, Any
 
 from .acquisition import CacheEntry, ManagedRepositoryCache, is_github_url, normalize_github_url
+from .bounded_process import (
+    ProcessCollectionError,
+    ProcessOutputLimitError,
+    run_bounded_process,
+)
 from .change_report import ChangeReport, collect_change_report_context, render_change_report
 from .change_set import ChangeSet, collect_change_set
 from .config import ProjectConfig
@@ -1213,22 +1218,23 @@ def _git_command(root: Path, executable: str, *arguments: str) -> list[str]:
 
 
 def _git_run(root: Path, executable: str, *arguments: str) -> subprocess.CompletedProcess[str]:
+    command = _git_command(root, executable, *arguments)
     try:
-        result = subprocess.run(  # noqa: S603  # nosec B603
-            _git_command(root, executable, *arguments),
-            check=False,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
+        result = run_bounded_process(
+            command,
+            max_stdout_bytes=MAX_GIT_OUTPUT_BYTES,
             timeout=10,
-            shell=False,
         )
-    except (OSError, subprocess.SubprocessError) as exc:
+    except ProcessOutputLimitError as exc:
+        raise ValueError("Git metadata exceeds the guided analysis limit") from exc
+    except ProcessCollectionError as exc:
         raise ValueError("cannot inspect Git repository") from exc
-    if len(result.stdout.encode("utf-8")) > MAX_GIT_OUTPUT_BYTES:
-        raise ValueError("Git metadata exceeds the guided analysis limit")
-    return result
+    return subprocess.CompletedProcess(
+        command,
+        result.returncode,
+        result.stdout.decode("utf-8", errors="replace"),
+        "",
+    )
 
 
 def _git_output(root: Path, executable: str, *arguments: str) -> str:

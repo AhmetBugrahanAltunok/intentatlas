@@ -4,11 +4,11 @@ import hashlib
 import json
 import re
 import shutil
-import subprocess  # nosec B404
 from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from .bounded_process import ProcessCollectionError, run_bounded_process
 from .config import ProjectConfig
 from .corpus import CorpusEvaluationResult, CorpusProject, evaluate_corpus, render_corpus
 from .evaluation import load_evaluation_labels
@@ -19,6 +19,7 @@ GENERATED_OUTPUT_POLICY = "ephemeral-only"
 MAX_MANIFEST_BYTES = 256_000
 MAX_PROJECTS = 10
 MAX_LICENSE_BYTES = 128_000
+MAX_GIT_OUTPUT_BYTES = 1_000_000
 SAFE_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$")
 SAFE_COMMIT = re.compile(r"^[0-9a-f]{40}$")
 SAFE_SHA256 = re.compile(r"^[0-9a-f]{64}$")
@@ -295,21 +296,16 @@ def _git_value(git: str, checkout: Path, *arguments: str) -> str:
         *arguments,
     ]
     try:
-        result = subprocess.run(  # noqa: S603  # nosec B603
+        result = run_bounded_process(
             command,
-            check=False,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
+            max_stdout_bytes=MAX_GIT_OUTPUT_BYTES,
             timeout=10,
-            shell=False,
         )
-    except (OSError, subprocess.SubprocessError) as exc:
+    except ProcessCollectionError as exc:
         raise ValueError(f"Cannot inspect real-world checkout {checkout.name}: {exc}") from exc
     if result.returncode != 0:
         raise ValueError(f"Cannot inspect real-world checkout {checkout.name}")
-    return result.stdout.strip()
+    return result.stdout.decode("utf-8", errors="replace").strip()
 
 
 def _checkout_path(root: Path, project_id: str) -> Path:

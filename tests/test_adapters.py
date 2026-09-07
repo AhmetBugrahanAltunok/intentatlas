@@ -163,3 +163,85 @@ def test_go_adapter_links_only_unique_exported_symbol_references(tmp_path: Path)
     assert not any(source == "file:ambiguous_test.go" for source, _target in symbol_edges)
     assert not any(source == "file:blank_import_test.go" for source, _target in symbol_edges)
     assert ("file:focused_test.go", "file:beta.go") not in symbol_edges
+
+
+def test_cross_language_symbol_spans_abstain_on_ambiguous_or_unclosed_bodies(
+    tmp_path: Path,
+) -> None:
+    sources = {
+        "sample.ts": (
+            "export function exact() {\n  return 1;\n}\n"
+            "export function regexSensitive() {\n  return /}/.test('x');\n}\n"
+            "export function broken() {\n  return 2;\n"
+        ),
+        "sample.go": (
+            "package sample\n\n"
+            "func Exact() int { return 1 }\n"
+            "func External() int\n"
+            "func Broken() int {\n"
+        ),
+    }
+    files = {}
+    for relative, source in sources.items():
+        path = tmp_path / relative
+        path.write_text(source, encoding="utf-8")
+        files[relative] = path
+    context = AdapterContext(
+        files=MappingProxyType(files),
+        kinds=MappingProxyType({relative: "file" for relative in files}),
+        max_parse_bytes=2_000,
+    )
+
+    javascript = {node.label: node for node in JavaScriptAdapter().scan(context).nodes}
+    go = {node.label: node for node in GoAdapter().scan(context).nodes}
+
+    assert javascript["exact"].metadata["end_line"] == 3
+    assert "end_line" not in javascript["regexSensitive"].metadata
+    assert "end_line" not in javascript["broken"].metadata
+    assert go["Exact"].metadata["end_line"] == 3
+    assert "end_line" not in go["External"].metadata
+    assert "end_line" not in go["Broken"].metadata
+
+
+def test_typescript_spans_skip_balanced_header_braces_before_the_body(
+    tmp_path: Path,
+) -> None:
+    sources = {
+        "load.ts": (
+            "export function load(): Promise<{ value: number }> {\n"
+            "  return Promise.resolve({ value: 1 });\n"
+            "}\n"
+        ),
+        "describe.ts": (
+            "export function describe(): { value: number } {\n"
+            "  return { value: 1 };\n"
+            "}\n"
+        ),
+        "conditional.ts": (
+            "export function choose<T>(): T extends {} ? { a: 1 } : { b: 2 } {\n"
+            "  return {} as never;\n"
+            "}\n"
+        ),
+        "box.ts": (
+            "export class Box<T extends { value: number }> {\n"
+            "  value!: T;\n"
+            "}\n"
+        ),
+    }
+    files = {}
+    for relative, source in sources.items():
+        path = tmp_path / relative
+        path.write_text(source, encoding="utf-8")
+        files[relative] = path
+    context = AdapterContext(
+        files=MappingProxyType(files),
+        kinds=MappingProxyType({relative: "file" for relative in files}),
+        max_parse_bytes=2_000,
+    )
+
+    symbols = {node.label: node for node in JavaScriptAdapter().scan(context).nodes}
+
+    assert symbols["load"].metadata["end_line"] == 3
+    assert symbols["describe"].metadata["end_line"] == 3
+    assert symbols["choose"].metadata["end_line"] == 3
+    assert symbols["Box"].metadata["end_line"] == 3

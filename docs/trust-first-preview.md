@@ -47,11 +47,20 @@ The report is Change Report schema 1. Read it in this order:
 2. Check analysis state and freshness. `fallback` or `unknown` requires the displayed full-suite
    strategy; it is not targeted sufficiency. Read the per-file **Analysis limitations** lines to
    see why the analysis fell back or abstained.
-3. Confirm the minimum confidence threshold and selected/total/filtered/limit-omitted counts.
+3. Confirm the minimum confidence threshold and selected/total/filtered/limit-omitted counts. Read
+   `analysis_coverage` first when artifact or test-signal analysis was bounded: candidate totals are
+   explicitly lower bounds unless their `candidate_count_complete` value is true.
 4. Inspect each score, confidence, evidence tag, reason, and recorded ranking path.
 5. Treat an omitted candidate only as below the shown threshold or result limit. It is never proof
    that a requirement is unaffected or a test unnecessary.
 6. Follow the displayed test strategy and advisory.
+
+Exact symbol analysis requires coverage of every changed current-side line. A hunk partly
+outside symbols, or spanning a gap between symbols, retains file-level fallback. If a change
+touches both a function's own body and a nested function, both owners are retained; a change
+entirely inside the nested function selects only that function. Deletion-only hunks in surviving
+files have no current-side symbol evidence and require fallback even when another hunk maps
+exactly. Whole-file deletion remains `unknown`.
 
 To inspect the same immutable in-memory graph/report snapshot, opt in explicitly:
 

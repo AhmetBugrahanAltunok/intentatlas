@@ -25,7 +25,11 @@ from repository-relative paths with only a leading `src/` stripped, and retain a
 candidates; imports, symbols, and re-exports resolve only for one candidate, while module or
 same-name direct/re-export binding collisions abstain. Nested custom source roots are not guessed. A
 test with exact symbol evidence does not also inherit the broader file edge for that resolved
-module.
+module. Repeated Python definitions normally remain ambiguous and are omitted with their nested
+symbols. The sole promoted form is a direct-sibling sequence of proven `typing` or
+`typing_extensions` overload declarations followed by exactly one unconditional implementation;
+only the implementation span is persisted, while shadowed decorators, overload-only groups, and
+conditional or multiple implementations continue to abstain.
 
 Adapter conformance contract version 1 validates stable names, complete suffix inputs, cache
 versions, declared evidence, canonical symbol nodes, structural endpoint shapes, bounded counts,
@@ -53,13 +57,18 @@ The TypeScript/JavaScript adapter conservatively recognizes explicit declaration
 relative module references in `.ts`, `.tsx`, `.js`, and `.jsx` files without requiring Node. Named
 and default static imports additionally link to a discovered exact symbol when the target export is
 unambiguous. Bare package imports, dynamic imports, and unresolved export expressions are not
-resolved into exact repository relationships.
+resolved into exact repository relationships. A declaration receives an end line only when the
+masked structural source yields a balanced function, class, interface, enum, type, or callable
+boundary before the next declaration; ambiguous regex-sensitive or malformed bodies remain
+spanless.
 
 The Go adapter uses a small structural lexer to recognize named types, functions, methods, and
 import declarations without requiring the Go toolchain. `go.mod` module declarations define local
 resolution boundaries, including nested modules. A local package import projects to its discovered
 non-test Go files; external and unresolved imports are omitted rather than guessed. Import-like
-text inside comments or literals is never treated as a relationship.
+text inside comments or literals is never treated as a relationship. Balanced type and function
+bodies publish conservative end lines; bodyless, unclosed, or otherwise ambiguous declarations do
+not.
 
 For same-directory tests, the adapter also records `go-symbol-reference` evidence when an
 identifier names an exported declaration owned by exactly one production file in the compatible
@@ -78,12 +87,15 @@ The Git adapter reads commit metadata, changed paths, and a bounded recent windo
 diff hunks with fixed read-only commands. The literal Private boundary and configured exclusions
 are Git pathspec exclusions before metadata collection; patch commands additionally include only
 bounded literal scanned-symbol paths, and stdout is killed on byte overflow while being collected.
-Changed new-side lines project to the most-specific
-Python symbol only when the current file matches that commit's bounded raw Git blob after
-line-ending normalization and validated AST source spans intersect. Blob checks include only
+Shared collection enforces the byte and time bounds while reading and terminates the complete child
+process tree on failure (a kill-on-close Job Object on Windows and a process group on POSIX), so an
+inherited pipe writer cannot extend the declared timeout.
+Changed new-side lines project to the most-specific symbol only when the current file matches that
+commit's bounded raw Git blob after line-ending normalization and a validated Python AST or
+conservatively balanced JavaScript/TypeScript/Go source span intersects. Blob checks include only
 scanned paths with trusted spans, never excluded paths, and stop safely above 1,000 commit/path
 candidates. File-level history remains the fallback for stale historical files, deletions, module
-edits, adapters without spans, malformed patches, and excessive output. Repository discovery
+edits, adapters without trustworthy spans, malformed patches, and excessive output. Repository discovery
 prunes excluded directories before descent,
 does not follow directory links, and excludes the configured vault from the repository walk.
 Adapters never execute project code.
@@ -142,21 +154,26 @@ the changed symbol, exact-symbol requirement, and test evidence from graph index
 recommendations, then exit without a listener. Both modes state that an omitted same-file path is
 not proof of no impact or no test need. The viewer normalizes accepted names to numeric IPv4
 loopback, rejects foreign `Host` headers, and applies defensive response policies before returning
-local graph data. It builds one reusable adjacency view after loading the graph, then derives
-evidence paths locally with deterministic breadth-first traversal in both edge directions, limited
-to depth 6, 800 visited nodes, and 6 proof-oriented results. Path labels use the stored forward or
-inverse relation; they are structural explanations, not proof of causality or completeness.
+local graph data. The client requests evidence paths from the snapshot-bound graph query endpoint,
+which performs deterministic breadth-first traversal over the complete graph in both edge
+directions, limited to depth 6, 800 visited nodes, and 6 proof-oriented results. Path labels use the
+stored forward or inverse relation; they are structural explanations, not proof of causality or
+completeness. When either bound is reached, the API marks the result as truncated and reports the
+unknown omitted population as `null` rather than presenting a boolean sentinel as an exact count.
 
-The client also builds stable node, edge, degree, search, and adjacency indexes once. SVG rendering
+The client also builds stable node, edge, degree, and search indexes for each window. SVG rendering
 is limited to a deterministic 240-node/900-edge window: a layer-balanced overview or a two-hop
 focus neighborhood. Global search and linked navigation can focus a node outside the current
 window; relationship details are capped at 80 items with an explicit omitted count. The complete
-graph remains available in memory, so a window is a rendering projection rather than data loss.
-Initial JSON transfer still scales with total graph size; server-side shards remain a later option.
+graph remains available in the local server snapshot, so a window is a rendering projection rather
+than data loss. Overview and focus transfers remain bounded independently of total graph size.
 
 Graph comparison is a pure operation over two validated caches. Diff schema 1 excludes generation
 timestamps and sorts added, removed, and changed nodes plus added and removed edges. The same two
 graphs therefore produce byte-for-byte identical JSON suitable for CI artifacts or `--check` gates.
+Saved graph readers accept only stable regular files within a 256 MiB document boundary and reject
+documents above the scanner's one-million-node or four-million-edge ceilings before model
+construction. The viewer applies the same byte boundary to file-backed and in-memory documents.
 
 ChangeSet schema 1 is a separate, deterministic Git input boundary. Commit and range scopes resolve
 user revisions to full commit IDs before diffing; commit scope compares with its first parent and
@@ -171,8 +188,8 @@ Optional Change Analysis schema 1 always builds a fresh read-only graph of the c
 For worktree scope that scan is aligned by construction. For staged, commit, and range scopes,
 bounded blob comparison checks each current artifact against the index or resolved head revision;
 line endings are normalized and mismatches become `unknown/stale` before symbol inference. A file
-is `analyzed/high` only when every current-side hunk maps to validated source spans (currently the
-Python AST adapter). Existing artifacts without complete spans remain `fallback/low`; deleted,
+is `analyzed/high` only when every current-side hunk maps to validated source spans (Python AST or
+conservatively balanced JavaScript/TypeScript/Go declarations). Existing artifacts without complete spans remain `fallback/low`; deleted,
 missing, private, unmerged, or stale artifacts remain `unknown/none`. Unsupported but present files
 are explicit file fallbacks. Durable vault notes map through frontmatter identity, generated vault
 outputs are recognized as derived artifacts, and `Private/` is excluded before Git metadata
@@ -226,6 +243,8 @@ to `collect_change_set` and `collect_change_report_context`. It serializes the r
 report once; terminal projection, language switching, complete JSON details, and the optional
 ephemeral IPv4-loopback viewer all consume that immutable snapshot. The guide never invokes the
 persistent init/scan/open paths or executes project tooling.
+Persistent `open` never scans implicitly: a missing saved graph returns an actionable error that
+states `scan`'s write effects, keeping repository mutation behind an explicit command.
 
 The guided presentation is a semantic grouping layer only. An ASCII-safe heading, named EN/TR
 sections, sanitized bounded wrapping, and one-option-per-line menus operate on the existing
@@ -333,7 +352,9 @@ identity to protected `main` or an explicitly approved release ref.
 
 The loopback viewer uses a narrow IPv4 `ThreadingHTTPServer` subclass that binds through
 `TCPServer`. The accepted `localhost` alias is normalized to numeric `127.0.0.1` before binding and
-the emitted URL uses that validated address. This avoids the standard HTTP server's reverse DNS
+the emitted URL uses that validated address. When that alias was explicitly selected, the Host
+allowlist accepts both `localhost` and numeric loopback forms, with or without the active port, and
+continues to reject every foreign hostname. This avoids the standard HTTP server's reverse DNS
 lookup, which is unnecessary for local serving and can delay startup on constrained macOS runners.
 
 ## Source acquisition and guided projection

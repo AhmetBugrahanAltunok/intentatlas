@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import http.client
 import json
 import socket
+import threading
 from importlib.resources import files
 
 import pytest
@@ -35,7 +37,8 @@ def test_viewer_assets_are_packaged() -> None:
     assert 'issue: "#f97316"' in app
     assert '"delivery-issue": "#fb923c"' in app
     assert '"pull-request": "#facc15"' in app
-    assert "findEvidencePaths(node.id)" in app
+    assert "/api/graph/paths?${query}" in app
+    assert "result.paths.map" in app
     assert "formatRecordedPath" in app
     assert "Primary ranking path:" in app
     assert "Primary reason:" in app
@@ -47,7 +50,8 @@ def test_viewer_assets_are_packaged() -> None:
     assert "edge.inverse || edge.relation" in app
     assert "No bounded evidence path found." in app
     assert "function bindFocusButton(button)" in app
-    assert "state.pathAdjacency = buildPathAdjacency();" in app
+    assert "function findEvidencePaths" not in app
+    assert "function buildPathAdjacency" not in app
     assert (
         "const renderLimits = { nodes: 240, edges: 900, focusDepth: 2, relationships: 80 };"
         in app
@@ -81,6 +85,18 @@ def test_viewer_assets_are_packaged() -> None:
 def test_serve_graph_rejects_missing_graph(tmp_path) -> None:
     with pytest.raises(ValueError, match="Graph not found"):
         viewer.serve_graph(tmp_path / "missing.json", open_browser=False)
+
+
+def test_serve_graph_rejects_oversized_file_and_in_memory_documents(
+    tmp_path, monkeypatch
+) -> None:
+    graph = tmp_path / "graph.json"
+    graph.write_text(_graph_document(), encoding="utf-8")
+    monkeypatch.setattr(viewer, "MAX_GRAPH_DOCUMENT_BYTES", 1)
+    with pytest.raises(ValueError, match="byte limit"):
+        viewer.serve_graph(graph, open_browser=False)
+    with pytest.raises(ValueError, match="byte limit"):
+        viewer.serve_graph(None, graph_document=b"{}", open_browser=False)
 
 
 def test_serve_graph_rejects_non_loopback_and_invalid_ports(tmp_path) -> None:
@@ -127,6 +143,58 @@ def test_serve_graph_starts_and_closes_server(tmp_path, monkeypatch, capsys) -> 
     assert fake.closed
     assert observed["address"] == ("127.0.0.1", 0)
     assert "http://127.0.0.1:1234" in capsys.readouterr().out
+
+
+def test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign(
+    monkeypatch,
+) -> None:
+    original_server = viewer.LoopbackHTTPServer
+    ready = threading.Event()
+    captured: dict[str, viewer.LoopbackHTTPServer] = {}
+
+    class CapturingServer(original_server):
+        def __init__(self, *args, **kwargs):  # noqa: ANN002, ANN003
+            super().__init__(*args, **kwargs)
+            captured["server"] = self
+            ready.set()
+
+    monkeypatch.setattr(viewer, "LoopbackHTTPServer", CapturingServer)
+    thread = threading.Thread(
+        target=lambda: viewer.serve_graph(
+            None,
+            host="localhost",
+            port=0,
+            open_browser=False,
+            graph_document=_graph_document().encode("utf-8"),
+        ),
+        daemon=True,
+    )
+    thread.start()
+    assert ready.wait(timeout=5)
+    server = captured["server"]
+    port = server.server_address[1]
+
+    def response_status(host_header: str) -> int:
+        connection = http.client.HTTPConnection("127.0.0.1", port, timeout=5)
+        try:
+            connection.putrequest("GET", "/", skip_host=True)
+            connection.putheader("Host", host_header)
+            connection.endheaders()
+            response = connection.getresponse()
+            response.read()
+            return response.status
+        finally:
+            connection.close()
+
+    try:
+        assert response_status("localhost") == 200
+        assert response_status(f"LOCALHOST:{port}") == 200
+        assert response_status(f"127.0.0.1:{port}") == 200
+        assert response_status(f"localhost.invalid:{port}") == 421
+    finally:
+        server.shutdown()
+        thread.join(timeout=5)
+    assert not thread.is_alive()
 
 
 def test_serve_graph_flushes_url_for_redirected_output(tmp_path, monkeypatch) -> None:

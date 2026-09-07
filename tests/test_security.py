@@ -17,6 +17,49 @@ def test_redact_nested_values_and_common_token_shapes() -> None:
     }
 
 
+def test_redact_exact_token_auth_keys_and_quoted_json_shapes() -> None:
+    value = {
+        "token": "plain-token-value",
+        "AUTH": "Bearer plain-auth-value",
+        "Authorization": "Bearer header.payload.signature",
+        "author": "Ada",
+        "nested": (
+            'payload={"token": "quoted-token-value", '
+            '"auth":"Bearer quoted-auth-value", "safe": "visible"}'
+        ),
+    }
+
+    assert redact(value) == {
+        "token": "[REDACTED]",
+        "AUTH": "[REDACTED]",
+        "Authorization": "[REDACTED]",
+        "author": "Ada",
+        "nested": (
+            'payload={"token": "[REDACTED]", '
+            '"auth":"[REDACTED]", "safe": "visible"}'
+        ),
+    }
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "auth: Bearer header.payload.signature",
+        "Authorization: Bearer header.payload.signature",
+        "authorization=Basic encoded-credential",
+        "token: Token opaque-credential",
+        'Authorization: "Bearer quoted-credential"',
+        "auth='Token single-quoted-credential'",
+    ],
+)
+def test_redact_header_style_authorization_values(value: str) -> None:
+    redacted = redact(value)
+
+    assert "credential" not in redacted
+    assert "header.payload.signature" not in redacted
+    assert redacted.endswith("=[REDACTED]")
+
+
 def test_redact_preserves_non_strings() -> None:
     assert redact(42) == 42
     assert redact("ordinary commit subject") == "ordinary commit subject"

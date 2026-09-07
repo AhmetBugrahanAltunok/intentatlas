@@ -13,9 +13,14 @@ repository is current on GitHub.
 
 Entries live under the operating system's user cache convention. They are created in unique
 staging directories, validated, then atomically promoted under a deterministic URL-derived ID.
-Concurrent mutation uses a bounded lock. A failed refresh preserves the prior complete entry;
-invalid metadata triggers reacquisition. Metadata contains only URL, revision, time, bounds, and
-file/byte counts—not source text, environment values, logs, credentials, or tokens.
+Concurrent mutation uses a bounded lock with small owner and creation-time metadata. A recent lock
+always waits or times out. An old lock with a live local owner PID is never stolen; an old lock
+whose bounded metadata proves no live owner is atomically renamed and removed before retry.
+Ownership tokens prevent an expired owner's cleanup from deleting a successor lock, and unexpected
+nested lock content is never recursively removed. A failed refresh preserves the prior complete
+entry; invalid cache metadata triggers reacquisition. Cache metadata
+contains only URL, revision, time, bounds, and file/byte counts—not source text, environment values,
+logs, credentials, or tokens.
 
 Cache management is offline and exact-target only:
 

@@ -338,6 +338,52 @@ def _keyboard_accessibility_probe(browser: str, url: str, profile: Path) -> None
         chrome.close()
 
 
+def _server_evidence_path_probe(browser: str, url: str, profile: Path) -> None:
+    chrome = _CdpChrome(browser, url, profile)
+    try:
+        def evaluate(expression: str) -> Any:
+            result = chrome.command(
+                "Runtime.evaluate",
+                {"expression": expression, "returnByValue": True},
+            )
+            return result["result"].get("value")
+
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            if evaluate("!!document.querySelector('#change-report.open')"):
+                break
+            time.sleep(0.05)
+        else:
+            raise AssertionError("Change report did not become ready in Chrome")
+
+        # Exercise a real delayed response. Select once, then observe: selecting
+        # on every poll clears the completed paths and invalidates in-flight work.
+        assert evaluate("""(() => {
+            const originalFetch = window.fetch.bind(window);
+            window.evidencePathRequests = 0;
+            window.fetch = async (...args) => {
+                if (String(args[0]).startsWith('/api/graph/paths?')) {
+                    window.evidencePathRequests += 1;
+                    await new Promise(resolve => setTimeout(resolve, 150));
+                }
+                return originalFetch(...args);
+            };
+            closeChangeReport();
+            selectNode('REQ-DEMO-001');
+            return true;
+        })()""") is True
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            text = evaluate("document.querySelector('#detail-paths')?.textContent || ''")
+            if "tests/test_auth_rotation.py" in text:
+                assert evaluate("window.evidencePathRequests") == 1
+                return
+            time.sleep(0.05)
+        raise AssertionError("Server-backed evidence path did not render in Chrome")
+    finally:
+        chrome.close()
+
+
 def _wait_for_graph_layout(evaluate) -> None:  # noqa: ANN001
     deadline = time.monotonic() + 12
     previous: str | None = None
@@ -631,6 +677,11 @@ def test_real_browser_renders_same_file_demo_story(tmp_path: Path) -> None:
             browser,
             url,
             tmp_path / "demo-keyboard-browser-profile",
+        )
+        _server_evidence_path_probe(
+            browser,
+            url,
+            tmp_path / "demo-path-browser-profile",
         )
         _layout_stability_probe(
             browser,

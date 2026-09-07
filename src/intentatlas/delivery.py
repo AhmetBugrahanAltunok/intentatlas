@@ -9,6 +9,7 @@ from urllib.parse import quote, urlsplit
 
 from .models import Edge, Node
 from .safe_io import read_bounded_regular_file
+from .security import redact
 
 MAX_REPORT_BYTES = 10_000_000
 MAX_RECORDS = 10_000
@@ -35,6 +36,7 @@ def import_delivery(
 ) -> DeliveryFragment:
     nodes: list[Node] = []
     edges: list[Edge] = []
+    persisted_node_ids: set[str] = set()
     aliases = _file_aliases(files)
     for configured in reports:
         path, relative = _report_path(root, vault, configured)
@@ -42,6 +44,14 @@ def import_delivery(
         report_nodes, report_edges = _delivery_fragment(
             document, report=relative, aliases=aliases, graph_nodes=graph_nodes
         )
+        duplicate_ids = persisted_node_ids.intersection(node.id for node in report_nodes)
+        if duplicate_ids:
+            duplicate = min(duplicate_ids)
+            raise ValueError(
+                "Delivery node IDs collide across reports after redaction: "
+                f"{duplicate}"
+            )
+        persisted_node_ids.update(node.id for node in report_nodes)
         nodes.extend(report_nodes)
         edges.extend(report_edges)
     return DeliveryFragment(
@@ -69,8 +79,9 @@ def _delivery_fragment(
     )
     if document.get("schema_version") != 1:
         raise ValueError(f"Unsupported delivery report schema in {report}")
-    source = _text(document.get("source"), "source", 100)
-    repository = _text(document.get("repository"), "repository", 200)
+    source = _redacted_text(_text(document.get("source"), "source", 100))
+    repository = _redacted_text(_text(document.get("repository"), "repository", 200))
+    persisted_report = _redacted_text(report)
     issues = _records(document.get("issues", []), "issues")
     pull_requests = _records(document.get("pull_requests", []), "pull requests")
     if len(issues) + len(pull_requests) > MAX_RECORDS:
@@ -80,20 +91,30 @@ def _delivery_fragment(
     nodes: list[Node] = []
     edges: list[Edge] = []
     issue_nodes: dict[str, str] = {}
+    node_ids: set[str] = set()
     link_count = 0
 
     for record in issues:
         _only_keys(record, {"id", "title", "state", "url", "labels", "intent_ids"}, "issue")
-        external_id = _external_id(record.get("id"), "issue")
-        if external_id in issue_nodes:
-            raise ValueError(f"Duplicate issue ID in {report}: {external_id}")
-        title = _text(record.get("title"), "issue title", 300)
-        state = _state(record.get("state"), "issue")
-        url = _url(record.get("url"), "issue")
-        labels = sorted(set(_strings(record.get("labels", []), "issue labels", 50, 100)))
+        source_external_id = _external_id(record.get("id"), "issue")
+        if source_external_id in issue_nodes:
+            raise ValueError(f"Duplicate issue ID in {report}: {source_external_id}")
+        external_id = _redacted_text(source_external_id)
+        title = _redacted_text(_text(record.get("title"), "issue title", 300))
+        state = _redacted_text(_state(record.get("state"), "issue"))
+        url = _redacted_text(_url(record.get("url"), "issue"))
+        labels = sorted(
+            {
+                _redacted_text(item)
+                for item in _strings(record.get("labels", []), "issue labels", 50, 100)
+            }
+        )
         intent_ids = _strings(record.get("intent_ids", []), "issue intent IDs")
         node_id = f"delivery-issue:{namespace}:{_component(external_id)}"
-        issue_nodes[external_id] = node_id
+        if node_id in node_ids:
+            raise ValueError(f"Delivery issue IDs collide after redaction in {report}")
+        node_ids.add(node_id)
+        issue_nodes[source_external_id] = node_id
         nodes.append(
             Node(
                 id=node_id,
@@ -106,7 +127,7 @@ def _delivery_fragment(
                     "state": state,
                     "url": url,
                     "labels": labels,
-                    "report": report,
+                    "report": persisted_report,
                     "owner": "scanner",
                 },
             )
@@ -135,13 +156,14 @@ def _delivery_fragment(
             },
             "pull request",
         )
-        external_id = _external_id(record.get("id"), "pull request")
-        if external_id in pr_ids:
-            raise ValueError(f"Duplicate pull-request ID in {report}: {external_id}")
-        pr_ids.add(external_id)
-        title = _text(record.get("title"), "pull-request title", 300)
-        state = _state(record.get("state"), "pull request")
-        url = _url(record.get("url"), "pull request")
+        source_external_id = _external_id(record.get("id"), "pull request")
+        if source_external_id in pr_ids:
+            raise ValueError(f"Duplicate pull-request ID in {report}: {source_external_id}")
+        pr_ids.add(source_external_id)
+        external_id = _redacted_text(source_external_id)
+        title = _redacted_text(_text(record.get("title"), "pull-request title", 300))
+        state = _redacted_text(_state(record.get("state"), "pull request"))
+        url = _redacted_text(_url(record.get("url"), "pull request"))
         draft = record.get("draft", False)
         if not isinstance(draft, bool):
             raise ValueError("Pull-request draft must be a boolean")
@@ -149,6 +171,9 @@ def _delivery_fragment(
         changed_files = _strings(record.get("changed_files", []), "changed files")
         commit_shas = _strings(record.get("commit_shas", []), "commit SHAs")
         node_id = f"pull-request:{namespace}:{_component(external_id)}"
+        if node_id in node_ids:
+            raise ValueError(f"Delivery pull-request IDs collide after redaction in {report}")
+        node_ids.add(node_id)
         nodes.append(
             Node(
                 id=node_id,
@@ -161,7 +186,7 @@ def _delivery_fragment(
                     "state": state,
                     "url": url,
                     "draft": draft,
-                    "report": report,
+                    "report": persisted_report,
                     "owner": "scanner",
                 },
             )
@@ -274,6 +299,13 @@ def _text(value: Any, label: str, limit: int) -> str:
     if not text or len(text) > limit or any(ord(character) < 32 for character in text):
         raise ValueError(f"Invalid delivery {label}")
     return text
+
+
+def _redacted_text(value: str) -> str:
+    redacted = redact(value)
+    if not isinstance(redacted, str):
+        raise ValueError("Secret redaction returned an invalid delivery string")
+    return redacted
 
 
 def _external_id(value: Any, label: str) -> str:

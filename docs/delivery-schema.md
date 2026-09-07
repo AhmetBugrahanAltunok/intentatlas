@@ -34,4 +34,6 @@ Configure `"delivery_reports": ["reports/delivery.json"]` in `intentatlas.json`,
 
 Fields are allowlisted and bounded. URLs must be HTTP(S) without credentials, queries, or
 fragments. File paths and commit SHAs link only on exact local matches. Unknown references create
-no relationship. Bodies, comments, authors, raw API payloads, and unknown fields are rejected.
+no relationship. Source, repository, IDs, titles, states, URLs, labels, and the recorded report path
+are secret-redacted before graph or generated-vault persistence. Bodies, comments, authors, raw API
+payloads, and unknown fields are rejected.

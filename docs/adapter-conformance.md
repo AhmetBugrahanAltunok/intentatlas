@@ -26,6 +26,11 @@ Every symbol path belongs to a discovered file handled by the adapter, its ID is
 `symbol:<path>::<label>`, and its metadata contains a positive line, optional valid end line,
 bounded symbol kind, and `owner: scanner`.
 
+An end line is a trust claim used by exact change analysis, not a completeness requirement for all
+symbols. Built-in structural adapters emit it only for balanced declaration forms they can bound
+without executing a language toolchain; uncertain declarations omit it and retain file-level
+fallback behavior.
+
 Edges are limited to the shared structural relations:
 
 - `defines`: file to a symbol owned by that same file;

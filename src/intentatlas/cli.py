@@ -955,8 +955,12 @@ def _evaluate_longitudinal(
 def _open(root: Path, host: str, port: int, open_browser: bool) -> int:
     config = ProjectConfig.load(root)
     graph_path = config.graph_path(root)
-    if not graph_path.exists():
-        _scan(root)
+    if not graph_path.is_file():
+        raise ValueError(
+            f"Graph does not exist: {graph_path.relative_to(root).as_posix()}. "
+            f"Run `intentatlas scan {root}` explicitly before `open`; scanning writes the "
+            "generated graph and vault outputs."
+        )
     serve_graph(graph_path, host=host, port=port, open_browser=open_browser)
     return 0
 

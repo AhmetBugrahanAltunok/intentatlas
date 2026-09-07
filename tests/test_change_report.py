@@ -6,6 +6,7 @@ import subprocess
 
 import pytest
 
+import intentatlas.change_report as change_report_module
 from intentatlas.change_analysis import ChangeAnalysis, ChangeAnalysisFile
 from intentatlas.change_report import (
     build_change_report,
@@ -171,6 +172,133 @@ def test_change_report_distinguishes_result_limit_omissions() -> None:
     assert payload["test_selection"]["limit_omitted_count"] == 1
     assert payload["omitted_tests"][0]["reason"] == "result-limit"
     assert payload["omitted_tests"][0]["paths"]
+
+
+def test_change_report_counts_high_fanout_candidates_before_result_limit() -> None:
+    graph = report_graph()
+    additional_tests = [
+        Node(
+            f"file:test_auth_{index:03}.py",
+            "test",
+            f"test_auth_{index:03}.py",
+            path=f"test_auth_{index:03}.py",
+        )
+        for index in range(100)
+    ]
+    graph.extend(
+        additional_tests,
+        [
+            Edge(
+                test.id,
+                "symbol:auth.py::login",
+                "tests",
+                "python-symbol-reference",
+            )
+            for test in additional_tests
+        ],
+    )
+
+    report = build_change_report(graph, exact_analysis(), limit=100)
+    payload = report.to_dict()
+
+    assert report.test_candidate_count == 101
+    assert len(report.tests) == 100
+    assert report.test_limit_omitted_count == 1
+    assert report.test_candidate_count_complete is True
+    assert payload["test_selection"] == {
+        "selected_count": 100,
+        "total_candidate_count": 101,
+        "filtered_count": 0,
+        "limit_omitted_count": 1,
+        "omitted_shown_count": 1,
+    }
+    assert payload["omitted_tests"][0]["node"]["id"] == "file:test_auth_099.py"
+    assert payload["omitted_tests"][0]["reason"] == "result-limit"
+
+
+def test_change_report_truncates_artifacts_with_explicit_lower_bound_semantics(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(change_report_module, "MAX_REPORT_ARTIFACTS", 1)
+    base = exact_analysis()
+    analysis = ChangeAnalysis(
+        base.change_set,
+        "analyzed",
+        (
+            ChangeAnalysisFile(
+                "auth.py",
+                "modified",
+                "analyzed",
+                "aligned",
+                "high",
+                ("symbol:auth.py::login", "symbol:auth.py::audit"),
+                ("validated-symbol-span",),
+            ),
+        ),
+    )
+
+    report = build_change_report(report_graph(), analysis)
+    payload = report.to_dict()
+
+    assert report.analysis_coverage_complete is False
+    assert report.requirement_candidate_count_complete is False
+    assert report.test_candidate_count_complete is False
+    assert report.test_strategy == "full-suite-fallback"
+    assert payload["analysis_coverage"] == {
+        "complete": False,
+        "requirement_candidate_count_complete": False,
+        "test_candidate_count_complete": False,
+        "artifact_selection": {
+            "analysis_limit": 1,
+            "total_candidate_count": 2,
+            "analyzed_count": 1,
+            "limit_omitted_count": 1,
+            "bounded_selection_complete": False,
+        },
+        "test_signal_selection": {
+            "analysis_limit": 1,
+            "total_candidate_count": 1,
+            "analyzed_count": 1,
+            "limit_omitted_count": 0,
+            "bounded_selection_complete": False,
+        },
+    }
+    rendered = render_change_report(report)
+    assert "1/2 artifacts analyzed; 1 omitted by the 1-artifact limit" in rendered
+    assert "Candidate totals include only the analyzed subset and are lower bounds" in rendered
+
+
+def test_change_report_truncates_file_symbol_signals_without_failing(monkeypatch) -> None:
+    monkeypatch.setattr(change_report_module, "MAX_REPORT_ARTIFACTS", 2)
+    base = exact_analysis()
+    analysis = ChangeAnalysis(
+        base.change_set,
+        "analyzed",
+        (
+            ChangeAnalysisFile(
+                "auth.py",
+                "modified",
+                "analyzed",
+                "aligned",
+                "high",
+                ("file:auth.py",),
+                ("validated-file-artifact",),
+            ),
+        ),
+    )
+
+    report = build_change_report(report_graph(), analysis, minimum_confidence="low")
+    coverage = report.analysis_coverage
+
+    assert coverage.artifact_candidate_count == 1
+    assert coverage.artifact_limit_omitted_count == 0
+    assert coverage.test_signal_candidate_count == 3
+    assert coverage.test_signal_analyzed_count == 2
+    assert coverage.test_signal_limit_omitted_count == 1
+    assert report.requirement_candidate_count_complete is True
+    assert report.test_candidate_count_complete is False
+    assert report.analysis_coverage_complete is False
+    assert report.test_strategy == "targeted-plus-full-suite"
 
 
 def test_change_report_requires_full_suite_for_fallback_or_unknown_analysis() -> None:

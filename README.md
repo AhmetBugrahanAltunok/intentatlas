@@ -140,9 +140,10 @@ strong enough.
 - Import existing Cobertura coverage and JUnit test evidence without running project code.
 - Produce a deterministic, versioned graph diff for CI.
 - Import bounded issue and pull-request metadata from explicit local JSON snapshots.
-- Link recent commits to exact modified Python symbols when zero-context diff hunks intersect
-  validated AST source spans and the worktree file matches that commit's blob, while retaining
-  file-level history as a safe fallback.
+- Link recent commits to exact modified symbols when zero-context diff hunks intersect validated
+  Python AST spans or conservatively balanced JavaScript/TypeScript and Go declaration spans, and
+  the worktree file matches that commit's blob, while retaining file-level history as a safe
+  fallback.
 - Rank test files for a commit, file, or symbol with fixed confidence levels, complete evidence
   paths, and deterministic text or JSON output.
 - Measure recommendations against exhaustive, human-reviewed local labels with deterministic
@@ -337,8 +338,11 @@ intentatlas evaluate-longitudinal MANIFEST CHECKOUTS  Measure a frozen pilot off
 intentatlas benchmark-scale              Measure indexed queries on a synthetic large graph
 intentatlas demo [--report text|json]    Open the showcase or print its bounded evidence report
 intentatlas diff BASE [PATH] [--check]   Compare the cached graph with a baseline
-intentatlas open [PATH]                  Launch the local interactive graph
+intentatlas open [PATH]                  Launch an existing graph (run scan explicitly first)
 ```
+
+`status` is also a graph-health gate: it returns exit status 1 when one or more durable notes are
+orphaned and 0 when none are orphaned. Invalid requests or unreadable graph state retain exit 2.
 
 The same deterministic ChangeSet schema covers a commit, endpoint range, index, or current
 worktree:
@@ -372,8 +376,11 @@ strategy, and explains omissions. `--report --open` shows that same in-memory re
 viewer.
 
 ChangeSet output contains statuses, safe project-relative paths, resolved commit IDs, and
-current-side hunk ranges. It never stores raw diff lines. Worktree mode includes ignored-aware
-untracked paths but does not read or emit their contents. `--analyze` explicitly performs a fresh,
+current-side hunk ranges. Git output is capped while it is being drained, and raw diff lines are
+never stored. Worktree mode includes ignored-aware untracked paths but does not read or emit their
+contents. If an indexed deletion is followed by an untracked recreation at the same path, the
+combined worktree state is reported as `modified`; `--staged` still reports the index deletion.
+`--analyze` explicitly performs a fresh,
 bounded local scan and labels each file `analyzed`, `fallback`, or `unknown`, with
 `aligned`/`stale` freshness, confidence, artifact IDs, and evidence. It may read supported
 worktree files through the normal scanner but never executes project code or persists raw source.
@@ -577,7 +584,9 @@ language-neutral built-in adapter contract. The TypeScript/JavaScript adapter co
 The Go adapter covers `.go` files, `go.mod` module boundaries, named types, functions, methods,
 module-local package imports, and tests. Same-directory tests gain structural evidence only for
 referenced exported declarations owned by one production file; ambiguous names remain unlinked and
-filename matching stays a weak fallback. Neither adapter runs a language runtime or project code.
+filename matching stays a weak fallback. Both adapters publish an `end_line` only when their
+dependency-free structural parsers can prove a balanced declaration boundary; ambiguous or
+malformed declarations remain spanless. Neither adapter runs a language runtime or project code.
 
 Adapter conformance contract version 1 turns the shared boundary into an executable check. Fresh
 and cached fragments must satisfy the same bounded symbol, relation, endpoint, evidence, ordering,
@@ -591,10 +600,11 @@ generation timestamp.
 Explicit local delivery snapshots connect requirements and decisions to issues, pull requests,
 changed files, and known commits without credentials or provider API access.
 
-Recent Git history also records direct `modifies` relationships for Python classes, functions,
-and methods when changed new-side lines intersect their AST spans and the current file still
-matches the analyzed commit blob. File-level `changes` links stay available for stale files,
-deletions, module-level edits, unsupported span adapters, and uncertain cases.
+Recent Git history also records direct `modifies` relationships for Python classes, functions, and
+methods, plus conservatively balanced JavaScript/TypeScript and Go declarations, when changed
+new-side lines intersect their validated spans and the current file still matches the analyzed
+commit blob. File-level `changes` links stay available for stale files, deletions, module-level
+edits, unsupported or ambiguous spans, and uncertain cases.
 
 `recommend-tests` consumes those validated graph relationships and ranks test-file candidates as
 high, medium, or low confidence. Python tests can target exact imported symbols through bounded

@@ -147,6 +147,22 @@ def recommend_tests(
         raise ValueError(f"Unknown minimum confidence: {minimum_confidence}")
     if isinstance(limit, bool) or limit < 1 or limit > MAX_RECOMMENDATIONS:
         raise ValueError(f"Recommendation limit must be between 1 and {MAX_RECOMMENDATIONS}")
+    target, recommendations = _recommendation_candidates(graph, target_id)
+    candidate_count = len(recommendations)
+    minimum_rank = CONFIDENCE_RANK[minimum_confidence]
+    filtered = tuple(
+        item
+        for item in recommendations
+        if CONFIDENCE_RANK[item.confidence] >= minimum_rank
+    )[:limit]
+    return RecommendationResult(target, minimum_confidence, candidate_count, filtered)
+
+
+def _recommendation_candidates(
+    graph: AtlasGraph, target_id: str
+) -> tuple[Node, tuple[TestRecommendation, ...]]:
+    """Return the complete bounded candidate set for internal report aggregation."""
+
     target = graph.nodes.get(target_id)
     if target is None:
         raise ValueError(f"Unknown node: {target_id}")
@@ -278,15 +294,7 @@ def recommend_tests(
         raise ValueError(
             f"Recommendation query exceeds the {MAX_CANDIDATE_TESTS}-test candidate limit"
         )
-    recommendations = _recommendations(graph, reasons_by_test, index)
-    candidate_count = len(recommendations)
-    minimum_rank = CONFIDENCE_RANK[minimum_confidence]
-    filtered = tuple(
-        item
-        for item in recommendations
-        if CONFIDENCE_RANK[item.confidence] >= minimum_rank
-    )[:limit]
-    return RecommendationResult(target, minimum_confidence, candidate_count, filtered)
+    return target, _recommendations(graph, reasons_by_test, index)
 
 
 def render_recommendations(

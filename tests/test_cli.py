@@ -7,6 +7,9 @@ import subprocess
 import pytest
 
 from intentatlas.cli import main
+from intentatlas.config import ProjectConfig
+from intentatlas.graph import AtlasGraph
+from intentatlas.models import Node
 
 
 def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
@@ -43,6 +46,19 @@ def test_cli_init_scan_status_and_impact(tmp_path, capsys) -> None:
     assert "Adapter cache: 3 reused, 0 rebuilt" in capsys.readouterr().out
 
 
+def test_cli_status_uses_exit_one_for_durable_orphan_health(tmp_path, capsys) -> None:
+    config = ProjectConfig()
+    config.save_if_missing(tmp_path)
+    graph = AtlasGraph()
+    graph.add_node(Node("REQ-ORPHAN", "requirement", "Disconnected requirement"))
+    graph.save(config.graph_path(tmp_path))
+
+    assert main(["status", str(tmp_path)]) == 1
+    output = capsys.readouterr().out
+    assert "durable orphans 1" in output
+    assert "REQ-ORPHAN: Disconnected requirement" in output
+
+
 def test_cli_init_preserves_and_idempotently_extends_gitignore(tmp_path, capsys) -> None:
     gitignore = tmp_path / ".gitignore"
     gitignore.write_text("dist/\n# keep this comment\n", encoding="utf-8")
@@ -70,6 +86,16 @@ def test_cli_reports_invalid_requests(tmp_path, capsys) -> None:
     assert main(["impact", "missing", str(tmp_path)]) == 2
     assert f"project: {tmp_path.resolve()}" in capsys.readouterr().err
     assert main(["impact", "Home", str(tmp_path), "--depth", "20"]) == 2
+
+
+def test_cli_open_requires_an_explicit_scan_without_writing_project_state(
+    tmp_path, capsys
+) -> None:
+    assert main(["open", str(tmp_path), "--no-browser"]) == 2
+    error = capsys.readouterr().err
+    assert "Run `intentatlas scan" in error
+    assert "scanning writes the generated graph and vault outputs" in error
+    assert list(tmp_path.iterdir()) == []
 
 
 def test_cli_writes_deterministic_graph_diff_and_supports_ci_check(tmp_path, capsys) -> None:

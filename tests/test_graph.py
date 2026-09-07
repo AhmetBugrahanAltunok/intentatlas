@@ -4,6 +4,7 @@ import json
 
 import pytest
 
+import intentatlas.graph as graph_module
 import intentatlas.storage as storage_module
 from intentatlas.graph import AtlasGraph
 from intentatlas.models import Edge, Node
@@ -168,6 +169,33 @@ def test_load_rejects_unknown_schema_and_invalid_edges(tmp_path) -> None:
     with pytest.raises(ValueError, match="Invalid edge"):
         AtlasGraph.load(path)
 
+
+def test_load_rejects_graph_documents_over_byte_node_and_edge_limits(
+    tmp_path, monkeypatch
+) -> None:
+    path = tmp_path / "graph.json"
+    path.write_text(json.dumps({"schema_version": 1}), encoding="utf-8")
+    monkeypatch.setattr(graph_module, "MAX_GRAPH_DOCUMENT_BYTES", 1)
+    with pytest.raises(ValueError, match="byte limit"):
+        AtlasGraph.load(path)
+
+    monkeypatch.setattr(graph_module, "MAX_GRAPH_DOCUMENT_BYTES", 1_000_000)
+    monkeypatch.setattr(graph_module, "MAX_GRAPH_DOCUMENT_NODES", 0)
+    path.write_text(
+        json.dumps({"schema_version": 1, "nodes": [{}], "edges": []}),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="node limit"):
+        AtlasGraph.load(path)
+
+    monkeypatch.setattr(graph_module, "MAX_GRAPH_DOCUMENT_NODES", 1)
+    monkeypatch.setattr(graph_module, "MAX_GRAPH_DOCUMENT_EDGES", 0)
+    path.write_text(
+        json.dumps({"schema_version": 1, "nodes": [], "edges": [{}]}),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="edge limit"):
+        AtlasGraph.load(path)
 
 @pytest.mark.parametrize(
     ("document", "message"),

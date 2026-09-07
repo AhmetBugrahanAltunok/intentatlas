@@ -5,6 +5,18 @@ unbounded promise: the class below identifies what may change, how a breaking ch
 and whether migration support is required. Security and privacy corrections may shorten a
 deprecation window, but the release notes must identify the correction and safe replacement.
 
+## Change-range correctness correction
+
+ChangeSet schema 1 retains the existing integer `start` and `count` fields. A valid deletion-only
+hunk in a surviving file is now preserved with `count: 0`, including `start: 0` when Git removes
+leading lines. Previously these hunks were silently omitted, which could incorrectly make a
+mixed edit/deletion look fully analyzed. Consumers must preserve zero-count ranges as uncertainty;
+they are not source lines and must not be mapped to a current symbol. Positive ranges keep their
+existing meaning. Whole-file deletions retain their existing deleted-file/unknown analysis.
+Reports can consequently change from targeted-only to a full-suite fallback without any scoring
+or threshold change. Re-run analysis to regenerate saved reports; do not treat old reports as
+evidence of complete change coverage.
+
 ## Contract matrix
 
 | Contract | Class | Current boundary | Compatibility promise |
@@ -80,3 +92,9 @@ deprecated for consumers that need a linked ranking explanation. Python test nod
 eligibility without removing the node or its graph edges. Graphs without role metadata, and
 non-Python adapters, retain their prior recommendation behavior. These are additive fields under
 the existing schema boundaries and require no stored-data migration.
+
+Change Report schema 1 may also include additive `analysis_coverage` metadata. It separates result
+limits from artifact and test-signal analysis limits, records how many candidates were analyzed or
+omitted by each bound, and marks whether published requirement/test totals are complete or lower
+bounds. Existing selection fields and `analysis_coverage_complete` remain present; strict consumers
+that reject unknown fields must allow this additive object.

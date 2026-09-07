@@ -59,6 +59,11 @@ claimed to be unaffected or unnecessary. Complete details are the unchanged sche
 Report JSON. Human copy can be switched between English and Turkish without rescanning; enum
 values, IDs, commands, flags, and JSON remain canonical.
 
+The two Enter actions are deliberately contextual and are labeled on their respective screens:
+Enter on the confirmation screen starts the displayed analysis, while Enter on the result action
+screen exits exactly like `Q`. Result actions `1` through `6` and `L` always require their explicit
+key; Enter never repeats the analysis or opens the viewer.
+
 The browser is optional and starts only after the explicit viewer menu choice. It binds to numeric
 IPv4 loopback on an ephemeral port and receives the exact immutable graph/report bytes already
 used by the terminal result. There is no second scan. If the browser or listener is unavailable,

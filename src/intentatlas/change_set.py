@@ -7,6 +7,11 @@ import subprocess  # nosec B404
 from dataclasses import dataclass, replace
 from pathlib import Path, PurePosixPath
 
+from .bounded_process import (
+    ProcessCollectionError,
+    ProcessOutputLimitError,
+    run_bounded_process,
+)
 from .git_history import (
     MAX_DIFF_BYTES,
     MAX_DIFF_FILES,
@@ -29,6 +34,14 @@ _STATUS_NAMES = {
     "T": "type-changed",
     "U": "unmerged",
 }
+
+
+class _GitCollectionError(Exception):
+    pass
+
+
+class _GitOutputLimitError(_GitCollectionError):
+    pass
 
 
 @dataclass(frozen=True, slots=True)
@@ -362,7 +375,9 @@ def _oversized_file_freshness(
         result = subprocess.run(  # noqa: S603  # nosec B603
             command,
             check=False,
-            capture_output=True,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
             timeout=10,
             shell=False,
         )
@@ -489,23 +504,20 @@ def _git_output(root: Path, executable: str, *arguments: str) -> str:
         *arguments,
     ]
     try:
-        result = subprocess.run(  # noqa: S603  # nosec B603
+        return_code, output = _run_git_bounded(
             command,
-            check=False,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
+            max_bytes=MAX_DIFF_BYTES,
             timeout=10,
-            shell=False,
         )
-    except (OSError, subprocess.SubprocessError) as exc:
+    except _GitOutputLimitError as exc:
+        raise ValueError(
+            f"Git change output exceeds the {MAX_DIFF_BYTES}-byte limit"
+        ) from exc
+    except _GitCollectionError as exc:
         raise ValueError("Cannot inspect Git changes") from exc
-    if result.returncode != 0:
+    if return_code != 0:
         raise ValueError("Cannot inspect Git changes")
-    if len(result.stdout.encode("utf-8")) > MAX_DIFF_BYTES:
-        raise ValueError(f"Git change output exceeds the {MAX_DIFF_BYTES}-byte limit")
-    return result.stdout
+    return output.decode("utf-8", errors="replace")
 
 
 def _try_git_blob(root: Path, executable: str, target: str) -> bytes | None:
@@ -522,18 +534,37 @@ def _try_git_blob(root: Path, executable: str, target: str) -> bytes | None:
         target,
     ]
     try:
-        result = subprocess.run(  # noqa: S603  # nosec B603
+        return_code, output = _run_git_bounded(
             command,
-            check=False,
-            capture_output=True,
+            max_bytes=MAX_SYMBOL_SOURCE_BYTES,
             timeout=5,
-            shell=False,
         )
-    except (OSError, subprocess.SubprocessError):
+    except _GitCollectionError:
         return None
-    if result.returncode != 0 or len(result.stdout) > MAX_SYMBOL_SOURCE_BYTES:
+    if return_code != 0:
         return None
-    return result.stdout
+    return output
+
+
+def _run_git_bounded(
+    command: list[str],
+    *,
+    max_bytes: int,
+    timeout: float,
+) -> tuple[int, bytes]:
+    """Run Git while retaining at most ``max_bytes`` of stdout."""
+
+    try:
+        result = run_bounded_process(
+            command,
+            max_stdout_bytes=max_bytes,
+            timeout=timeout,
+        )
+    except ProcessOutputLimitError as exc:
+        raise _GitOutputLimitError from exc
+    except ProcessCollectionError as exc:
+        raise _GitCollectionError from exc
+    return result.returncode, result.stdout
 
 
 def _normalized_lines(value: bytes) -> bytes:
@@ -587,6 +618,12 @@ def _merge_files(files: tuple[ChangeFile, ...]) -> tuple[ChangeFile, ...]:
             continue
         elif current.status == "modified" and item.status == "added":
             merged[item.path] = item
+        elif {current.status, item.status} == {"deleted", "untracked"}:
+            # The index deleted a tracked path but the worktree recreated it as
+            # untracked. Relative to the worktree baseline the path still exists,
+            # so represent the combined state as a modification rather than
+            # claiming that the visible file is deleted or newly introduced.
+            merged[item.path] = ChangeFile("modified", item.path)
         elif current != item:
             raise ValueError(f"Conflicting Git change metadata for path: {item.path}")
     if len(merged) > MAX_DIFF_FILES:

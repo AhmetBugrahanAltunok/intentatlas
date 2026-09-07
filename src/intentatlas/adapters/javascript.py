@@ -52,7 +52,7 @@ class JavaScriptAdapter:
     name = "javascript-typescript"
     suffixes = JAVASCRIPT_SUFFIXES
     cache_input_suffixes = suffixes
-    cache_version = 1
+    cache_version = 2
     evidence_kinds = frozenset(
         {
             "filename-convention",
@@ -124,15 +124,30 @@ class JavaScriptAdapter:
 
 
 def _symbols(relative: str, source: str) -> list[Node]:
-    discovered: dict[str, tuple[str, int]] = {}
+    declarations: list[tuple[int, str, str, re.Match[str]]] = []
     for match in _DECLARATION.finditer(source):
         raw_kind, name = match.groups()
         symbol_kind = "function" if raw_kind.startswith("function") else raw_kind
-        discovered.setdefault(name, (symbol_kind, _line_number(source, match.start())))
-    for pattern in (_ARROW_DECLARATION, _FUNCTION_EXPRESSION):
-        for match in pattern.finditer(source):
-            name = match.group(1)
-            discovered.setdefault(name, ("function", _line_number(source, match.start())))
+        mode = "function" if symbol_kind == "function" else symbol_kind
+        declarations.append((match.start(), name, mode, match))
+    for match in _ARROW_DECLARATION.finditer(source):
+        declarations.append((match.start(), match.group(1), "arrow", match))
+    for match in _FUNCTION_EXPRESSION.finditer(source):
+        declarations.append((match.start(), match.group(1), "function-expression", match))
+
+    declarations.sort(key=lambda item: (item[0], item[1], item[2]))
+    discovered: dict[str, tuple[str, int, int | None]] = {}
+    for index, (start, name, mode, match) in enumerate(declarations):
+        boundary = declarations[index + 1][0] if index + 1 < len(declarations) else len(source)
+        symbol_kind = "function" if mode in {"function", "arrow", "function-expression"} else mode
+        discovered.setdefault(
+            name,
+            (
+                symbol_kind,
+                _line_number(source, start),
+                _javascript_end_line(source, match, mode, boundary),
+            ),
+        )
 
     return [
         Node(
@@ -140,14 +155,187 @@ def _symbols(relative: str, source: str) -> list[Node]:
             kind="symbol",
             label=name,
             path=relative,
-            metadata={"symbol_kind": kind, "line": line, "owner": "scanner"},
+            metadata=_symbol_metadata(kind, line, end_line),
         )
-        for name, (kind, line) in sorted(discovered.items())
+        for name, (kind, line, end_line) in sorted(discovered.items())
     ]
 
 
 def _line_number(source: str, offset: int) -> int:
     return source.count("\n", 0, offset) + 1
+
+
+def _symbol_metadata(kind: str, line: int, end_line: int | None) -> dict[str, str | int]:
+    metadata: dict[str, str | int] = {
+        "symbol_kind": kind,
+        "line": line,
+        "owner": "scanner",
+    }
+    if end_line is not None:
+        metadata["end_line"] = end_line
+    return metadata
+
+
+def _javascript_end_line(
+    source: str,
+    match: re.Match[str],
+    mode: str,
+    boundary: int,
+) -> int | None:
+    if mode == "type":
+        return _statement_end_line(source, match.end(), boundary)
+    if mode == "arrow":
+        cursor = _next_content(source, match.end(), boundary)
+        if cursor is None:
+            return None
+        if source[cursor] != "{":
+            return _statement_end_line(source, cursor, boundary)
+        end = _balanced_brace_end(source, cursor, boundary)
+        return None if end is None else _line_number(source, end)
+    if mode in {"function", "function-expression"}:
+        body = _javascript_function_body(source, match.end(), boundary)
+        if body is None:
+            return None
+        end = _balanced_brace_end(source, body, boundary)
+        return None if end is None else _line_number(source, end)
+
+    opening = _body_brace_after_header(source, match.end(), boundary)
+    if opening is None:
+        return None
+    end = _balanced_brace_end(source, opening, boundary)
+    return None if end is None else _line_number(source, end)
+
+
+def _javascript_function_body(source: str, start: int, boundary: int) -> int | None:
+    parameters = source.find("(", start, boundary)
+    if parameters < 0:
+        return None
+    parameters_end = _matching_delimiter(source, parameters, "(", ")", boundary)
+    if parameters_end is None:
+        return None
+    return _body_brace_after_header(source, parameters_end + 1, boundary)
+
+
+def _body_brace_after_header(source: str, start: int, boundary: int) -> int | None:
+    """Find a declaration body after balanced generic/return-type header shapes."""
+
+    pairs = {"(": ")", "[": "]", "{": "}", "<": ">"}
+    stack: list[str] = []
+    index = start
+    while index < boundary:
+        character = source[index]
+        if character in pairs:
+            if character == "{" and not stack:
+                prefix = source[start:index].rstrip()
+                type_header = ":" in source[start:index]
+                type_continuation = _next_content_after_balanced_brace(
+                    source, index, boundary
+                )
+                if (
+                    prefix.endswith((":", "=>", "|", "&", "?"))
+                    or type_header
+                    and type_continuation in {"?", ":", "|", "&"}
+                ):
+                    type_end = _matching_delimiter(
+                        source, index, "{", "}", boundary
+                    )
+                    if type_end is None:
+                        return None
+                    index = type_end + 1
+                    continue
+                return index
+            stack.append(pairs[character])
+            index += 1
+            continue
+        if character in pairs.values():
+            if not stack or stack.pop() != character:
+                return None
+            index += 1
+            continue
+        if character in {";", "="} and not stack:
+            return None
+        index += 1
+    return None
+
+
+def _next_content_after_balanced_brace(
+    source: str, start: int, boundary: int
+) -> str | None:
+    end = _matching_delimiter(source, start, "{", "}", boundary)
+    if end is None:
+        return None
+    content = _next_content(source, end + 1, boundary)
+    return None if content is None else source[content]
+
+
+def _statement_end_line(source: str, start: int, boundary: int) -> int | None:
+    pairs = {"(": ")", "[": "]", "{": "}"}
+    stack: list[str] = []
+    last_content: int | None = None
+    for index in range(start, boundary):
+        character = source[index]
+        if character in pairs:
+            stack.append(pairs[character])
+            last_content = index
+            continue
+        if character in pairs.values():
+            if not stack or stack.pop() != character:
+                return None
+            last_content = index
+            continue
+        if character == ";" and not stack:
+            return _line_number(source, index)
+        if character == "\n" and not stack:
+            return None if last_content is None else _line_number(source, last_content)
+        if not character.isspace():
+            last_content = index
+    return None if stack or last_content is None else _line_number(source, last_content)
+
+
+def _matching_delimiter(
+    source: str,
+    start: int,
+    opening: str,
+    closing: str,
+    boundary: int,
+) -> int | None:
+    if start >= boundary or source[start] != opening:
+        return None
+    depth = 0
+    for index in range(start, boundary):
+        if source[index] == opening:
+            depth += 1
+        elif source[index] == closing:
+            depth -= 1
+            if depth == 0:
+                return index
+    return None
+
+
+def _balanced_brace_end(source: str, start: int, boundary: int) -> int | None:
+    """Find a brace end and reject unmatched closings before the next declaration."""
+
+    if start >= boundary or source[start] != "{":
+        return None
+    depth = 0
+    first_end: int | None = None
+    for index in range(start, boundary):
+        if source[index] == "{":
+            depth += 1
+        elif source[index] == "}":
+            if depth == 0:
+                return None
+            depth -= 1
+            if depth == 0 and first_end is None:
+                first_end = index
+    return first_end if depth == 0 else None
+
+
+def _next_content(source: str, start: int, boundary: int) -> int | None:
+    for index in range(start, boundary):
+        if not source[index].isspace():
+            return index
+    return None
 
 
 def _default_export_name(source: str) -> str | None:

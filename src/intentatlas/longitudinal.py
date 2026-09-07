@@ -5,13 +5,13 @@ import json
 import math
 import re
 import shutil
-import subprocess  # nosec B404
 from collections import Counter
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from .bounded_process import ProcessCollectionError, run_bounded_process
 from .change_analysis import _analyze_change_set_with_graph
 from .change_report import build_change_report
 from .change_set import collect_change_set
@@ -24,6 +24,7 @@ PILOT_SCHEMA_VERSION = 1
 PILOT_LABEL_SCHEMA_VERSION = 1
 PILOT_CLASSIFICATION_SCHEMA_VERSION = 1
 GENERATED_OUTPUT_POLICY = "ephemeral-only"
+MAX_GIT_OUTPUT_BYTES = 1_000_000
 LABEL_POLICY = "complete-test-set"
 THRESHOLDS = ("low", "medium", "high")
 PARTITIONS = ("calibration", "evaluation")
@@ -980,21 +981,16 @@ def _git_value(git: str, checkout: Path, *arguments: str) -> str:
         *arguments,
     ]
     try:
-        result = subprocess.run(  # noqa: S603  # nosec B603
+        result = run_bounded_process(
             command,
-            check=False,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
+            max_stdout_bytes=MAX_GIT_OUTPUT_BYTES,
             timeout=10,
-            shell=False,
         )
-    except (OSError, subprocess.SubprocessError) as exc:
+    except ProcessCollectionError as exc:
         raise ValueError(f"Cannot inspect pilot checkout {checkout.name}: {exc}") from exc
     if result.returncode != 0:
         raise ValueError(f"Cannot inspect pilot checkout {checkout.name}")
-    return result.stdout.strip()
+    return result.stdout.decode("utf-8", errors="replace").strip()
 
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

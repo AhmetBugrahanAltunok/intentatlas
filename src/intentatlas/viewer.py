@@ -10,8 +10,9 @@ from pathlib import Path
 from socketserver import TCPServer
 from urllib.parse import parse_qs, urlsplit
 
-from .graph import AtlasGraph
+from .graph import MAX_GRAPH_DOCUMENT_BYTES, AtlasGraph
 from .graph_query import GraphQuerySnapshot
+from .safe_io import read_bounded_regular_file
 
 CONTENT_TYPES = {
     "/": ("index.html", "text/html; charset=utf-8"),
@@ -44,11 +45,24 @@ def serve_graph(
     if isinstance(port, bool) or not isinstance(port, int) or port < 0 or port > 65535:
         raise ValueError("Port must be between 0 and 65535")
     bind_host = "127.0.0.1" if host == "localhost" else host
+    served_graph_document: bytes
     if graph_document is None:
         if graph_path is None or not graph_path.is_file():
             raise ValueError(f"Graph not found: {graph_path}. Run `intentatlas scan` first.")
-        served_graph_document = graph_path.read_bytes()
+        loaded = read_bounded_regular_file(
+            graph_path, MAX_GRAPH_DOCUMENT_BYTES
+        )
+        if loaded is None:
+            raise ValueError(
+                "Cannot read viewer graph as a stable regular file within the "
+                f"{MAX_GRAPH_DOCUMENT_BYTES}-byte limit"
+            )
+        served_graph_document = loaded
     else:
+        if len(graph_document) > MAX_GRAPH_DOCUMENT_BYTES:
+            raise ValueError(
+                f"Viewer graph exceeds the {MAX_GRAPH_DOCUMENT_BYTES}-byte limit"
+            )
         served_graph_document = graph_document
     try:
         graph_value = json.loads(served_graph_document.decode("utf-8"))
@@ -62,7 +76,8 @@ def serve_graph(
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:  # noqa: N802
-            if self.headers.get("Host") not in allowed_hosts:
+            host_header = self.headers.get("Host")
+            if host_header is None or host_header.casefold() not in allowed_hosts:
                 self.send_error(421, "Unexpected Host header")
                 return
             parsed = urlsplit(self.path)
@@ -164,7 +179,14 @@ def serve_graph(
 
     server = LoopbackHTTPServer((bind_host, port), Handler)
     actual_port = server.server_address[1]
-    allowed_hosts = {bind_host, f"{bind_host}:{actual_port}"}
+    allowed_host_names = {bind_host}
+    if host == "localhost":
+        allowed_host_names.add("localhost")
+    allowed_hosts = {
+        value
+        for allowed_host in allowed_host_names
+        for value in (allowed_host, f"{allowed_host}:{actual_port}")
+    }
     url = f"http://{bind_host}:{actual_port}"
     print(f"IntentAtlas viewer: {url}", flush=True)
     print("Press Ctrl+C to stop.", flush=True)
