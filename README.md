@@ -7,6 +7,12 @@
 <p align="center"><strong>The living intent map for software projects.</strong></p>
 
 <p align="center">
+  <img alt="Status: beta" src="https://img.shields.io/badge/status-beta-orange">
+  <img alt="Version 0.3.0b1" src="https://img.shields.io/badge/version-0.3.0b1-blue">
+  <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue">
+</p>
+
+<p align="center">
   <a href="README.tr.md">Türkçe</a> ·
   <a href="https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md">Product roadmap</a> ·
   <a href="CONTRIBUTING.md">Contributing</a>

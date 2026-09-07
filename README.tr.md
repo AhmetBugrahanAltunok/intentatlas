@@ -6,6 +6,12 @@
 
 <p align="center"><strong>Yazılım projeleri için yaşayan niyet haritası.</strong></p>
 
+<p align="center">
+  <img alt="Durum: beta" src="https://img.shields.io/badge/durum-beta-orange">
+  <img alt="Sürüm 0.3.0b1" src="https://img.shields.io/badge/s%C3%BCr%C3%BCm-0.3.0b1-blue">
+  <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue">
+</p>
+
 <p align="center"><a href="README.md">English</a> · <a href="https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md">Ürün yol haritası</a></p>
 
 IntentAtlas bir değişikliğin **neden var olduğunu, hangi gereksinimi etkileyebileceğini ve hangi
