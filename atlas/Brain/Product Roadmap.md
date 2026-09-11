@@ -17,14 +17,15 @@ independent, MIT-licensed, local-first, and vault-first.
 
 ## Current execution checkpoint — 2026-09-11
 
-- Latest completed delivery: **Phase 21A — Verification integrity**. **Phase 21B — Reproducible
-  candidate artifacts** holds a conditional pass pending network-gated checks.
-- Active delivery: **Phase 21 — Reproducible installation and first useful report**; its
-  import-identity and reproducible-artifact gates are closed offline, while the network checks,
-  first-run reconciliation, and governance decision remain open.
+- Latest completed delivery: **Phase 21C — First-run walkthrough from a verified candidate**.
+  Phase 21A is complete; Phase 21B holds a conditional pass whose only remaining condition is the
+  remote platform matrix.
+- Active delivery: **Phase 21 — Reproducible installation and first useful report**. Its
+  import-identity, reproducible-artifact, and first-run gates are closed. Remaining: the platform
+  matrix (needs a push), the release inventory, and the ISSUE-039 owner decisions.
 - Forward plan, acceptance gates, risks, and next actions:
   [[Brain/Alpha Release Execution Plan]].
-- Latest working checkpoint: [[Sessions/2026-09-11 - Phase 21B reproducible candidate]].
+- Latest working checkpoint: [[Sessions/2026-09-11 - Phase 21C first-run walkthrough]].
 - The Phase 20 browser failure is now explained: it was an import-identity defect in the
   development environment, not a product defect. Phase 21A removes the ambiguity that produced it.
 - Phase 18 and 19 closure records existed outside this roadmap. They are now linked below;
@@ -687,13 +688,26 @@ Status: conditional pass (2026-09-11); offline gates passed, three network gates
   installs that wheel and returns a schema-1 demo report. Platform matrix, dependency audit, and
   the pipx lifecycle remain unverified pending network approval.
 
+## Phase 21C — First-run walkthrough from a verified candidate
+
+Status: complete (2026-09-11). Implementer walkthrough, not human pilot evidence.
+
+- Requirement: [[Requirements/REQ-039 - Deliver a useful first report from a clean install]]
+- Issue: [[Issues/ISSUE-039 - Resolve the documentation divergence decisions]]
+- Evidence: [[Evidence/EVD-039 - Phase 21C first-run walkthrough verification]]
+- Review: [[Reviews/Phase 21C First-Run Walkthrough Review]]
+- Outcome: the candidate installed alone in a clean environment analyzed an unseen repository,
+  reported exact changed-symbol state, and ranked both a directly referencing test and an
+  import-chain test with printed routes, while writing nothing into the target. EN/TR
+  installation and recovery commands were verified identical.
+
 ## Phase 21 — Reproducible installation and first useful report
 
-Status: in progress. Phase 21A closed the import-identity gate; Phase 21B produced a verified
-reproducible candidate under a conditional pass. Remaining: network-gated checks (ISSUE-038),
-EN/TR first-run reconciliation, the clean-environment first-run walkthrough, release inventory,
-and the ADR-034 governance decision. Detailed gates:
-[[Brain/Alpha Release Execution Plan]].
+Status: in progress. Phase 21A closed the import-identity gate, Phase 21B produced a verified
+reproducible candidate under a narrowed conditional pass, and Phase 21C verified the first-run
+path end to end. Remaining: the supported platform matrix (ISSUE-038, needs a push), the
+Phase 18/19/20 release inventory reconciliation, and the three documentation and governance
+decisions in ISSUE-039. Detailed gates: [[Brain/Alpha Release Execution Plan]].
 
 - Verify exact candidate artifacts in clean environments and source/package import identity.
 - Validate EN/TR first-run instructions and a real local-repository no-write report.

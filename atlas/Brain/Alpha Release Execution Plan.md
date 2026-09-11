@@ -6,9 +6,21 @@ status: active
 # Alpha Release Execution Plan
 
 Updated: 2026-09-11. Canonical phase status: [[Brain/Product Roadmap]].
-Current handoff: [[Sessions/2026-09-11 - Phase 21B reproducible candidate]].
+Current handoff: [[Sessions/2026-09-11 - Phase 21C first-run walkthrough]].
 
 ## Güncel sonuç — 2026-09-11
+
+**Faz 21C tamamlandı.** Yalnızca aday wheel'i barındıran temiz bir ortam, daha önce hiç görmediği
+bir depoyu analiz etti: `analyzed / aligned / targeted`, doğrudan referans veren testi 80/100 ve
+yalnızca import zinciriyle bağlı `test_refund.py`'yi 65/100 ile rotasını yazdırarak önerdi. Hedef
+depoya hiçbir şey yazılmadı; kurulum ve hata sonrası devam komutlarının EN/TR eşitliği doğrulandı.
+Bu bir uygulayıcı yürüyüşüdür, insan pilot kanıtı **değildir**. Ayrıntılar:
+[[Evidence/EVD-039 - Phase 21C first-run walkthrough verification]] ve
+[[Reviews/Phase 21C First-Run Walkthrough Review]].
+
+**Faz 21B'nin ağ kapıları kapandı.** pipx yaşam döngüsü ve `pip_audit` geçti; dokümante edilen
+izole build aynı digest'leri üretti, böylece kayıtlı sapma da kapandı. Tek açık koşul kaldı:
+uzak platform matrisi (push gerektiriyor).
 
 **Faz 21B koşullu geçti.** `ecbcc8ca` revizyonundan üretilen iki wheel/sdist bayt-özdeş; tam
 yayın doğrulayıcısı 13 kontrolü geçti ve revizyona bağlı provenance yazdı; kaynak arşivi doğrudan
@@ -83,15 +95,20 @@ taslak işler yapılmış gibi işaretlenmez.
 - [x] Yerel sabit araç zinciriyle iki wheel/sdist üret; kurulum ve yeniden üretim eşitliğini doğrula.
   Faz 21B'de kapatıldı: bayt-özdeş tekrar üretim, tam doğrulayıcı ve revizyona bağlı provenance.
   Ayrıntı: [[Evidence/EVD-038 - Phase 21B reproducible candidate verification]].
-- [ ] Temiz ortamda sürüm, metin/JSON demo, diagnose, değişiklik raporu ve viewer akışlarını dene.
-  Faz 21B'de sürüm eşitliği ve JSON demo temiz ortamda doğrulandı; diagnose, değişiklik raporu
-  ve viewer akışları kullanıcının yapacağı gibi henüz denenmedi.
-- [ ] Kullanıcı notu veya yapılandırma yazmadan ilk depo raporunu doğrula.
-- [ ] README EN/TR kurulum ve hata sonrası devam komutlarını eşleştir.
+- [x] Temiz ortamda sürüm, metin/JSON demo, diagnose, değişiklik raporu ve viewer akışlarını dene.
+  Faz 21C'de sürüm, metin/JSON demo, diagnose ve değişiklik raporu temiz kurulumdan doğrulandı;
+  viewer bu yürüyüşte açılmadı, gerçek tarayıcı kanıtı `tests/test_browser_e2e.py`'de.
+- [x] Kullanıcı notu veya yapılandırma yazmadan ilk depo raporunu doğrula.
+  Faz 21C: her dosyanın SHA-256'sı önce/sonra aynı; hiçbir yeni yol oluşmadı.
+- [x] README EN/TR kurulum ve hata sonrası devam komutlarını eşleştir.
+  Faz 21C'de incelemeyle doğrulandı: komutlar zaten birebir aynı, değişiklik gerekmedi. Daha geniş
+  bir ayrışma bulundu ([[Issues/ISSUE-039 - Resolve the documentation divergence decisions]]).
 - [ ] Desteklenen işletim sistemi/Python matrisi için gerçek CI sonuçlarını revizyona bağla.
   Açık kalan ağ kapıları: [[Issues/ISSUE-038 - Close the network-gated release checks]].
 - [ ] ADR-034 gereği katkı öncesi üretilmiş vault politikası seç: mevcut snapshot, artifact veya
   yerel üretim seçeneklerini kalıcı bağlantı ve geçiş maliyetiyle karşılaştır. Toplu silme yapma.
+  README uzunluğu ve TR kapsamıyla birlikte karara bağlanmalı:
+  [[Issues/ISSUE-039 - Resolve the documentation divergence decisions]].
 - [ ] Kanıt, kapsamlı inceleme ve somut yayın adayı envanterini kaydet.
 
 ## Faz 22 gözlem protokolü

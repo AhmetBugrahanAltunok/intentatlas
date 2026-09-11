@@ -6,9 +6,12 @@ phase: 21B
 ---
 # Phase 21B Reproducible Candidate Review
 
-Decision: **conditional pass, 2026-09-11**. Every gate that can run without network passed for the
-candidate built from `ecbcc8ca0c112336ba8a11b3ac06e46c1610b160`. Three gates need network approval
-and are recorded as unverified in EVD-038. The condition is ISSUE-038; Phase 21 stays open.
+Decision: **conditional pass, 2026-09-11**, with the condition substantially narrowed the same
+day. Every offline gate passed for the candidate built from
+`ecbcc8ca0c112336ba8a11b3ac06e46c1610b160`. The owner then granted network approval, which closed
+the pipx lifecycle and the dependency audit and retired the recorded build deviation. One
+condition remains: the supported platform matrix, which needs a push that has not been approved.
+ISSUE-038 stays open on that single item; Phase 21 stays open.
 
 ## What this sub-phase establishes
 
@@ -21,25 +24,25 @@ demo report without the development checkout, and the extracted archive ran its 
 No source, test, or documentation file changed in this sub-phase. It is verification only, so the
 Phase 21A result carries forward unchanged.
 
+After network approval, three more gates closed: the isolated pipx install, reinstall and
+uninstall lifecycle passed against the verified wheel; `pip_audit --skip-editable` found no known
+vulnerabilities across the whole environment; and two runs of the documented isolated
+`python -m build` reproduced the offline digests exactly, which retires the deviation recorded
+earlier rather than leaving it as an argument.
+
+A side result worth keeping: the same digests hold at `ecbcc8ca` and `06701d3`, revisions that
+differ only under `atlas/`. Because the source archive excludes the vault, vault-only commits are
+demonstrably unable to change the candidate bytes.
+
 ## What it does not establish
 
 - Nothing about other operating systems or Python versions. One platform and one interpreter were
-  exercised. The declared support matrix is a claim the remote CI run has to substantiate.
-- Nothing about third-party dependency vulnerabilities.
-- Nothing about the pipx installation path a real user might take. The offline attempt failed in
-  pipx's own bootstrap before reaching the candidate, which is informative about the environment
-  and says nothing either way about the wheel.
+  exercised. The declared support matrix is a claim only the remote CI run can substantiate, and
+  that run needs a push.
 - Nothing about release approval. The artifacts live under the ignored `var/` tree. No upload,
   publication, tag, or push occurred, and the version remains an unpublished candidate.
-
-## Recorded deviation
-
-The documented procedure uses isolated `python -m build`. This run used `--no-isolation` to stay
-offline. That is sound only because the installed backend is exactly the pinned
-`hatchling==1.31.0` that isolation would have fetched, and the provenance record confirms the
-generator. It is still a deviation from the documented command and is recorded as one rather than
-presented as equivalent. The next networked run should use the documented isolated form and
-confirm the same digests.
+- Nothing about real first-run usability. Installing a wheel and reading `--version` is not the
+  same as a person getting a useful report; that is the remaining Phase 21 work and Phase 22.
 
 ## Remaining Phase 21 gates
 

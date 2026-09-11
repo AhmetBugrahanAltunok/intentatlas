@@ -6,8 +6,9 @@ phase: 21B
 ---
 # Phase 21B reproducible candidate verification
 
-Local decision: **verified for the offline gates, 2026-09-11**. Three network-dependent gates
-could not run and are recorded as unverified, not as passed.
+Local decision: **verified, 2026-09-11**. The offline gates passed first; the owner then granted
+network approval and two of the three remaining gates closed the same day. Only the remote
+platform matrix stays unverified, because it needs a push that has not been approved.
 
 Source revision under verification: `ecbcc8ca0c112336ba8a11b3ac06e46c1610b160`.
 Fixed build epoch: `1789136856` (the HEAD commit time, per `RELEASING.md`).
@@ -35,9 +36,10 @@ is at `var/release-21b/release-provenance.json` and is not tracked, because `var
 | Useful result without the checkout | `intentatlas demo --report json` from that venv returned `schema_version 1` and the `rotate_session` changed symbol | passed |
 | Extracted archive tests itself | 607 passed, 11 skipped, exit 0, run from the extracted tree with its own `src` on `PYTHONPATH` | passed |
 | Environment consistency | `python -m pip check`: no broken requirements | passed |
-| Isolated pipx lifecycle | Not run offline; see below | **unverified** |
-| Supported platform matrix | Not run; see below | **unverified** |
-| Dependency audit | Not run; see below | **unverified** |
+| Isolated pipx lifecycle | `verify_pipx_install.py` exit 0 after network approval | passed |
+| Dependency audit | `pip_audit --skip-editable`: no known vulnerabilities, exit 0 | passed |
+| Documented isolated build reproduces the same bytes | Two isolated `python -m build` runs; digests identical to the offline pair | passed |
+| Supported platform matrix | Not run; needs a push; see below | **unverified** |
 
 ## Commands
 
@@ -56,24 +58,41 @@ python -m venv var/release-21b/sdist-install && install the archive-derived whee
 (extracted root) PYTHONPATH="$PWD/src" python -m pytest -q
 ```
 
-`--no-isolation` was used deliberately so the build stayed offline. It is safe here only because
-the installed backend is exactly the pinned `hatchling==1.31.0`; the documented isolated command
-remains the CI form. This is a documented deviation, not an equivalent substitution.
+`--no-isolation` was used deliberately so the offline run could stay offline. At the time it was
+recorded as a deviation rather than an equivalent substitution, because the argument for it rested
+on the installed backend being exactly the pinned `hatchling==1.31.0`. The networked section below
+retires that caveat: the documented isolated command produced the same bytes.
 
 One early comparison failed before the epoch was applied to the rebuild step: the direct and
 archive-derived wheels differed at byte 11, the zip timestamp. The CI job sets the epoch at job
 scope, which covers that step. The corrected run is the recorded result, and the cache was
 disabled so the comparison could not be satisfied by a stored wheel.
 
-## Unverified checks
+## Networked verification — 2026-09-11
 
-- **Isolated pipx lifecycle.** `tools/verify_pipx_install.py` was attempted with `PIP_NO_INDEX=1`
-  and failed while pipx upgraded its own shared libraries: `Could not find a version that
-  satisfies the requirement pip>=23.1`. The failure is in pipx's environment bootstrap, not in the
-  candidate wheel. The gate needs network approval to run.
-- **Supported platform matrix.** Verified on Windows 11 with one Python only. The declared
-  matrix — Ubuntu, Windows and macOS across Python 3.11 and 3.13 — needs remote CI.
-- **Dependency audit.** `pip_audit --skip-editable` needs network approval.
+The owner granted network approval after the offline gates were recorded. Three things then ran.
+
+- **Isolated pipx lifecycle.** `python tools/verify_pipx_install.py var/release-21b/a/*.whl` ->
+  `Verified isolated pipx install, reinstall, and uninstall: IntentAtlas 0.3.0rc1`, exit 0. The
+  earlier offline failure was pipx bootstrapping its own shared libraries, as suspected.
+- **Dependency audit.** `python -m pip_audit --skip-editable` -> `No known vulnerabilities found`,
+  exit 0, across the combined development, release, security, typing, and build environment. Only
+  the editable candidate itself was skipped.
+- **The recorded build deviation is closed.** Two isolated `python -m build` runs, the documented
+  command, produced digests identical to the earlier `--no-isolation` pair:
+  wheel `54d38e11...`, sdist `d028f36b...`. `verify_release.py` passed again and wrote provenance
+  bound to `06701d36874e125ab5b0de5cc1ce08ca6fd01092`. The `--no-isolation` shortcut is therefore
+  confirmed equivalent for this toolchain rather than merely argued to be.
+
+Those digests also hold across two different source revisions, `ecbcc8ca` and `06701d3`, which
+differ only in `atlas/`. The source archive excludes the vault, so vault-only commits provably do
+not alter the candidate bytes.
+
+## Still unverified
+
+- **Supported platform matrix.** Verified on Windows 11 with one Python only. The declared matrix
+  — Ubuntu, Windows and macOS across Python 3.11 and 3.13 — needs remote CI, which needs a push to
+  the public remote. That is a separate outward-facing action and has not been approved.
 
 Nothing was published, uploaded, or pushed. The artifacts exist only under the ignored `var/`
 tree and carry no release approval.
