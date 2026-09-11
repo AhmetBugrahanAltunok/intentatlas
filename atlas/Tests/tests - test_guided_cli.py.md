@@ -11,7 +11,7 @@ source_path: "tests/test_guided_cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>28582</code>
+- **Size Bytes:** <code>29344</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -99,6 +99,8 @@ source_path: "tests/test_guided_cli.py"
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Evidence/EVD-030 - Phase 14 guided CLI verification|EVD-030 - Phase 14 guided CLI verification]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding|ISSUE-028 - Implement one-command guided CLI onboarding]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions|ISSUE-037 - Add the package identity gate and vault boundary regressions]] _(reference; evidence: wikilink)_

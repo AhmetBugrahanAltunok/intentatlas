@@ -20,4 +20,3 @@ source_path: "tests/test_longitudinal.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 9557cb1 - docs- publish longitudinal baseline card|docs: publish longitudinal baseline card]] _(history; evidence: git-diff-hunk)_

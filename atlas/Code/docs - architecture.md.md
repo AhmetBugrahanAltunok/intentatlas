@@ -11,7 +11,7 @@ source_path: "docs/architecture.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>31946</code>
+- **Size Bytes:** <code>32787</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -55,4 +55,5 @@ source_path: "docs/architecture.md"
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

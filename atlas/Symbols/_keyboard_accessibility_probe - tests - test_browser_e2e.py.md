@@ -10,8 +10,8 @@ source_path: "tests/test_browser_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>338</code>
-- **Line:** <code>275</code>
+- **End Line:** <code>339</code>
+- **Line:** <code>276</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

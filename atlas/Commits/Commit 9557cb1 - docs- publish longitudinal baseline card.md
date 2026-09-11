@@ -17,7 +17,6 @@ generated: true
 - <code>changes</code> → [[Code/README.md|README.md]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/docs - longitudinal-pilot.md|docs/longitudinal-pilot.md]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/test_frozen_pilot_metadata_and_benchmark_card_match - tests - test_longitudinal.py|test_frozen_pilot_metadata_and_benchmark_card_match]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

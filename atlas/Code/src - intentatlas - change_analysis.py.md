@@ -51,6 +51,7 @@ source_path: "src/intentatlas/change_analysis.py"
 - <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
+- <code>implements</code> ← [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions|ISSUE-037 - Add the package identity gate and vault boundary regressions]] _(implementation; evidence: wikilink)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-ast)_

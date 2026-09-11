@@ -11,7 +11,7 @@ source_path: "tests/test_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12302</code>
+- **Size Bytes:** <code>12731</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -42,8 +42,10 @@ source_path: "tests/test_e2e.py"
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-017 - Implement open-source release gates|ISSUE-017 - Implement open-source release gates]] _(implementation; evidence: wikilink)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-019 - Implement CI shadow review loop|ISSUE-019 - Implement CI shadow review loop]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-028 - Implement one-command guided CLI onboarding|ISSUE-028 - Implement one-command guided CLI onboarding]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions|ISSUE-037 - Add the package identity gate and vault boundary regressions]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Sessions/2026-08-01 - Phase 8 kickoff|2026-08-01 - Phase 8 kickoff]] _(reference; evidence: wikilink)_

@@ -33,5 +33,4 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
 - <code>modifies</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_config_round_trip_and_bounds - tests - test_config.py|test_config_round_trip_and_bounds]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_installed_cli_scan_recommend_and_viewer_workflow - tests - test_e2e.py|test_installed_cli_scan_recommend_and_viewer_workflow]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_recommendation_json_and_cli_are_deterministic - tests - test_recommendations.py|test_recommendation_json_and_cli_are_deterministic]] _(history; evidence: git-diff-hunk)_

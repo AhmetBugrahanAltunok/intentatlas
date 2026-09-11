@@ -5,10 +5,20 @@ status: active
 ---
 # Alpha Release Execution Plan
 
-Updated: 2026-09-07. Canonical phase status: [[Brain/Product Roadmap]].
-Current handoff: [[Sessions/2026-09-07 - Alpha readiness checkpoint]].
+Updated: 2026-09-11. Canonical phase status: [[Brain/Product Roadmap]].
+Current handoff: [[Sessions/2026-09-11 - Phase 21A verification integrity]].
 
-## Güncel sonuç — 2026-09-07
+## Güncel sonuç — 2026-09-11
+
+**Faz 21A tamamlandı.** Faz 20'de ürüne atfedilen tarayıcı hatasının gerçek nedeni bulundu:
+geliştirme ortamındaki editable olmayan kurulum, alt süreçlere bayat paketi yüklüyordu. Artık
+her oturum hangi paketi doğruladığını beyan ediyor; beyan ile içe aktarılan paket çelişirse
+oturum toplama öncesinde kapanıyor. Daha önce hiç test edilmemiş vault sınıflandırması,
+`atlas/Private/` sınırı dahil, çalıştırılabilir kanıta bağlandı. Ayrıntılar:
+[[Evidence/EVD-037 - Phase 21A verification integrity verification]] ve
+[[Reviews/Phase 21A Verification Integrity Review]].
+
+## Önceki sonuç — 2026-09-07
 
 **Faz 20 tamamlandı.** 595 test geçti, 4 platform testi atlandı; branch ölçümü açık toplam kapsam
 %86,47. Ruff, mypy ve Bandit geçti. Obsidian'da 264 bağlantı doğrulandı, 212 kalıcı dosya korundu,
@@ -57,7 +67,10 @@ taslak işler yapılmış gibi işaretlenmez.
 ## Faz 21 için somut kontrol listesi
 
 - [ ] Değişiklik envanterini Faz 18/19/20 olarak ayır; izlenmeyen gerekli dosyaları kaybetme.
-- [ ] Testin güncel `src` kodunu, paket testinin ise tam seçilen wheel'i yüklediğini doğrula.
+- [x] Testin güncel `src` kodunu, paket testinin ise tam seçilen wheel'i yüklediğini doğrula.
+  Faz 21A'da kapatıldı: `INTENTATLAS_TEST_PACKAGE` beyanı, oturum başında kapanan kapı ve
+  içe aktarılan modülden türetilen alt süreç ortamı. Ayrıntı:
+  [[Evidence/EVD-037 - Phase 21A verification integrity verification]].
 - [ ] Yerel sabit araç zinciriyle iki wheel/sdist üret; kurulum ve yeniden üretim eşitliğini doğrula.
 - [ ] Temiz ortamda sürüm, metin/JSON demo, diagnose, değişiklik raporu ve viewer akışlarını dene.
 - [ ] Kullanıcı notu veya yapılandırma yazmadan ilk depo raporunu doğrula.
@@ -92,7 +105,7 @@ ilk rapora ulaşma, doğru yorumlama, açıklanabilir öneri ve gerçek tekrar k
 | --- | --- |
 | Eksik kapsamın tam gösterilmesi | Faz 20'de negatif regresyonlar ve full-suite fallback |
 | Yeşil eski kanıtın yeni kaynak için kullanılması | Her incelemede kaynak/komut/sonuç ve tarih; yeni hata eski sonucu geçersiz kılmaz ama güncel kapıyı açar |
-| Kurulu paketin kaynak testini maskelemesi | Açık import kimliği ve izole paket doğrulaması |
+| Kurulu paketin kaynak testini maskelemesi | Faz 21A'da kapatıldı: beyan edilen paket kimliği, oturum başında kapanan kapı, modülden türetilen alt süreç ortamı ve iki yönlü regresyon |
 | Üretilmiş notların Git gürültüsü | Faz 21'de ADR-034 yönetişim kararı; tek yazarlı deterministik tarama |
 | Gerçek kullanımın bilinmemesi | Faz 22'de insan gözlemi; teknik testleri kullanıcı kanıtı saymama |
 | Paket/CI/audit kanıtının eskimesi | Faz 23'te yayın revizyonuna bağlı sonuç ve artifact hash'leri |

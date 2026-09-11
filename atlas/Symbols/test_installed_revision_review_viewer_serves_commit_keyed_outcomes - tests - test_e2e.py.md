@@ -20,3 +20,4 @@ source_path: "tests/test_e2e.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_e2e.py|tests/test_e2e.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-diff-hunk)_

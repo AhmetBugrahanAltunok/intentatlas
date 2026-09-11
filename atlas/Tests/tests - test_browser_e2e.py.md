@@ -11,7 +11,7 @@ source_path: "tests/test_browser_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>26238</code>
+- **Size Bytes:** <code>26996</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -63,9 +63,11 @@ source_path: "tests/test_browser_e2e.py"
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 5651c34 - test- verify viewer keyboard accessibility|test: verify viewer keyboard accessibility]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>proven-by</code> ← [[Evidence/EVD-029 - Phase 13 semantic monorepo verification|EVD-029 - Phase 13 semantic monorepo verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting|ISSUE-026 - Implement zero-footprint onboarding and trust-first reporting]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-027 - Implement semantic monorepo foundation|ISSUE-027 - Implement semantic monorepo foundation]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions|ISSUE-036 - Close partial hunk deletion and browser regressions]] _(reference; evidence: wikilink)_
+- <code>referenced-by</code> ← [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions|ISSUE-037 - Add the package identity gate and vault boundary regressions]] _(reference; evidence: wikilink)_

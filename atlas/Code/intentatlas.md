@@ -65,6 +65,8 @@ generated: true
 - <code>owns</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - web - __init__.py|src/intentatlas/web/__init__.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Code/src - intentatlas - workspace.py|src/intentatlas/workspace.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - _package_identity.py|tests/_package_identity.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - conftest.py|tests/conftest.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - fixtures - delivery_project - src - app.py|tests/fixtures/delivery_project/src/app.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - fixtures - evidence_project - src - app.py|tests/fixtures/evidence_project/src/app.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - fixtures - evidence_project - tests - app_check.py|tests/fixtures/evidence_project/tests/app_check.py]] _(boundary; evidence: workspace-boundary)_
@@ -96,6 +98,7 @@ generated: true
 - <code>owns</code> → [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_onboarding_walkthroughs.py|tests/test_onboarding_walkthroughs.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_open_evidence.py|tests/test_open_evidence.py]] _(boundary; evidence: workspace-boundary)_
+- <code>owns</code> → [[Tests/tests - test_package_identity.py|tests/test_package_identity.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_phase17_recommendation_integrity.py|tests/test_phase17_recommendation_integrity.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_phase17f_evidence_integrity.py|tests/test_phase17f_evidence_integrity.py]] _(boundary; evidence: workspace-boundary)_
 - <code>owns</code> → [[Tests/tests - test_property_fuzz.py|tests/test_property_fuzz.py]] _(boundary; evidence: workspace-boundary)_

@@ -15,13 +15,16 @@ the [[Brain/Phase Completion Protocol]] is satisfied and its evidence and review
 The product continues to serve [[Requirements/REQ-001 - Explain change impact]] while remaining
 independent, MIT-licensed, local-first, and vault-first.
 
-## Current execution checkpoint — 2026-09-07
+## Current execution checkpoint — 2026-09-11
 
-- Latest completed delivery: **Phase 20 — Complete change coverage and repeatable browser evidence**.
-- Next queued delivery: **Phase 21 — Reproducible installation and first useful report**.
+- Latest completed delivery: **Phase 21A — Verification integrity**.
+- Active delivery: **Phase 21 — Reproducible installation and first useful report**; its
+  import-identity gate is closed and its packaging, first-run, and governance gates remain open.
 - Forward plan, acceptance gates, risks, and next actions:
   [[Brain/Alpha Release Execution Plan]].
-- Latest working checkpoint: [[Sessions/2026-09-07 - Alpha readiness checkpoint]].
+- Latest working checkpoint: [[Sessions/2026-09-11 - Phase 21A verification integrity]].
+- The Phase 20 browser failure is now explained: it was an import-identity defect in the
+  development environment, not a product defect. Phase 21A removes the ambiguity that produced it.
 - Phase 18 and 19 closure records existed outside this roadmap. They are now linked below;
   Phase 20 records the 2026-09-07 revalidation defects, corrections, and final local pass.
 - Public launch is still contingent on the Phase 11C human-validation and release gates.
@@ -656,9 +659,23 @@ EVD-036 verified and Phase 20 Review passed. Next: Phase 21.
 - Close only after focused regressions, complete tests, lint, typing, security, CLI/browser
   workflows, and deterministic vault verification pass.
 
+## Phase 21A — Verification integrity
+
+Status: complete (2026-09-11). First Phase 21 gate: a run must state which package it verifies.
+
+- Requirement: [[Requirements/REQ-037 - Prove which package and boundaries verification covers]]
+- Decision: [[Decisions/ADR-039 - Declare and derive the verified package identity]]
+- Issue: [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions]]
+- Evidence: [[Evidence/EVD-037 - Phase 21A verification integrity verification]]
+- Review: [[Reviews/Phase 21A Verification Integrity Review]]
+- Outcome: an installed distribution can no longer be mistaken for the working tree in either
+  direction, subprocesses import the package their parent session verified, and the declared
+  `atlas/Private/` change-analysis boundary has executable evidence.
+
 ## Phase 21 — Reproducible installation and first useful report
 
-Status: queued after Phase 20. Detailed gates: [[Brain/Alpha Release Execution Plan]].
+Status: in progress; Phase 21A closed the import-identity gate. Remaining gates:
+[[Brain/Alpha Release Execution Plan]].
 
 - Verify exact candidate artifacts in clean environments and source/package import identity.
 - Validate EN/TR first-run instructions and a real local-repository no-write report.

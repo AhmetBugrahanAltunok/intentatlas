@@ -10,8 +10,8 @@ source_path: "tests/test_browser_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>349</code>
-- **Line:** <code>344</code>
+- **End Line:** <code>350</code>
+- **Line:** <code>345</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_browser_e2e.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_browser_e2e.py|tests/test_browser_e2e.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

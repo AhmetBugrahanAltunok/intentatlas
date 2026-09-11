@@ -30,5 +30,3 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_diagnostic.py|tests/test_diagnostic.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
 - <code>modifies</code> → [[Symbols/AdapterContext.read_text - src - intentatlas - adapters - base.py|AdapterContext.read_text]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_oversized_unscanned_commit_file_uses_safe_file_fallback - tests - test_change_analysis.py|test_oversized_unscanned_commit_file_uses_safe_file_fallback]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_oversized_unscanned_commit_file_uses_safe_file_fallback.git - tests - test_change_analysis.py|test_oversized_unscanned_commit_file_uses_safe_file_fallback.git]] _(history; evidence: git-diff-hunk)_

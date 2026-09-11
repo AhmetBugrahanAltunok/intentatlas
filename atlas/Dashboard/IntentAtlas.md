@@ -11,37 +11,37 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 58
+- **commit:** 60
 - **config:** 8
-- **decision:** 38
+- **decision:** 39
 - **document:** 33
-- **evidence:** 36
+- **evidence:** 37
 - **file:** 49
-- **issue:** 36
+- **issue:** 37
 - **memory:** 12
 - **project:** 3
 - **repository:** 1
-- **requirement:** 36
-- **review:** 36
-- **session:** 17
+- **requirement:** 37
+- **review:** 37
+- **session:** 18
 - **source-root:** 3
-- **symbol:** 1483
-- **test:** 83
-- **relationships:** 4747
+- **symbol:** 1509
+- **test:** 86
+- **relationships:** 4857
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 253 relationships
-- [[Brain/Product Roadmap|Product Roadmap]] — 243 relationships
+- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 249 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 249 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 141 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 112 relationships
-- [[Code/intentatlas|intentatlas]] — 106 relationships
+- [[Code/intentatlas|intentatlas]] — 109 relationships
 - [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] — 85 relationships
 - [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 79 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 77 relationships
+- [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 77 relationships
 - [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 75 relationships
-- [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 75 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 68 relationships
 - [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 66 relationships
 

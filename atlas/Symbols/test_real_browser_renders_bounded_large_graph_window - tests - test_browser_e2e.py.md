@@ -10,8 +10,8 @@ source_path: "tests/test_browser_e2e.py"
 
 ## Metadata
 
-- **End Line:** <code>599</code>
-- **Line:** <code>534</code>
+- **End Line:** <code>600</code>
+- **Line:** <code>535</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,3 +20,4 @@ source_path: "tests/test_browser_e2e.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_browser_e2e.py|tests/test_browser_e2e.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-diff-hunk)_
