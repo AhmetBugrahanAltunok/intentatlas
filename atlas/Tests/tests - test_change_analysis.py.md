@@ -45,6 +45,7 @@ source_path: "tests/test_change_analysis.py"
 
 ## Incoming relationships
 
+- <code>changed-by</code> ← [[Commits/Commit 0e4e8c1 - fix- stop describing a derived vault identity as a declared one|fix: stop describing a derived vault identity as a declared one]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-log)_

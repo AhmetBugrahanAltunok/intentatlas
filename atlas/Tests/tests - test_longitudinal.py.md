@@ -11,7 +11,7 @@ source_path: "tests/test_longitudinal.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11559</code>
+- **Size Bytes:** <code>18234</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -25,7 +25,34 @@ source_path: "tests/test_longitudinal.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/_commit - tests - test_longitudinal.py|_commit]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_drop_schema_version - tests - test_longitudinal.py|_drop_schema_version]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_duplicate_metadata_path - tests - test_longitudinal.py|_duplicate_metadata_path]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_duplicate_project_id - tests - test_longitudinal.py|_duplicate_project_id]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_duplicate_repository - tests - test_longitudinal.py|_duplicate_repository]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_excluded_paths_unbounded - tests - test_longitudinal.py|_excluded_paths_unbounded]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_git - tests - test_longitudinal.py|_git]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_history_limit_not_an_int - tests - test_longitudinal.py|_history_limit_not_an_int]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_history_limit_out_of_range - tests - test_longitudinal.py|_history_limit_out_of_range]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_invalid_license_digest - tests - test_longitudinal.py|_invalid_license_digest]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_invalid_spdx - tests - test_longitudinal.py|_invalid_spdx]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_labels_equal_classifications - tests - test_longitudinal.py|_labels_equal_classifications]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_license_not_an_object - tests - test_longitudinal.py|_license_not_an_object]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_manifest_document - tests - test_longitudinal.py|_manifest_document]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_non_github_repository - tests - test_longitudinal.py|_non_github_repository]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_partition_digest_not_hex - tests - test_longitudinal.py|_partition_digest_not_hex]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_partition_not_object - tests - test_longitudinal.py|_partition_not_object]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_partitions_not_object - tests - test_longitudinal.py|_partitions_not_object]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_project_not_an_object - tests - test_longitudinal.py|_project_not_an_object]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_projects_empty - tests - test_longitudinal.py|_projects_empty]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_projects_not_a_list - tests - test_longitudinal.py|_projects_not_a_list]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_short_revision - tests - test_longitudinal.py|_short_revision]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_unknown_partition - tests - test_longitudinal.py|_unknown_partition]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_unknown_project_key - tests - test_longitudinal.py|_unknown_project_key]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_unknown_top_level_key - tests - test_longitudinal.py|_unknown_top_level_key]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_unsupported_language - tests - test_longitudinal.py|_unsupported_language]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_unsupported_workspace_shape - tests - test_longitudinal.py|_unsupported_workspace_shape]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_wrong_output_policy - tests - test_longitudinal.py|_wrong_output_policy]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_wrong_thresholds - tests - test_longitudinal.py|_wrong_thresholds]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/build_pilot_fixture - tests - test_longitudinal.py|build_pilot_fixture]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_frozen_pilot_metadata_and_benchmark_card_match - tests - test_longitudinal.py|test_frozen_pilot_metadata_and_benchmark_card_match]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_longitudinal_cli_runs_offline - tests - test_longitudinal.py|test_longitudinal_cli_runs_offline]] _(structure; evidence: python-ast)_
@@ -33,6 +60,8 @@ source_path: "tests/test_longitudinal.py"
 - <code>defines</code> → [[Symbols/test_longitudinal_labels_are_strict - tests - test_longitudinal.py|test_longitudinal_labels_are_strict]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_longitudinal_manifest_rejects_duplicate_keys_and_unbounded_history - tests - test_longitudinal.py|test_longitudinal_manifest_rejects_duplicate_keys_and_unbounded_history]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_longitudinal_manifest_rejects_mutated_partition_hash - tests - test_longitudinal.py|test_longitudinal_manifest_rejects_mutated_partition_hash]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_pilot_manifest_refuses_every_malformed_shape - tests - test_longitudinal.py|test_pilot_manifest_refuses_every_malformed_shape]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_the_frozen_pilot_manifest_is_accepted_unmutated - tests - test_longitudinal.py|test_the_frozen_pilot_manifest_is_accepted_unmutated]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/main - src - intentatlas - cli.py|main]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/PilotCase - src - intentatlas - longitudinal.py|PilotCase]] _(verification; evidence: python-symbol-reference)_

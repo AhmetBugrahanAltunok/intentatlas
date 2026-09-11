@@ -244,6 +244,31 @@ def test_longitudinal_cli_runs_offline(tmp_path, capsys) -> None:
             lambda document: document["cases"][0].update(expected_tests=["../test.py"]),
             "Unsafe pilot expected test",
         ),
+        (
+            lambda document: document.update(schema_version="1"),
+            "Unsupported longitudinal pilot label schema",
+        ),
+        (
+            lambda document: document.update(project_id="someone-else"),
+            "do not belong to",
+        ),
+        (
+            lambda document: document.update(label_policy="best-effort"),
+            "label_policy must be",
+        ),
+        (lambda document: document.update(cases=[]), "non-empty case list"),
+        (lambda document: document.update(cases={}), "non-empty case list"),
+        (lambda document: document.update(cases=["case-1"]), "must be an object"),
+        (
+            lambda document: document["cases"][0].update(expected_tests="tests/a.py"),
+            "Expected tests must be a list",
+        ),
+        (
+            lambda document: document["cases"][0].update(
+                expected_tests=["tests/a.py", "tests/a.py"]
+            ),
+            "Duplicate expected test",
+        ),
     ],
 )
 def test_longitudinal_labels_are_strict(tmp_path, mutate, message) -> None:
@@ -307,3 +332,165 @@ def test_frozen_pilot_metadata_and_benchmark_card_match() -> None:
     assert "not general accuracy" in normalized_readme
     assert "duration/savings remain unknown" in normalized_readme
     assert "intentatlas evaluate-longitudinal" in normalized_readme
+
+
+def _manifest_document() -> dict:
+    return json.loads(
+        Path("benchmarks/longitudinal/manifest.json").read_text(encoding="utf-8")
+    )
+
+
+def _drop_schema_version(document: dict) -> None:
+    document["schema_version"] = "1"
+
+
+def _unknown_top_level_key(document: dict) -> None:
+    document["notes"] = "extra"
+
+
+def _wrong_output_policy(document: dict) -> None:
+    document["generated_output_policy"] = "persisted"
+
+
+def _wrong_thresholds(document: dict) -> None:
+    document["thresholds"] = ["low", "high"]
+
+
+def _partitions_not_object(document: dict) -> None:
+    document["partitions"] = []
+
+
+def _unknown_partition(document: dict) -> None:
+    document["partitions"]["holdout"] = {"sha256": "0" * 64}
+
+
+def _partition_not_object(document: dict) -> None:
+    document["partitions"]["evaluation"] = "0" * 64
+
+
+def _partition_digest_not_hex(document: dict) -> None:
+    document["partitions"]["evaluation"]["sha256"] = "z" * 64
+
+
+def _projects_not_a_list(document: dict) -> None:
+    document["projects"] = {}
+
+
+def _projects_empty(document: dict) -> None:
+    document["projects"] = []
+
+
+def _project_not_an_object(document: dict) -> None:
+    document["projects"][0] = "antfu-utils"
+
+
+def _unknown_project_key(document: dict) -> None:
+    document["projects"][0]["notes"] = "extra"
+
+
+def _non_github_repository(document: dict) -> None:
+    document["projects"][0]["repository"] = "https://example.invalid/owner/repo"
+
+
+def _short_revision(document: dict) -> None:
+    document["projects"][0]["revision"] = "91f8cf7"
+
+
+def _unsupported_language(document: dict) -> None:
+    document["projects"][0]["language"] = "cobol"
+
+
+def _unsupported_workspace_shape(document: dict) -> None:
+    document["projects"][0]["workspace_shape"] = "monorepo-of-monorepos"
+
+
+def _history_limit_out_of_range(document: dict) -> None:
+    document["projects"][0]["history_limit"] = 0
+
+
+def _history_limit_not_an_int(document: dict) -> None:
+    document["projects"][0]["history_limit"] = True
+
+
+def _excluded_paths_unbounded(document: dict) -> None:
+    document["projects"][0]["excluded_paths"] = [f"p{index}" for index in range(33)]
+
+
+def _license_not_an_object(document: dict) -> None:
+    document["projects"][0]["license"] = "MIT"
+
+
+def _invalid_spdx(document: dict) -> None:
+    document["projects"][0]["license"]["spdx"] = "MIT OR $$$"
+
+
+def _invalid_license_digest(document: dict) -> None:
+    document["projects"][0]["license"]["sha256"] = "0" * 63
+
+
+def _labels_equal_classifications(document: dict) -> None:
+    document["projects"][0]["classifications"] = document["projects"][0]["labels"]
+
+
+def _duplicate_project_id(document: dict) -> None:
+    document["projects"][1]["id"] = document["projects"][0]["id"]
+
+
+def _duplicate_repository(document: dict) -> None:
+    document["projects"][1]["repository"] = document["projects"][0]["repository"]
+
+
+def _duplicate_metadata_path(document: dict) -> None:
+    document["projects"][1]["labels"] = document["projects"][0]["labels"]
+
+
+@pytest.mark.parametrize(
+    ("mutate", "message"),
+    [
+        (_drop_schema_version, "schema"),
+        (_unknown_top_level_key, "manifest"),
+        (_wrong_output_policy, "generated_output_policy"),
+        (_wrong_thresholds, "thresholds"),
+        (_partitions_not_object, "partitions must be an object"),
+        (_unknown_partition, "partitions"),
+        (_partition_not_object, "must be an object"),
+        (_partition_digest_not_hex, "SHA-256"),
+        (_projects_not_a_list, "non-empty list"),
+        (_projects_empty, "non-empty list"),
+        (_project_not_an_object, "must be an object"),
+        (_unknown_project_key, "project"),
+        (_non_github_repository, "GitHub repository URL"),
+        (_short_revision, "revision"),
+        (_unsupported_language, "Unsupported pilot language"),
+        (_unsupported_workspace_shape, "Unsupported workspace shape"),
+        (_history_limit_out_of_range, "history_limit"),
+        (_history_limit_not_an_int, "history_limit"),
+        (_excluded_paths_unbounded, "excluded_paths"),
+        (_license_not_an_object, "License review"),
+        (_invalid_spdx, "Invalid SPDX"),
+        (_invalid_license_digest, "license SHA-256"),
+        (_labels_equal_classifications, "must differ"),
+        (_duplicate_project_id, "Duplicate pilot project ID"),
+        (_duplicate_repository, "Duplicate pilot repository"),
+        (_duplicate_metadata_path, "Duplicate pilot metadata path"),
+    ],
+)
+def test_pilot_manifest_refuses_every_malformed_shape(tmp_path, mutate, message) -> None:
+    document = _manifest_document()
+    mutate(document)
+    path = tmp_path / "manifest.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+
+    with pytest.raises(ValueError, match=message):
+        load_pilot_manifest(path)
+
+
+def test_the_frozen_pilot_manifest_is_accepted_unmutated(tmp_path) -> None:
+    path = tmp_path / "manifest.json"
+    path.write_text(json.dumps(_manifest_document()), encoding="utf-8")
+
+    manifest = load_pilot_manifest(path)
+
+    assert manifest.projects
+    assert len(manifest.projects) == len({project.id for project in manifest.projects})
+    assert set(manifest.partition_hashes) == {"calibration", "evaluation"}

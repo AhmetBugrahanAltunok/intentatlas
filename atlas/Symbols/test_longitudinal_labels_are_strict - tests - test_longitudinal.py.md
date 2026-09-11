@@ -10,7 +10,7 @@ source_path: "tests/test_longitudinal.py"
 
 ## Metadata
 
-- **End Line:** <code>258</code>
+- **End Line:** <code>283</code>
 - **Line:** <code>231</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>

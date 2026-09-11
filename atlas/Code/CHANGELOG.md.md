@@ -21,6 +21,7 @@ source_path: "CHANGELOG.md"
 
 - <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 0e4e8c1 - fix- stop describing a derived vault identity as a declared one|fix: stop describing a derived vault identity as a declared one]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_

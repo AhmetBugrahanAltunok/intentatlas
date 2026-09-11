@@ -20,3 +20,4 @@ source_path: "src/intentatlas/change_analysis.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 0e4e8c1 - fix- stop describing a derived vault identity as a declared one|fix: stop describing a derived vault identity as a declared one]] _(history; evidence: git-diff-hunk)_

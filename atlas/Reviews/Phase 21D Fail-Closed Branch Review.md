@@ -6,7 +6,7 @@ phase: 21D
 ---
 # Phase 21D Fail-Closed Branch Review
 
-Decision: **passed, 2026-09-11**. 641 passed, 4 platform skips, exit 0, 87.70% branch-enabled
+Decision: **passed, 2026-09-11**. 678 passed, 4 platform skips, exit 0, 88.12% branch-enabled
 total coverage. Ruff, mypy and Bandit passed. No runtime module was modified; this sub-phase adds
 evidence for behaviour that already existed.
 
@@ -18,9 +18,11 @@ contract that no in-process test ever called. `bounded_process.py` had seven dis
 exits, most unproven. `change_set.py`'s text renderer had no direct test at all.
 
 After: the viewer's served surface is exercised over real HTTP in process, every bounded-process
-refusal has a case, ChangeSet rendering and freshness abstention are pinned, and acquisition's
-local-protocol refusal has its first test. The aggregate moved little — 86.47% to 87.70% —
-which is the point: the modules that moved are the ones whose uncovered lines were load-bearing.
+refusal has a case, ChangeSet rendering and freshness abstention are pinned, acquisition's
+local-protocol refusal has its first test, and the longitudinal pilot's strict loaders are
+exercised against the real frozen manifest rather than a fixture. The aggregate moved little —
+86.47% to 88.12% — which is the point: the modules that moved are the ones whose uncovered
+lines were load-bearing.
 
 ## Worth keeping
 
@@ -51,7 +53,7 @@ Coverage is not correctness. These tests fix current behaviour at the boundaries
 argue the boundaries are correctly chosen. The residual `bounded_process.py` gap is platform-gated
 in both directions and cannot be closed on one operating system without mocking the operating
 system, which would prove the mock. `acquisition.py`'s clone path needs a real remote.
-`longitudinal.py` at 75% was not addressed and remains available work.
+`longitudinal.py` reached 81%; its remainder is analysis helpers rather than safety boundaries.
 
 ## Links
 

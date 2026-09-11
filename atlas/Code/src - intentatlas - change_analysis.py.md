@@ -49,6 +49,7 @@ source_path: "src/intentatlas/change_analysis.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 0e4e8c1 - fix- stop describing a derived vault identity as a declared one|fix: stop describing a derived vault identity as a declared one]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>implements</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(implementation; evidence: wikilink)_
 - <code>implements</code> ← [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions|ISSUE-037 - Add the package identity gate and vault boundary regressions]] _(implementation; evidence: wikilink)_

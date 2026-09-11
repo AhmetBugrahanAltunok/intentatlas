@@ -6,8 +6,8 @@ phase: 21D
 ---
 # Phase 21D fail-closed branch verification
 
-Local decision: **verified, 2026-09-11**. Complete suite: **641 passed, 4 skipped**, exit **0**,
-branch-enabled total coverage **87.70%**, duration **165.62s**. Ruff, mypy (50 source files) and
+Local decision: **verified, 2026-09-11**. Complete suite: **678 passed, 4 skipped**, exit **0**,
+branch-enabled total coverage **88.12%**. Ruff, mypy (50 source files) and
 Bandit over `src` and `tools` passed. No runtime module was modified.
 
 ## Why these modules
@@ -26,9 +26,10 @@ hiding the fact that the fail-closed behaviour itself was the least proven part 
 | `change_set.py` | 78% | 86% |
 | `change_analysis.py` (Phase 21A) | 66% | 84% |
 | `acquisition.py` | 76% | 78% |
-| Project total | 86.47% | 87.70% |
+| `longitudinal.py` | 75% | 81% |
+| Project total | 86.47% | 88.12% |
 
-Suite size moved from 612 to 641 collected passes; the 29 additions are the regressions listed
+Suite size moved from 612 to 678 collected passes; the 66 additions are the regressions listed
 below. The remaining `bounded_process.py` gap is platform-gated: the POSIX process-group kill is
 unreachable on Windows and the Windows Job Object and thread-resume ctypes paths are unreachable
 on POSIX. Neither can be covered on one platform without mocking the operating system, which
@@ -84,6 +85,21 @@ Covering it offline would mean relaxing `protocol.file.allow`, which would test 
 configuration rather than the shipped one. It is left uncovered deliberately; the honest way to
 exercise it is the networked acquisition path against a real public repository.
 
+**Longitudinal pilot, 37 cases.** The three strict loaders refuse malformed input at roughly
+forty distinct points, almost none of which were exercised. A parameterised suite mutates the real
+frozen `benchmarks/longitudinal/manifest.json` twenty-six ways — wrong schema type, unknown keys at
+both levels, wrong output policy and thresholds, malformed partitions and digests, a non-GitHub
+repository, a short revision, unsupported language and workspace shape, an out-of-range and a
+boolean `history_limit`, unbounded exclusions, a malformed SPDX identifier and licence digest,
+labels equal to classifications, and duplicate IDs, repositories and metadata paths. Each must be
+refused. One companion case asserts the unmutated frozen manifest is still accepted, so the suite
+cannot pass by refusing everything.
+
+The labels loader gained nine further mutations covering schema type, project mismatch, label
+policy, empty and non-list case collections, a non-object case, and non-list or duplicated expected
+tests. `longitudinal.py` moved 75% to 81%; the remainder is the classifications loader and the
+cohort aggregation helpers.
+
 ## A test that initially passed for the wrong reason
 
 The uncollectable-child case was written against what looked like the process-wait failure block
@@ -97,8 +113,9 @@ Recorded because a passing assertion was not by itself evidence that the intende
 
 - Coverage is not correctness. These tests pin current behaviour at the boundaries; they do not
   establish that the chosen boundaries are the right ones.
-- `longitudinal.py` at 75% was not addressed. `acquisition.py`'s residual gap is structural,
-  as described above, rather than a matter of missing effort.
+- `acquisition.py`'s residual gap is structural, as described above, rather than a matter of
+  missing effort. `longitudinal.py`'s remaining gap is the classifications loader and cohort
+  aggregation, which are analysis helpers rather than safety boundaries.
 - One platform and one interpreter. The platform-gated branches above need the remote matrix.
 
 ## Links

@@ -6,8 +6,8 @@ phase: 21C
 ---
 # Resolve the documentation divergence decisions
 
-Three documentation questions are open. They interact, so they should be decided together rather
-than closed one at a time. All three are project-owner decisions, not implementation work.
+Four conventions questions are open. They interact, so they should be decided together rather
+than closed one at a time. All four are project-owner decisions, not implementation work.
 
 - [ ] **English README length.** 675 lines. The first-run path competes with capability lists,
   command reference, status, and inspiration sections. The Phase 22 gate targets a below-ten-minute
@@ -21,6 +21,16 @@ than closed one at a time. All three are project-owner decisions, not implementa
   tracked files under `atlas/` against 51 under `src/`. Compare tracked snapshots, artifact
   publication, and local-only generation on durable-link preservation and migration cost. Do not
   bulk delete or untrack.
+- [ ] **Durable relation vocabulary.** The durable notes use `delivered-by::`, `reviewed-by::`,
+  `extends::`, and `planned-in::`. None are in the accepted relation catalog, so each degrades to a
+  generic `references` edge. No link is lost, but the intent chain carries less meaning than the
+  notes appear to declare — which matters for a product whose contract is that links group by
+  meaning. Two of the four already have catalog equivalents: `tracked-by` covers intent tracked by
+  a delivery item, and `recorded-in` covers a note recorded in a plan. `reviewed-by` and `extends`
+  have none. Options: add the missing relations to the catalog, or rewrite the notes onto existing
+  vocabulary. Either is a migration across roughly 40 durable notes and should not be applied
+  piecemeal. Recorded in the Phase 21A review; `drives::` and `proved-by::` already resolve as
+  typed, so the convention is inconsistent rather than uniformly wrong.
 
 Installation and post-failure recovery instructions are already identical across both languages;
 that was verified in EVD-039 and needs no change.

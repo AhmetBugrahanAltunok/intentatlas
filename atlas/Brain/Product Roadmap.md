@@ -711,7 +711,8 @@ Status: complete (2026-09-11). Verification only; no runtime module changed.
 - Outcome: the viewer's served routes and bounded error contract, the bounded-process refusal
   paths including a descendant holding the stdout pipe after a clean exit, and ChangeSet
   rendering and freshness abstention now have executable evidence. `viewer.py` 62% to 99%,
-  `bounded_process.py` 79% to 87%, `change_set.py` 78% to 86%, total 87.70%. Source
+  `bounded_process.py` 79% to 87%, `change_set.py` 78% to 86%, `longitudinal.py` 75% to 81%,
+  total 88.12%. Source
   acquisition's refusal of local and `file://` origins gained its first regression; its clone
   path is structurally uncoverable offline and is recorded as such rather than worked around.
 

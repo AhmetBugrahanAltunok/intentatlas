@@ -62,6 +62,7 @@ source_path: "tests/test_scanner.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 0e4e8c1 - fix- stop describing a derived vault identity as a declared one|fix: stop describing a derived vault identity as a declared one]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 49619ea - feat- complete trustworthy foundation phase|feat: complete trustworthy foundation phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7e8623a - fix- enforce private-safe analysis boundaries|fix: enforce private-safe analysis boundaries]] _(history; evidence: git-log)_

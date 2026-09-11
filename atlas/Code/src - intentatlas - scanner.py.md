@@ -101,6 +101,7 @@ source_path: "src/intentatlas/scanner.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 042c1dd - feat- import local delivery context|feat: import local delivery context]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 0e4e8c1 - fix- stop describing a derived vault identity as a declared one|fix: stop describing a derived vault identity as a declared one]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 45922df - feat- import verification evidence and diff graphs|feat: import verification evidence and diff graphs]] _(history; evidence: git-log)_

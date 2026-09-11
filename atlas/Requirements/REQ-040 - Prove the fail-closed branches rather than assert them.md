@@ -34,6 +34,8 @@ documented claim.
 - Source acquisition refuses local and `file://` origins, so a reachable on-disk repository
   stays unacquirable, and the fixed Git argument list carries the protocol and redirect
   settings that enforce it.
+- The longitudinal pilot's strict loaders refuse every malformed manifest and label shape they
+  document, exercised against the real frozen manifest, while still accepting it unmutated.
 - The full suite, Ruff, mypy, and Bandit pass with no runtime module modified.
 
 ## Links
