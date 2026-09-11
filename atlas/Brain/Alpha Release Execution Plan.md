@@ -87,7 +87,9 @@ taslak işler yapılmış gibi işaretlenmez.
 
 ## Faz 21 için somut kontrol listesi
 
-- [ ] Değişiklik envanterini Faz 18/19/20 olarak ayır; izlenmeyen gerekli dosyaları kaybetme.
+- [x] Değişiklik envanterini Faz 18/19/20 olarak ayır; izlenmeyen gerekli dosyaları kaybetme.
+  Git geçmişinden türetildi: [[Brain/Release Candidate Inventory]]. 75 benzersiz dosya;
+  faz başına sayılar 98 ediyor çünkü 22 dosya birden fazla fazda değişti — toplanmamalı.
 - [x] Testin güncel `src` kodunu, paket testinin ise tam seçilen wheel'i yüklediğini doğrula.
   Faz 21A'da kapatıldı: `INTENTATLAS_TEST_PACKAGE` beyanı, oturum başında kapanan kapı ve
   içe aktarılan modülden türetilen alt süreç ortamı. Ayrıntı:

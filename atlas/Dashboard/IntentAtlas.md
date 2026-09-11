@@ -18,7 +18,7 @@ generated: true
 - **evidence:** 39
 - **file:** 49
 - **issue:** 39
-- **memory:** 12
+- **memory:** 13
 - **project:** 3
 - **repository:** 1
 - **requirement:** 39
@@ -27,7 +27,7 @@ generated: true
 - **source-root:** 3
 - **symbol:** 1509
 - **test:** 86
-- **relationships:** 4919
+- **relationships:** 4925
 - **orphaned durable notes:** 0
 
 ## Most connected
