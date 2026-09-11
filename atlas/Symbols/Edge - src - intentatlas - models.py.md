@@ -59,3 +59,4 @@ source_path: "src/intentatlas/models.py"
 - <code>tested-by</code> ← [[Tests/tests - test_review.py|tests/test_review.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_scan_cache.py|tests/test_scan_cache.py]] _(verification; evidence: python-symbol-reference)_
 - <code>tested-by</code> ← [[Tests/tests - test_vault.py|tests/test_vault.py]] _(verification; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(verification; evidence: python-symbol-reference)_

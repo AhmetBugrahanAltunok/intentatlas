@@ -11,7 +11,7 @@ source_path: "tests/test_viewer.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>8966</code>
+- **Size Bytes:** <code>15956</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -24,13 +24,27 @@ source_path: "tests/test_viewer.py"
 
 ## Outgoing relationships
 
+- <code>defines</code> → [[Symbols/_RunningViewer - tests - test_viewer.py|_RunningViewer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_RunningViewer.__init__ - tests - test_viewer.py|_RunningViewer.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_RunningViewer.__init__.CapturingServer - tests - test_viewer.py|_RunningViewer.__init__.CapturingServer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_RunningViewer.__init__.CapturingServer.__init__ - tests - test_viewer.py|_RunningViewer.__init__.CapturingServer.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_RunningViewer.close - tests - test_viewer.py|_RunningViewer.close]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_RunningViewer.get - tests - test_viewer.py|_RunningViewer.get]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_RunningViewer.json - tests - test_viewer.py|_RunningViewer.json]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_connected_graph_document - tests - test_viewer.py|_connected_graph_document]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_graph_document - tests - test_viewer.py|_graph_document]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/running_viewer - tests - test_viewer.py|running_viewer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/running_viewer.start - tests - test_viewer.py|running_viewer.start]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_graph_query_routes_serve_the_served_snapshot - tests - test_viewer.py|test_graph_query_routes_serve_the_served_snapshot]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer.__init__ - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.CapturingServer.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.response_status - tests - test_viewer.py|test_localhost_alias_accepts_localhost_host_headers_and_rejects_foreign.response_status]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns - tests - test_viewer.py|test_loopback_server_binding_does_not_require_reverse_dns.reject_reverse_dns]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_malformed_graph_query_returns_a_bounded_error_not_a_traceback - tests - test_viewer.py|test_malformed_graph_query_returns_a_bounded_error_not_a_traceback]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_optional_report_endpoints_appear_only_when_supplied - tests - test_viewer.py|test_optional_report_endpoints_appear_only_when_supplied]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_packaged_assets_are_served_with_their_content_types - tests - test_viewer.py|test_packaged_assets_are_served_with_their_content_types]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output.FakeServer - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output.FakeServer]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_flushes_url_for_redirected_output.FakeServer.__init__ - tests - test_viewer.py|test_serve_graph_flushes_url_for_redirected_output.FakeServer.__init__]] _(structure; evidence: python-ast)_
@@ -46,9 +60,13 @@ source_path: "tests/test_viewer.py"
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.serve_forever - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.serve_forever]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.FakeServer.server_close - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.FakeServer.server_close]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_serve_graph_starts_and_closes_server.fake_server - tests - test_viewer.py|test_serve_graph_starts_and_closes_server.fake_server]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unknown_routes_are_refused - tests - test_viewer.py|test_unknown_routes_are_refused]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unparsable_graph_document_fails_closed - tests - test_viewer.py|test_unparsable_graph_document_fails_closed]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_viewer_assets_are_packaged - tests - test_viewer.py|test_viewer_assets_are_packaged]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - viewer.py|src/intentatlas/viewer.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/AtlasGraph - src - intentatlas - graph.py|AtlasGraph]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Edge - src - intentatlas - models.py|Edge]] _(verification; evidence: python-symbol-reference)_
+- <code>tests</code> → [[Symbols/Node - src - intentatlas - models.py|Node]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/LoopbackHTTPServer - src - intentatlas - viewer.py|LoopbackHTTPServer]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/serve_graph - src - intentatlas - viewer.py|serve_graph]] _(verification; evidence: python-symbol-reference)_
 

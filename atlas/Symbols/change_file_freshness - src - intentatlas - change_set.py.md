@@ -21,3 +21,4 @@ source_path: "src/intentatlas/change_set.py"
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - change_set.py|src/intentatlas/change_set.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - change_analysis.py|src/intentatlas/change_analysis.py]] _(structure; evidence: python-symbol-reference)_
+- <code>tested-by</code> ← [[Tests/tests - test_change_set.py|tests/test_change_set.py]] _(verification; evidence: python-symbol-reference)_

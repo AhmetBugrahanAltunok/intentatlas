@@ -10,6 +10,7 @@ import pytest
 
 import intentatlas.viewer as viewer
 from intentatlas.graph import AtlasGraph
+from intentatlas.models import Edge, Node
 
 
 def _graph_document() -> str:
@@ -240,3 +241,182 @@ def test_loopback_server_binding_does_not_require_reverse_dns(monkeypatch) -> No
         assert server.server_port == server.server_address[1]
     finally:
         server.server_close()
+
+
+def _connected_graph_document() -> bytes:
+    graph = AtlasGraph()
+    graph.add_node(Node(id="REQ-1", kind="requirement", label="Explain impact", path=None))
+    graph.add_node(Node(id="file:src/app.py", kind="file", label="app.py", path="src/app.py"))
+    graph.add_node(
+        Node(
+            id="file:tests/test_app.py",
+            kind="test",
+            label="test_app.py",
+            path="tests/test_app.py",
+        )
+    )
+    graph.add_edge(
+        Edge(
+            source="REQ-1",
+            target="file:src/app.py",
+            relation="implemented-by",
+            evidence="wikilink",
+        )
+    )
+    graph.add_edge(
+        Edge(
+            source="file:tests/test_app.py",
+            target="file:src/app.py",
+            relation="tests",
+            evidence="python-ast",
+        )
+    )
+    return json.dumps(graph.to_dict()).encode("utf-8")
+
+
+class _RunningViewer:
+    """Serve one in-memory graph on loopback for the duration of a test."""
+
+    def __init__(self, monkeypatch, **options) -> None:  # noqa: ANN001, ANN003
+        original = viewer.LoopbackHTTPServer
+        ready = threading.Event()
+        captured: dict[str, viewer.LoopbackHTTPServer] = {}
+
+        class CapturingServer(original):
+            def __init__(self, *args, **kwargs):  # noqa: ANN002, ANN003
+                super().__init__(*args, **kwargs)
+                captured["server"] = self
+                ready.set()
+
+        monkeypatch.setattr(viewer, "LoopbackHTTPServer", CapturingServer)
+        self._thread = threading.Thread(
+            target=lambda: viewer.serve_graph(None, port=0, open_browser=False, **options),
+            daemon=True,
+        )
+        self._thread.start()
+        assert ready.wait(timeout=5)
+        self._server = captured["server"]
+        self.port = self._server.server_address[1]
+
+    def get(self, path: str) -> tuple[int, bytes]:
+        connection = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+        try:
+            connection.request("GET", path)
+            response = connection.getresponse()
+            return response.status, response.read()
+        finally:
+            connection.close()
+
+    def json(self, path: str) -> tuple[int, object]:
+        status, body = self.get(path)
+        return status, json.loads(body.decode("utf-8"))
+
+    def close(self) -> None:
+        self._server.shutdown()
+        self._thread.join(timeout=5)
+
+
+@pytest.fixture
+def running_viewer(monkeypatch):  # noqa: ANN001, ANN201
+    servers: list[_RunningViewer] = []
+
+    def start(**options):  # noqa: ANN003, ANN202
+        server = _RunningViewer(monkeypatch, **options)
+        servers.append(server)
+        return server
+
+    yield start
+    for server in servers:
+        server.close()
+
+
+def test_graph_query_routes_serve_the_served_snapshot(running_viewer) -> None:  # noqa: ANN001
+    document = _connected_graph_document()
+    server = running_viewer(graph_document=document)
+
+    status, overview = server.json("/api/graph/overview")
+    assert status == 200
+    assert {node["id"] for node in overview["nodes"]} == {
+        "REQ-1",
+        "file:src/app.py",
+        "file:tests/test_app.py",
+    }
+
+    status, search = server.json("/api/graph/search?q=test_app")
+    assert status == 200
+    assert any(node["id"] == "file:tests/test_app.py" for node in search["nodes"])
+
+    status, neighborhood = server.json("/api/graph/neighborhood?id=file:src/app.py&depth=1")
+    assert status == 200
+    assert "file:src/app.py" in {node["id"] for node in neighborhood["nodes"]}
+
+    status, paths = server.json("/api/graph/paths?start=REQ-1")
+    assert status == 200
+    assert any(
+        path["destination"]["id"] == "file:tests/test_app.py" for path in paths["paths"]
+    )
+
+    status, raw = server.json("/graph.json")
+    assert status == 200
+    assert raw == json.loads(document.decode("utf-8"))
+
+
+def test_unparsable_graph_document_fails_closed() -> None:
+    with pytest.raises(ValueError, match="Cannot parse viewer graph"):
+        viewer.serve_graph(None, graph_document=b"{not json", open_browser=False)
+    with pytest.raises(ValueError, match="Cannot parse viewer graph"):
+        viewer.serve_graph(None, graph_document=b"\xff\xfe", open_browser=False)
+
+
+def test_malformed_graph_query_returns_a_bounded_error_not_a_traceback(
+    running_viewer,
+) -> None:  # noqa: ANN001
+    server = running_viewer(graph_document=_connected_graph_document())
+
+    for path in (
+        "/api/graph/overview?node_limit=many",
+        "/api/graph/overview?node_limit=-1",
+        "/api/graph/overview?node_limit=1&node_limit=2",
+        "/api/graph/search",
+        "/api/graph/search?q=a&q=b",
+        "/api/graph/neighborhood?id=file:src/app.py&depth=deep",
+        "/api/graph/paths?start=REQ-1&visited_limit=%D9%A3",  # Arabic-Indic digit three
+    ):
+        status, payload = server.json(path)
+        assert status == 400, path
+        assert payload["schema_version"] == 1
+        assert payload["error"]
+        assert "Traceback" not in payload["error"]
+
+
+def test_unknown_routes_are_refused(running_viewer) -> None:  # noqa: ANN001
+    server = running_viewer(graph_document=_connected_graph_document())
+    for path in ("/api/graph/unknown", "/nope", "/api/report/change", "/review.json"):
+        status, _ = server.get(path)
+        assert status == 404, path
+
+
+def test_optional_report_endpoints_appear_only_when_supplied(running_viewer) -> None:  # noqa: ANN001
+    change = json.dumps({"schema_version": 1, "kind": "change"}).encode("utf-8")
+    review = json.dumps({"schema_version": 1, "kind": "review"}).encode("utf-8")
+    server = running_viewer(
+        graph_document=_connected_graph_document(),
+        change_report_document=change,
+        review_document=review,
+    )
+    for path in ("/api/report/change", "/change-report.json"):
+        status, payload = server.json(path)
+        assert (status, payload["kind"]) == (200, "change")
+    for path in ("/api/report/review", "/review.json"):
+        status, payload = server.json(path)
+        assert (status, payload["kind"]) == (200, "review")
+
+
+def test_packaged_assets_are_served_with_their_content_types(running_viewer) -> None:  # noqa: ANN001
+    server = running_viewer(graph_document=_connected_graph_document())
+    status, body = server.get("/")
+    assert status == 200
+    assert b"IntentAtlas" in body
+    for route in ("/app.js", "/styles.css"):
+        status, body = server.get(route)
+        assert (status, bool(body)) == (200, True), route

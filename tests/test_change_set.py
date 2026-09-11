@@ -12,6 +12,9 @@ import intentatlas.bounded_process as bounded_process_module
 import intentatlas.change_set as change_set_module
 from intentatlas.change_set import (
     ChangeFile,
+    ChangeSet,
+    DiffHunk,
+    change_file_freshness,
     collect_change_set,
     parse_name_status,
     render_change_set,
@@ -209,3 +212,120 @@ def test_collect_change_set_rejects_invalid_scope_and_revision(tmp_path) -> None
         collect_change_set(tmp_path, scope="commit", revision="--output=/tmp/x")
     with pytest.raises(ValueError, match="requires both base and head"):
         collect_change_set(tmp_path, scope="range", base="HEAD")
+
+
+def _change_set(**overrides):  # noqa: ANN003, ANN202
+    fields = {
+        "scope": "commit",
+        "base_revision": "a" * 40,
+        "head_revision": "b" * 40,
+        "files": (
+            ChangeFile("modified", "src/app.py", None, (DiffHunk("src/app.py", 4, 3),)),
+            ChangeFile("renamed", "src/new.py", "src/old.py", ()),
+        ),
+    }
+    fields.update(overrides)
+    return ChangeSet(**fields)
+
+
+def test_text_rendering_shows_scope_revisions_counts_and_ranges() -> None:
+    rendered = render_change_set(_change_set())
+
+    assert rendered.splitlines() == [
+        "Change set: commit",
+        f"Base revision: {'a' * 40}",
+        f"Head revision: {'b' * 40}",
+        "Files: 2, hunks: 1",
+        "- modified: src/app.py — lines 4+3",
+        "- renamed: src/new.py (from src/old.py)",
+    ]
+
+
+def test_text_rendering_states_absent_revisions_explicitly() -> None:
+    rendered = render_change_set(
+        _change_set(scope="worktree", base_revision=None, head_revision=None, files=())
+    )
+
+    assert "Base revision: none" in rendered
+    assert "Head revision: none" in rendered
+    assert "Files: 0, hunks: 0" in rendered
+
+
+def test_rendering_refuses_an_unknown_output_format() -> None:
+    with pytest.raises(ValueError, match="Unknown change-set output format"):
+        render_change_set(_change_set(), "yaml")
+
+
+def test_json_and_text_renderings_describe_the_same_change_set() -> None:
+    change_set = _change_set()
+    payload = json.loads(render_change_set(change_set, "json"))
+
+    assert payload["scope"] == change_set.scope
+    assert payload["file_count"] == len(change_set.files)
+    assert payload["hunk_count"] == change_set.hunk_count
+    assert [item["path"] for item in payload["files"]] == [
+        item.path for item in change_set.files
+    ]
+
+
+def test_collect_refuses_unknown_scopes_and_non_repositories(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="Unknown change scope"):
+        collect_change_set(tmp_path, scope="everything")
+    with pytest.raises(ValueError, match="not a Git repository"):
+        collect_change_set(tmp_path, scope="worktree")
+
+
+def test_collect_refuses_missing_git(tmp_path: Path, monkeypatch) -> None:
+    (tmp_path / ".git").mkdir()
+    monkeypatch.setattr(change_set_module.shutil, "which", lambda name: None)
+    with pytest.raises(ValueError, match="Git is required"):
+        collect_change_set(tmp_path, scope="worktree")
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_commit_scope_requires_exactly_one_revision(tmp_path: Path) -> None:
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    for arguments in (
+        {},
+        {"revision": "HEAD", "base": "HEAD~1"},
+        {"revision": "HEAD", "head": "HEAD"},
+    ):
+        with pytest.raises(ValueError, match="exactly one revision"):
+            collect_change_set(tmp_path, scope="commit", **arguments)
+
+
+def test_worktree_scope_is_aligned_without_consulting_git(tmp_path: Path) -> None:
+    item = ChangeFile("modified", "src/app.py", None, ())
+    assert change_file_freshness(tmp_path, _change_set(scope="worktree"), item) == "aligned"
+
+
+def test_unmerged_and_unresolvable_artifacts_abstain(tmp_path: Path) -> None:
+    unmerged = ChangeFile("unmerged", "src/app.py", None, ())
+    assert change_file_freshness(tmp_path, _change_set(), unmerged) == "unknown"
+
+    missing = ChangeFile("modified", "src/absent.py", None, ())
+    assert change_file_freshness(tmp_path, _change_set(), missing) == "unknown"
+
+    no_head = _change_set(scope="commit", head_revision=None)
+    present = tmp_path / "src"
+    present.mkdir()
+    (present / "app.py").write_text("x = 1\n", encoding="utf-8")
+    item = ChangeFile("modified", "src/app.py", None, ())
+    assert change_file_freshness(tmp_path, no_head, item) == "unknown"
+
+
+def test_deletion_freshness_depends_on_the_artifact_being_gone(tmp_path: Path) -> None:
+    deleted = ChangeFile("deleted", "src/gone.py", None, ())
+    assert change_file_freshness(tmp_path, _change_set(), deleted) == "aligned"
+
+    (tmp_path / "src").mkdir(exist_ok=True)
+    (tmp_path / "src" / "gone.py").write_text("still here\n", encoding="utf-8")
+    assert change_file_freshness(tmp_path, _change_set(), deleted) == "stale"
+
+
+def test_freshness_abstains_without_git(tmp_path: Path, monkeypatch) -> None:
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src" / "app.py").write_text("x = 1\n", encoding="utf-8")
+    monkeypatch.setattr(change_set_module.shutil, "which", lambda name: None)
+    item = ChangeFile("modified", "src/app.py", None, ())
+    assert change_file_freshness(tmp_path, _change_set(), item) == "unknown"

@@ -10,8 +10,8 @@ source_path: "tests/test_change_set.py"
 
 ## Metadata
 
-- **End Line:** <code>84</code>
-- **Line:** <code>81</code>
+- **End Line:** <code>87</code>
+- **Line:** <code>84</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_change_set.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_change_set.py|tests/test_change_set.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

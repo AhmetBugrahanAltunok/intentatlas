@@ -11,7 +11,7 @@ source_path: "tests/test_bounded_process.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>4567</code>
+- **Size Bytes:** <code>10708</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -31,7 +31,31 @@ source_path: "tests/test_bounded_process.py"
 - <code>defines</code> → [[Symbols/test_bounded_process_stops_on_timeout - tests - test_bounded_process.py|test_bounded_process_stops_on_timeout]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_bounded_process_stops_stdout_overflow_during_collection - tests - test_bounded_process.py|test_bounded_process_stops_stdout_overflow_during_collection]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_bounded_process_timeout_does_not_wait_for_descendant_pipe_writer - tests - test_bounded_process.py|test_bounded_process_timeout_does_not_wait_for_descendant_pipe_writer]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_containment_failure_terminates_the_child_and_fails_closed - tests - test_bounded_process.py|test_containment_failure_terminates_the_child_and_fails_closed]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_containment_failure_terminates_the_child_and_fails_closed.record - tests - test_bounded_process.py|test_containment_failure_terminates_the_child_and_fails_closed.record]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_containment_failure_terminates_the_child_and_fails_closed.refuse - tests - test_bounded_process.py|test_containment_failure_terminates_the_child_and_fails_closed.refuse]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_missing_stdout_pipe_fails_closed - tests - test_bounded_process.py|test_missing_stdout_pipe_fails_closed]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_missing_stdout_pipe_fails_closed._NoPipe - tests - test_bounded_process.py|test_missing_stdout_pipe_fails_closed._NoPipe]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_missing_stdout_pipe_fails_closed._NoPipe.__getattr__ - tests - test_bounded_process.py|test_missing_stdout_pipe_fails_closed._NoPipe.__getattr__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_missing_stdout_pipe_fails_closed._NoPipe.__init__ - tests - test_bounded_process.py|test_missing_stdout_pipe_fails_closed._NoPipe.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_negative_stdout_allowance_is_refused_before_starting_anything - tests - test_bounded_process.py|test_negative_stdout_allowance_is_refused_before_starting_anything]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_surviving_pipe_holder_after_a_clean_exit_fails_closed - tests - test_bounded_process.py|test_surviving_pipe_holder_after_a_clean_exit_fails_closed]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_uncollectable_child_fails_closed - tests - test_bounded_process.py|test_uncollectable_child_fails_closed]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_uncollectable_child_fails_closed._UnwaitableProcess - tests - test_bounded_process.py|test_uncollectable_child_fails_closed._UnwaitableProcess]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_uncollectable_child_fails_closed._UnwaitableProcess.__getattr__ - tests - test_bounded_process.py|test_uncollectable_child_fails_closed._UnwaitableProcess.__getattr__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_uncollectable_child_fails_closed._UnwaitableProcess.__init__ - tests - test_bounded_process.py|test_uncollectable_child_fails_closed._UnwaitableProcess.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_uncollectable_child_fails_closed._UnwaitableProcess.wait - tests - test_bounded_process.py|test_uncollectable_child_fails_closed._UnwaitableProcess.wait]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed._BrokenPipe - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed._BrokenPipe]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed._BrokenPipe.__init__ - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed._BrokenPipe.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed._BrokenPipe.close - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed._BrokenPipe.close]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed._BrokenPipe.read - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed._BrokenPipe.read]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed._BrokenStdout - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed._BrokenStdout]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed._BrokenStdout.__getattr__ - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed._BrokenStdout.__getattr__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unreadable_stdout_fails_closed._BrokenStdout.__init__ - tests - test_bounded_process.py|test_unreadable_stdout_fails_closed._BrokenStdout.__init__]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_unstartable_command_fails_closed - tests - test_bounded_process.py|test_unstartable_command_fails_closed]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_windows_process_tree_uses_a_kill_on_close_job - tests - test_bounded_process.py|test_windows_process_tree_uses_a_kill_on_close_job]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_zero_allowance_refuses_any_output - tests - test_bounded_process.py|test_zero_allowance_refuses_any_output]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - bounded_process.py|src/intentatlas/bounded_process.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/ProcessCollectionError - src - intentatlas - bounded_process.py|ProcessCollectionError]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/ProcessOutputLimitError - src - intentatlas - bounded_process.py|ProcessOutputLimitError]] _(verification; evidence: python-symbol-reference)_

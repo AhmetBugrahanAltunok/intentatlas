@@ -15,25 +15,25 @@ generated: true
 - **config:** 8
 - **decision:** 39
 - **document:** 33
-- **evidence:** 39
+- **evidence:** 40
 - **file:** 49
 - **issue:** 39
 - **memory:** 13
 - **project:** 3
 - **repository:** 1
-- **requirement:** 39
-- **review:** 39
+- **requirement:** 40
+- **review:** 40
 - **session:** 20
 - **source-root:** 3
-- **symbol:** 1509
+- **symbol:** 1561
 - **test:** 86
-- **relationships:** 4925
+- **relationships:** 4967
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 257 relationships
-- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 249 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 260 relationships
+- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 221 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 141 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 112 relationships
 - [[Code/intentatlas|intentatlas]] — 109 relationships

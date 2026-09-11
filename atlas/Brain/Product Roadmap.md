@@ -17,7 +17,7 @@ independent, MIT-licensed, local-first, and vault-first.
 
 ## Current execution checkpoint — 2026-09-11
 
-- Latest completed delivery: **Phase 21C — First-run walkthrough from a verified candidate**.
+- Latest completed delivery: **Phase 21D — Fail-closed branch evidence**.
   Phase 21A is complete; Phase 21B holds a conditional pass whose only remaining condition is the
   remote platform matrix.
 - Active delivery: **Phase 21 — Reproducible installation and first useful report**. Its
@@ -700,6 +700,18 @@ Status: complete (2026-09-11). Implementer walkthrough, not human pilot evidence
   reported exact changed-symbol state, and ranked both a directly referencing test and an
   import-chain test with printed routes, while writing nothing into the target. EN/TR
   installation and recovery commands were verified identical.
+
+## Phase 21D — Fail-closed branch evidence
+
+Status: complete (2026-09-11). Verification only; no runtime module changed.
+
+- Requirement: [[Requirements/REQ-040 - Prove the fail-closed branches rather than assert them]]
+- Evidence: [[Evidence/EVD-040 - Phase 21D fail-closed branch verification]]
+- Review: [[Reviews/Phase 21D Fail-Closed Branch Review]]
+- Outcome: the viewer's served routes and bounded error contract, the bounded-process refusal
+  paths including a descendant holding the stdout pipe after a clean exit, and ChangeSet
+  rendering and freshness abstention now have executable evidence. `viewer.py` 62% to 99%,
+  `bounded_process.py` 79% to 87%, `change_set.py` 78% to 86%, total 87.60%.
 
 ## Phase 21 — Reproducible installation and first useful report
 
