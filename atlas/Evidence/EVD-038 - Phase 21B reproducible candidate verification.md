@@ -14,8 +14,8 @@ and the entire chain was re-run rather than carried forward; the re-verification
 is the authoritative result and the earlier `rc1` sections are retained as superseded history.
 
 Toolchain: `hatchling 1.31.0`, `build 1.3.0` — both exactly the pinned `[release]` versions, so
-the local build backend matches the one CI uses. The remote platform matrix remains the only
-unverified gate.
+the local build backend matches the one CI uses. Every gate, including the remote platform
+matrix, has now passed.
 
 ## Verified artifacts — current, `0.3.0b1`
 
@@ -102,12 +102,30 @@ Those digests also hold across two different source revisions, `ecbcc8ca` and `0
 differ only in `atlas/`. The source archive excludes the vault, so vault-only commits provably do
 not alter the candidate bytes.
 
-## Still unverified
+## Supported platform matrix — closed
 
-- **Supported platform matrix.** Verified on Windows 11 with one Python only. The declared matrix
-  — Ubuntu, Windows and macOS across Python 3.11 and 3.13 — needs remote CI. The owner approved a
-  push on 2026-09-11, so that run is expected to follow this record; until its result is bound to
-  `ac2f2402`, the matrix claim stays open.
+Run [34635166633](https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/34635166633)
+at `a6e60d10fd0e1a8e402878b62fd02c10747f5a8c`: **13 of 13 jobs succeeded**, 2026-09-11.
+
+```text
+test (3.11, 3.12, 3.13)                        success
+cross-platform-e2e  ubuntu  3.11 / 3.13        success
+cross-platform-e2e  windows 3.11 / 3.13        success
+cross-platform-e2e  macos   3.11 / 3.13        success
+reproducible-package                           success
+browser-e2e                                    success
+static-types                                   success
+security                                       success
+```
+
+Two results matter beyond the tick. All six `cross-platform-e2e` combinations passed, which is the
+first remote evidence that the Phase 21A package-identity gate — written and tested only on a
+Windows host — behaves correctly on Linux and macOS, including the `INTENTATLAS_TEST_PACKAGE:
+installed` declaration added to that job. And `reproducible-package` passed on Ubuntu, independently
+corroborating the local dual-build, verifier, pipx-lifecycle and extracted-sdist results on a
+different operating system.
+
+This describes `a6e60d1`. A later revision needs its own run.
 
 No package was uploaded or published. The artifacts exist only under the ignored `var/` tree and
 carry no release approval; pushing source is not publishing a distribution.

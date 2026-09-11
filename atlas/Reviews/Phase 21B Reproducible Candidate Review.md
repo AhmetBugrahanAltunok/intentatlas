@@ -1,17 +1,20 @@
 ---
 id: review-phase-21b-reproducible-candidate
 type: review
-status: conditional
+status: passed
 phase: 21B
 ---
 # Phase 21B Reproducible Candidate Review
 
-Decision: **conditional pass, 2026-09-11**, with the condition substantially narrowed the same
-day. Every offline gate passed for the candidate built from
-`ecbcc8ca0c112336ba8a11b3ac06e46c1610b160`. The owner then granted network approval, which closed
-the pipx lifecycle and the dependency audit and retired the recorded build deviation. One
-condition remains: the supported platform matrix, which needs a push that has not been approved.
-ISSUE-038 stays open on that single item; Phase 21 stays open.
+Decision: **passed, 2026-09-11**. Recorded first as a conditional pass at `0.3.0rc1`; every
+condition has since been discharged and the whole chain was re-verified at `0.3.0b1`.
+
+The sequence matters, so it is recorded rather than flattened. Offline gates passed first. Network
+approval then closed the pipx lifecycle and the dependency audit and retired the recorded
+`--no-isolation` deviation. A beta version change arrived from the remote, invalidating the `rc1`
+digests, so the chain was re-run at merged revision `ac2f2402` rather than carried forward. Push
+approval then produced the remote matrix result, closing the last open item. ISSUE-038 is closed;
+Phase 21 itself stays open on its remaining items.
 
 ## What this sub-phase establishes
 
@@ -36,9 +39,12 @@ demonstrably unable to change the candidate bytes.
 
 ## What it does not establish
 
-- Nothing about other operating systems or Python versions. One platform and one interpreter were
-  exercised. The declared support matrix is a claim only the remote CI run can substantiate, and
-  that run needs a push.
+- The supported matrix is now substantiated rather than claimed: run
+  [34635166633](https://github.com/AhmetBugrahanAltunok/intentatlas/actions/runs/34635166633)
+  at `a6e60d1` passed 13 of 13 jobs, including all six `cross-platform-e2e` combinations and
+  `reproducible-package`. That is the first remote evidence that the Phase 21A package-identity
+  gate behaves on Linux and macOS, not only on the Windows host it was written on. It describes
+  `a6e60d1` and no later revision.
 - Nothing about release approval. The artifacts live under the ignored `var/` tree. No upload,
   publication, tag, or push occurred, and the version remains an unpublished candidate.
 - Nothing about real first-run usability. Installing a wheel and reading `--version` is not the

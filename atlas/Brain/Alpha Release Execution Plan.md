@@ -106,8 +106,10 @@ taslak işler yapılmış gibi işaretlenmez.
 - [x] README EN/TR kurulum ve hata sonrası devam komutlarını eşleştir.
   Faz 21C'de incelemeyle doğrulandı: komutlar zaten birebir aynı, değişiklik gerekmedi. Daha geniş
   bir ayrışma bulundu ([[Issues/ISSUE-039 - Resolve the documentation divergence decisions]]).
-- [ ] Desteklenen işletim sistemi/Python matrisi için gerçek CI sonuçlarını revizyona bağla.
-  Açık kalan ağ kapıları: [[Issues/ISSUE-038 - Close the network-gated release checks]].
+- [x] Desteklenen işletim sistemi/Python matrisi için gerçek CI sonuçlarını revizyona bağla.
+  Kapandı 2026-09-11: `a6e60d1`'de CI run 34635166633, 13/13 iş başarılı; altı
+  `cross-platform-e2e` kombinasyonunun tamamı ve `reproducible-package` geçti.
+  [[Issues/ISSUE-038 - Close the network-gated release checks]] kapandı.
 - [ ] ADR-034 gereği katkı öncesi üretilmiş vault politikası seç: mevcut snapshot, artifact veya
   yerel üretim seçeneklerini kalıcı bağlantı ve geçiş maliyetiyle karşılaştır. Toplu silme yapma.
   README uzunluğu ve TR kapsamıyla birlikte karara bağlanmalı:

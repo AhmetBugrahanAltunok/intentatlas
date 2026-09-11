@@ -17,7 +17,8 @@ independent, MIT-licensed, local-first, and vault-first.
 
 ## Current execution checkpoint — 2026-09-11
 
-- Latest completed delivery: **Phase 21E — Accurate vault identity evidence**.
+- Latest completed delivery: **Phase 21E — Accurate vault identity evidence**. Phase 21B's
+  conditional pass is now a full pass: the remote matrix succeeded at `a6e60d1`.
   Phase 21A is complete; Phase 21B holds a conditional pass whose only remaining condition is the
   remote platform matrix.
 - Active delivery: **Phase 21 — Reproducible installation and first useful report**. Its
@@ -677,7 +678,8 @@ Status: complete (2026-09-11). First Phase 21 gate: a run must state which packa
 
 ## Phase 21B — Reproducible candidate artifacts
 
-Status: conditional pass (2026-09-11); offline gates passed, three network gates open.
+Status: complete (2026-09-11). Recorded first as a conditional pass; all conditions discharged
+and the chain re-verified at `0.3.0b1`.
 
 - Requirement: [[Requirements/REQ-038 - Produce a reproducible independently installable candidate]]
 - Issue: [[Issues/ISSUE-038 - Close the network-gated release checks]]
@@ -685,8 +687,9 @@ Status: conditional pass (2026-09-11); offline gates passed, three network gates
 - Review: [[Reviews/Phase 21B Reproducible Candidate Review]]
 - Outcome: repeated builds are byte-identical, the release verifier passes with provenance bound
   to the exact revision, the source archive reproduces the direct wheel, and a clean environment
-  installs that wheel and returns a schema-1 demo report. Platform matrix, dependency audit, and
-  the pipx lifecycle remain unverified pending network approval.
+  installs that wheel and returns a schema-1 demo report. The pipx lifecycle, dependency audit
+  and supported platform matrix all passed; CI run 34635166633 at `a6e60d1` succeeded on 13 of
+  13 jobs across Ubuntu, Windows and macOS on Python 3.11 and 3.13.
 
 ## Phase 21C — First-run walkthrough from a verified candidate
 
@@ -731,11 +734,11 @@ Status: complete (2026-09-11). Closes the defect deferred in Phase 21A.
 
 ## Phase 21 — Reproducible installation and first useful report
 
-Status: in progress. Phase 21A closed the import-identity gate, Phase 21B produced a verified
-reproducible candidate under a narrowed conditional pass, and Phase 21C verified the first-run
-path end to end. Remaining: the supported platform matrix (ISSUE-038, needs a push), the
-Phase 18/19/20 release inventory reconciliation, and the three documentation and governance
-decisions in ISSUE-039. Detailed gates: [[Brain/Alpha Release Execution Plan]].
+Status: in progress. Phases 21A-21E closed the import-identity, reproducible-artifact,
+first-run, fail-closed-evidence and vault-identity gates, and the release inventory is
+reconciled. Remaining: the ADR-034 governance decision and the three other owner decisions in
+ISSUE-039, then the final release-candidate inventory record. Detailed gates:
+[[Brain/Alpha Release Execution Plan]].
 
 - Verify exact candidate artifacts in clean environments and source/package import identity.
 - Validate EN/TR first-run instructions and a real local-repository no-write report.
