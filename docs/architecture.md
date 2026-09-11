@@ -343,6 +343,16 @@ error. A Chrome-family headless browser must execute the packaged viewer and ren
 240-node large-graph window. Maintained Python source is checked statically, while a repository
 policy test rejects every external Action reference that is not a full immutable commit SHA.
 
+Every one of those gates depends on knowing which package it ran against, so a test session
+declares that identity rather than inferring it. The default claim is the working tree;
+`INTENTATLAS_TEST_PACKAGE=installed` claims a deliberately installed distribution. A session-start
+check resolves the parent directory of the imported `intentatlas` package and fails closed when it
+contradicts the claim in either direction, so neither a stale install nor a failed wheel
+reinstallation can produce a result that describes the wrong artifact. Subprocess environments
+derive their import root from that same imported module instead of an assumed layout, which keeps
+a CLI started in a temporary directory on the package its parent session verified. This boundary
+governs test identity only; it adds no runtime dependency and no product behavior.
+
 After repeated archive verification, the verifier can write canonical provenance JSON containing
 the exact source revision, fixed build epoch, artifact names, sizes, SHA-256 digests, and completed
 checks. This record is deterministic descriptive evidence, not a signature. Default CI remains

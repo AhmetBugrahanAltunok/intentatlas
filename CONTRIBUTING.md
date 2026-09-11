@@ -20,6 +20,13 @@ the repository's explicit network-approval policy.
 On macOS or Linux, use `./.venv/bin/python` in place of
 `.\.venv\Scripts\python.exe`; the gate commands and expected results are the same.
 
+The editable install is required, not a convenience. Tests verify the working tree by default and
+refuse to start when `intentatlas` resolves to an installed distribution instead, because a stale
+installed copy can hide or contradict current source changes. The refusal names both paths and the
+command that corrects it. To verify a built artifact on purpose — the packaging job does this after
+installing a wheel — declare it with `INTENTATLAS_TEST_PACKAGE=installed`; that mode then refuses a
+working-tree import, so a packaging run cannot silently verify source it already had.
+
 Release-affecting changes must also pass the installed CLI and real-browser E2E tests, build twice under a fixed
 `SOURCE_DATE_EPOCH`, and pass `tools/verify_release.py` as described in
 [`RELEASING.md`](RELEASING.md).

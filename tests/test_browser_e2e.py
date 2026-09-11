@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+import _package_identity
 import pytest
 
 from intentatlas.graph import AtlasGraph
@@ -558,7 +559,7 @@ def test_real_browser_renders_bounded_large_graph_window(tmp_path: Path) -> None
         )
     graph.save(graph_path)
 
-    environment = os.environ.copy()
+    environment = _package_identity.child_environment()
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONUTF8"] = "1"
     server = subprocess.Popen(
@@ -606,7 +607,7 @@ def test_real_browser_renders_same_file_demo_story(tmp_path: Path) -> None:
             pytest.fail("A Chrome-family browser is required for the browser E2E gate")
         pytest.skip("No installed Chrome-family browser")
 
-    environment = os.environ.copy()
+    environment = _package_identity.child_environment()
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONUTF8"] = "1"
     server = subprocess.Popen(

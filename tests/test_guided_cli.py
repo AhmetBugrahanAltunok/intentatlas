@@ -9,6 +9,7 @@ import sys
 from dataclasses import replace
 from pathlib import Path
 
+import _package_identity
 import pytest
 
 from intentatlas import cli, onboarding
@@ -763,8 +764,7 @@ def test_cli_empty_argv_tty_gate_and_explicit_non_tty_refusal(monkeypatch, capsy
 def test_non_tty_subprocess_preserves_argparse_exit_2_without_prompt(tmp_path: Path) -> None:
     root = tmp_path / "repo"
     repository(root)
-    environment = os.environ.copy()
-    environment["PYTHONPATH"] = str(Path(__file__).parents[1] / "src")
+    environment = _package_identity.child_environment()
     result = subprocess.run(
         [sys.executable, "-m", "intentatlas"],
         cwd=root,

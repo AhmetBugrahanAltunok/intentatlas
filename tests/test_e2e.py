@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import http.client
 import json
-import os
 import queue
 import re
 import shutil
@@ -12,11 +11,12 @@ import threading
 import time
 from pathlib import Path
 
+import _package_identity
 import pytest
 
 
 def _cli(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
-    environment = os.environ.copy()
+    environment = _package_identity.child_environment()
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONUTF8"] = "1"
     return subprocess.run(
@@ -141,7 +141,7 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
     payload = json.loads(recommendation.stdout)
     assert [item["test"]["path"] for item in payload["recommendations"]] == ["test_app.py"]
 
-    environment = os.environ.copy()
+    environment = _package_identity.child_environment()
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONUTF8"] = "1"
     server = subprocess.Popen(
@@ -286,7 +286,7 @@ def test_installed_revision_review_viewer_serves_commit_keyed_outcomes(tmp_path)
         encoding="utf-8",
     )
 
-    environment = os.environ.copy()
+    environment = _package_identity.child_environment()
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONUTF8"] = "1"
     server = subprocess.Popen(

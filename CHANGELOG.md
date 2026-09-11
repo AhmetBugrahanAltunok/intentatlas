@@ -9,6 +9,12 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ### Fixed
 
+- Stop tests from silently verifying an installed distribution instead of the working tree. A
+  session now declares its package identity through `INTENTATLAS_TEST_PACKAGE` (`source` by
+  default, `installed` for deliberate artifact verification) and fails before collection when the
+  imported package contradicts that declaration. Subprocesses derive their import root from the
+  imported module, so a CLI started in a temporary directory can no longer load a stale package.
+  This was the actual cause of a browser regression previously attributed to the viewer.
 - Require complete changed-line coverage before reporting exact symbol analysis; retain parent
   and nested-symbol changes when both own changed lines within the same diff hunk.
 - Preserve zero-count deletion hunks in surviving files so mixed edits/deletions require a
@@ -43,6 +49,10 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ### Added
 
+- Executable evidence for the change-analysis vault boundary: changed `atlas/Private/` files stay
+  unknown with no artifact identity and contribute no content to a rendered report, generated
+  areas are recognized as derived artifacts, deleted durable notes abstain, and vault files
+  outside every known area remain capped fallbacks.
 - Strict, explicitly approved public GitHub source onboarding through a bounded inert Git
   acquisition and atomic OS-managed local cache, with exact revision/history disclosure and
   offline `cache list`, `cache info`, and exact-target `cache clear` commands.

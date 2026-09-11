@@ -147,3 +147,148 @@ def test_oversized_unscanned_commit_file_uses_safe_file_fallback(
         "low",
     )
     assert "unscanned-file-fallback" in item.evidence
+
+
+def _vault_repository(root):
+    def git(*arguments: str) -> None:
+        subprocess.run(
+            ["git", *arguments],
+            cwd=root,
+            check=True,
+            capture_output=True,
+        )
+
+    git("init", "-q")
+    git("config", "user.name", "Change Analysis Test")
+    git("config", "user.email", "change-analysis@example.invalid")
+    for area in ("Private", "Code", "Requirements", "Brain"):
+        (root / "atlas" / area).mkdir(parents=True, exist_ok=True)
+    (root / "atlas" / "Private" / "credentials.md").write_text(
+        "# Local only\n\ntoken: keep-this-out\n", encoding="utf-8"
+    )
+    (root / "atlas" / "Code" / "File app-py.md").write_text(
+        '---\nid: "file:app.py"\ntype: "file"\n---\n\n# app.py\n', encoding="utf-8"
+    )
+    (root / "atlas" / "Requirements" / "REQ-900 - Keep a boundary.md").write_text(
+        "---\nid: REQ-900\ntype: requirement\n---\n\n# Keep a boundary\n", encoding="utf-8"
+    )
+    (root / "atlas" / "Brain" / "Loose note.md").write_text(
+        "# Loose note\n\nNo frontmatter identity yet.\n", encoding="utf-8"
+    )
+    git("add", "atlas")
+    git("commit", "-qm", "seed vault")
+    return git
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_private_vault_changes_stay_unknown_without_artifact_evidence(tmp_path) -> None:
+    git = _vault_repository(tmp_path)
+    (tmp_path / "atlas" / "Private" / "credentials.md").write_text(
+        "# Local only\n\ntoken: rotated-but-still-private\n", encoding="utf-8"
+    )
+    git("add", "atlas/Private/credentials.md")
+
+    change_set = collect_change_set(tmp_path, scope="staged")
+    result = analyze_change_set(tmp_path, change_set, ProjectConfig(git_history_limit=0))
+
+    item = next(
+        entry for entry in result.files if entry.path == "atlas/Private/credentials.md"
+    )
+    assert (item.state, item.freshness, item.confidence) == ("unknown", "unknown", "none")
+    assert item.artifact_ids == ()
+    assert "private-boundary-excluded" in item.evidence
+    assert result.state == "unknown"
+    rendered = render_change_analysis(result, "json")
+    assert "rotated-but-still-private" not in rendered
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_generated_vault_output_is_recognized_as_a_derived_artifact(tmp_path) -> None:
+    git = _vault_repository(tmp_path)
+    (tmp_path / "atlas" / "Code" / "File app-py.md").write_text(
+        '---\nid: "file:app.py"\ntype: "file"\n---\n\n# app.py\n\nRegenerated.\n',
+        encoding="utf-8",
+    )
+    git("add", "atlas/Code/File app-py.md")
+
+    change_set = collect_change_set(tmp_path, scope="staged")
+    result = analyze_change_set(tmp_path, change_set, ProjectConfig(git_history_limit=0))
+
+    item = next(
+        entry for entry in result.files if entry.path == "atlas/Code/File app-py.md"
+    )
+    assert (item.state, item.freshness, item.confidence) == ("analyzed", "aligned", "high")
+    assert item.artifact_ids == ()
+    assert "generated-vault-output" in item.evidence
+    assert "excluded-derived-artifact" in item.evidence
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_durable_intent_note_resolves_to_its_frontmatter_identity(tmp_path) -> None:
+    git = _vault_repository(tmp_path)
+    note = tmp_path / "atlas" / "Requirements" / "REQ-900 - Keep a boundary.md"
+    note.write_text(
+        "---\nid: REQ-900\ntype: requirement\n---\n\n# Keep a boundary\n\nAccepted.\n",
+        encoding="utf-8",
+    )
+    git("add", "atlas/Requirements")
+
+    change_set = collect_change_set(tmp_path, scope="staged")
+    result = analyze_change_set(tmp_path, change_set, ProjectConfig(git_history_limit=0))
+
+    item = next(entry for entry in result.files if entry.path == note.relative_to(
+        tmp_path
+    ).as_posix())
+    assert (item.state, item.freshness, item.confidence) == ("analyzed", "aligned", "high")
+    assert item.artifact_ids == ("REQ-900",)
+    assert "durable-intent-artifact" in item.evidence
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_deleted_durable_note_abstains_instead_of_claiming_analysis(tmp_path) -> None:
+    git = _vault_repository(tmp_path)
+    git("rm", "-q", "atlas/Requirements/REQ-900 - Keep a boundary.md")
+
+    change_set = collect_change_set(tmp_path, scope="staged")
+    result = analyze_change_set(tmp_path, change_set, ProjectConfig(git_history_limit=0))
+
+    item = next(entry for entry in result.files if entry.path.startswith("atlas/Requirements/"))
+    assert (item.state, item.freshness, item.confidence) == ("unknown", "aligned", "none")
+    assert item.artifact_ids == ()
+    assert "deleted-durable-intent-artifact" in item.evidence
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_user_area_note_without_frontmatter_keeps_a_derived_note_identity(tmp_path) -> None:
+    git = _vault_repository(tmp_path)
+    (tmp_path / "atlas" / "Brain" / "Loose note.md").write_text(
+        "# Loose note\n\nStill no frontmatter identity.\n", encoding="utf-8"
+    )
+    git("add", "atlas/Brain/Loose note.md")
+
+    change_set = collect_change_set(tmp_path, scope="staged")
+    result = analyze_change_set(tmp_path, change_set, ProjectConfig(git_history_limit=0))
+
+    item = next(entry for entry in result.files if entry.path == "atlas/Brain/Loose note.md")
+    assert (item.state, item.freshness, item.confidence) == ("analyzed", "aligned", "high")
+    assert item.artifact_ids == ("note:Brain/Loose note",)
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
+def test_vault_file_outside_every_known_area_uses_a_capped_fallback(tmp_path) -> None:
+    git = _vault_repository(tmp_path)
+    (tmp_path / "atlas" / "Templates").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "atlas" / "Templates" / "Requirement.md").write_text(
+        "# Requirement template\n\n- Outcome:\n", encoding="utf-8"
+    )
+    (tmp_path / "atlas" / "Home.md").write_text("# Home\n", encoding="utf-8")
+    git("add", "atlas/Templates/Requirement.md", "atlas/Home.md")
+
+    change_set = collect_change_set(tmp_path, scope="staged")
+    result = analyze_change_set(tmp_path, change_set, ProjectConfig(git_history_limit=0))
+
+    for path in ("atlas/Templates/Requirement.md", "atlas/Home.md"):
+        item = next(entry for entry in result.files if entry.path == path)
+        assert (item.state, item.freshness, item.confidence) == ("fallback", "aligned", "low")
+        assert item.artifact_ids == ()
+        assert "vault-file-fallback" in item.evidence
