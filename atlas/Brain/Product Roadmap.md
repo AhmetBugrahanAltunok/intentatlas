@@ -17,12 +17,14 @@ independent, MIT-licensed, local-first, and vault-first.
 
 ## Current execution checkpoint — 2026-09-11
 
-- Latest completed delivery: **Phase 21A — Verification integrity**.
+- Latest completed delivery: **Phase 21A — Verification integrity**. **Phase 21B — Reproducible
+  candidate artifacts** holds a conditional pass pending network-gated checks.
 - Active delivery: **Phase 21 — Reproducible installation and first useful report**; its
-  import-identity gate is closed and its packaging, first-run, and governance gates remain open.
+  import-identity and reproducible-artifact gates are closed offline, while the network checks,
+  first-run reconciliation, and governance decision remain open.
 - Forward plan, acceptance gates, risks, and next actions:
   [[Brain/Alpha Release Execution Plan]].
-- Latest working checkpoint: [[Sessions/2026-09-11 - Phase 21A verification integrity]].
+- Latest working checkpoint: [[Sessions/2026-09-11 - Phase 21B reproducible candidate]].
 - The Phase 20 browser failure is now explained: it was an import-identity defect in the
   development environment, not a product defect. Phase 21A removes the ambiguity that produced it.
 - Phase 18 and 19 closure records existed outside this roadmap. They are now linked below;
@@ -672,9 +674,25 @@ Status: complete (2026-09-11). First Phase 21 gate: a run must state which packa
   direction, subprocesses import the package their parent session verified, and the declared
   `atlas/Private/` change-analysis boundary has executable evidence.
 
+## Phase 21B — Reproducible candidate artifacts
+
+Status: conditional pass (2026-09-11); offline gates passed, three network gates open.
+
+- Requirement: [[Requirements/REQ-038 - Produce a reproducible independently installable candidate]]
+- Issue: [[Issues/ISSUE-038 - Close the network-gated release checks]]
+- Evidence: [[Evidence/EVD-038 - Phase 21B reproducible candidate verification]]
+- Review: [[Reviews/Phase 21B Reproducible Candidate Review]]
+- Outcome: repeated builds are byte-identical, the release verifier passes with provenance bound
+  to the exact revision, the source archive reproduces the direct wheel, and a clean environment
+  installs that wheel and returns a schema-1 demo report. Platform matrix, dependency audit, and
+  the pipx lifecycle remain unverified pending network approval.
+
 ## Phase 21 — Reproducible installation and first useful report
 
-Status: in progress; Phase 21A closed the import-identity gate. Remaining gates:
+Status: in progress. Phase 21A closed the import-identity gate; Phase 21B produced a verified
+reproducible candidate under a conditional pass. Remaining: network-gated checks (ISSUE-038),
+EN/TR first-run reconciliation, the clean-environment first-run walkthrough, release inventory,
+and the ADR-034 governance decision. Detailed gates:
 [[Brain/Alpha Release Execution Plan]].
 
 - Verify exact candidate artifacts in clean environments and source/package import identity.

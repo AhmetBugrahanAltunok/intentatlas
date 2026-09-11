@@ -6,9 +6,18 @@ status: active
 # Alpha Release Execution Plan
 
 Updated: 2026-09-11. Canonical phase status: [[Brain/Product Roadmap]].
-Current handoff: [[Sessions/2026-09-11 - Phase 21A verification integrity]].
+Current handoff: [[Sessions/2026-09-11 - Phase 21B reproducible candidate]].
 
 ## Güncel sonuç — 2026-09-11
+
+**Faz 21B koşullu geçti.** `ecbcc8ca` revizyonundan üretilen iki wheel/sdist bayt-özdeş; tam
+yayın doğrulayıcısı 13 kontrolü geçti ve revizyona bağlı provenance yazdı; kaynak arşivi doğrudan
+wheel'i bayt bayt yeniden üretti; temiz bir ortam bu wheel'i kurup şema-1 demo raporu döndürdü;
+açılan arşiv kendi test paketini 607 geçti / 11 atladı ile çalıştırdı. Üç kapı ağ onayı bekliyor:
+pipx yaşam döngüsü, platform matrisi ve bağımlılık denetimi. Ayrıntılar:
+[[Evidence/EVD-038 - Phase 21B reproducible candidate verification]],
+[[Reviews/Phase 21B Reproducible Candidate Review]] ve
+[[Issues/ISSUE-038 - Close the network-gated release checks]].
 
 **Faz 21A tamamlandı.** Faz 20'de ürüne atfedilen tarayıcı hatasının gerçek nedeni bulundu:
 geliştirme ortamındaki editable olmayan kurulum, alt süreçlere bayat paketi yüklüyordu. Artık
@@ -71,11 +80,16 @@ taslak işler yapılmış gibi işaretlenmez.
   Faz 21A'da kapatıldı: `INTENTATLAS_TEST_PACKAGE` beyanı, oturum başında kapanan kapı ve
   içe aktarılan modülden türetilen alt süreç ortamı. Ayrıntı:
   [[Evidence/EVD-037 - Phase 21A verification integrity verification]].
-- [ ] Yerel sabit araç zinciriyle iki wheel/sdist üret; kurulum ve yeniden üretim eşitliğini doğrula.
+- [x] Yerel sabit araç zinciriyle iki wheel/sdist üret; kurulum ve yeniden üretim eşitliğini doğrula.
+  Faz 21B'de kapatıldı: bayt-özdeş tekrar üretim, tam doğrulayıcı ve revizyona bağlı provenance.
+  Ayrıntı: [[Evidence/EVD-038 - Phase 21B reproducible candidate verification]].
 - [ ] Temiz ortamda sürüm, metin/JSON demo, diagnose, değişiklik raporu ve viewer akışlarını dene.
+  Faz 21B'de sürüm eşitliği ve JSON demo temiz ortamda doğrulandı; diagnose, değişiklik raporu
+  ve viewer akışları kullanıcının yapacağı gibi henüz denenmedi.
 - [ ] Kullanıcı notu veya yapılandırma yazmadan ilk depo raporunu doğrula.
 - [ ] README EN/TR kurulum ve hata sonrası devam komutlarını eşleştir.
 - [ ] Desteklenen işletim sistemi/Python matrisi için gerçek CI sonuçlarını revizyona bağla.
+  Açık kalan ağ kapıları: [[Issues/ISSUE-038 - Close the network-gated release checks]].
 - [ ] ADR-034 gereği katkı öncesi üretilmiş vault politikası seç: mevcut snapshot, artifact veya
   yerel üretim seçeneklerini kalıcı bağlantı ve geçiş maliyetiyle karşılaştır. Toplu silme yapma.
 - [ ] Kanıt, kapsamlı inceleme ve somut yayın adayı envanterini kaydet.
