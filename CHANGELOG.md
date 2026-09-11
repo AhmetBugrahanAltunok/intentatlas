@@ -2,8 +2,8 @@
 
 All notable changes will be documented in this file.
 
-The format is based on Keep a Changelog. Python artifacts use PEP 440; `0.3.0rc1` is the PEP 440
-form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
+The format is based on Keep a Changelog. Python artifacts use PEP 440; `0.3.0b1` is the PEP 440
+form corresponding to the SemVer-style pre-release identity `0.3.0-beta.1`.
 
 ## [Unreleased]
 
@@ -77,7 +77,7 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 - Trust-first real-repository onboarding, cross-surface change-report reasons and recorded paths,
   explicit omission semantics, and an accessible report-first loopback viewer panel.
 
-## [0.3.0rc1] - 2026-08-01
+## [0.3.0b1] - 2026-08-01
 
 Candidate preparation record only; this version has not been tagged or published.
 
@@ -181,7 +181,7 @@ Candidate preparation record only; this version has not been tagged or published
   input fails explicitly, foreign `Host` headers are rejected, and local responses carry
   anti-framing, no-sniff, no-referrer, same-origin-resource, and content-security policies.
 - Package versioning now has one canonical Hatchling source and identifies candidate
-  builds as `0.3.0rc1` without implying tag or publication approval.
+  builds as `0.3.0b1` without implying tag or publication approval.
 - Fresh vault initialization now creates generic guidance and templates without seeding
   IntentAtlas-specific project memory into user repositories.
 - Go test references retain exact symbol targets alongside separate file navigation edges, and

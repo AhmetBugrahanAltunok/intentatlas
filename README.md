@@ -7,6 +7,12 @@
 <p align="center"><strong>The living intent map for software projects.</strong></p>
 
 <p align="center">
+  <img alt="Status: beta" src="https://img.shields.io/badge/status-beta-orange">
+  <img alt="Version 0.3.0b1" src="https://img.shields.io/badge/version-0.3.0b1-blue">
+  <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue">
+</p>
+
+<p align="center">
   <a href="README.tr.md">Türkçe</a> ·
   <a href="https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md">Product roadmap</a> ·
   <a href="CONTRIBUTING.md">Contributing</a>
@@ -30,10 +36,17 @@ Prerequisites: Python 3.11, 3.12, or 3.13. Git is required for repository analys
 built-in demo. The install step may contact your configured Python package index to obtain build
 dependencies.
 
+> **Windows: enable long paths before cloning this repository.** IntentAtlas ships its own `atlas/`
+> vault, and 51 of its generated symbol notes have paths longer than 120 characters. Cloning into
+> anything but a short directory exceeds the 260-character `MAX_PATH` limit and the checkout aborts
+> with `Filename too long`, leaving an empty working tree. Run
+> `git config --global core.longpaths true` once, or clone to a short path such as
+> `C:\src\intentatlas`. This affects cloning IntentAtlas itself, not the repositories it analyzes.
+
 The two-minute target ends when the first text demo appears. Reading the output and trying the
 repository workflows below takes longer.
 
-IntentAtlas is currently an unpublished release candidate. Choose the environment folder once;
+IntentAtlas is currently an unpublished beta. Choose the environment folder once;
 if `.venv` already belongs to another setup, change the first line to
 `$IntentAtlasVenv = ".venv-intentatlas"`:
 
@@ -164,9 +177,9 @@ strong enough.
   synthetic scale benchmark for contributors.
 - Keep requirements, decisions, evidence, reviews, and project memory in Git.
 
-## Release candidate status
+## Beta status
 
-The current source identifies itself as `0.3.0rc1`. It has not been tagged or published to a package
+The current source identifies itself as `0.3.0b1`. It has not been tagged or published to a package
 index and is not yet a compatibility promise. The quick path above confirms the behavior of the
 current checkout; release review additionally verifies the exact revision, reproducible artifacts,
 provenance, hashes, installed wheel, and browser workflow. See [installation status](docs/installation.md)
