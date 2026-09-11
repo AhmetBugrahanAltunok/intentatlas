@@ -25,7 +25,7 @@ independent, MIT-licensed, local-first, and vault-first.
   matrix (needs a push), the release inventory, and the ISSUE-039 owner decisions.
 - Forward plan, acceptance gates, risks, and next actions:
   [[Brain/Alpha Release Execution Plan]].
-- Latest working checkpoint: [[Sessions/2026-09-11 - Phase 21C first-run walkthrough]].
+- Latest working checkpoint: [[Sessions/2026-09-11 - Beta merge and re-verification]].
 - The Phase 20 browser failure is now explained: it was an import-identity defect in the
   development environment, not a product defect. Phase 21A removes the ambiguity that produced it.
 - Phase 18 and 19 closure records existed outside this roadmap. They are now linked below;

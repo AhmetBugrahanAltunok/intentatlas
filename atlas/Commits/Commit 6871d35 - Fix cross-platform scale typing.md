@@ -15,7 +15,6 @@ generated: true
 ## Outgoing relationships
 
 - <code>changes</code> → [[Code/src - intentatlas - scale.py|src/intentatlas/scale.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_peak_memory_bytes - src - intentatlas - scale.py|_peak_memory_bytes]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

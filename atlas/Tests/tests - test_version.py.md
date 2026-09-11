@@ -11,7 +11,7 @@ source_path: "tests/test_version.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>591</code>
+- **Size Bytes:** <code>590</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -31,4 +31,5 @@ source_path: "tests/test_version.py"
 
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ac1ba3e - Surum beta olarak isaretlendi- 0.3.0rc1 -- 0.3.0b1|Surum beta olarak isaretlendi: 0.3.0rc1 -&gt; 0.3.0b1]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

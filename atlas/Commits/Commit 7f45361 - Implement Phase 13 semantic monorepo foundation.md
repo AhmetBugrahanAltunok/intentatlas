@@ -43,26 +43,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_workspace.py|tests/test_workspace.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_validate_symbol_node - src - intentatlas - adapters - conformance.py|_validate_symbol_node]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/import_evidence - src - intentatlas - evidence.py|import_evidence]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_scip_freshness - src - intentatlas - open_evidence.py|_scip_freshness]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_scip_metadata - src - intentatlas - open_evidence.py|_scip_metadata]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_scip_metadata_string - src - intentatlas - open_evidence.py|_scip_metadata_string]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_scip_range - src - intentatlas - open_evidence.py|_scip_range]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_symbols_at_range - src - intentatlas - open_evidence.py|_symbols_at_range]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_symbols_by_path - src - intentatlas - open_evidence.py|_symbols_by_path]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/scip_fragment - src - intentatlas - open_evidence.py|scip_fragment]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/AdapterFragmentCache._path - src - intentatlas - scan_cache.py|AdapterFragmentCache._path]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/AdapterFragmentCache.load - src - intentatlas - scan_cache.py|AdapterFragmentCache.load]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/AdapterFragmentCache.store - src - intentatlas - scan_cache.py|AdapterFragmentCache.store]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_strict_node - src - intentatlas - scan_cache.py|_strict_node]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_imports_open_evidence_without_retaining_raw_content - tests - test_open_evidence.py|test_imports_open_evidence_without_retaining_raw_content]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_revision_bound_scip_creates_exact_symbol_test_edge_only_when_aligned - tests - test_open_evidence.py|test_revision_bound_scip_creates_exact_symbol_test_edge_only_when_aligned]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scip_ambiguous_owner_and_unsupported_roles_remain_fallback - tests - test_open_evidence.py|test_scip_ambiguous_owner_and_unsupported_roles_remain_fallback]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scip_import_does_not_launch_repository_tooling - tests - test_open_evidence.py|test_scip_import_does_not_launch_repository_tooling]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scip_import_does_not_launch_repository_tooling.git_only - tests - test_open_evidence.py|test_scip_import_does_not_launch_repository_tooling.git_only]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_large_graph_benchmark_has_exact_work_counts_and_bounded_queries - tests - test_scale.py|test_large_graph_benchmark_has_exact_work_counts_and_bounded_queries]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_workspace_partitions_reuse_unrelated_projects_and_invalidate_dependents - tests - test_scan_cache.py|test_workspace_partitions_reuse_unrelated_projects_and_invalidate_dependents]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

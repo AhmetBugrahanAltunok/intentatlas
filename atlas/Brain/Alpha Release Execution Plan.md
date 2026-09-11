@@ -6,7 +6,7 @@ status: active
 # Alpha Release Execution Plan
 
 Updated: 2026-09-11. Canonical phase status: [[Brain/Product Roadmap]].
-Current handoff: [[Sessions/2026-09-11 - Phase 21C first-run walkthrough]].
+Current handoff: [[Sessions/2026-09-11 - Beta merge and re-verification]].
 
 ## Güncel sonuç — 2026-09-11
 
@@ -64,7 +64,8 @@ ile uyumludur. Öneriler danışmanlık niteliğindedir; test yeterliliği garan
 
 - Çalışan temel: Python, JS/TS ve Go adaptörleri; değişiklik raporu; çevrimdışı CLI;
   yerel grafik; taşınabilir vault; test/coverage ve yerel teslimat verisi içe aktarma.
-- Sürüm: 0.3.0rc1. Bu ifade yayımlanmış paket veya yayın onayı anlamına gelmez.
+- Sürüm: 0.3.0b1 (2026-09-07'de uzaktan rc1'den değiştirildi). Bu ifade yayımlanmış paket
+  veya yayın onayı anlamına gelmez.
 - Faz 18/19 kayıtları ana yol haritasından kopuktu; bağlantılar 2026-09-07'de tamamlandı.
 - Yeniden inceleme: 569 test geçti, 1 tarayıcı testi başarısız, 4 atlandı.
   Ruff, Bandit, mypy ve CLI metin demosu geçti.

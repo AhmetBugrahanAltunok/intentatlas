@@ -11,7 +11,7 @@ source_path: "README.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>38823</code>
+- **Size Bytes:** <code>39614</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -24,6 +24,7 @@ source_path: "README.md"
 - <code>changed-by</code> ← [[Commits/Commit 0f9d6cb - fix- harden release candidate verification|fix: harden release candidate verification]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 1db9847 - feat- add trust-first repository onboarding|feat: add trust-first repository onboarding]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 2985cc8 - README- Windows uzun yol uyarisi eklendi|README: Windows uzun yol uyarisi eklendi]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2c3c301 - feat- refine symbol-aware test evidence|feat: refine symbol-aware test evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-log)_
@@ -48,6 +49,7 @@ source_path: "README.md"
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ac1ba3e - Surum beta olarak isaretlendi- 0.3.0rc1 -- 0.3.0b1|Surum beta olarak isaretlendi: 0.3.0rc1 -&gt; 0.3.0b1]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_
@@ -59,5 +61,6 @@ source_path: "README.md"
 - <code>changed-by</code> ← [[Commits/Commit dfc5345 - feat- complete typed intent chain phase|feat: complete typed intent chain phase]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e305680 - Implement Phase 16 guided experience stability|Implement Phase 16 guided experience stability]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ee5ff92 - README'lere beta rozeti eklendi (EN + TR)|README'lere beta rozeti eklendi (EN + TR)]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f023062 - feat- compare recommendation thresholds across projects|feat: compare recommendation thresholds across projects]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

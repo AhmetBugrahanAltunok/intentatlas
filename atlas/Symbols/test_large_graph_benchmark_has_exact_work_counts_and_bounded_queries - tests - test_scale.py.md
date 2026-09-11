@@ -20,4 +20,3 @@ source_path: "tests/test_scale.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_scale.py|tests/test_scale.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-diff-hunk)_

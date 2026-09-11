@@ -20,3 +20,4 @@ source_path: "tests/test_longitudinal.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_longitudinal.py|tests/test_longitudinal.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit b4f9cd4 - test- exercise the longitudinal pilot's strict loaders|test: exercise the longitudinal pilot's strict loaders]] _(history; evidence: git-diff-hunk)_

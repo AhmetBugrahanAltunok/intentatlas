@@ -11,7 +11,7 @@ source_path: "src/intentatlas/__init__.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>163</code>
+- **Size Bytes:** <code>162</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -28,6 +28,7 @@ source_path: "src/intentatlas/__init__.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ac1ba3e - Surum beta olarak isaretlendi- 0.3.0rc1 -- 0.3.0b1|Surum beta olarak isaretlendi: 0.3.0rc1 -&gt; 0.3.0b1]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-ast)_

@@ -11,7 +11,7 @@ source_path: "RELEASING.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>8544</code>
+- **Size Bytes:** <code>10296</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -23,4 +23,5 @@ source_path: "RELEASING.md"
 - <code>changed-by</code> ← [[Commits/Commit 1c64019 - feat- prepare honest 0.3.0 release candidate|feat: prepare honest 0.3.0 release candidate]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 2f3d695 - feat- harden verification and release provenance|feat: harden verification and release provenance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 304c3c9 - feat- verify cross-platform releases|feat: verify cross-platform releases]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ff78ab6 - Dependabot dondurulmus bagimliliklari atliyor; prosedur belgelendi|Dependabot dondurulmus bagimliliklari atliyor; prosedur belgelendi]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

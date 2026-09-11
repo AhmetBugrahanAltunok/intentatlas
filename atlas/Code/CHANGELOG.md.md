@@ -11,7 +11,7 @@ source_path: "CHANGELOG.md"
 ## Metadata
 
 - **Language:** <code>"Markdown"</code>
-- **Size Bytes:** <code>17604</code>
+- **Size Bytes:** <code>17375</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -44,6 +44,7 @@ source_path: "CHANGELOG.md"
 - <code>changed-by</code> ← [[Commits/Commit 9162f40 - feat- add content-addressed incremental scans|feat: add content-addressed incremental scans]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 997ed17 - feat- import bounded open evidence|feat: import bounded open evidence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ab90903 - feat- add guided intent-to-proof demo|feat: add guided intent-to-proof demo]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ac1ba3e - Surum beta olarak isaretlendi- 0.3.0rc1 -- 0.3.0b1|Surum beta olarak isaretlendi: 0.3.0rc1 -&gt; 0.3.0b1]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad2289c - feat- validate recommendations on real projects|feat: validate recommendations on real projects]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit ad7fde5 - feat- add adapter conformance and bounded graph views|feat: add adapter conformance and bounded graph views]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit b7f0347 - feat- broaden real-world validation|feat: broaden real-world validation]] _(history; evidence: git-log)_

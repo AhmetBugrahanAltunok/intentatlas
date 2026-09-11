@@ -5,11 +5,12 @@ status: active
 ---
 # Release Candidate Inventory
 
-Reconciles the candidate at `0.3.0rc1` back to the phases that delivered it. The Phase 21
+Reconciles the candidate at `0.3.0b1` back to the phases that delivered it. The Phase 21
 checklist requires this split so release notes do not present four phases of accumulated work as
 one delivery. Derived from Git history, not from recollection.
 
-Baseline: `3854f04` (Phase 17F closure). Everything after it belongs to Phases 18-21A.
+Baseline: `3854f04` (Phase 17F closure). Everything after it belongs to Phases 18-21A plus the
+owner's four direct-to-remote commits.
 
 ## Attribution
 
@@ -20,10 +21,16 @@ Baseline: `3854f04` (Phase 17F closure). Everything after it belongs to Phases 1
 | 20 — Complete change coverage | interval-union coverage, deletion uncertainty, browser evidence path | `041069a` (the nine files EVD-036 names) | 9 |
 | 21A — Verification integrity | declared package identity, vault-boundary regressions | `f0e6719` | 11 |
 | — | delivery continuity rules | `6f4a561` | 1 (`AGENTS.md`) |
+| owner, direct to remote | beta version, badge, Dependabot policy, Windows long-path note | `2985cc8`, `ff78ab6`, `ac1ba3e`, `ee5ff92` | 9 |
 
-**75 unique files**, not 98. The per-phase counts sum to 98 because 22 files were touched by more
-than one phase; they must never be added together in release notes. Of the 75: 26 under `src/`,
-29 under `tests/`, 20 documentation and root files.
+**79 unique files**, not 107. The per-row counts sum to 107 because 26 files were touched by more
+than one row; they must never be added together in release notes. Of the 79: 27 under `src/`,
+30 under `tests/`, 22 documentation and root files.
+
+The owner's four remote commits contributed 9 files, of which only 4 are new to this inventory:
+`.github/dependabot.yml`, `RELEASING.md`, `src/intentatlas/__init__.py`, and
+`tests/test_version.py`. The other five — `CHANGELOG.md`, `README.md`, `README.tr.md`,
+`docs/installation.md`, `tests/test_e2e.py` — were already counted under earlier phases.
 
 Phases 19 and 20 share commit `041069a`. The split is authoritative from the EVD-036 change
 inventory, which names Phase 20's files exactly; everything else in that commit is Phase 19.
@@ -53,6 +60,18 @@ EVD-036 lists `AGENTS.md` in the Phase 20 change inventory. Git shows it changed
 the documentation commit that followed the Phase 20 source commit, not in `041069a`. The content
 attribution is right and the file is small; only the commit placement was imprecise. Recorded here
 rather than edited into the closed phase evidence.
+
+## The beta version change
+
+Four commits landed on the remote on 2026-09-07 while this work was local, one of which moved the
+version from `0.3.0rc1` to `0.3.0b1`. They were merged on 2026-09-11 without conflict. The merge
+invalidated every artifact digest recorded for `rc1`, so the reproducible-candidate chain was
+re-run at `0.3.0b1` rather than carried forward; see EVD-038.
+
+Merge rather than rebase was deliberate. The durable notes cite exact commit SHAs as evidence —
+`f0e6719`, `ecbcc8ca`, `06701d3`, `041069a` — and a rebase would have rewritten every one of them,
+leaving recorded evidence pointing at commits that no longer exist. Preserving those references
+was worth the one merge commit in an otherwise linear history.
 
 ## What this inventory is not
 

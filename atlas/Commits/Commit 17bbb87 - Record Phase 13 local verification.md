@@ -16,7 +16,6 @@ generated: true
 
 - <code>changes</code> → [[Code/src - intentatlas - workspace.py|src/intentatlas/workspace.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_workspace.py|tests/test_workspace.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/test_declared_dependency_cycle_is_reported_deterministically - tests - test_workspace.py|test_declared_dependency_cycle_is_reported_deterministically]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

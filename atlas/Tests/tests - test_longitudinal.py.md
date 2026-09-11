@@ -74,6 +74,7 @@ source_path: "tests/test_longitudinal.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 9557cb1 - docs- publish longitudinal baseline card|docs: publish longitudinal baseline card]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit b4f9cd4 - test- exercise the longitudinal pilot's strict loaders|test: exercise the longitudinal pilot's strict loaders]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-027 - Phase 11B longitudinal pilot verification|EVD-027 - Phase 11B longitudinal pilot verification]] _(evidence; evidence: wikilink)_

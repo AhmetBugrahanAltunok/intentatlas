@@ -11,7 +11,7 @@ source_path: ".github/dependabot.yml"
 ## Metadata
 
 - **Language:** <code>"YAML"</code>
-- **Size Bytes:** <code>193</code>
+- **Size Bytes:** <code>1569</code>
 - **Workspace Candidates:** <code>["workspace:repository:."]</code>
 - **Workspace Owners:** <code>["workspace:repository:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -20,4 +20,5 @@ source_path: ".github/dependabot.yml"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit e5e7952 - feat- bootstrap the living intent graph|feat: bootstrap the living intent graph]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ff78ab6 - Dependabot dondurulmus bagimliliklari atliyor; prosedur belgelendi|Dependabot dondurulmus bagimliliklari atliyor; prosedur belgelendi]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

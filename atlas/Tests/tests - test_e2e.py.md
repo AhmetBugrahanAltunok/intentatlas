@@ -11,7 +11,7 @@ source_path: "tests/test_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12731</code>
+- **Size Bytes:** <code>12376</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -40,6 +40,7 @@ source_path: "tests/test_e2e.py"
 - <code>changed-by</code> ← [[Commits/Commit 74df114 - fix- bypass proxies in loopback e2e|fix: bypass proxies in loopback e2e]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 751e039 - feat- add trustworthy CI shadow reviews|feat: add trustworthy CI shadow reviews]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit ac1ba3e - Surum beta olarak isaretlendi- 0.3.0rc1 -- 0.3.0b1|Surum beta olarak isaretlendi: 0.3.0rc1 -&gt; 0.3.0b1]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c83138c - Improve first-run analysis guidance|Improve first-run analysis guidance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-log)_
