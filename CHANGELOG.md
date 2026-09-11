@@ -9,6 +9,14 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-rc.1`.
 
 ### Fixed
 
+- Stop describing a derived vault note identity as a declared one. Change analysis emitted
+  `vault-frontmatter-id` for durable notes whose identity the scanner derived from their path
+  because no `id:` frontmatter existed. User-owned vault nodes now record
+  `metadata["identity"]` as `frontmatter` or `path`, and the analysis emits `vault-frontmatter-id`
+  only for a declared identity and the new `vault-path-identity` otherwise. A graph without that
+  metadata resolves to the weaker claim. `durable-intent-artifact`, state, freshness, confidence
+  and artifact identity are unchanged; consumers detecting durable notes should key off
+  `durable-intent-artifact`. See `docs/compatibility-policy.md`.
 - Stop tests from silently verifying an installed distribution instead of the working tree. A
   session now declares its package identity through `INTENTATLAS_TEST_PACKAGE` (`source` by
   default, `installed` for deliberate artifact verification) and fails before collection when the

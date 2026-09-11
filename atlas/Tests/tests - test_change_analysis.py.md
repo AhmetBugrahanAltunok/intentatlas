@@ -11,7 +11,7 @@ source_path: "tests/test_change_analysis.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>11905</code>
+- **Size Bytes:** <code>12555</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>

@@ -242,6 +242,8 @@ def test_durable_intent_note_resolves_to_its_frontmatter_identity(tmp_path) -> N
     assert (item.state, item.freshness, item.confidence) == ("analyzed", "aligned", "high")
     assert item.artifact_ids == ("REQ-900",)
     assert "durable-intent-artifact" in item.evidence
+    assert "vault-frontmatter-id" in item.evidence
+    assert "vault-path-identity" not in item.evidence
 
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")
@@ -272,6 +274,10 @@ def test_user_area_note_without_frontmatter_keeps_a_derived_note_identity(tmp_pa
     item = next(entry for entry in result.files if entry.path == "atlas/Brain/Loose note.md")
     assert (item.state, item.freshness, item.confidence) == ("analyzed", "aligned", "high")
     assert item.artifact_ids == ("note:Brain/Loose note",)
+    # The identity came from the path, so the evidence must not claim a declared one.
+    assert "vault-path-identity" in item.evidence
+    assert "vault-frontmatter-id" not in item.evidence
+    assert "durable-intent-artifact" in item.evidence
 
 
 @pytest.mark.skipif(shutil.which("git") is None, reason="Git is required")

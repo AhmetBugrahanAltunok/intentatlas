@@ -17,7 +17,7 @@ independent, MIT-licensed, local-first, and vault-first.
 
 ## Current execution checkpoint — 2026-09-11
 
-- Latest completed delivery: **Phase 21D — Fail-closed branch evidence**.
+- Latest completed delivery: **Phase 21E — Accurate vault identity evidence**.
   Phase 21A is complete; Phase 21B holds a conditional pass whose only remaining condition is the
   remote platform matrix.
 - Active delivery: **Phase 21 — Reproducible installation and first useful report**. Its
@@ -714,6 +714,19 @@ Status: complete (2026-09-11). Verification only; no runtime module changed.
   `bounded_process.py` 79% to 87%, `change_set.py` 78% to 86%, total 87.70%. Source
   acquisition's refusal of local and `file://` origins gained its first regression; its clone
   path is structurally uncoverable offline and is recorded as such rather than worked around.
+
+## Phase 21E — Accurate vault identity evidence
+
+Status: complete (2026-09-11). Closes the defect deferred in Phase 21A.
+
+- Requirement: [[Requirements/REQ-041 - Describe vault identity evidence accurately]]
+- Decision: [[Decisions/ADR-040 - Record vault note identity provenance]]
+- Evidence: [[Evidence/EVD-041 - Phase 21E vault identity evidence verification]]
+- Review: [[Reviews/Phase 21E Vault Identity Evidence Review]]
+- Outcome: `vault-frontmatter-id` now describes only a declared identity, `vault-path-identity`
+  covers a path-derived one, and a graph without recorded provenance resolves to the weaker
+  claim. No analysis conclusion changed. This repository was never affected, because all 233 of
+  its user notes declare frontmatter identities.
 
 ## Phase 21 — Reproducible installation and first useful report
 

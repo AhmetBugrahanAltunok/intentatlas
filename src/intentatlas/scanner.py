@@ -79,6 +79,8 @@ TYPED_RELATION_PREFIX = re.compile(r"\s*(?:[-*+]\s+)?([a-z][a-z0-9-]*)::\s*")
 FRONTMATTER_ID_LINE = re.compile(r"^id:\s*(.+?)\s*$")
 UNSAFE_USER_ID = re.compile(r"[\x00-\x20\x7f\[\]|]")
 RESERVED_USER_ID_PREFIXES = ("commit:", "file:", "symbol:")
+FRONTMATTER_IDENTITY = "frontmatter"
+PATH_IDENTITY = "path"
 PRIVATE_PARTS = ("atlas", "private")
 
 
@@ -502,12 +504,16 @@ class RepositoryScanner:
                     if explicit_id is not None
                     else f"note:{relative.removesuffix('.md')}"
                 )
+                # Record where the identity came from. A note without frontmatter still
+                # receives a stable ID derived from its path, and downstream evidence must
+                # not describe that as a declared identity.
+                identity = FRONTMATTER_IDENTITY if explicit_id is not None else PATH_IDENTITY
                 node = Node(
                     id=node_id,
                     kind=kind,
                     label=path.stem,
                     path=relative,
-                    metadata={"owner": "user", "area": area},
+                    metadata={"owner": "user", "area": area, "identity": identity},
                 )
                 self.graph.add_node(node)
                 for target, relation in _wikilinks(content):

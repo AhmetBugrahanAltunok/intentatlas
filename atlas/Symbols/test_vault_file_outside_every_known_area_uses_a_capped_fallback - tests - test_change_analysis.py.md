@@ -10,8 +10,8 @@ source_path: "tests/test_change_analysis.py"
 
 ## Metadata
 
-- **End Line:** <code>294</code>
-- **Line:** <code>277</code>
+- **End Line:** <code>300</code>
+- **Line:** <code>283</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "tests/test_change_analysis.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_change_analysis.py|tests/test_change_analysis.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit f0e6719 - test- declare and verify the package identity under test|test: declare and verify the package identity under test]] _(history; evidence: git-diff-hunk)_

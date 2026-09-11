@@ -8,7 +8,7 @@ from .change_set import ChangeFile, ChangeSet, change_file_freshness
 from .config import ProjectConfig
 from .graph import AtlasGraph
 from .models import Node
-from .scanner import scan_repository
+from .scanner import FRONTMATTER_IDENTITY, scan_repository
 from .symbol_spans import map_hunks_to_most_specific_symbols, valid_symbol_span
 from .vault import USER_KINDS
 
@@ -268,22 +268,32 @@ def _vault_artifact(
             (),
             (*base_evidence, "deleted-durable-intent-artifact"),
         )
-    durable = tuple(
+    durable_nodes = tuple(
         sorted(
-            node.id
-            for node in graph.nodes.values()
-            if node.kind in USER_KINDS and node.path == relative
+            (
+                node
+                for node in graph.nodes.values()
+                if node.kind in USER_KINDS and node.path == relative
+            ),
+            key=lambda node: node.id,
         )
     )
-    if durable:
+    if durable_nodes:
+        # A note without frontmatter still receives a stable path-derived identity. Only
+        # claim a declared identity when the scanner recorded one, and abstain from the
+        # stronger claim when an older graph carries no provenance at all.
+        declared = all(
+            node.metadata.get("identity") == FRONTMATTER_IDENTITY for node in durable_nodes
+        )
+        identity_evidence = "vault-frontmatter-id" if declared else "vault-path-identity"
         return ChangeAnalysisFile(
             item.path,
             item.status,
             "analyzed",
             "aligned",
             "high",
-            durable,
-            (*base_evidence, "vault-frontmatter-id", "durable-intent-artifact"),
+            tuple(node.id for node in durable_nodes),
+            (*base_evidence, identity_evidence, "durable-intent-artifact"),
         )
     return ChangeAnalysisFile(
         item.path,

@@ -130,7 +130,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/run_bounded_process - src - intentatlas - bounded_process.py|run_bounded_process]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/run_bounded_process.drain - src - intentatlas - bounded_process.py|run_bounded_process.drain]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/terminate_process_tree - src - intentatlas - bounded_process.py|terminate_process_tree]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_exact_symbols - src - intentatlas - change_analysis.py|_exact_symbols]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/ChangeReport - src - intentatlas - change_report.py|ChangeReport]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/ChangeReport.requirement_candidate_count_complete - src - intentatlas - change_report.py|ChangeReport.requirement_candidate_count_complete]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/ChangeReport.test_candidate_count_complete - src - intentatlas - change_report.py|ChangeReport.test_candidate_count_complete]] _(history; evidence: git-diff-hunk)_
@@ -170,8 +169,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/_git_value - src - intentatlas - real_world.py|_git_value]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_recommendation_candidates - src - intentatlas - recommendations.py|_recommendation_candidates]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_modified_symbols - src - intentatlas - scanner.py|_modified_symbols]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_symbols_by_path - src - intentatlas - scanner.py|_symbols_by_path]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_secret_key - src - intentatlas - security.py|_secret_key]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/redact - src - intentatlas - security.py|redact]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/HunkSpan - src - intentatlas - symbol_spans.py|HunkSpan]] _(history; evidence: git-diff-hunk)_
@@ -210,9 +207,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/test_overload_implementation_span_keeps_change_analysis_completeness_honest - tests - test_python_overloads.py|test_overload_implementation_span_keeps_change_analysis_completeness_honest]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_python_adapter_abstains_if_overloads_have_multiple_implementations - tests - test_python_overloads.py|test_python_adapter_abstains_if_overloads_have_multiple_implementations]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_python_adapter_keeps_overload_implementations_and_abstains_on_duplicates - tests - test_python_overloads.py|test_python_adapter_keeps_overload_implementations_and_abstains_on_duplicates]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scanner_connects_go_symbols_local_imports_and_tests - tests - test_scanner.py|test_scanner_connects_go_symbols_local_imports_and_tests]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scanner_connects_typescript_javascript_symbols_imports_and_tests - tests - test_scanner.py|test_scanner_connects_typescript_javascript_symbols_imports_and_tests]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_scanner_maps_git_hunks_to_exact_supported_language_symbols - tests - test_scanner.py|test_scanner_maps_git_hunks_to_exact_supported_language_symbols]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_redact_exact_token_auth_keys_and_quoted_json_shapes - tests - test_security.py|test_redact_exact_token_auth_keys_and_quoted_json_shapes]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_redact_header_style_authorization_values - tests - test_security.py|test_redact_header_style_authorization_values]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/ExampleHunk - tests - test_symbol_spans.py|ExampleHunk]] _(history; evidence: git-diff-hunk)_

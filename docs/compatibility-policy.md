@@ -98,3 +98,14 @@ limits from artifact and test-signal analysis limits, records how many candidate
 omitted by each bound, and marks whether published requirement/test totals are complete or lower
 bounds. Existing selection fields and `analysis_coverage_complete` remain present; strict consumers
 that reject unknown fields must allow this additive object.
+
+Change Analysis schema 1 narrows one evidence label. `vault-frontmatter-id` previously appeared for
+every durable vault note, including notes whose identity the scanner derived from their path
+because no `id:` frontmatter existed. It now appears only when the declared identity is real, and
+the new `vault-path-identity` label covers the derived case. This narrows an inaccurate claim
+rather than weakening a safety semantic: state, freshness, confidence, and artifact identity are
+unchanged, and `durable-intent-artifact` still accompanies both. A consumer detecting durable vault
+notes must key off `durable-intent-artifact`; one that keyed off `vault-frontmatter-id` was relying
+on a signal that did not mean what it said. User-owned vault nodes carry a corresponding additive
+`metadata["identity"]` of `frontmatter` or `path`; a graph without it resolves to the conservative
+`vault-path-identity`.

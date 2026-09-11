@@ -20,3 +20,4 @@ source_path: "tests/test_acquisition.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_acquisition.py|tests/test_acquisition.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit d084c18 - test- pin the acquisition transport's refusal of local origins|test: pin the acquisition transport's refusal of local origins]] _(history; evidence: git-diff-hunk)_

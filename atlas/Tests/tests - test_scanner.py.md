@@ -11,7 +11,7 @@ source_path: "tests/test_scanner.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>36217</code>
+- **Size Bytes:** <code>38903</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -25,6 +25,7 @@ source_path: "tests/test_scanner.py"
 ## Outgoing relationships
 
 - <code>defines</code> → [[Symbols/build_python_project - tests - test_scanner.py|build_python_project]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_a_declared_identity_may_use_the_note_prefix_without_claiming_derivation - tests - test_scanner.py|test_a_declared_identity_may_use_the_note_prefix_without_claiming_derivation]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_file_recommendation_ranks_exact_src_symbol_test_above_cochange - tests - test_scanner.py|test_file_recommendation_ranks_exact_src_symbol_test_above_cochange]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_go_recommendations_follow_one_exact_intra_package_caller - tests - test_scanner.py|test_go_recommendations_follow_one_exact_intra_package_caller]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_python_adapter_abstains_on_direct_and_reexport_binding_collision - tests - test_scanner.py|test_python_adapter_abstains_on_direct_and_reexport_binding_collision]] _(structure; evidence: python-ast)_
@@ -51,6 +52,7 @@ source_path: "tests/test_scanner.py"
 - <code>defines</code> → [[Symbols/test_scanner_recognizes_root_test_javascript_file - tests - test_scanner.py|test_scanner_recognizes_root_test_javascript_file]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_rejects_reserved_user_note_ids - tests - test_scanner.py|test_scanner_rejects_reserved_user_note_ids]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_scanner_resolves_python_reexports_to_exact_symbols - tests - test_scanner.py|test_scanner_resolves_python_reexports_to_exact_symbols]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_user_vault_nodes_record_where_their_identity_came_from - tests - test_scanner.py|test_user_vault_nodes_record_where_their_identity_came_from]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] _(verification; evidence: filename-convention)_
 - <code>tests</code> → [[Symbols/ProjectConfig - src - intentatlas - config.py|ProjectConfig]] _(verification; evidence: python-symbol-reference)_
 - <code>tests</code> → [[Symbols/recommend_tests - src - intentatlas - recommendations.py|recommend_tests]] _(verification; evidence: python-symbol-reference)_

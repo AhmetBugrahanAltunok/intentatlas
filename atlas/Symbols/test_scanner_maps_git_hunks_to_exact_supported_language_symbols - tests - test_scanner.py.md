@@ -20,4 +20,3 @@ source_path: "tests/test_scanner.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_scanner.py|tests/test_scanner.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

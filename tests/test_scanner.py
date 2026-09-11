@@ -963,3 +963,47 @@ def test_scanner_preserves_explicit_typed_intent_links(tmp_path) -> None:
     assert ("EVD-TYPED", "REQ-TYPED", "proves") in relationships
     assert ("EVD-TYPED", "file:tests/test_core.py", "proves") in relationships
     assert ("REQ-TYPED", "EVD-TYPED", "references") in relationships
+
+
+def test_user_vault_nodes_record_where_their_identity_came_from(tmp_path) -> None:
+    vault = tmp_path / "atlas"
+    (vault / "Requirements").mkdir(parents=True)
+    (vault / "Brain").mkdir(parents=True)
+    (vault / "Requirements" / "REQ-700 - Declared.md").write_text(
+        "---\nid: REQ-700\ntype: requirement\n---\n\n# Declared\n", encoding="utf-8"
+    )
+    (vault / "Brain" / "Derived.md").write_text(
+        "# Derived\n\nNo frontmatter identity.\n", encoding="utf-8"
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    declared = graph.nodes["REQ-700"]
+    assert declared.metadata["identity"] == scanner_module.FRONTMATTER_IDENTITY
+    assert declared.metadata["owner"] == "user"
+
+    derived = graph.nodes["note:Brain/Derived"]
+    assert derived.metadata["identity"] == scanner_module.PATH_IDENTITY
+    assert derived.path == "Brain/Derived.md"
+
+
+def test_a_declared_identity_may_use_the_note_prefix_without_claiming_derivation(
+    tmp_path,
+) -> None:
+    """Provenance must not be inferred from the ID text.
+
+    `note:` is not a reserved user-identity prefix, so a declared identity may legitimately
+    start with it. Only the scanner knows which branch produced the ID.
+    """
+
+    vault = tmp_path / "atlas"
+    (vault / "Brain").mkdir(parents=True)
+    (vault / "Brain" / "Declared.md").write_text(
+        "---\nid: note:chosen-by-the-author\ntype: memory\n---\n\n# Declared\n",
+        encoding="utf-8",
+    )
+
+    graph = scan_repository(tmp_path, ProjectConfig(git_history_limit=0))
+
+    node = graph.nodes["note:chosen-by-the-author"]
+    assert node.metadata["identity"] == scanner_module.FRONTMATTER_IDENTITY

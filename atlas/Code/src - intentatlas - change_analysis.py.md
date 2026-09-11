@@ -11,7 +11,7 @@ source_path: "src/intentatlas/change_analysis.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>8767</code>
+- **Size Bytes:** <code>9679</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
