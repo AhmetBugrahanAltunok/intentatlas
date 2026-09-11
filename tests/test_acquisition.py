@@ -522,3 +522,70 @@ def test_git_transport_checks_limits_after_a_fast_process_exit(
             "status",
             monitor_root=monitored,
         )
+
+
+def _origin_repository(root: Path) -> Path:
+    """Build a real local repository to use as a would-be acquisition origin."""
+
+    def git(*arguments: str) -> None:
+        subprocess.run(["git", *arguments], cwd=root, check=True, capture_output=True)
+
+    (root / "src").mkdir(parents=True)
+    (root / "src" / "app.py").write_text("def run():\n    return 1\n", encoding="utf-8")
+    git("init", "-q")
+    git("config", "user.name", "Origin")
+    git("config", "user.email", "origin@example.invalid")
+    git("add", "-A")
+    git("commit", "-qm", "seed")
+    return root
+
+
+def test_transport_refuses_local_and_file_protocols(tmp_path: Path) -> None:
+    """A reachable on-disk repository must still be unacquirable.
+
+    `protocol.file.allow=never` keeps acquisition to remote public HTTPS. Without it, a crafted
+    source argument could make the transport read an arbitrary local repository.
+    """
+
+    origin = _origin_repository(tmp_path / "origin")
+    limits = AcquisitionLimits(timeout_seconds=30)
+
+    for source in (origin.as_uri(), str(origin)):
+        destination = tmp_path / "acquired" / str(abs(hash(source)))
+        with pytest.raises(ValueError, match="public GitHub acquisition failed"):
+            GitTransport().clone(source, destination, limits)
+        assert not (destination / ".git").exists()
+        assert not (destination / "src" / "app.py").exists()
+
+
+def test_transport_refuses_an_unreachable_origin(tmp_path: Path) -> None:
+    destination = tmp_path / "acquired" / "checkout"
+    with pytest.raises(ValueError, match="public GitHub acquisition failed"):
+        GitTransport().clone(
+            (tmp_path / "absent-origin").as_uri(),
+            destination,
+            AcquisitionLimits(timeout_seconds=30),
+        )
+
+
+def test_clone_without_git_is_refused(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(acquisition.shutil, "which", lambda name: None)
+    transport = GitTransport()
+    assert transport.executable == ""
+    with pytest.raises(ValueError, match="Git is required"):
+        transport.clone(
+            "https://github.com/OWNER/REPOSITORY", tmp_path / "out", AcquisitionLimits()
+        )
+    assert not (tmp_path / "out").exists()
+
+
+def test_safe_git_command_forbids_local_protocols_and_redirects() -> None:
+    command = _safe_git_command("git", Path.cwd(), "status")
+    pairs = {
+        command[index + 1]
+        for index, value in enumerate(command)
+        if value == "-c" and index + 1 < len(command)
+    }
+    assert "protocol.file.allow=never" in pairs
+    assert "protocol.ext.allow=never" in pairs
+    assert "http.followRedirects=false" in pairs

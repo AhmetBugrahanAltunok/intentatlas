@@ -20,3 +20,4 @@ source_path: "tests/test_viewer.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(structure; evidence: python-ast)_
+- <code>modified-by</code> ← [[Commits/Commit 806aba1 - test- prove the fail-closed branches instead of asserting them|test: prove the fail-closed branches instead of asserting them]] _(history; evidence: git-diff-hunk)_

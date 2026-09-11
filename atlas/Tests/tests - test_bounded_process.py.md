@@ -66,4 +66,5 @@ source_path: "tests/test_bounded_process.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit 806aba1 - test- prove the fail-closed branches instead of asserting them|test: prove the fail-closed branches instead of asserting them]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

@@ -11,7 +11,7 @@ source_path: "tests/test_acquisition.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>17261</code>
+- **Size Bytes:** <code>20488</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -34,6 +34,8 @@ source_path: "tests/test_acquisition.py"
 - <code>defines</code> → [[Symbols/LocalTransport - tests - test_acquisition.py|LocalTransport]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/LocalTransport.__init__ - tests - test_acquisition.py|LocalTransport.__init__]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/LocalTransport.clone - tests - test_acquisition.py|LocalTransport.clone]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_origin_repository - tests - test_acquisition.py|_origin_repository]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_origin_repository.git - tests - test_acquisition.py|_origin_repository.git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/git - tests - test_acquisition.py|git]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cache_create_hit_refresh_list_info_and_clear - tests - test_acquisition.py|test_cache_create_hit_refresh_list_info_and_clear]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cache_create_hit_refresh_list_info_and_clear.clock - tests - test_acquisition.py|test_cache_create_hit_refresh_list_info_and_clear.clock]] _(structure; evidence: python-ast)_
@@ -41,6 +43,7 @@ source_path: "tests/test_acquisition.py"
 - <code>defines</code> → [[Symbols/test_cache_lock_never_reaps_an_old_live_owner - tests - test_acquisition.py|test_cache_lock_never_reaps_an_old_live_owner]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cache_lock_recovers_only_after_bounded_owner_age - tests - test_acquisition.py|test_cache_lock_recovers_only_after_bounded_owner_age]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_cache_tree_removal_uses_the_runtime_callback_without_deprecation - tests - test_acquisition.py|test_cache_tree_removal_uses_the_runtime_callback_without_deprecation]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_clone_without_git_is_refused - tests - test_acquisition.py|test_clone_without_git_is_refused]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_corruption_recovers_atomically_and_failure_preserves_prior_good_entry - tests - test_acquisition.py|test_corruption_recovers_atomically_and_failure_preserves_prior_good_entry]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_git_transport_checks_limits_after_a_fast_process_exit - tests - test_acquisition.py|test_git_transport_checks_limits_after_a_fast_process_exit]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_git_transport_enforces_output_time_and_disk_bounds - tests - test_acquisition.py|test_git_transport_enforces_output_time_and_disk_bounds]] _(structure; evidence: python-ast)_
@@ -50,11 +53,14 @@ source_path: "tests/test_acquisition.py"
 - <code>defines</code> → [[Symbols/test_interrupted_acquisition_removes_staging_and_lock - tests - test_acquisition.py|test_interrupted_acquisition_removes_staging_and_lock]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_managed_git_metadata_is_bounded_during_collection_and_times_out - tests - test_acquisition.py|test_managed_git_metadata_is_bounded_during_collection_and_times_out]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_metadata_contains_no_source_or_environment_content - tests - test_acquisition.py|test_metadata_contains_no_source_or_environment_content]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_safe_git_command_forbids_local_protocols_and_redirects - tests - test_acquisition.py|test_safe_git_command_forbids_local_protocols_and_redirects]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_safe_git_contract_disables_external_execution_and_auth - tests - test_acquisition.py|test_safe_git_contract_disables_external_execution_and_auth]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_same_repository_concurrency_uses_one_atomic_acquisition - tests - test_acquisition.py|test_same_repository_concurrency_uses_one_atomic_acquisition]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_same_repository_concurrency_uses_one_atomic_acquisition.acquire - tests - test_acquisition.py|test_same_repository_concurrency_uses_one_atomic_acquisition.acquire]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_strict_github_url_normalization - tests - test_acquisition.py|test_strict_github_url_normalization]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_strict_github_url_rejection - tests - test_acquisition.py|test_strict_github_url_rejection]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_transport_refuses_an_unreachable_origin - tests - test_acquisition.py|test_transport_refuses_an_unreachable_origin]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_transport_refuses_local_and_file_protocols - tests - test_acquisition.py|test_transport_refuses_local_and_file_protocols]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_url_detection_keeps_quoted_windows_paths_local - tests - test_acquisition.py|test_url_detection_keeps_quoted_windows_paths_local]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - __init__.py|src/intentatlas/__init__.py]] _(verification; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - acquisition.py|src/intentatlas/acquisition.py]] _(verification; evidence: filename-convention)_

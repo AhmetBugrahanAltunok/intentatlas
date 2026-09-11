@@ -11,7 +11,7 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 60
+- **commit:** 61
 - **config:** 8
 - **decision:** 39
 - **document:** 33
@@ -25,15 +25,15 @@ generated: true
 - **review:** 40
 - **session:** 20
 - **source-root:** 3
-- **symbol:** 1561
+- **symbol:** 1567
 - **test:** 86
-- **relationships:** 4967
+- **relationships:** 5019
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 260 relationships
-- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 221 relationships
+- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 212 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 141 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 112 relationships
 - [[Code/intentatlas|intentatlas]] — 109 relationships

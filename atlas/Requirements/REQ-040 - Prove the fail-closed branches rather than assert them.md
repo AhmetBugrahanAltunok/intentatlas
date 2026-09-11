@@ -31,6 +31,9 @@ documented claim.
   and hunk ranges, and an unknown output format is refused.
 - Change freshness abstains for unmerged, missing, symlinked, and unresolvable artifacts and when
   Git is unavailable; deletion freshness depends on the artifact actually being gone.
+- Source acquisition refuses local and `file://` origins, so a reachable on-disk repository
+  stays unacquirable, and the fixed Git argument list carries the protocol and redirect
+  settings that enforce it.
 - The full suite, Ruff, mypy, and Bandit pass with no runtime module modified.
 
 ## Links
