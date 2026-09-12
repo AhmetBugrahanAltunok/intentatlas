@@ -38,6 +38,7 @@ source_path: "tests/test_trust_first.py"
 - <code>changed-by</code> ← [[Commits/Commit 644d8b9 - Implement Phase 14 guided CLI onboarding|Implement Phase 14 guided CLI onboarding]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 922adfe - docs- record Phase 12 automated evidence|docs: record Phase 12 automated evidence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cd525d0 - feat- lead the change report with its answer|feat: lead the change report with its answer]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit e039183 - test- verify technical onboarding walkthroughs|test: verify technical onboarding walkthroughs]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit f407e49 - Fix cross-platform diagnostic command tests|Fix cross-platform diagnostic command tests]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

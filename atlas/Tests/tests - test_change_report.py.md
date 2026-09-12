@@ -63,6 +63,7 @@ source_path: "tests/test_change_report.py"
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit a8ef700 - Fix first-run analysis and guidance|Fix first-run analysis and guidance]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit c4414dd - feat- add trustworthy change intelligence|feat: add trustworthy change intelligence]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cd525d0 - feat- lead the change report with its answer|feat: lead the change report with its answer]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>proven-by</code> ← [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification|EVD-028 - Phase 12 trust-first onboarding verification]] _(evidence; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-018 - Implement trustworthy change intelligence|ISSUE-018 - Implement trustworthy change intelligence]] _(reference; evidence: wikilink)_

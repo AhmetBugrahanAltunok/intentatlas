@@ -11,7 +11,7 @@ generated: true
 
 ## Graph summary
 
-- **commit:** 69
+- **commit:** 70
 - **config:** 8
 - **decision:** 41
 - **document:** 33
@@ -27,20 +27,20 @@ generated: true
 - **source-root:** 3
 - **symbol:** 1609
 - **test:** 86
-- **relationships:** 5100
+- **relationships:** 5116
 - **orphaned durable notes:** 0
 
 ## Most connected
 
 - [[Brain/Product Roadmap|Product Roadmap]] — 268 relationships
 - [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 186 relationships
-- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 141 relationships
+- [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 142 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 113 relationships
 - [[Code/intentatlas|intentatlas]] — 109 relationships
-- [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] — 91 relationships
+- [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] — 92 relationships
 - [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 79 relationships
+- [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 78 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 77 relationships
-- [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 77 relationships
 - [[Code/src - intentatlas - longitudinal.py|src/intentatlas/longitudinal.py]] — 75 relationships
 - [[Code/src - intentatlas - graph.py|src/intentatlas/graph.py]] — 68 relationships
 - [[Code/src - intentatlas - recommendations.py|src/intentatlas/recommendations.py]] — 66 relationships

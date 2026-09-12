@@ -31,5 +31,6 @@ source_path: "tests/test_change_coverage.py"
 ## Incoming relationships
 
 - <code>changed-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cd525d0 - feat- lead the change report with its answer|feat: lead the change report with its answer]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_
 - <code>referenced-by</code> ← [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions|ISSUE-036 - Close partial hunk deletion and browser regressions]] _(reference; evidence: wikilink)_

@@ -58,4 +58,5 @@ source_path: "tests/test_phase17f_evidence_integrity.py"
 - <code>changed-by</code> ← [[Commits/Commit 41811e5 - Implement Phase 17F evidence integrity|Implement Phase 17F evidence integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 6936698 - Fix first-run workflow blockers|Fix first-run workflow blockers]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 8b38c15 - Constrain Python test discovery roots|Constrain Python test discovery roots]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cd525d0 - feat- lead the change report with its answer|feat: lead the change report with its answer]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/intentatlas|intentatlas]] _(boundary; evidence: workspace-boundary)_

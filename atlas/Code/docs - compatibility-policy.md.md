@@ -28,5 +28,6 @@ source_path: "docs/compatibility-policy.md"
 - <code>changed-by</code> ← [[Commits/Commit 7f45361 - Implement Phase 13 semantic monorepo foundation|Implement Phase 13 semantic monorepo foundation]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 85a639f - Implement Phase 17 recommendation integrity|Implement Phase 17 recommendation integrity]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit 8b38c15 - Constrain Python test discovery roots|Constrain Python test discovery roots]] _(history; evidence: git-log)_
+- <code>changed-by</code> ← [[Commits/Commit cd525d0 - feat- lead the change report with its answer|feat: lead the change report with its answer]] _(history; evidence: git-log)_
 - <code>changed-by</code> ← [[Commits/Commit d84e545 - feat- add frozen longitudinal pilot baseline|feat: add frozen longitudinal pilot baseline]] _(history; evidence: git-log)_
 - <code>owned-by</code> ← [[Code/IntentAtlas - c1f62610|IntentAtlas]] _(boundary; evidence: workspace-boundary)_

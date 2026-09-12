@@ -20,4 +20,3 @@ source_path: "tools/verify_pipx_install.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/tools - verify_pipx_install.py|tools/verify_pipx_install.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 492eca4 - Implement Phase 15 source-to-atlas onboarding|Implement Phase 15 source-to-atlas onboarding]] _(history; evidence: git-diff-hunk)_

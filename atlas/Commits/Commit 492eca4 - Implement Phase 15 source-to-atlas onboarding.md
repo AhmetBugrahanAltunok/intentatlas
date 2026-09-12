@@ -34,28 +34,6 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_source_to_atlas.py|tests/test_source_to_atlas.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/tools - verify_pipx_install.py|tools/verify_pipx_install.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Code/tools - verify_release.py|tools/verify_release.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_package_values - tests - test_release.py|_package_values]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_write_project - tests - test_release.py|_write_project]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_write_sdist - tests - test_release.py|_write_sdist]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_release_verifier_accepts_repeated_project_archives - tests - test_release.py|test_release_verifier_accepts_repeated_project_archives]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/LocalTransport - tests - test_source_to_atlas.py|LocalTransport]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/LocalTransport.__init__ - tests - test_source_to_atlas.py|LocalTransport.__init__]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/LocalTransport.clone - tests - test_source_to_atlas.py|LocalTransport.clone]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/TTYBuffer - tests - test_source_to_atlas.py|TTYBuffer]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/TTYBuffer.isatty - tests - test_source_to_atlas.py|TTYBuffer.isatty]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/git - tests - test_source_to_atlas.py|git]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/snapshot - tests - test_source_to_atlas.py|snapshot]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_cache_cli_is_deterministic_offline_and_clears_only_exact_identity - tests - test_source_to_atlas.py|test_cache_cli_is_deterministic_offline_and_clears_only_exact_identity]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_direct_url_shorthand_requires_real_tty_and_non_tty_never_calls_guide - tests - test_source_to_atlas.py|test_direct_url_shorthand_requires_real_tty_and_non_tty_never_calls_guide]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_direct_url_shorthand_requires_real_tty_and_non_tty_never_calls_guide.forbidden - tests - test_source_to_atlas.py|test_direct_url_shorthand_requires_real_tty_and_non_tty_never_calls_guide.forbidden]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_public_url_one_approval_reaches_ready_atlas_and_cache_hit_is_no_write - tests - test_source_to_atlas.py|test_public_url_one_approval_reaches_ready_atlas_and_cache_hit_is_no_write]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_remote_terminal_and_viewer_reuse_one_immutable_snapshot - tests - test_source_to_atlas.py|test_remote_terminal_and_viewer_reuse_one_immutable_snapshot]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.collect - tests - test_source_to_atlas.py|test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.collect]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.serve - tests - test_source_to_atlas.py|test_remote_terminal_and_viewer_reuse_one_immutable_snapshot.serve]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_run - tools - verify_pipx_install.py|_run]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/main - tools - verify_pipx_install.py|main]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/verify_pipx_lifecycle - tools - verify_pipx_install.py|verify_pipx_lifecycle]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/_project_source_manifest - tools - verify_release.py|_project_source_manifest]] _(history; evidence: git-diff-hunk)_
 
 ## Incoming relationships
 

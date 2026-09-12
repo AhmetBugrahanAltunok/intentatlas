@@ -19,11 +19,13 @@ independent, MIT-licensed, local-first, and vault-first.
 
 - Latest completed delivery: **Phase 21F — Readable first answer**, which prepares Phase 22 by
   making the result readable without weakening what it claims.
-  Phase 21A is complete; Phase 21B holds a conditional pass whose only remaining condition is the
-  remote platform matrix.
-- Active delivery: **Phase 21 — Reproducible installation and first useful report**. Its
-  import-identity, reproducible-artifact, and first-run gates are closed. Remaining: the platform
-  matrix (needs a push), the release inventory, and the ISSUE-039 owner decisions.
+- Active delivery: **Phase 21 — Reproducible installation and first useful report**. Phases
+  21A-21F closed every technical gate: import identity, reproducible artifacts verified at
+  `0.3.0b1`, the remote platform matrix at `a6e60d1`, the first-run walkthrough, fail-closed
+  evidence, accurate vault identity, and a readable default report. The release inventory is
+  reconciled. **Only the four ISSUE-039 owner decisions remain before the phase can close.**
+- Next: **Phase 22** needs five independent participants. No technical work substitutes for it,
+  and nothing recorded in Phases 21A-21F counts toward it.
 - Forward plan, acceptance gates, risks, and next actions:
   [[Brain/Alpha Release Execution Plan]].
 - Latest working checkpoint: [[Sessions/2026-09-11 - Beta merge and re-verification]].
