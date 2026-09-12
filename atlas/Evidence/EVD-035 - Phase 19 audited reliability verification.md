@@ -91,5 +91,5 @@ phase: 19
 
 - proves:: [[Requirements/REQ-035 - Close audited trust and cross-language analysis gaps]]
 - references:: [[Decisions/ADR-037 - Bound trust claims and abstain on uncertain structure]]
-- delivered-by:: [[Issues/ISSUE-035 - Apply audited reliability fixes]]
+- tracked-by:: [[Issues/ISSUE-035 - Apply audited reliability fixes]]
 - reviewed-by:: [[Reviews/Phase 19 Audited Reliability Review]]

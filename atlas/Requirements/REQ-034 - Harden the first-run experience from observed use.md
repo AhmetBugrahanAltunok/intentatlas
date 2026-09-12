@@ -46,8 +46,8 @@ mistaking missing evidence for proof of no impact.
 ## Links
 
 - drives:: [[Decisions/ADR-036 - Use repository-state-aware first-run guidance]]
-- delivered-by:: [[Issues/ISSUE-034 - Apply first-run observation fixes]]
-- proved-by:: [[Evidence/EVD-034 - Phase 18 first-run experience hardening verification]]
+- tracked-by:: [[Issues/ISSUE-034 - Apply first-run observation fixes]]
+- proven-by:: [[Evidence/EVD-034 - Phase 18 first-run experience hardening verification]]
 - reviewed-by:: [[Reviews/Phase 18 First-Run Experience Hardening Review]]
 - extends:: [[Requirements/REQ-028 - Deliver trust-first first-run value]]
 - preserves:: [[Requirements/REQ-033 - Preserve recommendation integrity across supported surfaces]]

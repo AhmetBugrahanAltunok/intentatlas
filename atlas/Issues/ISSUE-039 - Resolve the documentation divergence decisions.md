@@ -62,9 +62,32 @@ than closed one at a time. They are project-owner decisions, not implementation 
   3. **Normalise every note onto the existing 16 types**, accepting that several links lose
      meaning or become plain `references`. No schema change, largest edit, worst fidelity.
 
-  Recommended: option 2. The product's contract is that links group by meaning, and 46% of its
-  own intent chain currently does not. Option 1 leaves the headline problem intact; option 3
-  discards meaning to protect a vocabulary that was never designed for this layer.
+  **Correction, applied 2026-09-12.** The constraint is not the 16-type catalog. Vault notes may
+  only declare the six names in `USER_RELATIONS`: `drives`, `implemented-by`, `proves`,
+  `recorded-in`, `references`, `tracked-by`. Inverse names are not accepted from vault text at all,
+  so `proven-by::` is no more writable than `proved-by::` was. The earlier figures in this issue
+  were computed against the full catalog including inverses and overstated resolution; measured
+  against `USER_RELATIONS`, **343 of 655 links resolve (52%)**.
+
+  Option 1 was applied and the result was smaller than predicted:
+
+  - `delivered-by` -> `tracked-by`, 17 links. Real: `tracked-by` is user-writable, so typed
+    `delivery` edges now exist. Resolution 50% to 52%.
+  - `proved-by` -> `proven-by`, 14 links. **A spelling correction only.** It produced no graph
+    change. All 14 already had a reciprocal `proves::` on the Evidence side, which is what creates
+    the typed edge; the requirement-side line exists for human navigation and always resolved to a
+    generic `references`. It is kept because `proven-by` is the catalog's own word for that
+    direction, not because it fixed anything.
+
+  So option 2 is larger than described above. Extending the catalog is not sufficient:
+  `USER_RELATIONS` must grow with it, and whether inverse names should become writable from vault
+  text is a separate design question. ADR-003 restricted user input deliberately; widening it is a
+  trust-boundary change, not only a vocabulary one.
+
+  Recommended: defer option 2 until after Phase 22. It changes nothing a participant sees — they
+  run `diagnose` and `changes` against their own repository and never author a vault note — and
+  Phase 22 may show which intent relations actually carry weight. Deciding the vocabulary from one
+  author's habits before that evidence exists is working backwards.
 
 Installation and post-failure recovery instructions are already identical across both languages;
 that was verified in EVD-039 and needs no change.

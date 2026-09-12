@@ -40,4 +40,4 @@ code are persisted. No new package dependency or network requirement is introduc
 - implements:: [[Requirements/REQ-036 - Require complete change coverage before targeted advice]]
 - refines:: [[Decisions/ADR-008 - Conservative diff-to-symbol projection]]
 - refines:: [[Decisions/ADR-020 - Separate exact change evidence from fallback]]
-- delivered-by:: [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions]]
+- tracked-by:: [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions]]

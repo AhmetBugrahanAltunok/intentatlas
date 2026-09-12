@@ -30,8 +30,8 @@ anything into their project, and without having to guess the next command.
 
 ## Links
 
-- proved-by:: [[Evidence/EVD-039 - Phase 21C first-run walkthrough verification]]
+- proven-by:: [[Evidence/EVD-039 - Phase 21C first-run walkthrough verification]]
 - reviewed-by:: [[Reviews/Phase 21C First-Run Walkthrough Review]]
-- delivered-by:: [[Issues/ISSUE-039 - Resolve the documentation divergence decisions]]
+- tracked-by:: [[Issues/ISSUE-039 - Resolve the documentation divergence decisions]]
 - extends:: [[Requirements/REQ-038 - Produce a reproducible independently installable candidate]]
 - planned-in:: [[Brain/Alpha Release Execution Plan]]

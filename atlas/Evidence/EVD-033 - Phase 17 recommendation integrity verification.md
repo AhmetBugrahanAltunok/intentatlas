@@ -265,6 +265,6 @@ results remain historical evidence, not proof that the new 17F gates pass.
 - references:: [[Decisions/ADR-033 - Canonicalize confidence and conservative Python resolution]]
 - references:: [[Decisions/ADR-034 - Retain generated vault outputs under single-writer governance]]
 - references:: [[Decisions/ADR-035 - Add linked report reasons and explicit runnable test roles]]
-- delivered-by:: [[Issues/ISSUE-032 - Implement recommendation integrity and Python resolution]]
-- delivered-by:: [[Issues/ISSUE-033 - Correct evidence presentation and runnable test integrity]]
+- tracked-by:: [[Issues/ISSUE-032 - Implement recommendation integrity and Python resolution]]
+- tracked-by:: [[Issues/ISSUE-033 - Correct evidence presentation and runnable test integrity]]
 - reviewed-by:: [[Reviews/Phase 17 Recommendation Integrity and Python Resolution Review]]

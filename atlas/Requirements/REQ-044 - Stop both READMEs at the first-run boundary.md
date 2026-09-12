@@ -27,5 +27,5 @@ finds everything else through a clear index. Neither language is the poor relati
 ## Links
 
 - drives:: [[Decisions/ADR-043 - Split the READMEs at the first-run boundary]]
-- proved-by:: [[Evidence/EVD-044 - Phase 21H documentation split verification]]
+- proven-by:: [[Evidence/EVD-044 - Phase 21H documentation split verification]]
 - reviewed-by:: [[Reviews/Phase 21H Documentation Split Review]]

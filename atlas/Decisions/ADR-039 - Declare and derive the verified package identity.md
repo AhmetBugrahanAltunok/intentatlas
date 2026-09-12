@@ -48,5 +48,5 @@ behavior, and does not execute or inspect project code.
 ## Links
 
 - implements:: [[Requirements/REQ-037 - Prove which package and boundaries verification covers]]
-- delivered-by:: [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions]]
+- tracked-by:: [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions]]
 - refines:: [[Decisions/ADR-038 - Preserve uncovered change ranges and deletion uncertainty]]

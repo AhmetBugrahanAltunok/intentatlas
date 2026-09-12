@@ -37,8 +37,8 @@ across Python, JavaScript/TypeScript, and Go without treating uncertainty as pro
 ## Links
 
 - drives:: [[Decisions/ADR-037 - Bound trust claims and abstain on uncertain structure]]
-- delivered-by:: [[Issues/ISSUE-035 - Apply audited reliability fixes]]
-- proved-by:: [[Evidence/EVD-035 - Phase 19 audited reliability verification]]
+- tracked-by:: [[Issues/ISSUE-035 - Apply audited reliability fixes]]
+- proven-by:: [[Evidence/EVD-035 - Phase 19 audited reliability verification]]
 - reviewed-by:: [[Reviews/Phase 19 Audited Reliability Review]]
 - preserves:: [[Requirements/REQ-033 - Preserve recommendation integrity across supported surfaces]]
 - extends:: [[Requirements/REQ-034 - Harden the first-run experience from observed use]]

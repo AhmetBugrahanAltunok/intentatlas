@@ -184,5 +184,5 @@ verified change relationships explain the increased graph population; source/tes
 
 - proves:: [[Requirements/REQ-036 - Require complete change coverage before targeted advice]]
 - follows:: [[Decisions/ADR-038 - Preserve uncovered change ranges and deletion uncertainty]]
-- delivered-by:: [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions]]
+- tracked-by:: [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions]]
 - reviewed-by:: [[Reviews/Phase 20 Change Coverage Review]]

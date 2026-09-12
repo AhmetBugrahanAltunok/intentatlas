@@ -27,8 +27,8 @@ without the development checkout present.
 
 ## Links
 
-- proved-by:: [[Evidence/EVD-038 - Phase 21B reproducible candidate verification]]
+- proven-by:: [[Evidence/EVD-038 - Phase 21B reproducible candidate verification]]
 - reviewed-by:: [[Reviews/Phase 21B Reproducible Candidate Review]]
-- delivered-by:: [[Issues/ISSUE-038 - Close the network-gated release checks]]
+- tracked-by:: [[Issues/ISSUE-038 - Close the network-gated release checks]]
 - extends:: [[Requirements/REQ-037 - Prove which package and boundaries verification covers]]
 - planned-in:: [[Brain/Alpha Release Execution Plan]]

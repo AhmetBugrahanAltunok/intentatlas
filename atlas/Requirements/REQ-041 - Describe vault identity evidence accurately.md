@@ -29,6 +29,6 @@ identity or whether IntentAtlas derived it from the file's location.
 ## Links
 
 - drives:: [[Decisions/ADR-040 - Record vault note identity provenance]]
-- proved-by:: [[Evidence/EVD-041 - Phase 21E vault identity evidence verification]]
+- proven-by:: [[Evidence/EVD-041 - Phase 21E vault identity evidence verification]]
 - reviewed-by:: [[Reviews/Phase 21E Vault Identity Evidence Review]]
 - extends:: [[Requirements/REQ-040 - Prove the fail-closed branches rather than assert them]]

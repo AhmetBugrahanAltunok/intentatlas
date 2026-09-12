@@ -37,6 +37,6 @@ repeatedly inspect or fit the same interactive Atlas without displacing the page
 ## Typed links
 
 - drives:: [[Decisions/ADR-032 - Prevent focus-driven viewport drift and structure terminal presentation]]
-- delivered-by:: [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]]
-- delivered-by:: [[Issues/ISSUE-031 - Improve guided PowerShell readability]]
-- proved-by:: [[Evidence/EVD-032 - Phase 16 guided experience stability verification]]
+- tracked-by:: [[Issues/ISSUE-030 - Fix cumulative viewer layout drift after report and fit controls]]
+- tracked-by:: [[Issues/ISSUE-031 - Improve guided PowerShell readability]]
+- proven-by:: [[Evidence/EVD-032 - Phase 16 guided experience stability verification]]

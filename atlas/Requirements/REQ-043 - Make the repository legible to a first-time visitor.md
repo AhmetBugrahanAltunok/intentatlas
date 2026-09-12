@@ -29,6 +29,6 @@ stays intact and stays linked.
 ## Links
 
 - drives:: [[Decisions/ADR-042 - Untrack derived vault output and keep commit notes]]
-- proved-by:: [[Evidence/EVD-043 - Phase 21G vault governance verification]]
+- proven-by:: [[Evidence/EVD-043 - Phase 21G vault governance verification]]
 - reviewed-by:: [[Reviews/Phase 21G Vault Governance Review]]
 - planned-in:: [[Brain/Alpha Release Execution Plan]]

@@ -32,6 +32,6 @@ first, and without losing any of the limits that make the answer trustworthy.
 ## Links
 
 - drives:: [[Decisions/ADR-041 - Lead the change report with its answer]]
-- proved-by:: [[Evidence/EVD-042 - Phase 21F readable first answer verification]]
+- proven-by:: [[Evidence/EVD-042 - Phase 21F readable first answer verification]]
 - reviewed-by:: [[Reviews/Phase 21F Readable First Answer Review]]
 - planned-in:: [[Brain/Alpha Release Execution Plan]]

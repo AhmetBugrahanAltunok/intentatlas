@@ -139,7 +139,7 @@ publication, deployment, telemetry, API key, hosted account, or `atlas/Private/`
 
 - proves:: [[Requirements/REQ-034 - Harden the first-run experience from observed use]]
 - references:: [[Decisions/ADR-036 - Use repository-state-aware first-run guidance]]
-- delivered-by:: [[Issues/ISSUE-034 - Apply first-run observation fixes]]
+- tracked-by:: [[Issues/ISSUE-034 - Apply first-run observation fixes]]
 - reviewed-by:: [[Reviews/Phase 18 First-Run Experience Hardening Review]]
 - extends:: [[Evidence/EVD-028 - Phase 12 trust-first onboarding verification]]
 - preserves:: [[Evidence/EVD-033 - Phase 17 recommendation integrity verification]]

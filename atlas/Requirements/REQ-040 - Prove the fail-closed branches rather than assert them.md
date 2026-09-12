@@ -40,6 +40,6 @@ documented claim.
 
 ## Links
 
-- proved-by:: [[Evidence/EVD-040 - Phase 21D fail-closed branch verification]]
+- proven-by:: [[Evidence/EVD-040 - Phase 21D fail-closed branch verification]]
 - reviewed-by:: [[Reviews/Phase 21D Fail-Closed Branch Review]]
 - extends:: [[Requirements/REQ-037 - Prove which package and boundaries verification covers]]

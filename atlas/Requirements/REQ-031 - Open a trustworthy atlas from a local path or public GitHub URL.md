@@ -45,5 +45,5 @@ scope, graph, or package-manager details first.
 ## Typed links
 
 - drives:: [[Decisions/ADR-031 - Acquire explicit public repositories into a managed local cache]]
-- delivered-by:: [[Issues/ISSUE-029 - Implement frictionless source-to-atlas onboarding]]
-- proved-by:: [[Evidence/EVD-031 - Phase 15 source-to-atlas verification]]
+- tracked-by:: [[Issues/ISSUE-029 - Implement frictionless source-to-atlas onboarding]]
+- proven-by:: [[Evidence/EVD-031 - Phase 15 source-to-atlas verification]]

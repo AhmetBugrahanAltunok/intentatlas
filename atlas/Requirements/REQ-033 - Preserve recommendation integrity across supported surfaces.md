@@ -43,5 +43,5 @@ Python src-layout imports resolve real callers without promoting weak or non-run
 ## Links
 
 - drives:: [[Decisions/ADR-033 - Canonicalize confidence and conservative Python resolution]]
-- delivered-by:: [[Issues/ISSUE-032 - Implement recommendation integrity and Python resolution]]
-- proved-by:: [[Evidence/EVD-033 - Phase 17 recommendation integrity verification]]
+- tracked-by:: [[Issues/ISSUE-032 - Implement recommendation integrity and Python resolution]]
+- proven-by:: [[Evidence/EVD-033 - Phase 17 recommendation integrity verification]]

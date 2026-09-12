@@ -32,8 +32,8 @@ current-side symbol coverage. Unmapped lines and deletion-only ranges retain unc
 ## Links
 
 - drives:: [[Decisions/ADR-038 - Preserve uncovered change ranges and deletion uncertainty]]
-- delivered-by:: [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions]]
-- proved-by:: [[Evidence/EVD-036 - Phase 20 change coverage verification]]
+- tracked-by:: [[Issues/ISSUE-036 - Close partial hunk deletion and browser regressions]]
+- proven-by:: [[Evidence/EVD-036 - Phase 20 change coverage verification]]
 - reviewed-by:: [[Reviews/Phase 20 Change Coverage Review]]
 - extends:: [[Requirements/REQ-035 - Close audited trust and cross-language analysis gaps]]
 - planned-in:: [[Brain/Alpha Release Execution Plan]]

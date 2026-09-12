@@ -37,8 +37,8 @@ documentation alone.
 ## Links
 
 - drives:: [[Decisions/ADR-039 - Declare and derive the verified package identity]]
-- delivered-by:: [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions]]
-- proved-by:: [[Evidence/EVD-037 - Phase 21A verification integrity verification]]
+- tracked-by:: [[Issues/ISSUE-037 - Add the package identity gate and vault boundary regressions]]
+- proven-by:: [[Evidence/EVD-037 - Phase 21A verification integrity verification]]
 - reviewed-by:: [[Reviews/Phase 21A Verification Integrity Review]]
 - extends:: [[Requirements/REQ-036 - Require complete change coverage before targeted advice]]
 - planned-in:: [[Brain/Alpha Release Execution Plan]]
