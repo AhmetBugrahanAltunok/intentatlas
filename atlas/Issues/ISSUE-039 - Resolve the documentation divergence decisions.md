@@ -6,8 +6,8 @@ phase: 21C
 ---
 # Resolve the documentation divergence decisions
 
-Four conventions questions are open. They interact, so they should be decided together rather
-than closed one at a time. All four are project-owner decisions, not implementation work.
+Four conventions questions were opened; one is closed. They interact, so they should be decided together rather
+than closed one at a time. They are project-owner decisions, not implementation work.
 
 - [ ] **English README length.** 675 lines. The first-run path competes with capability lists,
   command reference, status, and inspiration sections. The Phase 22 gate targets a below-ten-minute
@@ -17,10 +17,12 @@ than closed one at a time. All four are project-owner decisions, not implementat
   commands`. A Turkish reader gets no capability list and no command reference. Options: translate
   both sections, or apply the same split to both languages so neither carries a reference table.
   Expanding the Turkish file before deciding the split above would have to be undone.
-- [ ] **ADR-034 generated-vault governance.** Still required before contributor intake. 1944
-  tracked files under `atlas/` against 51 under `src/`. Compare tracked snapshots, artifact
-  publication, and local-only generation on durable-link preservation and migration cost. Do not
-  bulk delete or untrack.
+- [x] **ADR-034 generated-vault governance.** Closed 2026-09-12 by
+  [[Decisions/ADR-042 - Untrack derived vault output and keep commit notes]]. `Symbols/`, `Code/`,
+  `Tests/` and `Dashboard/` left the index; they stay on disk and regenerate deterministically.
+  `Commits/` stayed tracked because durable notes cite commit notes by name and untracking them
+  would break recorded evidence for 70 of 1863 files. Tracked `atlas/` went from 2114 to 321, of
+  which 245 are human-written. No file was deleted and no history was rewritten.
 - [ ] **Durable relation vocabulary.** The durable notes use `delivered-by::`, `reviewed-by::`,
   `extends::`, and `planned-in::`. None are in the accepted relation catalog, so each degrades to a
   generic `references` edge. No link is lost, but the intent chain carries less meaning than the

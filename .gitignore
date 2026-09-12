@@ -16,6 +16,13 @@ var/
 
 # IntentAtlas local state and private vault material
 .intentatlas/
+
+# Derived vault output: deterministic from `intentatlas scan`, see ADR-042.
+# atlas/Commits/ stays tracked because durable notes cite commit notes by name.
+atlas/Symbols/
+atlas/Code/
+atlas/Tests/
+atlas/Dashboard/
 /.obsidian/
 atlas/Private/
 atlas/.obsidian/workspace*.json

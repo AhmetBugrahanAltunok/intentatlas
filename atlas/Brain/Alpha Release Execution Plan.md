@@ -5,7 +5,7 @@ status: active
 ---
 # Alpha Release Execution Plan
 
-Updated: 2026-09-11. Canonical phase status: [[Brain/Product Roadmap]].
+Updated: 2026-09-12. Canonical phase status: [[Brain/Product Roadmap]].
 Current handoff: [[Sessions/2026-09-11 - Beta merge and re-verification]].
 
 ## Güncel sonuç — 2026-09-11
@@ -79,7 +79,7 @@ ile uyumludur. Öneriler danışmanlık niteliğindedir; test yeterliliği garan
 | --- | --- | --- | --- |
 | 20 | Eksik analizin güvenli görünmesini engellemek | Tam satır kapsamı, iç içe semboller, silme belirsizliği, tarayıcı kanıt yolu | REQ-036 kabul tablosu ve tüm yerel kalite kapıları geçer |
 | 21 | Yardımsız kurulabilen ve anlamlı sonuç veren aday | Temiz wheel/sdist kurulumları, EN/TR akışı, kaynak kimliği, katkı/vault politikası | Aynı kaynak revizyonuna bağlı tekrar üretilebilir paketler; CLI/UI ve platform kanıtı; gerçeği yansıtan kurulum metni |
-| 22 | Gerçek kullanım değerini ölçmek | En az 5 bağımsız kişi kendi deposunda ilk raporu alır; anlamlandırma ve sonraki kullanım gözlenir | İlk kullanım medyanı 10 dakikanın altında; yardım ve başarısızlıklar dahil raporlanır; kritik sorunlar kapanır |
+| 22 | Gerçek kullanım değerini ölçmek | En az 5 bağımsız kişi kendi deposunda ilk raporu alır; kararı etkileyip etkilemediği ve ikinci kullanım gözlenir | **Birincil:** en az bir katılımcı raporu gerçek bir kararında kullanır ve kendiliğinden ikinci kez döner. **İkincil:** ilk kullanım süresi, takılma noktaları, yardım ve başarısızlıklar dahil raporlanır |
 | 23 | İncelenmiş alpha'yı erişilebilir kılmak | Yayın notu, örnek, güvenlik kanalı, temiz revizyon, doğrulanmış hash'ler ve yayın işlemleri | Faz 11C kapıları, uzaktaki CI/audit ve somut yayın incelemesi geçer; yayımlanan bytes doğrulanır |
 
 Takvim, kanıt yerine geçmez. Bir fazın başarısız kapısı kapanmadan sonraki uygulama fazı başlamaz.
@@ -110,13 +110,37 @@ taslak işler yapılmış gibi işaretlenmez.
   Kapandı 2026-09-11: `a6e60d1`'de CI run 34635166633, 13/13 iş başarılı; altı
   `cross-platform-e2e` kombinasyonunun tamamı ve `reproducible-package` geçti.
   [[Issues/ISSUE-038 - Close the network-gated release checks]] kapandı.
-- [ ] ADR-034 gereği katkı öncesi üretilmiş vault politikası seç: mevcut snapshot, artifact veya
+- [x] ADR-034 gereği katkı öncesi üretilmiş vault politikası seç: mevcut snapshot, artifact veya
   yerel üretim seçeneklerini kalıcı bağlantı ve geçiş maliyetiyle karşılaştır. Toplu silme yapma.
-  README uzunluğu ve TR kapsamıyla birlikte karara bağlanmalı:
-  [[Issues/ISSUE-039 - Resolve the documentation divergence decisions]].
+  Kapandı 2026-09-12: [[Decisions/ADR-042 - Untrack derived vault output and keep commit notes]].
+  `Symbols/`, `Code/`, `Tests/`, `Dashboard/` takipten çıktı (diskte duruyor, `scan` determinist
+  olarak üretiyor); `Commits/` takipli kaldı çünkü kalıcı notlar commit notlarına adıyla atıf
+  yapıyor. Takipli: 2114 → 321. Hiçbir dosya silinmedi, geçmiş yeniden yazılmadı.
 - [ ] Kanıt, kapsamlı inceleme ve somut yayın adayı envanterini kaydet.
 
 ## Faz 22 gözlem protokolü
+
+### Neyi ölçtüğümüz — düzeltildi 2026-09-12
+
+Bu protokolün birincil ölçütü "ilk rapora 10 dakikanın altında ulaşma" idi. Bu bir
+**kullanılabilirlik** kapısı ve projenin en büyük riskini ölçmüyor. Asıl risk şu: bu kadar iyi
+inşa edilmiş bir aracın kimsenin yeterince önemsemediği bir problemi çözüyor olması. On dakikada
+rapor alıp bir daha dönmeyen beş kişi bu kapıyı geçer ve bize hiçbir şey söylemez.
+
+Ölçütler yer değiştirdi:
+
+**Birincil — değer.** Katılımcı raporu gerçek bir kararında kullandı mı? Kendisi istemeden,
+başka bir değişiklikte ikinci kez döndü mü? Dönmediyse neden? "Kullanışlı göründü" bir sonuç
+değildir; bir davranış gözlenmeden değer iddiası yazılmaz.
+
+**İkincil — kullanılabilirlik.** İlk rapora ne kadar sürede ulaştı, nerede takıldı, hangi komutu
+tahmin edemedi. Bu ölçüler birincil sonucu açıklamak içindir, onun yerine geçmez.
+
+**Üçüncül — yorum doğruluğu.** Önerilen bir testin *neden* önerildiğini kendi cümleleriyle
+açıklayabiliyor mu? Kanıtın sınırını doğru anlıyor mu? Burada tehlikeli başarısızlık pes eden
+katılımcı değil, sonuca kanıtın desteklediğinden fazla güvenen katılımcıdır.
+
+### Yürütme
 
 Katılımcıya ürünü kurup kendi yerel deposunda bir değişikliğin raporunu alması ve önerilen
 bir testin nedenini açıklaması görevi verilir. Süre başlangıcı, başarı tanımı ve yardım düzeyi
@@ -124,9 +148,13 @@ bir testin nedenini açıklaması görevi verilir. Süre başlangıcı, başarı
 olmadan medyan, kullanıcı başarısı veya kullanım kolaylığı iddiası yayımlanmaz.
 Sentetik senaryolar ve mevcut benchmarklar bu kapıyı karşılamaz.
 
-İkinci kullanım ayrı takip edilir: kişi ürünü başka bir değişiklikte tekrar kullandı mı, kararını
-etkiledi mi, hangi eksik kanıt işini engelledi? Henüz kullanıcı veya gözlem kaydı yok; sonuç
-uydurulmaz. Katılımcılara mesaj gönderimi ve kişisel veri paylaşımı ayrı, somut işlem olarak ele alınır.
+İkinci kullanım pasif beklenmez, ayrıca sorulur: kişi ürünü başka bir değişiklikte tekrar
+kullandı mı, kararını etkiledi mi, hangi eksik kanıt işini engelledi? Henüz kullanıcı veya gözlem
+kaydı yok; sonuç uydurulmaz. Katılımcılara mesaj gönderimi ve kişisel veri paylaşımı ayrı, somut
+işlem olarak ele alınır.
+
+**Beşi beklemeye gerek yok.** İlk katılımcı, altı haftalık teknik doğrulamanın verdiğinden daha
+çok bilgi verir. Beş kişi yayın iddiası için gereken eşiktir, ilk sinyal için değil.
 
 ## Yayın kapsamı ve ertelenenler
 
