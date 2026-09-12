@@ -320,8 +320,9 @@ def test_frozen_pilot_metadata_and_benchmark_card_match() -> None:
     )
 
     protocol = (project_root / "docs" / "longitudinal-pilot.md").read_text(encoding="utf-8")
-    readme = (project_root / "README.md").read_text(encoding="utf-8")
-    normalized_readme = " ".join(readme.split())
+    # The benchmark is reference material and lives in the command reference, not the README.
+    reference = (project_root / "docs" / "commands.md").read_text(encoding="utf-8")
+    normalized_readme = " ".join(reference.split())
     for value in (
         manifest.partition_hashes["calibration"],
         manifest.partition_hashes["evaluation"],

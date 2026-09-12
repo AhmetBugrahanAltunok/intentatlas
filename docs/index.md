@@ -18,6 +18,10 @@ deliberate persistent actions.
 
 ## Concepts and operations
 
+- [Workflows](workflows.md) — the flows past first use ([Türkçe](workflows.tr.md))
+- [Command reference](commands.md) — every command, including maintainer and benchmark ones
+- [Capabilities in detail](capabilities.md) — what each adapter covers and where it abstains
+  ([Türkçe](capabilities.tr.md))
 - [Architecture and trust boundaries](architecture.md)
 - [Installation and first run](installation.md)
 - [Managed public-repository cache](managed-repository-cache.md)

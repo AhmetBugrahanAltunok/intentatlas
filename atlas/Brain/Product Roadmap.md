@@ -17,13 +17,14 @@ independent, MIT-licensed, local-first, and vault-first.
 
 ## Current execution checkpoint — 2026-09-12
 
-- Latest completed delivery: **Phase 21G — Vault governance and Phase 22 measurement**.
+- Latest completed delivery: **Phase 21H — Documentation split at the first-run boundary**.
 - Active delivery: **Phase 21 — Reproducible installation and first useful report**. Phases
   21A-21F closed every technical gate: import identity, reproducible artifacts verified at
   `0.3.0b1`, the remote platform matrix at `a6e60d1`, the first-run walkthrough, fail-closed
   evidence, accurate vault identity, and a readable default report. The release inventory is
-  reconciled, and the ADR-034 governance question is answered. **Three ISSUE-039 owner decisions
-  remain — all about documentation — before the phase can close.**
+  reconciled, the ADR-034 governance question is answered, and both READMEs now stop at the
+  first-run boundary. **One ISSUE-039 item remains — the durable relation vocabulary — then
+  the closure record.**
 - Next: **Phase 22** needs five independent participants. No technical work substitutes for it,
   and nothing recorded in Phases 21A-21F counts toward it.
 - Forward plan, acceptance gates, risks, and next actions:
@@ -762,6 +763,19 @@ measures.
   tracked so durable citations keep resolving in a clone. A fresh clone regenerates the rest
   deterministically. The Phase 22 protocol now measures value first — did the report change a
   decision, did the participant return — with time-to-first-report demoted to secondary.
+
+## Phase 21H — Documentation split at the first-run boundary
+
+Status: complete (2026-09-12). Closes two of the three remaining ISSUE-039 decisions.
+
+- Requirement: [[Requirements/REQ-044 - Stop both READMEs at the first-run boundary]]
+- Decision: [[Decisions/ADR-043 - Split the READMEs at the first-run boundary]]
+- Evidence: [[Evidence/EVD-044 - Phase 21H documentation split verification]]
+- Review: [[Reviews/Phase 21H Documentation Split Review]]
+- Outcome: `README.md` 696 to 242 lines and `README.tr.md` 559 to 238, with identical section
+  sequences. Reference material moved to `docs/commands.md`, `docs/workflows.md` and
+  `docs/capabilities.md`, with the existing Turkish detail relocated verbatim rather than dropped.
+  A regression caught the confidence legend leaving the READMEs and it was restored.
 
 ## Phase 21 — Reproducible installation and first useful report
 

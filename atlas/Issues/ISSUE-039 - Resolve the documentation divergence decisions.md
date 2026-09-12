@@ -6,17 +6,16 @@ phase: 21C
 ---
 # Resolve the documentation divergence decisions
 
-Four conventions questions were opened; one is closed. They interact, so they should be decided together rather
+Four conventions questions were opened; three are closed and one remains. They interact, so they should be decided together rather
 than closed one at a time. They are project-owner decisions, not implementation work.
 
-- [ ] **English README length.** 675 lines. The first-run path competes with capability lists,
-  command reference, status, and inspiration sections. The Phase 22 gate targets a below-ten-minute
-  first use, and reading time counts against it. Option: keep the root README to the first-run
-  path and move reference material under `docs/`, which already has an index.
-- [ ] **Turkish README scope.** `README.tr.md` has no `## What works today` and no `## Core
-  commands`. A Turkish reader gets no capability list and no command reference. Options: translate
-  both sections, or apply the same split to both languages so neither carries a reference table.
-  Expanding the Turkish file before deciding the split above would have to be undone.
+- [x] **English README length.** Closed 2026-09-12 by
+  [[Decisions/ADR-043 - Split the READMEs at the first-run boundary]]: 696 to 242 lines, reference
+  material moved to `docs/commands.md`, `docs/workflows.md` and `docs/capabilities.md`.
+- [x] **Turkish README scope.** Closed with the same decision. `README.tr.md` is 238 lines with the
+  identical section sequence and a translated `Bugün ne çalışıyor`. Its 393 lines of existing
+  detail were relocated verbatim to `docs/workflows.tr.md` and `docs/capabilities.tr.md` rather
+  than dropped, so no Turkish reader loses material.
 - [x] **ADR-034 generated-vault governance.** Closed 2026-09-12 by
   [[Decisions/ADR-042 - Untrack derived vault output and keep commit notes]]. `Symbols/`, `Code/`,
   `Tests/` and `Dashboard/` left the index; they stay on disk and regenerate deterministically.

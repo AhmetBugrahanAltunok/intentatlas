@@ -136,8 +136,8 @@ def test_trust_first_documentation_sequence_and_artifacts_are_frozen() -> None:
     )
 
     quick_starts = (
-        readme.split("## Quick start", maxsplit=1)[1],
-        readme_tr.split("## Hızlı başlangıç", maxsplit=1)[1],
+        readme.split("## Choose your first command", maxsplit=1)[1],
+        readme_tr.split("## İlk komutunuzu seçin", maxsplit=1)[1],
         preview,
     )
     for document in quick_starts:

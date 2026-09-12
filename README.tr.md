@@ -127,6 +127,12 @@ Bu çıktı tavsiye niteliğindedir. Checkout yeniden üretilebilirlik için sab
 incelenmiştir; proje kodu ve testler çalıştırılmaz. Bkz.
 [gerçek dünya doğrulama protokolü](docs/real-world-validation.md).
 
+Güven, mevcut yapısal kanıtın sıralamasıdır; doğruluk olasılığı değildir. `high` (85-100) en güçlü
+yapısal kanıtı gösterir; örneğin testin kendisinin değişiklik kümesinde olması. `medium` (65-84)
+doğrudan bağlantıları kapsar; `80/medium` bir statik sembol referansıdır. `low` (65 altı) yüksek
+dağılımlı bir keşif düzeyidir; otomatik seçim için medium veya üzeri kullanın. `--minimum-confidence
+low` daha zayıf adayları gösterir, onları güçlendirmez.
+
 ## IntentAtlas nedir, ne değildir?
 
 | IntentAtlas nedir? | IntentAtlas ne değildir? |
@@ -143,6 +149,41 @@ Güncel fazlar ve tamamlanma durumları
 [Ürün Yol Haritası](https://github.com/AhmetBugrahanAltunok/IntentAtlas/blob/main/atlas/Brain/Product%20Roadmap.md) belgesinde izlenir. Repo kökündeki
 `ROADMAP.md`, ilk 0.1–0.3 teknik planının açıkça arşivlenmiş tarihsel kaydıdır.
 
+## Bugün ne çalışıyor
+
+- Python, TypeScript/JavaScript ve Go depolarını determinist bir ilişki grafiğine tarar.
+- Dosyaları, sembolleri, import'ları, testleri, Markdown belgelerini ve Git commit'lerini bağlar.
+- Amaca göre klasörlenmiş, wikilink'li bir Obsidian vault üretir.
+- Aynı grafiği yerel, bağımlılıksız bir web görüntüleyicide gezdirir.
+- Komut satırından yukarı ve aşağı yönlü etkiyi izler.
+- Mevcut Cobertura kapsam ve JUnit test kanıtlarını, proje kodunu çalıştırmadan içe aktarır.
+- CI için determinist, sürümlenmiş bir grafik diff'i üretir.
+- Açık yerel JSON snapshot'larından sınırlı issue ve pull-request verisini içe aktarır.
+- Sıfır bağlamlı diff aralıkları doğrulanmış Python AST span'leriyle ya da muhafazakâr biçimde
+  dengelenmiş JavaScript/TypeScript ve Go bildirim span'leriyle kesiştiğinde ve çalışma
+  kopyasındaki dosya o commit'in blob'uyla eşleştiğinde, commit'leri tam değişen sembollere
+  bağlar; belirsiz durumlarda dosya düzeyi geçmişi güvenli geri dönüş olarak kalır.
+- Bir commit, dosya ya da sembol için test dosyalarını sabit güven düzeyleri, tam kanıt yolları ve
+  determinist metin veya JSON çıktısıyla sıralar.
+- Önerileri, insan tarafından incelenmiş kapsamlı yerel etiketlere karşı ölçer; vaka başına ve
+  mikro-toplam kesinlik/duyarlılık verir.
+- Etiketli yerel grafiklerden oluşan sınırlı bir korpusta düşük, orta ve yüksek güveni karşılaştırır.
+- Değişmemiş öneri sorgusunu, temiz ve sabitlenmiş, lisansı incelenmiş public checkout'lara karşı
+  üçüncü taraf kodu paketlemeden veya çalıştırmadan yeniden koşar.
+- Kurulu wheel akışını Windows, macOS ve Linux CI'da doğrular; tekrarlanan wheel veya kaynak
+  build'leri bayt bayt farklıysa sürüm adayını reddeder.
+- Grafik ve güvenilmeyen JSON sınırlarını tekrar oynatılabilir sabit tohumlu property/mutation
+  testleriyle zorlar; sınırlı büyük grafik penceresini CI'da gerçek bir Chrome ailesi tarayıcıda
+  render eder.
+- Doğrulanmış artifact hash'lerini tam bir Git revizyonuna ve sabit build epoch'una bağlayan
+  determinist yayın provenance'ı üretir; paket yayımı ayrıca onay gerektirir.
+- Go testlerini gerçekten referans verdikleri, tek bir dosyaya ait dışa açık bildirimlere bağlar;
+  belirsiz ve yalnızca dosya adına dayanan eşleşmeleri muhafazakâr tutar.
+- Doğrudan test edilen bir sarmalayıcı değişen sembolü çağırdığında tek bir tam Go çağrı adımını izler.
+- Etki ve öneri sorguları için tembel, determinist bir komşuluk indeksi kullanır; katkıcılar için
+  sınırlı bir sentetik ölçek benchmark'ı sunar.
+- Gereksinimleri, kararları, kanıtları, incelemeleri ve proje hafızasını Git'te tutar.
+
 ## Beta durumu
 
 Mevcut kaynak kendisini `0.3.0b1` olarak tanımlar. Henüz tag'lenmemiş, paket indeksinde
@@ -151,9 +192,7 @@ doğrular; release incelemesi ayrıca kesin revision'ı, tekrarlanabilir artifac
 hash'leri, kurulu wheel'i ve browser akışını doğrular. Bkz. [kurulum durumu](docs/installation.md)
 ve [sürüm süreci](RELEASING.md).
 
-## Hızlı başlangıç
-
-### İlk komutu seçin
+## İlk komutunuzu seçin
 
 | Durumunuz | Kullanın | Projeye yazılanlar | Ağ |
 | --- | --- | --- | --- |
@@ -165,395 +204,35 @@ ve [sürüm süreci](RELEASING.md).
 Yalnız açıkça onaylanan public GitHub URL'si ağ ve yönetilen işletim sistemi cache'ini kullanabilir.
 Paket kurulumu da ayarlı Python paket indeksine bağlanabilir; yerel analiz çevrimdışıdır.
 
-Etkileşimli terminalde gerçek bir repo içinden tek komut çalıştırın:
+Sonra:
 
 ```powershell
-intentatlas
+intentatlas            # etkileşimli terminal: rehberli akış
 ```
 
-IntentAtlas analizden önce en yakın güvenli Git kökünü ve ihtiyatlı kapsamı gösterir. Kabul etmek
-için bir kez Enter'a basın. Conflict, unstaged veya untracked durum `worktree`; yalnız staged durum
-`staged`; temiz repo exact `HEAD`; unborn repo `worktree` seçer. Sonuç production Change Report'u
-kullanır ve hiçbir şey yazmaz. Pipe, redirect, CI veya başka non-TTY çağrılar mevcut argparse
-stderr/exit-2 davranışını korur; prompt açmaz ve tarama yapmaz. Açık bir yol için aynı akışı
-`intentatlas guide [PATH]` ile başlatın. Ayrıntılar [rehberli CLI sözleşmesindedir](docs/guided-cli.md).
+Etkileşimsiz bir kabukta `intentatlas diagnose PATH` çalıştırın ve yazdırdığı **Next safe
+command** satırını kopyalayın. Varsayılan rapor neyin değiştiği ve hangi testlerin çalıştırılacağıyla
+açılır; revizyonlar, güven bantları ve grafik kimlikleri için `--explain`, değişmeyen şema için
+`--format json` ekleyin.
 
-Etkileşimli çıktı büyük bir IntentAtlas başlığı; açık kaynak/güvenlik/analiz/öneri/Atlas bölümleri;
-satıra sığdırılmış kanıt ve her satırda tek seçenek kullanır. Browser viewer'da **Change report** ve
-**Fit graph** tekrarlandığında sayfa ile graph geometrisi sabit kalır.
+## Dokümantasyon
 
-Public bir GitHub repository'yi elle clone etmeden analiz etmek için gerçek bir etkileşimli
-terminal kullanın:
+Akışlar ve yetenekler Türkçe; geri kalan ayrıntılı belgeler İngilizcedir:
 
-```text
-intentatlas https://github.com/OWNER/REPOSITORY
-# veya: intentatlas guide https://github.com/OWNER/REPOSITORY
-```
-
-IntentAtlas ağ veya cache etkisinden önce normalize URL'yi, yönetilen cache yazmasını,
-shallow/resource sınırlarını ve devre dışı çalıştırma davranışını gösterir. Yalnız boş Enter onay
-verir. Sonuç exact cache revision'ını gösterir ve aynı production no-write Change Report ile
-immutable viewer snapshot'ını kullanır. Private/authenticated repository, redirect, repository
-sayfası URL'si, hook, filter, LFS, submodule ve proje kodu çalıştırma desteklenmez. Ayrıntılar
-[yönetilen repository cache belgesindedir](docs/managed-repository-cache.md).
-
-Exact aday wheel'i geçici pipx köklerinde install/reinstall/uninstall kapısından geçer; ancak paket
-yayımlanmamıştır ve sıfır-önkoşullu Windows installer yoktur. Bkz.
-[kurulum durumu](docs/installation.md).
-
-Hiçbir depoya dokunmadan paketlenmiş sentetik sözleşmeyi değerlendirmek için:
-
-```powershell
-intentatlas demo --report text
-intentatlas demo --report json
-intentatlas demo
-```
-
-Yerleşik örnek özgün, çevrimdışı ve geçicidir. Sentetik grafiği ve ilişkileri önceden hazırlanır;
-üretim graph, öneri, rapor ve görüntüleyici katmanlarını çalıştırır ancak repo keşfi, AST ayrıştırma
-veya Git diff çıkarımını sınamaz. İnteraktif görünümde **Change report** düğmesini açarak seçilen
-`tests/test_auth_rotation.py` testini, gösterilen uyarı sınırını ve grafikte bulunmasına rağmen
-sıralanmayan `tests/test_auth_audit.py` testini karşılaştırın. Ayrıntılı tur için
-[yönlendirmeli demo belgesine](docs/guided-demo.md) bakın. Geçerli klasörü taramaz.
-
-Açık uzman komutları sıfır-izli önizleme için kullanılmaya devam eder:
-
-```powershell
-intentatlas diagnose C:\projenizin\yolu
-# Sonra yazdırdığı kesin Next safe command satırını çalıştırın. Örnekler:
-intentatlas changes C:\projenizin\yolu --worktree --report
-intentatlas changes C:\projenizin\yolu --commit HEAD --report --format json
-```
-
-Bu komutlar çevrimdışı ve salt okunurdur. Tanı; sınırlı yetenekleri, belirsizliği, kanıt
-hazırlığını ve sonraki güvenli komutu bildirir. Rapor kesin revision/kapsamı, güncelliği, güven
-eşiğini, seçilen ve atlanan adayları, kaydedilmiş sıralama yollarını ve yedek test stratejisini
-gösterir. Atlanmak, niyetin etkilenmediğini veya testin gereksiz olduğunu kanıtlamaz. Kayıtlı
-grafik varsa `diagnose`, bulunan Python test dosyası ve kesin `python-symbol-reference`
-bağlantısı sayılarını da gösterir. `missing-exact-links`, testlerin bulunduğu fakat kesin sembol→test
-bağının kurulmadığı anlamına gelir; hazır sonucu değildir. Grafik güncelliği yine ayrıca doğrulanmaz.
-Sonraki komut için `diagnose`; unstaged, untracked veya conflicted değişikliklerde `worktree`, yalnız
-index değiştiğinde `staged`, çalışma kopyası temizse exact `HEAD`, henüz commit yoksa `worktree`
-seçer. Böylece kirli çalışma kopyası yanlışlıkla commit edilmiş `HEAD` görüntüsü sanılmaz.
-Yalnız açıkça verilen `--open`, aynı bellek içi rapor anlık görüntüsü için loopback görüntüleyicisini
-başlatır.
-[Güven-öncelikli önizleme](docs/trust-first-preview.md) ve [belge dizini](docs/index.md) ayrıntıları
-açıklar.
-
-Önizlemeyi yorumladıktan sonra kalıcı vault akışını bilinçli olarak benimseyin:
-
-```powershell
-intentatlas init C:\projenizin\yolu
-intentatlas scan C:\projenizin\yolu
-intentatlas open C:\projenizin\yolu
-```
-
-Aktif reponuza henüz yazmak istemiyorsanız bu üç komutu önce atılabilir bir kopya veya küçük test
-reposunda deneyin. `init`; `intentatlas.json`, başlangıç Markdown klasörleri, taşınabilir Obsidian
-ayarları ve eksik yerel-durum `.gitignore` kurallarını oluşturur. `scan`, atılabilir `.intentatlas/`
-cache'ini ve `atlas/` altındaki üretilmiş alanları yazar; proje kodunu çalıştırmaz ve kullanıcıya
-ait notların üzerine yazmaz. Her şeyi commit etmeden önce `git status` ile inceleyin.
-
-`init`, genel yönlendirme ile boş niyet klasörleri oluşturur; IntentAtlas'ın kendi gereksinim,
-karar, kanıt, inceleme veya tarihli oturumlarını hedef depoya örnek veri olarak eklemez.
-Mevcut `.gitignore` dosyasını korur; yalnız `.intentatlas/`, `.venv-intentatlas/` ve Obsidian'ın
-makineye özel workspace/cache dosyaları için eksik kuralları ekler. Kalıcı `atlas/` notları ve
-taşınabilir Obsidian ayarları Git tarafından izlenebilir kalır.
-Obsidian isteğe bağlıdır: `atlas/` kalıcı akışın Markdown katmanıdır; Obsidian kurmadan aynı
-üretilmiş grafiği `intentatlas open` ile inceleyebilirsiniz.
-
-`status`, `impact`, `recommend-tests`, `diff` ve öneri değerlendirme komutları kalıcı grafiği okur;
-bu nedenle önce `scan` çalıştırılmalıdır. `diagnose`, `guide` ve `changes --report` kendi salt-okunur
-incelemesini yapar ve kayıtlı grafik gerektirmez.
-
-`impact` için `TARGET`; kesin grafik kimliği (`commit:TAM_SHA` veya
-`symbol:src/auth.py::rotate_session`), `src/auth.py` gibi proje-göreli yol, kesin etiket veya tekil
-kısmi eşleşme olabilir:
-
-```text
-intentatlas impact src/auth.py C:\projenizin\yolu --depth 2
-intentatlas impact symbol:src/auth.py::rotate_session C:\projenizin\yolu --direction upstream
-```
-
-Çıktıdaki her iki boşluk, asıl hedeften bir ilişki hop'u demektir. Satırlar düz bir traversal
-sonucudur; girintili satır hemen üstündeki satırın çocuğu değildir.
-İsteğe bağlı `[PATH]` verilmezse komutlar geçerli klasörü kullanır. `impact` ve `recommend-tests`,
-yanlış klasörün grafiği kullanılıyorsa bunun görülebilmesi için çözümlenen proje kökünü yazdırır.
-
-Tekrarlanan CLI taramaları, değişmeyen her yerleşik dil adaptörü için sınırlı ve içerik-karmalı bir
-parçayı yeniden kullanır. Komut, yeniden kullanılan ve yeniden üretilen adaptör sayılarını gösterir.
-Bu cache kaynak metni değil yalnızca grafik metadata'sını taşır ve güvenle silinebilir; bozuk veya
-eski kayıt yeniden üretilir. Grafik ve cache dosyaları atomik olarak değiştirilir. Ayrıntılar için
-[artımlı tarama belgesine](docs/incremental-scanning.md) bakın.
-
-Yönetilen public GitHub cache kayıtlarında önce kimliği listeleyin, sonra kesin kimliği kullanın:
-
-```text
-intentatlas cache list
-intentatlas cache info CACHE_ID
-intentatlas cache clear CACHE_ID
-```
-
-Obsidian kullanıyorsanız `atlas/` klasörünü vault olarak açın. Graph View; gereksinimleri, kararları,
-kodu, testleri, kanıtları ve commit’leri renkli, bağlantılı düğümler olarak gösterecektir.
-
-macOS veya Linux'ta `/projenizin/yolu` gibi açık bir hedef yol kullanın. Ortam etkin değilse
-kurulumda seçtiğiniz ortam klasörünün içindeki `intentatlas` executable'ını çağırın.
-
-Python 3.11, 3.12 ve 3.13 desteklenir. Tam test paketi Linux üzerinde; kurulmuş wheel ile CLI,
-tarama, test önerisi ve yerel görüntüleyici akışı ise en eski ve en yeni desteklenen Python
-sürümlerinde Linux, Windows ve macOS üzerinde CI tarafından doğrulanır. Yerel, tekrarlanabilir
-paket kontrollerine ek olarak sabit tohumlu property/mutasyon testleri, gerçek Chrome tabanlı
-görüntüleme, statik tip ve değişmez Action referansı kapıları uygulanır. Doğrulanan paket
-hash'lerini kesin Git revision ve sabit derleme zamanına bağlayan deterministik provenance kaydı
-üretilir; yayınlama ayrı onay gerektirir. Ayrıntılar için [sürüm sürecine](RELEASING.md) bakın.
-
-Pull request veya CI denemelerinde aynı değişiklik analizi salt-okunur gölge modunda çalıştırılabilir:
-
-```text
-intentatlas review --base origin/main --head HEAD
-intentatlas review --base origin/main --head HEAD --format json
-intentatlas review --base origin/main --head HEAD --format sarif
-intentatlas review --base origin/main --head HEAD --test-outcomes .intentatlas/test-outcomes.json
-intentatlas review --base origin/main --head HEAD --open
-```
-
-Komut aynı revision-aralığı ChangeSet ve Change Report verisini kullanır. Geçerli bulgular süreci
-başarısız yapmaz; pull request yayımlamaz veya değiştirmez, sağlayıcı kimlik bilgisi ve ağ erişimi
-istemez. SARIF yalnız güvenli proje-göreli konumları ve hunk satır aralıklarını taşır; kaynak
-parçası veya mutlak yol içermez. Sınırlar [CI gölge inceleme belgesinde](docs/ci-shadow-review.md)
-açıklanır.
-
-İsteğe bağlı outcome JSON’u tam commit kimliğiyle eşleşirse seçilen ve gerçekten çalıştırılan test
-yolları gözlemsel olarak karşılaştırılır. Commit farklıysa veri `stale` kalır ve karşılaştırma
-üretilmez; bu kümeler doğruluk, zorunluluk veya yeterlilik iddiası değildir.
-`--open`, komutun kullandığı aynı bellek içi grafik ve review raporunu yerel arayüzde açar.
-
-Aynı deterministik ChangeSet şeması commit, revision aralığı, index veya mevcut çalışma ağacını
-kapsar:
-
-```text
-intentatlas changes --commit HEAD
-intentatlas changes --base main --head HEAD --format json
-intentatlas changes --staged
-intentatlas changes --worktree
-intentatlas changes --staged --analyze --format json
-intentatlas changes --staged --report --format json
-intentatlas changes --worktree --report --open
-```
-
-Neyi incelemek istediğinize göre kapsam seçin: `--worktree` mevcut staged, unstaged ve untracked
-değişiklikleri birlikte kapsar; `--staged` yalnız index'i; `--commit HEAD` commit edilmiş HEAD
-görüntüsünü inceler ve etkilenen dosyaların hâlâ o revision ile eşleşmesini bekler. Kirli repoda
-tahmin yürütmek yerine `diagnose` çıktısındaki komutu kullanın.
-
-| Çıktı terimi | Anlamı |
+| | |
 | --- | --- |
-| `aligned` | Seçilen değişiklik tarafı, güvenle taranan mevcut dosyayla eşleşiyor. |
-| `stale` | Seçilen commit/index içeriği mevcut dosyadan farklı; kesin iddialardan kaçınılıyor. |
-| `analyzed` | Değişen dosya için desteklenen kesin artifact kanıtı kuruldu. |
-| `fallback` | Yalnız daha geniş dosya-seviyesi kanıt var; gösterilen tam-paket politikasını izleyin. |
-| `unknown` | Artifact güvenle eşleştirilemedi veya analiz edilemedi; hedefli yeterlilik iddiası yok. |
+| [Akışlar](docs/workflows.tr.md) | Rehberli akış, public GitHub analizi, iz bırakmayan önizleme ve kalıcı vault'a geçiş |
+| [Yetenekler, ayrıntılı](docs/capabilities.tr.md) | Her adaptör ve içe aktarıcının kapsadığı ve çekimser kaldığı yerler |
+| [Komut referansı](docs/commands.md) | Bakım ve benchmark komutları dahil her komut (İngilizce) |
+| [Kurulum](docs/installation.md) | Desteklenen sürümler ve güncel kurulum durumu |
+| [Mimari](docs/architecture.md) | Güven sınırları ve katmanların nasıl birleştiği |
+| [Doküman dizini](docs/index.md) | Geri kalan her şey |
 
-`--analyze`, dosya başına durum, güncellik, güven ve artifact kimliklerini verir. `--report`, aynı
-taze analize ek olarak gereksinim etkilerini ve testleri sıralar, test stratejisini seçer ve
-atlamaları açıklar. `--report --open`, aynı bellek-içi raporu yerel görüntüleyicide gösterir.
+Projenin kendi niyet haritası [`atlas/`](atlas/) içinde: her teslimat fazı için gereksinimler,
+kararlar, kanıtlar ve incelemeler — aracın kendisiyle yazıldı. Üretilmiş alanlar
+`intentatlas scan` ile yeniden üretilir ve takip edilmez.
 
-`--open`, aynı bellek içi raporu ikinci bir grafik veya rapor dosyası kaydetmeden yalnızca yerel
-arayüzde açar.
+## İlham
 
-Çıktı yalnız durumları, güvenli proje-göreli yolları, çözümlenmiş commit kimliklerini ve yeni taraf
-satır aralıklarını taşır; ham diff satırlarını saklamaz. Worktree modu ignore kurallarına uyan
-takip edilmeyen yolları gösterir ancak içeriklerini okumaz veya yazmaz. `--analyze`, açıkça yeni ve
-sınırlı bir yerel tarama yaparak her dosyayı `analyzed`, `fallback` veya `unknown`; güncelliği
-`aligned` veya `stale` olarak işaretler ve güven, eser kimliği ile kanıtı gösterir. Bu seçenek normal
-tarayıcı üzerinden desteklenen çalışma ağacı dosyalarını okuyabilir ancak proje kodunu çalıştırmaz
-ve ham kaynağı saklamaz. Yapılandırılmış vault'un `Private/` alanı Git meta verisi toplanmadan önce
-kapsam dışında bırakılır.
-
-`--report` aynı hizalanmış analizi kullanarak olası gereksinim etkilerini ve aday testleri sıralar.
-Kesin sembol-niyet yolu varsayılan orta güven eşiğine ulaşabilir; yalnızca aynı dosyada bulunmaya
-dayanan ilişki düşük güvenli kalır. `fallback` durumunda hedefli testler tek başına yeterli sayılmaz
-ve tam test paketi de istenir. `unknown` durumunda sistem sıralama iddiasından kaçınır ve tam test
-paketine yönlendirir. Rapor tavsiye niteliğindedir; listede olmayan gereksinim veya testlerin
-etkilenmediğini kanıtlamaz.
-
-Bir commit, dosya veya sembol için test dosyalarını çalıştırmadan sıralamak için:
-
-```text
-intentatlas recommend-tests commit:TAM_SHA --minimum-confidence medium
-intentatlas recommend-tests src/auth.py --minimum-confidence low --format json
-```
-
-Puanlar sabit ve incelenebilir yapısal kanıtlara dayanır. Kesin sembol değişikliği ile kesin statik
-test bağlantısı, yalnız dosya veya adlandırma kuralı kanıtından daha yüksek sıralanır. Dosya
-düzeyindeki bir ilişki, aynı dosyadaki ilgisiz bir sembol için varsayılan orta güvenli iddiaya
-dönüşmez; bu yedek kanıt düşük güvenli kalır veya çelişen kesin sembol kanıtı varsa elenir.
-Sonuçlar tavsiyedir; listede olmayan bir test, davranışın etkilenmediğini kanıtlamaz.
-
-Tam IntentAtlas repo checkout'unda, öneri kalitesini eksiksiz olduğu açıkça belirtilen insan
-incelemeli yerel etiketlerle ölçmek için:
-
-```text
-intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json
-intentatlas evaluate-recommendations benchmarks/intentatlas-recommendations.json --minimum-confidence high --format json
-```
-
-Değerlendirme testleri çalıştırmadan ve sıralama puanlarını değiştirmeden TP, FP, FN, precision ve
-recall üretir. Yalnız tam repoda bulunan iki vakalık temel ölçüm regresyon yardımcısıdır; sdist
-corpus'una dahil değildir ve başka repolardaki doğruluğu kanıtlamaz. Şema ve metrik sözleşmesi
-[değerlendirme belgesinde](docs/recommendation-evaluation.md) açıklanır.
-
-Özgün Python, TypeScript ve Go grafik senaryolarında bütün güven eşiklerini karşılaştırmak için:
-
-```text
-intentatlas evaluate-corpus benchmarks/recommendation-corpus.json
-intentatlas evaluate-corpus benchmarks/recommendation-corpus.json --format json
-```
-
-Corpus çıktısı proje başına ve mikro toplamları birlikte gösterir. Bu küçük özgün fixture’lar
-agregasyon ile güven davranışını doğrular; kopyalanmış repo veya gerçek dünya doğruluk kanıtı
-değildir. Ayrıntılar [corpus şemasında](docs/recommendation-corpus.md) bulunur.
-
-Tam IntentAtlas repo checkout'unda lisansı incelenmiş gerçek projelerle yeniden üretilebilir
-doğrulama için, onaylı altı açık kaynak depoyu yalnızca ağ izninden sonra yalnız repoda bulunan
-manifestteki commit’lere sabitleyin ve şunu çalıştırın:
-
-```text
-intentatlas evaluate-real-world benchmarks/real-world/manifest.json .intentatlas/real-world/checkouts
-```
-
-Komut taramadan önce origin, commit, temiz çalışma ağacı ve incelenmiş lisans özetini doğrular.
-Repo klonlamaz, bağımlılık kurmaz, test veya proje kodu çalıştırmaz; üçüncü taraf kaynak, Git
-geçmişi, logo ya da üretilmiş grafiği üründe saklamaz. Ayrıntılar
-[gerçek proje doğrulama protokolünde](docs/real-world-validation.md) bulunur. On sekiz sabit vaka
-yalnızca seçilen Python, JavaScript ve Go değişiklikleri için kanıttır; genel doğruluk iddiası
-değildir.
-
-Bir projeyi okumadan veya çalıştırmadan çevrimdışı ölçek kontrolü yapmak için:
-
-```text
-intentatlas benchmark-scale
-intentatlas benchmark-scale --unrelated-edges 50000 --iterations 500 --format json
-```
-
-Benchmark kararlı grafik/sonuç/iş sayılarını ve ortama bağlı süreleri raporlar. Taşınabilir gecikme
-garantisi değil, regresyon ve tanılama aracıdır. Ayrıntılar
-[ölçek benchmark sözleşmesinde](docs/query-scale-benchmark.md) bulunur.
-
-Yerel görüntüleyici, seçilen düğümden testlere, kanıtlara, coverage sonuçlarına, test sonuçlarına,
-commit'lere ve pull request'lere giden sınırlı en kısa yapısal yolları da gösterir. Bu yollar grafik
-bağlantısını açıklar; nedensellik, eksiksizlik, güncellik veya test zorunluluğu iddia etmez.
-`intentatlas demo`, aynı üretim görüntüleyicisini aynı-dosya karşı örneği içeren on iki düğümlü
-özgün bir grafik üzerinde açar ve görüntüleyici kapandığında geçici grafiği temizler.
-`intentatlas demo --report text` ve `--report json`, listener başlatmadan aynı sınırlı kanıt
-hikâyesini üretir.
-
-Büyük depolarda görüntüleyici, grafiğin tamamını yerel gezinme için bellekte korur; aynı anda en
-fazla 240 düğüm ve 900 kenardan oluşan deterministik bir pencere çizer. Genel görünüm katmanları
-dengeler; genel arama, rapor ve ilişki bağlantıları gizli bir düğümün iki adımlı sınırlı çevresini
-açabilir. Toplam/gösterilen sayıları görünür kalır ve ilişki ayrıntıları sınırsız tarayıcı öğesi
-üretmek yerine kaç sonucun gösterilmediğini açıkça belirtir.
-
-Adapter conformance sözleşmesi sürüm 1, ortak adapter sınırını çalıştırılabilir bir denetime
-dönüştürür. Yeni ve cache’den okunan fragment’lar grafiğe katılmadan önce aynı sınırlı sembol,
-ilişki, uç nokta, kanıt, sıralama ve determinizm kurallarını geçmelidir. Built-in adapter’lar aynı
-fixture tabanlı yardımcıyla doğrulanır; bu özellik harici plugin yükleyicisi değildir. Ayrıntılar
-[dil adapter conformance belgesinde](docs/adapter-conformance.md) bulunur.
-
-## Temel yaklaşım
-
-- Klasörler amaca göre, bağlantılar anlama göre düzenlenir.
-- İnsan/ajan notları ile tarayıcının ürettiği kod notlarının sahipliği ayrıdır.
-- `Issues/` dahil kalıcı niyet notları kullanıcıya aittir ve taramalarda korunur.
-- `Private/` Git’e girmez ve IntentAtlas tarafından okunmaz.
-- Kalıcı ama bağlantısız notlar sağlık sorunu olarak raporlanır.
-- Obsidian zorunlu değildir; aynı grafik yerel web görünümünde açılabilir.
-
-Üretilmiş notların senkronizasyonu, dosyalara dokunmadan önce hedef görünümün tamamını hazırlar.
-Bayt düzeyinde aynı notları yeniden yazmaz; değişen notları geçici dosya kilitleri için sınırlı
-tekrarlarla atomik olarak değiştirir ve eski notları ancak bütün hedef notlar yerindeyken siler.
-Kalıcı hata bu nedenle önceki üretilmiş görünümü baştan silmeden açıkça raporlanır.
-
-Anlamı belirtilmiş bağlantılar `relation:: [[hedef]]` biçimini kullanır. Normal wikilinkler
-güvenli ve genel `references` ilişkileri olarak çalışmaya devam eder.
-
-## Durum
-
-Python, TypeScript/JavaScript ve Go analizi aynı dil-bağımsız adaptör sözleşmesini kullanır. `.ts`,
-`.tsx`, `.js` ve `.jsx` dosyalarında adlandırılmış semboller, yerel import/re-export bağlantıları
-ve test ilişkileri çıkarılır. Go adaptörü `.go` dosyalarını, `go.mod` modül sınırlarını,
-adlandırılmış türleri, fonksiyonları, metotları, modül-içi paket importlarını ve testleri kapsar.
-Aynı klasördeki testler yalnızca tek bir üretim dosyasına ait, gerçekten başvurulan dışa açık
-bildirimler için yapısal kanıt kazanır; belirsiz adlar bağlanmaz ve dosya adı eşleşmesi zayıf yedek
-olarak kalır. Hiçbir adaptör dil çalışma zamanını veya proje kodunu çalıştırmaz.
-Doğrudan test edilen bir Go sarmalayıcısı değişen sembolü çağırıyorsa yalnızca bir kesin
-`calls`/`called-by` adımı izlenir; sınırsız çağrı grafiği yayılımı yapılmaz.
-
-İsteğe bağlı Cobertura coverage ve JUnit test raporları `intentatlas.json` içindeki proje-göreli
-`coverage_reports` ve `test_reports` listeleriyle içe aktarılabilir. IntentAtlas testleri çalıştırmaz;
-yalnızca dosya başına sınırlı özetleri grafiğe ekler. `intentatlas diff` komutu da mevcut grafiği bir
-temel grafikle karşılaştırarak CI için deterministik ve zaman damgasız JSON üretir.
-
-SCIP protobuf-JSON, SARIF 2.1.0 ve commit-kimli test execution map raporları da sırasıyla
-`scip_reports`, `sarif_reports` ve `test_execution_reports` listeleriyle açıkça etkinleştirilebilir.
-İkili SCIP bu fazda desteklenmez. SCIP ve SARIF yalnız dosya gözlemi olarak kalır; etki veya test
-zorunluluğu iddiası üretmez. Execution map yalnız tam commit kimliği güncel Git HEAD ile eşleşir ve
-eşlenen tüm dosyalar o HEAD'e göre takip edilen/değişmemiş durumdaysa testten kaynak dosyaya
-çalışma-zamanı kanıtı ekler; eski ya da kimliği çözülemeyen rapor önerileri etkilemez. Ham semboller,
-tanılar, mesajlar, snippet'ler, düzeltmeler, kod akışları ve kaynak metni
-saklanmaz. Ayrıntılar [açık kanıt belgesinde](docs/open-evidence.md) açıklanır.
-
-Issue ve pull request bağlamı da isteğe bağlı yerel JSON snapshot dosyalarından içe aktarılabilir.
-`delivery_reports` kaynakları gereksinim ve kararları issue, pull request, değişen dosya ve bilinen
-commitlerle bağlar. Gövdeler, yorumlar ve ham API yanıtları saklanmaz; ayrıntılar
-[yerel teslimat şemasında](docs/delivery-schema.md) açıklanır.
-
-Yakın Git geçmişinde değişen yeni taraf satırları, doğrulanmış AST aralıklarıyla kesiştiğinde ve
-güncel dosya incelenen commit blobuyla eşleştiğinde Python sınıf, fonksiyon ve metot sembollerine
-doğrudan `modifies` ilişkisi eklenir. Eski dosya sürümü, silme, modül-seviyesi değişiklik, span
-desteği olmayan adaptör veya belirsizlik durumunda mevcut dosya-seviyesi `changes` ilişkisi güvenli
-yedek olarak korunur.
-
-`recommend-tests`, doğrulanmış grafik ilişkilerinden test dosyalarını `high`, `medium` veya `low`
-güvenle sıralar. Manifesti olmayan kök `src/` düzeninde hem `from auth import ...` gibi geleneksel
-hem de `from src.auth import ...` gibi namespace importları tek bir yerel modülü gösterdiğinde
-çözülür. Setuptools, Hatch veya Flit source-root bilgisi taşıyan `pyproject.toml` varsa bu bilgi
-önceliklidir. Belirsiz modül veya sembol kimlikleri bilinçli olarak bağlanmaz; kesin Python
-sembol→test bağlantılarını görmek için `scan` sonrasında `diagnose` çalıştırın.
-güvenle sıralar ve her sonucun neden yolunu gösterir. Python testleri, sınırlı paket yeniden
-dışa-aktarımları üzerinden tam içe aktarılan sembole bağlanabilir; iç içe bir değişiklikte test adı
-uyuşuyorsa sahibi olan sembolün odaklı testi kullanılabilir. JavaScript/TypeScript için adlandırılmış
-ve varsayılan statik içe aktarımlar kaydedilir; yalnızca tam sembolü içe aktaran tek bir bağımlı
-kaynaktan doğrudan bağlı teste gidilir. Seçilen dosya veya sembolün en son incelenen dar
-eş-değişimindeki testler ayrı bir düşük-güven kanıtıdır; 20 artifact'tan geniş commitler abstain
-eder. Yalnız filename eşleşmesine dayanan ikinci hop düşük kalır. Python dosyaları ancak sınırlı
-pytest filename desenleri ile güvenle okunan `python_files` veya `testpaths` bildirimleri bu rolü kanıtlarsa
-doğrudan çalıştırılabilir hedeftir; `conftest.py`, package marker, typing fixture ve eşleşmeyen
-ilan edilmiş test köklerinin dışındaki dosyalar ve diğer support dosyaları graph artifact olarak kalır fakat çalıştırılacak komut diye sunulmaz.
-JavaScript/TypeScript ve Go mevcut adapter davranışını korur.
-
-`low` keşif modudur: zayıf filename, fallback ve co-change sinyalleri yüksek fan-out ve düşük
-precision üretebilir. Otomatik CI seçimi için `medium veya üzeri` eşik kullanın; varsayılan ve
-guided akış `medium` kalır. Exact statik direct-reference bilinçli olarak `80/medium` değerindedir;
-`high`, doğrudan değişiklik kümesi içindeki test gibi daha güçlü kanıtlara ayrılmıştır. Sorgu
-sınırsız geçişli dolaşım yapmaz.
-
-`evaluate-recommendations`, aynı üretim sorgusunu değiştirmeden katı ve kapalı-dünya yerel
-etiketleriyle karşılaştırır. Zaman damgasız şema-1 çıktısı eşik farklarını ve regresyonları görünür
-kılar; tanımsız metrikleri açıkça `null`/`n/a` olarak korur.
-
-`evaluate-corpus`, aynı sorguyu birden fazla kayıtlı grafiğe uygular ve `low`, `medium`, `high`
-eşiklerini yan yana raporlar. Herhangi bir grafik veya etiket geçersizse corpus’un tamamı açıkça
-başarısız olur; eski veya bozuk bir proje toplam metriği sessizce iyileştiremez.
-
-Etki ve test önerisi sorguları aynı tembel ve deterministik adjacency indeksini kullanır. Tekrarlı
-yerel sorgular yalnız eşleşen giriş/çıkış bucket’larını inceler; yeni kenar eklenirse bellek içi
-indeks geçersizleştirilip güvenle yeniden kurulur.
-
-Vault-first hafıza yaklaşımı
-[breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) projesinden
-esinlenmiştir. IntentAtlas buna kod, test, Git ve teslimat niyeti katmanını ekler.
-Üçüncü taraf kaynak kodu, logosu veya vault içeriği paketlenmez.
-
-MIT lisanslıdır. Katkı göndermeden önce [CONTRIBUTING.md](CONTRIBUTING.md) belgesini okuyun.
+Obsidian'ın yerel Markdown grafiği, mimari karar kayıtları ve güvenlik-kritik mühendislikten gelen
+izlenebilirlik pratiği — gündelik depolara, çevrimdışı ve barındırılan bir servis olmadan uygulandı.
