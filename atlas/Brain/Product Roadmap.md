@@ -17,13 +17,13 @@ independent, MIT-licensed, local-first, and vault-first.
 
 ## Current execution checkpoint — 2026-09-12
 
-- Latest completed delivery: **Phase 21F — Readable first answer**, which prepares Phase 22 by
-  making the result readable without weakening what it claims.
+- Latest completed delivery: **Phase 21G — Vault governance and Phase 22 measurement**.
 - Active delivery: **Phase 21 — Reproducible installation and first useful report**. Phases
   21A-21F closed every technical gate: import identity, reproducible artifacts verified at
   `0.3.0b1`, the remote platform matrix at `a6e60d1`, the first-run walkthrough, fail-closed
   evidence, accurate vault identity, and a readable default report. The release inventory is
-  reconciled. **Only the four ISSUE-039 owner decisions remain before the phase can close.**
+  reconciled, and the ADR-034 governance question is answered. **Three ISSUE-039 owner decisions
+  remain — all about documentation — before the phase can close.**
 - Next: **Phase 22** needs five independent participants. No technical work substitutes for it,
   and nothing recorded in Phases 21A-21F counts toward it.
 - Forward plan, acceptance gates, risks, and next actions:
@@ -748,6 +748,20 @@ what it claims.
   `--format json` stays byte-identical. Every boundary — advisory, full-suite caveat,
   could-not-be-analysed count, hidden-candidate count — remains in the default view. `--help`
   lists ten commands instead of eighteen and names the rest in its epilog.
+
+## Phase 21G — Vault governance and Phase 22 measurement
+
+Status: complete (2026-09-12). Answers ADR-034's deferred question and corrects what Phase 22
+measures.
+
+- Requirement: [[Requirements/REQ-043 - Make the repository legible to a first-time visitor]]
+- Decision: [[Decisions/ADR-042 - Untrack derived vault output and keep commit notes]]
+- Evidence: [[Evidence/EVD-043 - Phase 21G vault governance verification]]
+- Review: [[Reviews/Phase 21G Vault Governance Review]]
+- Outcome: tracked `atlas/` fell from 2114 to 321 against 51 under `src/`; `Commits/` stayed
+  tracked so durable citations keep resolving in a clone. A fresh clone regenerates the rest
+  deterministically. The Phase 22 protocol now measures value first — did the report change a
+  decision, did the participant return — with time-to-first-report demoted to secondary.
 
 ## Phase 21 — Reproducible installation and first useful report
 

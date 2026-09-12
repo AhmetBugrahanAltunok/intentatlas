@@ -200,6 +200,7 @@ generated: true
 
 ## Incoming relationships
 
+- <code>referenced-by</code> ← [[Decisions/ADR-042 - Untrack derived vault output and keep commit notes|ADR-042 - Untrack derived vault output and keep commit notes]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Evidence/EVD-036 - Phase 20 change coverage verification|EVD-036 - Phase 20 change coverage verification]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Reviews/Phase 20 Change Coverage Review|Phase 20 Change Coverage Review]] _(reference; evidence: wikilink)_
 - <code>referenced-by</code> ← [[Sessions/2026-09-07 - Alpha readiness checkpoint|2026-09-07 - Alpha readiness checkpoint]] _(reference; evidence: wikilink)_
