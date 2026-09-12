@@ -11,7 +11,7 @@ source_path: "tests/test_onboarding_walkthroughs.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6222</code>
+- **Size Bytes:** <code>6402</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>

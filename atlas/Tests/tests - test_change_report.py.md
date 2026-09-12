@@ -11,7 +11,7 @@ source_path: "tests/test_change_report.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>16116</code>
+- **Size Bytes:** <code>19031</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
@@ -33,6 +33,11 @@ source_path: "tests/test_change_report.py"
 - <code>defines</code> → [[Symbols/test_change_report_requires_full_suite_for_fallback_or_unknown_analysis - tests - test_change_report.py|test_change_report_requires_full_suite_for_fallback_or_unknown_analysis]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_change_report_truncates_artifacts_with_explicit_lower_bound_semantics - tests - test_change_report.py|test_change_report_truncates_artifacts_with_explicit_lower_bound_semantics]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_change_report_truncates_file_symbol_signals_without_failing - tests - test_change_report.py|test_change_report_truncates_file_symbol_signals_without_failing]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_default_text_hides_the_machinery_without_hiding_the_boundary - tests - test_change_report.py|test_default_text_hides_the_machinery_without_hiding_the_boundary]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_default_text_leads_with_the_answer_not_the_machinery - tests - test_change_report.py|test_default_text_leads_with_the_answer_not_the_machinery]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_default_text_wraps_long_prose_for_a_terminal - tests - test_change_report.py|test_default_text_wraps_long_prose_for_a_terminal]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_explain_preserves_the_established_detailed_rendering - tests - test_change_report.py|test_explain_preserves_the_established_detailed_rendering]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/test_json_is_unchanged_by_the_plain_default - tests - test_change_report.py|test_json_is_unchanged_by_the_plain_default]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_staged_same_file_requirement_holdout_preserves_symbol_precision - tests - test_change_report.py|test_staged_same_file_requirement_holdout_preserves_symbol_precision]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/test_staged_same_file_requirement_holdout_preserves_symbol_precision.git - tests - test_change_report.py|test_staged_same_file_requirement_holdout_preserves_symbol_precision.git]] _(structure; evidence: python-ast)_
 - <code>tests</code> → [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] _(verification; evidence: filename-convention)_

@@ -110,16 +110,24 @@ selects one test and explains the exact structural route. Abridged output:
 
 ```text
 $ intentatlas changes /path/to/click --commit HEAD --report
-Analysis state: analyzed; freshness aligned
-Test strategy: targeted
-Recommended tests: 1 selected / 1 candidates
-- tests/test_context.py: 80/100 (medium)
-  Why: The test references the owning symbol of an exactly modified nested symbol.
-  Path: Context.__exit__ → Context → tests/test_context.py
+Changed: __exit__ (src/click/core.py)
+Run 1 test:
+
+  tests/test_context.py   [medium confidence]
+    The test references the owning symbol of an exactly modified nested symbol.
+    __exit__ -> Context -> tests/test_context.py
+
+No requirement is linked to this change.
+
+Impact and test recommendations are bounded structural evidence, not proof that an
+omitted requirement is unaffected or that a suggested test is sufficient.
+Full detail: --explain    Machine-readable: --format json
 ```
 
-`candidates` is the total set found before the displayed confidence threshold and result limit;
-`selected` is the subset shown after those rules are applied.
+`--explain` adds the revisions, confidence bands, candidate and omission counts, graph
+identifiers and evidence labels behind that answer. `--format json` is the stable schema-1
+document for tools; neither the JSON nor the `--explain` text changed when the default became
+this summary.
 
 This output is advisory. The checkout is pinned and license-reviewed for reproducibility; project
 code and tests are not executed. See the [real-world validation protocol](docs/real-world-validation.md).

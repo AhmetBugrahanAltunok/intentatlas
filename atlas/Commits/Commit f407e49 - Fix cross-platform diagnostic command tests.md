@@ -16,5 +16,3 @@ generated: true
 
 - <code>changes</code> → [[Tests/tests - test_diagnostic.py|tests/test_diagnostic.py]] _(history; evidence: git-log)_
 - <code>changes</code> → [[Tests/tests - test_trust_first.py|tests/test_trust_first.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/_quoted_command_path - tests - test_trust_first.py|_quoted_command_path]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_diagnostic_and_real_repository_preview_are_no_write - tests - test_trust_first.py|test_diagnostic_and_real_repository_preview_are_no_write]] _(history; evidence: git-diff-hunk)_

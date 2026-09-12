@@ -99,6 +99,18 @@ omitted by each bound, and marks whether published requirement/test totals are c
 bounds. Existing selection fields and `analysis_coverage_complete` remain present; strict consumers
 that reject unknown fields must allow this additive object.
 
+The default text rendering of a Change Report was reordered. It now leads with the changed symbol
+and the recommended tests; scope, revisions, confidence bands, coverage counts, graph identifiers
+and evidence labels moved behind `--explain`, which reproduces the previous rendering. This stays
+within the supported-CLI-text promise above: no command, meaning, safeguard, or undefined-value
+wording changed, and nothing was removed — the advisory, the full-suite caveat, the
+could-not-be-analysed count and the hidden-candidate count all remain in the default view. It is
+announced here and in the changelog rather than shipped silently.
+
+`--format json` is unaffected and is byte-identical with and without `--explain`. A consumer
+parsing the text layout should move to `--format json`, which is the field-level contract, or pass
+`--explain` to keep the previous shape.
+
 Change Analysis schema 1 narrows one evidence label. `vault-frontmatter-id` previously appeared for
 every durable vault note, including notes whose identity the scanner derived from their path
 because no `id:` frontmatter existed. It now appears only when the declared identity is real, and

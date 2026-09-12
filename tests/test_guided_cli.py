@@ -777,7 +777,7 @@ def test_non_tty_subprocess_preserves_argparse_exit_2_without_prompt(tmp_path: P
         check=False,
     )
     assert result.returncode == 2
-    assert "the following arguments are required: command" in result.stderr
+    assert "the following arguments are required" in result.stderr
     assert "guided" not in result.stdout.casefold()
 
 

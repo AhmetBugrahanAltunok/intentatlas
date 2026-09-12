@@ -13,31 +13,31 @@ generated: true
 
 - **commit:** 69
 - **config:** 8
-- **decision:** 40
+- **decision:** 41
 - **document:** 33
-- **evidence:** 41
+- **evidence:** 42
 - **file:** 49
 - **issue:** 39
 - **memory:** 13
 - **project:** 3
 - **repository:** 1
-- **requirement:** 41
-- **review:** 41
+- **requirement:** 42
+- **review:** 42
 - **session:** 21
 - **source-root:** 3
-- **symbol:** 1598
+- **symbol:** 1609
 - **test:** 86
-- **relationships:** 5093
+- **relationships:** 5100
 - **orphaned durable notes:** 0
 
 ## Most connected
 
-- [[Brain/Product Roadmap|Product Roadmap]] — 264 relationships
-- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 206 relationships
+- [[Brain/Product Roadmap|Product Roadmap]] — 268 relationships
+- [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] — 186 relationships
 - [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] — 141 relationships
 - [[Code/src - intentatlas - scanner.py|src/intentatlas/scanner.py]] — 113 relationships
 - [[Code/intentatlas|intentatlas]] — 109 relationships
-- [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] — 85 relationships
+- [[Code/src - intentatlas - change_report.py|src/intentatlas/change_report.py]] — 91 relationships
 - [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] — 79 relationships
 - [[Code/src - intentatlas - web - app.js|src/intentatlas/web/app.js]] — 77 relationships
 - [[Tests/tests - test_guided_cli.py|tests/test_guided_cli.py]] — 77 relationships

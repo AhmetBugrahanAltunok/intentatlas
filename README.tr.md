@@ -105,16 +105,23 @@ bir test seçer ve kesin yapısal yolu açıklar. Kısaltılmış çıktı:
 
 ```text
 $ intentatlas changes /click/deposunun/yolu --commit HEAD --report
-Analysis state: analyzed; freshness aligned
-Test strategy: targeted
-Recommended tests: 1 selected / 1 candidates
-- tests/test_context.py: 80/100 (medium)
-  Why: The test references the owning symbol of an exactly modified nested symbol.
-  Path: Context.__exit__ → Context → tests/test_context.py
+Changed: __exit__ (src/click/core.py)
+Run 1 test:
+
+  tests/test_context.py   [medium confidence]
+    The test references the owning symbol of an exactly modified nested symbol.
+    __exit__ -> Context -> tests/test_context.py
+
+No requirement is linked to this change.
+
+Impact and test recommendations are bounded structural evidence, not proof that an
+omitted requirement is unaffected or that a suggested test is sufficient.
+Full detail: --explain    Machine-readable: --format json
 ```
 
-`candidates`, gösterilen güven eşiği ve sonuç limitinden önce bulunan toplam kümedir; `selected`,
-bu kurallar uygulandıktan sonra gösterilen alt kümedir.
+`--explain` bu cevabın arkasındaki revizyonları, güven bantlarını, aday ve atlama sayılarını,
+grafik kimliklerini ve kanıt etiketlerini ekler. `--format json` araçlar için değişmeyen şema-1
+belgesidir; varsayılan bu özete dönerken ne JSON ne de `--explain` metni değişti.
 
 Bu çıktı tavsiye niteliğindedir. Checkout yeniden üretilebilirlik için sabitlenmiş ve lisansı
 incelenmiştir; proje kodu ve testler çalıştırılmaz. Bkz.

@@ -10,8 +10,8 @@ source_path: "src/intentatlas/change_report.py"
 
 ## Metadata
 
-- **End Line:** <code>142</code>
-- **Line:** <code>96</code>
+- **End Line:** <code>143</code>
+- **Line:** <code>97</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>

@@ -10,8 +10,8 @@ source_path: "src/intentatlas/cli.py"
 
 ## Metadata
 
-- **End Line:** <code>965</code>
-- **Line:** <code>955</code>
+- **End Line:** <code>981</code>
+- **Line:** <code>971</code>
 - **Symbol Kind:** <code>"function"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -20,4 +20,3 @@ source_path: "src/intentatlas/cli.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Code/src - intentatlas - cli.py|src/intentatlas/cli.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

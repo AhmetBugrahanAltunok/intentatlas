@@ -66,9 +66,20 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="intentatlas",
         description="Build a living map from project intent to implementation evidence.",
+        epilog=(
+            "Start with:\n"
+            "  intentatlas demo              see a worked example, no repository needed\n"
+            "  intentatlas diagnose PATH     check a repository, then run the command it prints\n"
+            "\n"
+            "Maintainer and benchmark commands are not listed above but still work:\n"
+            "cache, review, diff, benchmark-scale, evaluate-recommendations,\n"
+            "evaluate-corpus, evaluate-real-world, evaluate-longitudinal.\n"
+            "Run `intentatlas COMMAND --help` for any of them."
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("--version", action="version", version=f"IntentAtlas {__version__}")
-    commands = parser.add_subparsers(dest="command", required=True)
+    commands = parser.add_subparsers(dest="command", required=True, metavar="COMMAND")
 
     guide_parser = commands.add_parser(
         "guide",
@@ -83,7 +94,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     cache_parser = commands.add_parser(
         "cache",
-        help="Inspect or clear managed public-repository cache entries without network access",
     )
     cache_commands = cache_parser.add_subparsers(dest="cache_command", required=True)
     cache_list = cache_commands.add_parser("list", help="List valid managed cache entries")
@@ -176,6 +186,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Rank affected requirements and tests with explicit fallback policy",
     )
     changes_parser.add_argument(
+        "--explain",
+        action="store_true",
+        help="Show revisions, confidence bands, coverage counts and graph identifiers",
+    )
+    changes_parser.add_argument(
         "--minimum-confidence",
         choices=("low", "medium", "high"),
         default="medium",
@@ -192,7 +207,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     review_parser = commands.add_parser(
         "review",
-        help="Review a revision range in non-blocking CI shadow mode",
     )
     _path_argument(review_parser)
     review_parser.add_argument("--base", required=True, help="Base revision")
@@ -224,7 +238,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     evaluate_parser = commands.add_parser(
         "evaluate-recommendations",
-        help="Compare test recommendations with an exhaustive local label set",
     )
     evaluate_parser.add_argument(
         "labels",
@@ -246,7 +259,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     corpus_parser = commands.add_parser(
         "evaluate-corpus",
-        help="Compare recommendation confidence across labeled local graphs",
     )
     corpus_parser.add_argument(
         "corpus",
@@ -263,7 +275,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     real_world_parser = commands.add_parser(
         "evaluate-real-world",
-        help="Evaluate pinned, license-reviewed checkouts without executing project code",
     )
     real_world_parser.add_argument(
         "manifest",
@@ -284,7 +295,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     longitudinal_parser = commands.add_parser(
         "evaluate-longitudinal",
-        help="Evaluate a frozen, partitioned longitudinal pilot offline",
     )
     longitudinal_parser.add_argument(
         "manifest",
@@ -305,7 +315,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     scale_parser = commands.add_parser(
         "benchmark-scale",
-        help="Measure indexed queries on a bounded synthetic graph",
     )
     scale_parser.add_argument("--unrelated-edges", type=int, default=25_000)
     scale_parser.add_argument("--iterations", type=int, default=200)
@@ -328,7 +337,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Print the deterministic same-file evidence report and exit",
     )
 
-    diff_parser = commands.add_parser("diff", help="Compare the current graph with a baseline")
+    diff_parser = commands.add_parser("diff")
     diff_parser.add_argument("base", help="Baseline graph path below the project root")
     _path_argument(diff_parser)
     diff_parser.add_argument("--output", help="Write deterministic JSON below the project root")
@@ -404,6 +413,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.analyze,
                 args.report,
                 args.open_report,
+                args.explain,
                 args.minimum_confidence,
                 args.limit,
                 args.output_format,
@@ -669,6 +679,7 @@ def _changes(
     analyze: bool,
     report: bool,
     open_report: bool,
+    explain: bool,
     minimum_confidence: str,
     limit: int,
     output_format: str,
@@ -740,7 +751,12 @@ def _changes(
                 minimum_confidence=minimum_confidence,
                 limit=limit,
             )
-            print(render_change_report(change_report, output_format), end="")
+            print(
+                render_change_report(
+                    change_report, output_format, explain=explain
+                ),
+                end="",
+            )
     elif analyze:
         analyzed = analyze_change_set(root, result, config)
         print(render_change_analysis(analyzed, output_format), end="")

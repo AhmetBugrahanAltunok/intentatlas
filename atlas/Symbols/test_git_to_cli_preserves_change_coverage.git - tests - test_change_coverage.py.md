@@ -20,4 +20,3 @@ source_path: "tests/test_change_coverage.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_change_coverage.py|tests/test_change_coverage.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

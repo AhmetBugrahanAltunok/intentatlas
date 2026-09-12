@@ -11,7 +11,7 @@ source_path: "tests/test_change_coverage.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>3267</code>
+- **Size Bytes:** <code>3363</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>

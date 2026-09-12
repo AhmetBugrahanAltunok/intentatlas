@@ -11,7 +11,7 @@ source_path: "src/intentatlas/change_report.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>33333</code>
+- **Size Bytes:** <code>39086</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>
@@ -58,10 +58,16 @@ source_path: "src/intentatlas/change_report.py"
 - <code>defines</code> → [[Symbols/_omitted_requirement - src - intentatlas - change_report.py|_omitted_requirement]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_omitted_test - src - intentatlas - change_report.py|_omitted_test]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_path_text - src - intentatlas - change_report.py|_path_text]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_plain_node - src - intentatlas - change_report.py|_plain_node]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_plain_path_text - src - intentatlas - change_report.py|_plain_path_text]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_plain_symbol_location - src - intentatlas - change_report.py|_plain_symbol_location]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_reason_sort_key - src - intentatlas - change_report.py|_reason_sort_key]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_render_detailed_text - src - intentatlas - change_report.py|_render_detailed_text]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_render_plain_text - src - intentatlas - change_report.py|_render_plain_text]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_requirement_impacts - src - intentatlas - change_report.py|_requirement_impacts]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_requirement_score - src - intentatlas - change_report.py|_requirement_score]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/_test_recommendations - src - intentatlas - change_report.py|_test_recommendations]] _(structure; evidence: python-ast)_
+- <code>defines</code> → [[Symbols/_wrapped - src - intentatlas - change_report.py|_wrapped]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/build_change_report - src - intentatlas - change_report.py|build_change_report]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/collect_change_report - src - intentatlas - change_report.py|collect_change_report]] _(structure; evidence: python-ast)_
 - <code>defines</code> → [[Symbols/collect_change_report_context - src - intentatlas - change_report.py|collect_change_report_context]] _(structure; evidence: python-ast)_

@@ -20,4 +20,3 @@ source_path: "tests/test_trust_first.py"
 ## Incoming relationships
 
 - <code>defined-in</code> ← [[Tests/tests - test_trust_first.py|tests/test_trust_first.py]] _(structure; evidence: python-ast)_
-- <code>modified-by</code> ← [[Commits/Commit f407e49 - Fix cross-platform diagnostic command tests|Fix cross-platform diagnostic command tests]] _(history; evidence: git-diff-hunk)_

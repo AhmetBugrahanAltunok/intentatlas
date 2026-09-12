@@ -15,10 +15,10 @@ the [[Brain/Phase Completion Protocol]] is satisfied and its evidence and review
 The product continues to serve [[Requirements/REQ-001 - Explain change impact]] while remaining
 independent, MIT-licensed, local-first, and vault-first.
 
-## Current execution checkpoint — 2026-09-11
+## Current execution checkpoint — 2026-09-12
 
-- Latest completed delivery: **Phase 21E — Accurate vault identity evidence**. Phase 21B's
-  conditional pass is now a full pass: the remote matrix succeeded at `a6e60d1`.
+- Latest completed delivery: **Phase 21F — Readable first answer**, which prepares Phase 22 by
+  making the result readable without weakening what it claims.
   Phase 21A is complete; Phase 21B holds a conditional pass whose only remaining condition is the
   remote platform matrix.
 - Active delivery: **Phase 21 — Reproducible installation and first useful report**. Its
@@ -731,6 +731,21 @@ Status: complete (2026-09-11). Closes the defect deferred in Phase 21A.
   covers a path-derived one, and a graph without recorded provenance resolves to the weaker
   claim. No analysis conclusion changed. This repository was never affected, because all 233 of
   its user notes declare frontmatter identities.
+
+## Phase 21F — Readable first answer
+
+Status: complete (2026-09-12). Prepares Phase 22 by making the result readable, not by changing
+what it claims.
+
+- Requirement: [[Requirements/REQ-042 - Make the first report readable by a newcomer]]
+- Decision: [[Decisions/ADR-041 - Lead the change report with its answer]]
+- Evidence: [[Evidence/EVD-042 - Phase 21F readable first answer verification]]
+- Review: [[Reviews/Phase 21F Readable First Answer Review]]
+- Outcome: the default report opens with the changed symbol and the tests to run; nine lines of
+  bookkeeping moved behind `--explain`, which reproduces the previous rendering exactly, while
+  `--format json` stays byte-identical. Every boundary — advisory, full-suite caveat,
+  could-not-be-analysed count, hidden-candidate count — remains in the default view. `--help`
+  lists ten commands instead of eighteen and names the rest in its epilog.
 
 ## Phase 21 — Reproducible installation and first useful report
 

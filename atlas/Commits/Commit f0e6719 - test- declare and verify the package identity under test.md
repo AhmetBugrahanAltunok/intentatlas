@@ -32,7 +32,6 @@ generated: true
 - <code>modifies</code> → [[Symbols/pytest_sessionstart - tests - conftest.py|pytest_sessionstart]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_real_browser_renders_bounded_large_graph_window - tests - test_browser_e2e.py|test_real_browser_renders_bounded_large_graph_window]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_real_browser_renders_same_file_demo_story - tests - test_browser_e2e.py|test_real_browser_renders_same_file_demo_story]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_non_tty_subprocess_preserves_argparse_exit_2_without_prompt - tests - test_guided_cli.py|test_non_tty_subprocess_preserves_argparse_exit_2_without_prompt]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_declare - tests - test_package_identity.py|_declare]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/_import_root - tests - test_package_identity.py|_import_root]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_child_environment_exports_an_absolute_working_tree_root - tests - test_package_identity.py|test_child_environment_exports_an_absolute_working_tree_root]] _(history; evidence: git-diff-hunk)_

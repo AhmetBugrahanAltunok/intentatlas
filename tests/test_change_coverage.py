@@ -67,7 +67,7 @@ def test_git_to_cli_preserves_change_coverage(
         "commit": ["--commit", "HEAD"],
         "range": ["--base", "HEAD^", "--head", "HEAD"],
     }
-    command = ["changes", str(tmp_path), *selectors[scope], "--report"]
+    command = ["changes", str(tmp_path), *selectors[scope], "--report", "--explain"]
     assert main([*command, "--format", "json"]) == 0
     report = json.loads(capsys.readouterr().out)
     assert report["analysis"]["state"] == state

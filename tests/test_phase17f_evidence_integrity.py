@@ -106,7 +106,7 @@ def test_change_report_preserves_primary_reason_path_and_evidence() -> None:
         "direct-symbol-dependent-package-fallback",
     }
     assert payload["reasons"] and payload["paths"] and payload["evidence"]
-    text = render_change_report(report)
+    text = render_change_report(report, explain=True)
     assert "Why: The test directly references an exactly modified symbol." in text
     assert "(symbol-structural-test, 80/100)" in text
     assert f"Path: {target} -[tested-by]-> file:tests/test_core.py" in text
@@ -163,7 +163,7 @@ def test_omission_counts_and_ranking_reason_remain_separate_on_all_human_surface
     assert omitted["primary_reason"]["score"] == omitted["score"]
     assert omitted["primary_reason"] == omitted["reason_details"][0]
 
-    text = render_change_report(report)
+    text = render_change_report(report, explain=True)
     assert text.count("20/25 omission details shown") == 2
 
     output = StringIO()

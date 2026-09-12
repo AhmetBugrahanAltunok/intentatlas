@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import textwrap
 from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
@@ -517,12 +518,117 @@ def build_change_report(
     )
 
 
-def render_change_report(report: ChangeReport, output_format: str = "text") -> str:
+_STRATEGY_NOTE = {
+    "targeted": None,
+    "targeted-plus-full-suite": (
+        "Run the full suite as well. Some changed files could not be mapped to exact "
+        "symbols, so this list may be incomplete."
+    ),
+    "full-suite-fallback": (
+        "Run the full suite. This change could not be mapped to exact symbols, so no "
+        "targeted selection is trustworthy here."
+    ),
+}
+_MAX_PLAIN_CHANGED = 5
+_PLAIN_WIDTH = 88
+
+
+def render_change_report(
+    report: ChangeReport, output_format: str = "text", *, explain: bool = False
+) -> str:
+    """Render a report. Text leads with the answer; `explain` adds the full machinery."""
+
     if output_format == "json":
         return json.dumps(report.to_dict(), indent=2, ensure_ascii=False, sort_keys=True) + "\n"
     if output_format != "text":
         raise ValueError(f"Unknown change-report output format: {output_format}")
+    if explain:
+        return _render_detailed_text(report)
+    return _render_plain_text(report)
 
+
+def _render_plain_text(report: ChangeReport) -> str:
+    """Lead with what to run and why, and keep every boundary that qualifies it."""
+
+    changed = tuple(
+        dict.fromkeys(
+            _plain_symbol_location(artifact_id)
+            for item in report.analysis.files
+            if item.state == "analyzed"
+            for artifact_id in item.artifact_ids
+            if artifact_id.startswith("symbol:")
+        )
+    )
+    lines: list[str] = []
+    if changed:
+        shown = changed[:_MAX_PLAIN_CHANGED]
+        remainder = len(changed) - len(shown)
+        suffix = f" and {remainder} more" if remainder else ""
+        lines.append(f"Changed: {', '.join(shown)}{suffix}")
+
+    if report.tests:
+        count = len(report.tests)
+        lines.append(f"Run {count} {'test' if count == 1 else 'tests'}:")
+        lines.append("")
+        for item in report.tests:
+            primary = item.primary_reason
+            lines.append(f"  {_plain_node(item.test.id)}   [{item.confidence} confidence]")
+            lines.append(f"    {primary.summary}")
+            lines.append(f"    {_plain_path_text(primary.path)}")
+            lines.append("")
+    else:
+        lines.append("No test is recommended from the available evidence.")
+        lines.append("")
+
+    strategy_note = _STRATEGY_NOTE.get(report.test_strategy)
+    if strategy_note is not None:
+        lines.extend(_wrapped(strategy_note))
+
+    if report.requirements:
+        count = len(report.requirements)
+        lines.append(f"May affect {count} {'requirement' if count == 1 else 'requirements'}:")
+        for requirement_item in report.requirements:
+            lines.append(
+                f"  {requirement_item.requirement.id}   "
+                f"[{requirement_item.confidence} confidence]"
+            )
+            lines.append(f"    {requirement_item.primary_reason.summary}")
+    else:
+        lines.append("No requirement is linked to this change.")
+
+    unclear = tuple(
+        item
+        for item in report.analysis.files
+        if item.state != "analyzed" or item.freshness != "aligned"
+    )
+    if unclear:
+        noun = "file" if len(unclear) == 1 else "files"
+        lines.extend(
+            _wrapped(
+                f"{len(unclear)} changed {noun} could not be analysed exactly; "
+                "absence here is not proof of no impact."
+            )
+        )
+
+    hidden = (
+        report.requirement_filtered_count
+        + report.requirement_limit_omitted_count
+        + report.test_filtered_count
+        + report.test_limit_omitted_count
+    )
+    if hidden:
+        noun = "candidate" if hidden == 1 else "candidates"
+        lines.append(
+            f"{hidden} weaker {noun} not shown at {report.minimum_confidence} confidence."
+        )
+
+    lines.append("")
+    lines.extend(_wrapped(_ADVISORY))
+    lines.append("Full detail: --explain    Machine-readable: --format json")
+    return "\n".join(lines) + "\n"
+
+
+def _render_detailed_text(report: ChangeReport) -> str:
     lines = [
         f"Change report: {report.analysis.change_set.scope}",
         (
@@ -893,6 +999,38 @@ def _path_text(path: RequirementImpactPath) -> str:
     for relation, node in zip(path.relations, path.nodes[1:], strict=True):
         parts.extend((f"-[{relation}]->", node))
     return " ".join(parts)
+
+
+def _plain_node(node_id: str) -> str:
+    """Render a graph node ID the way a reader would name the thing it addresses."""
+
+    if node_id.startswith("symbol:"):
+        return node_id.rpartition("::")[2] or node_id.removeprefix("symbol:")
+    if node_id.startswith("file:"):
+        return node_id.removeprefix("file:")
+    if node_id.startswith("commit:"):
+        return f"commit {node_id.removeprefix('commit:')[:8]}"
+    return node_id
+
+
+def _plain_path_text(path: RequirementImpactPath) -> str:
+    """Show the route without the graph addressing that carries it."""
+
+    return " -> ".join(_plain_node(node) for node in path.nodes)
+
+
+def _plain_symbol_location(node_id: str) -> str:
+    """Name a changed symbol together with the file it lives in."""
+
+    body = node_id.removeprefix("symbol:")
+    location, separator, name = body.rpartition("::")
+    if not separator:
+        return body
+    return f"{name} ({location})"
+
+
+def _wrapped(text: str) -> list[str]:
+    return textwrap.wrap(text, width=_PLAIN_WIDTH) or [text]
 
 
 def _omission_text(item: OmittedCandidate) -> str:

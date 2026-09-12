@@ -10,8 +10,8 @@ source_path: "src/intentatlas/change_report.py"
 
 ## Metadata
 
-- **End Line:** <code>356</code>
-- **Line:** <code>260</code>
+- **End Line:** <code>357</code>
+- **Line:** <code>261</code>
 - **Symbol Kind:** <code>"class"</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
@@ -23,4 +23,3 @@ source_path: "src/intentatlas/change_report.py"
 - <code>imported-by</code> ← [[Code/src - intentatlas - demo.py|src/intentatlas/demo.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - onboarding.py|src/intentatlas/onboarding.py]] _(structure; evidence: python-symbol-reference)_
 - <code>imported-by</code> ← [[Code/src - intentatlas - review.py|src/intentatlas/review.py]] _(structure; evidence: python-symbol-reference)_
-- <code>modified-by</code> ← [[Commits/Commit 041069a - fix- harden analysis reliability and change coverage|fix: harden analysis reliability and change coverage]] _(history; evidence: git-diff-hunk)_

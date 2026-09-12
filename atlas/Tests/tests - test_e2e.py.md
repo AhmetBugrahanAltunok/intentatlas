@@ -11,7 +11,7 @@ source_path: "tests/test_e2e.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>12376</code>
+- **Size Bytes:** <code>12721</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>

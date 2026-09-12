@@ -11,7 +11,7 @@ source_path: "src/intentatlas/cli.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>37529</code>
+- **Size Bytes:** <code>39016</code>
 - **Workspace Candidates:** <code>["workspace:python-project:."]</code>
 - **Workspace Owners:** <code>["workspace:python-project:."]</code>
 - **Workspace Schema Version:** <code>1</code>

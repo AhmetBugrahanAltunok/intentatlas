@@ -34,4 +34,3 @@ generated: true
 - <code>changes</code> → [[Tests/tests - test_viewer.py|tests/test_viewer.py]] _(history; evidence: git-log)_
 - <code>modifies</code> → [[Symbols/evaluate_recommendations - src - intentatlas - evaluation.py|evaluate_recommendations]] _(history; evidence: git-diff-hunk)_
 - <code>modifies</code> → [[Symbols/test_evaluation_rejects_stale_or_invalid_graph_labels - tests - test_evaluation.py|test_evaluation_rejects_stale_or_invalid_graph_labels]] _(history; evidence: git-diff-hunk)_
-- <code>modifies</code> → [[Symbols/test_change_report_preserves_primary_reason_path_and_evidence - tests - test_phase17f_evidence_integrity.py|test_change_report_preserves_primary_reason_path_and_evidence]] _(history; evidence: git-diff-hunk)_

@@ -141,7 +141,7 @@ def test_change_report_keeps_file_level_requirements_below_default_threshold() -
     assert payload["omitted_requirements"][0]["node"]["id"] == "REQ-18"
     assert payload["omitted_requirements"][0]["reason"] == "below-minimum-confidence"
 
-    text = render_change_report(result)
+    text = render_change_report(result, explain=True)
     assert "Confidence bands: low 0-64; medium 65-84; high 85-100" in text
     assert "Requirement threshold: 1 candidate(s) are below medium" in text
     assert "  Why: The requirement is connected" in text
@@ -263,7 +263,7 @@ def test_change_report_truncates_artifacts_with_explicit_lower_bound_semantics(
             "bounded_selection_complete": False,
         },
     }
-    rendered = render_change_report(report)
+    rendered = render_change_report(report, explain=True)
     assert "1/2 artifacts analyzed; 1 omitted by the 1-artifact limit" in rendered
     assert "Candidate totals include only the analyzed subset and are lower bounds" in rendered
 
@@ -349,7 +349,7 @@ def test_change_report_requires_full_suite_for_fallback_or_unknown_analysis() ->
         f"{change_set.base_revision}, then run intentatlas changes --commit HEAD --report there."
     )
     assert unknown_report.to_dict()["revision_action"] == unknown_report.revision_action
-    rendered = render_change_report(unknown_report)
+    rendered = render_change_report(unknown_report, explain=True)
     assert "Revision action: Use a clean checkout" in rendered
     assert "Analysis limitations: 1 file" in rendered
     assert "auth.py: unknown; freshness stale" in rendered
@@ -457,3 +457,64 @@ def test_staged_same_file_requirement_holdout_preserves_symbol_precision(tmp_pat
         ("test_auth.py", 80)
     ]
     assert report.test_strategy == "targeted"
+
+
+def test_default_text_leads_with_the_answer_not_the_machinery() -> None:
+    text = render_change_report(build_change_report(report_graph(), exact_analysis()))
+    lines = text.splitlines()
+
+    assert lines[0] == "Changed: login (auth.py)"
+    assert lines[1] == "Run 1 test:"
+    assert "  test_auth.py   [medium confidence]" in lines
+    assert "    The test directly references an exactly modified symbol." in lines
+    assert "    login -> test_auth.py" in lines
+    assert "  REQ-9   [medium confidence]" in lines
+
+
+def test_default_text_hides_the_machinery_without_hiding_the_boundary() -> None:
+    text = render_change_report(build_change_report(report_graph(), exact_analysis()))
+
+    for machinery in (
+        "Change report:",
+        "Revision:",
+        "Analysis state:",
+        "Confidence bands:",
+        "Analysis coverage:",
+        "omission details shown",
+        "Requirement impacts:",
+        "80/100",
+        "symbol:auth.py::login",
+        "file:test_auth.py",
+        "-[tested-by]->",
+    ):
+        assert machinery not in text, machinery
+
+    # The advisory is wrapped for the terminal, so compare it as prose.
+    unwrapped = " ".join(text.split())
+    assert "not proof that an omitted requirement is unaffected" in unwrapped
+    assert "1 weaker candidate not shown at medium confidence." in unwrapped
+    assert "Full detail: --explain    Machine-readable: --format json" in text
+
+
+def test_default_text_wraps_long_prose_for_a_terminal() -> None:
+    text = render_change_report(build_change_report(report_graph(), exact_analysis()))
+
+    assert all(len(line) <= 100 for line in text.splitlines())
+
+
+def test_explain_preserves_the_established_detailed_rendering() -> None:
+    report = build_change_report(report_graph(), exact_analysis())
+    text = render_change_report(report, explain=True)
+
+    assert text.startswith("Change report: ")
+    assert "Confidence bands: low 0-64; medium 65-84; high 85-100" in text
+    assert "  Path: symbol:auth.py::login -[tested-by]-> file:test_auth.py" in text
+    assert text.rstrip().endswith(change_report_module._ADVISORY)
+
+
+def test_json_is_unchanged_by_the_plain_default() -> None:
+    report = build_change_report(report_graph(), exact_analysis())
+
+    assert render_change_report(report, "json") == render_change_report(
+        report, "json", explain=True
+    )

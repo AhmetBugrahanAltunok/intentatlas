@@ -113,7 +113,7 @@ def test_walkthrough_02_explain_an_aligned_change_with_recorded_paths() -> None:
 def test_walkthrough_03_interpret_an_omission_without_claiming_no_impact() -> None:
     report = build_change_report(_task_graph(), _analysis())
     payload = report.to_dict()
-    text = render_change_report(report, "text")
+    text = render_change_report(report, "text", explain=True)
 
     assert payload["requirement_selection"] == {
         "selected_count": 1,

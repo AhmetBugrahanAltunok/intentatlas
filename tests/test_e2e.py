@@ -57,7 +57,7 @@ def test_installed_cli_scan_recommend_and_viewer_workflow(tmp_path) -> None:
 
     empty_non_tty = _cli(cwd=tmp_path)
     assert empty_non_tty.returncode == 2
-    assert "the following arguments are required: command" in empty_non_tty.stderr
+    assert "the following arguments are required" in empty_non_tty.stderr
     assert "guided" not in empty_non_tty.stdout.casefold()
 
     explicit_non_tty = _cli("guide", cwd=tmp_path)

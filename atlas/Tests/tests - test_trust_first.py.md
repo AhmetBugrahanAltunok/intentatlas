@@ -11,7 +11,7 @@ source_path: "tests/test_trust_first.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>6179</code>
+- **Size Bytes:** <code>6811</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>

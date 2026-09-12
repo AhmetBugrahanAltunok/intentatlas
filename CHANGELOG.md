@@ -33,6 +33,17 @@ form corresponding to the SemVer-style pre-release identity `0.3.0-beta.1`.
 
 ### Changed
 
+- Lead the default change report with its answer. The text output now opens with the changed
+  symbol and the tests to run, each with a plain reason and a readable route; scope, revisions,
+  confidence bands, coverage counts, graph identifiers and evidence labels moved behind
+  `--explain`, which reproduces the previous rendering exactly. `--format json` is unaffected and
+  is byte-identical with and without the flag. Every boundary stays in the default view: the
+  advisory, the full-suite caveat, the count of files that could not be analysed exactly, and the
+  count of weaker candidates hidden by the threshold.
+- List only first-use commands in `intentatlas --help`. `cache`, `review`, `diff`,
+  `benchmark-scale` and the four `evaluate-*` commands are named in the epilog instead and still
+  run unchanged. The subcommand metavar is now `COMMAND`, which changes argparse's empty-argv
+  message noun; exit 2 and its stderr behaviour are unchanged.
 - Bind Change Report scores to structured primary reasons with matching paths and evidence, expose
   bounded omission-detail totals, and preserve legacy schema-1 aggregate fields additively.
 - Keep Python support modules, fixtures, and package markers in the graph while excluding them

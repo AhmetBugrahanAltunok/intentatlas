@@ -95,9 +95,19 @@ def test_diagnostic_and_real_repository_preview_are_no_write(
 
     assert main(["changes", str(project), "--commit", "HEAD", "--report"]) == 0
     report_text = capsys.readouterr().out
-    assert "Change report: commit" in report_text
-    assert "Test strategy:" in report_text
-    assert "Advisory:" in report_text
+    # The default view is what a first-time reader actually sees: an answer, and the
+    # boundary that qualifies it. The machinery it summarises lives behind --explain.
+    assert "not proof that" in report_text
+    assert "Full detail: --explain" in report_text
+    assert "Confidence bands:" not in report_text
+
+    assert main(
+        ["changes", str(project), "--commit", "HEAD", "--report", "--explain"]
+    ) == 0
+    explained = capsys.readouterr().out
+    assert "Change report: commit" in explained
+    assert "Test strategy:" in explained
+    assert "Advisory:" in explained
 
     assert main(
         ["changes", str(project), "--commit", "HEAD", "--report", "--format", "json"]

@@ -11,7 +11,7 @@ source_path: "tests/test_phase17f_evidence_integrity.py"
 ## Metadata
 
 - **Language:** <code>"Python"</code>
-- **Size Bytes:** <code>13031</code>
+- **Size Bytes:** <code>13398</code>
 - **Test Discovery Root:** <code>"tests"</code>
 - **Test Pattern:** <code>"test_*.py"</code>
 - **Test Role:** <code>"runnable"</code>
