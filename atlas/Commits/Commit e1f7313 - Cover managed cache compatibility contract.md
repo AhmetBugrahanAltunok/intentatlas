@@ -15,4 +15,3 @@ generated: true
 ## Outgoing relationships
 
 - <code>changes</code> → [[Tests/tests - test_compatibility_policy.py|tests/test_compatibility_policy.py]] _(history; evidence: git-log)_
-- <code>modifies</code> → [[Symbols/test_compatibility_policy_covers_every_declared_contract - tests - test_compatibility_policy.py|test_compatibility_policy_covers_every_declared_contract]] _(history; evidence: git-diff-hunk)_
