@@ -128,6 +128,6 @@ jobs:
           test "$(sha256sum "${wheels[0]}" | cut -d' ' -f1)" = "$EXPECTED_WHEEL_SHA256"
           test "$(sha256sum "${sdists[0]}" | cut -d' ' -f1)" = "$EXPECTED_SDIST_SHA256"
       - name: Publish the already verified bytes with trusted identity
-        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # release/v1 verified 2026-08-01
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # release/v1 verified 2026-08-01
         with:
           packages-dir: var/approved/release-a
